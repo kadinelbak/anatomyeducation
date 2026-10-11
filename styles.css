@@ -19,6 +19,8 @@ button { font: inherit; cursor: pointer; }
 
 #viewer { position: fixed; inset: 0; touch-action: none; }
 #viewer canvas { display: block; }
+.viewer-mesh, .viewer-volume { position: absolute; inset: 0; }
+body.mode-volume #controls { display: none; }
 
 .topbar {
   position: fixed; top: 0; left: 0; right: 0;

@@ -1,10 +1,10 @@
 // Wiring: boot, renderer, bank, sets, engine, share and signup.
 import { CONFIG } from "./config.js";
 import { track, visitor, checkReturnVisit } from "./analytics.js";
-import { loadBank } from "./bank.js";
+import { loadBanks } from "./bank.js";
 import { buildSets, resolveSet } from "./sets.js";
 import { createEngine, fmtTime } from "./engine.js";
-import { createMeshRenderer } from "./renderers/mesh.js";
+import { createRendererSwitch } from "./renderers/switch.js";
 import { WebGLUnavailableError, webglHelp } from "./webgl-probe.js";
 
 const $ = (id) => document.getElementById(id);
@@ -27,12 +27,14 @@ const app = (window.__app = {});
 let engine = null;
 let selectedSet = "daily";
 
-const renderer = await createMeshRenderer({
-  container: $("viewer"),
+const renderer = createRendererSwitch({
+  viewer: $("viewer"),
   modelUrl: CONFIG.modelUrl,
   structuresUrl: "assets/model/structures.json",
   onPick: (id) => engine.answer(id),
-}).catch((err) => {
+  onChange: (kind) => ($("attr-ct").hidden = kind !== "volume"),
+});
+await renderer.activate("mesh").catch((err) => {
   console.error(err);
   if (err instanceof WebGLUnavailableError) showNoWebGL(err);
   else $("loading").textContent = `Couldn't load the 3D model. Please reload the page. (${err?.message || err})`;
@@ -64,7 +66,7 @@ function showNoWebGL(err) {
 
 let bank;
 try {
-  bank = await loadBank("assets/questions/upper-limb.json");
+  bank = await loadBanks(["assets/questions/upper-limb.json", "assets/questions/ct-trunk.json"]);
 } catch (err) {
   console.error(err);
   $("loading").textContent = "Couldn't load the questions. Please reload the page.";
@@ -152,13 +154,39 @@ renderChooser();
 
 // A shared link plays exactly its questions; otherwise the chosen set.
 let pendingShared = initial.explicit;
+
+// Make the set's renderer the active one (building the CT viewer on first use), then play.
+async function begin(setId, replay = false) {
+  const set = sets.find((s) => s.id === setId) || sets[0];
+  const needsBuild = set.renderer === "volume" && renderer.active !== "volume";
+  const buttons = ["start", "again"].map($);
+  buttons.forEach((b) => (b.disabled = true));
+  if (needsBuild) {
+    $("loading").textContent = "Loading the scan…";
+    $("loading").hidden = false;
+  }
+  try {
+    await renderer.activate(set.renderer || "mesh", set.study);
+  } catch (err) {
+    console.error(err);
+    $("loading").textContent = `Couldn't load the scan. Please reload the page. (${err?.message || err})`;
+    $("loading").hidden = false;
+    buttons.forEach((b) => (b.disabled = false));
+    return;
+  }
+  $("loading").hidden = true;
+  buttons.forEach((b) => (b.disabled = false));
+  engine.start(setId, replay);
+}
 $("start").addEventListener("click", () => {
-  engine.start(pendingShared ? "custom" : selectedSet);
+  const id = pendingShared ? "custom" : selectedSet;
   pendingShared = false;
+  begin(id);
 });
-$("again").addEventListener("click", () => engine.start(engine.set.id, true));
-$("new-set").addEventListener("click", () => {
+$("again").addEventListener("click", () => begin(engine.set.id, true));
+$("new-set").addEventListener("click", async () => {
   pendingShared = false;
+  await renderer.activate("mesh"); // back to the model behind the chooser (already built)
   engine.intro();
 });
 $("next").addEventListener("click", () => engine.next());
@@ -237,5 +265,5 @@ $("loading").hidden = true;
 $("start").disabled = false;
 
 // Exposed for automated checks (tools/smoke_test.mjs).
-Object.assign(app, renderer.debug, { quiz: engine.state, answer: engine.answer, engine, renderer });
+Object.assign(app, renderer.mesh.debug, { quiz: engine.state, answer: engine.answer, engine, renderer, switch: renderer });
 app.QUESTIONS ||= engine.current;

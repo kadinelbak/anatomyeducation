@@ -68,6 +68,8 @@ The engine talks to a renderer through five calls (`show`, `highlight`,
 `clearHighlight`, `name`, `setPickEnabled`), so a volume renderer for CT
 questions (milestone 3) plugs in beside `renderers/mesh.js`.
 
+**CT questions.** A record with `"renderer": "volume"` and a `"study"` field (records without `renderer` are mesh) is drawn by the Cornerstone3D volume viewer instead of the 3D model; `view` and `layers` are described in `docs/imaging/renderer-spec.md`. The CT questions live in `assets/questions/ct-trunk.json`, and each study has a folder `assets/volumes/<study>/` made with `tools/pack_study.py`. The bank gets one built-in set per study, `?set=ct:<study>` (shown as "CT scan" while there is a single study); daily, random, clinical and topic sets stay mesh-only. Only the 3 mm sample study `ts-example-sm` ships until real TotalSegmentator studies are packed.
+
 ## The model
 
 Source: [Open3DModel](https://anatomytool.org/node/63858) upper limb (Leiden,

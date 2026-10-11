@@ -1,0 +1,453 @@
+{
+ "id": "ts-example-sm",
+ "source": "TotalSegmentator example CT (wasserth/TotalSegmentator tests/reference_files/example_ct_sm.nii.gz, 3 mm)",
+ "license": "CC BY 4.0 (TotalSegmentator dataset); code Apache-2.0",
+ "attribution": "Wasserthal J. et al., TotalSegmentator, Radiology: Artificial Intelligence 2023",
+ "dims": [
+  122,
+  101,
+  30
+ ],
+ "spacing": [
+  3.0,
+  3.0,
+  3.0
+ ],
+ "orientation": "RAS",
+ "ct": {
+  "file": "ct.i16.gz",
+  "dtype": "int16"
+ },
+ "labels": {
+  "file": "labels.u8.gz",
+  "dtype": "uint8"
+ },
+ "windows": {
+  "soft": {
+   "width": 400,
+   "level": 40
+  },
+  "lung": {
+   "width": 1500,
+   "level": -600
+  },
+  "bone": {
+   "width": 1800,
+   "level": 400
+  }
+ },
+ "structures": {
+  "1": {
+   "key": "spleen",
+   "name": "Spleen",
+   "group": "organ"
+  },
+  "2": {
+   "key": "kidney_right",
+   "name": "Right kidney",
+   "group": "organ"
+  },
+  "3": {
+   "key": "kidney_left",
+   "name": "Left kidney",
+   "group": "organ"
+  },
+  "4": {
+   "key": "gallbladder",
+   "name": "Gallbladder",
+   "group": "organ"
+  },
+  "5": {
+   "key": "liver",
+   "name": "Liver",
+   "group": "organ"
+  },
+  "6": {
+   "key": "stomach",
+   "name": "Stomach",
+   "group": "hollow"
+  },
+  "7": {
+   "key": "pancreas",
+   "name": "Pancreas",
+   "group": "organ"
+  },
+  "8": {
+   "key": "adrenal_gland_right",
+   "name": "Right adrenal gland",
+   "group": "organ"
+  },
+  "9": {
+   "key": "adrenal_gland_left",
+   "name": "Left adrenal gland",
+   "group": "organ"
+  },
+  "10": {
+   "key": "lung_upper_lobe_left",
+   "name": "Left lung upper lobe",
+   "group": "lung"
+  },
+  "11": {
+   "key": "lung_lower_lobe_left",
+   "name": "Left lung lower lobe",
+   "group": "lung"
+  },
+  "13": {
+   "key": "lung_middle_lobe_right",
+   "name": "Right lung middle lobe",
+   "group": "lung"
+  },
+  "14": {
+   "key": "lung_lower_lobe_right",
+   "name": "Right lung lower lobe",
+   "group": "lung"
+  },
+  "18": {
+   "key": "small_bowel",
+   "name": "Small bowel",
+   "group": "hollow"
+  },
+  "19": {
+   "key": "duodenum",
+   "name": "Duodenum",
+   "group": "hollow"
+  },
+  "20": {
+   "key": "colon",
+   "name": "Colon",
+   "group": "hollow"
+  },
+  "30": {
+   "key": "vertebrae_L2",
+   "name": "L2 vertebra",
+   "group": "bone"
+  },
+  "31": {
+   "key": "vertebrae_L1",
+   "name": "L1 vertebra",
+   "group": "bone"
+  },
+  "32": {
+   "key": "vertebrae_T12",
+   "name": "T12 vertebra",
+   "group": "bone"
+  },
+  "33": {
+   "key": "vertebrae_T11",
+   "name": "T11 vertebra",
+   "group": "bone"
+  },
+  "52": {
+   "key": "aorta",
+   "name": "Aorta",
+   "group": "vessel"
+  },
+  "63": {
+   "key": "inferior_vena_cava",
+   "name": "Inferior vena cava",
+   "group": "vessel"
+  },
+  "64": {
+   "key": "portal_vein_and_splenic_vein",
+   "name": "Portal and splenic veins",
+   "group": "vessel"
+  },
+  "79": {
+   "key": "spinal_cord",
+   "name": "Spinal cord",
+   "group": "nervous"
+  },
+  "86": {
+   "key": "autochthon_left",
+   "name": "Left erector spinae (autochthonous back muscles)",
+   "group": "muscle"
+  },
+  "87": {
+   "key": "autochthon_right",
+   "name": "Right erector spinae (autochthonous back muscles)",
+   "group": "muscle"
+  },
+  "88": {
+   "key": "iliopsoas_left",
+   "name": "Left iliopsoas",
+   "group": "muscle"
+  },
+  "89": {
+   "key": "iliopsoas_right",
+   "name": "Right iliopsoas",
+   "group": "muscle"
+  },
+  "98": {
+   "key": "rib_left_7",
+   "name": "Left rib 7",
+   "group": "bone"
+  },
+  "99": {
+   "key": "rib_left_8",
+   "name": "Left rib 8",
+   "group": "bone"
+  },
+  "100": {
+   "key": "rib_left_9",
+   "name": "Left rib 9",
+   "group": "bone"
+  },
+  "101": {
+   "key": "rib_left_10",
+   "name": "Left rib 10",
+   "group": "bone"
+  },
+  "102": {
+   "key": "rib_left_11",
+   "name": "Left rib 11",
+   "group": "bone"
+  },
+  "103": {
+   "key": "rib_left_12",
+   "name": "Left rib 12",
+   "group": "bone"
+  },
+  "110": {
+   "key": "rib_right_7",
+   "name": "Right rib 7",
+   "group": "bone"
+  },
+  "111": {
+   "key": "rib_right_8",
+   "name": "Right rib 8",
+   "group": "bone"
+  },
+  "112": {
+   "key": "rib_right_9",
+   "name": "Right rib 9",
+   "group": "bone"
+  },
+  "113": {
+   "key": "rib_right_10",
+   "name": "Right rib 10",
+   "group": "bone"
+  },
+  "114": {
+   "key": "rib_right_11",
+   "name": "Right rib 11",
+   "group": "bone"
+  },
+  "115": {
+   "key": "rib_right_12",
+   "name": "Right rib 12",
+   "group": "bone"
+  },
+  "117": {
+   "key": "costal_cartilages",
+   "name": "Costal cartilages",
+   "group": "bone"
+  }
+ },
+ "views": {
+  "spleen": {
+   "plane": "axial",
+   "frac": 0.626,
+   "window": "soft"
+  },
+  "kidney_right": {
+   "plane": "axial",
+   "frac": 0.275,
+   "window": "soft"
+  },
+  "kidney_left": {
+   "plane": "axial",
+   "frac": 0.321,
+   "window": "soft"
+  },
+  "gallbladder": {
+   "plane": "axial",
+   "frac": 0.273,
+   "window": "soft"
+  },
+  "liver": {
+   "plane": "axial",
+   "frac": 0.642,
+   "window": "soft"
+  },
+  "stomach": {
+   "plane": "axial",
+   "frac": 0.567,
+   "window": "soft"
+  },
+  "pancreas": {
+   "plane": "axial",
+   "frac": 0.373,
+   "window": "soft"
+  },
+  "adrenal_gland_right": {
+   "plane": "axial",
+   "frac": 0.661,
+   "window": "soft"
+  },
+  "adrenal_gland_left": {
+   "plane": "axial",
+   "frac": 0.71,
+   "window": "soft"
+  },
+  "lung_upper_lobe_left": {
+   "plane": "axial",
+   "frac": 0.883,
+   "window": "soft"
+  },
+  "lung_lower_lobe_left": {
+   "plane": "axial",
+   "frac": 0.932,
+   "window": "soft"
+  },
+  "lung_middle_lobe_right": {
+   "plane": "axial",
+   "frac": 1.0,
+   "window": "soft"
+  },
+  "lung_lower_lobe_right": {
+   "plane": "axial",
+   "frac": 0.917,
+   "window": "soft"
+  },
+  "small_bowel": {
+   "plane": "axial",
+   "frac": 0.08,
+   "window": "soft"
+  },
+  "duodenum": {
+   "plane": "axial",
+   "frac": 0.229,
+   "window": "soft"
+  },
+  "colon": {
+   "plane": "axial",
+   "frac": 0.396,
+   "window": "soft"
+  },
+  "vertebrae_L2": {
+   "plane": "axial",
+   "frac": 0.136,
+   "window": "soft"
+  },
+  "vertebrae_L1": {
+   "plane": "axial",
+   "frac": 0.487,
+   "window": "soft"
+  },
+  "vertebrae_T12": {
+   "plane": "axial",
+   "frac": 0.849,
+   "window": "soft"
+  },
+  "vertebrae_T11": {
+   "plane": "axial",
+   "frac": 0.978,
+   "window": "soft"
+  },
+  "aorta": {
+   "plane": "axial",
+   "frac": 0.565,
+   "window": "soft"
+  },
+  "inferior_vena_cava": {
+   "plane": "axial",
+   "frac": 0.453,
+   "window": "soft"
+  },
+  "portal_vein_and_splenic_vein": {
+   "plane": "axial",
+   "frac": 0.534,
+   "window": "soft"
+  },
+  "spinal_cord": {
+   "plane": "axial",
+   "frac": 0.497,
+   "window": "soft"
+  },
+  "autochthon_left": {
+   "plane": "axial",
+   "frac": 0.442,
+   "window": "soft"
+  },
+  "autochthon_right": {
+   "plane": "axial",
+   "frac": 0.454,
+   "window": "soft"
+  },
+  "iliopsoas_left": {
+   "plane": "axial",
+   "frac": 0.146,
+   "window": "soft"
+  },
+  "iliopsoas_right": {
+   "plane": "axial",
+   "frac": 0.176,
+   "window": "soft"
+  },
+  "rib_left_7": {
+   "plane": "axial",
+   "frac": 0.894,
+   "window": "soft"
+  },
+  "rib_left_8": {
+   "plane": "axial",
+   "frac": 0.737,
+   "window": "soft"
+  },
+  "rib_left_9": {
+   "plane": "axial",
+   "frac": 0.667,
+   "window": "soft"
+  },
+  "rib_left_10": {
+   "plane": "axial",
+   "frac": 0.646,
+   "window": "soft"
+  },
+  "rib_left_11": {
+   "plane": "axial",
+   "frac": 0.612,
+   "window": "soft"
+  },
+  "rib_left_12": {
+   "plane": "axial",
+   "frac": 0.696,
+   "window": "soft"
+  },
+  "rib_right_7": {
+   "plane": "axial",
+   "frac": 0.943,
+   "window": "soft"
+  },
+  "rib_right_8": {
+   "plane": "axial",
+   "frac": 0.797,
+   "window": "soft"
+  },
+  "rib_right_9": {
+   "plane": "axial",
+   "frac": 0.732,
+   "window": "soft"
+  },
+  "rib_right_10": {
+   "plane": "axial",
+   "frac": 0.649,
+   "window": "soft"
+  },
+  "rib_right_11": {
+   "plane": "axial",
+   "frac": 0.585,
+   "window": "soft"
+  },
+  "rib_right_12": {
+   "plane": "axial",
+   "frac": 0.629,
+   "window": "soft"
+  },
+  "costal_cartilages": {
+   "plane": "axial",
+   "frac": 0.63,
+   "window": "soft"
+  }
+ }
+}

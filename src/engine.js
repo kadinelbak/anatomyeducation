@@ -133,7 +133,8 @@ export function createEngine({ renderer, questions, sets, ui, track }) {
     },
 
     shareText() {
-      return `I scored ${state.score}/${current.length} on ${set.title} in 3D. Can you beat it?`;
+      const on = set.renderer === "volume" ? `the ${set.title} set` : `${set.title} in 3D`;
+      return `I scored ${state.score}/${current.length} on ${on}. Can you beat it?`;
     },
   };
   return engine;

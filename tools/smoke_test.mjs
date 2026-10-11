@@ -5,6 +5,7 @@
 //   npm i -D playwright   (once)
 //   python3 tools/serve.py --port 8123 &
 //   node tools/smoke_test.mjs http://127.0.0.1:8123/ [chromium executable]
+//   CT=1 node tools/smoke_test.mjs ...    plays the CT volume set (clicks real voxels of each target)
 //   ALL=1 node tools/smoke_test.mjs ...   plays every question in the bank, 10 per set,
 //                                         and lists the ones whose answer is not clickable
 import { chromium } from "playwright";
@@ -13,7 +14,7 @@ const url = process.argv[2] || "http://127.0.0.1:8123/";
 const executablePath = process.argv[3];
 const browser = await chromium.launch({
   executablePath,
-  args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
+  args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"],
 });
 const width = Number(process.env.W || 1280), height = Number(process.env.H || 800);
 const errors = [];
@@ -86,7 +87,75 @@ async function playSet(page, label) {
   return { n, failed };
 }
 
-if (process.env.ALL) {
+// Plays the CT set. Finds a voxel of the target on the current slice, converts it to a screen
+// point with the volume renderer's canvasOf(), checks pickAt() agrees, and does a real click.
+async function playCT(page) {
+  await page.goto(`${base}?set=ct:ts-example-sm`);
+  await page.waitForFunction(() => !document.getElementById("start").disabled, null, { timeout: 90000 });
+  if (await page.evaluate(() => getComputedStyle(document.getElementById("controls")).display === "none")) { failures++; console.log("FAIL controls hidden before CT start"); }
+  await page.click("#start");
+  await page.waitForSelector("#question:not([hidden])", { timeout: 120000 });
+  const hiddenDuring = await page.evaluate(() => getComputedStyle(document.getElementById("controls")).display === "none");
+  console.log(`${hiddenDuring ? "ok  " : "FAIL"} mesh #controls hidden during CT set; CT attribution ${await page.evaluate(() => !document.getElementById("attr-ct").hidden)}`);
+  if (!hiddenDuring) failures++;
+  const n = await page.evaluate(() => window.__app.QUESTIONS.length);
+  let failed = 0;
+  for (let i = 0; i < n; i++) {
+    await page.waitForTimeout(700);
+    const spot = await page.evaluate(() => {
+      const a = window.__app, q = a.QUESTIONS[a.quiz.index], d = a.switch.debug, vol = d.volume;
+      const key = q.accept[0], value = vol.valueOf(key);
+      if (!d.state.pickEnabled) return { id: q.id, why: "pick not enabled" };
+      const ax = { axial: [0, 1, 2], coronal: [0, 2, 1], sagittal: [1, 2, 0] }[d.state.plane]; // u, v, depth axes
+      if (vol.boundsOf(key) && d.volume.labelAt) { /* bounds exist */ }
+      const dims = vol.dims, ijk = [0, 0, 0], pts = [];
+      ijk[ax[2]] = d.currentDepth();
+      for (let u = 0; u < dims[ax[0]]; u++) for (let v = 0; v < dims[ax[1]]; v++) {
+        ijk[ax[0]] = u; ijk[ax[1]] = v;
+        if (vol.labelAt(ijk[0], ijk[1], ijk[2]) === value) pts.push([u, v]);
+      }
+      if (!pts.length) return { id: q.id, why: "target not on the shown slice" };
+      const cu = pts.reduce((s, p) => s + p[0], 0) / pts.length, cv = pts.reduce((s, p) => s + p[1], 0) / pts.length;
+      pts.sort((p, r) => Math.hypot(p[0] - cu, p[1] - cv) - Math.hypot(r[0] - cu, r[1] - cv));
+      const cards = ["question", "intro"].map((id) => document.getElementById(id).getBoundingClientRect());
+      const vr = d.vpEl.getBoundingClientRect();
+      for (const [u, v] of pts.slice(0, 200)) {
+        ijk[ax[0]] = u; ijk[ax[1]] = v;
+        const [cx, cy] = d.canvasOf(ijk.slice());
+        const x = vr.left + cx, y = vr.top + cy;
+        if (cx < 0 || cy < 0 || x > innerWidth || y > innerHeight) continue;
+        if (cards.some((r) => r.width && x >= r.left && x <= r.right && y >= r.top && y <= r.bottom)) continue;
+        if (d.pickAt(cx, cy) === key && document.elementFromPoint(x, y)?.closest(".vol-viewport")) return { id: q.id, x, y };
+      }
+      return { id: q.id, why: `no clickable voxel among ${pts.length} on the slice` };
+    });
+    if (spot.x === undefined) {
+      failed++;
+      console.log(`FAIL ctq${i + 1} ${spot.id}: ${spot.why}; answering via answer()`);
+      await page.evaluate(() => window.__app.answer(window.__app.QUESTIONS[window.__app.quiz.index].accept[0]));
+    } else {
+      await page.mouse.click(spot.x, spot.y);
+      console.log(`ok   ctq${i + 1} ${spot.id}: real click at ${Math.round(spot.x)},${Math.round(spot.y)}`);
+    }
+    await page.waitForSelector("#feedback:not([hidden])", { timeout: 5000 });
+    if (i === 4) await page.screenshot({ path: process.env.SHOT || "docs/screenshots/ct-question.png" });
+    await page.click("#next");
+  }
+  await page.waitForSelector("#results:not([hidden])");
+  const score = (await page.textContent("#final-score")).trim();
+  console.log("results:", score);
+  if (score !== `You scored ${n - failed}/${n}`) { failures++; console.log("FAIL score text"); }
+  failures += failed;
+  console.log("share text:", await page.evaluate(() => window.__app.engine.shareText()));
+  await page.click("#new-set");
+  const shown = await page.evaluate(() => getComputedStyle(document.getElementById("controls")).display !== "none");
+  console.log(`${shown ? "ok  " : "FAIL"} mesh #controls visible again after New set`);
+  if (shown === false) failures++;
+}
+
+if (process.env.CT) {
+  await playCT(page);
+} else if (process.env.ALL) {
   // Every question in the bank, ten per set.
   const bank = (await (await fetch(base + "assets/questions/upper-limb.json")).json()).questions;
   console.log(`bank: ${bank.length} questions`);

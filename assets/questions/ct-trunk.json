@@ -1,0 +1,475 @@
+{
+  "version": 1,
+  "region": "ct-trunk",
+  "study": "ts-example-sm",
+  "questions": [
+    {
+      "id": "ct-liver-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-example-sm",
+      "target": "liver",
+      "accept": [
+        "liver"
+      ],
+      "prompt": "Click the liver.",
+      "hint": "It is the largest solid organ in the right upper abdomen, with a fairly uniform soft-tissue density.",
+      "view": "liver",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The liver fills the right upper quadrant and extends across the midline under the left hemidiaphragm. On CT it is homogeneous, and fat in the liver makes it look darker than the spleen.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "ct-kidney-right-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-example-sm",
+      "target": "kidney_right",
+      "accept": [
+        "kidney_right"
+      ],
+      "prompt": "Click the right kidney.",
+      "hint": "Look beside the spine, behind the peritoneal cavity, below the liver.",
+      "view": "kidney_right",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The right kidney sits slightly lower than the left because of the liver above it. On CT the renal sinus fat and the bright, contrast-filled collecting system help distinguish it from adjacent bowel.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "ct-stomach-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-example-sm",
+      "target": "stomach",
+      "accept": [
+        "stomach"
+      ],
+      "prompt": "Click the stomach.",
+      "hint": "It lies in the left upper abdomen beneath the left hemidiaphragm, often with gas or fluid inside.",
+      "view": "stomach",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The stomach is a distensible J-shaped organ in the left upper quadrant, anterior to the pancreas and spleen. On CT, look for a thick rugal wall surrounding a lumen that holds gas, fluid or food.",
+      "tags": {
+        "topic": "gi",
+        "region": "abdomen",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "ct-colon-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-example-sm",
+      "target": "colon",
+      "accept": [
+        "colon"
+      ],
+      "prompt": "Click the colon.",
+      "hint": "Find the bowel with the most faeces and gas, running around the periphery of the abdomen.",
+      "view": "colon",
+      "layers": [],
+      "explain": "The colon is recognised by its peripheral position, haustral folds and mottled faecal content mixed with gas. Small bowel, by contrast, lies centrally and has feathery valvulae conniventes.",
+      "tags": {
+        "topic": "gi",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "ct-duodenum-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-example-sm",
+      "target": "duodenum",
+      "accept": [
+        "duodenum"
+      ],
+      "prompt": "Click the duodenum.",
+      "hint": "Follow the C-shaped loop that wraps around the head of the pancreas.",
+      "view": "duodenum",
+      "layers": [],
+      "explain": "The duodenum is retroperitoneal and curves around the pancreatic head. On CT, trace the bowel continuing from the stomach's pylorus and lying just lateral to the pancreas.",
+      "tags": {
+        "topic": "gi",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "ct-aorta-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-example-sm",
+      "target": "aorta",
+      "accept": [
+        "aorta"
+      ],
+      "prompt": "Click the abdominal aorta.",
+      "hint": "It is a round vessel just in front of the vertebral body, slightly to the left of midline.",
+      "view": "aorta",
+      "layers": [],
+      "explain": "The abdominal aorta runs anterior to the vertebral bodies and slightly left of midline, while the IVC lies to its right. On CT its wall is thin and its calibre is uniform, around 2 cm at this level.",
+      "tags": {
+        "topic": "vessels",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "ct-adrenal-left-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-example-sm",
+      "target": "adrenal_gland_left",
+      "accept": [
+        "adrenal_gland_left"
+      ],
+      "prompt": "Click the left adrenal gland.",
+      "hint": "Look for a thin inverted-Y or lambda shape above the left kidney, beside the aorta.",
+      "view": "adrenal_gland_left",
+      "layers": [],
+      "explain": "The left adrenal gland lies anteromedial to the upper pole of the left kidney, lateral to the left diaphragmatic crus. On CT its limbs are thin (under about 10 mm) and the shape is a lambda or inverted Y.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "ct-autochthon-right-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-example-sm",
+      "target": "autochthon_right",
+      "accept": [
+        "autochthon_right"
+      ],
+      "prompt": "Click the right erector spinae (autochthon) muscle.",
+      "hint": "It is the paraspinal muscle mass lying behind the vertebral column on the right.",
+      "view": "autochthon_right",
+      "layers": [],
+      "explain": "The erector spinae group runs on either side of the spinous processes and extends the spine. On axial CT it is the bulky paraspinal muscle posterior to the vertebral arch and transverse process.",
+      "tags": {
+        "topic": "muscles",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "ct-lung-left-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-example-sm",
+      "target": "lung_lower_lobe_left",
+      "accept": [
+        "lung_upper_lobe_left",
+        "lung_lower_lobe_left"
+      ],
+      "prompt": "Click the left lung.",
+      "hint": "Use the lung window: find the dark air-filled lung on the patient's left, which is the right side of a standard axial image.",
+      "view": "axial:0.932:lung",
+      "layers": [],
+      "explain": "At the diaphragm level the left lung base is made up of the lower lobe, with the upper lobe (including the lingula) in front. In the lung window air is dark and vessels appear as bright branching dots.",
+      "tags": {
+        "topic": "lungs",
+        "region": "chest",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "ct-lung-right-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-example-sm",
+      "target": "lung_lower_lobe_right",
+      "accept": [
+        "lung_middle_lobe_right",
+        "lung_lower_lobe_right"
+      ],
+      "prompt": "Click the right lung.",
+      "hint": "In the lung window, find the dark lung on the patient's right, above the liver dome.",
+      "view": "axial:0.917:lung",
+      "layers": [],
+      "explain": "The right lung base sits above the liver dome and is mainly the lower lobe, with the middle lobe anterior. Remember that patient right is displayed on the left of a standard axial image.",
+      "tags": {
+        "topic": "lungs",
+        "region": "chest",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "ct-t12-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-example-sm",
+      "target": "vertebrae_T12",
+      "accept": [
+        "vertebrae_T12"
+      ],
+      "prompt": "Click the T12 vertebra.",
+      "hint": "T12 is the last thoracic vertebra, bearing the lowest pair of ribs.",
+      "view": "axial:0.849:bone",
+      "layers": [],
+      "explain": "T12 is the lowest vertebra to articulate with a rib, and it marks the thoracolumbar junction. In the bone window the cortex is bright and the marrow cavity is intermediate density.",
+      "tags": {
+        "topic": "bones",
+        "region": "abdomen",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "ct-rib-right-12-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-example-sm",
+      "target": "rib_right_12",
+      "accept": [
+        "rib_right_12"
+      ],
+      "prompt": "Click the right 12th rib.",
+      "hint": "It is the lowest rib, short and floating, with no cartilage connection to the sternum.",
+      "view": "axial:0.629:bone",
+      "layers": [],
+      "explain": "The 12th rib is the lowest and shortest rib and has no anterior attachment. On CT, count ribs from the 12th upward after confirming it articulates with the T12 vertebra.",
+      "tags": {
+        "topic": "bones",
+        "region": "abdomen",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "ct-spleen-rupture",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-example-sm",
+      "target": "spleen",
+      "accept": [
+        "spleen"
+      ],
+      "prompt": "A 24-year-old cyclist is hit on the left flank and arrives with left shoulder-tip pain, tachycardia and low blood pressure. Which organ is the likely source of the bleed? Click it.",
+      "hint": "Think of the solid organ tucked under the left ribs.",
+      "view": "spleen",
+      "layers": [],
+      "explain": "The spleen is the most commonly injured organ in blunt abdominal trauma, and its irritation of the diaphragm causes Kehr's sign (left shoulder-tip pain). On CT, a rupture appears as a laceration or hypodense fluid around the spleen.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "ct-pancreatitis",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-example-sm",
+      "target": "pancreas",
+      "accept": [
+        "pancreas"
+      ],
+      "prompt": "A 45-year-old has severe epigastric pain radiating through to the back, vomiting and a very high serum lipase. Click the organ that is inflamed.",
+      "hint": "It lies behind the stomach, across the front of the aorta and IVC.",
+      "view": "pancreas",
+      "layers": [],
+      "explain": "Acute pancreatitis causes severe epigastric pain radiating to the back with raised lipase. On CT, look for an enlarged gland, blurred outline and fat stranding around the pancreas.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "ct-gallstones",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-example-sm",
+      "target": "gallbladder",
+      "accept": [
+        "gallbladder"
+      ],
+      "prompt": "A 38-year-old woman has right upper quadrant pain after fatty meals, a positive Murphy's sign and gallstones on ultrasound. Click the organ containing the stones.",
+      "hint": "Look under the liver's inferior surface for a pear-shaped sac.",
+      "view": "gallbladder",
+      "layers": [],
+      "explain": "Gallstones form in the gallbladder, a pear-shaped sac on the underside of the liver. On CT, look for a fluid-filled sac, sometimes with calcified stones that are bright.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "ct-ivc-thrombus",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-example-sm",
+      "target": "inferior_vena_cava",
+      "accept": [
+        "inferior_vena_cava"
+      ],
+      "prompt": "A patient with renal cell carcinoma develops bilateral leg swelling and dilated abdominal wall veins. Which vessel is occluded by tumour thrombus? Click it.",
+      "hint": "It lies to the right of the aorta and carries blood back to the heart.",
+      "view": "inferior_vena_cava",
+      "layers": [],
+      "explain": "The inferior vena cava drains the lower body, and tumour thrombus extending from the renal vein can block it. On CT, look for a filling defect or expanded lumen in the vessel right of the aorta.",
+      "tags": {
+        "topic": "vessels",
+        "region": "abdomen",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "ct-portal-hypertension",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-example-sm",
+      "target": "portal_vein_and_splenic_vein",
+      "accept": [
+        "portal_vein_and_splenic_vein"
+      ],
+      "prompt": "A 58-year-old with cirrhosis has ascites, splenomegaly and oesophageal varices. Click the large vein whose raised pressure explains these findings.",
+      "hint": "It enters the liver at the porta hepatis, formed behind the pancreatic neck.",
+      "view": "portal_vein_and_splenic_vein",
+      "layers": [],
+      "explain": "In cirrhosis, resistance to flow raises portal vein pressure, causing varices, splenomegaly and ascites. On CT, a portal vein wider than about 13 mm supports portal hypertension.",
+      "tags": {
+        "topic": "vessels",
+        "region": "abdomen",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "ct-l1-burst",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-example-sm",
+      "target": "vertebrae_L1",
+      "accept": [
+        "vertebrae_L1"
+      ],
+      "prompt": "A 30-year-old falls from a ladder and has severe back pain at the thoracolumbar junction. CT shows a burst fracture with retropulsed fragments, just below T12. Click the fractured vertebra.",
+      "hint": "The fracture is at the first lumbar level.",
+      "view": "axial:0.487:bone",
+      "layers": [],
+      "explain": "The L1 vertebra is the first lumbar vertebra, below T12 and above L2, and burst fractures are common at the thoracolumbar junction. On bone-window CT, retropulsed bone fragments narrowing the canal indicate instability.",
+      "tags": {
+        "topic": "bones",
+        "region": "abdomen",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "ct-psoas-abscess",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-example-sm",
+      "target": "iliopsoas_right",
+      "accept": [
+        "iliopsoas_right"
+      ],
+      "prompt": "A 40-year-old with fever, right flank pain and a hip held flexed has pain on extending the right hip. CT shows a rim-enhancing collection. Click the right muscle that is infected.",
+      "hint": "It lies beside the lumbar vertebrae and flexes the hip.",
+      "view": "iliopsoas_right",
+      "layers": [],
+      "explain": "The psoas muscle sits beside the lumbar vertebral bodies and flexes the hip, so an abscess causes a flexed, painful hip. On CT, look for a low-density collection with an enhancing rim inside the muscle.",
+      "tags": {
+        "topic": "muscles",
+        "region": "abdomen",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "ct-pyelonephritis",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-example-sm",
+      "target": "kidney_left",
+      "accept": [
+        "kidney_left"
+      ],
+      "prompt": "A 29-year-old woman has fever, left loin pain, left costovertebral angle tenderness and pyuria. Click the organ most likely infected.",
+      "hint": "Look beside the spine on the left, behind the peritoneum.",
+      "view": "kidney_left",
+      "layers": [],
+      "explain": "Acute pyelonephritis is an infection of the kidney, with fever and loin pain. On contrast CT, it shows wedge-shaped areas of reduced enhancement with perinephric stranding.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "draft"
+      }
+    }
+  ]
+}

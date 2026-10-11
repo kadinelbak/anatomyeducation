@@ -39,30 +39,48 @@ export function utcDate() {
   return new Date().toISOString().slice(0, 10);
 }
 
-export function buildSets(questions) {
+const isMesh = (q) => q.renderer !== "volume";
+
+export function buildSets(allQuestions) {
+  const questions = allQuestions.filter(isMesh);
+  const mk = (s) => ({ renderer: "mesh", ...s });
   const sets = [
-    { id: "daily", title: "Daily 10", pick: (qs) => shuffled(qs, utcDate()).slice(0, SIZE) },
-    { id: "random", title: "Random 10", pick: (qs) => shuffled(qs, Math.random() + "" + Date.now()).slice(0, SIZE) },
-    {
+    mk({ id: "daily", title: "Daily 10", pick: (qs) => shuffled(qs.filter(isMesh), utcDate()).slice(0, SIZE) }),
+    mk({ id: "random", title: "Random 10", pick: (qs) => shuffled(qs.filter(isMesh), Math.random() + "" + Date.now()).slice(0, SIZE) }),
+    mk({
       id: "kind:Clinical", title: "Clinical cases",
-      pick: (qs) => shuffled(qs.filter((q) => q.kind === "Clinical"), Math.random() + "").slice(0, SIZE),
-    },
+      pick: (qs) => shuffled(qs.filter((q) => isMesh(q) && q.kind === "Clinical"), Math.random() + "").slice(0, SIZE),
+    }),
   ];
   const topics = [...new Set(questions.map((q) => q.tags?.topic).filter(Boolean))];
   for (const topic of topics) {
-    sets.push({
+    sets.push(mk({
       id: `topic:${topic}`, title: TOPIC_LABELS[topic] || cap(topic),
-      pick: (qs) => shuffled(qs.filter((q) => q.tags?.topic === topic), Math.random() + "").slice(0, SIZE),
+      pick: (qs) => shuffled(qs.filter((q) => isMesh(q) && q.tags?.topic === topic), Math.random() + "").slice(0, SIZE),
+    }));
+  }
+  // One CT set per volume study in the bank.
+  const studies = [...new Set(allQuestions.filter((q) => q.renderer === "volume" && q.study).map((q) => q.study))];
+  for (const study of studies) {
+    sets.push({
+      id: `ct:${study}`, renderer: "volume", study,
+      title: studies.length === 1 ? "CT scan" : `CT: ${study}`,
+      pick: (qs) => shuffled(qs.filter((q) => q.renderer === "volume" && q.study === study), Math.random() + "").slice(0, SIZE),
     });
   }
   // Sets with nothing to ask are hidden from the chooser.
-  return sets.filter((s) => s.pick(questions, "").length > 0);
+  return sets.filter((s) => s.pick(allQuestions, "").length > 0);
 }
 
-// An explicit list of ids, used by share links.
+// An explicit list of ids, used by share links. Mixed renderers are not supported:
+// only questions that match the first question's renderer (and study) are kept.
 export function explicitSet(ids, byId, title = "hand anatomy") {
-  const list = ids.map((id) => byId.get(id)).filter(Boolean);
-  return list.length ? { id: "custom", title, pick: () => list } : null;
+  let list = ids.map((id) => byId.get(id)).filter(Boolean);
+  const renderer = list[0]?.renderer || "mesh";
+  const study = renderer === "volume" ? list[0].study : undefined;
+  list = list.filter((q) => (q.renderer || "mesh") === renderer && (renderer !== "volume" || q.study === study));
+  if (renderer === "volume" && title === "hand anatomy") title = "CT scan";
+  return list.length ? { id: "custom", title, renderer, study, pick: () => list } : null;
 }
 
 // ?q=id1,id2 wins over ?set=...; unknown or missing falls back to daily.
