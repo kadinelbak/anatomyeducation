@@ -30,9 +30,9 @@ src/app.js                  Three.js viewer, layers, cross-section, quiz, share,
 src/questions.js            the 10 questions (answers are structure keys from tools/parts.py)
 src/analytics.js            anonymous events (random visitor id in localStorage)
 src/config.js               endpoints
-assets/model/arm.glb        the model (4.7 MB, 111 meshes, ~260k triangles)
+assets/model/arm.glb        the model (5.0 MB, 141 meshes incl. marrow cores, ~300k triangles)
 assets/model/structures.json   mesh -> structure/layer map, display names, forearm axis
-vendor/three/               Three.js 0.169 (MIT)
+vendor/three/               Three.js 0.169 (MIT): core, TrackballControls, GLTFLoader
 tools/build_model.py        rebuilds arm.glb from BodyParts3D files
 tools/parts.py              which BodyParts3D parts are used, and the structure names
 tools/nerves.py             schematic nerve and artery paths
@@ -53,8 +53,10 @@ made proprietary.
 What was done to it (`tools/build_model.py`): the right arm's bones, forearm
 and hand muscles, flexor retinaculum, interosseous membrane and skin were
 cropped from fingertips to just above the elbow, long tendons were split off
-the extrinsic muscles into their own layer by local thickness, and every mesh
-was simplified for phones.
+the extrinsic muscles into their own layer by local thickness, every mesh
+was simplified for phones, and each bone got a shrunken copy as a marrow
+core so the cross-section shows cortex around medulla. Cut faces are drawn
+with a stencil-capping pass per layer (skin cap doubles as subcutaneous fat).
 
 **BodyParts3D has no forearm or hand nerves and no radial or ulnar artery
 trunks** (checked in the 3.0 parts list and the 4.x manifest; 4.x only has a

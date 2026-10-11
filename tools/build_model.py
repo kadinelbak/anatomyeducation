@@ -151,6 +151,19 @@ def main(src):
         with open(cache, "wb") as f:
             pickle.dump(meshes, f)
 
+    # Marrow: a copy of each bone shrunk about its long axis, so the
+    # cross-section shows a cortex ring around a medullary core.
+    for name, structure, layer, m in list(meshes):
+        if layer != "bone":
+            continue
+        c = m.vertices.mean(0)
+        _, _, vt = np.linalg.svd(m.vertices - c, full_matrices=False)
+        long_axis = vt[0]
+        rel = m.vertices - c
+        along = np.outer(rel @ long_axis, long_axis)
+        v = c + along * 0.92 + (rel - along) * 0.5
+        meshes.append((name + "_marrow", structure, "marrow", trimesh.Trimesh(v, m.faces.copy(), process=False)))
+
     by_structure = {}
     for _, s, _, m in meshes:
         by_structure.setdefault(s, []).append(m)

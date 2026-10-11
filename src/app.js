@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { TrackballControls } from "three/addons/controls/TrackballControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { QUESTIONS } from "./questions.js";
 import { CONFIG } from "./config.js";
@@ -23,7 +23,7 @@ const HIGHLIGHT_GOOD = new THREE.Color(0x2ee68a);
 const HIGHLIGHT_BAD = new THREE.Color(0xff3b3b);
 
 const container = $("viewer");
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const renderer = new THREE.WebGLRenderer({ antialias: true, stencil: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.localClippingEnabled = true;
@@ -32,10 +32,16 @@ container.appendChild(renderer.domElement);
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x0f1419);
 const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.005, 10);
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
+// Trackball: free rotation in every direction (no pole lock). Left-drag
+// rotates, right-drag or two fingers pan, wheel or pinch zooms.
+const controls = new TrackballControls(camera, renderer.domElement);
+controls.rotateSpeed = 2.5;
+controls.zoomSpeed = 1.0;
+controls.panSpeed = 0.5;
+controls.dynamicDampingFactor = 0.15;
 controls.minDistance = 0.06;
 controls.maxDistance = 1.5;
+renderer.domElement.addEventListener("contextmenu", (e) => e.preventDefault());
 
 scene.add(new THREE.HemisphereLight(0xffffff, 0x404858, 1.4));
 const key = new THREE.DirectionalLight(0xffffff, 1.6);
@@ -44,6 +50,7 @@ key.position.set(0.3, 0.5, 0.2);
 scene.add(camera);
 
 const clipPlane = new THREE.Plane(new THREE.Vector3(0, -1, 0), 10);
+let sliceActive = false;
 const model = new THREE.Group();
 scene.add(model);
 
@@ -52,6 +59,11 @@ const meshesByStructure = new Map(); // structure -> [mesh]
 const meshesByLayer = new Map(); // layer -> [mesh]
 const layerOn = { ...DEFAULT_LAYERS };
 let axis = null; // { origin, dir, min, max } for the cross-section
+const marrowMeshes = [];
+const stencilByLayer = new Map(); // layer -> [stencil meshes]
+const caps = []; // { layer, mesh, offset }
+const CAP_COLORS = { skin: 0xe8c99a, muscle: 0xb5433b, tendon: 0xe3dccb, nerve: 0xe6c94a, vessel: 0xb01f24, bone: 0xd8ccb0, marrow: 0xb4553f };
+const CAP_ORDER = ["skin", "muscle", "tendon", "nerve", "vessel", "bone", "marrow"];
 
 // Back faces of cut meshes render as a flat darker cap so the slice reads as solid.
 function capShader(material) {
@@ -99,6 +111,61 @@ async function loadGltf(url) {
   return loader.parseAsync(bin.buffer, "");
 }
 
+// Solid cut faces: for each layer, back faces of the clipped meshes bump a
+// stencil count and front faces drop it, so pixels where the cut opens into a
+// mesh end up non-zero; a plane on the cut is then drawn only there.
+function stencilMaterial(side, op) {
+  return new THREE.MeshBasicMaterial({
+    side, clippingPlanes: [clipPlane], depthWrite: false, depthTest: true, colorWrite: false,
+    stencilWrite: true, stencilFunc: THREE.AlwaysStencilFunc, stencilFail: op, stencilZFail: op, stencilZPass: op,
+  });
+}
+
+function addStencilPair(mesh, layer) {
+  const order = CAP_ORDER.indexOf(layer) * 2 + 20;
+  const back = new THREE.Mesh(mesh.geometry, stencilMaterial(THREE.BackSide, THREE.IncrementWrapStencilOp));
+  const front = new THREE.Mesh(mesh.geometry, stencilMaterial(THREE.FrontSide, THREE.DecrementWrapStencilOp));
+  for (const m of [back, front]) {
+    m.renderOrder = order;
+    m.visible = false;
+    m.raycast = () => {};
+    mesh.add(m);
+  }
+  if (!stencilByLayer.has(layer)) stencilByLayer.set(layer, []);
+  stencilByLayer.get(layer).push(back, front);
+}
+
+function addCap(layer) {
+  const i = CAP_ORDER.indexOf(layer);
+  const mat = new THREE.MeshStandardMaterial({
+    color: CAP_COLORS[layer], roughness: 0.9, metalness: 0, side: THREE.DoubleSide,
+    stencilWrite: true, stencilRef: 0, stencilFunc: THREE.NotEqualStencilFunc,
+    stencilFail: THREE.ReplaceStencilOp, stencilZFail: THREE.ReplaceStencilOp, stencilZPass: THREE.ReplaceStencilOp,
+  });
+  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), mat);
+  mesh.renderOrder = i * 2 + 21;
+  mesh.visible = false;
+  mesh.raycast = () => {}; // never pickable
+  scene.add(mesh);
+  caps.push({ layer, mesh, offset: i * 0.00012 });
+}
+
+function updateCaps() {
+  for (const { layer, mesh, offset } of caps) {
+    const on = sliceActive && (layer === "marrow" ? layerOn.bone : layerOn[layer]);
+    mesh.visible = on;
+    if (!on) continue;
+    // Sit on the cut, nudged toward the viewer side so later layers draw over earlier ones.
+    clipPlane.coplanarPoint(mesh.position);
+    mesh.position.addScaledVector(clipPlane.normal, -offset);
+    mesh.lookAt(mesh.position.clone().add(clipPlane.normal));
+  }
+  for (const [layer, list] of stencilByLayer) {
+    const on = sliceActive && (layer === "marrow" ? layerOn.bone : layerOn[layer]);
+    for (const m of list) m.visible = on;
+  }
+}
+
 async function loadModel() {
   const [gltf, structures] = await Promise.all([
     loadGltf(CONFIG.modelUrl),
@@ -113,6 +180,12 @@ async function loadModel() {
     obj.userData = { ...info };
     if (!obj.geometry.attributes.normal) obj.geometry.computeVertexNormals();
     obj.geometry.deleteAttribute("color");
+    addStencilPair(obj, info.layer);
+    if (info.layer === "marrow") {
+      obj.material = new THREE.MeshBasicMaterial({ visible: false }); // only its cut face is ever seen
+      marrowMeshes.push(obj);
+      return;
+    }
     obj.material = makeMaterial(info.layer, info.structure);
     obj.userData.baseColor = obj.material.color.clone();
     obj.userData.baseEmissive = obj.material.emissive.clone();
@@ -122,6 +195,7 @@ async function loadModel() {
     if (!meshesByLayer.has(info.layer)) meshesByLayer.set(info.layer, []);
     meshesByLayer.get(info.layer).push(obj);
   });
+  for (const layer of CAP_ORDER) addCap(layer);
   model.add(gltf.scene);
 
   // Cross-section axis: elbow -> wrist, extended to cover the whole model.
@@ -157,6 +231,7 @@ function applyLayers() {
     const box = document.querySelector(`input[data-layer="${layer}"]`);
     if (box) box.checked = layerOn[layer];
   }
+  updateCaps();
 }
 
 function setLayers(spec) {
@@ -175,12 +250,14 @@ const slider = $("slice");
 function applySlice() {
   if (!axis) return;
   const t = Number(slider.value) / 1000;
-  if (t <= 0) {
+  sliceActive = t > 0;
+  if (!sliceActive) {
     clipPlane.set(axis.dir, 10); // keeps everything
   } else {
     const d = axis.min + t * (axis.max - axis.min);
     clipPlane.set(axis.dir, -d); // keep points distal to the cut
   }
+  updateCaps();
 }
 slider.addEventListener("input", applySlice);
 
@@ -209,6 +286,7 @@ function setView(name, animate = true) {
     controls.update();
     return;
   }
+  camera.up.set(0, 1, 0);
   Object.assign(viewTween, {
     active: true, start: performance.now(),
     fromPos: camera.position.clone(), toPos: pos,
@@ -216,6 +294,15 @@ function setView(name, animate = true) {
   });
 }
 document.querySelectorAll("[data-view]").forEach((b) => b.addEventListener("click", () => setView(b.dataset.view)));
+
+// "Move" swaps left-drag between rotate and pan, for trackpads and phones.
+const moveBtn = $("move");
+moveBtn.addEventListener("click", () => {
+  const panning = controls.mouseButtons.LEFT !== THREE.MOUSE.PAN;
+  controls.mouseButtons.LEFT = panning ? THREE.MOUSE.PAN : THREE.MOUSE.ROTATE;
+  moveBtn.classList.toggle("active", panning);
+  moveBtn.setAttribute("aria-pressed", panning);
+});
 
 $("controls-toggle").addEventListener("click", () => {
   const open = $("controls").classList.toggle("open");
@@ -528,6 +615,7 @@ window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
+  controls.handleResize();
 });
 
 function tick() {

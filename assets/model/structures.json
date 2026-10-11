@@ -472,6 +472,156 @@
    "layer": "skin"
   },
   {
+   "node": "FMA23130_marrow",
+   "structure": "humerus",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA23464_marrow",
+   "structure": "radius",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA23467_marrow",
+   "structure": "ulna",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24435_marrow",
+   "structure": "scaphoid",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24437_marrow",
+   "structure": "lunate",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24439_marrow",
+   "structure": "triquetrum",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24441_marrow",
+   "structure": "pisiform",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24443_marrow",
+   "structure": "trapezium",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA23725_marrow",
+   "structure": "trapezoid",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24446_marrow",
+   "structure": "capitate",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24448_marrow",
+   "structure": "hamate",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24464_marrow",
+   "structure": "metacarpal_1",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24466_marrow",
+   "structure": "metacarpal_2",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24468_marrow",
+   "structure": "metacarpal_3",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24470_marrow",
+   "structure": "metacarpal_4",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24472_marrow",
+   "structure": "metacarpal_5",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24450_marrow",
+   "structure": "phalanges_thumb",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24459_marrow",
+   "structure": "phalanges_thumb",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24451_marrow",
+   "structure": "phalanges_index",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24455_marrow",
+   "structure": "phalanges_index",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24460_marrow",
+   "structure": "phalanges_index",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24452_marrow",
+   "structure": "phalanges_middle",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24456_marrow",
+   "structure": "phalanges_middle",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24461_marrow",
+   "structure": "phalanges_middle",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24453_marrow",
+   "structure": "phalanges_ring",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24457_marrow",
+   "structure": "phalanges_ring",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24462_marrow",
+   "structure": "phalanges_ring",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24454_marrow",
+   "structure": "phalanges_little",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24458_marrow",
+   "structure": "phalanges_little",
+   "layer": "marrow"
+  },
+  {
+   "node": "FMA24463_marrow",
+   "structure": "phalanges_little",
+   "layer": "marrow"
+  },
+  {
    "node": "schematic_median_nerve",
    "structure": "median_nerve",
    "layer": "nerve"
@@ -628,9 +778,9 @@
  },
  "axis": {
   "elbow": [
-   0.04,
-   0.1753,
-   -0.0513
+   0.0397,
+   0.1752,
+   -0.0518
   ],
   "wrist": [
    -0.0055,
