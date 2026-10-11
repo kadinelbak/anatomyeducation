@@ -295,14 +295,13 @@ function setView(name, animate = true) {
 }
 document.querySelectorAll("[data-view]").forEach((b) => b.addEventListener("click", () => setView(b.dataset.view)));
 
-// "Move" swaps left-drag between rotate and pan, for trackpads and phones.
-const moveBtn = $("move");
-moveBtn.addEventListener("click", () => {
-  const panning = controls.mouseButtons.LEFT !== THREE.MOUSE.PAN;
-  controls.mouseButtons.LEFT = panning ? THREE.MOUSE.PAN : THREE.MOUSE.ROTATE;
-  moveBtn.classList.toggle("active", panning);
-  moveBtn.setAttribute("aria-pressed", panning);
-});
+// Shift + left-drag pans (right-drag and two-finger drag pan as well).
+function setShiftPan(on) {
+  controls.mouseButtons.LEFT = on ? THREE.MOUSE.PAN : THREE.MOUSE.ROTATE;
+}
+window.addEventListener("keydown", (e) => { if (e.key === "Shift") setShiftPan(true); });
+window.addEventListener("keyup", (e) => { if (e.key === "Shift") setShiftPan(false); });
+window.addEventListener("blur", () => setShiftPan(false));
 
 $("controls-toggle").addEventListener("click", () => {
   const open = $("controls").classList.toggle("open");

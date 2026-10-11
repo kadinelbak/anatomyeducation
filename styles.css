@@ -78,9 +78,6 @@ button { font: inherit; cursor: pointer; }
 .views { display: flex; gap: 4px; margin-top: 10px; }
 .views button { flex: 1; font-size: 0.75rem; padding: 6px 2px; border-radius: 8px; background: transparent; color: var(--text); border: 1px solid var(--border); }
 
-.move { width: 100%; margin-top: 6px; font-size: 0.75rem; padding: 6px; border-radius: 8px; background: transparent; color: var(--text); border: 1px solid var(--border); }
-.move.active { background: var(--accent); color: #04121f; border-color: var(--accent); }
-
 .hover-label {
   position: fixed; pointer-events: none; padding: 3px 8px; border-radius: 6px;
   background: rgba(0, 0, 0, 0.75); font-size: 0.82rem; transform: translate(12px, -50%);
