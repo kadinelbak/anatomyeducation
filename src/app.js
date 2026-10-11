@@ -480,6 +480,12 @@ $("signup-form").addEventListener("submit", async (e) => {
   const email = $("signup-email").value.trim();
   const status = $("signup-status");
   $("signup-submit").disabled = true;
+  if (!CONFIG.signupUrl) {
+    status.textContent = "Signups aren't connected on this copy of the page.";
+    status.hidden = false;
+    $("signup-submit").disabled = false;
+    return;
+  }
   try {
     const r = await fetch(CONFIG.signupUrl, {
       method: "POST",
