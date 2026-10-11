@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Hand Nerves 3D Challenge</title>
+  <meta name="description" content="Can you score 10/10 on hand nerves and muscles? Free 3D anatomy practice: click the structure on a real forearm and hand model.">
+  <meta property="og:title" content="Hand Nerves 3D Challenge">
+  <meta property="og:description" content="10 click-the-structure questions on a 3D hand and forearm. Free, no account.">
+  <link rel="stylesheet" href="styles.css">
+  <script type="importmap">
+    { "imports": { "three": "./vendor/three/three.module.js", "three/addons/": "./vendor/three/addons/" } }
+  </script>
+</head>
+<body>
+  <div id="viewer" aria-label="3D hand and forearm model"></div>
+
+  <header class="topbar">
+    <div class="brand">Hand Nerves 3D</div>
+    <div class="stats" hidden>
+      <span id="qcount">1/10</span>
+      <span id="timer">0:00</span>
+      <span id="score">0 pts</span>
+    </div>
+  </header>
+
+  <div id="loading" class="loading">Loading the model…</div>
+
+  <!-- Intro -->
+  <section id="intro" class="card intro">
+    <p id="shared-banner" class="shared-banner" hidden></p>
+    <h1>Can you score 10/10 on hand nerves?</h1>
+    <p>10 questions on a 3D hand and forearm. Rotate, peel back layers, and click the structure. Mix of straight identification and clinical vignettes.</p>
+    <button id="start" class="primary" disabled>Start the challenge</button>
+    <p class="fine">Free, no account. Drag to rotate, scroll or pinch to zoom, right-drag or two-finger drag to pan.</p>
+  </section>
+
+  <!-- Question -->
+  <section id="question" class="card question" hidden>
+    <div class="qkind" id="qkind"></div>
+    <p class="qprompt" id="qprompt"></p>
+    <p class="qhint" id="qhint" hidden></p>
+    <div id="feedback" class="feedback" hidden>
+      <p class="verdict" id="verdict"></p>
+      <p class="explain" id="explain"></p>
+      <button id="next" class="primary">Next question</button>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section id="results" class="card results" hidden>
+    <h2 id="final-score"></h2>
+    <p id="final-time"></p>
+    <ol id="review" class="review"></ol>
+    <div class="actions">
+      <button id="share" class="primary">Share your score</button>
+      <button id="more" class="secondary">Get 50 more questions</button>
+      <button id="again" class="ghost">Try again</button>
+    </div>
+    <p id="share-status" class="fine" hidden></p>
+  </section>
+
+  <!-- Controls -->
+  <aside id="controls" class="controls">
+    <button id="controls-toggle" class="controls-toggle" aria-expanded="false">Layers</button>
+    <div class="controls-body">
+      <fieldset class="layers">
+        <legend>Layers</legend>
+        <label><input type="checkbox" data-layer="skin"> Skin</label>
+        <label><input type="checkbox" data-layer="muscle"> Muscles</label>
+        <label><input type="checkbox" data-layer="tendon"> Tendons</label>
+        <label><input type="checkbox" data-layer="nerve"> Nerves</label>
+        <label><input type="checkbox" data-layer="vessel"> Vessels</label>
+        <label><input type="checkbox" data-layer="bone"> Bone</label>
+      </fieldset>
+      <label class="slice">
+        <span>Cross-section</span>
+        <input id="slice" type="range" min="0" max="1000" value="0" aria-label="Slice the forearm from elbow to fingertips">
+      </label>
+      <div class="views">
+        <button data-view="palmar">Palm</button>
+        <button data-view="dorsal">Back</button>
+        <button data-view="lateral">Thumb side</button>
+      </div>
+    </div>
+  </aside>
+
+  <div id="hover-label" class="hover-label" hidden></div>
+
+  <!-- Email signup -->
+  <dialog id="signup" class="signup">
+    <form id="signup-form" method="dialog">
+      <h2>Get 50 more questions</h2>
+      <p>We're building a full bank of 3D questions for the upper limb: brachial plexus, elbow, shoulder. Leave your email and we'll send them when they're ready.</p>
+      <input id="signup-email" type="email" required placeholder="you@school.edu" autocomplete="email" maxlength="254">
+      <div class="actions">
+        <button type="submit" class="primary" id="signup-submit">Notify me</button>
+        <button type="button" class="ghost" id="signup-cancel">Not now</button>
+      </div>
+      <p id="signup-status" class="fine" hidden></p>
+      <p class="fine">One email when new questions launch. No spam, unsubscribe any time.</p>
+    </form>
+  </dialog>
+
+  <footer class="attribution">
+    Model: <a href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/" target="_blank" rel="noopener">BodyParts3D</a>, © The Database Center for Life Science, licensed under
+    <a href="https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en" target="_blank" rel="noopener">CC BY-SA 2.1 JP</a>; cropped, simplified and recoloured. Nerves and arteries are schematic. For study, not clinical use.
+  </footer>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>

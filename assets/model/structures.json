@@ -1,0 +1,653 @@
+{
+ "source": "BodyParts3D 3.0 (DBCLS), CC BY-SA 2.1 JP; nerves and arteries are schematic",
+ "nodes": [
+  {
+   "node": "FMA23130",
+   "structure": "humerus",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA23464",
+   "structure": "radius",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA23467",
+   "structure": "ulna",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24435",
+   "structure": "scaphoid",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24437",
+   "structure": "lunate",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24439",
+   "structure": "triquetrum",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24441",
+   "structure": "pisiform",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24443",
+   "structure": "trapezium",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA23725",
+   "structure": "trapezoid",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24446",
+   "structure": "capitate",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24448",
+   "structure": "hamate",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24464",
+   "structure": "metacarpal_1",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24466",
+   "structure": "metacarpal_2",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24468",
+   "structure": "metacarpal_3",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24470",
+   "structure": "metacarpal_4",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24472",
+   "structure": "metacarpal_5",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24450",
+   "structure": "phalanges_thumb",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24459",
+   "structure": "phalanges_thumb",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24451",
+   "structure": "phalanges_index",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24455",
+   "structure": "phalanges_index",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24460",
+   "structure": "phalanges_index",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24452",
+   "structure": "phalanges_middle",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24456",
+   "structure": "phalanges_middle",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24461",
+   "structure": "phalanges_middle",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24453",
+   "structure": "phalanges_ring",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24457",
+   "structure": "phalanges_ring",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24462",
+   "structure": "phalanges_ring",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24454",
+   "structure": "phalanges_little",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24458",
+   "structure": "phalanges_little",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA24463",
+   "structure": "phalanges_little",
+   "layer": "bone"
+  },
+  {
+   "node": "FMA23707",
+   "structure": "interosseous_membrane",
+   "layer": "tendon"
+  },
+  {
+   "node": "FMA40120",
+   "structure": "flexor_retinaculum",
+   "layer": "tendon"
+  },
+  {
+   "node": "FMA37668",
+   "structure": "brachialis",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA37684",
+   "structure": "biceps_brachii",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA37686",
+   "structure": "biceps_brachii",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA37695",
+   "structure": "triceps_brachii",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA37697",
+   "structure": "triceps_brachii",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA37699",
+   "structure": "triceps_brachii",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38560",
+   "structure": "pronator_teres",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38562",
+   "structure": "pronator_teres",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38460",
+   "structure": "flexor_carpi_radialis",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38460_tendon",
+   "structure": "flexor_carpi_radialis",
+   "layer": "tendon"
+  },
+  {
+   "node": "FMA38463",
+   "structure": "palmaris_longus",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38463_tendon",
+   "structure": "palmaris_longus",
+   "layer": "tendon"
+  },
+  {
+   "node": "FMA38617",
+   "structure": "flexor_carpi_ulnaris",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38617_tendon",
+   "structure": "flexor_carpi_ulnaris",
+   "layer": "tendon"
+  },
+  {
+   "node": "FMA38619",
+   "structure": "flexor_carpi_ulnaris",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38619_tendon",
+   "structure": "flexor_carpi_ulnaris",
+   "layer": "tendon"
+  },
+  {
+   "node": "FMA38638",
+   "structure": "flexor_digitorum_superficialis",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38638_tendon",
+   "structure": "flexor_digitorum_superficialis",
+   "layer": "tendon"
+  },
+  {
+   "node": "FMA38640",
+   "structure": "flexor_digitorum_superficialis",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38640_tendon",
+   "structure": "flexor_digitorum_superficialis",
+   "layer": "tendon"
+  },
+  {
+   "node": "FMA38479",
+   "structure": "flexor_digitorum_profundus",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38479_tendon",
+   "structure": "flexor_digitorum_profundus",
+   "layer": "tendon"
+  },
+  {
+   "node": "FMA38482",
+   "structure": "flexor_pollicis_longus",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38482_tendon",
+   "structure": "flexor_pollicis_longus",
+   "layer": "tendon"
+  },
+  {
+   "node": "FMA38454",
+   "structure": "pronator_quadratus",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38486",
+   "structure": "brachioradialis",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38486_tendon",
+   "structure": "brachioradialis",
+   "layer": "tendon"
+  },
+  {
+   "node": "FMA38495",
+   "structure": "extensor_carpi_radialis_longus",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38495_tendon",
+   "structure": "extensor_carpi_radialis_longus",
+   "layer": "tendon"
+  },
+  {
+   "node": "FMA38498",
+   "structure": "extensor_carpi_radialis_brevis",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38498_tendon",
+   "structure": "extensor_carpi_radialis_brevis",
+   "layer": "tendon"
+  },
+  {
+   "node": "FMA38501",
+   "structure": "extensor_digitorum",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38501_tendon",
+   "structure": "extensor_digitorum",
+   "layer": "tendon"
+  },
+  {
+   "node": "FMA38504",
+   "structure": "extensor_digiti_minimi",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38504_tendon",
+   "structure": "extensor_digiti_minimi",
+   "layer": "tendon"
+  },
+  {
+   "node": "BP45",
+   "structure": "extensor_carpi_ulnaris",
+   "layer": "muscle"
+  },
+  {
+   "node": "BP45_tendon",
+   "structure": "extensor_carpi_ulnaris",
+   "layer": "tendon"
+  },
+  {
+   "node": "BP47",
+   "structure": "extensor_carpi_ulnaris",
+   "layer": "muscle"
+  },
+  {
+   "node": "BP47_tendon",
+   "structure": "extensor_carpi_ulnaris",
+   "layer": "tendon"
+  },
+  {
+   "node": "FMA37705",
+   "structure": "anconeus",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38513",
+   "structure": "supinator",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38516",
+   "structure": "abductor_pollicis_longus",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38516_tendon",
+   "structure": "abductor_pollicis_longus",
+   "layer": "tendon"
+  },
+  {
+   "node": "FMA38519",
+   "structure": "extensor_pollicis_brevis",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38519_tendon",
+   "structure": "extensor_pollicis_brevis",
+   "layer": "tendon"
+  },
+  {
+   "node": "FMA38522",
+   "structure": "extensor_pollicis_longus",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38522_tendon",
+   "structure": "extensor_pollicis_longus",
+   "layer": "tendon"
+  },
+  {
+   "node": "FMA38525",
+   "structure": "extensor_indicis",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA38525_tendon",
+   "structure": "extensor_indicis",
+   "layer": "tendon"
+  },
+  {
+   "node": "FMA37386",
+   "structure": "abductor_pollicis_brevis",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA65198",
+   "structure": "flexor_pollicis_brevis",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA46110",
+   "structure": "flexor_pollicis_brevis",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA37390",
+   "structure": "opponens_pollicis",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA46121",
+   "structure": "adductor_pollicis",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA46123",
+   "structure": "adductor_pollicis",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA37396",
+   "structure": "abductor_digiti_minimi",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA37398",
+   "structure": "flexor_digiti_minimi_brevis",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA37400",
+   "structure": "opponens_digiti_minimi",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA42398",
+   "structure": "lumbricals",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA42402",
+   "structure": "palmar_interossei",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA42404",
+   "structure": "dorsal_interossei",
+   "layer": "muscle"
+  },
+  {
+   "node": "FMA7163",
+   "structure": "skin",
+   "layer": "skin"
+  },
+  {
+   "node": "schematic_median_nerve",
+   "structure": "median_nerve",
+   "layer": "nerve"
+  },
+  {
+   "node": "schematic_median_digital_thumb",
+   "structure": "median_nerve",
+   "layer": "nerve"
+  },
+  {
+   "node": "schematic_median_digital_index",
+   "structure": "median_nerve",
+   "layer": "nerve"
+  },
+  {
+   "node": "schematic_median_digital_2nd_web",
+   "structure": "median_nerve",
+   "layer": "nerve"
+  },
+  {
+   "node": "schematic_median_digital_3rd_web",
+   "structure": "median_nerve",
+   "layer": "nerve"
+  },
+  {
+   "node": "schematic_median_recurrent",
+   "structure": "median_recurrent_branch",
+   "layer": "nerve"
+  },
+  {
+   "node": "schematic_ulnar_nerve",
+   "structure": "ulnar_nerve",
+   "layer": "nerve"
+  },
+  {
+   "node": "schematic_ulnar_superficial",
+   "structure": "ulnar_nerve",
+   "layer": "nerve"
+  },
+  {
+   "node": "schematic_ulnar_superficial_little",
+   "structure": "ulnar_nerve",
+   "layer": "nerve"
+  },
+  {
+   "node": "schematic_ulnar_deep",
+   "structure": "ulnar_deep_branch",
+   "layer": "nerve"
+  },
+  {
+   "node": "schematic_radial_nerve",
+   "structure": "radial_nerve",
+   "layer": "nerve"
+  },
+  {
+   "node": "schematic_radial_superficial",
+   "structure": "radial_superficial_branch",
+   "layer": "nerve"
+  },
+  {
+   "node": "schematic_radial_superficial_index",
+   "structure": "radial_superficial_branch",
+   "layer": "nerve"
+  },
+  {
+   "node": "schematic_posterior_interosseous",
+   "structure": "posterior_interosseous_nerve",
+   "layer": "nerve"
+  },
+  {
+   "node": "schematic_radial_artery",
+   "structure": "radial_artery",
+   "layer": "vessel"
+  },
+  {
+   "node": "schematic_ulnar_artery",
+   "structure": "ulnar_artery",
+   "layer": "vessel"
+  },
+  {
+   "node": "schematic_superficial_palmar_arch",
+   "structure": "superficial_palmar_arch",
+   "layer": "vessel"
+  }
+ ],
+ "structures": {
+  "humerus": "Humerus (distal end)",
+  "radius": "Radius",
+  "ulna": "Ulna",
+  "scaphoid": "Scaphoid",
+  "lunate": "Lunate",
+  "triquetrum": "Triquetrum",
+  "pisiform": "Pisiform",
+  "trapezium": "Trapezium",
+  "trapezoid": "Trapezoid",
+  "capitate": "Capitate",
+  "hamate": "Hamate",
+  "metacarpal_1": "First metacarpal",
+  "metacarpal_2": "Second metacarpal",
+  "metacarpal_3": "Third metacarpal",
+  "metacarpal_4": "Fourth metacarpal",
+  "metacarpal_5": "Fifth metacarpal",
+  "phalanges_thumb": "Phalanges of the thumb",
+  "phalanges_index": "Phalanges of the index finger",
+  "phalanges_middle": "Phalanges of the middle finger",
+  "phalanges_ring": "Phalanges of the ring finger",
+  "phalanges_little": "Phalanges of the little finger",
+  "interosseous_membrane": "Interosseous membrane",
+  "flexor_retinaculum": "Flexor retinaculum (transverse carpal ligament)",
+  "brachialis": "Brachialis",
+  "biceps_brachii": "Biceps brachii",
+  "triceps_brachii": "Triceps brachii",
+  "pronator_teres": "Pronator teres",
+  "flexor_carpi_radialis": "Flexor carpi radialis",
+  "palmaris_longus": "Palmaris longus",
+  "flexor_carpi_ulnaris": "Flexor carpi ulnaris",
+  "flexor_digitorum_superficialis": "Flexor digitorum superficialis",
+  "flexor_digitorum_profundus": "Flexor digitorum profundus",
+  "flexor_pollicis_longus": "Flexor pollicis longus",
+  "pronator_quadratus": "Pronator quadratus",
+  "brachioradialis": "Brachioradialis",
+  "extensor_carpi_radialis_longus": "Extensor carpi radialis longus",
+  "extensor_carpi_radialis_brevis": "Extensor carpi radialis brevis",
+  "extensor_digitorum": "Extensor digitorum",
+  "extensor_digiti_minimi": "Extensor digiti minimi",
+  "extensor_carpi_ulnaris": "Extensor carpi ulnaris",
+  "anconeus": "Anconeus",
+  "supinator": "Supinator",
+  "abductor_pollicis_longus": "Abductor pollicis longus",
+  "extensor_pollicis_brevis": "Extensor pollicis brevis",
+  "extensor_pollicis_longus": "Extensor pollicis longus",
+  "extensor_indicis": "Extensor indicis",
+  "abductor_pollicis_brevis": "Abductor pollicis brevis",
+  "flexor_pollicis_brevis": "Flexor pollicis brevis",
+  "opponens_pollicis": "Opponens pollicis",
+  "adductor_pollicis": "Adductor pollicis",
+  "abductor_digiti_minimi": "Abductor digiti minimi",
+  "flexor_digiti_minimi_brevis": "Flexor digiti minimi brevis",
+  "opponens_digiti_minimi": "Opponens digiti minimi",
+  "lumbricals": "Lumbricals",
+  "palmar_interossei": "Palmar interossei",
+  "dorsal_interossei": "Dorsal interossei",
+  "skin": "Skin",
+  "median_nerve": "Median nerve",
+  "median_recurrent_branch": "Recurrent (motor) branch of the median nerve",
+  "ulnar_nerve": "Ulnar nerve",
+  "ulnar_deep_branch": "Deep branch of the ulnar nerve",
+  "radial_nerve": "Radial nerve",
+  "radial_superficial_branch": "Superficial branch of the radial nerve",
+  "posterior_interosseous_nerve": "Posterior interosseous nerve (deep radial)",
+  "radial_artery": "Radial artery",
+  "ulnar_artery": "Ulnar artery",
+  "superficial_palmar_arch": "Superficial palmar arch"
+ },
+ "axis": {
+  "elbow": [
+   0.04,
+   0.1753,
+   -0.0513
+  ],
+  "wrist": [
+   -0.0055,
+   -0.0838,
+   -0.0007
+  ]
+ },
+ "schematic": [
+  "median_nerve",
+  "median_recurrent_branch",
+  "posterior_interosseous_nerve",
+  "radial_artery",
+  "radial_nerve",
+  "radial_superficial_branch",
+  "superficial_palmar_arch",
+  "ulnar_artery",
+  "ulnar_deep_branch",
+  "ulnar_nerve"
+ ]
+}
