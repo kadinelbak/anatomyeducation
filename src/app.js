@@ -33,7 +33,7 @@ const renderer = await createMeshRenderer({
   onPick: (id) => engine.answer(id),
 }).catch((err) => {
   console.error(err);
-  $("loading").textContent = "Couldn't load the 3D model. Please reload the page.";
+  $("loading").textContent = `Couldn't load the 3D model. Please reload the page. (${err?.message || err})`;
   throw err;
 });
 

@@ -100,11 +100,31 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
   }
 
   // Hosts that only serve text files get the GLB as base64 in a .txt file.
+  // Fetches are retried once because a 6 MB transfer on a phone can drop.
+  async function fetchText(url) {
+    let lastErr;
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        const r = await fetch(url, { cache: attempt ? "reload" : "default" });
+        if (!r.ok) throw new Error(`${url}: HTTP ${r.status}`);
+        return await r.text();
+      } catch (err) {
+        lastErr = err;
+      }
+    }
+    throw lastErr;
+  }
+
   async function loadGltf(url) {
     const loader = new GLTFLoader();
     if (!url.endsWith(".txt")) return loader.loadAsync(url);
-    const b64 = await fetch(url).then((r) => r.text());
-    const bin = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+    const b64 = (await fetchText(url)).replace(/\s+/g, "");
+    let bin;
+    try {
+      bin = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+    } catch (err) {
+      throw new Error(`model text is not valid base64 (${b64.length} chars): ${err.message}`);
+    }
     return loader.parseAsync(bin.buffer, "");
   }
 
@@ -166,7 +186,7 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
   async function loadModel() {
     const [gltf, structures] = await Promise.all([
       loadGltf(modelUrl),
-      fetch(structuresUrl).then((r) => r.json()),
+      fetchText(structuresUrl).then((t) => JSON.parse(t)),
     ]);
     meta = structures;
     const nodeInfo = new Map(meta.nodes.map((n) => [n.node, n]));
