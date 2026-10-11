@@ -36,3 +36,22 @@ export function track(type, fields = {}) {
     /* analytics must never break the page */
   }
 }
+
+// Fires once per session when someone comes back between 1 hour and 7 days after their first visit.
+export function checkReturnVisit() {
+  try {
+    const now = Date.now();
+    const first = Number(window.localStorage.getItem("hn3d_first_visit"));
+    if (!first) {
+      window.localStorage.setItem("hn3d_first_visit", String(now));
+      return;
+    }
+    const age = now - first;
+    if (age > 3600e3 && age < 7 * 86400e3 && !window.sessionStorage.getItem("hn3d_return_sent")) {
+      window.sessionStorage.setItem("hn3d_return_sent", "1");
+      track("return_visit", { days: Math.round((age / 86400e3) * 10) / 10 });
+    }
+  } catch {
+    /* storage can be blocked */
+  }
+}

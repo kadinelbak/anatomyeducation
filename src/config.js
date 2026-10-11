@@ -6,4 +6,7 @@ export const CONFIG = {
   modelUrl: "assets/model/arm.glb",
   eventsUrl: "api/event",
   signupUrl: "api/signup",
+  // The PRD requires clinician approval before public launch. Set this to
+  // false to hide every question whose review.status is not "approved".
+  includeDraftQuestions: true,
 };

@@ -1,0 +1,7 @@
+{
+  "name": "hand-nerves-3d",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node tools/smoke_test.mjs" },
+  "devDependencies": { "playwright": "^1.64.0" }
+}

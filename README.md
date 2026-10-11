@@ -1,8 +1,9 @@
 # Hand Nerves 3D Challenge
 
-Milestone 1 of the 3D anatomy practice app: one static page with a hand and
-forearm model and 10 "click the structure" questions on hand nerves and
-muscles. No accounts, no build step.
+The 3D anatomy practice app (milestone 2 of the Anatomy and Imaging Practice
+Suite PRD): one static page with a hand and forearm model and a bank of 50
+"click the structure" questions served as sets of 10 (daily, random, by topic,
+clinical cases). No accounts, no build step.
 
 ## Run it
 
@@ -26,29 +27,53 @@ Any static host can serve the page too (everything is plain files); point
 
 ```
 index.html, styles.css      the page
-src/app.js                  Three.js viewer, layers, cross-section, quiz, share, signup
-src/questions.js            the 10 questions (answers are structure keys from tools/parts.py)
+src/app.js                  wiring: boot, DOM callbacks, set chooser, share, signup
+src/engine.js               quiz engine: state, score, timer, feedback, share URL (no DOM, no three)
+src/renderers/mesh.js       the Three.js renderer: model, layers, cross-section, picking, highlight
+src/sets.js                 question sets: daily (seeded by UTC date), random, per topic, clinical
+src/bank.js                 loads the question bank JSON
 src/analytics.js            anonymous events (random visitor id in localStorage)
-src/config.js               endpoints
+src/config.js               endpoints and the draft-question gate
+assets/questions/upper-limb.json   the question bank (50 records, see below)
 assets/model/arm.glb        the model (5.0 MB, 141 meshes incl. marrow cores, ~300k triangles)
 assets/model/structures.json   mesh -> structure/layer map, display names, forearm axis
 vendor/three/               Three.js 0.169 (MIT): core, TrackballControls, GLTFLoader
 tools/build_model.py        rebuilds arm.glb from BodyParts3D files
 tools/parts.py              which BodyParts3D parts are used, and the structure names
 tools/nerves.py             schematic nerve and artery paths
-tools/serve.py, report.py   local server and metrics
-tools/smoke_test.mjs        end-to-end browser test (Playwright)
-docs/question-review.md     the 10 questions laid out for clinician review
+tools/serve.py, report.py   local server and metrics (per set, per question accuracy)
+tools/smoke_test.mjs        end-to-end browser test (Playwright); ALL=1 plays every question
+tools/questions_md.py       regenerates docs/question-review.md from the bank
+docs/question-review.md     all 50 questions laid out for clinician review
 ```
+
+## Questions and sets
+
+Each record in `assets/questions/upper-limb.json` is renderer-independent:
+`target` and `accept` are structure keys (from `assets/model/structures.json`),
+`view` and `layers` set the starting camera and visible layers, `tags` give
+topic, region and difficulty, and `review` records the clinician sign-off
+(`{"status":"approved","by":"...","date":"YYYY-MM-DD"}`). Every record is
+currently `draft`. `CONFIG.includeDraftQuestions` in `src/config.js` is `true`
+so drafts show; set it to `false` before a public launch so only approved
+questions are served.
+
+Sets are chosen on the intro card or by URL: `?set=daily` (same 10 for
+everyone each UTC day), `?set=random`, `?set=kind:Clinical`,
+`?set=topic:nerves` (also muscles, bones, vessels, ligaments). A share link
+carries the exact questions played (`?q=id1,id2,...&s=score&t=seconds`), so a
+friend plays the same set.
+
+The engine talks to a renderer through five calls (`show`, `highlight`,
+`clearHighlight`, `name`, `setPickEnabled`), so a volume renderer for CT
+questions (milestone 3) plugs in beside `renderers/mesh.js`.
 
 ## The model
 
 Source: [BodyParts3D](https://dbarchive.biosciencedbc.jp/en/bodyparts3d/) 3.0
-(DBCLS), licensed **CC BY-SA 2.1 Japan**. The attribution footer on the page
-is required by the license; share-alike means the modified meshes (`arm.glb`)
-must stay under the same license if redistributed. That does not restrict
-selling access to questions or the app itself, but the model files cannot be
-made proprietary.
+(DBCLS), licensed **CC BY 4.0** (per the DBCLS license page, updated 2025-02-27; it
+was CC BY-SA 2.1 JP before). The attribution footer on the page is required
+by the license; there is no share-alike obligation on the modified meshes.
 
 What was done to it (`tools/build_model.py`): the right arm's bones, forearm
 and hand muscles, flexor retinaculum, interosseous membrane and skin were
@@ -84,14 +109,18 @@ python3 tools/serve.py --port 8123 &
 node tools/smoke_test.mjs http://127.0.0.1:8123/
 ```
 
-The test plays all 10 questions by clicking each answer on screen from the
-question's starting view, then checks the score, the share link and the
-signup form. `W=390 H=844 TOUCH=1` runs it at phone size.
+The test plays the 10 original questions by clicking each answer on screen
+from the question's starting view, then checks the score, the share link and
+the signup form. `W=390 H=844 TOUCH=1` runs it at phone size; `ALL=1` plays
+every question in the bank and lists any whose answer is not clickable from
+its starting view. Pass `/opt/pw-browsers/chromium` (or any Chromium path) as
+a third argument if Playwright has no browser of its own.
 
 ## Analytics events
 
-`visit` (with `via`: direct, referral, share), `start`, `answer` (`q`, `qid`,
-`correct`, `clicked`, `ms`), `finish` (`score`, `seconds`), `share_click`,
-`signup_open`, `signup`. Every event carries a random `visitor` id
+`visit` (with `via`: direct, referral, share), `return_visit` (a visitor back
+between 1 hour and 7 days after their first visit), `start` (`set`, `n`),
+`answer` (`q`, `qid`, `correct`, `clicked`, `ms`, `set`, `n`), `finish`
+(`score`, `seconds`, `set`, `n`), `share_click`, `signup_open`, `signup`. Every event carries a random `visitor` id
 (localStorage) and `session` id (sessionStorage); no personal data. Emails go
 only to `data/signups.jsonl`.

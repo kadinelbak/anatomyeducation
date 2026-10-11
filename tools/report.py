@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Milestone report. Usage: python3 tools/report.py [events.jsonl] [signups.jsonl]"""
 import json
+import statistics
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -8,6 +9,7 @@ from pathlib import Path
 HOUR_MS = 3600 * 1000
 WEEK_MS = 7 * 24 * HOUR_MS
 DATA = Path(__file__).resolve().parent.parent / "data"
+DEFAULT_SET = "m1"
 
 
 def load(path):
@@ -40,6 +42,11 @@ def ts_ms(e):
         except ValueError:
             pass
     return None
+
+
+def set_of(e):
+    s = e.get("set")
+    return s if isinstance(s, str) and s else DEFAULT_SET
 
 
 def ratio(n, d):
@@ -95,6 +102,9 @@ def main():
                 returners.add(v)
                 break
 
+    return_event_visitors = {vis(e) for e in events
+                             if e.get("type") == "return_visit" and vis(e)}
+
     signup_visitors = {s.get("visitor") for s in signups if s.get("visitor")}
     signup_src = "signups file"
     if not signups:
@@ -113,11 +123,39 @@ def main():
     print("Completion:          %s  (bar 33%%)  %s" % (pct(completion), verdict(completion, 0.33)))
     print("Share clicks:        %d" % share_clicks)
     print("Share-link arrivals: %d" % len(share_arrivals))
-    print("Return visitors:     %d" % len(returners))
+    print("Return visitors:     %d   Return visits (event): %d"
+          % (len(returners), len(return_event_visitors)))
     print("Return or share:     %s  (bar 10%%)  %s" % (pct(ros), verdict(ros, 0.10)))
     print("Signups:             %d (%s)" % (len(signup_visitors), signup_src))
     print("Demand:              %s  (bar 5%%)  %s" % (pct(demand), verdict(demand, 0.05)))
     print()
+
+    # Per set: starters, finishers and completion for each question set id.
+    set_starters, set_finishers = {}, {}
+    for e in events:
+        v = vis(e)
+        if not v:
+            continue
+        if e.get("type") == "start":
+            set_starters.setdefault(set_of(e), set()).add(v)
+        elif e.get("type") == "finish":
+            set_finishers.setdefault(set_of(e), set()).add(v)
+    set_ids = set(set_starters) | set(set_finishers)
+    print("Per set")
+    if not set_ids:
+        print("  (no start or finish events)")
+    else:
+        ordered = sorted(set_ids, key=lambda s: (-len(set_starters.get(s, ())), s))
+        w = max(len("Set"), max(len(s) for s in ordered))
+        print("  %-*s  %8s  %9s  %11s  %s"
+              % (w, "Set", "Starters", "Finishers", "Completion", "Bar 33%"))
+        for s in ordered:
+            st = len(set_starters.get(s, ()))
+            fi = len(set_finishers.get(s, ()))
+            c = ratio(fi, st)
+            print("  %-*s  %8d  %9d  %11s  %s" % (w, s, st, fi, pct(c), verdict(c, 0.33)))
+    print()
+
     print("Drop-off (distinct visitors answering question N)")
     per_q = {}
     for e in events:
@@ -125,9 +163,48 @@ def main():
         if e.get("type") == "answer" and v and isinstance(q, int) and not isinstance(q, bool):
             per_q.setdefault(q, set()).add(v)
     top = max([len(s) for s in per_q.values()] + [1])
-    for q in range(1, 11):
+    max_q = max(list(per_q) + [10])
+    for q in range(1, max_q + 1):
         n = len(per_q.get(q, ()))
         print("  Q%-2d %4d %s" % (q, n, "#" * round(30 * n / top)))
+    print()
+
+    # Accuracy health: per question id, from answer events.
+    acc = {}
+    for e in events:
+        qid = e.get("qid")
+        if e.get("type") != "answer" or not isinstance(qid, str) or not qid:
+            continue
+        d = acc.setdefault(qid, {"n": 0, "graded": 0, "right": 0, "ms": []})
+        d["n"] += 1
+        c = e.get("correct")
+        if isinstance(c, bool):
+            d["graded"] += 1
+            if c:
+                d["right"] += 1
+        m = e.get("ms")
+        if isinstance(m, (int, float)) and not isinstance(m, bool):
+            d["ms"].append(m)
+
+    rows = []
+    for qid, d in acc.items():
+        right_pct = ratio(d["right"], d["graded"])
+        broken = (d["n"] >= 20 and right_pct is not None
+                  and (right_pct < 0.20 or right_pct > 0.90))
+        med = statistics.median(d["ms"]) if d["ms"] else None
+        rows.append((right_pct, qid, d["n"], med, broken))
+    rows.sort(key=lambda r: (r[0] is None, r[0] or 0, r[1]))
+
+    print("Accuracy health (flag: under 20% or over 90% correct, with at least 20 answers)")
+    if not rows:
+        print("  (no answer events with a qid)")
+    else:
+        w = max(len(r[1]) for r in rows)
+        for right_pct, qid, n, med, broken in rows:
+            print("  %-*s  answers %4d  correct %6s  median ms %7s%s"
+                  % (w, qid, n, pct(right_pct),
+                     "n/a" if med is None else "%.0f" % med,
+                     " REWRITE" if broken else ""))
     if len(unique) < 200:
         print()
         print("WARNING: only %d unique visitors; too few visitors to read the numbers yet." % len(unique))
