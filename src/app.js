@@ -90,9 +90,18 @@ function makeMaterial(layer, structure) {
   return m;
 }
 
+// Hosts that only serve text files get the GLB as base64 in a .txt file.
+async function loadGltf(url) {
+  const loader = new GLTFLoader();
+  if (!url.endsWith(".txt")) return loader.loadAsync(url);
+  const b64 = await fetch(url).then((r) => r.text());
+  const bin = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+  return loader.parseAsync(bin.buffer, "");
+}
+
 async function loadModel() {
   const [gltf, structures] = await Promise.all([
-    new GLTFLoader().loadAsync("assets/model/arm.glb"),
+    loadGltf(CONFIG.modelUrl),
     fetch("assets/model/structures.json").then((r) => r.json()),
   ]);
   meta = structures;

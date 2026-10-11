@@ -14,7 +14,7 @@
 
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
-html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); }
+html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--text); color-scheme: dark; }
 button { font: inherit; cursor: pointer; }
 
 #viewer { position: fixed; inset: 0; touch-action: none; }
