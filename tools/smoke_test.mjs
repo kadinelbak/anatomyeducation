@@ -33,6 +33,14 @@ let failures = 0;
 // Plays the set that is loaded; returns its length.
 async function playSet(page, label) {
   await page.waitForFunction(() => !document.getElementById("start").disabled, null, { timeout: 90000 });
+  if (!playSet.logged) {
+    playSet.logged = true;
+    const info = await page.evaluate(async () => ({
+      keys: Object.keys(window.__app.renderer.debug),
+      version: (await (await fetch("assets/model/structures.json")).json()).version ?? 1,
+    }));
+    console.log(`model: structures.json version ${info.version}; renderer.debug keys: ${info.keys.join(", ")}`);
+  }
   await page.click("#start");
   const n = await page.evaluate(() => window.__app.QUESTIONS.length);
   let failed = 0;

@@ -13,6 +13,8 @@ export function verdictLine(score, n) {
   return "Lots to gain here. Try again with the layers panel.";
 }
 
+const FOCUS_BY_REGION = { hand: "hand", wrist: "hand", forearm: "forearm", elbow: "forearm", arm: "arm", shoulder: "shoulder" };
+
 export function createEngine({ renderer, questions, sets, ui, track }) {
   // state: intro | asking | feedback | done
   const state = { state: "intro", index: 0, score: 0, seconds: 0, startedAt: 0, askedAt: 0, results: [] };
@@ -30,7 +32,7 @@ export function createEngine({ renderer, questions, sets, ui, track }) {
   function showQuestion() {
     const q = current[state.index];
     renderer.clearHighlight();
-    renderer.show({ view: q.view, layers: q.layers });
+    renderer.show({ view: q.view, layers: q.layers, focus: q.focus || FOCUS_BY_REGION[q.tags?.region] || "all" });
     state.state = "asking";
     state.askedAt = performance.now();
     renderer.setPickEnabled(true);

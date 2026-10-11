@@ -26,7 +26,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "forearm"
     },
     {
       "id": "fcu-id",
@@ -51,7 +52,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "forearm"
     },
     {
       "id": "carpal-tunnel-apb",
@@ -76,7 +78,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "ulnar-nerve-id",
@@ -103,7 +106,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "forearm"
     },
     {
       "id": "froment-adductor",
@@ -128,7 +132,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "fdp-id",
@@ -153,7 +158,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "forearm"
     },
     {
       "id": "ain-fpl",
@@ -178,7 +184,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "forearm"
     },
     {
       "id": "humerus-superficial-radial",
@@ -203,7 +210,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "forearm"
     },
     {
       "id": "pin-syndrome",
@@ -211,7 +219,8 @@
       "renderer": "mesh",
       "target": "posterior_interosseous_nerve",
       "accept": [
-        "posterior_interosseous_nerve"
+        "posterior_interosseous_nerve",
+        "radial_deep_branch"
       ],
       "prompt": "A patient cannot extend the fingers at the knuckles but can still extend the wrist, which drifts toward the thumb side. Sensation is normal. Click the nerve compressed as it passes through supinator.",
       "view": "dorsal",
@@ -228,7 +237,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "forearm"
     },
     {
       "id": "dorsal-interossei",
@@ -252,7 +262,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "scaphoid-snuffbox",
@@ -276,7 +287,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "lunate-id",
@@ -300,7 +312,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "hook-of-hamate-golf",
@@ -324,7 +337,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "pisiform-id",
@@ -348,7 +362,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "capitate-id",
@@ -371,7 +386,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "boxers-fracture-mc5",
@@ -394,7 +410,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "bennett-fracture-mc1",
@@ -418,7 +435,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "colles-radius",
@@ -441,7 +459,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "interosseous-membrane-id",
@@ -456,7 +475,7 @@
       "view": "palmar",
       "layers": [
         "bone",
-        "tendon"
+        "ligament"
       ],
       "explain": "The interosseous membrane binds the radius and ulna, transmits force from the radius to the ulna, and gives origin to deep flexors and extensors. The posterior interosseous nerve and the anterior interosseous nerve lie on its two surfaces.",
       "tags": {
@@ -466,7 +485,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "forearm"
     },
     {
       "id": "flexor-retinaculum-id",
@@ -477,11 +497,11 @@
         "flexor_retinaculum"
       ],
       "prompt": "Click the thick fibrous band that forms the roof of the carpal tunnel.",
-      "hint": "It stretches between the pisiform and hook of the hamate medially and the scaphoid and trapezium laterally.",
+      "hint": "It stretches between the pisiform and hook of the hamate medially and the scaphoid and trapezium laterally; turn on the Ligaments layer if it is hidden.",
       "view": "palmar",
       "layers": [
         "bone",
-        "tendon"
+        "ligament"
       ],
       "explain": "The flexor retinaculum (transverse carpal ligament) converts the carpal groove into the carpal tunnel. Dividing it relieves pressure on the median nerve in carpal tunnel release.",
       "tags": {
@@ -491,7 +511,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "pronator-teres-median",
@@ -515,7 +536,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "forearm"
     },
     {
       "id": "fcr-radial-pulse",
@@ -540,7 +562,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "forearm"
     },
     {
       "id": "palmaris-longus-id",
@@ -566,7 +589,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "forearm"
     },
     {
       "id": "fds-pip-test",
@@ -590,7 +614,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "forearm"
     },
     {
       "id": "pronator-quadratus-id",
@@ -615,7 +640,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "forearm"
     },
     {
       "id": "brachioradialis-radial-paradox",
@@ -639,7 +665,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "forearm"
     },
     {
       "id": "tennis-elbow-ecrb",
@@ -663,7 +690,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "forearm"
     },
     {
       "id": "extensor-digitorum-id",
@@ -689,7 +717,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "forearm"
     },
     {
       "id": "de-quervain-apl-epb",
@@ -715,7 +744,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "epl-rupture-colles",
@@ -740,7 +770,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "extensor-indicis-id",
@@ -764,7 +795,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "forearm"
     },
     {
       "id": "opponens-pollicis-id",
@@ -789,7 +821,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "abductor-digiti-minimi-id",
@@ -814,7 +847,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "lumbricals-claw",
@@ -839,7 +873,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "palmar-interossei-pad",
@@ -864,7 +899,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "median-nerve-carpal-tunnel",
@@ -889,7 +925,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "median-recurrent-branch-id",
@@ -914,7 +951,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "hand-of-benediction",
@@ -939,7 +977,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "forearm"
     },
     {
       "id": "cubital-tunnel-ulnar",
@@ -964,7 +1003,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "forearm"
     },
     {
       "id": "ulnar-deep-branch-hook",
@@ -988,7 +1028,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "wartenberg-superficial-radial",
@@ -1014,7 +1055,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "radial-nerve-trunk-elbow",
@@ -1038,7 +1080,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "forearm"
     },
     {
       "id": "ulnar-paradox-fdp",
@@ -1063,7 +1106,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "forearm"
     },
     {
       "id": "median-nerve-wrist-tendons",
@@ -1088,7 +1132,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "radial-pulse-art-line",
@@ -1113,7 +1158,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "allen-test-ulnar",
@@ -1137,7 +1183,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "superficial-palmar-arch-id",
@@ -1161,7 +1208,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "radial-artery-snuffbox",
@@ -1186,7 +1234,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "ulnar-artery-guyon",
@@ -1210,7 +1259,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     },
     {
       "id": "hypothenar-hammer",
@@ -1235,7 +1285,8 @@
       },
       "review": {
         "status": "draft"
-      }
+      },
+      "focus": "hand"
     }
   ]
 }

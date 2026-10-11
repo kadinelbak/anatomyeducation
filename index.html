@@ -30,7 +30,7 @@
   <!-- Intro -->
   <section id="intro" class="card intro">
     <p id="shared-banner" class="shared-banner" hidden></p>
-    <h1>Hand and forearm anatomy in 3D</h1>
+    <h1>Upper limb anatomy in 3D</h1>
     <p>Rotate, peel back layers, and click the structure. Pick a set:</p>
     <div id="set-chooser" class="chooser" role="group" aria-label="Question set"></div>
     <button id="start" class="primary" disabled>Start</button>
@@ -72,18 +72,26 @@
         <label><input type="checkbox" data-layer="skin"> Skin</label>
         <label><input type="checkbox" data-layer="muscle"> Muscles</label>
         <label><input type="checkbox" data-layer="tendon"> Tendons</label>
+        <label><input type="checkbox" data-layer="ligament"> Ligaments</label>
         <label><input type="checkbox" data-layer="nerve"> Nerves</label>
         <label><input type="checkbox" data-layer="vessel"> Vessels</label>
         <label><input type="checkbox" data-layer="bone"> Bone</label>
       </fieldset>
       <label class="slice">
         <span>Cross-section</span>
-        <input id="slice" type="range" min="0" max="1000" value="0" aria-label="Slice the forearm from elbow to fingertips">
+        <input id="slice" type="range" min="0" max="1000" value="0" aria-label="Slice the limb from proximal to distal">
       </label>
       <div class="views">
         <button data-view="palmar">Palm</button>
         <button data-view="dorsal">Back</button>
         <button data-view="lateral">Thumb side</button>
+      </div>
+      <div class="views zoom" id="zoom-row" hidden role="group" aria-label="Zoom to">
+        <button data-focus="hand">Hand</button>
+        <button data-focus="forearm">Forearm</button>
+        <button data-focus="arm">Arm</button>
+        <button data-focus="shoulder">Shoulder</button>
+        <button data-focus="all">All</button>
       </div>
     </div>
   </aside>
@@ -106,8 +114,9 @@
   </dialog>
 
   <footer class="attribution">
-    Model: <a href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/" target="_blank" rel="noopener">BodyParts3D</a>, © The Database Center for Life Science, licensed under
-    <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>; cropped, simplified and recoloured. Nerves and arteries are schematic. For study, not clinical use.
+    <span id="attr-bp3d">Model: <a href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/" target="_blank" rel="noopener">BodyParts3D</a>, © The Database Center for Life Science, licensed under
+    <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>; cropped, simplified and recoloured. Nerves and arteries are schematic. For study, not clinical use.</span>
+    <span id="attr-o3d" hidden>Model: <a href="https://anatomytool.org/node/63858" target="_blank" rel="noopener">Open3DModel</a> (Leiden, Utrecht, Maastricht, KU Leuven KULAK), licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>; simplified and recoloured, textures removed. For study, not clinical use.</span>
   </footer>
 
   <script type="module" src="src/app.js"></script>

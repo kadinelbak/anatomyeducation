@@ -5,6 +5,7 @@ import { loadBank } from "./bank.js";
 import { buildSets, resolveSet } from "./sets.js";
 import { createEngine, fmtTime } from "./engine.js";
 import { createMeshRenderer } from "./renderers/mesh.js";
+import { WebGLUnavailableError, webglHelp } from "./webgl-probe.js";
 
 const $ = (id) => document.getElementById(id);
 const STATS_HIDDEN = () => ($("stats").hidden = true);
@@ -33,9 +34,33 @@ const renderer = await createMeshRenderer({
   onPick: (id) => engine.answer(id),
 }).catch((err) => {
   console.error(err);
-  $("loading").textContent = `Couldn't load the 3D model. Please reload the page. (${err?.message || err})`;
+  if (err instanceof WebGLUnavailableError) showNoWebGL(err);
+  else $("loading").textContent = `Couldn't load the 3D model. Please reload the page. (${err?.message || err})`;
   throw err;
 });
+
+// No WebGL: say why, and offer a way out of an embedded viewer.
+function showNoWebGL(err) {
+  const box = $("loading");
+  box.replaceChildren();
+  const h = document.createElement("p");
+  h.textContent = "Couldn't start the 3D view.";
+  box.append(h);
+  for (const line of webglHelp(err)) {
+    const p = document.createElement("p");
+    p.className = "fine";
+    p.textContent = line;
+    box.append(p);
+  }
+  if (window.top !== window) {
+    const a = document.createElement("a");
+    a.href = window.location.href;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.textContent = "Open this page in its own tab";
+    box.append(a);
+  }
+}
 
 let bank;
 try {

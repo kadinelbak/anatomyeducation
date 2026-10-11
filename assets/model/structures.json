@@ -1,803 +1,2850 @@
 {
- "source": "BodyParts3D 3.0 (DBCLS), CC BY-SA 2.1 JP; nerves and arteries are schematic",
+ "version": 2,
+ "source": "Open3DModel upper limb GLB (2025-07-24), CC BY-SA 4.0; converted by tools/build_o3d.mjs",
+ "units": "m",
+ "layers": [
+  "muscle",
+  "tendon",
+  "ligament",
+  "nerve",
+  "vessel",
+  "bone"
+ ],
  "nodes": [
   {
-   "node": "FMA23130",
+   "node": "o3d_0001",
    "structure": "humerus",
-   "layer": "bone"
+   "layer": "bone",
+   "source": "Humerus.r"
   },
   {
-   "node": "FMA23464",
-   "structure": "radius",
-   "layer": "bone"
+   "node": "o3d_0002",
+   "structure": "bicipital_aponeurosis",
+   "layer": "tendon",
+   "source": "Bicipital aponeurosis.r"
   },
   {
-   "node": "FMA23467",
-   "structure": "ulna",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24435",
-   "structure": "scaphoid",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24437",
-   "structure": "lunate",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24439",
-   "structure": "triquetrum",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24441",
-   "structure": "pisiform",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24443",
-   "structure": "trapezium",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA23725",
-   "structure": "trapezoid",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24446",
-   "structure": "capitate",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24448",
-   "structure": "hamate",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24464",
-   "structure": "metacarpal_1",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24466",
-   "structure": "metacarpal_2",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24468",
-   "structure": "metacarpal_3",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24470",
-   "structure": "metacarpal_4",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24472",
-   "structure": "metacarpal_5",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24450",
-   "structure": "phalanges_thumb",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24459",
-   "structure": "phalanges_thumb",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24451",
-   "structure": "phalanges_index",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24455",
-   "structure": "phalanges_index",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24460",
-   "structure": "phalanges_index",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24452",
-   "structure": "phalanges_middle",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24456",
-   "structure": "phalanges_middle",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24461",
-   "structure": "phalanges_middle",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24453",
-   "structure": "phalanges_ring",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24457",
-   "structure": "phalanges_ring",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24462",
-   "structure": "phalanges_ring",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24454",
-   "structure": "phalanges_little",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24458",
-   "structure": "phalanges_little",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA24463",
-   "structure": "phalanges_little",
-   "layer": "bone"
-  },
-  {
-   "node": "FMA23707",
-   "structure": "interosseous_membrane",
-   "layer": "tendon"
-  },
-  {
-   "node": "FMA40120",
-   "structure": "flexor_retinaculum",
-   "layer": "tendon"
-  },
-  {
-   "node": "FMA37668",
+   "node": "o3d_0003",
    "structure": "brachialis",
-   "layer": "muscle"
+   "layer": "muscle",
+   "source": "Brachialis muscle.r"
   },
   {
-   "node": "FMA37684",
+   "node": "o3d_0004",
    "structure": "biceps_brachii",
-   "layer": "muscle"
+   "layer": "tendon",
+   "source": "Common tendon of biceps brachii.r"
   },
   {
-   "node": "FMA37686",
+   "node": "o3d_0005",
+   "structure": "triceps_brachii",
+   "layer": "tendon",
+   "source": "Common tendon of triceps brachii.r"
+  },
+  {
+   "node": "o3d_0006",
+   "structure": "coracobrachialis",
+   "layer": "muscle",
+   "source": "Coracobrachialis muscle.r"
+  },
+  {
+   "node": "o3d_0007",
+   "structure": "triceps_brachii",
+   "layer": "muscle",
+   "source": "Lateral head of triceps brachii.r"
+  },
+  {
+   "node": "o3d_0008",
    "structure": "biceps_brachii",
-   "layer": "muscle"
+   "layer": "muscle",
+   "source": "Long head of biceps brachii.r"
   },
   {
-   "node": "FMA37695",
+   "node": "o3d_0009",
    "structure": "triceps_brachii",
-   "layer": "muscle"
+   "layer": "muscle",
+   "source": "Long head of triceps brachii.r"
   },
   {
-   "node": "FMA37697",
+   "node": "o3d_0010",
    "structure": "triceps_brachii",
-   "layer": "muscle"
+   "layer": "muscle",
+   "source": "Medial head of triceps brachii.r"
   },
   {
-   "node": "FMA37699",
-   "structure": "triceps_brachii",
-   "layer": "muscle"
+   "node": "o3d_0011",
+   "structure": "biceps_brachii",
+   "layer": "muscle",
+   "source": "Short head of biceps brachii.r"
   },
   {
-   "node": "FMA38560",
-   "structure": "pronator_teres",
-   "layer": "muscle"
+   "node": "o3d_0012",
+   "structure": "axillary_nerve_superior_lateral_cutaneous",
+   "layer": "nerve",
+   "source": "Axillary nerve - superior lateral br cutaneous nerve.r"
   },
   {
-   "node": "FMA38562",
-   "structure": "pronator_teres",
-   "layer": "muscle"
+   "node": "o3d_0013",
+   "structure": "median_nerve_lateral_root",
+   "layer": "nerve",
+   "source": "Lateral root of median nerve.r"
   },
   {
-   "node": "FMA38460",
-   "structure": "flexor_carpi_radialis",
-   "layer": "muscle"
+   "node": "o3d_0014",
+   "structure": "medial_brachial_cutaneous_nerve",
+   "layer": "nerve",
+   "source": "Medial brachial cutaneous nerve.r"
   },
   {
-   "node": "FMA38460_tendon",
-   "structure": "flexor_carpi_radialis",
-   "layer": "tendon"
+   "node": "o3d_0015",
+   "structure": "median_nerve_medial_root",
+   "layer": "nerve",
+   "source": "Medial root of median nerve.r"
   },
   {
-   "node": "FMA38463",
-   "structure": "palmaris_longus",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA38463_tendon",
-   "structure": "palmaris_longus",
-   "layer": "tendon"
-  },
-  {
-   "node": "FMA38617",
-   "structure": "flexor_carpi_ulnaris",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA38617_tendon",
-   "structure": "flexor_carpi_ulnaris",
-   "layer": "tendon"
-  },
-  {
-   "node": "FMA38619",
-   "structure": "flexor_carpi_ulnaris",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA38619_tendon",
-   "structure": "flexor_carpi_ulnaris",
-   "layer": "tendon"
-  },
-  {
-   "node": "FMA38638",
-   "structure": "flexor_digitorum_superficialis",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA38638_tendon",
-   "structure": "flexor_digitorum_superficialis",
-   "layer": "tendon"
-  },
-  {
-   "node": "FMA38640",
-   "structure": "flexor_digitorum_superficialis",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA38640_tendon",
-   "structure": "flexor_digitorum_superficialis",
-   "layer": "tendon"
-  },
-  {
-   "node": "FMA38479",
-   "structure": "flexor_digitorum_profundus",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA38479_tendon",
-   "structure": "flexor_digitorum_profundus",
-   "layer": "tendon"
-  },
-  {
-   "node": "FMA38482",
-   "structure": "flexor_pollicis_longus",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA38482_tendon",
-   "structure": "flexor_pollicis_longus",
-   "layer": "tendon"
-  },
-  {
-   "node": "FMA38454",
-   "structure": "pronator_quadratus",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA38486",
-   "structure": "brachioradialis",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA38486_tendon",
-   "structure": "brachioradialis",
-   "layer": "tendon"
-  },
-  {
-   "node": "FMA38495",
-   "structure": "extensor_carpi_radialis_longus",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA38495_tendon",
-   "structure": "extensor_carpi_radialis_longus",
-   "layer": "tendon"
-  },
-  {
-   "node": "FMA38498",
-   "structure": "extensor_carpi_radialis_brevis",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA38498_tendon",
-   "structure": "extensor_carpi_radialis_brevis",
-   "layer": "tendon"
-  },
-  {
-   "node": "FMA38501",
-   "structure": "extensor_digitorum",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA38501_tendon",
-   "structure": "extensor_digitorum",
-   "layer": "tendon"
-  },
-  {
-   "node": "FMA38504",
-   "structure": "extensor_digiti_minimi",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA38504_tendon",
-   "structure": "extensor_digiti_minimi",
-   "layer": "tendon"
-  },
-  {
-   "node": "BP45",
-   "structure": "extensor_carpi_ulnaris",
-   "layer": "muscle"
-  },
-  {
-   "node": "BP45_tendon",
-   "structure": "extensor_carpi_ulnaris",
-   "layer": "tendon"
-  },
-  {
-   "node": "BP47",
-   "structure": "extensor_carpi_ulnaris",
-   "layer": "muscle"
-  },
-  {
-   "node": "BP47_tendon",
-   "structure": "extensor_carpi_ulnaris",
-   "layer": "tendon"
-  },
-  {
-   "node": "FMA37705",
-   "structure": "anconeus",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA38513",
-   "structure": "supinator",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA38516",
-   "structure": "abductor_pollicis_longus",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA38516_tendon",
-   "structure": "abductor_pollicis_longus",
-   "layer": "tendon"
-  },
-  {
-   "node": "FMA38519",
-   "structure": "extensor_pollicis_brevis",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA38519_tendon",
-   "structure": "extensor_pollicis_brevis",
-   "layer": "tendon"
-  },
-  {
-   "node": "FMA38522",
-   "structure": "extensor_pollicis_longus",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA38522_tendon",
-   "structure": "extensor_pollicis_longus",
-   "layer": "tendon"
-  },
-  {
-   "node": "FMA38525",
-   "structure": "extensor_indicis",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA38525_tendon",
-   "structure": "extensor_indicis",
-   "layer": "tendon"
-  },
-  {
-   "node": "FMA37386",
-   "structure": "abductor_pollicis_brevis",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA65198",
-   "structure": "flexor_pollicis_brevis",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA46110",
-   "structure": "flexor_pollicis_brevis",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA37390",
-   "structure": "opponens_pollicis",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA46121",
-   "structure": "adductor_pollicis",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA46123",
-   "structure": "adductor_pollicis",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA37396",
-   "structure": "abductor_digiti_minimi",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA37398",
-   "structure": "flexor_digiti_minimi_brevis",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA37400",
-   "structure": "opponens_digiti_minimi",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA42398",
-   "structure": "lumbricals",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA42402",
-   "structure": "palmar_interossei",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA42404",
-   "structure": "dorsal_interossei",
-   "layer": "muscle"
-  },
-  {
-   "node": "FMA7163",
-   "structure": "skin",
-   "layer": "skin"
-  },
-  {
-   "node": "FMA23130_marrow",
-   "structure": "humerus",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA23464_marrow",
-   "structure": "radius",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA23467_marrow",
-   "structure": "ulna",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24435_marrow",
-   "structure": "scaphoid",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24437_marrow",
-   "structure": "lunate",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24439_marrow",
-   "structure": "triquetrum",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24441_marrow",
-   "structure": "pisiform",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24443_marrow",
-   "structure": "trapezium",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA23725_marrow",
-   "structure": "trapezoid",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24446_marrow",
-   "structure": "capitate",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24448_marrow",
-   "structure": "hamate",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24464_marrow",
-   "structure": "metacarpal_1",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24466_marrow",
-   "structure": "metacarpal_2",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24468_marrow",
-   "structure": "metacarpal_3",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24470_marrow",
-   "structure": "metacarpal_4",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24472_marrow",
-   "structure": "metacarpal_5",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24450_marrow",
-   "structure": "phalanges_thumb",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24459_marrow",
-   "structure": "phalanges_thumb",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24451_marrow",
-   "structure": "phalanges_index",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24455_marrow",
-   "structure": "phalanges_index",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24460_marrow",
-   "structure": "phalanges_index",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24452_marrow",
-   "structure": "phalanges_middle",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24456_marrow",
-   "structure": "phalanges_middle",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24461_marrow",
-   "structure": "phalanges_middle",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24453_marrow",
-   "structure": "phalanges_ring",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24457_marrow",
-   "structure": "phalanges_ring",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24462_marrow",
-   "structure": "phalanges_ring",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24454_marrow",
-   "structure": "phalanges_little",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24458_marrow",
-   "structure": "phalanges_little",
-   "layer": "marrow"
-  },
-  {
-   "node": "FMA24463_marrow",
-   "structure": "phalanges_little",
-   "layer": "marrow"
-  },
-  {
-   "node": "schematic_median_nerve",
+   "node": "o3d_0016",
    "structure": "median_nerve",
-   "layer": "nerve"
+   "layer": "nerve",
+   "source": "Median nerve.r"
   },
   {
-   "node": "schematic_median_digital_thumb",
-   "structure": "median_nerve",
-   "layer": "nerve"
+   "node": "o3d_0017",
+   "structure": "musculocutaneous_nerve",
+   "layer": "nerve",
+   "source": "Musculocutaneus nerve.r"
   },
   {
-   "node": "schematic_median_digital_index",
-   "structure": "median_nerve",
-   "layer": "nerve"
+   "node": "o3d_0018",
+   "structure": "radial_deep_branch",
+   "layer": "nerve",
+   "source": "Radial nerve (deep branch).r"
   },
   {
-   "node": "schematic_median_digital_2nd_web",
-   "structure": "median_nerve",
-   "layer": "nerve"
+   "node": "o3d_0019",
+   "structure": "radial_inferior_lateral_brachial_cutaneous_nerve",
+   "layer": "nerve",
+   "source": "Radial nerve (inferior lateral brachial cutaneous n).r"
   },
   {
-   "node": "schematic_median_digital_3rd_web",
-   "structure": "median_nerve",
-   "layer": "nerve"
+   "node": "o3d_0020",
+   "structure": "radial_posterior_antebrachial_cutaneous_nerve",
+   "layer": "nerve",
+   "source": "Radial nerve (posterior antebrachial cutaneous n).r"
   },
   {
-   "node": "schematic_median_recurrent",
-   "structure": "median_recurrent_branch",
-   "layer": "nerve"
+   "node": "o3d_0021",
+   "structure": "radial_posterior_brachial_cutaneous_nerve",
+   "layer": "nerve",
+   "source": "Radial nerve (posterior brachial cutaneous n).r"
   },
   {
-   "node": "schematic_ulnar_nerve",
-   "structure": "ulnar_nerve",
-   "layer": "nerve"
-  },
-  {
-   "node": "schematic_ulnar_superficial",
-   "structure": "ulnar_nerve",
-   "layer": "nerve"
-  },
-  {
-   "node": "schematic_ulnar_superficial_little",
-   "structure": "ulnar_nerve",
-   "layer": "nerve"
-  },
-  {
-   "node": "schematic_ulnar_deep",
-   "structure": "ulnar_deep_branch",
-   "layer": "nerve"
-  },
-  {
-   "node": "schematic_radial_nerve",
-   "structure": "radial_nerve",
-   "layer": "nerve"
-  },
-  {
-   "node": "schematic_radial_superficial",
-   "structure": "radial_superficial_branch",
-   "layer": "nerve"
-  },
-  {
-   "node": "schematic_radial_superficial_index",
-   "structure": "radial_superficial_branch",
-   "layer": "nerve"
-  },
-  {
-   "node": "schematic_posterior_interosseous",
+   "node": "o3d_0022",
    "structure": "posterior_interosseous_nerve",
-   "layer": "nerve"
+   "layer": "nerve",
+   "source": "Radial nerve (posterior interosseus n).r"
   },
   {
-   "node": "schematic_radial_artery",
+   "node": "o3d_0023",
+   "structure": "radial_superficial_branch",
+   "layer": "nerve",
+   "source": "Radial nerve (superficial br).r"
+  },
+  {
+   "node": "o3d_0024",
+   "structure": "radial_nerve",
+   "layer": "nerve",
+   "source": "Radial nerve.r"
+  },
+  {
+   "node": "o3d_0025",
+   "structure": "ulnar_nerve",
+   "layer": "nerve",
+   "source": "Ulnar nerve.r"
+  },
+  {
+   "node": "o3d_0026",
+   "structure": "anterior_circumflex_humeral_artery",
+   "layer": "vessel",
+   "source": "Anterior circumflex humeral artery.r"
+  },
+  {
+   "node": "o3d_0027",
+   "structure": "axillary_artery",
+   "layer": "vessel",
+   "source": "Axillary artery.r"
+  },
+  {
+   "node": "o3d_0028",
+   "structure": "brachial_artery",
+   "layer": "vessel",
+   "source": "Brachial artery.r"
+  },
+  {
+   "node": "o3d_0029",
+   "structure": "deep_artery_of_arm",
+   "layer": "vessel",
+   "source": "Deep artery of arm.r"
+  },
+  {
+   "node": "o3d_0030",
+   "structure": "inferior_ulnar_collateral_artery",
+   "layer": "vessel",
+   "source": "Inferior ulnar collateral artery.r"
+  },
+  {
+   "node": "o3d_0031",
+   "structure": "medial_collateral_artery",
+   "layer": "vessel",
+   "source": "Medial collateral artery.r"
+  },
+  {
+   "node": "o3d_0032",
+   "structure": "middle_collateral_artery",
+   "layer": "vessel",
+   "source": "Middle collateral artery.r"
+  },
+  {
+   "node": "o3d_0033",
+   "structure": "posterior_circumflex_humeral_artery",
+   "layer": "vessel",
+   "source": "Posterior circumflex humeral artery.r"
+  },
+  {
+   "node": "o3d_0034",
+   "structure": "posterior_ulnar_recurrent_artery",
+   "layer": "vessel",
+   "source": "Posterior ulnar recurrent artery.r"
+  },
+  {
+   "node": "o3d_0035",
+   "structure": "radial_collateral_artery",
+   "layer": "vessel",
+   "source": "Radial collateral artery.r"
+  },
+  {
+   "node": "o3d_0036",
+   "structure": "superior_ulnar_collateral_artery",
+   "layer": "vessel",
+   "source": "Superior ulnar collateral artery.r"
+  },
+  {
+   "node": "o3d_0037",
+   "structure": "articular_capsule_of_glenohumeral_joint",
+   "layer": "ligament",
+   "source": "Articular capsule of glenohumeral joint.r"
+  },
+  {
+   "node": "o3d_0038",
+   "structure": "coracohumeral_ligament",
+   "layer": "ligament",
+   "source": "Coracohumeral ligament.r"
+  },
+  {
+   "node": "o3d_0039",
+   "structure": "glenoid_labrum",
+   "layer": "ligament",
+   "source": "Glenoid labrum.r"
+  },
+  {
+   "node": "o3d_0040",
+   "structure": "inferior_glenohumeral_ligament",
+   "layer": "ligament",
+   "source": "Inferior glenohumeral ligament.r"
+  },
+  {
+   "node": "o3d_0041",
+   "structure": "lateral_intermuscular_septum_of_arm",
+   "layer": "ligament",
+   "source": "Lateral intermuscular septum of arm.r"
+  },
+  {
+   "node": "o3d_0042",
+   "structure": "medial_intermuscular_septum_of_arm",
+   "layer": "ligament",
+   "source": "Medial intermuscular septum of arm.r"
+  },
+  {
+   "node": "o3d_0043",
+   "structure": "middle_glenohumeral_ligament",
+   "layer": "ligament",
+   "source": "Middle glenohumeral ligament.r"
+  },
+  {
+   "node": "o3d_0044",
+   "structure": "superior_glenohumeral_ligament",
+   "layer": "ligament",
+   "source": "Superior glenohumeral ligament.r"
+  },
+  {
+   "node": "o3d_0045",
+   "structure": "transverse_humeral_ligament",
+   "layer": "ligament",
+   "source": "Transverse humeral ligament.r"
+  },
+  {
+   "node": "o3d_0046",
+   "structure": "humerus",
+   "layer": "bone",
+   "source": "Art cart of humerus distal end.r"
+  },
+  {
+   "node": "o3d_0047",
+   "structure": "humerus",
+   "layer": "bone",
+   "source": "Art cart of humerus head.r"
+  },
+  {
+   "node": "o3d_0048",
+   "structure": "anterior_interosseous_artery",
+   "layer": "vessel",
+   "source": "Anterior interosseous artery.r"
+  },
+  {
+   "node": "o3d_0049",
+   "structure": "anterior_ulnar_recurrent_artery",
+   "layer": "vessel",
+   "source": "Anterior ulnar recurrent artery.r"
+  },
+  {
+   "node": "o3d_0050",
+   "structure": "common_interosseous_artery",
+   "layer": "vessel",
+   "source": "Common interosseous artery.r"
+  },
+  {
+   "node": "o3d_0051",
+   "structure": "interosseous_recurrent_artery",
+   "layer": "vessel",
+   "source": "Interosseous recurrent artery.r"
+  },
+  {
+   "node": "o3d_0052",
+   "structure": "posterior_interosseous_artery",
+   "layer": "vessel",
+   "source": "Posterior interosseous artery.r"
+  },
+  {
+   "node": "o3d_0053",
    "structure": "radial_artery",
-   "layer": "vessel"
+   "layer": "vessel",
+   "source": "Radial artery.r"
   },
   {
-   "node": "schematic_ulnar_artery",
+   "node": "o3d_0054",
+   "structure": "radial_recurrent_artery",
+   "layer": "vessel",
+   "source": "Radial recrurrent artery.r"
+  },
+  {
+   "node": "o3d_0055",
+   "structure": "ulnar_dorsal_carpal_branch",
+   "layer": "vessel",
+   "source": "Ulnar artery (dorsal carpal br).r"
+  },
+  {
+   "node": "o3d_0056",
    "structure": "ulnar_artery",
-   "layer": "vessel"
+   "layer": "vessel",
+   "source": "Ulnar artery.r"
   },
   {
-   "node": "schematic_superficial_palmar_arch",
+   "node": "o3d_0057",
+   "structure": "radius",
+   "layer": "bone",
+   "source": "Radius.r"
+  },
+  {
+   "node": "o3d_0058",
+   "structure": "ulna",
+   "layer": "bone",
+   "source": "Ulna.r"
+  },
+  {
+   "node": "o3d_0059",
+   "structure": "articular_capsule_of_elbow_joint",
+   "layer": "ligament",
+   "source": "Articular capsule of elbow joint.r"
+  },
+  {
+   "node": "o3d_0060",
+   "structure": "dorsal_radio_ulnar_ligament",
+   "layer": "ligament",
+   "source": "Dorsal radio-ulnar ligament.r"
+  },
+  {
+   "node": "o3d_0061",
+   "structure": "interosseous_membrane",
+   "layer": "ligament",
+   "source": "Interosseous membrane of forearm.r"
+  },
+  {
+   "node": "o3d_0062",
+   "structure": "oblique_cord_or_radio_ulnar_syndesmosis",
+   "layer": "ligament",
+   "source": "Oblique cord or radio-ulnar syndesmosis.r"
+  },
+  {
+   "node": "o3d_0063",
+   "structure": "quadrate_ligament",
+   "layer": "ligament",
+   "source": "Quadrate ligament.r"
+  },
+  {
+   "node": "o3d_0064",
+   "structure": "radial_annular_ligament",
+   "layer": "ligament",
+   "source": "Radial annular ligament.r"
+  },
+  {
+   "node": "o3d_0065",
+   "structure": "radial_collateral_ligament_of_elbow",
+   "layer": "ligament",
+   "source": "Radial collateral ligament of elbow.r"
+  },
+  {
+   "node": "o3d_0066",
+   "structure": "ulnar_collateral_ligament_of_elbow",
+   "layer": "ligament",
+   "source": "Ulnar collateral ligament of elbow.r"
+  },
+  {
+   "node": "o3d_0067",
+   "structure": "radius",
+   "layer": "bone",
+   "source": "Art cart of radius distal end.r"
+  },
+  {
+   "node": "o3d_0068",
+   "structure": "radius",
+   "layer": "bone",
+   "source": "Art cart of radius head.r"
+  },
+  {
+   "node": "o3d_0069",
+   "structure": "ulna",
+   "layer": "bone",
+   "source": "Art cart of ulna (proximal end).r"
+  },
+  {
+   "node": "o3d_0070",
+   "structure": "ulna",
+   "layer": "bone",
+   "source": "Art cart of ulna. (distal end).r"
+  },
+  {
+   "node": "o3d_0071",
+   "structure": "abductor_pollicis_longus",
+   "layer": "muscle",
+   "source": "Abductor pollicis longus.r"
+  },
+  {
+   "node": "o3d_0072",
+   "structure": "anconeus",
+   "layer": "muscle",
+   "source": "Anconeus muscle.r"
+  },
+  {
+   "node": "o3d_0073",
+   "structure": "brachioradialis",
+   "layer": "muscle",
+   "source": "Brachioradialis muscle.r"
+  },
+  {
+   "node": "o3d_0074",
+   "structure": "extensor_carpi_ulnaris",
+   "layer": "tendon",
+   "source": "Common tendon of extensor carpi ulnaris.r"
+  },
+  {
+   "node": "o3d_0075",
+   "structure": "flexor_carpi_ulnaris",
+   "layer": "tendon",
+   "source": "Common tendon of flexor carpi ulnaris.r"
+  },
+  {
+   "node": "o3d_0076",
+   "structure": "extensor_carpi_radialis_brevis",
+   "layer": "muscle",
+   "source": "Extensor carpi radialis brevis.r"
+  },
+  {
+   "node": "o3d_0077",
+   "structure": "extensor_carpi_radialis_longus",
+   "layer": "muscle",
+   "source": "Extensor carpi radialis longus.r"
+  },
+  {
+   "node": "o3d_0078",
+   "structure": "extensor_digiti_minimi",
+   "layer": "muscle",
+   "source": "Extensor digiti minimi.r"
+  },
+  {
+   "node": "o3d_0079",
+   "structure": "extensor_digitorum",
+   "layer": "muscle",
+   "source": "Extensor digitorum.r"
+  },
+  {
+   "node": "o3d_0080",
+   "structure": "extensor_indicis",
+   "layer": "muscle",
+   "source": "Extensor indicis.r"
+  },
+  {
+   "node": "o3d_0081",
+   "structure": "extensor_pollicis_brevis",
+   "layer": "muscle",
+   "source": "Extensor pollicis brevis.r"
+  },
+  {
+   "node": "o3d_0082",
+   "structure": "extensor_pollicis_longus",
+   "layer": "muscle",
+   "source": "Extensor pollicis longus.r"
+  },
+  {
+   "node": "o3d_0083",
+   "structure": "flexor_carpi_radialis",
+   "layer": "muscle",
+   "source": "Flexor carpi radialis.r"
+  },
+  {
+   "node": "o3d_0084",
+   "structure": "flexor_digitorum_profundus",
+   "layer": "muscle",
+   "source": "Flexor digitorum profundus.r"
+  },
+  {
+   "node": "o3d_0085",
+   "structure": "flexor_digitorum_superficialis",
+   "layer": "muscle",
+   "source": "Flexor digitorum superficialis humero-ulnar head.r"
+  },
+  {
+   "node": "o3d_0086",
+   "structure": "flexor_digitorum_superficialis",
+   "layer": "muscle",
+   "source": "Flexor digitorum superficialis radial head.r"
+  },
+  {
+   "node": "o3d_0087",
+   "structure": "flexor_pollicis_longus",
+   "layer": "muscle",
+   "source": "Flexor pollicis longus.r"
+  },
+  {
+   "node": "o3d_0088",
+   "structure": "extensor_carpi_ulnaris",
+   "layer": "muscle",
+   "source": "Humeral head of extensor carpi ulnaris.r"
+  },
+  {
+   "node": "o3d_0089",
+   "structure": "flexor_carpi_ulnaris",
+   "layer": "muscle",
+   "source": "Humeral head of flexor carpi ulnaris.r"
+  },
+  {
+   "node": "o3d_0090",
+   "structure": "pronator_teres",
+   "layer": "muscle",
+   "source": "Humeral head of pronator teres.r"
+  },
+  {
+   "node": "o3d_0091",
+   "structure": "palmaris_longus",
+   "layer": "muscle",
+   "source": "Palmaris longus muscle.r"
+  },
+  {
+   "node": "o3d_0092",
+   "structure": "pronator_quadratus",
+   "layer": "muscle",
+   "source": "Pronator quadratus.r"
+  },
+  {
+   "node": "o3d_0093",
+   "structure": "supinator",
+   "layer": "muscle",
+   "source": "Supinator.r"
+  },
+  {
+   "node": "o3d_0094",
+   "structure": "extensor_carpi_ulnaris",
+   "layer": "muscle",
+   "source": "Ulnar head of extensor carpi ulnaris.r"
+  },
+  {
+   "node": "o3d_0095",
+   "structure": "flexor_carpi_ulnaris",
+   "layer": "muscle",
+   "source": "Ulnar head of flexor carpi ulnaris.r"
+  },
+  {
+   "node": "o3d_0096",
+   "structure": "pronator_teres",
+   "layer": "muscle",
+   "source": "Ulnar head of pronator teres.r"
+  },
+  {
+   "node": "o3d_0097",
+   "structure": "medial_antebrachial_cutaneous_nerve",
+   "layer": "nerve",
+   "source": "Medial antebrachial cutaneous nerve.r"
+  },
+  {
+   "node": "o3d_0098",
+   "structure": "lateral_antebrachial_cutaneous_nerve",
+   "layer": "nerve",
+   "source": "Musculocutaneus nerve - lateral antebrachial cutaneous nerve.r"
+  },
+  {
+   "node": "o3d_0099",
+   "structure": "common_palmar_digital_arteries",
+   "layer": "vessel",
+   "source": "Common palmar digital arteries.r"
+  },
+  {
+   "node": "o3d_0100",
+   "structure": "deep_palmar_arch",
+   "layer": "vessel",
+   "source": "Deep palmar arch.r"
+  },
+  {
+   "node": "o3d_0101",
+   "structure": "dorsal_carpal_arch",
+   "layer": "vessel",
+   "source": "Dorsal carpal arch.r"
+  },
+  {
+   "node": "o3d_0102",
+   "structure": "dorsal_carpal_network",
+   "layer": "vessel",
+   "source": "Dorsal carpal network.r"
+  },
+  {
+   "node": "o3d_0103",
+   "structure": "dorsal_digital_arteries",
+   "layer": "vessel",
+   "source": "Dorsal digital arteries.r"
+  },
+  {
+   "node": "o3d_0104",
+   "structure": "dorsal_metacarpal_arteries",
+   "layer": "vessel",
+   "source": "Dorsal metacarpal arteries.r"
+  },
+  {
+   "node": "o3d_0105",
+   "structure": "dorsalis_indicis",
+   "layer": "vessel",
+   "source": "Dorsalis indicis.r"
+  },
+  {
+   "node": "o3d_0106",
+   "structure": "dorsalis_pollicis",
+   "layer": "vessel",
+   "source": "Dorsalis pollicis.r"
+  },
+  {
+   "node": "o3d_0107",
+   "structure": "palmar_carpal_branches",
+   "layer": "vessel",
+   "source": "Palmar carpal branches.r"
+  },
+  {
+   "node": "o3d_0108",
+   "structure": "palmar_metacarpal_arteries",
+   "layer": "vessel",
+   "source": "Palmar metacarpal arteries.r"
+  },
+  {
+   "node": "o3d_0109",
+   "structure": "perforating_arteries",
+   "layer": "vessel",
+   "source": "Perforating arteries.r"
+  },
+  {
+   "node": "o3d_0110",
+   "structure": "princeps_pollicis_arteries",
+   "layer": "vessel",
+   "source": "Princeps pollicis arteries.r"
+  },
+  {
+   "node": "o3d_0111",
+   "structure": "proper_palmar_digital_arteries",
+   "layer": "vessel",
+   "source": "Proper palmar digital arteries.r"
+  },
+  {
+   "node": "o3d_0112",
+   "structure": "radialis_indicis",
+   "layer": "vessel",
+   "source": "Radialis indicis.r"
+  },
+  {
+   "node": "o3d_0113",
    "structure": "superficial_palmar_arch",
-   "layer": "vessel"
+   "layer": "vessel",
+   "source": "Superficial palmar arch.r"
+  },
+  {
+   "node": "o3d_0114",
+   "structure": "metacarpal_1",
+   "layer": "bone",
+   "source": "1st metacarpal bone.r"
+  },
+  {
+   "node": "o3d_0115",
+   "structure": "metacarpal_2",
+   "layer": "bone",
+   "source": "2nd metacarpal bone.r"
+  },
+  {
+   "node": "o3d_0116",
+   "structure": "metacarpal_3",
+   "layer": "bone",
+   "source": "3rd metacarpal bone.r"
+  },
+  {
+   "node": "o3d_0117",
+   "structure": "metacarpal_4",
+   "layer": "bone",
+   "source": "4th metacarpal bone.r"
+  },
+  {
+   "node": "o3d_0118",
+   "structure": "metacarpal_5",
+   "layer": "bone",
+   "source": "5th metacarpal bone.r"
+  },
+  {
+   "node": "o3d_0119",
+   "structure": "capitate",
+   "layer": "bone",
+   "source": "Capitate.r"
+  },
+  {
+   "node": "o3d_0120",
+   "structure": "phalanges_thumb",
+   "layer": "bone",
+   "source": "Distal phalanx of 1st finger.r"
+  },
+  {
+   "node": "o3d_0121",
+   "structure": "phalanges_index",
+   "layer": "bone",
+   "source": "Distal phalanx of 2d finger.r"
+  },
+  {
+   "node": "o3d_0122",
+   "structure": "phalanges_middle",
+   "layer": "bone",
+   "source": "Distal phalanx of 3d finger.r"
+  },
+  {
+   "node": "o3d_0123",
+   "structure": "phalanges_ring",
+   "layer": "bone",
+   "source": "Distal phalanx of 4th finger.r"
+  },
+  {
+   "node": "o3d_0124",
+   "structure": "phalanges_little",
+   "layer": "bone",
+   "source": "Distal phalanx of 5th finger.r"
+  },
+  {
+   "node": "o3d_0125",
+   "structure": "hamate",
+   "layer": "bone",
+   "source": "Hamate.r"
+  },
+  {
+   "node": "o3d_0126",
+   "structure": "lunate",
+   "layer": "bone",
+   "source": "Lunate bone.r"
+  },
+  {
+   "node": "o3d_0127",
+   "structure": "phalanges_index",
+   "layer": "bone",
+   "source": "Middle phalanx of 2d finger.r"
+  },
+  {
+   "node": "o3d_0128",
+   "structure": "phalanges_middle",
+   "layer": "bone",
+   "source": "Middle phalanx of 3rd finger.r"
+  },
+  {
+   "node": "o3d_0129",
+   "structure": "phalanges_ring",
+   "layer": "bone",
+   "source": "Middle phalanx of 4th finger.r"
+  },
+  {
+   "node": "o3d_0130",
+   "structure": "phalanges_little",
+   "layer": "bone",
+   "source": "Middle phalanx of 5th finger.r"
+  },
+  {
+   "node": "o3d_0131",
+   "structure": "pisiform",
+   "layer": "bone",
+   "source": "Pisiform.r"
+  },
+  {
+   "node": "o3d_0132",
+   "structure": "phalanges_thumb",
+   "layer": "bone",
+   "source": "Proximal phalanx of 1st finger.r"
+  },
+  {
+   "node": "o3d_0133",
+   "structure": "phalanges_index",
+   "layer": "bone",
+   "source": "Proximal phalanx of 2d finger.r"
+  },
+  {
+   "node": "o3d_0134",
+   "structure": "phalanges_middle",
+   "layer": "bone",
+   "source": "Proximal phalanx of 3rd finger.r"
+  },
+  {
+   "node": "o3d_0135",
+   "structure": "phalanges_ring",
+   "layer": "bone",
+   "source": "Proximal phalanx of 4th finger.r"
+  },
+  {
+   "node": "o3d_0136",
+   "structure": "phalanges_little",
+   "layer": "bone",
+   "source": "Proximal phalanx of 5th finger.r"
+  },
+  {
+   "node": "o3d_0137",
+   "structure": "scaphoid",
+   "layer": "bone",
+   "source": "Scaphoid.r"
+  },
+  {
+   "node": "o3d_0138",
+   "structure": "sesamoid_bones",
+   "layer": "bone",
+   "source": "Sesamoid bones of hand.r"
+  },
+  {
+   "node": "o3d_0139",
+   "structure": "trapezium",
+   "layer": "bone",
+   "source": "Trapezium.r"
+  },
+  {
+   "node": "o3d_0140",
+   "structure": "trapezoid",
+   "layer": "bone",
+   "source": "Trapezoid.r"
+  },
+  {
+   "node": "o3d_0141",
+   "structure": "triquetrum",
+   "layer": "bone",
+   "source": "Triquetrum.r"
+  },
+  {
+   "node": "o3d_0142",
+   "structure": "annular_ligaments",
+   "layer": "tendon",
+   "source": "Annular ligament(A1) of 1st finger.r"
+  },
+  {
+   "node": "o3d_0143",
+   "structure": "annular_ligaments",
+   "layer": "tendon",
+   "source": "Annular ligament(A2) of 1st finger.r"
+  },
+  {
+   "node": "o3d_0144",
+   "structure": "annular_ligaments",
+   "layer": "tendon",
+   "source": "Annular ligaments of 2nd finger A1-A5.r"
+  },
+  {
+   "node": "o3d_0145",
+   "structure": "annular_ligaments",
+   "layer": "tendon",
+   "source": "Annular ligaments of 3rd finger A1-A5.r"
+  },
+  {
+   "node": "o3d_0146",
+   "structure": "annular_ligaments",
+   "layer": "tendon",
+   "source": "Annular ligaments of 4th finger A1-A5.r"
+  },
+  {
+   "node": "o3d_0147",
+   "structure": "annular_ligaments",
+   "layer": "tendon",
+   "source": "Annular ligaments of 5th finger A1-A5.r"
+  },
+  {
+   "node": "o3d_0148",
+   "structure": "articular_capsule_of_radiocarpal_joint",
+   "layer": "ligament",
+   "source": "Articular capsule of radiocarpal joint"
+  },
+  {
+   "node": "o3d_0149",
+   "structure": "articular_capsules_of_distal_interphalangeal_joints",
+   "layer": "ligament",
+   "source": "Articular capsules of distal interphalangeal joints"
+  },
+  {
+   "node": "o3d_0150",
+   "structure": "articular_capsules_of_metacarpophalangeal_joints",
+   "layer": "ligament",
+   "source": "Articular capsules of metacarpophalangeal joints"
+  },
+  {
+   "node": "o3d_0151",
+   "structure": "articular_capsules_of_proximal_interphalangeal_joints",
+   "layer": "ligament",
+   "source": "Articular capsules of proximal interphalangeal joints"
+  },
+  {
+   "node": "o3d_0152",
+   "structure": "capitohamate_interosseous_ligament",
+   "layer": "ligament",
+   "source": "Capitohamate interosseus ligament"
+  },
+  {
+   "node": "o3d_0153",
+   "structure": "collateral_ligaments_of_distal_phalangeal_joints",
+   "layer": "ligament",
+   "source": "Collateral ligaments of distal phalangeal joints.r"
+  },
+  {
+   "node": "o3d_0154",
+   "structure": "collateral_ligaments_of_interphalangeal_joints",
+   "layer": "ligament",
+   "source": "Collateral ligaments of interphalangeal joints.r"
+  },
+  {
+   "node": "o3d_0155",
+   "structure": "collateral_ligaments_of_metacarpal_joints",
+   "layer": "ligament",
+   "source": "Collateral ligaments of metacarpal joints.r"
+  },
+  {
+   "node": "o3d_0156",
+   "structure": "collateral_ligaments_of_metacarpophalangeal_joints",
+   "layer": "ligament",
+   "source": "Collateral ligaments of metacarpophalangeal joints.r"
+  },
+  {
+   "node": "o3d_0157",
+   "structure": "cruciform_ligaments",
+   "layer": "tendon",
+   "source": "Cruciform ligaments of 2nd finger.r"
+  },
+  {
+   "node": "o3d_0158",
+   "structure": "cruciform_ligaments",
+   "layer": "tendon",
+   "source": "Cruciform ligaments of 3rd finger.r"
+  },
+  {
+   "node": "o3d_0159",
+   "structure": "cruciform_ligaments",
+   "layer": "tendon",
+   "source": "Cruciform ligaments of 4th finger.r"
+  },
+  {
+   "node": "o3d_0160",
+   "structure": "cruciform_ligaments",
+   "layer": "tendon",
+   "source": "Cruciform ligaments of 5th finger.r"
+  },
+  {
+   "node": "o3d_0161",
+   "structure": "deep_transverse_metacarpal_ligament",
+   "layer": "ligament",
+   "source": "Deep transverse metacarpal ligament"
+  },
+  {
+   "node": "o3d_0162",
+   "structure": "dorsal_carpometacarpal_ligaments",
+   "layer": "ligament",
+   "source": "Dorsal carpometacarpal ligaments"
+  },
+  {
+   "node": "o3d_0163",
+   "structure": "dorsal_intercarpal_ligament",
+   "layer": "ligament",
+   "source": "Dorsal intercarpal ligament"
+  },
+  {
+   "node": "o3d_0164",
+   "structure": "dorsal_metacarpal_ligaments",
+   "layer": "ligament",
+   "source": "Dorsal metacarpal ligaments"
+  },
+  {
+   "node": "o3d_0165",
+   "structure": "dorsal_radiocarpal_ligament",
+   "layer": "ligament",
+   "source": "Dorsal radiocarpal ligament.r"
+  },
+  {
+   "node": "o3d_0166",
+   "structure": "dorsal_scaphotriquetral_ligament",
+   "layer": "ligament",
+   "source": "Dorsal scaphotriquetral ligament"
+  },
+  {
+   "node": "o3d_0167",
+   "structure": "dorsal_ulnocarpal_ligament",
+   "layer": "ligament",
+   "source": "Dorsal ulnocarpal ligament"
+  },
+  {
+   "node": "o3d_0168",
+   "structure": "extensor_retinaculum",
+   "layer": "ligament",
+   "source": "Extensor retinaculum of wrist"
+  },
+  {
+   "node": "o3d_0169",
+   "structure": "fibrous_sheaths",
+   "layer": "tendon",
+   "source": "Fibrous sheath of digits of hand"
+  },
+  {
+   "node": "o3d_0170",
+   "structure": "fibrous_sheaths",
+   "layer": "tendon",
+   "source": "Fibrous sheath of digits of hand thumb"
+  },
+  {
+   "node": "o3d_0171",
+   "structure": "flexor_retinaculum",
+   "layer": "ligament",
+   "source": "Flexor retinaculum"
+  },
+  {
+   "node": "o3d_0172",
+   "structure": "intercarpal_articulations",
+   "layer": "ligament",
+   "source": "Intercarpal articulations.r"
+  },
+  {
+   "node": "o3d_0173",
+   "structure": "interosseous_metacarpal_ligaments",
+   "layer": "ligament",
+   "source": "Interosseous metacarpal ligaments"
+  },
+  {
+   "node": "o3d_0174",
+   "structure": "intertendinous_connections",
+   "layer": "tendon",
+   "source": "Intertendinous connections of extensor digitorum"
+  },
+  {
+   "node": "o3d_0175",
+   "structure": "lateral_bands",
+   "layer": "tendon",
+   "source": "Lateral band of 2nd finger"
+  },
+  {
+   "node": "o3d_0176",
+   "structure": "lateral_bands",
+   "layer": "tendon",
+   "source": "Lateral band of 3rd finger"
+  },
+  {
+   "node": "o3d_0177",
+   "structure": "lateral_bands",
+   "layer": "tendon",
+   "source": "Lateral band of 4th finger"
+  },
+  {
+   "node": "o3d_0178",
+   "structure": "lateral_bands",
+   "layer": "tendon",
+   "source": "Lateral band of 5th finger"
+  },
+  {
+   "node": "o3d_0179",
+   "structure": "lunotriquetral_interosseous_ligament",
+   "layer": "ligament",
+   "source": "Lunotriquetral interosseous ligament"
+  },
+  {
+   "node": "o3d_0180",
+   "structure": "oblique_ligament_of_first_finger",
+   "layer": "ligament",
+   "source": "Oblique ligament of 1st finger.r"
+  },
+  {
+   "node": "o3d_0181",
+   "structure": "palmar_capitohamate_ligament",
+   "layer": "ligament",
+   "source": "Palmar capitohamate ligament"
+  },
+  {
+   "node": "o3d_0182",
+   "structure": "palmar_carpometacarpal_ligaments",
+   "layer": "ligament",
+   "source": "Palmar carpometacarpal ligaments"
+  },
+  {
+   "node": "o3d_0183",
+   "structure": "palmar_ligaments_of_distal_phalangeal_joints",
+   "layer": "ligament",
+   "source": "Palmar ligaments of distal phalangeal joints.r"
+  },
+  {
+   "node": "o3d_0184",
+   "structure": "palmar_ligaments_of_interphalangeal_joints",
+   "layer": "ligament",
+   "source": "Palmar ligaments of interphalangeal joints.r"
+  },
+  {
+   "node": "o3d_0185",
+   "structure": "palmar_ligaments_of_metacarpophalangeal_joints",
+   "layer": "ligament",
+   "source": "Palmar ligaments of metacarpophalangeal joints.r"
+  },
+  {
+   "node": "o3d_0186",
+   "structure": "palmar_lunotriquetral_ligament",
+   "layer": "ligament",
+   "source": "Palmar lunotriquetral ligament"
+  },
+  {
+   "node": "o3d_0187",
+   "structure": "palmar_metacarpal_ligaments",
+   "layer": "ligament",
+   "source": "Palmar metacarpal ligaments"
+  },
+  {
+   "node": "o3d_0188",
+   "structure": "palmar_radio_ulnar_ligament",
+   "layer": "ligament",
+   "source": "Palmar radio-ulnar ligament"
+  },
+  {
+   "node": "o3d_0189",
+   "structure": "palmar_radiocarpal_ligament",
+   "layer": "ligament",
+   "source": "Palmar radiocarpal ligament.r"
+  },
+  {
+   "node": "o3d_0190",
+   "structure": "palmar_scaphotriquetral_ligament",
+   "layer": "ligament",
+   "source": "Palmar scaphotriquetral ligament"
+  },
+  {
+   "node": "o3d_0191",
+   "structure": "palmar_trapezoideocapitate_ligament",
+   "layer": "ligament",
+   "source": "Palmar trapezoideocapitate ligament"
+  },
+  {
+   "node": "o3d_0192",
+   "structure": "palmar_ulnocarpal_ligament",
+   "layer": "ligament",
+   "source": "Palmar ulnocarpal ligament.r"
+  },
+  {
+   "node": "o3d_0193",
+   "structure": "pisohamate_ligament",
+   "layer": "ligament",
+   "source": "Pisohamate ligament"
+  },
+  {
+   "node": "o3d_0194",
+   "structure": "pisometacarpal_ligament",
+   "layer": "ligament",
+   "source": "Pisometacarpal ligament.r"
+  },
+  {
+   "node": "o3d_0195",
+   "structure": "pisotriquetral_ligament",
+   "layer": "ligament",
+   "source": "Pisotriquetral ligament"
+  },
+  {
+   "node": "o3d_0196",
+   "structure": "radial_collateral_ligament_of_wrist",
+   "layer": "ligament",
+   "source": "Radial collateral ligament of wrist.r"
+  },
+  {
+   "node": "o3d_0197",
+   "structure": "radiate_carpal_ligament",
+   "layer": "ligament",
+   "source": "Radiate carpal ligament"
+  },
+  {
+   "node": "o3d_0198",
+   "structure": "radioscaphocapitate_ligament",
+   "layer": "ligament",
+   "source": "Radioscaphocapitate ligament"
+  },
+  {
+   "node": "o3d_0199",
+   "structure": "scaphocapitate_ligament",
+   "layer": "ligament",
+   "source": "Scaphocapitate ligament"
+  },
+  {
+   "node": "o3d_0200",
+   "structure": "scapholunate_interosseous_ligament",
+   "layer": "ligament",
+   "source": "Scapholunate interosseus ligament"
+  },
+  {
+   "node": "o3d_0201",
+   "structure": "scaphotrapeziotrapezoidal_ligament",
+   "layer": "ligament",
+   "source": "Scaphotrapeziotrapezoidal ligament"
+  },
+  {
+   "node": "o3d_0202",
+   "structure": "thickened_antebrachial_fascia",
+   "layer": "ligament",
+   "source": "Thickened part of antebrachial fascia"
+  },
+  {
+   "node": "o3d_0203",
+   "structure": "trapeziotrapezoidal_interosseous_ligament",
+   "layer": "ligament",
+   "source": "Trapeziotrapezoidal interosseous ligament"
+  },
+  {
+   "node": "o3d_0204",
+   "structure": "trapezoideocapitate_interosseous_ligament",
+   "layer": "ligament",
+   "source": "Trapezoideocapitate interosseous ligament"
+  },
+  {
+   "node": "o3d_0205",
+   "structure": "triangular_fibrocartilage_disc",
+   "layer": "ligament",
+   "source": "Triangular fibro cartilage disc"
+  },
+  {
+   "node": "o3d_0206",
+   "structure": "triquetrocapitate_ligament",
+   "layer": "ligament",
+   "source": "Triquetrocapitate ligament"
+  },
+  {
+   "node": "o3d_0207",
+   "structure": "triquetrohamate_ligament",
+   "layer": "ligament",
+   "source": "Triquetrohamate ligament"
+  },
+  {
+   "node": "o3d_0208",
+   "structure": "ulnar_collateral_ligament_of_wrist",
+   "layer": "ligament",
+   "source": "Ulnar collateral ligament of wrist.r"
+  },
+  {
+   "node": "o3d_0209",
+   "structure": "ulnopisiform_ligament",
+   "layer": "ligament",
+   "source": "Ulnopisiform ligament"
+  },
+  {
+   "node": "o3d_0210",
+   "structure": "ulnotriquetral_ligament",
+   "layer": "ligament",
+   "source": "Ulnotriquetral ligament"
+  },
+  {
+   "node": "o3d_0211",
+   "structure": "capitate",
+   "layer": "bone",
+   "source": "Art cart of capitate bone"
+  },
+  {
+   "node": "o3d_0212",
+   "structure": "hamate",
+   "layer": "bone",
+   "source": "Art cart of hamate bone"
+  },
+  {
+   "node": "o3d_0213",
+   "structure": "lunate",
+   "layer": "bone",
+   "source": "Art cart of lunate bone"
+  },
+  {
+   "node": "o3d_0214",
+   "structure": "pisiform",
+   "layer": "bone",
+   "source": "Art cart of pisiform bone"
+  },
+  {
+   "node": "o3d_0215",
+   "structure": "scaphoid",
+   "layer": "bone",
+   "source": "Art cart of scaphoid bone"
+  },
+  {
+   "node": "o3d_0216",
+   "structure": "trapezium",
+   "layer": "bone",
+   "source": "Art cart of trapezium bone"
+  },
+  {
+   "node": "o3d_0217",
+   "structure": "trapezoid",
+   "layer": "bone",
+   "source": "Art cart of trapezoid bone"
+  },
+  {
+   "node": "o3d_0218",
+   "structure": "triquetrum",
+   "layer": "bone",
+   "source": "Art cart of triquetrum bone"
+  },
+  {
+   "node": "o3d_0219",
+   "structure": "cartilage_phalanges",
+   "layer": "bone",
+   "source": "Art carts of distal phalanges"
+  },
+  {
+   "node": "o3d_0220",
+   "structure": "cartilage_metacarpals",
+   "layer": "bone",
+   "source": "Art carts of metacarpal bones"
+  },
+  {
+   "node": "o3d_0221",
+   "structure": "cartilage_phalanges",
+   "layer": "bone",
+   "source": "Art carts of middle phalanges"
+  },
+  {
+   "node": "o3d_0222",
+   "structure": "cartilage_phalanges",
+   "layer": "bone",
+   "source": "Art carts of proximal phalanges"
+  },
+  {
+   "node": "o3d_0223",
+   "structure": "dorsal_interossei",
+   "layer": "muscle",
+   "source": "1st dorsal interosseus of hand.r"
+  },
+  {
+   "node": "o3d_0224",
+   "structure": "lumbricals",
+   "layer": "muscle",
+   "source": "1st lumbrical of hand.r"
+  },
+  {
+   "node": "o3d_0225",
+   "structure": "palmar_interossei",
+   "layer": "muscle",
+   "source": "1st palmar interosseus of hand.r"
+  },
+  {
+   "node": "o3d_0226",
+   "structure": "dorsal_interossei",
+   "layer": "muscle",
+   "source": "2nd dorsal interosseus of hand.r"
+  },
+  {
+   "node": "o3d_0227",
+   "structure": "lumbricals",
+   "layer": "muscle",
+   "source": "2nd lumbrical of hand.r"
+  },
+  {
+   "node": "o3d_0228",
+   "structure": "palmar_interossei",
+   "layer": "muscle",
+   "source": "2nd palmar interosseus of hand.r"
+  },
+  {
+   "node": "o3d_0229",
+   "structure": "dorsal_interossei",
+   "layer": "muscle",
+   "source": "3rd dorsal interosseus of hand.r"
+  },
+  {
+   "node": "o3d_0230",
+   "structure": "lumbricals",
+   "layer": "muscle",
+   "source": "3rd lumbrical of hand.r"
+  },
+  {
+   "node": "o3d_0231",
+   "structure": "palmar_interossei",
+   "layer": "muscle",
+   "source": "3rd palmar interosseus of hand.r"
+  },
+  {
+   "node": "o3d_0232",
+   "structure": "dorsal_interossei",
+   "layer": "muscle",
+   "source": "4th dorsal interosseus of hand.r"
+  },
+  {
+   "node": "o3d_0233",
+   "structure": "lumbricals",
+   "layer": "muscle",
+   "source": "4th lumbrical of hand.r"
+  },
+  {
+   "node": "o3d_0234",
+   "structure": "abductor_digiti_minimi",
+   "layer": "muscle",
+   "source": "Abductor digiti minimi.r"
+  },
+  {
+   "node": "o3d_0235",
+   "structure": "abductor_pollicis_brevis",
+   "layer": "muscle",
+   "source": "Abductor pollicis brevis.r"
+  },
+  {
+   "node": "o3d_0236",
+   "structure": "adductor_pollicis",
+   "layer": "muscle",
+   "source": "Adductor pollicis.r"
+  },
+  {
+   "node": "o3d_0237",
+   "structure": "aponeurosis_palmaris",
+   "layer": "tendon",
+   "source": "Aponeurosis palmaris.r"
+  },
+  {
+   "node": "o3d_0238",
+   "structure": "flexor_pollicis_brevis",
+   "layer": "muscle",
+   "source": "Deep head of flexor pollicis brevis.r"
+  },
+  {
+   "node": "o3d_0239",
+   "structure": "extensor_hoods",
+   "layer": "tendon",
+   "source": "Extensor hood of 2nd finger.r"
+  },
+  {
+   "node": "o3d_0240",
+   "structure": "extensor_hoods",
+   "layer": "tendon",
+   "source": "Extensor hood of 3rd finger.r"
+  },
+  {
+   "node": "o3d_0241",
+   "structure": "extensor_hoods",
+   "layer": "tendon",
+   "source": "Extensor hood of 4th finger.r"
+  },
+  {
+   "node": "o3d_0242",
+   "structure": "extensor_hoods",
+   "layer": "tendon",
+   "source": "Extensor hood of 5th finger.r"
+  },
+  {
+   "node": "o3d_0243",
+   "structure": "flexor_digiti_minimi_brevis",
+   "layer": "muscle",
+   "source": "Flexor digiti minimi brevis of hand.r"
+  },
+  {
+   "node": "o3d_0244",
+   "structure": "adductor_pollicis",
+   "layer": "muscle",
+   "source": "Oblique head of adductor pollicis.r"
+  },
+  {
+   "node": "o3d_0245",
+   "structure": "opponens_digiti_minimi",
+   "layer": "muscle",
+   "source": "Opponens digiti minimi muscle of hand.r"
+  },
+  {
+   "node": "o3d_0246",
+   "structure": "opponens_pollicis",
+   "layer": "muscle",
+   "source": "Opponens pollicis muscle.r"
+  },
+  {
+   "node": "o3d_0247",
+   "structure": "palmaris_brevis",
+   "layer": "muscle",
+   "source": "Palmaris brevis muscle.r"
+  },
+  {
+   "node": "o3d_0248",
+   "structure": "flexor_pollicis_brevis",
+   "layer": "muscle",
+   "source": "Superficial head of flexor pollicis brevis.r"
+  },
+  {
+   "node": "o3d_0249",
+   "structure": "superficial_transverse_metacarpal_ligament",
+   "layer": "ligament",
+   "source": "Superficial transverse metacarpal lig."
+  },
+  {
+   "node": "o3d_0250",
+   "structure": "adductor_pollicis",
+   "layer": "muscle",
+   "source": "Transverse head of adductor pollicis.r"
+  },
+  {
+   "node": "o3d_0251",
+   "structure": "median_common_palmar_digital_nerve_thumb",
+   "layer": "nerve",
+   "source": "Median nerve Common palmar digital nerve of the thumb"
+  },
+  {
+   "node": "o3d_0252",
+   "structure": "median_common_palmar_digital_nerves",
+   "layer": "nerve",
+   "source": "Median nerve Common palmar digital nerves"
+  },
+  {
+   "node": "o3d_0253",
+   "structure": "median_palmar_branch",
+   "layer": "nerve",
+   "source": "Median nerve Palmar br"
+  },
+  {
+   "node": "o3d_0254",
+   "structure": "median_proper_palmar_digital_nerves",
+   "layer": "nerve",
+   "source": "Median nerve Proper palmar digital nerves"
+  },
+  {
+   "node": "o3d_0255",
+   "structure": "median_proper_palmar_digital_nerves_thumb",
+   "layer": "nerve",
+   "source": "Median nerve Proper palmar digital nerves of the thumb"
+  },
+  {
+   "node": "o3d_0256",
+   "structure": "median_recurrent_branch",
+   "layer": "nerve",
+   "source": "Median nerve Recurrent br"
+  },
+  {
+   "node": "o3d_0257",
+   "structure": "radial_dorsal_digital_nerves",
+   "layer": "nerve",
+   "source": "Radial nerve (dorsal digital nn).r"
+  },
+  {
+   "node": "o3d_0258",
+   "structure": "ulnar_communicating_branch",
+   "layer": "nerve",
+   "source": "Ulnar nerve Communicating br"
+  },
+  {
+   "node": "o3d_0259",
+   "structure": "ulnar_deep_branch",
+   "layer": "nerve",
+   "source": "Ulnar nerve Deep br"
+  },
+  {
+   "node": "o3d_0260",
+   "structure": "ulnar_dorsal_cutaneous_branch",
+   "layer": "nerve",
+   "source": "Ulnar nerve Dorsal cutaneous br"
+  },
+  {
+   "node": "o3d_0261",
+   "structure": "ulnar_palmar_cutaneous_branch",
+   "layer": "nerve",
+   "source": "Ulnar nerve Palmar cutaneous br"
+  },
+  {
+   "node": "o3d_0262",
+   "structure": "ulnar_common_palmar_digital_nerve",
+   "layer": "nerve",
+   "source": "Ulnar nerve Superficial br Common palmar digital n"
+  },
+  {
+   "node": "o3d_0263",
+   "structure": "ulnar_proper_palmar_digital_nerves",
+   "layer": "nerve",
+   "source": "Ulnar nerve Superficial br Proper palmar digital nn"
+  },
+  {
+   "node": "o3d_0264",
+   "structure": "circumflex_scapular_artery",
+   "layer": "vessel",
+   "source": "Circumflex scapular artery.r"
+  },
+  {
+   "node": "o3d_0265",
+   "structure": "dorsal_scapular_artery",
+   "layer": "vessel",
+   "source": "Dorsal scapular artery (Deep br of transverse cervical a.).r"
+  },
+  {
+   "node": "o3d_0266",
+   "structure": "subscapular_artery",
+   "layer": "vessel",
+   "source": "Subscapular artery.r"
+  },
+  {
+   "node": "o3d_0267",
+   "structure": "transverse_cervical_artery_superficial_branch",
+   "layer": "vessel",
+   "source": "Superficial branch of Transverse cervical artery.r"
+  },
+  {
+   "node": "o3d_0268",
+   "structure": "suprascapular_artery",
+   "layer": "vessel",
+   "source": "Suprascapular artery.r"
+  },
+  {
+   "node": "o3d_0269",
+   "structure": "thoracoacromial_acromial_branch",
+   "layer": "vessel",
+   "source": "Thoracoacromial artery Acromial br.r"
+  },
+  {
+   "node": "o3d_0270",
+   "structure": "deltoid",
+   "layer": "vessel",
+   "source": "Thoracoacromial artery Deltoid br.r"
+  },
+  {
+   "node": "o3d_0271",
+   "structure": "thoracoacromial_pectoral_branch",
+   "layer": "vessel",
+   "source": "Thoracoacromial artery Pectoral br.r"
+  },
+  {
+   "node": "o3d_0272",
+   "structure": "transverse_cervical_artery",
+   "layer": "vessel",
+   "source": "Transverse cervical artery.r"
+  },
+  {
+   "node": "o3d_0273",
+   "structure": "clavicle",
+   "layer": "bone",
+   "source": "Clavicle.r"
+  },
+  {
+   "node": "o3d_0274",
+   "structure": "scapula",
+   "layer": "bone",
+   "source": "Scapula.r."
+  },
+  {
+   "node": "o3d_0275",
+   "structure": "acromioclavicular_capsule",
+   "layer": "ligament",
+   "source": "Acromioclavicular capsule.r"
+  },
+  {
+   "node": "o3d_0276",
+   "structure": "acromioclavicular_disc",
+   "layer": "ligament",
+   "source": "Acromioclavicular disc.r"
+  },
+  {
+   "node": "o3d_0277",
+   "structure": "acromioclavicular_ligament",
+   "layer": "ligament",
+   "source": "Acromioclavicular ligament.r"
+  },
+  {
+   "node": "o3d_0278",
+   "structure": "anterior_sternoclavicular_ligament",
+   "layer": "ligament",
+   "source": "Anterior sternoclavicular ligament.r"
+  },
+  {
+   "node": "o3d_0279",
+   "structure": "conoid_ligament",
+   "layer": "ligament",
+   "source": "Conoid ligament (part of coracoclavicular ligament).r"
+  },
+  {
+   "node": "o3d_0280",
+   "structure": "coraco_acromial_ligament",
+   "layer": "ligament",
+   "source": "Coraco-acromial ligament.r"
+  },
+  {
+   "node": "o3d_0281",
+   "structure": "coracoclavicular_ligament",
+   "layer": "ligament",
+   "source": "Coracoclavicular ligament.r"
+  },
+  {
+   "node": "o3d_0282",
+   "structure": "costoclavicular_ligament",
+   "layer": "ligament",
+   "source": "Costoclavicular ligament.r"
+  },
+  {
+   "node": "o3d_0283",
+   "structure": "inferior_transverse_scapular_ligament",
+   "layer": "ligament",
+   "source": "Inferior transverse scapular ligament.r"
+  },
+  {
+   "node": "o3d_0284",
+   "structure": "interclavicular_ligament",
+   "layer": "ligament",
+   "source": "Interclavicular ligament.r"
+  },
+  {
+   "node": "o3d_0285",
+   "structure": "posterior_sternoclavicular_ligament",
+   "layer": "ligament",
+   "source": "Posterior Sternoclavicular ligament.r"
+  },
+  {
+   "node": "o3d_0286",
+   "structure": "sternoclavicular_capsule",
+   "layer": "ligament",
+   "source": "Sternoclavicular capsule.r"
+  },
+  {
+   "node": "o3d_0287",
+   "structure": "superior_transverse_scapular_ligament",
+   "layer": "ligament",
+   "source": "Superior transverse scapular ligament.r"
+  },
+  {
+   "node": "o3d_0288",
+   "structure": "trapezoid_ligament",
+   "layer": "ligament",
+   "source": "Trapezoid ligament (part of coracoclavicular ligament).r"
+  },
+  {
+   "node": "o3d_0289",
+   "structure": "clavicle",
+   "layer": "bone",
+   "source": "Articular cartilage of acromioclavicular joint on clavicle.r"
+  },
+  {
+   "node": "o3d_0290",
+   "structure": "scapula",
+   "layer": "bone",
+   "source": "Articular cartilage of acromioclavicular joint on scapula.r"
+  },
+  {
+   "node": "o3d_0291",
+   "structure": "scapula",
+   "layer": "bone",
+   "source": "Articular cartilage of glenohumeral joint on scapula.r"
+  },
+  {
+   "node": "o3d_0292",
+   "structure": "clavicle",
+   "layer": "bone",
+   "source": "Articular cartilage of sternoclavicular joint on clavicle.r"
+  },
+  {
+   "node": "o3d_0293",
+   "structure": "sternoclavicular_disc",
+   "layer": "ligament",
+   "source": "Articular disc of steroclavicular joint.r"
+  },
+  {
+   "node": "o3d_0294",
+   "structure": "pectoralis_major",
+   "layer": "muscle",
+   "source": "Abdominal head of pectoralis major muscle.r"
+  },
+  {
+   "node": "o3d_0295",
+   "structure": "deltoid",
+   "layer": "muscle",
+   "source": "Acromial part of deltoid muscle.r"
+  },
+  {
+   "node": "o3d_0296",
+   "structure": "trapezius",
+   "layer": "muscle",
+   "source": "Ascending part of Trapezius muscle.r"
+  },
+  {
+   "node": "o3d_0297",
+   "structure": "pectoralis_major",
+   "layer": "muscle",
+   "source": "Clavicular head of pectoralis major muscle.r"
+  },
+  {
+   "node": "o3d_0298",
+   "structure": "deltoid",
+   "layer": "muscle",
+   "source": "Clavicular part of deltoid muscle.r"
+  },
+  {
+   "node": "o3d_0299",
+   "structure": "deltoid",
+   "layer": "muscle",
+   "source": "Deltoid muscle.r"
+  },
+  {
+   "node": "o3d_0300",
+   "structure": "trapezius",
+   "layer": "muscle",
+   "source": "Descending part of Trapezius muscle.r"
+  },
+  {
+   "node": "o3d_0301",
+   "structure": "infraspinatus",
+   "layer": "muscle",
+   "source": "Infraspinatus muscle.r"
+  },
+  {
+   "node": "o3d_0302",
+   "structure": "latissimus_dorsi",
+   "layer": "muscle",
+   "source": "Latissimus dorsi.r"
+  },
+  {
+   "node": "o3d_0303",
+   "structure": "levator_scapulae",
+   "layer": "muscle",
+   "source": "Levator scapulae.r"
+  },
+  {
+   "node": "o3d_0304",
+   "structure": "pectoralis_major",
+   "layer": "muscle",
+   "source": "Pectoralis major.r"
+  },
+  {
+   "node": "o3d_0305",
+   "structure": "pectoralis_minor",
+   "layer": "muscle",
+   "source": "Pectoralis minor muscle.r"
+  },
+  {
+   "node": "o3d_0306",
+   "structure": "rhomboid_major",
+   "layer": "muscle",
+   "source": "Rhomboid major muscle.r"
+  },
+  {
+   "node": "o3d_0307",
+   "structure": "rhomboid_minor",
+   "layer": "muscle",
+   "source": "Rhomboid minor muscle.r"
+  },
+  {
+   "node": "o3d_0308",
+   "structure": "serratus_anterior",
+   "layer": "muscle",
+   "source": "Serratus anterior muscle.r"
+  },
+  {
+   "node": "o3d_0309",
+   "structure": "deltoid",
+   "layer": "muscle",
+   "source": "Spinal part of deltoid muscle.r"
+  },
+  {
+   "node": "o3d_0310",
+   "structure": "pectoralis_major",
+   "layer": "muscle",
+   "source": "Sternocostal head of pectoralis major muscle.r"
+  },
+  {
+   "node": "o3d_0311",
+   "structure": "subclavius",
+   "layer": "muscle",
+   "source": "Subclavius muscle.r"
+  },
+  {
+   "node": "o3d_0312",
+   "structure": "subscapularis",
+   "layer": "muscle",
+   "source": "Subscapularis muscle.r"
+  },
+  {
+   "node": "o3d_0313",
+   "structure": "supraspinatus",
+   "layer": "muscle",
+   "source": "Supraspinatus muscle.r"
+  },
+  {
+   "node": "o3d_0314",
+   "structure": "teres_major",
+   "layer": "muscle",
+   "source": "Teres major muscle.r"
+  },
+  {
+   "node": "o3d_0315",
+   "structure": "teres_minor",
+   "layer": "muscle",
+   "source": "Teres minor muscle.r"
+  },
+  {
+   "node": "o3d_0316",
+   "structure": "trapezius",
+   "layer": "muscle",
+   "source": "Transverse part of trapezius muscle.r"
+  },
+  {
+   "node": "o3d_0317",
+   "structure": "trapezius",
+   "layer": "muscle",
+   "source": "Trapezius muscle.r"
+  },
+  {
+   "node": "o3d_0318",
+   "structure": "dorsal_scapular_nerve",
+   "layer": "nerve",
+   "source": "Dorsal scapular nerve.r"
+  },
+  {
+   "node": "o3d_0319",
+   "structure": "lower_subscapular_nerve",
+   "layer": "nerve",
+   "source": "Lower subscapular nerve.r"
+  },
+  {
+   "node": "o3d_0320",
+   "structure": "suprascapular_nerve",
+   "layer": "nerve",
+   "source": "Suprascapular nerve.r"
+  },
+  {
+   "node": "o3d_0321",
+   "structure": "upper_subscapular_nerve",
+   "layer": "nerve",
+   "source": "Upper subscapular nerve.r"
+  },
+  {
+   "node": "o3d_0322",
+   "structure": "sternum",
+   "layer": "bone",
+   "source": "Body of sternum"
+  },
+  {
+   "node": "o3d_0323",
+   "structure": "sternum",
+   "layer": "bone",
+   "source": "Manubrium of sternum"
+  },
+  {
+   "node": "o3d_0324",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "Rib (10th).r"
+  },
+  {
+   "node": "o3d_0325",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "Rib (11th).r"
+  },
+  {
+   "node": "o3d_0326",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "Rib (12th).r"
+  },
+  {
+   "node": "o3d_0327",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "Rib (1st).r"
+  },
+  {
+   "node": "o3d_0328",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "Rib (2nd).r"
+  },
+  {
+   "node": "o3d_0329",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "Rib (3rd).r"
+  },
+  {
+   "node": "o3d_0330",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "Rib (4th).r"
+  },
+  {
+   "node": "o3d_0331",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "Rib (5th).r"
+  },
+  {
+   "node": "o3d_0332",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "Rib (6th).r"
+  },
+  {
+   "node": "o3d_0333",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "Rib (7th).r"
+  },
+  {
+   "node": "o3d_0334",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "Rib (8th).r"
+  },
+  {
+   "node": "o3d_0335",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "Rib (9th).r"
+  },
+  {
+   "node": "o3d_0336",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "10th rib art cart of head.r"
+  },
+  {
+   "node": "o3d_0337",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "10th rib art cart of tubercle.r"
+  },
+  {
+   "node": "o3d_0338",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "11th rib art cart of head.r"
+  },
+  {
+   "node": "o3d_0339",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "12th rib art cart of head.r"
+  },
+  {
+   "node": "o3d_0340",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "1st rib art cart of head.r"
+  },
+  {
+   "node": "o3d_0341",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "1st rib art cart of tubercle.r"
+  },
+  {
+   "node": "o3d_0342",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "2nd rib art cart of head.r"
+  },
+  {
+   "node": "o3d_0343",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "2nd rib art cart of tubercle.r"
+  },
+  {
+   "node": "o3d_0344",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "3rd rib art cart of head.r"
+  },
+  {
+   "node": "o3d_0345",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "3rd rib art cart of tubercle.r"
+  },
+  {
+   "node": "o3d_0346",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "4th rib art cart of head.r"
+  },
+  {
+   "node": "o3d_0347",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "4th rib art cart of tubercle.r"
+  },
+  {
+   "node": "o3d_0348",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "5th rib art cart of head.r"
+  },
+  {
+   "node": "o3d_0349",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "5th rib art cart of tubercle.r"
+  },
+  {
+   "node": "o3d_0350",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "6th rib art cart of head.r"
+  },
+  {
+   "node": "o3d_0351",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "6th rib art cart of tubercle.r"
+  },
+  {
+   "node": "o3d_0352",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "7th rib art cart of head.r"
+  },
+  {
+   "node": "o3d_0353",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "7th rib art cart of tubercle.r"
+  },
+  {
+   "node": "o3d_0354",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "8th rib art cart of head.r"
+  },
+  {
+   "node": "o3d_0355",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "8th rib art cart of tubercle.r"
+  },
+  {
+   "node": "o3d_0356",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "9th rib art cart of head.r"
+  },
+  {
+   "node": "o3d_0357",
+   "structure": "ribs",
+   "layer": "bone",
+   "source": "9th rib art cart of tubercle.r"
+  },
+  {
+   "node": "o3d_0358",
+   "structure": "sternum",
+   "layer": "bone",
+   "source": "art cart of sternoclavicular joint on manubrium.r"
+  },
+  {
+   "node": "o3d_0359",
+   "structure": "sternum",
+   "layer": "bone",
+   "source": "art cart of sternocostal joint on manubrium.r"
+  },
+  {
+   "node": "o3d_0360",
+   "structure": "sternum",
+   "layer": "bone",
+   "source": "art cart of sternocostal joints on sternal body.r"
+  },
+  {
+   "node": "o3d_0361",
+   "structure": "costal_cartilages",
+   "layer": "bone",
+   "source": "Costal cart of 10th.rib.r"
+  },
+  {
+   "node": "o3d_0362",
+   "structure": "costal_cartilages",
+   "layer": "bone",
+   "source": "Costal cart of 11th.rib.r"
+  },
+  {
+   "node": "o3d_0363",
+   "structure": "costal_cartilages",
+   "layer": "bone",
+   "source": "Costal cart of 12th.rib.r"
+  },
+  {
+   "node": "o3d_0364",
+   "structure": "costal_cartilages",
+   "layer": "bone",
+   "source": "Costal cart of 1st.rib.r"
+  },
+  {
+   "node": "o3d_0365",
+   "structure": "costal_cartilages",
+   "layer": "bone",
+   "source": "Costal cart of 2nd.rib.r"
+  },
+  {
+   "node": "o3d_0366",
+   "structure": "costal_cartilages",
+   "layer": "bone",
+   "source": "Costal cart of 3rd.rib.r"
+  },
+  {
+   "node": "o3d_0367",
+   "structure": "costal_cartilages",
+   "layer": "bone",
+   "source": "Costal cart of 4th.rib.r"
+  },
+  {
+   "node": "o3d_0368",
+   "structure": "costal_cartilages",
+   "layer": "bone",
+   "source": "Costal cart of 5th.rib.r"
+  },
+  {
+   "node": "o3d_0369",
+   "structure": "costal_cartilages",
+   "layer": "bone",
+   "source": "Costal cart of 6th.rib.r"
+  },
+  {
+   "node": "o3d_0370",
+   "structure": "costal_cartilages",
+   "layer": "bone",
+   "source": "Costal cart of 7th.rib.r"
+  },
+  {
+   "node": "o3d_0371",
+   "structure": "costal_cartilages",
+   "layer": "bone",
+   "source": "Costal cart of 8th.rib.r"
+  },
+  {
+   "node": "o3d_0372",
+   "structure": "costal_cartilages",
+   "layer": "bone",
+   "source": "Costal cart of 9th.rib.r"
+  },
+  {
+   "node": "o3d_0373",
+   "structure": "sternum",
+   "layer": "bone",
+   "source": "Xiphoid process"
+  },
+  {
+   "node": "o3d_0374",
+   "structure": "brachial_plexus_anterior_divisions",
+   "layer": "nerve",
+   "source": "Anterior divisions of brachial plexus.r"
+  },
+  {
+   "node": "o3d_0375",
+   "structure": "inferior_trunk",
+   "layer": "nerve",
+   "source": "Inferior trunk of brachial plexus.r"
+  },
+  {
+   "node": "o3d_0376",
+   "structure": "brachial_plexus_lateral_cord",
+   "layer": "nerve",
+   "source": "Lateral cord of brachial plexus.r"
+  },
+  {
+   "node": "o3d_0377",
+   "structure": "lateral_pectoral_nerve",
+   "layer": "nerve",
+   "source": "Lateral pectoral nerve.r"
+  },
+  {
+   "node": "o3d_0378",
+   "structure": "long_thoracic_nerve",
+   "layer": "nerve",
+   "source": "Long thoracic nerve.r"
+  },
+  {
+   "node": "o3d_0379",
+   "structure": "brachial_plexus_medial_cord",
+   "layer": "nerve",
+   "source": "Medial cord of brachial plexus.r"
+  },
+  {
+   "node": "o3d_0380",
+   "structure": "medial_pectoral_nerve",
+   "layer": "nerve",
+   "source": "Medial pectoral nerve.r"
+  },
+  {
+   "node": "o3d_0381",
+   "structure": "middle_trunk",
+   "layer": "nerve",
+   "source": "Middle trunk of brachial plexus.r"
+  },
+  {
+   "node": "o3d_0382",
+   "structure": "brachial_plexus_posterior_cord",
+   "layer": "nerve",
+   "source": "Posterior cord of brachial plexus.r"
+  },
+  {
+   "node": "o3d_0383",
+   "structure": "brachial_plexus_posterior_divisions",
+   "layer": "nerve",
+   "source": "Posterior divisions of brachial plexus.r"
+  },
+  {
+   "node": "o3d_0384",
+   "structure": "subclavian_nerve",
+   "layer": "nerve",
+   "source": "Subclavian nerve.r"
+  },
+  {
+   "node": "o3d_0385",
+   "structure": "superior_trunk",
+   "layer": "nerve",
+   "source": "Superior trunk of brachial plexus.r"
+  },
+  {
+   "node": "o3d_0001__marrow",
+   "structure": "humerus",
+   "layer": "marrow",
+   "source": "Humerus.r"
+  },
+  {
+   "node": "o3d_0057__marrow",
+   "structure": "radius",
+   "layer": "marrow",
+   "source": "Radius.r"
+  },
+  {
+   "node": "o3d_0058__marrow",
+   "structure": "ulna",
+   "layer": "marrow",
+   "source": "Ulna.r"
+  },
+  {
+   "node": "o3d_0114__marrow",
+   "structure": "metacarpal_1",
+   "layer": "marrow",
+   "source": "1st metacarpal bone.r"
+  },
+  {
+   "node": "o3d_0115__marrow",
+   "structure": "metacarpal_2",
+   "layer": "marrow",
+   "source": "2nd metacarpal bone.r"
+  },
+  {
+   "node": "o3d_0116__marrow",
+   "structure": "metacarpal_3",
+   "layer": "marrow",
+   "source": "3rd metacarpal bone.r"
+  },
+  {
+   "node": "o3d_0117__marrow",
+   "structure": "metacarpal_4",
+   "layer": "marrow",
+   "source": "4th metacarpal bone.r"
+  },
+  {
+   "node": "o3d_0118__marrow",
+   "structure": "metacarpal_5",
+   "layer": "marrow",
+   "source": "5th metacarpal bone.r"
+  },
+  {
+   "node": "o3d_0119__marrow",
+   "structure": "capitate",
+   "layer": "marrow",
+   "source": "Capitate.r"
+  },
+  {
+   "node": "o3d_0120__marrow",
+   "structure": "phalanges_thumb",
+   "layer": "marrow",
+   "source": "Distal phalanx of 1st finger.r"
+  },
+  {
+   "node": "o3d_0121__marrow",
+   "structure": "phalanges_index",
+   "layer": "marrow",
+   "source": "Distal phalanx of 2d finger.r"
+  },
+  {
+   "node": "o3d_0122__marrow",
+   "structure": "phalanges_middle",
+   "layer": "marrow",
+   "source": "Distal phalanx of 3d finger.r"
+  },
+  {
+   "node": "o3d_0123__marrow",
+   "structure": "phalanges_ring",
+   "layer": "marrow",
+   "source": "Distal phalanx of 4th finger.r"
+  },
+  {
+   "node": "o3d_0124__marrow",
+   "structure": "phalanges_little",
+   "layer": "marrow",
+   "source": "Distal phalanx of 5th finger.r"
+  },
+  {
+   "node": "o3d_0125__marrow",
+   "structure": "hamate",
+   "layer": "marrow",
+   "source": "Hamate.r"
+  },
+  {
+   "node": "o3d_0126__marrow",
+   "structure": "lunate",
+   "layer": "marrow",
+   "source": "Lunate bone.r"
+  },
+  {
+   "node": "o3d_0127__marrow",
+   "structure": "phalanges_index",
+   "layer": "marrow",
+   "source": "Middle phalanx of 2d finger.r"
+  },
+  {
+   "node": "o3d_0128__marrow",
+   "structure": "phalanges_middle",
+   "layer": "marrow",
+   "source": "Middle phalanx of 3rd finger.r"
+  },
+  {
+   "node": "o3d_0129__marrow",
+   "structure": "phalanges_ring",
+   "layer": "marrow",
+   "source": "Middle phalanx of 4th finger.r"
+  },
+  {
+   "node": "o3d_0130__marrow",
+   "structure": "phalanges_little",
+   "layer": "marrow",
+   "source": "Middle phalanx of 5th finger.r"
+  },
+  {
+   "node": "o3d_0131__marrow",
+   "structure": "pisiform",
+   "layer": "marrow",
+   "source": "Pisiform.r"
+  },
+  {
+   "node": "o3d_0132__marrow",
+   "structure": "phalanges_thumb",
+   "layer": "marrow",
+   "source": "Proximal phalanx of 1st finger.r"
+  },
+  {
+   "node": "o3d_0133__marrow",
+   "structure": "phalanges_index",
+   "layer": "marrow",
+   "source": "Proximal phalanx of 2d finger.r"
+  },
+  {
+   "node": "o3d_0134__marrow",
+   "structure": "phalanges_middle",
+   "layer": "marrow",
+   "source": "Proximal phalanx of 3rd finger.r"
+  },
+  {
+   "node": "o3d_0135__marrow",
+   "structure": "phalanges_ring",
+   "layer": "marrow",
+   "source": "Proximal phalanx of 4th finger.r"
+  },
+  {
+   "node": "o3d_0136__marrow",
+   "structure": "phalanges_little",
+   "layer": "marrow",
+   "source": "Proximal phalanx of 5th finger.r"
+  },
+  {
+   "node": "o3d_0137__marrow",
+   "structure": "scaphoid",
+   "layer": "marrow",
+   "source": "Scaphoid.r"
+  },
+  {
+   "node": "o3d_0139__marrow",
+   "structure": "trapezium",
+   "layer": "marrow",
+   "source": "Trapezium.r"
+  },
+  {
+   "node": "o3d_0140__marrow",
+   "structure": "trapezoid",
+   "layer": "marrow",
+   "source": "Trapezoid.r"
+  },
+  {
+   "node": "o3d_0141__marrow",
+   "structure": "triquetrum",
+   "layer": "marrow",
+   "source": "Triquetrum.r"
   }
  ],
  "structures": {
-  "humerus": "Humerus (distal end)",
+  "humerus": "Humerus",
+  "bicipital_aponeurosis": "Bicipital aponeurosis",
+  "brachialis": "Brachialis",
+  "biceps_brachii": "Biceps brachii",
+  "triceps_brachii": "Triceps brachii",
+  "coracobrachialis": "Coracobrachialis",
+  "axillary_nerve_superior_lateral_cutaneous": "Superior lateral brachial cutaneous nerve (axillary)",
+  "median_nerve_lateral_root": "Lateral root of the median nerve",
+  "medial_brachial_cutaneous_nerve": "Medial brachial cutaneous nerve",
+  "median_nerve_medial_root": "Medial root of the median nerve",
+  "median_nerve": "Median nerve",
+  "musculocutaneous_nerve": "Musculocutaneous nerve",
+  "radial_deep_branch": "Deep branch of the radial nerve",
+  "radial_inferior_lateral_brachial_cutaneous_nerve": "Inferior lateral brachial cutaneous nerve",
+  "radial_posterior_antebrachial_cutaneous_nerve": "Posterior antebrachial cutaneous nerve",
+  "radial_posterior_brachial_cutaneous_nerve": "Posterior brachial cutaneous nerve",
+  "posterior_interosseous_nerve": "Posterior interosseous nerve (deep radial)",
+  "radial_superficial_branch": "Superficial branch of the radial nerve",
+  "radial_nerve": "Radial nerve",
+  "ulnar_nerve": "Ulnar nerve",
+  "anterior_circumflex_humeral_artery": "Anterior circumflex humeral artery",
+  "axillary_artery": "Axillary artery",
+  "brachial_artery": "Brachial artery",
+  "deep_artery_of_arm": "Deep artery of arm",
+  "inferior_ulnar_collateral_artery": "Inferior ulnar collateral artery",
+  "medial_collateral_artery": "Medial collateral artery",
+  "middle_collateral_artery": "Middle collateral artery",
+  "posterior_circumflex_humeral_artery": "Posterior circumflex humeral artery",
+  "posterior_ulnar_recurrent_artery": "Posterior ulnar recurrent artery",
+  "radial_collateral_artery": "Radial collateral artery",
+  "superior_ulnar_collateral_artery": "Superior ulnar collateral artery",
+  "articular_capsule_of_glenohumeral_joint": "Articular capsule of glenohumeral joint",
+  "coracohumeral_ligament": "Coracohumeral ligament",
+  "glenoid_labrum": "Glenoid labrum",
+  "inferior_glenohumeral_ligament": "Inferior glenohumeral ligament",
+  "lateral_intermuscular_septum_of_arm": "Lateral intermuscular septum of arm",
+  "medial_intermuscular_septum_of_arm": "Medial intermuscular septum of arm",
+  "middle_glenohumeral_ligament": "Middle glenohumeral ligament",
+  "superior_glenohumeral_ligament": "Superior glenohumeral ligament",
+  "transverse_humeral_ligament": "Transverse humeral ligament",
+  "anterior_interosseous_artery": "Anterior interosseous artery",
+  "anterior_ulnar_recurrent_artery": "Anterior ulnar recurrent artery",
+  "common_interosseous_artery": "Common interosseous artery",
+  "interosseous_recurrent_artery": "Interosseous recurrent artery",
+  "posterior_interosseous_artery": "Posterior interosseous artery",
+  "radial_artery": "Radial artery",
+  "radial_recurrent_artery": "Radial recurrent artery",
+  "ulnar_dorsal_carpal_branch": "Dorsal carpal branch of the ulnar artery",
+  "ulnar_artery": "Ulnar artery",
   "radius": "Radius",
   "ulna": "Ulna",
-  "scaphoid": "Scaphoid",
-  "lunate": "Lunate",
-  "triquetrum": "Triquetrum",
-  "pisiform": "Pisiform",
-  "trapezium": "Trapezium",
-  "trapezoid": "Trapezoid",
-  "capitate": "Capitate",
-  "hamate": "Hamate",
+  "articular_capsule_of_elbow_joint": "Articular capsule of elbow joint",
+  "dorsal_radio_ulnar_ligament": "Dorsal radio-ulnar ligament",
+  "interosseous_membrane": "Interosseous membrane",
+  "oblique_cord_or_radio_ulnar_syndesmosis": "Oblique cord or radio-ulnar syndesmosis",
+  "quadrate_ligament": "Quadrate ligament",
+  "radial_annular_ligament": "Radial annular ligament",
+  "radial_collateral_ligament_of_elbow": "Radial collateral ligament of elbow",
+  "ulnar_collateral_ligament_of_elbow": "Ulnar collateral ligament of elbow",
+  "abductor_pollicis_longus": "Abductor pollicis longus",
+  "anconeus": "Anconeus",
+  "brachioradialis": "Brachioradialis",
+  "extensor_carpi_ulnaris": "Extensor carpi ulnaris",
+  "flexor_carpi_ulnaris": "Flexor carpi ulnaris",
+  "extensor_carpi_radialis_brevis": "Extensor carpi radialis brevis",
+  "extensor_carpi_radialis_longus": "Extensor carpi radialis longus",
+  "extensor_digiti_minimi": "Extensor digiti minimi",
+  "extensor_digitorum": "Extensor digitorum",
+  "extensor_indicis": "Extensor indicis",
+  "extensor_pollicis_brevis": "Extensor pollicis brevis",
+  "extensor_pollicis_longus": "Extensor pollicis longus",
+  "flexor_carpi_radialis": "Flexor carpi radialis",
+  "flexor_digitorum_profundus": "Flexor digitorum profundus",
+  "flexor_digitorum_superficialis": "Flexor digitorum superficialis",
+  "flexor_pollicis_longus": "Flexor pollicis longus",
+  "pronator_teres": "Pronator teres",
+  "palmaris_longus": "Palmaris longus",
+  "pronator_quadratus": "Pronator quadratus",
+  "supinator": "Supinator",
+  "medial_antebrachial_cutaneous_nerve": "Medial antebrachial cutaneous nerve",
+  "lateral_antebrachial_cutaneous_nerve": "Lateral antebrachial cutaneous nerve",
+  "common_palmar_digital_arteries": "Common palmar digital arteries",
+  "deep_palmar_arch": "Deep palmar arch",
+  "dorsal_carpal_arch": "Dorsal carpal arch",
+  "dorsal_carpal_network": "Dorsal carpal network",
+  "dorsal_digital_arteries": "Dorsal digital arteries",
+  "dorsal_metacarpal_arteries": "Dorsal metacarpal arteries",
+  "dorsalis_indicis": "Dorsalis indicis",
+  "dorsalis_pollicis": "Dorsalis pollicis",
+  "palmar_carpal_branches": "Palmar carpal branches",
+  "palmar_metacarpal_arteries": "Palmar metacarpal arteries",
+  "perforating_arteries": "Perforating arteries",
+  "princeps_pollicis_arteries": "Princeps pollicis arteries",
+  "proper_palmar_digital_arteries": "Proper palmar digital arteries",
+  "radialis_indicis": "Radialis indicis",
+  "superficial_palmar_arch": "Superficial palmar arch",
   "metacarpal_1": "First metacarpal",
   "metacarpal_2": "Second metacarpal",
   "metacarpal_3": "Third metacarpal",
   "metacarpal_4": "Fourth metacarpal",
   "metacarpal_5": "Fifth metacarpal",
+  "capitate": "Capitate",
   "phalanges_thumb": "Phalanges of the thumb",
   "phalanges_index": "Phalanges of the index finger",
   "phalanges_middle": "Phalanges of the middle finger",
   "phalanges_ring": "Phalanges of the ring finger",
   "phalanges_little": "Phalanges of the little finger",
-  "interosseous_membrane": "Interosseous membrane",
+  "hamate": "Hamate",
+  "lunate": "Lunate",
+  "pisiform": "Pisiform",
+  "scaphoid": "Scaphoid",
+  "sesamoid_bones": "Sesamoid bones of the hand",
+  "trapezium": "Trapezium",
+  "trapezoid": "Trapezoid",
+  "triquetrum": "Triquetrum",
+  "annular_ligaments": "Annular ligaments of the fingers",
+  "articular_capsule_of_radiocarpal_joint": "Articular capsule of radiocarpal joint",
+  "articular_capsules_of_distal_interphalangeal_joints": "Articular capsules of distal interphalangeal joints",
+  "articular_capsules_of_metacarpophalangeal_joints": "Articular capsules of metacarpophalangeal joints",
+  "articular_capsules_of_proximal_interphalangeal_joints": "Articular capsules of proximal interphalangeal joints",
+  "capitohamate_interosseous_ligament": "Capitohamate interosseous ligament",
+  "collateral_ligaments_of_distal_phalangeal_joints": "Collateral ligaments of distal phalangeal joints",
+  "collateral_ligaments_of_interphalangeal_joints": "Collateral ligaments of interphalangeal joints",
+  "collateral_ligaments_of_metacarpal_joints": "Collateral ligaments of metacarpal joints",
+  "collateral_ligaments_of_metacarpophalangeal_joints": "Collateral ligaments of metacarpophalangeal joints",
+  "cruciform_ligaments": "Cruciform ligaments of the fingers",
+  "deep_transverse_metacarpal_ligament": "Deep transverse metacarpal ligament",
+  "dorsal_carpometacarpal_ligaments": "Dorsal carpometacarpal ligaments",
+  "dorsal_intercarpal_ligament": "Dorsal intercarpal ligament",
+  "dorsal_metacarpal_ligaments": "Dorsal metacarpal ligaments",
+  "dorsal_radiocarpal_ligament": "Dorsal radiocarpal ligament",
+  "dorsal_scaphotriquetral_ligament": "Dorsal scaphotriquetral ligament",
+  "dorsal_ulnocarpal_ligament": "Dorsal ulnocarpal ligament",
+  "extensor_retinaculum": "Extensor retinaculum",
+  "fibrous_sheaths": "Fibrous sheaths of the digits",
   "flexor_retinaculum": "Flexor retinaculum (transverse carpal ligament)",
-  "brachialis": "Brachialis",
-  "biceps_brachii": "Biceps brachii",
-  "triceps_brachii": "Triceps brachii",
-  "pronator_teres": "Pronator teres",
-  "flexor_carpi_radialis": "Flexor carpi radialis",
-  "palmaris_longus": "Palmaris longus",
-  "flexor_carpi_ulnaris": "Flexor carpi ulnaris",
-  "flexor_digitorum_superficialis": "Flexor digitorum superficialis",
-  "flexor_digitorum_profundus": "Flexor digitorum profundus",
-  "flexor_pollicis_longus": "Flexor pollicis longus",
-  "pronator_quadratus": "Pronator quadratus",
-  "brachioradialis": "Brachioradialis",
-  "extensor_carpi_radialis_longus": "Extensor carpi radialis longus",
-  "extensor_carpi_radialis_brevis": "Extensor carpi radialis brevis",
-  "extensor_digitorum": "Extensor digitorum",
-  "extensor_digiti_minimi": "Extensor digiti minimi",
-  "extensor_carpi_ulnaris": "Extensor carpi ulnaris",
-  "anconeus": "Anconeus",
-  "supinator": "Supinator",
-  "abductor_pollicis_longus": "Abductor pollicis longus",
-  "extensor_pollicis_brevis": "Extensor pollicis brevis",
-  "extensor_pollicis_longus": "Extensor pollicis longus",
-  "extensor_indicis": "Extensor indicis",
-  "abductor_pollicis_brevis": "Abductor pollicis brevis",
-  "flexor_pollicis_brevis": "Flexor pollicis brevis",
-  "opponens_pollicis": "Opponens pollicis",
-  "adductor_pollicis": "Adductor pollicis",
-  "abductor_digiti_minimi": "Abductor digiti minimi",
-  "flexor_digiti_minimi_brevis": "Flexor digiti minimi brevis",
-  "opponens_digiti_minimi": "Opponens digiti minimi",
+  "intercarpal_articulations": "Intercarpal articulations",
+  "interosseous_metacarpal_ligaments": "Interosseous metacarpal ligaments",
+  "intertendinous_connections": "Intertendinous connections of extensor digitorum",
+  "lateral_bands": "Lateral bands of the fingers",
+  "lunotriquetral_interosseous_ligament": "Lunotriquetral interosseous ligament",
+  "oblique_ligament_of_first_finger": "Oblique ligament of first finger",
+  "palmar_capitohamate_ligament": "Palmar capitohamate ligament",
+  "palmar_carpometacarpal_ligaments": "Palmar carpometacarpal ligaments",
+  "palmar_ligaments_of_distal_phalangeal_joints": "Palmar ligaments of distal phalangeal joints",
+  "palmar_ligaments_of_interphalangeal_joints": "Palmar ligaments of interphalangeal joints",
+  "palmar_ligaments_of_metacarpophalangeal_joints": "Palmar ligaments of metacarpophalangeal joints",
+  "palmar_lunotriquetral_ligament": "Palmar lunotriquetral ligament",
+  "palmar_metacarpal_ligaments": "Palmar metacarpal ligaments",
+  "palmar_radio_ulnar_ligament": "Palmar radio-ulnar ligament",
+  "palmar_radiocarpal_ligament": "Palmar radiocarpal ligament",
+  "palmar_scaphotriquetral_ligament": "Palmar scaphotriquetral ligament",
+  "palmar_trapezoideocapitate_ligament": "Palmar trapezoideocapitate ligament",
+  "palmar_ulnocarpal_ligament": "Palmar ulnocarpal ligament",
+  "pisohamate_ligament": "Pisohamate ligament",
+  "pisometacarpal_ligament": "Pisometacarpal ligament",
+  "pisotriquetral_ligament": "Pisotriquetral ligament",
+  "radial_collateral_ligament_of_wrist": "Radial collateral ligament of wrist",
+  "radiate_carpal_ligament": "Radiate carpal ligament",
+  "radioscaphocapitate_ligament": "Radioscaphocapitate ligament",
+  "scaphocapitate_ligament": "Scaphocapitate ligament",
+  "scapholunate_interosseous_ligament": "Scapholunate interosseous ligament",
+  "scaphotrapeziotrapezoidal_ligament": "Scaphotrapeziotrapezoidal ligament",
+  "thickened_antebrachial_fascia": "Thickened part of the antebrachial fascia",
+  "trapeziotrapezoidal_interosseous_ligament": "Trapeziotrapezoidal interosseous ligament",
+  "trapezoideocapitate_interosseous_ligament": "Trapezoideocapitate interosseous ligament",
+  "triangular_fibrocartilage_disc": "Triangular fibrocartilage disc",
+  "triquetrocapitate_ligament": "Triquetrocapitate ligament",
+  "triquetrohamate_ligament": "Triquetrohamate ligament",
+  "ulnar_collateral_ligament_of_wrist": "Ulnar collateral ligament of wrist",
+  "ulnopisiform_ligament": "Ulnopisiform ligament",
+  "ulnotriquetral_ligament": "Ulnotriquetral ligament",
+  "cartilage_phalanges": "Articular cartilage of the phalanges",
+  "cartilage_metacarpals": "Articular cartilage of the metacarpals",
+  "dorsal_interossei": "Dorsal interossei",
   "lumbricals": "Lumbricals",
   "palmar_interossei": "Palmar interossei",
-  "dorsal_interossei": "Dorsal interossei",
-  "skin": "Skin",
-  "median_nerve": "Median nerve",
+  "abductor_digiti_minimi": "Abductor digiti minimi",
+  "abductor_pollicis_brevis": "Abductor pollicis brevis",
+  "adductor_pollicis": "Adductor pollicis",
+  "aponeurosis_palmaris": "Palmar aponeurosis",
+  "flexor_pollicis_brevis": "Flexor pollicis brevis",
+  "extensor_hoods": "Extensor hoods of the fingers",
+  "flexor_digiti_minimi_brevis": "Flexor digiti minimi brevis",
+  "opponens_digiti_minimi": "Opponens digiti minimi",
+  "opponens_pollicis": "Opponens pollicis",
+  "palmaris_brevis": "Palmaris brevis",
+  "superficial_transverse_metacarpal_ligament": "Superficial transverse metacarpal ligament",
+  "median_common_palmar_digital_nerve_thumb": "Common palmar digital nerve of the thumb (median)",
+  "median_common_palmar_digital_nerves": "Common palmar digital nerves (median)",
+  "median_palmar_branch": "Palmar branch of the median nerve",
+  "median_proper_palmar_digital_nerves": "Proper palmar digital nerves (median)",
+  "median_proper_palmar_digital_nerves_thumb": "Proper palmar digital nerves of the thumb (median)",
   "median_recurrent_branch": "Recurrent (motor) branch of the median nerve",
-  "ulnar_nerve": "Ulnar nerve",
+  "radial_dorsal_digital_nerves": "Dorsal digital nerves (radial)",
+  "ulnar_communicating_branch": "Communicating branch of the ulnar nerve",
   "ulnar_deep_branch": "Deep branch of the ulnar nerve",
-  "radial_nerve": "Radial nerve",
-  "radial_superficial_branch": "Superficial branch of the radial nerve",
-  "posterior_interosseous_nerve": "Posterior interosseous nerve (deep radial)",
-  "radial_artery": "Radial artery",
-  "ulnar_artery": "Ulnar artery",
-  "superficial_palmar_arch": "Superficial palmar arch"
+  "ulnar_dorsal_cutaneous_branch": "Dorsal cutaneous branch of the ulnar nerve",
+  "ulnar_palmar_cutaneous_branch": "Palmar cutaneous branch of the ulnar nerve",
+  "ulnar_common_palmar_digital_nerve": "Common palmar digital nerve (superficial branch of the ulnar nerve)",
+  "ulnar_proper_palmar_digital_nerves": "Proper palmar digital nerves (superficial branch of the ulnar nerve)",
+  "circumflex_scapular_artery": "Circumflex scapular artery",
+  "dorsal_scapular_artery": "Dorsal scapular artery",
+  "subscapular_artery": "Subscapular artery",
+  "transverse_cervical_artery_superficial_branch": "Superficial branch of the transverse cervical artery",
+  "suprascapular_artery": "Suprascapular artery",
+  "thoracoacromial_acromial_branch": "Acromial branch of the thoracoacromial artery",
+  "deltoid": "Deltoid",
+  "thoracoacromial_pectoral_branch": "Pectoral branch of the thoracoacromial artery",
+  "transverse_cervical_artery": "Transverse cervical artery",
+  "clavicle": "Clavicle",
+  "scapula": "Scapula",
+  "acromioclavicular_capsule": "Acromioclavicular capsule",
+  "acromioclavicular_disc": "Acromioclavicular disc",
+  "acromioclavicular_ligament": "Acromioclavicular ligament",
+  "anterior_sternoclavicular_ligament": "Anterior sternoclavicular ligament",
+  "conoid_ligament": "Conoid ligament",
+  "coraco_acromial_ligament": "Coraco-acromial ligament",
+  "coracoclavicular_ligament": "Coracoclavicular ligament",
+  "costoclavicular_ligament": "Costoclavicular ligament",
+  "inferior_transverse_scapular_ligament": "Inferior transverse scapular ligament",
+  "interclavicular_ligament": "Interclavicular ligament",
+  "posterior_sternoclavicular_ligament": "Posterior sternoclavicular ligament",
+  "sternoclavicular_capsule": "Sternoclavicular capsule",
+  "superior_transverse_scapular_ligament": "Superior transverse scapular ligament",
+  "trapezoid_ligament": "Trapezoid ligament",
+  "sternoclavicular_disc": "Sternoclavicular articular disc",
+  "pectoralis_major": "Pectoralis major",
+  "trapezius": "Trapezius",
+  "infraspinatus": "Infraspinatus",
+  "latissimus_dorsi": "Latissimus dorsi",
+  "levator_scapulae": "Levator scapulae",
+  "pectoralis_minor": "Pectoralis minor",
+  "rhomboid_major": "Rhomboid major",
+  "rhomboid_minor": "Rhomboid minor",
+  "serratus_anterior": "Serratus anterior",
+  "subclavius": "Subclavius",
+  "subscapularis": "Subscapularis",
+  "supraspinatus": "Supraspinatus",
+  "teres_major": "Teres major",
+  "teres_minor": "Teres minor",
+  "dorsal_scapular_nerve": "Dorsal scapular nerve",
+  "lower_subscapular_nerve": "Lower subscapular nerve",
+  "suprascapular_nerve": "Suprascapular nerve",
+  "upper_subscapular_nerve": "Upper subscapular nerve",
+  "sternum": "Sternum",
+  "ribs": "Ribs",
+  "costal_cartilages": "Costal cartilages",
+  "brachial_plexus_anterior_divisions": "Anterior divisions of the brachial plexus",
+  "inferior_trunk": "Inferior trunk of the brachial plexus",
+  "brachial_plexus_lateral_cord": "Lateral cord of the brachial plexus",
+  "lateral_pectoral_nerve": "Lateral pectoral nerve",
+  "long_thoracic_nerve": "Long thoracic nerve",
+  "brachial_plexus_medial_cord": "Medial cord of the brachial plexus",
+  "medial_pectoral_nerve": "Medial pectoral nerve",
+  "middle_trunk": "Middle trunk of the brachial plexus",
+  "brachial_plexus_posterior_cord": "Posterior cord of the brachial plexus",
+  "brachial_plexus_posterior_divisions": "Posterior divisions of the brachial plexus",
+  "subclavian_nerve": "Subclavian nerve",
+  "superior_trunk": "Superior trunk of the brachial plexus"
  },
- "axis": {
-  "elbow": [
-   0.0397,
-   0.1752,
-   -0.0518
+ "regions": {
+  "hand": [
+   "scaphoid",
+   "lunate",
+   "triquetrum",
+   "pisiform",
+   "trapezium",
+   "trapezoid",
+   "capitate",
+   "hamate",
+   "metacarpal_1",
+   "metacarpal_2",
+   "metacarpal_3",
+   "metacarpal_4",
+   "metacarpal_5",
+   "phalanges_thumb",
+   "phalanges_index",
+   "phalanges_middle",
+   "phalanges_ring",
+   "phalanges_little",
+   "sesamoid_bones"
   ],
-  "wrist": [
-   -0.0055,
-   -0.0838,
-   -0.0007
+  "forearm": [
+   "radius",
+   "ulna"
+  ],
+  "arm": [
+   "humerus"
+  ],
+  "shoulder": [
+   "scapula",
+   "clavicle"
+  ],
+  "all": [
+   "humerus",
+   "radius",
+   "ulna",
+   "scapula",
+   "clavicle",
+   "scaphoid",
+   "lunate",
+   "triquetrum",
+   "pisiform",
+   "trapezium",
+   "trapezoid",
+   "capitate",
+   "hamate",
+   "metacarpal_1",
+   "metacarpal_2",
+   "metacarpal_3",
+   "metacarpal_4",
+   "metacarpal_5",
+   "phalanges_thumb",
+   "phalanges_index",
+   "phalanges_middle",
+   "phalanges_ring",
+   "phalanges_little",
+   "sesamoid_bones"
   ]
  },
- "schematic": [
-  "median_nerve",
-  "median_recurrent_branch",
-  "posterior_interosseous_nerve",
-  "radial_artery",
-  "radial_nerve",
-  "radial_superficial_branch",
-  "superficial_palmar_arch",
-  "ulnar_artery",
-  "ulnar_deep_branch",
-  "ulnar_nerve"
- ]
+ "axis": {
+  "shoulder": [
+   -0.1706,
+   1.3981,
+   -0.0304
+  ],
+  "elbow": [
+   -0.2131,
+   1.0958,
+   -0.0389
+  ],
+  "wrist": [
+   -0.2773,
+   0.8606,
+   0.0095
+  ],
+  "fingertip": [
+   -0.2871,
+   0.7068,
+   0.0829
+  ]
+ },
+ "schematic": []
 }

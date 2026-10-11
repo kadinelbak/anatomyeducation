@@ -3,24 +3,60 @@
 import * as THREE from "three";
 import { TrackballControls } from "three/addons/controls/TrackballControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { probeWebGL } from "../webgl-probe.js";
 
 const $ = (id) => document.getElementById(id);
 
-const LAYERS = ["skin", "muscle", "tendon", "nerve", "vessel", "bone"];
+const OLD_LAYERS = ["skin", "muscle", "tendon", "nerve", "vessel", "bone"];
 const LAYER_COLORS = {
   skin: 0xe2b08f,
   muscle: 0xb0473f,
   tendon: 0xe9e3d3,
+  ligament: 0xc9b98a,
   nerve: 0xffe066,
   vessel: 0xe0403f,
   bone: 0xeadfc8,
 };
-const DEFAULT_LAYERS = { skin: true, muscle: true, tendon: true, nerve: false, vessel: false, bone: true };
+const DEFAULT_LAYERS = { skin: true, muscle: true, tendon: true, ligament: false, nerve: false, vessel: false, bone: true };
 const HIGHLIGHT_GOOD = new THREE.Color(0x2ee68a);
 const HIGHLIGHT_BAD = new THREE.Color(0xff3b3b);
 
 export async function createMeshRenderer({ container, modelUrl, structuresUrl, onPick }) {
-  const renderer = new THREE.WebGLRenderer({ antialias: true, stencil: true });
+  let LAYERS = OLD_LAYERS;
+  const ATTEMPTS = [
+    { antialias: true, stencil: true, powerPreference: "high-performance" },
+    { antialias: false, stencil: true },
+    { antialias: false, stencil: false, failIfMajorPerformanceCaveat: false },
+  ];
+  // Ask the browser for the context ourselves first: when it refuses, this
+  // throws a WebGLUnavailableError carrying the browser's own reason, which the
+  // page shows instead of three's generic "Error creating WebGL context".
+  const probe = probeWebGL({ antialias: true, stencil: true });
+  let renderer = null;
+  let hasStencil = false;
+  if (probe.attributesHonoured) {
+    renderer = new THREE.WebGLRenderer({ canvas: probe.canvas, context: probe.context, antialias: true, stencil: true });
+    hasStencil = true;
+  } else {
+    // The attributes were refused (weak GPU): try progressively simpler setups.
+    probe.context.getExtension("WEBGL_lose_context")?.loseContext();
+    for (const opts of ATTEMPTS) {
+      try {
+        renderer = new THREE.WebGLRenderer(opts);
+        hasStencil = !!opts.stencil;
+        break;
+      } catch (err) {
+        console.warn("WebGL renderer attempt failed", opts, err);
+      }
+    }
+  }
+  if (!renderer) throw new Error("WebGL is unavailable in this browser tab. Reload the tab, or check that hardware acceleration is on.");
+  if (!hasStencil) console.warn("WebGL context without stencil: cut faces are disabled.");
+  const releaseGL = () => {
+    try { renderer.forceContextLoss(); renderer.dispose(); } catch { /* already gone */ }
+  };
+  window.addEventListener("pagehide", releaseGL);
+  window.addEventListener("beforeunload", releaseGL);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.localClippingEnabled = true;
@@ -59,8 +95,8 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
   const marrowMeshes = [];
   const stencilByLayer = new Map(); // layer -> [stencil meshes]
   const caps = []; // { layer, mesh, offset }
-  const CAP_COLORS = { skin: 0xe8c99a, muscle: 0xb5433b, tendon: 0xe3dccb, nerve: 0xe6c94a, vessel: 0xb01f24, bone: 0xd8ccb0, marrow: 0xb4553f };
-  const CAP_ORDER = ["skin", "muscle", "tendon", "nerve", "vessel", "bone", "marrow"];
+  const CAP_COLORS = { skin: 0xe8c99a, muscle: 0xb5433b, tendon: 0xe3dccb, ligament: 0xbfae84, nerve: 0xe6c94a, vessel: 0xb01f24, bone: 0xd8ccb0, marrow: 0xb4553f };
+  const CAP_ORDER = ["skin", "muscle", "tendon", "ligament", "nerve", "vessel", "bone", "marrow"];
 
   // Back faces of cut meshes render as a flat darker cap so the slice reads as solid.
   function capShader(material) {
@@ -89,7 +125,7 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
     }
     const m = new THREE.MeshStandardMaterial({
       color,
-      roughness: layer === "bone" ? 0.75 : layer === "tendon" ? 0.4 : 0.55,
+      roughness: layer === "bone" ? 0.75 : layer === "tendon" ? 0.4 : layer === "ligament" ? 0.5 : 0.55,
       metalness: 0,
       side: THREE.DoubleSide,
       clippingPlanes: [clipPlane],
@@ -189,6 +225,8 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
       fetchText(structuresUrl).then((t) => JSON.parse(t)),
     ]);
     meta = structures;
+    if (Array.isArray(meta.layers) && meta.layers.length) LAYERS = meta.layers.filter((l) => l !== "marrow");
+    meta.schematic ||= [];
     const nodeInfo = new Map(meta.nodes.map((n) => [n.node, n]));
     gltf.scene.traverse((obj) => {
       if (!obj.isMesh) return;
@@ -197,7 +235,7 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
       obj.userData = { ...info };
       if (!obj.geometry.attributes.normal) obj.geometry.computeVertexNormals();
       obj.geometry.deleteAttribute("color");
-      addStencilPair(obj, info.layer);
+      if (hasStencil) addStencilPair(obj, info.layer);
       if (info.layer === "marrow") {
         obj.material = new THREE.MeshBasicMaterial({ visible: false }); // only its cut face is ever seen
         marrowMeshes.push(obj);
@@ -212,12 +250,15 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
       if (!meshesByLayer.has(info.layer)) meshesByLayer.set(info.layer, []);
       meshesByLayer.get(info.layer).push(obj);
     });
-    for (const layer of CAP_ORDER) addCap(layer);
+    if (hasStencil) for (const layer of CAP_ORDER) addCap(layer);
     model.add(gltf.scene);
 
-    // Cross-section axis: elbow -> wrist, extended to cover the whole model.
-    const elbow = new THREE.Vector3(...meta.axis.elbow);
-    const wrist = new THREE.Vector3(...meta.axis.wrist);
+    // Cross-section axis: shoulder -> fingertip when the model has them, else
+    // elbow -> wrist; extended to cover the whole model.
+    const ax = meta.axis || {};
+    const [a0, a1] = ax.shoulder && ax.fingertip ? [ax.shoulder, ax.fingertip] : [ax.elbow, ax.wrist];
+    const elbow = new THREE.Vector3(...a0);
+    const wrist = new THREE.Vector3(...a1);
     const dir = wrist.clone().sub(elbow).normalize();
     let min = Infinity, max = -Infinity;
     const v = new THREE.Vector3();
@@ -237,7 +278,18 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
     axis = { dir, min, max };
     applySlice();
     applyLayers();
-    setView("palmar", false);
+    // Hide checkboxes for layers this model does not have (e.g. skin).
+    document.querySelectorAll("input[data-layer]").forEach((box) => {
+      const has = (meshesByLayer.get(box.dataset.layer) || []).length > 0;
+      const row = box.closest("label") || box;
+      row.hidden = !has;
+      if (!has) layerOn[box.dataset.layer] = false;
+    });
+    const v2 = (meta.version || 1) >= 2;
+    $("attr-bp3d").hidden = v2;
+    $("attr-o3d").hidden = !v2;
+    $("zoom-row").hidden = !meta.regions;
+    setView("palmar", "all", false);
   }
 
   // ---------- Layers, slice, views ----------
@@ -284,9 +336,22 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
     lateral: new THREE.Vector3(-1, 0, 0.25),
   };
   const viewTween = { active: false };
-  function setView(name, animate = true) {
+  let currentView = "palmar";
+  let currentFocus = "all";
+  function focusBox(focus) {
+    const keys = meta?.regions?.[focus];
+    const set = Array.isArray(keys) ? new Set(keys) : null;
     const box = new THREE.Box3();
-    for (const layer of ["bone"]) for (const m of meshesByLayer.get(layer) || []) box.expandByObject(m);
+    for (const m of meshesByLayer.get("bone") || []) if (!set || set.has(m.userData.structure)) box.expandByObject(m);
+    if (box.isEmpty()) for (const m of meshesByLayer.get("bone") || []) box.expandByObject(m);
+    return box;
+  }
+  function setView(name, focus = "all", animate = true) {
+    if (!VIEWS[name]) name = "palmar";
+    currentView = name;
+    currentFocus = focus;
+    document.querySelectorAll("[data-focus]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.focus === focus)));
+    const box = focusBox(focus);
     const center = box.getCenter(new THREE.Vector3());
     const size = box.getSize(new THREE.Vector3()).length();
     const aspect = window.innerWidth / window.innerHeight;
@@ -310,7 +375,8 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
       fromTarget: controls.target.clone(), toTarget: target,
     });
   }
-  document.querySelectorAll("[data-view]").forEach((b) => b.addEventListener("click", () => setView(b.dataset.view)));
+  document.querySelectorAll("[data-view]").forEach((b) => b.addEventListener("click", () => setView(b.dataset.view, currentFocus)));
+  document.querySelectorAll("[data-focus]").forEach((b) => b.addEventListener("click", () => setView(currentView, b.dataset.focus)));
 
   // Shift + left-drag pans (right-drag and two-finger drag pan as well).
   function setShiftPan(on) {
@@ -368,7 +434,7 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
     return meta?.structures[s] || s;
   }
   function labelName(s) {
-    return structureName(s) + (meta?.schematic.includes(s) ? " (schematic)" : "");
+    return structureName(s) + (meta?.schematic?.includes(s) ? " (schematic)" : "");
   }
   let pickEnabled = false;
 
@@ -450,11 +516,11 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
   tick();
 
   return {
-    show({ view, layers }) {
+    show({ view, layers, focus = "all" }) {
       slider.value = 0;
       applySlice();
       setLayers(Object.fromEntries(layers.map((l) => [l, true])));
-      setView(view);
+      setView(view, focus);
       label.hidden = true;
     },
     highlight(id, kind) { highlight(id, kind === "good" ? HIGHLIGHT_GOOD : HIGHLIGHT_BAD); },

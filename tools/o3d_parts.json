@@ -1,0 +1,1927 @@
+{
+ "Humerus.r": {
+  "structure": "humerus",
+  "layer": "bone",
+  "name": "Humerus"
+ },
+ "Bicipital aponeurosis.r": {
+  "structure": "bicipital_aponeurosis",
+  "layer": "tendon",
+  "name": "Bicipital aponeurosis"
+ },
+ "Brachialis muscle.r": {
+  "structure": "brachialis",
+  "layer": "muscle",
+  "name": "Brachialis"
+ },
+ "Common tendon of biceps brachii.r": {
+  "structure": "biceps_brachii",
+  "layer": "tendon",
+  "name": "Biceps brachii"
+ },
+ "Common tendon of triceps brachii.r": {
+  "structure": "triceps_brachii",
+  "layer": "tendon",
+  "name": "Triceps brachii"
+ },
+ "Coracobrachialis muscle.r": {
+  "structure": "coracobrachialis",
+  "layer": "muscle",
+  "name": "Coracobrachialis"
+ },
+ "Lateral head of triceps brachii.r": {
+  "structure": "triceps_brachii",
+  "layer": "muscle",
+  "name": "Triceps brachii"
+ },
+ "Long head of biceps brachii.r": {
+  "structure": "biceps_brachii",
+  "layer": "muscle",
+  "name": "Biceps brachii"
+ },
+ "Long head of triceps brachii.r": {
+  "structure": "triceps_brachii",
+  "layer": "muscle",
+  "name": "Triceps brachii"
+ },
+ "Medial head of triceps brachii.r": {
+  "structure": "triceps_brachii",
+  "layer": "muscle",
+  "name": "Triceps brachii"
+ },
+ "Short head of biceps brachii.r": {
+  "structure": "biceps_brachii",
+  "layer": "muscle",
+  "name": "Biceps brachii"
+ },
+ "Axillary nerve - superior lateral br cutaneous nerve.r": {
+  "structure": "axillary_nerve_superior_lateral_cutaneous",
+  "layer": "nerve",
+  "name": "Superior lateral brachial cutaneous nerve (axillary)"
+ },
+ "Lateral root of median nerve.r": {
+  "structure": "median_nerve_lateral_root",
+  "layer": "nerve",
+  "name": "Lateral root of the median nerve"
+ },
+ "Medial brachial cutaneous nerve.r": {
+  "structure": "medial_brachial_cutaneous_nerve",
+  "layer": "nerve",
+  "name": "Medial brachial cutaneous nerve"
+ },
+ "Medial root of median nerve.r": {
+  "structure": "median_nerve_medial_root",
+  "layer": "nerve",
+  "name": "Medial root of the median nerve"
+ },
+ "Median nerve.r": {
+  "structure": "median_nerve",
+  "layer": "nerve",
+  "name": "Median nerve"
+ },
+ "Musculocutaneus nerve.r": {
+  "structure": "musculocutaneous_nerve",
+  "layer": "nerve",
+  "name": "Musculocutaneous nerve"
+ },
+ "Radial nerve (deep branch).r": {
+  "structure": "radial_deep_branch",
+  "layer": "nerve",
+  "name": "Deep branch of the radial nerve"
+ },
+ "Radial nerve (inferior lateral brachial cutaneous n).r": {
+  "structure": "radial_inferior_lateral_brachial_cutaneous_nerve",
+  "layer": "nerve",
+  "name": "Inferior lateral brachial cutaneous nerve"
+ },
+ "Radial nerve (posterior antebrachial cutaneous n).r": {
+  "structure": "radial_posterior_antebrachial_cutaneous_nerve",
+  "layer": "nerve",
+  "name": "Posterior antebrachial cutaneous nerve"
+ },
+ "Radial nerve (posterior brachial cutaneous n).r": {
+  "structure": "radial_posterior_brachial_cutaneous_nerve",
+  "layer": "nerve",
+  "name": "Posterior brachial cutaneous nerve"
+ },
+ "Radial nerve (posterior interosseus n).r": {
+  "structure": "posterior_interosseous_nerve",
+  "layer": "nerve",
+  "name": "Posterior interosseous nerve (deep radial)"
+ },
+ "Radial nerve (superficial br).r": {
+  "structure": "radial_superficial_branch",
+  "layer": "nerve",
+  "name": "Superficial branch of the radial nerve"
+ },
+ "Radial nerve.r": {
+  "structure": "radial_nerve",
+  "layer": "nerve",
+  "name": "Radial nerve"
+ },
+ "Ulnar nerve.r": {
+  "structure": "ulnar_nerve",
+  "layer": "nerve",
+  "name": "Ulnar nerve"
+ },
+ "Anterior circumflex humeral artery.r": {
+  "structure": "anterior_circumflex_humeral_artery",
+  "layer": "vessel",
+  "name": "Anterior circumflex humeral artery"
+ },
+ "Axillary artery.r": {
+  "structure": "axillary_artery",
+  "layer": "vessel",
+  "name": "Axillary artery"
+ },
+ "Brachial artery.r": {
+  "structure": "brachial_artery",
+  "layer": "vessel",
+  "name": "Brachial artery"
+ },
+ "Deep artery of arm.r": {
+  "structure": "deep_artery_of_arm",
+  "layer": "vessel",
+  "name": "Deep artery of arm"
+ },
+ "Inferior ulnar collateral artery.r": {
+  "structure": "inferior_ulnar_collateral_artery",
+  "layer": "vessel",
+  "name": "Inferior ulnar collateral artery"
+ },
+ "Medial collateral artery.r": {
+  "structure": "medial_collateral_artery",
+  "layer": "vessel",
+  "name": "Medial collateral artery"
+ },
+ "Middle collateral artery.r": {
+  "structure": "middle_collateral_artery",
+  "layer": "vessel",
+  "name": "Middle collateral artery"
+ },
+ "Posterior circumflex humeral artery.r": {
+  "structure": "posterior_circumflex_humeral_artery",
+  "layer": "vessel",
+  "name": "Posterior circumflex humeral artery"
+ },
+ "Posterior ulnar recurrent artery.r": {
+  "structure": "posterior_ulnar_recurrent_artery",
+  "layer": "vessel",
+  "name": "Posterior ulnar recurrent artery"
+ },
+ "Radial collateral artery.r": {
+  "structure": "radial_collateral_artery",
+  "layer": "vessel",
+  "name": "Radial collateral artery"
+ },
+ "Superior ulnar collateral artery.r": {
+  "structure": "superior_ulnar_collateral_artery",
+  "layer": "vessel",
+  "name": "Superior ulnar collateral artery"
+ },
+ "Articular capsule of glenohumeral joint.r": {
+  "structure": "articular_capsule_of_glenohumeral_joint",
+  "layer": "ligament",
+  "name": "Articular capsule of glenohumeral joint"
+ },
+ "Coracohumeral ligament.r": {
+  "structure": "coracohumeral_ligament",
+  "layer": "ligament",
+  "name": "Coracohumeral ligament"
+ },
+ "Glenoid labrum.r": {
+  "structure": "glenoid_labrum",
+  "layer": "ligament",
+  "name": "Glenoid labrum"
+ },
+ "Inferior glenohumeral ligament.r": {
+  "structure": "inferior_glenohumeral_ligament",
+  "layer": "ligament",
+  "name": "Inferior glenohumeral ligament"
+ },
+ "Lateral intermuscular septum of arm.r": {
+  "structure": "lateral_intermuscular_septum_of_arm",
+  "layer": "ligament",
+  "name": "Lateral intermuscular septum of arm"
+ },
+ "Medial intermuscular septum of arm.r": {
+  "structure": "medial_intermuscular_septum_of_arm",
+  "layer": "ligament",
+  "name": "Medial intermuscular septum of arm"
+ },
+ "Middle glenohumeral ligament.r": {
+  "structure": "middle_glenohumeral_ligament",
+  "layer": "ligament",
+  "name": "Middle glenohumeral ligament"
+ },
+ "Superior glenohumeral ligament.r": {
+  "structure": "superior_glenohumeral_ligament",
+  "layer": "ligament",
+  "name": "Superior glenohumeral ligament"
+ },
+ "Transverse humeral ligament.r": {
+  "structure": "transverse_humeral_ligament",
+  "layer": "ligament",
+  "name": "Transverse humeral ligament"
+ },
+ "Art cart of humerus distal end.r": {
+  "structure": "humerus",
+  "layer": "bone",
+  "name": "Humerus"
+ },
+ "Art cart of humerus head.r": {
+  "structure": "humerus",
+  "layer": "bone",
+  "name": "Humerus"
+ },
+ "Anterior interosseous artery.r": {
+  "structure": "anterior_interosseous_artery",
+  "layer": "vessel",
+  "name": "Anterior interosseous artery"
+ },
+ "Anterior ulnar recurrent artery.r": {
+  "structure": "anterior_ulnar_recurrent_artery",
+  "layer": "vessel",
+  "name": "Anterior ulnar recurrent artery"
+ },
+ "Common interosseous artery.r": {
+  "structure": "common_interosseous_artery",
+  "layer": "vessel",
+  "name": "Common interosseous artery"
+ },
+ "Interosseous recurrent artery.r": {
+  "structure": "interosseous_recurrent_artery",
+  "layer": "vessel",
+  "name": "Interosseous recurrent artery"
+ },
+ "Posterior interosseous artery.r": {
+  "structure": "posterior_interosseous_artery",
+  "layer": "vessel",
+  "name": "Posterior interosseous artery"
+ },
+ "Radial artery.r": {
+  "structure": "radial_artery",
+  "layer": "vessel",
+  "name": "Radial artery"
+ },
+ "Radial recrurrent artery.r": {
+  "structure": "radial_recurrent_artery",
+  "layer": "vessel",
+  "name": "Radial recurrent artery"
+ },
+ "Ulnar artery (dorsal carpal br).r": {
+  "structure": "ulnar_dorsal_carpal_branch",
+  "layer": "vessel",
+  "name": "Dorsal carpal branch of the ulnar artery"
+ },
+ "Ulnar artery.r": {
+  "structure": "ulnar_artery",
+  "layer": "vessel",
+  "name": "Ulnar artery"
+ },
+ "Radius.r": {
+  "structure": "radius",
+  "layer": "bone",
+  "name": "Radius"
+ },
+ "Ulna.r": {
+  "structure": "ulna",
+  "layer": "bone",
+  "name": "Ulna"
+ },
+ "Articular capsule of elbow joint.r": {
+  "structure": "articular_capsule_of_elbow_joint",
+  "layer": "ligament",
+  "name": "Articular capsule of elbow joint"
+ },
+ "Dorsal radio-ulnar ligament.r": {
+  "structure": "dorsal_radio_ulnar_ligament",
+  "layer": "ligament",
+  "name": "Dorsal radio-ulnar ligament"
+ },
+ "Interosseous membrane of forearm.r": {
+  "structure": "interosseous_membrane",
+  "layer": "ligament",
+  "name": "Interosseous membrane"
+ },
+ "Oblique cord or radio-ulnar syndesmosis.r": {
+  "structure": "oblique_cord_or_radio_ulnar_syndesmosis",
+  "layer": "ligament",
+  "name": "Oblique cord or radio-ulnar syndesmosis"
+ },
+ "Quadrate ligament.r": {
+  "structure": "quadrate_ligament",
+  "layer": "ligament",
+  "name": "Quadrate ligament"
+ },
+ "Radial annular ligament.r": {
+  "structure": "radial_annular_ligament",
+  "layer": "ligament",
+  "name": "Radial annular ligament"
+ },
+ "Radial collateral ligament of elbow.r": {
+  "structure": "radial_collateral_ligament_of_elbow",
+  "layer": "ligament",
+  "name": "Radial collateral ligament of elbow"
+ },
+ "Ulnar collateral ligament of elbow.r": {
+  "structure": "ulnar_collateral_ligament_of_elbow",
+  "layer": "ligament",
+  "name": "Ulnar collateral ligament of elbow"
+ },
+ "Art cart of radius distal end.r": {
+  "structure": "radius",
+  "layer": "bone",
+  "name": "Radius"
+ },
+ "Art cart of radius head.r": {
+  "structure": "radius",
+  "layer": "bone",
+  "name": "Radius"
+ },
+ "Art cart of ulna (proximal end).r": {
+  "structure": "ulna",
+  "layer": "bone",
+  "name": "Ulna"
+ },
+ "Art cart of ulna. (distal end).r": {
+  "structure": "ulna",
+  "layer": "bone",
+  "name": "Ulna"
+ },
+ "Abductor pollicis longus.r": {
+  "structure": "abductor_pollicis_longus",
+  "layer": "muscle",
+  "name": "Abductor pollicis longus"
+ },
+ "Anconeus muscle.r": {
+  "structure": "anconeus",
+  "layer": "muscle",
+  "name": "Anconeus"
+ },
+ "Brachioradialis muscle.r": {
+  "structure": "brachioradialis",
+  "layer": "muscle",
+  "name": "Brachioradialis"
+ },
+ "Common tendon of extensor carpi ulnaris.r": {
+  "structure": "extensor_carpi_ulnaris",
+  "layer": "tendon",
+  "name": "Extensor carpi ulnaris"
+ },
+ "Common tendon of flexor carpi ulnaris.r": {
+  "structure": "flexor_carpi_ulnaris",
+  "layer": "tendon",
+  "name": "Flexor carpi ulnaris"
+ },
+ "Extensor carpi radialis brevis.r": {
+  "structure": "extensor_carpi_radialis_brevis",
+  "layer": "muscle",
+  "name": "Extensor carpi radialis brevis"
+ },
+ "Extensor carpi radialis longus.r": {
+  "structure": "extensor_carpi_radialis_longus",
+  "layer": "muscle",
+  "name": "Extensor carpi radialis longus"
+ },
+ "Extensor digiti minimi.r": {
+  "structure": "extensor_digiti_minimi",
+  "layer": "muscle",
+  "name": "Extensor digiti minimi"
+ },
+ "Extensor digitorum.r": {
+  "structure": "extensor_digitorum",
+  "layer": "muscle",
+  "name": "Extensor digitorum"
+ },
+ "Extensor indicis.r": {
+  "structure": "extensor_indicis",
+  "layer": "muscle",
+  "name": "Extensor indicis"
+ },
+ "Extensor pollicis brevis.r": {
+  "structure": "extensor_pollicis_brevis",
+  "layer": "muscle",
+  "name": "Extensor pollicis brevis"
+ },
+ "Extensor pollicis longus.r": {
+  "structure": "extensor_pollicis_longus",
+  "layer": "muscle",
+  "name": "Extensor pollicis longus"
+ },
+ "Flexor carpi radialis.r": {
+  "structure": "flexor_carpi_radialis",
+  "layer": "muscle",
+  "name": "Flexor carpi radialis"
+ },
+ "Flexor digitorum profundus.r": {
+  "structure": "flexor_digitorum_profundus",
+  "layer": "muscle",
+  "name": "Flexor digitorum profundus"
+ },
+ "Flexor digitorum superficialis humero-ulnar head.r": {
+  "structure": "flexor_digitorum_superficialis",
+  "layer": "muscle",
+  "name": "Flexor digitorum superficialis"
+ },
+ "Flexor digitorum superficialis radial head.r": {
+  "structure": "flexor_digitorum_superficialis",
+  "layer": "muscle",
+  "name": "Flexor digitorum superficialis"
+ },
+ "Flexor pollicis longus.r": {
+  "structure": "flexor_pollicis_longus",
+  "layer": "muscle",
+  "name": "Flexor pollicis longus"
+ },
+ "Humeral head of extensor carpi ulnaris.r": {
+  "structure": "extensor_carpi_ulnaris",
+  "layer": "muscle",
+  "name": "Extensor carpi ulnaris"
+ },
+ "Humeral head of flexor carpi ulnaris.r": {
+  "structure": "flexor_carpi_ulnaris",
+  "layer": "muscle",
+  "name": "Flexor carpi ulnaris"
+ },
+ "Humeral head of pronator teres.r": {
+  "structure": "pronator_teres",
+  "layer": "muscle",
+  "name": "Pronator teres"
+ },
+ "Palmaris longus muscle.r": {
+  "structure": "palmaris_longus",
+  "layer": "muscle",
+  "name": "Palmaris longus"
+ },
+ "Pronator quadratus.r": {
+  "structure": "pronator_quadratus",
+  "layer": "muscle",
+  "name": "Pronator quadratus"
+ },
+ "Supinator.r": {
+  "structure": "supinator",
+  "layer": "muscle",
+  "name": "Supinator"
+ },
+ "Ulnar head of extensor carpi ulnaris.r": {
+  "structure": "extensor_carpi_ulnaris",
+  "layer": "muscle",
+  "name": "Extensor carpi ulnaris"
+ },
+ "Ulnar head of flexor carpi ulnaris.r": {
+  "structure": "flexor_carpi_ulnaris",
+  "layer": "muscle",
+  "name": "Flexor carpi ulnaris"
+ },
+ "Ulnar head of pronator teres.r": {
+  "structure": "pronator_teres",
+  "layer": "muscle",
+  "name": "Pronator teres"
+ },
+ "Medial antebrachial cutaneous nerve.r": {
+  "structure": "medial_antebrachial_cutaneous_nerve",
+  "layer": "nerve",
+  "name": "Medial antebrachial cutaneous nerve"
+ },
+ "Musculocutaneus nerve - lateral antebrachial cutaneous nerve.r": {
+  "structure": "lateral_antebrachial_cutaneous_nerve",
+  "layer": "nerve",
+  "name": "Lateral antebrachial cutaneous nerve"
+ },
+ "Common palmar digital arteries.r": {
+  "structure": "common_palmar_digital_arteries",
+  "layer": "vessel",
+  "name": "Common palmar digital arteries"
+ },
+ "Deep palmar arch.r": {
+  "structure": "deep_palmar_arch",
+  "layer": "vessel",
+  "name": "Deep palmar arch"
+ },
+ "Dorsal carpal arch.r": {
+  "structure": "dorsal_carpal_arch",
+  "layer": "vessel",
+  "name": "Dorsal carpal arch"
+ },
+ "Dorsal carpal network.r": {
+  "structure": "dorsal_carpal_network",
+  "layer": "vessel",
+  "name": "Dorsal carpal network"
+ },
+ "Dorsal digital arteries.r": {
+  "structure": "dorsal_digital_arteries",
+  "layer": "vessel",
+  "name": "Dorsal digital arteries"
+ },
+ "Dorsal metacarpal arteries.r": {
+  "structure": "dorsal_metacarpal_arteries",
+  "layer": "vessel",
+  "name": "Dorsal metacarpal arteries"
+ },
+ "Dorsalis indicis.r": {
+  "structure": "dorsalis_indicis",
+  "layer": "vessel",
+  "name": "Dorsalis indicis"
+ },
+ "Dorsalis pollicis.r": {
+  "structure": "dorsalis_pollicis",
+  "layer": "vessel",
+  "name": "Dorsalis pollicis"
+ },
+ "Palmar carpal branches.r": {
+  "structure": "palmar_carpal_branches",
+  "layer": "vessel",
+  "name": "Palmar carpal branches"
+ },
+ "Palmar metacarpal arteries.r": {
+  "structure": "palmar_metacarpal_arteries",
+  "layer": "vessel",
+  "name": "Palmar metacarpal arteries"
+ },
+ "Perforating arteries.r": {
+  "structure": "perforating_arteries",
+  "layer": "vessel",
+  "name": "Perforating arteries"
+ },
+ "Princeps pollicis arteries.r": {
+  "structure": "princeps_pollicis_arteries",
+  "layer": "vessel",
+  "name": "Princeps pollicis arteries"
+ },
+ "Proper palmar digital arteries.r": {
+  "structure": "proper_palmar_digital_arteries",
+  "layer": "vessel",
+  "name": "Proper palmar digital arteries"
+ },
+ "Radialis indicis.r": {
+  "structure": "radialis_indicis",
+  "layer": "vessel",
+  "name": "Radialis indicis"
+ },
+ "Superficial palmar arch.r": {
+  "structure": "superficial_palmar_arch",
+  "layer": "vessel",
+  "name": "Superficial palmar arch"
+ },
+ "1st metacarpal bone.r": {
+  "structure": "metacarpal_1",
+  "layer": "bone",
+  "name": "First metacarpal"
+ },
+ "2nd metacarpal bone.r": {
+  "structure": "metacarpal_2",
+  "layer": "bone",
+  "name": "Second metacarpal"
+ },
+ "3rd metacarpal bone.r": {
+  "structure": "metacarpal_3",
+  "layer": "bone",
+  "name": "Third metacarpal"
+ },
+ "4th metacarpal bone.r": {
+  "structure": "metacarpal_4",
+  "layer": "bone",
+  "name": "Fourth metacarpal"
+ },
+ "5th metacarpal bone.r": {
+  "structure": "metacarpal_5",
+  "layer": "bone",
+  "name": "Fifth metacarpal"
+ },
+ "Capitate.r": {
+  "structure": "capitate",
+  "layer": "bone",
+  "name": "Capitate"
+ },
+ "Distal phalanx of 1st finger.r": {
+  "structure": "phalanges_thumb",
+  "layer": "bone",
+  "name": "Phalanges of the thumb"
+ },
+ "Distal phalanx of 2d finger.r": {
+  "structure": "phalanges_index",
+  "layer": "bone",
+  "name": "Phalanges of the index finger"
+ },
+ "Distal phalanx of 3d finger.r": {
+  "structure": "phalanges_middle",
+  "layer": "bone",
+  "name": "Phalanges of the middle finger"
+ },
+ "Distal phalanx of 4th finger.r": {
+  "structure": "phalanges_ring",
+  "layer": "bone",
+  "name": "Phalanges of the ring finger"
+ },
+ "Distal phalanx of 5th finger.r": {
+  "structure": "phalanges_little",
+  "layer": "bone",
+  "name": "Phalanges of the little finger"
+ },
+ "Hamate.r": {
+  "structure": "hamate",
+  "layer": "bone",
+  "name": "Hamate"
+ },
+ "Lunate bone.r": {
+  "structure": "lunate",
+  "layer": "bone",
+  "name": "Lunate"
+ },
+ "Middle phalanx of 2d finger.r": {
+  "structure": "phalanges_index",
+  "layer": "bone",
+  "name": "Phalanges of the index finger"
+ },
+ "Middle phalanx of 3rd finger.r": {
+  "structure": "phalanges_middle",
+  "layer": "bone",
+  "name": "Phalanges of the middle finger"
+ },
+ "Middle phalanx of 4th finger.r": {
+  "structure": "phalanges_ring",
+  "layer": "bone",
+  "name": "Phalanges of the ring finger"
+ },
+ "Middle phalanx of 5th finger.r": {
+  "structure": "phalanges_little",
+  "layer": "bone",
+  "name": "Phalanges of the little finger"
+ },
+ "Pisiform.r": {
+  "structure": "pisiform",
+  "layer": "bone",
+  "name": "Pisiform"
+ },
+ "Proximal phalanx of 1st finger.r": {
+  "structure": "phalanges_thumb",
+  "layer": "bone",
+  "name": "Phalanges of the thumb"
+ },
+ "Proximal phalanx of 2d finger.r": {
+  "structure": "phalanges_index",
+  "layer": "bone",
+  "name": "Phalanges of the index finger"
+ },
+ "Proximal phalanx of 3rd finger.r": {
+  "structure": "phalanges_middle",
+  "layer": "bone",
+  "name": "Phalanges of the middle finger"
+ },
+ "Proximal phalanx of 4th finger.r": {
+  "structure": "phalanges_ring",
+  "layer": "bone",
+  "name": "Phalanges of the ring finger"
+ },
+ "Proximal phalanx of 5th finger.r": {
+  "structure": "phalanges_little",
+  "layer": "bone",
+  "name": "Phalanges of the little finger"
+ },
+ "Scaphoid.r": {
+  "structure": "scaphoid",
+  "layer": "bone",
+  "name": "Scaphoid"
+ },
+ "Sesamoid bones of hand.r": {
+  "structure": "sesamoid_bones",
+  "layer": "bone",
+  "name": "Sesamoid bones of the hand"
+ },
+ "Trapezium.r": {
+  "structure": "trapezium",
+  "layer": "bone",
+  "name": "Trapezium"
+ },
+ "Trapezoid.r": {
+  "structure": "trapezoid",
+  "layer": "bone",
+  "name": "Trapezoid"
+ },
+ "Triquetrum.r": {
+  "structure": "triquetrum",
+  "layer": "bone",
+  "name": "Triquetrum"
+ },
+ "Annular ligament(A1) of 1st finger.r": {
+  "structure": "annular_ligaments",
+  "layer": "tendon",
+  "name": "Annular ligaments of the fingers"
+ },
+ "Annular ligament(A2) of 1st finger.r": {
+  "structure": "annular_ligaments",
+  "layer": "tendon",
+  "name": "Annular ligaments of the fingers"
+ },
+ "Annular ligaments of 2nd finger A1-A5.r": {
+  "structure": "annular_ligaments",
+  "layer": "tendon",
+  "name": "Annular ligaments of the fingers"
+ },
+ "Annular ligaments of 3rd finger A1-A5.r": {
+  "structure": "annular_ligaments",
+  "layer": "tendon",
+  "name": "Annular ligaments of the fingers"
+ },
+ "Annular ligaments of 4th finger A1-A5.r": {
+  "structure": "annular_ligaments",
+  "layer": "tendon",
+  "name": "Annular ligaments of the fingers"
+ },
+ "Annular ligaments of 5th finger A1-A5.r": {
+  "structure": "annular_ligaments",
+  "layer": "tendon",
+  "name": "Annular ligaments of the fingers"
+ },
+ "Articular capsule of radiocarpal joint": {
+  "structure": "articular_capsule_of_radiocarpal_joint",
+  "layer": "ligament",
+  "name": "Articular capsule of radiocarpal joint"
+ },
+ "Articular capsules of distal interphalangeal joints": {
+  "structure": "articular_capsules_of_distal_interphalangeal_joints",
+  "layer": "ligament",
+  "name": "Articular capsules of distal interphalangeal joints"
+ },
+ "Articular capsules of metacarpophalangeal joints": {
+  "structure": "articular_capsules_of_metacarpophalangeal_joints",
+  "layer": "ligament",
+  "name": "Articular capsules of metacarpophalangeal joints"
+ },
+ "Articular capsules of proximal interphalangeal joints": {
+  "structure": "articular_capsules_of_proximal_interphalangeal_joints",
+  "layer": "ligament",
+  "name": "Articular capsules of proximal interphalangeal joints"
+ },
+ "Capitohamate interosseus ligament": {
+  "structure": "capitohamate_interosseous_ligament",
+  "layer": "ligament",
+  "name": "Capitohamate interosseous ligament"
+ },
+ "Collateral ligaments of distal phalangeal joints.r": {
+  "structure": "collateral_ligaments_of_distal_phalangeal_joints",
+  "layer": "ligament",
+  "name": "Collateral ligaments of distal phalangeal joints"
+ },
+ "Collateral ligaments of interphalangeal joints.r": {
+  "structure": "collateral_ligaments_of_interphalangeal_joints",
+  "layer": "ligament",
+  "name": "Collateral ligaments of interphalangeal joints"
+ },
+ "Collateral ligaments of metacarpal joints.r": {
+  "structure": "collateral_ligaments_of_metacarpal_joints",
+  "layer": "ligament",
+  "name": "Collateral ligaments of metacarpal joints"
+ },
+ "Collateral ligaments of metacarpophalangeal joints.r": {
+  "structure": "collateral_ligaments_of_metacarpophalangeal_joints",
+  "layer": "ligament",
+  "name": "Collateral ligaments of metacarpophalangeal joints"
+ },
+ "Cruciform ligaments of 2nd finger.r": {
+  "structure": "cruciform_ligaments",
+  "layer": "tendon",
+  "name": "Cruciform ligaments of the fingers"
+ },
+ "Cruciform ligaments of 3rd finger.r": {
+  "structure": "cruciform_ligaments",
+  "layer": "tendon",
+  "name": "Cruciform ligaments of the fingers"
+ },
+ "Cruciform ligaments of 4th finger.r": {
+  "structure": "cruciform_ligaments",
+  "layer": "tendon",
+  "name": "Cruciform ligaments of the fingers"
+ },
+ "Cruciform ligaments of 5th finger.r": {
+  "structure": "cruciform_ligaments",
+  "layer": "tendon",
+  "name": "Cruciform ligaments of the fingers"
+ },
+ "Deep transverse metacarpal ligament": {
+  "structure": "deep_transverse_metacarpal_ligament",
+  "layer": "ligament",
+  "name": "Deep transverse metacarpal ligament"
+ },
+ "Dorsal carpometacarpal ligaments": {
+  "structure": "dorsal_carpometacarpal_ligaments",
+  "layer": "ligament",
+  "name": "Dorsal carpometacarpal ligaments"
+ },
+ "Dorsal intercarpal ligament": {
+  "structure": "dorsal_intercarpal_ligament",
+  "layer": "ligament",
+  "name": "Dorsal intercarpal ligament"
+ },
+ "Dorsal metacarpal ligaments": {
+  "structure": "dorsal_metacarpal_ligaments",
+  "layer": "ligament",
+  "name": "Dorsal metacarpal ligaments"
+ },
+ "Dorsal radiocarpal ligament.r": {
+  "structure": "dorsal_radiocarpal_ligament",
+  "layer": "ligament",
+  "name": "Dorsal radiocarpal ligament"
+ },
+ "Dorsal scaphotriquetral ligament": {
+  "structure": "dorsal_scaphotriquetral_ligament",
+  "layer": "ligament",
+  "name": "Dorsal scaphotriquetral ligament"
+ },
+ "Dorsal ulnocarpal ligament": {
+  "structure": "dorsal_ulnocarpal_ligament",
+  "layer": "ligament",
+  "name": "Dorsal ulnocarpal ligament"
+ },
+ "Extensor retinaculum of wrist": {
+  "structure": "extensor_retinaculum",
+  "layer": "ligament",
+  "name": "Extensor retinaculum"
+ },
+ "Fibrous sheath of digits of hand": {
+  "structure": "fibrous_sheaths",
+  "layer": "tendon",
+  "name": "Fibrous sheaths of the digits"
+ },
+ "Fibrous sheath of digits of hand thumb": {
+  "structure": "fibrous_sheaths",
+  "layer": "tendon",
+  "name": "Fibrous sheaths of the digits"
+ },
+ "Flexor retinaculum": {
+  "structure": "flexor_retinaculum",
+  "layer": "ligament",
+  "name": "Flexor retinaculum (transverse carpal ligament)"
+ },
+ "Intercarpal articulations.r": {
+  "structure": "intercarpal_articulations",
+  "layer": "ligament",
+  "name": "Intercarpal articulations"
+ },
+ "Interosseous metacarpal ligaments": {
+  "structure": "interosseous_metacarpal_ligaments",
+  "layer": "ligament",
+  "name": "Interosseous metacarpal ligaments"
+ },
+ "Intertendinous connections of extensor digitorum": {
+  "structure": "intertendinous_connections",
+  "layer": "tendon",
+  "name": "Intertendinous connections of extensor digitorum"
+ },
+ "Lateral band of 2nd finger": {
+  "structure": "lateral_bands",
+  "layer": "tendon",
+  "name": "Lateral bands of the fingers"
+ },
+ "Lateral band of 3rd finger": {
+  "structure": "lateral_bands",
+  "layer": "tendon",
+  "name": "Lateral bands of the fingers"
+ },
+ "Lateral band of 4th finger": {
+  "structure": "lateral_bands",
+  "layer": "tendon",
+  "name": "Lateral bands of the fingers"
+ },
+ "Lateral band of 5th finger": {
+  "structure": "lateral_bands",
+  "layer": "tendon",
+  "name": "Lateral bands of the fingers"
+ },
+ "Lunotriquetral interosseous ligament": {
+  "structure": "lunotriquetral_interosseous_ligament",
+  "layer": "ligament",
+  "name": "Lunotriquetral interosseous ligament"
+ },
+ "Oblique ligament of 1st finger.r": {
+  "structure": "oblique_ligament_of_first_finger",
+  "layer": "ligament",
+  "name": "Oblique ligament of first finger"
+ },
+ "Palmar capitohamate ligament": {
+  "structure": "palmar_capitohamate_ligament",
+  "layer": "ligament",
+  "name": "Palmar capitohamate ligament"
+ },
+ "Palmar carpometacarpal ligaments": {
+  "structure": "palmar_carpometacarpal_ligaments",
+  "layer": "ligament",
+  "name": "Palmar carpometacarpal ligaments"
+ },
+ "Palmar ligaments of distal phalangeal joints.r": {
+  "structure": "palmar_ligaments_of_distal_phalangeal_joints",
+  "layer": "ligament",
+  "name": "Palmar ligaments of distal phalangeal joints"
+ },
+ "Palmar ligaments of interphalangeal joints.r": {
+  "structure": "palmar_ligaments_of_interphalangeal_joints",
+  "layer": "ligament",
+  "name": "Palmar ligaments of interphalangeal joints"
+ },
+ "Palmar ligaments of metacarpophalangeal joints.r": {
+  "structure": "palmar_ligaments_of_metacarpophalangeal_joints",
+  "layer": "ligament",
+  "name": "Palmar ligaments of metacarpophalangeal joints"
+ },
+ "Palmar lunotriquetral ligament": {
+  "structure": "palmar_lunotriquetral_ligament",
+  "layer": "ligament",
+  "name": "Palmar lunotriquetral ligament"
+ },
+ "Palmar metacarpal ligaments": {
+  "structure": "palmar_metacarpal_ligaments",
+  "layer": "ligament",
+  "name": "Palmar metacarpal ligaments"
+ },
+ "Palmar radio-ulnar ligament": {
+  "structure": "palmar_radio_ulnar_ligament",
+  "layer": "ligament",
+  "name": "Palmar radio-ulnar ligament"
+ },
+ "Palmar radiocarpal ligament.r": {
+  "structure": "palmar_radiocarpal_ligament",
+  "layer": "ligament",
+  "name": "Palmar radiocarpal ligament"
+ },
+ "Palmar scaphotriquetral ligament": {
+  "structure": "palmar_scaphotriquetral_ligament",
+  "layer": "ligament",
+  "name": "Palmar scaphotriquetral ligament"
+ },
+ "Palmar trapezoideocapitate ligament": {
+  "structure": "palmar_trapezoideocapitate_ligament",
+  "layer": "ligament",
+  "name": "Palmar trapezoideocapitate ligament"
+ },
+ "Palmar ulnocarpal ligament.r": {
+  "structure": "palmar_ulnocarpal_ligament",
+  "layer": "ligament",
+  "name": "Palmar ulnocarpal ligament"
+ },
+ "Pisohamate ligament": {
+  "structure": "pisohamate_ligament",
+  "layer": "ligament",
+  "name": "Pisohamate ligament"
+ },
+ "Pisometacarpal ligament.r": {
+  "structure": "pisometacarpal_ligament",
+  "layer": "ligament",
+  "name": "Pisometacarpal ligament"
+ },
+ "Pisotriquetral ligament": {
+  "structure": "pisotriquetral_ligament",
+  "layer": "ligament",
+  "name": "Pisotriquetral ligament"
+ },
+ "Radial collateral ligament of wrist.r": {
+  "structure": "radial_collateral_ligament_of_wrist",
+  "layer": "ligament",
+  "name": "Radial collateral ligament of wrist"
+ },
+ "Radiate carpal ligament": {
+  "structure": "radiate_carpal_ligament",
+  "layer": "ligament",
+  "name": "Radiate carpal ligament"
+ },
+ "Radioscaphocapitate ligament": {
+  "structure": "radioscaphocapitate_ligament",
+  "layer": "ligament",
+  "name": "Radioscaphocapitate ligament"
+ },
+ "Scaphocapitate ligament": {
+  "structure": "scaphocapitate_ligament",
+  "layer": "ligament",
+  "name": "Scaphocapitate ligament"
+ },
+ "Scapholunate interosseus ligament": {
+  "structure": "scapholunate_interosseous_ligament",
+  "layer": "ligament",
+  "name": "Scapholunate interosseous ligament"
+ },
+ "Scaphotrapeziotrapezoidal ligament": {
+  "structure": "scaphotrapeziotrapezoidal_ligament",
+  "layer": "ligament",
+  "name": "Scaphotrapeziotrapezoidal ligament"
+ },
+ "Thickened part of antebrachial fascia": {
+  "structure": "thickened_antebrachial_fascia",
+  "layer": "ligament",
+  "name": "Thickened part of the antebrachial fascia"
+ },
+ "Trapeziotrapezoidal interosseous ligament": {
+  "structure": "trapeziotrapezoidal_interosseous_ligament",
+  "layer": "ligament",
+  "name": "Trapeziotrapezoidal interosseous ligament"
+ },
+ "Trapezoideocapitate interosseous ligament": {
+  "structure": "trapezoideocapitate_interosseous_ligament",
+  "layer": "ligament",
+  "name": "Trapezoideocapitate interosseous ligament"
+ },
+ "Triangular fibro cartilage disc": {
+  "structure": "triangular_fibrocartilage_disc",
+  "layer": "ligament",
+  "name": "Triangular fibrocartilage disc"
+ },
+ "Triquetrocapitate ligament": {
+  "structure": "triquetrocapitate_ligament",
+  "layer": "ligament",
+  "name": "Triquetrocapitate ligament"
+ },
+ "Triquetrohamate ligament": {
+  "structure": "triquetrohamate_ligament",
+  "layer": "ligament",
+  "name": "Triquetrohamate ligament"
+ },
+ "Ulnar collateral ligament of wrist.r": {
+  "structure": "ulnar_collateral_ligament_of_wrist",
+  "layer": "ligament",
+  "name": "Ulnar collateral ligament of wrist"
+ },
+ "Ulnopisiform ligament": {
+  "structure": "ulnopisiform_ligament",
+  "layer": "ligament",
+  "name": "Ulnopisiform ligament"
+ },
+ "Ulnotriquetral ligament": {
+  "structure": "ulnotriquetral_ligament",
+  "layer": "ligament",
+  "name": "Ulnotriquetral ligament"
+ },
+ "Art cart of capitate bone": {
+  "structure": "capitate",
+  "layer": "bone",
+  "name": "Capitate"
+ },
+ "Art cart of hamate bone": {
+  "structure": "hamate",
+  "layer": "bone",
+  "name": "Hamate"
+ },
+ "Art cart of lunate bone": {
+  "structure": "lunate",
+  "layer": "bone",
+  "name": "Lunate"
+ },
+ "Art cart of pisiform bone": {
+  "structure": "pisiform",
+  "layer": "bone",
+  "name": "Pisiform"
+ },
+ "Art cart of scaphoid bone": {
+  "structure": "scaphoid",
+  "layer": "bone",
+  "name": "Scaphoid"
+ },
+ "Art cart of trapezium bone": {
+  "structure": "trapezium",
+  "layer": "bone",
+  "name": "Trapezium"
+ },
+ "Art cart of trapezoid bone": {
+  "structure": "trapezoid",
+  "layer": "bone",
+  "name": "Trapezoid"
+ },
+ "Art cart of triquetrum bone": {
+  "structure": "triquetrum",
+  "layer": "bone",
+  "name": "Triquetrum"
+ },
+ "Art carts of distal phalanges": {
+  "structure": "cartilage_phalanges",
+  "layer": "bone",
+  "name": "Articular cartilage of the phalanges"
+ },
+ "Art carts of metacarpal bones": {
+  "structure": "cartilage_metacarpals",
+  "layer": "bone",
+  "name": "Articular cartilage of the metacarpals"
+ },
+ "Art carts of middle phalanges": {
+  "structure": "cartilage_phalanges",
+  "layer": "bone",
+  "name": "Articular cartilage of the phalanges"
+ },
+ "Art carts of proximal phalanges": {
+  "structure": "cartilage_phalanges",
+  "layer": "bone",
+  "name": "Articular cartilage of the phalanges"
+ },
+ "1st dorsal interosseus of hand.r": {
+  "structure": "dorsal_interossei",
+  "layer": "muscle",
+  "name": "Dorsal interossei"
+ },
+ "1st lumbrical of hand.r": {
+  "structure": "lumbricals",
+  "layer": "muscle",
+  "name": "Lumbricals"
+ },
+ "1st palmar interosseus of hand.r": {
+  "structure": "palmar_interossei",
+  "layer": "muscle",
+  "name": "Palmar interossei"
+ },
+ "2nd dorsal interosseus of hand.r": {
+  "structure": "dorsal_interossei",
+  "layer": "muscle",
+  "name": "Dorsal interossei"
+ },
+ "2nd lumbrical of hand.r": {
+  "structure": "lumbricals",
+  "layer": "muscle",
+  "name": "Lumbricals"
+ },
+ "2nd palmar interosseus of hand.r": {
+  "structure": "palmar_interossei",
+  "layer": "muscle",
+  "name": "Palmar interossei"
+ },
+ "3rd dorsal interosseus of hand.r": {
+  "structure": "dorsal_interossei",
+  "layer": "muscle",
+  "name": "Dorsal interossei"
+ },
+ "3rd lumbrical of hand.r": {
+  "structure": "lumbricals",
+  "layer": "muscle",
+  "name": "Lumbricals"
+ },
+ "3rd palmar interosseus of hand.r": {
+  "structure": "palmar_interossei",
+  "layer": "muscle",
+  "name": "Palmar interossei"
+ },
+ "4th dorsal interosseus of hand.r": {
+  "structure": "dorsal_interossei",
+  "layer": "muscle",
+  "name": "Dorsal interossei"
+ },
+ "4th lumbrical of hand.r": {
+  "structure": "lumbricals",
+  "layer": "muscle",
+  "name": "Lumbricals"
+ },
+ "Abductor digiti minimi.r": {
+  "structure": "abductor_digiti_minimi",
+  "layer": "muscle",
+  "name": "Abductor digiti minimi"
+ },
+ "Abductor pollicis brevis.r": {
+  "structure": "abductor_pollicis_brevis",
+  "layer": "muscle",
+  "name": "Abductor pollicis brevis"
+ },
+ "Adductor pollicis.r": {
+  "structure": "adductor_pollicis",
+  "layer": "muscle",
+  "name": "Adductor pollicis"
+ },
+ "Aponeurosis palmaris.r": {
+  "structure": "aponeurosis_palmaris",
+  "layer": "tendon",
+  "name": "Palmar aponeurosis"
+ },
+ "Deep head of flexor pollicis brevis.r": {
+  "structure": "flexor_pollicis_brevis",
+  "layer": "muscle",
+  "name": "Flexor pollicis brevis"
+ },
+ "Extensor hood of 2nd finger.r": {
+  "structure": "extensor_hoods",
+  "layer": "tendon",
+  "name": "Extensor hoods of the fingers"
+ },
+ "Extensor hood of 3rd finger.r": {
+  "structure": "extensor_hoods",
+  "layer": "tendon",
+  "name": "Extensor hoods of the fingers"
+ },
+ "Extensor hood of 4th finger.r": {
+  "structure": "extensor_hoods",
+  "layer": "tendon",
+  "name": "Extensor hoods of the fingers"
+ },
+ "Extensor hood of 5th finger.r": {
+  "structure": "extensor_hoods",
+  "layer": "tendon",
+  "name": "Extensor hoods of the fingers"
+ },
+ "Flexor digiti minimi brevis of hand.r": {
+  "structure": "flexor_digiti_minimi_brevis",
+  "layer": "muscle",
+  "name": "Flexor digiti minimi brevis"
+ },
+ "Oblique head of adductor pollicis.r": {
+  "structure": "adductor_pollicis",
+  "layer": "muscle",
+  "name": "Adductor pollicis"
+ },
+ "Opponens digiti minimi muscle of hand.r": {
+  "structure": "opponens_digiti_minimi",
+  "layer": "muscle",
+  "name": "Opponens digiti minimi"
+ },
+ "Opponens pollicis muscle.r": {
+  "structure": "opponens_pollicis",
+  "layer": "muscle",
+  "name": "Opponens pollicis"
+ },
+ "Palmaris brevis muscle.r": {
+  "structure": "palmaris_brevis",
+  "layer": "muscle",
+  "name": "Palmaris brevis"
+ },
+ "Superficial head of flexor pollicis brevis.r": {
+  "structure": "flexor_pollicis_brevis",
+  "layer": "muscle",
+  "name": "Flexor pollicis brevis"
+ },
+ "Superficial transverse metacarpal lig.": {
+  "structure": "superficial_transverse_metacarpal_ligament",
+  "layer": "ligament",
+  "name": "Superficial transverse metacarpal ligament"
+ },
+ "Transverse head of adductor pollicis.r": {
+  "structure": "adductor_pollicis",
+  "layer": "muscle",
+  "name": "Adductor pollicis"
+ },
+ "Median nerve Common palmar digital nerve of the thumb": {
+  "structure": "median_common_palmar_digital_nerve_thumb",
+  "layer": "nerve",
+  "name": "Common palmar digital nerve of the thumb (median)"
+ },
+ "Median nerve Common palmar digital nerves": {
+  "structure": "median_common_palmar_digital_nerves",
+  "layer": "nerve",
+  "name": "Common palmar digital nerves (median)"
+ },
+ "Median nerve Palmar br": {
+  "structure": "median_palmar_branch",
+  "layer": "nerve",
+  "name": "Palmar branch of the median nerve"
+ },
+ "Median nerve Proper palmar digital nerves": {
+  "structure": "median_proper_palmar_digital_nerves",
+  "layer": "nerve",
+  "name": "Proper palmar digital nerves (median)"
+ },
+ "Median nerve Proper palmar digital nerves of the thumb": {
+  "structure": "median_proper_palmar_digital_nerves_thumb",
+  "layer": "nerve",
+  "name": "Proper palmar digital nerves of the thumb (median)"
+ },
+ "Median nerve Recurrent br": {
+  "structure": "median_recurrent_branch",
+  "layer": "nerve",
+  "name": "Recurrent (motor) branch of the median nerve"
+ },
+ "Radial nerve (dorsal digital nn).r": {
+  "structure": "radial_dorsal_digital_nerves",
+  "layer": "nerve",
+  "name": "Dorsal digital nerves (radial)"
+ },
+ "Ulnar nerve Communicating br": {
+  "structure": "ulnar_communicating_branch",
+  "layer": "nerve",
+  "name": "Communicating branch of the ulnar nerve"
+ },
+ "Ulnar nerve Deep br": {
+  "structure": "ulnar_deep_branch",
+  "layer": "nerve",
+  "name": "Deep branch of the ulnar nerve"
+ },
+ "Ulnar nerve Dorsal cutaneous br": {
+  "structure": "ulnar_dorsal_cutaneous_branch",
+  "layer": "nerve",
+  "name": "Dorsal cutaneous branch of the ulnar nerve"
+ },
+ "Ulnar nerve Palmar cutaneous br": {
+  "structure": "ulnar_palmar_cutaneous_branch",
+  "layer": "nerve",
+  "name": "Palmar cutaneous branch of the ulnar nerve"
+ },
+ "Ulnar nerve Superficial br Common palmar digital n": {
+  "structure": "ulnar_common_palmar_digital_nerve",
+  "layer": "nerve",
+  "name": "Common palmar digital nerve (superficial branch of the ulnar nerve)"
+ },
+ "Ulnar nerve Superficial br Proper palmar digital nn": {
+  "structure": "ulnar_proper_palmar_digital_nerves",
+  "layer": "nerve",
+  "name": "Proper palmar digital nerves (superficial branch of the ulnar nerve)"
+ },
+ "Circumflex scapular artery.r": {
+  "structure": "circumflex_scapular_artery",
+  "layer": "vessel",
+  "name": "Circumflex scapular artery"
+ },
+ "Dorsal scapular artery (Deep br of transverse cervical a.).r": {
+  "structure": "dorsal_scapular_artery",
+  "layer": "vessel",
+  "name": "Dorsal scapular artery"
+ },
+ "Subscapular artery.r": {
+  "structure": "subscapular_artery",
+  "layer": "vessel",
+  "name": "Subscapular artery"
+ },
+ "Superficial branch of Transverse cervical artery.r": {
+  "structure": "transverse_cervical_artery_superficial_branch",
+  "layer": "vessel",
+  "name": "Superficial branch of the transverse cervical artery"
+ },
+ "Suprascapular artery.r": {
+  "structure": "suprascapular_artery",
+  "layer": "vessel",
+  "name": "Suprascapular artery"
+ },
+ "Thoracoacromial artery Acromial br.r": {
+  "structure": "thoracoacromial_acromial_branch",
+  "layer": "vessel",
+  "name": "Acromial branch of the thoracoacromial artery"
+ },
+ "Thoracoacromial artery Deltoid br.r": {
+  "structure": "deltoid",
+  "layer": "vessel",
+  "name": "Deltoid"
+ },
+ "Thoracoacromial artery Pectoral br.r": {
+  "structure": "thoracoacromial_pectoral_branch",
+  "layer": "vessel",
+  "name": "Pectoral branch of the thoracoacromial artery"
+ },
+ "Transverse cervical artery.r": {
+  "structure": "transverse_cervical_artery",
+  "layer": "vessel",
+  "name": "Transverse cervical artery"
+ },
+ "Clavicle.r": {
+  "structure": "clavicle",
+  "layer": "bone",
+  "name": "Clavicle"
+ },
+ "Scapula.r.": {
+  "structure": "scapula",
+  "layer": "bone",
+  "name": "Scapula"
+ },
+ "Acromioclavicular capsule.r": {
+  "structure": "acromioclavicular_capsule",
+  "layer": "ligament",
+  "name": "Acromioclavicular capsule"
+ },
+ "Acromioclavicular disc.r": {
+  "structure": "acromioclavicular_disc",
+  "layer": "ligament",
+  "name": "Acromioclavicular disc"
+ },
+ "Acromioclavicular ligament.r": {
+  "structure": "acromioclavicular_ligament",
+  "layer": "ligament",
+  "name": "Acromioclavicular ligament"
+ },
+ "Anterior sternoclavicular ligament.r": {
+  "structure": "anterior_sternoclavicular_ligament",
+  "layer": "ligament",
+  "name": "Anterior sternoclavicular ligament"
+ },
+ "Conoid ligament (part of coracoclavicular ligament).r": {
+  "structure": "conoid_ligament",
+  "layer": "ligament",
+  "name": "Conoid ligament"
+ },
+ "Coraco-acromial ligament.r": {
+  "structure": "coraco_acromial_ligament",
+  "layer": "ligament",
+  "name": "Coraco-acromial ligament"
+ },
+ "Coracoclavicular ligament.r": {
+  "structure": "coracoclavicular_ligament",
+  "layer": "ligament",
+  "name": "Coracoclavicular ligament"
+ },
+ "Costoclavicular ligament.r": {
+  "structure": "costoclavicular_ligament",
+  "layer": "ligament",
+  "name": "Costoclavicular ligament"
+ },
+ "Inferior transverse scapular ligament.r": {
+  "structure": "inferior_transverse_scapular_ligament",
+  "layer": "ligament",
+  "name": "Inferior transverse scapular ligament"
+ },
+ "Interclavicular ligament.r": {
+  "structure": "interclavicular_ligament",
+  "layer": "ligament",
+  "name": "Interclavicular ligament"
+ },
+ "Posterior Sternoclavicular ligament.r": {
+  "structure": "posterior_sternoclavicular_ligament",
+  "layer": "ligament",
+  "name": "Posterior sternoclavicular ligament"
+ },
+ "Sternoclavicular capsule.r": {
+  "structure": "sternoclavicular_capsule",
+  "layer": "ligament",
+  "name": "Sternoclavicular capsule"
+ },
+ "Superior transverse scapular ligament.r": {
+  "structure": "superior_transverse_scapular_ligament",
+  "layer": "ligament",
+  "name": "Superior transverse scapular ligament"
+ },
+ "Trapezoid ligament (part of coracoclavicular ligament).r": {
+  "structure": "trapezoid_ligament",
+  "layer": "ligament",
+  "name": "Trapezoid ligament"
+ },
+ "Articular cartilage of acromioclavicular joint on clavicle.r": {
+  "structure": "clavicle",
+  "layer": "bone",
+  "name": "Clavicle"
+ },
+ "Articular cartilage of acromioclavicular joint on scapula.r": {
+  "structure": "scapula",
+  "layer": "bone",
+  "name": "Scapula"
+ },
+ "Articular cartilage of glenohumeral joint on scapula.r": {
+  "structure": "scapula",
+  "layer": "bone",
+  "name": "Scapula"
+ },
+ "Articular cartilage of sternoclavicular joint on clavicle.r": {
+  "structure": "clavicle",
+  "layer": "bone",
+  "name": "Clavicle"
+ },
+ "Articular disc of steroclavicular joint.r": {
+  "structure": "sternoclavicular_disc",
+  "layer": "ligament",
+  "name": "Sternoclavicular articular disc"
+ },
+ "Abdominal head of pectoralis major muscle.r": {
+  "structure": "pectoralis_major",
+  "layer": "muscle",
+  "name": "Pectoralis major"
+ },
+ "Acromial part of deltoid muscle.r": {
+  "structure": "deltoid",
+  "layer": "muscle",
+  "name": "Deltoid"
+ },
+ "Ascending part of Trapezius muscle.r": {
+  "structure": "trapezius",
+  "layer": "muscle",
+  "name": "Trapezius"
+ },
+ "Clavicular head of pectoralis major muscle.r": {
+  "structure": "pectoralis_major",
+  "layer": "muscle",
+  "name": "Pectoralis major"
+ },
+ "Clavicular part of deltoid muscle.r": {
+  "structure": "deltoid",
+  "layer": "muscle",
+  "name": "Deltoid"
+ },
+ "Deltoid muscle.r": {
+  "structure": "deltoid",
+  "layer": "muscle",
+  "name": "Deltoid"
+ },
+ "Descending part of Trapezius muscle.r": {
+  "structure": "trapezius",
+  "layer": "muscle",
+  "name": "Trapezius"
+ },
+ "Infraspinatus muscle.r": {
+  "structure": "infraspinatus",
+  "layer": "muscle",
+  "name": "Infraspinatus"
+ },
+ "Latissimus dorsi.r": {
+  "structure": "latissimus_dorsi",
+  "layer": "muscle",
+  "name": "Latissimus dorsi"
+ },
+ "Levator scapulae.r": {
+  "structure": "levator_scapulae",
+  "layer": "muscle",
+  "name": "Levator scapulae"
+ },
+ "Pectoralis major.r": {
+  "structure": "pectoralis_major",
+  "layer": "muscle",
+  "name": "Pectoralis major"
+ },
+ "Pectoralis minor muscle.r": {
+  "structure": "pectoralis_minor",
+  "layer": "muscle",
+  "name": "Pectoralis minor"
+ },
+ "Rhomboid major muscle.r": {
+  "structure": "rhomboid_major",
+  "layer": "muscle",
+  "name": "Rhomboid major"
+ },
+ "Rhomboid minor muscle.r": {
+  "structure": "rhomboid_minor",
+  "layer": "muscle",
+  "name": "Rhomboid minor"
+ },
+ "Serratus anterior muscle.r": {
+  "structure": "serratus_anterior",
+  "layer": "muscle",
+  "name": "Serratus anterior"
+ },
+ "Spinal part of deltoid muscle.r": {
+  "structure": "deltoid",
+  "layer": "muscle",
+  "name": "Deltoid"
+ },
+ "Sternocostal head of pectoralis major muscle.r": {
+  "structure": "pectoralis_major",
+  "layer": "muscle",
+  "name": "Pectoralis major"
+ },
+ "Subclavius muscle.r": {
+  "structure": "subclavius",
+  "layer": "muscle",
+  "name": "Subclavius"
+ },
+ "Subscapularis muscle.r": {
+  "structure": "subscapularis",
+  "layer": "muscle",
+  "name": "Subscapularis"
+ },
+ "Supraspinatus muscle.r": {
+  "structure": "supraspinatus",
+  "layer": "muscle",
+  "name": "Supraspinatus"
+ },
+ "Teres major muscle.r": {
+  "structure": "teres_major",
+  "layer": "muscle",
+  "name": "Teres major"
+ },
+ "Teres minor muscle.r": {
+  "structure": "teres_minor",
+  "layer": "muscle",
+  "name": "Teres minor"
+ },
+ "Transverse part of trapezius muscle.r": {
+  "structure": "trapezius",
+  "layer": "muscle",
+  "name": "Trapezius"
+ },
+ "Trapezius muscle.r": {
+  "structure": "trapezius",
+  "layer": "muscle",
+  "name": "Trapezius"
+ },
+ "Dorsal scapular nerve.r": {
+  "structure": "dorsal_scapular_nerve",
+  "layer": "nerve",
+  "name": "Dorsal scapular nerve"
+ },
+ "Lower subscapular nerve.r": {
+  "structure": "lower_subscapular_nerve",
+  "layer": "nerve",
+  "name": "Lower subscapular nerve"
+ },
+ "Suprascapular nerve.r": {
+  "structure": "suprascapular_nerve",
+  "layer": "nerve",
+  "name": "Suprascapular nerve"
+ },
+ "Upper subscapular nerve.r": {
+  "structure": "upper_subscapular_nerve",
+  "layer": "nerve",
+  "name": "Upper subscapular nerve"
+ },
+ "Body of sternum": {
+  "structure": "sternum",
+  "layer": "bone",
+  "name": "Sternum"
+ },
+ "Manubrium of sternum": {
+  "structure": "sternum",
+  "layer": "bone",
+  "name": "Sternum"
+ },
+ "Rib (10th).r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "Rib (11th).r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "Rib (12th).r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "Rib (1st).r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "Rib (2nd).r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "Rib (3rd).r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "Rib (4th).r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "Rib (5th).r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "Rib (6th).r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "Rib (7th).r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "Rib (8th).r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "Rib (9th).r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "10th rib art cart of head.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "10th rib art cart of tubercle.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "11th rib art cart of head.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "12th rib art cart of head.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "1st rib art cart of head.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "1st rib art cart of tubercle.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "2nd rib art cart of head.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "2nd rib art cart of tubercle.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "3rd rib art cart of head.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "3rd rib art cart of tubercle.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "4th rib art cart of head.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "4th rib art cart of tubercle.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "5th rib art cart of head.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "5th rib art cart of tubercle.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "6th rib art cart of head.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "6th rib art cart of tubercle.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "7th rib art cart of head.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "7th rib art cart of tubercle.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "8th rib art cart of head.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "8th rib art cart of tubercle.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "9th rib art cart of head.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "9th rib art cart of tubercle.r": {
+  "structure": "ribs",
+  "layer": "bone",
+  "name": "Ribs"
+ },
+ "art cart of sternoclavicular joint on manubrium.r": {
+  "structure": "sternum",
+  "layer": "bone",
+  "name": "Sternum"
+ },
+ "art cart of sternocostal joint on manubrium.r": {
+  "structure": "sternum",
+  "layer": "bone",
+  "name": "Sternum"
+ },
+ "art cart of sternocostal joints on sternal body.r": {
+  "structure": "sternum",
+  "layer": "bone",
+  "name": "Sternum"
+ },
+ "Costal cart of 10th.rib.r": {
+  "structure": "costal_cartilages",
+  "layer": "bone",
+  "name": "Costal cartilages"
+ },
+ "Costal cart of 11th.rib.r": {
+  "structure": "costal_cartilages",
+  "layer": "bone",
+  "name": "Costal cartilages"
+ },
+ "Costal cart of 12th.rib.r": {
+  "structure": "costal_cartilages",
+  "layer": "bone",
+  "name": "Costal cartilages"
+ },
+ "Costal cart of 1st.rib.r": {
+  "structure": "costal_cartilages",
+  "layer": "bone",
+  "name": "Costal cartilages"
+ },
+ "Costal cart of 2nd.rib.r": {
+  "structure": "costal_cartilages",
+  "layer": "bone",
+  "name": "Costal cartilages"
+ },
+ "Costal cart of 3rd.rib.r": {
+  "structure": "costal_cartilages",
+  "layer": "bone",
+  "name": "Costal cartilages"
+ },
+ "Costal cart of 4th.rib.r": {
+  "structure": "costal_cartilages",
+  "layer": "bone",
+  "name": "Costal cartilages"
+ },
+ "Costal cart of 5th.rib.r": {
+  "structure": "costal_cartilages",
+  "layer": "bone",
+  "name": "Costal cartilages"
+ },
+ "Costal cart of 6th.rib.r": {
+  "structure": "costal_cartilages",
+  "layer": "bone",
+  "name": "Costal cartilages"
+ },
+ "Costal cart of 7th.rib.r": {
+  "structure": "costal_cartilages",
+  "layer": "bone",
+  "name": "Costal cartilages"
+ },
+ "Costal cart of 8th.rib.r": {
+  "structure": "costal_cartilages",
+  "layer": "bone",
+  "name": "Costal cartilages"
+ },
+ "Costal cart of 9th.rib.r": {
+  "structure": "costal_cartilages",
+  "layer": "bone",
+  "name": "Costal cartilages"
+ },
+ "Xiphoid process": {
+  "structure": "sternum",
+  "layer": "bone",
+  "name": "Sternum"
+ },
+ "Anterior divisions of brachial plexus.r": {
+  "structure": "brachial_plexus_anterior_divisions",
+  "layer": "nerve",
+  "name": "Anterior divisions of the brachial plexus"
+ },
+ "Inferior trunk of brachial plexus.r": {
+  "structure": "inferior_trunk",
+  "layer": "nerve",
+  "name": "Inferior trunk of the brachial plexus"
+ },
+ "Lateral cord of brachial plexus.r": {
+  "structure": "brachial_plexus_lateral_cord",
+  "layer": "nerve",
+  "name": "Lateral cord of the brachial plexus"
+ },
+ "Lateral pectoral nerve.r": {
+  "structure": "lateral_pectoral_nerve",
+  "layer": "nerve",
+  "name": "Lateral pectoral nerve"
+ },
+ "Long thoracic nerve.r": {
+  "structure": "long_thoracic_nerve",
+  "layer": "nerve",
+  "name": "Long thoracic nerve"
+ },
+ "Medial cord of brachial plexus.r": {
+  "structure": "brachial_plexus_medial_cord",
+  "layer": "nerve",
+  "name": "Medial cord of the brachial plexus"
+ },
+ "Medial pectoral nerve.r": {
+  "structure": "medial_pectoral_nerve",
+  "layer": "nerve",
+  "name": "Medial pectoral nerve"
+ },
+ "Middle trunk of brachial plexus.r": {
+  "structure": "middle_trunk",
+  "layer": "nerve",
+  "name": "Middle trunk of the brachial plexus"
+ },
+ "Posterior cord of brachial plexus.r": {
+  "structure": "brachial_plexus_posterior_cord",
+  "layer": "nerve",
+  "name": "Posterior cord of the brachial plexus"
+ },
+ "Posterior divisions of brachial plexus.r": {
+  "structure": "brachial_plexus_posterior_divisions",
+  "layer": "nerve",
+  "name": "Posterior divisions of the brachial plexus"
+ },
+ "Subclavian nerve.r": {
+  "structure": "subclavian_nerve",
+  "layer": "nerve",
+  "name": "Subclavian nerve"
+ },
+ "Superior trunk of brachial plexus.r": {
+  "structure": "superior_trunk",
+  "layer": "nerve",
+  "name": "Superior trunk of the brachial plexus"
+ }
+}

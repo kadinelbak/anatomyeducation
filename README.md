@@ -1,7 +1,7 @@
 # Hand Nerves 3D Challenge
 
 The 3D anatomy practice app (milestone 2 of the Anatomy and Imaging Practice
-Suite PRD): one static page with a hand and forearm model and a bank of 50
+Suite PRD): one static page with a whole upper limb model (shoulder to fingertips) and a bank of 50
 "click the structure" questions served as sets of 10 (daily, random, by topic,
 clinical cases). No accounts, no build step.
 
@@ -35,12 +35,12 @@ src/bank.js                 loads the question bank JSON
 src/analytics.js            anonymous events (random visitor id in localStorage)
 src/config.js               endpoints and the draft-question gate
 assets/questions/upper-limb.json   the question bank (50 records, see below)
-assets/model/arm.glb        the model (5.0 MB, 141 meshes incl. marrow cores, ~300k triangles)
-assets/model/structures.json   mesh -> structure/layer map, display names, forearm axis
+assets/model/arm.glb        the model (6 MB, 415 meshes incl. marrow cores, ~400k triangles)
+assets/model/structures.json   mesh -> structure/layer map, display names, regions, limb axis
 vendor/three/               Three.js 0.169 (MIT): core, TrackballControls, GLTFLoader
-tools/build_model.py        rebuilds arm.glb from BodyParts3D files
-tools/parts.py              which BodyParts3D parts are used, and the structure names
-tools/nerves.py             schematic nerve and artery paths
+tools/build_o3d.mjs         rebuilds arm.glb from the Open3DModel GLB (see below)
+tools/o3d_parts.json        source node -> structure key, layer, display name
+tools/build_model.py, parts.py, nerves.py   the old BodyParts3D pipeline (milestone 1)
 tools/serve.py, report.py   local server and metrics (per set, per question accuracy)
 tools/smoke_test.mjs        end-to-end browser test (Playwright); ALL=1 plays every question
 tools/questions_md.py       regenerates docs/question-review.md from the bank
@@ -51,7 +51,7 @@ docs/question-review.md     all 50 questions laid out for clinician review
 
 Each record in `assets/questions/upper-limb.json` is renderer-independent:
 `target` and `accept` are structure keys (from `assets/model/structures.json`),
-`view` and `layers` set the starting camera and visible layers, `tags` give
+`view` and `layers` set the starting camera and visible layers, `focus` (hand, forearm, arm, shoulder or all; defaulted from `tags.region` if missing) says which part of the limb the camera frames, `tags` give
 topic, region and difficulty, and `review` records the clinician sign-off
 (`{"status":"approved","by":"...","date":"YYYY-MM-DD"}`). Every record is
 currently `draft`. `CONFIG.includeDraftQuestions` in `src/config.js` is `true`
@@ -70,36 +70,36 @@ questions (milestone 3) plugs in beside `renderers/mesh.js`.
 
 ## The model
 
-Source: [BodyParts3D](https://dbarchive.biosciencedbc.jp/en/bodyparts3d/) 3.0
-(DBCLS), licensed **CC BY 4.0** (per the DBCLS license page, updated 2025-02-27; it
-was CC BY-SA 2.1 JP before). The attribution footer on the page is required
-by the license; there is no share-alike obligation on the modified meshes.
+Source: [Open3DModel](https://anatomytool.org/node/63858) upper limb (Leiden,
+Utrecht, Maastricht and KU Leuven KULAK; anatomist-reviewed remesh of
+Z-Anatomy), licensed **CC BY-SA 4.0** for the geometry. Its textures are
+CC BY-NC-SA and are stripped. The attribution footer on the page is required;
+share-alike means `arm.glb` stays CC BY-SA if redistributed.
 
-What was done to it (`tools/build_model.py`): the right arm's bones, forearm
-and hand muscles, flexor retinaculum, interosseous membrane and skin were
-cropped from fingertips to just above the elbow, long tendons were split off
-the extrinsic muscles into their own layer by local thickness, every mesh
-was simplified for phones, and each bone got a shrunken copy as a marrow
-core so the cross-section shows cortex around medulla. Cut faces are drawn
-with a stencil-capping pass per layer (skin cap doubles as subcutaneous fat).
+What was done to it (`tools/build_o3d.mjs`, mapping in `tools/o3d_parts.json`):
+the arm, forearm, hand and wrist, pectoral girdle, brachial plexus and the
+ribs and sternum (as context) were kept; veins, bursae, tendon sheaths and the
+fascial sleeves were left out; textures, UVs and materials were dropped; every
+mesh was welded and simplified with meshoptimizer to about 400k triangles in
+total; each long bone and carpal got a shrunken copy as a marrow core so the
+cross-section shows cortex around medulla; positions and normals are quantized
+(KHR_mesh_quantization, which Three.js reads without a decoder). Nerves and
+arteries are real meshes now, so nothing is schematic.
 
-**BodyParts3D has no forearm or hand nerves and no radial or ulnar artery
-trunks** (checked in the 3.0 parts list and the 4.x manifest; 4.x only has a
-few digital branches). The median, ulnar and radial nerves with their main
-branches, and the radial and ulnar arteries with the superficial palmar arch,
-are therefore **schematic tubes** placed by hand against this model's muscles
-and bones (`tools/nerves.py`). They show the course, not true calibre or
-branching, and the page says so. They need the same clinician review as the
-questions.
-
-To rebuild: download `BodyParts3D_3.0_obj_95.zip` from the link above (or the
-STL mirror at github.com/Kevin-Mattheus-Moerman/BodyParts3D), then
+The source file is kept at `assets/source/open3dmodel/upper-limb.glb`
+(Draco-compressed, 6.9 MB, as downloaded 2025-07-24). To rebuild:
 
 ```
-python3 -m pip install numpy scipy trimesh fast-simplification rtree shapely mapbox_earcut networkx
-python3 tools/build_model.py <dir with the .obj or .stl files>
-python3 tools/build_model.py --cached      # after editing nerves.py only
+cd tools && npm i            # @gltf-transform/*, draco3dgltf, meshoptimizer
+cd .. && node tools/build_o3d.mjs assets/source/open3dmodel/upper-limb.glb --out assets/model/arm.glb
 ```
+
+The build fails and lists any source node missing from `tools/o3d_parts.json`;
+`--list` prints the selected node names.
+
+The previous model (milestone 1) came from BodyParts3D 3.0 (DBCLS, CC BY 4.0)
+via `tools/build_model.py`, `tools/parts.py` and `tools/nerves.py`, which are
+kept for reference; its nerves and arteries were hand-placed tubes.
 
 ## Testing
 
