@@ -39,7 +39,8 @@ export function utcDate() {
   return new Date().toISOString().slice(0, 10);
 }
 
-const isMesh = (q) => q.renderer !== "volume";
+const SCAN_RENDERERS = ["volume", "xray", "ultrasound"];
+const isMesh = (q) => !SCAN_RENDERERS.includes(q.renderer);
 // Scan sets are titled by the modality the bank records carry in tags.modality ("CT", "MRI"); CT when absent.
 const modalityOf = (qs) => qs.find((q) => q.tags?.modality)?.tags.modality || "CT";
 
@@ -75,13 +76,21 @@ export function buildSets(allQuestions, models = { "upper-limb": { title: "Upper
   // One scan set per modality and body region ("CT: Chest", "MRI: Pelvis"); a set may span several
   // studies, since the volume renderer loads each question's study on demand. `study` is the first
   // question's, so the page can fetch it while the student reads the intro.
-  const scanKey = (q) => `${modalityOf([q]).toLowerCase()}:${q.tags?.region || q.study}`;
-  const scans = allQuestions.filter((q) => q.renderer === "volume" && q.study);
+  // X-ray and ultrasound questions get their own groups and ids ("xray:chest", "us:abdomen").
+  const scanKey = (q) => {
+    const region = q.tags?.region || q.study;
+    if (q.renderer === "xray") return `xray:${region}`;
+    if (q.renderer === "ultrasound") return `us:${region}`;
+    return `${modalityOf([q]).toLowerCase()}:${region}`;
+  };
+  const GROUPS = { volume: "Scans", xray: "X-ray", ultrasound: "Ultrasound" };
+  const scans = allQuestions.filter((q) => SCAN_RENDERERS.includes(q.renderer) && q.study);
   for (const key of [...new Set(scans.map(scanKey))]) {
     const mine = scans.filter((q) => scanKey(q) === key);
-    const mod = modalityOf(mine);
+    const renderer = mine[0].renderer;
+    const mod = renderer === "xray" ? "X-ray" : renderer === "ultrasound" ? "Ultrasound" : modalityOf(mine);
     sets.push({
-      id: key, renderer: "volume", study: mine[0].study, modality: mod, group: "Scans",
+      id: key, renderer, study: mine[0].study, modality: mod, group: GROUPS[renderer],
       title: `${mod}: ${cap(mine[0].tags?.region || mine[0].study)}`,
       pick: (qs) => shuffled(qs.filter((q) => scanKey(q) === key), Math.random() + "").slice(0, SIZE),
     });
@@ -96,10 +105,10 @@ export function buildSets(allQuestions, models = { "upper-limb": { title: "Upper
 export function explicitSet(ids, byId, title = "hand anatomy") {
   let list = ids.map((id) => byId.get(id)).filter(Boolean);
   const renderer = list[0]?.renderer || "mesh";
-  const study = renderer === "volume" ? list[0].study : undefined;
+  const study = renderer !== "mesh" ? list[0]?.study : undefined;
   const model = renderer === "mesh" ? list[0]?.model : undefined;
   list = list.filter((q) => (q.renderer || "mesh") === renderer && (renderer !== "mesh" || q.model === model));
-  if (renderer === "volume" && title === "hand anatomy") title = `${modalityOf(list)} scan`;
+  if (renderer !== "mesh" && title === "hand anatomy") title = renderer === "xray" ? "X-ray set" : renderer === "ultrasound" ? "Ultrasound set" : `${modalityOf(list)} scan`;
   return list.length ? { id: "custom", title, renderer, study, model, pick: () => list } : null;
 }
 

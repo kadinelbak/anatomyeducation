@@ -8,6 +8,7 @@ import { createRendererSwitch } from "./renderers/switch.js";
 import { WebGLUnavailableError, webglHelp } from "./webgl-probe.js";
 
 const $ = (id) => document.getElementById(id);
+const SCAN_KINDS = ["volume", "xray", "ultrasound"];
 const STATS_HIDDEN = () => ($("stats").hidden = true);
 
 // ---------- Shared score ----------
@@ -34,9 +35,13 @@ const renderer = createRendererSwitch({
   onChange: (kind, id, meta) => {
     // One attribution line per source: the mesh renderer shows its model's line when active,
     // and a scan shows the line for its modality (the study's manifest says which it is).
-    if (kind === "volume") $("attr-bp3d").hidden = $("attr-o3d").hidden = true;
-    $("attr-ct").hidden = !(kind === "volume" && meta?.modality !== "MR");
+    // X-ray and ultrasound are computed from the CT studies, so they show the CT line with their own.
+    const scan = SCAN_KINDS.includes(kind);
+    if (scan) $("attr-bp3d").hidden = $("attr-o3d").hidden = true;
+    $("attr-ct").hidden = !(scan && (kind !== "volume" || meta?.modality !== "MR"));
     $("attr-mr").hidden = !(kind === "volume" && meta?.modality === "MR");
+    $("attr-xray").hidden = kind !== "xray";
+    $("attr-us").hidden = kind !== "ultrasound";
     if (meta?.modality === "MR") { // the MRI line names the study's own source: MR studies come from more than one dataset
       const a = $("attr-mr-src");
       a.textContent = `${meta.attribution || meta.source || meta.id}${meta.license ? ", " + meta.license : ""}`;
@@ -74,6 +79,7 @@ try {
     "assets/questions/upper-limb.json", "assets/questions/lower-limb.json",
     "assets/questions/ct-trunk.json", "assets/questions/ct-chest.json",
     "assets/questions/mri-abdomen.json", "assets/questions/mri-prostate.json",
+    "assets/questions/xray-chest.json", "assets/questions/xray-abdomen.json", "assets/questions/us-trunk.json",
   ]);
 } catch (err) {
   console.error(err);
@@ -186,7 +192,7 @@ renderChooser();
 // Make a set's renderer the active one (building a model or scan viewer on first use).
 // Returns false when it could not load; the page then shows why.
 async function showFor(set) {
-  const isScan = set.renderer === "volume";
+  const isScan = SCAN_KINDS.includes(set.renderer);
   const wanted = isScan ? set.study : set.model;
   const needsBuild = isScan ? renderer.study !== set.study : renderer.model !== set.model;
   const buttons = ["start", "again"].map($);
@@ -214,10 +220,12 @@ async function showFor(set) {
 // cross-section or slice tools, and hover names, without a quiz.
 const explore = [
   ...Object.entries(CONFIG.models).map(([model, m]) => ({ id: `model:${model}`, title: m.title, renderer: "mesh", model })),
-  ...[...new Map(bank.questions.filter((q) => q.renderer === "volume" && q.study).map((q) => [q.study, q])).values()].map((q) => ({
-    id: `study:${q.study}`, renderer: "volume", study: q.study,
-    title: `${q.tags?.modality || "CT"}: ${(q.tags?.region || "").replace(/^./, (c) => c.toUpperCase())} (${q.study.replace(/^ts-|^msd-/, "").replace(/-?example-sm$/, "sample")})`,
-  })),
+  ...[...new Map(bank.questions.filter((q) => SCAN_KINDS.includes(q.renderer) && q.study).map((q) => [q.renderer + ":" + q.study, q])).values()].map((q) => {
+    const region = (q.tags?.region || "").replace(/^./, (c) => c.toUpperCase());
+    const study = q.study.replace(/^ts-|^msd-/, "").replace(/-?example-sm$/, "sample");
+    const lead = q.renderer === "xray" ? "X-ray" : q.renderer === "ultrasound" ? "Ultrasound" : q.tags?.modality || "CT";
+    return { id: `${q.renderer === "volume" ? "study" : q.renderer}:${q.study}`, renderer: q.renderer, study: q.study, title: `${lead}: ${region} (${study})` };
+  }),
 ];
 $("explore-row").replaceChildren(...explore.map((e) => {
   const b = document.createElement("button");

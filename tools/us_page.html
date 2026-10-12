@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ultrasound test page</title>
+<style>html,body{margin:0;background:#111;height:100%}#box{position:absolute;left:0;top:0;width:900px;height:700px}</style></head>
+<body>
+<div id="box"></div>
+<script type="module">
+import { createUltrasoundRenderer } from "../src/renderers/ultrasound.js";
+const q = new URLSearchParams(location.search);
+const box = document.getElementById("box");
+if (q.get("w")) box.style.width = q.get("w") + "px";
+if (q.get("h")) box.style.height = q.get("h") + "px";
+window.__picks = [];
+createUltrasoundRenderer({ container: box, studiesBase: "../assets/volumes/", initialStudy: q.get("study") || "ts-s1042", onPick: (k) => window.__picks.push(k) })
+  .then((us) => { window.__us = us; window.__ready = true; })
+  .catch((e) => { window.__error = String(e && e.stack || e); });
+</script>
+</body></html>

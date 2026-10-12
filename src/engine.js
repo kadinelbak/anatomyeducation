@@ -135,7 +135,7 @@ export function createEngine({ renderer, questions, sets, ui, track }) {
     },
 
     shareText() {
-      const on = set.renderer === "volume" ? `the ${set.title} set` : `${set.title} in 3D`;
+      const on = set.renderer === "mesh" ? `${set.title} in 3D` : `the ${set.title} set`;
       return `I scored ${state.score}/${current.length} on ${on}. Can you beat it?`;
     },
   };

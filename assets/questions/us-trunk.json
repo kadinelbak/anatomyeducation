@@ -1,0 +1,560 @@
+{
+  "version": 1,
+  "region": "ultrasound-trunk",
+  "questions": [
+    {
+      "id": "us-suprapubic-bladder-volume",
+      "kind": "Clinical",
+      "renderer": "ultrasound",
+      "study": "ts-s0513",
+      "target": "urinary_bladder",
+      "accept": [
+        "urinary_bladder"
+      ],
+      "prompt": "After a hip operation an older man has not passed urine for eight hours and has lower abdominal discomfort. A bedside scan is used to estimate the volume of retained urine. Click the bladder.",
+      "hint": "Hold the probe just above the pubic symphysis and tilt it down toward the pelvis to see the full bladder.",
+      "view": "suprapubic",
+      "layers": [],
+      "explain": "The full bladder is a smooth, thin-walled, anechoic structure, with bright enhancement behind it. Volume is estimated from three diameters, and over 400 ml in a patient who cannot void suggests retention.",
+      "tags": {
+        "topic": "bladder",
+        "region": "abdomen",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-epigastric-aaa",
+      "kind": "Clinical",
+      "renderer": "ultrasound",
+      "study": "ts-s0513",
+      "target": "aorta",
+      "accept": [
+        "aorta"
+      ],
+      "prompt": "A hypotensive older man has sudden severe back and abdominal pain and a pulsatile mass. A transverse epigastric scan is done at the bedside. Click the vessel that is likely to be aneurysmal.",
+      "hint": "Press gently on the midline below the xiphoid, then identify the round circle in front of the spine and measure its outer width.",
+      "view": "epigastric",
+      "layers": [],
+      "explain": "The aorta is a circular, anechoic vessel with echogenic walls, and an aneurysm is an outer diameter above 3 cm. Mural thrombus is grey layered echo inside the lumen, and a rupture needs immediate surgical repair.",
+      "tags": {
+        "topic": "aorta",
+        "region": "abdomen",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-ruq-liver-id",
+      "kind": "Identify",
+      "renderer": "ultrasound",
+      "study": "ts-s0513",
+      "target": "liver",
+      "accept": [
+        "liver"
+      ],
+      "prompt": "Click the liver.",
+      "hint": "Put the probe in the right mid-axillary line between the ribs; the liver is the large uniform grey organ next to the kidney.",
+      "view": "ruq",
+      "layers": [],
+      "explain": "The liver is a homogeneous, finely granular organ, with the capsule a bright curved line. Its echogenicity is the reference, and brighter than the cortex of the kidney suggests fatty infiltration.",
+      "tags": {
+        "topic": "liver",
+        "region": "abdomen",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-left-kidney-id",
+      "kind": "Identify",
+      "renderer": "ultrasound",
+      "study": "ts-s0513",
+      "target": "kidney_left",
+      "accept": [
+        "kidney_left"
+      ],
+      "prompt": "Click the left kidney.",
+      "hint": "Sweep the probe along the left flank, slightly behind the mid-axillary line, and rotate until you see the long oval of the kidney.",
+      "view": "left_kidney_long",
+      "layers": [],
+      "explain": "The left kidney has the same pattern as the right: darker cortex and pyramids around the bright central sinus. It is higher and more posterior, so the spleen is its acoustic window.",
+      "tags": {
+        "topic": "kidney",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-subxiphoid-heart-id",
+      "kind": "Identify",
+      "renderer": "ultrasound",
+      "study": "ts-s1042",
+      "target": "heart",
+      "accept": [
+        "heart"
+      ],
+      "prompt": "Click the heart.",
+      "hint": "Place the probe just below the xiphoid, aim it up and to the left shoulder, and look for the four chambers beyond the liver.",
+      "view": "subxiphoid",
+      "layers": [],
+      "explain": "The heart appears as a four-chamber shape with echo-free blood in the chambers and brighter, moving valve leaflets, seen through the liver as an acoustic window. The subxiphoid view is the standard cardiac window when the ribs and lungs block the parasternal approach.",
+      "tags": {
+        "topic": "heart",
+        "region": "chest",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-luq-spleen-id",
+      "kind": "Identify",
+      "renderer": "ultrasound",
+      "study": "ts-s1042",
+      "target": "spleen",
+      "accept": [
+        "spleen"
+      ],
+      "prompt": "Click the spleen.",
+      "hint": "Slide the probe up to the posterior axillary line between the ribs on the left; the spleen is the crescent resting against the kidney.",
+      "view": "luq",
+      "layers": [],
+      "explain": "The spleen is a smooth, homogeneous, finely granular crescent, slightly less echogenic than the liver. It lies against the left diaphragm and kidney, and is only seen when it is enlarged or when this window is used.",
+      "tags": {
+        "topic": "spleen",
+        "region": "abdomen",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-aorta-long-aaa",
+      "kind": "Clinical",
+      "renderer": "ultrasound",
+      "study": "ts-s1042",
+      "target": "aorta",
+      "accept": [
+        "aorta"
+      ],
+      "prompt": "A 68-year-old man who smoked heavily is screened for abdominal aortic aneurysm with an ultrasound probe held along the midline of his epigastrium. Click the aorta.",
+      "hint": "Hold the probe longitudinally on the midline above the umbilicus and follow the tube from the diaphragm down to the bifurcation.",
+      "view": "aorta_long",
+      "layers": [],
+      "explain": "The aorta is a long anechoic tube with thin bright walls lying in front of the vertebral column. A diameter above 3 cm is aneurysmal, and screening of older men with this view cuts rupture deaths.",
+      "tags": {
+        "topic": "aorta",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-left-kidney-hydro",
+      "kind": "Clinical",
+      "renderer": "ultrasound",
+      "study": "ts-s1042",
+      "target": "kidney_left",
+      "accept": [
+        "kidney_left"
+      ],
+      "prompt": "A woman with severe left loin pain and haematuria has an ultrasound scan to look for obstruction from a stone. Click the kidney in which the collecting system could be dilated.",
+      "hint": "Rotate the probe along the long axis of the left flank and fan until the oval kidney with its bright central sinus fills the screen.",
+      "view": "left_kidney_long",
+      "layers": [],
+      "explain": "The kidney is a bean-shaped organ with a darker cortex and pyramids around a bright central sinus fat echo. Hydronephrosis opens the sinus into a branching echo-free pattern, a sign of obstruction by a stone.",
+      "tags": {
+        "topic": "kidney",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-parasternal-effusion",
+      "kind": "Clinical",
+      "renderer": "ultrasound",
+      "study": "ts-s1042",
+      "target": "heart",
+      "accept": [
+        "heart"
+      ],
+      "prompt": "A patient with chest pain and falling blood pressure has muffled heart sounds and distended neck veins after a viral illness. A parasternal scan is done to look for fluid around the pump. Click the heart.",
+      "hint": "Place the probe left of the sternum in the third to fifth intercostal space, and look for a black rim around the heart.",
+      "view": "parasternal",
+      "layers": [],
+      "explain": "The heart is a chambered, mostly echo-free organ with a bright pericardial line around it. A pericardial effusion is an anechoic rim between the heart and the pericardium, and tamponade needs urgent drainage.",
+      "tags": {
+        "topic": "heart",
+        "region": "chest",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-liver-intercostal-id",
+      "kind": "Identify",
+      "renderer": "ultrasound",
+      "study": "ts-s1042",
+      "target": "liver",
+      "accept": [
+        "liver"
+      ],
+      "prompt": "Click the liver.",
+      "hint": "Slide the probe into the right lower intercostal spaces and aim at the right shoulder; the liver is the wide field filling the screen.",
+      "view": "liver_intercostal",
+      "layers": [],
+      "explain": "The liver is a homogeneous mid-grey organ with fine uniform echoes and dark branching tubes, the hepatic and portal veins. It is used as the reference for comparing the echogenicity of the spleen and kidney.",
+      "tags": {
+        "topic": "liver",
+        "region": "abdomen",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-gallbladder-cholecystitis",
+      "kind": "Clinical",
+      "renderer": "ultrasound",
+      "study": "ts-s1164",
+      "target": "gallbladder",
+      "accept": [
+        "gallbladder"
+      ],
+      "prompt": "A woman has had right upper quadrant pain for a day after a fatty meal, with fever and a positive sonographic Murphy's sign. Click the organ that is inflamed.",
+      "hint": "Place the probe below the right costal margin and follow the liver edge until you see the dark pear-shaped sac.",
+      "view": "gallbladder",
+      "layers": [],
+      "explain": "The gallbladder is a pear-shaped, anechoic sac under the liver, and stones are bright echoes with dark shadows behind them. A thickened wall over 3 mm, pericholecystic fluid and pain under the probe suggest acute cholecystitis.",
+      "tags": {
+        "topic": "gallbladder",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-subxiphoid-effusion",
+      "kind": "Clinical",
+      "renderer": "ultrasound",
+      "study": "ts-s1164",
+      "target": "heart",
+      "accept": [
+        "heart"
+      ],
+      "prompt": "A man stabbed in the left chest is cold, pale and hypotensive. A subxiphoid FAST view is used to look for blood around the pump. Click the heart.",
+      "hint": "Angle the probe flat under the xiphoid, aim at the left shoulder and look for the heart through the liver.",
+      "view": "subxiphoid",
+      "layers": [],
+      "explain": "The heart is seen as four chambers with the dark pericardial fluid forming a rim in an effusion. Blood in the pericardium after penetrating trauma is the sign of tamponade, treated by emergency drainage.",
+      "tags": {
+        "topic": "fast",
+        "region": "chest",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-right-kidney-id",
+      "kind": "Identify",
+      "renderer": "ultrasound",
+      "study": "ts-s1164",
+      "target": "kidney_right",
+      "accept": [
+        "kidney_right"
+      ],
+      "prompt": "Click the right kidney.",
+      "hint": "Sweep the probe along the right flank between the ribs; the kidney sits deep to the liver.",
+      "view": "right_kidney_long",
+      "layers": [],
+      "explain": "The right kidney is a bean-shaped organ with a hypoechoic cortex, darker pyramids and a bright central renal sinus. It lies deep to the liver, usually slightly lower than the left.",
+      "tags": {
+        "topic": "kidney",
+        "region": "abdomen",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-parasternal-heart-id",
+      "kind": "Identify",
+      "renderer": "ultrasound",
+      "study": "ts-s1164",
+      "target": "heart",
+      "accept": [
+        "heart"
+      ],
+      "prompt": "Click the heart.",
+      "hint": "Place the probe left of the sternum in the fourth intercostal space with the marker toward the right shoulder.",
+      "view": "parasternal",
+      "layers": [],
+      "explain": "From the parasternal window the heart shows the left ventricle and left atrium as echo-free chambers, separated by the bright mitral valve. It is the window used for gross function and chamber size.",
+      "tags": {
+        "topic": "heart",
+        "region": "chest",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-ruq-morison-fast",
+      "kind": "Clinical",
+      "renderer": "ultrasound",
+      "study": "ts-s1337",
+      "target": "liver",
+      "accept": [
+        "liver",
+        "kidney_right"
+      ],
+      "prompt": "After a road traffic collision a hypotensive man has a FAST scan. The fluid-seeking probe sits in the right upper quadrant. Click the organ that borders the right side of Morison's pouch, the liver or the kidney.",
+      "hint": "Put the probe in the mid-axillary line between the ribs and slide it up and down until you see the liver and kidney meeting.",
+      "view": "ruq",
+      "layers": [],
+      "explain": "Morison's pouch is the potential space between the liver and the right kidney, and it appears as a thin line. Free blood appears as a black anechoic stripe there, the commonest site of positive FAST scans in trauma.",
+      "tags": {
+        "topic": "fast",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-epigastric-aorta-id",
+      "kind": "Identify",
+      "renderer": "ultrasound",
+      "study": "ts-s1337",
+      "target": "aorta",
+      "accept": [
+        "aorta"
+      ],
+      "prompt": "Click the aorta.",
+      "hint": "Hold the probe transversely just below the xiphoid; the aorta is the round pulsatile black circle in front of the spine, to the left of the midline.",
+      "view": "epigastric",
+      "layers": [],
+      "explain": "In cross-section the aorta is a round, thick-walled, anechoic circle immediately in front of the vertebral body and to the left of the IVC. It does not collapse under gentle pressure from the probe, unlike veins.",
+      "tags": {
+        "topic": "aorta",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-epigastric-ivc-id",
+      "kind": "Identify",
+      "renderer": "ultrasound",
+      "study": "ts-s1337",
+      "target": "inferior_vena_cava",
+      "accept": [
+        "inferior_vena_cava"
+      ],
+      "prompt": "Click the inferior vena cava.",
+      "hint": "On the transverse epigastric view, find the thin-walled oval to the right of the midline, next to the liver, which changes size with breathing.",
+      "view": "epigastric",
+      "layers": [],
+      "explain": "The IVC is a thin-walled, oval anechoic structure, flatter than the aorta, lying on the right and running behind the liver. Its width and respiratory collapse estimate right atrial pressure and fluid status.",
+      "tags": {
+        "topic": "aorta",
+        "region": "abdomen",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-right-kidney-hydro",
+      "kind": "Clinical",
+      "renderer": "ultrasound",
+      "study": "ts-s1337",
+      "target": "kidney_right",
+      "accept": [
+        "kidney_right"
+      ],
+      "prompt": "A man with right flank pain and fever has an ultrasound scan that shows urine backing up with a stone in the ureter. Click the kidney that is dilated.",
+      "hint": "Put the probe on the right flank and use the liver as the acoustic window, then rotate until the long axis of the kidney is in view.",
+      "view": "right_kidney_long",
+      "layers": [],
+      "explain": "The right kidney is an oval organ with a bright central sinus, seen through the liver and slightly less echogenic than it. Echo-free dilatation of the calyces in obstruction suggests hydronephrosis and a possible infected, blocked system.",
+      "tags": {
+        "topic": "kidney",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-luq-splenic-injury",
+      "kind": "Clinical",
+      "renderer": "ultrasound",
+      "study": "ts-s1337",
+      "target": "spleen",
+      "accept": [
+        "spleen"
+      ],
+      "prompt": "A cyclist hits the handlebars and has left upper abdominal pain, left shoulder tip pain and a falling blood pressure. Click the organ that is most likely to be lacerated.",
+      "hint": "Tilt the probe through the left lower ribs and scan the whole length of the spleen and the space around it.",
+      "view": "luq",
+      "layers": [],
+      "explain": "The spleen is the most commonly injured abdominal organ in blunt trauma. A laceration is an irregular echogenic or echo-poor area, and blood collects in the splenorenal space as a dark stripe, with Kehr's sign of left shoulder pain.",
+      "tags": {
+        "topic": "spleen",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-gallbladder-id",
+      "kind": "Identify",
+      "renderer": "ultrasound",
+      "study": "ts-s1383",
+      "target": "gallbladder",
+      "accept": [
+        "gallbladder"
+      ],
+      "prompt": "Click the gallbladder.",
+      "hint": "Position the probe below the right costal margin and ask the patient to take a deep breath so that the liver edge moves down.",
+      "view": "gallbladder",
+      "layers": [],
+      "explain": "The gallbladder is a pear-shaped, echo-free bag lying under the liver, with bright enhancement behind it. It lies at the junction of the right and left liver lobes, and it is best seen after fasting.",
+      "tags": {
+        "topic": "gallbladder",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-aorta-long-id",
+      "kind": "Identify",
+      "renderer": "ultrasound",
+      "study": "ts-s1383",
+      "target": "aorta",
+      "accept": [
+        "aorta"
+      ],
+      "prompt": "Click the aorta.",
+      "hint": "Turn the probe along the midline, marker toward the head, and follow the pulsatile tube in front of the spine.",
+      "view": "aorta_long",
+      "layers": [],
+      "explain": "In long axis the aorta is a straight anechoic tube with parallel bright walls that tapers slowly towards the bifurcation. Branches such as the coeliac and superior mesenteric arteries arise from its front.",
+      "tags": {
+        "topic": "aorta",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-suprapubic-bladder-id",
+      "kind": "Identify",
+      "renderer": "ultrasound",
+      "study": "ts-s1390",
+      "target": "urinary_bladder",
+      "accept": [
+        "urinary_bladder"
+      ],
+      "prompt": "Click the urinary bladder.",
+      "hint": "The patient should have a full bladder; place the probe above the pubic bone and tilt it caudally.",
+      "view": "suprapubic",
+      "layers": [],
+      "explain": "The bladder is a rounded or triangular black fluid-filled space with thin smooth walls. A full bladder acts as an acoustic window to the uterus, prostate and pelvic fluid.",
+      "tags": {
+        "topic": "bladder",
+        "region": "abdomen",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-luq-splenorenal-fast",
+      "kind": "Clinical",
+      "renderer": "ultrasound",
+      "study": "ts-s1390",
+      "target": "spleen",
+      "accept": [
+        "spleen",
+        "kidney_left"
+      ],
+      "prompt": "During a FAST scan after a fall from a ladder, the probe is on the left flank to look for free fluid in the splenorenal space. Click the organ that borders the space above the kidney, the spleen or the left kidney.",
+      "hint": "Put the probe in the posterior axillary line, a rib space or two above where you scanned the right side.",
+      "view": "luq",
+      "layers": [],
+      "explain": "The splenorenal recess lies between the spleen and left kidney, and free blood is a black stripe along the splenic tip. This is the left window of FAST and is deeper and more posterior than the right.",
+      "tags": {
+        "topic": "fast",
+        "region": "abdomen",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "us-subxiphoid-liver-id",
+      "kind": "Identify",
+      "renderer": "ultrasound",
+      "study": "ts-s1390",
+      "target": "liver",
+      "accept": [
+        "liver"
+      ],
+      "prompt": "Click the liver.",
+      "hint": "From the subxiphoid window, the liver is the large grey organ that lies between the probe and the heart.",
+      "view": "subxiphoid",
+      "layers": [],
+      "explain": "On the subxiphoid view the left lobe of the liver is the near field, a homogeneous grey wedge with bright capsule. It is the acoustic window that lets ultrasound reach the heart.",
+      "tags": {
+        "topic": "liver",
+        "region": "abdomen",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved"
+      }
+    }
+  ]
+}

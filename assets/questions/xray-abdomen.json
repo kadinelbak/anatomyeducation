@@ -1,0 +1,351 @@
+{
+  "version": 1,
+  "region": "xray-abdomen",
+  "questions": [
+    {
+      "id": "xr-abdomen-liver-id",
+      "kind": "Identify",
+      "renderer": "xray",
+      "study": "ts-s0513",
+      "target": "liver",
+      "accept": [
+        "liver"
+      ],
+      "prompt": "Click the liver.",
+      "hint": "It is the largest solid organ, a homogeneous density filling the right upper abdomen under the diaphragm.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The liver fills the right upper quadrant and extends across the midline under the left hemidiaphragm. On a radiograph it is a uniform soft-tissue density whose lower edge is outlined by surrounding fat.",
+      "tags": {
+        "topic": "abdomen",
+        "region": "abdomen",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-abdomen-stomach-bubble",
+      "kind": "Identify",
+      "renderer": "xray",
+      "study": "ts-s1390",
+      "target": "stomach",
+      "accept": [
+        "stomach"
+      ],
+      "prompt": "Click the stomach.",
+      "hint": "Look for a gas bubble in the left upper abdomen, under the left hemidiaphragm.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The stomach is a J-shaped organ in the left upper quadrant, below the left hemidiaphragm. On an erect radiograph it is seen as a gastric gas bubble, with a fluid level where the food and fluid settle.",
+      "tags": {
+        "topic": "abdomen",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-abdomen-kidney-right-id",
+      "kind": "Identify",
+      "renderer": "xray",
+      "study": "ts-s0513",
+      "target": "kidney_right",
+      "accept": [
+        "kidney_right"
+      ],
+      "prompt": "Click the right kidney.",
+      "hint": "The kidneys are faint bean-shaped soft-tissue shadows either side of the lumbar spine.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The right kidney sits slightly lower than the left because of the liver, at about T12 to L3. On a radiograph the renal outline is only visible because of the fat that surrounds it, and it is much fainter than bone.",
+      "tags": {
+        "topic": "abdomen",
+        "region": "abdomen",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-abdomen-kidney-left-id",
+      "kind": "Identify",
+      "renderer": "xray",
+      "study": "ts-s1383",
+      "target": "kidney_left",
+      "accept": [
+        "kidney_left"
+      ],
+      "prompt": "Click the left kidney.",
+      "hint": "It is the faint bean-shaped shadow beside the upper lumbar spine, a little higher than its partner.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The left kidney lies a little higher than the right, with its upper pole at about the level of T11 to T12. On a radiograph it shows as a faint oval outlined by perirenal fat, and its long axis runs parallel to the psoas muscle.",
+      "tags": {
+        "topic": "abdomen",
+        "region": "abdomen",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-abdomen-spleen-id",
+      "kind": "Identify",
+      "renderer": "xray",
+      "study": "ts-s1390",
+      "target": "spleen",
+      "accept": [
+        "spleen"
+      ],
+      "prompt": "Click the spleen.",
+      "hint": "It is a curved soft-tissue shadow tucked under the left hemidiaphragm, beside the ribs.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The spleen lies under the left ninth to eleventh ribs, behind the stomach, and is protected by the ribcage. On a radiograph it is a faint smooth soft-tissue shadow at the left upper abdomen, and an enlarged spleen displaces gas in the stomach and the colon.",
+      "tags": {
+        "topic": "abdomen",
+        "region": "abdomen",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-abdomen-free-air-liver",
+      "kind": "Clinical",
+      "renderer": "xray",
+      "study": "ts-s1383",
+      "target": "liver",
+      "accept": [
+        "liver"
+      ],
+      "prompt": "A man with a sudden severe abdominal pain and a rigid abdomen has a thin crescent of gas under the right hemidiaphragm on an erect film. Click the organ that lies directly below the free gas.",
+      "hint": "Free gas collects at the highest point; the right dome of the diaphragm sits on this large solid organ.",
+      "view": "ap",
+      "layers": [],
+      "explain": "Free intraperitoneal gas rises to lie between the liver and the diaphragm after a perforated peptic ulcer or viscus. On an erect radiograph a crescent of black gas lies under the hemidiaphragm, which makes the dome of the liver clearly outlined.",
+      "tags": {
+        "topic": "abdomen",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-abdomen-renal-stone-left",
+      "kind": "Clinical",
+      "renderer": "xray",
+      "study": "ts-s0513",
+      "target": "kidney_left",
+      "accept": [
+        "kidney_left"
+      ],
+      "prompt": "A man has severe colicky left loin pain that spreads to the groin, and a small dense opacity is seen near the left renal outline on a plain film. Click the organ in which the stone formed.",
+      "hint": "Kidney stones form in the collecting system, the faint bean-shaped shadow beside the spine.",
+      "view": "ap",
+      "layers": [],
+      "explain": "Most renal stones are calcium oxalate and form in the calyces and renal pelvis before passing down the ureter. On a radiograph about 90 percent are radio-opaque, a small white spot near the renal outline or along the line of the ureter.",
+      "tags": {
+        "topic": "abdomen",
+        "region": "abdomen",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-abdomen-l1-compression",
+      "kind": "Clinical",
+      "renderer": "xray",
+      "study": "ts-s1164",
+      "target": "vertebrae_L1",
+      "accept": [
+        "vertebrae_L1"
+      ],
+      "prompt": "An older man develops sudden low back pain after a minor fall. A lateral film shows the front of one vertebra at the thoracolumbar junction is squashed. Click the first lumbar vertebra.",
+      "hint": "It is the first vertebra below the last rib-bearing thoracic vertebra.",
+      "view": "lateral",
+      "layers": [],
+      "explain": "L1 is the first lumbar vertebra and the usual site of the thoracolumbar junction injuries, where the conus medullaris ends at about this level. On a lateral radiograph the vertebral body is wedge-shaped when compressed and the endplate looks dense.",
+      "tags": {
+        "topic": "spine",
+        "region": "abdomen",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-abdomen-l5-id",
+      "kind": "Identify",
+      "renderer": "xray",
+      "study": "ts-s0513",
+      "target": "vertebrae_L5",
+      "accept": [
+        "vertebrae_L5"
+      ],
+      "prompt": "Click the fifth lumbar vertebra.",
+      "hint": "It is the last and biggest of the lumbar vertebrae, sitting on top of the sacrum.",
+      "view": "lateral",
+      "layers": [],
+      "explain": "The fifth lumbar vertebra has the largest body, and its wedge shape creates the lumbosacral angle where it joins the sacrum. On a lateral radiograph it is the bottom vertebra of the lumbar column, resting on the first sacral segment.",
+      "tags": {
+        "topic": "spine",
+        "region": "abdomen",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-abdomen-hip-bone-id",
+      "kind": "Identify",
+      "renderer": "xray",
+      "study": "ts-s1390",
+      "target": "hip_right",
+      "accept": [
+        "hip_right"
+      ],
+      "prompt": "Click the right hip bone.",
+      "hint": "It is the large flared bone of the pelvis, made of the ilium, ischium and pubis.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The hip bone is formed by the fusion of the ilium, ischium and pubis, and the three meet at the acetabulum. On a radiograph the pelvic brim, ilium and acetabulum form a dense continuous white ring on each side.",
+      "tags": {
+        "topic": "bones",
+        "region": "abdomen",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-abdomen-sacrum-id",
+      "kind": "Identify",
+      "renderer": "xray",
+      "study": "ts-s1383",
+      "target": "sacrum",
+      "accept": [
+        "sacrum"
+      ],
+      "prompt": "Click the sacrum.",
+      "hint": "It is the triangular bone at the bottom of the spine, between the two hip bones.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The sacrum is five fused vertebrae that wedge between the iliac bones to form the sacroiliac joints. On a frontal radiograph it is a triangle whose centre is crossed by the sacral foramina, which show as paired round lucencies.",
+      "tags": {
+        "topic": "bones",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-abdomen-femoral-neck-fracture",
+      "kind": "Clinical",
+      "renderer": "xray",
+      "study": "ts-s0513",
+      "target": "femur_left",
+      "accept": [
+        "femur_left"
+      ],
+      "prompt": "An older woman falls at home and cannot weight-bear; the left leg is shortened and externally rotated. A pelvic film shows a break through the neck of one bone. Click the bone that is fractured.",
+      "hint": "It is the long bone of the thigh, whose head fits into the acetabulum.",
+      "view": "ap",
+      "layers": [],
+      "explain": "Fractures of the femoral neck threaten the blood supply from the retinacular branches of the medial circumflex femoral artery. On a radiograph look for a break in the cortex, a break in Shenton's line and a shortened leg.",
+      "tags": {
+        "topic": "bones",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-abdomen-psoas-shadow",
+      "kind": "Clinical",
+      "renderer": "xray",
+      "study": "ts-s1390",
+      "target": "iliopsoas_right",
+      "accept": [
+        "iliopsoas_right"
+      ],
+      "prompt": "On a plain abdominal film, a patient with a suspected retroperitoneal abscess loses the normal sharp edge of the psoas shadow on the right. Click the muscle whose outline is lost.",
+      "hint": "The shadow runs obliquely beside the lumbar spine from the upper lumbar region to the groin.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The psoas major arises from the lumbar vertebrae and joins iliacus to cross the pelvic brim, and it is outlined by retroperitoneal fat. On a radiograph the psoas margin is a thin straight line on either side of the spine, and fluid or a mass blurs it.",
+      "tags": {
+        "topic": "abdomen",
+        "region": "abdomen",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-abdomen-colon-gas",
+      "kind": "Identify",
+      "renderer": "xray",
+      "study": "ts-s1383",
+      "target": "colon",
+      "accept": [
+        "colon"
+      ],
+      "prompt": "Click the colon.",
+      "hint": "It frames the abdomen, and its gas and faecal mottling mark it from the smaller central bowel.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The large bowel frames the abdomen with its caecum on the right, its transverse colon in the middle and the descending colon on the left, and has haustra. On a radiograph it is recognised by its peripheral position and gas, with a mottled pattern of faeces.",
+      "tags": {
+        "topic": "abdomen",
+        "region": "abdomen",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-abdomen-bladder-id",
+      "kind": "Identify",
+      "renderer": "xray",
+      "study": "ts-s1390",
+      "target": "urinary_bladder",
+      "accept": [
+        "urinary_bladder"
+      ],
+      "prompt": "Click the urinary bladder.",
+      "hint": "It is a rounded soft-tissue shadow in the midline just above the pubic bones.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The bladder is a muscular reservoir in the pelvis, behind the pubic symphysis and in front of the rectum. On a radiograph a full bladder is a smooth, faint, rounded soft-tissue density in the midline of the pelvis, between the hip bones.",
+      "tags": {
+        "topic": "abdomen",
+        "region": "abdomen",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved"
+      }
+    }
+  ]
+}

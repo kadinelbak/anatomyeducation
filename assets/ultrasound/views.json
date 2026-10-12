@@ -1,0 +1,565 @@
+{
+ "ts-s1042": {
+  "subxiphoid": {
+   "frac": 0.192,
+   "angle": 345,
+   "tilt": 10,
+   "rot": 0,
+   "depth": 16,
+   "label": "Subxiphoid: heart and liver",
+   "expect": [
+    "heart",
+    "liver"
+   ]
+  },
+  "luq": {
+   "frac": 0.02,
+   "angle": 120,
+   "tilt": 0,
+   "rot": 0,
+   "depth": 16,
+   "label": "LUQ: spleen and left kidney",
+   "expect": [
+    "spleen",
+    "kidney_left"
+   ]
+  },
+  "aorta_long": {
+   "frac": 0,
+   "angle": 350,
+   "tilt": 0,
+   "rot": 90,
+   "depth": 16,
+   "label": "Aorta longitudinal",
+   "expect": [
+    "aorta"
+   ]
+  },
+  "left_kidney_long": {
+   "frac": 0,
+   "angle": 120,
+   "tilt": 10,
+   "rot": 90,
+   "depth": 16,
+   "label": "Left flank longitudinal: left kidney",
+   "expect": [
+    "kidney_left"
+   ]
+  },
+  "parasternal": {
+   "frac": 0.182,
+   "angle": 50,
+   "tilt": 0,
+   "rot": 45,
+   "depth": 16,
+   "label": "Parasternal: heart",
+   "expect": [
+    "heart"
+   ]
+  },
+  "liver_intercostal": {
+   "frac": 0.032,
+   "angle": 290,
+   "tilt": 0,
+   "rot": 90,
+   "depth": 16,
+   "label": "Right intercostal: liver and hepatic vessels",
+   "expect": [
+    "liver"
+   ]
+  },
+  "epigastric_stomach": {
+   "frac": 0.06,
+   "angle": 15,
+   "tilt": 10,
+   "rot": 0,
+   "depth": 16,
+   "label": "Epigastric: stomach and liver",
+   "expect": [
+    "stomach",
+    "liver"
+   ]
+  },
+  "splenic": {
+   "frac": 0,
+   "angle": 90,
+   "tilt": -10,
+   "rot": 90,
+   "depth": 16,
+   "label": "Left posterior axillary: spleen",
+   "expect": [
+    "spleen"
+   ]
+  }
+ },
+ "ts-s1337": {
+  "subxiphoid": {
+   "frac": 0.227,
+   "angle": 350,
+   "tilt": 10,
+   "rot": 0,
+   "depth": 16,
+   "label": "Subxiphoid: heart and liver",
+   "expect": [
+    "heart",
+    "liver"
+   ]
+  },
+  "ruq": {
+   "frac": 0,
+   "angle": 255,
+   "tilt": -10,
+   "rot": 90,
+   "depth": 16,
+   "label": "RUQ: liver and right kidney (Morison's pouch lies between them)",
+   "expect": [
+    "liver",
+    "kidney_right"
+   ]
+  },
+  "luq": {
+   "frac": 0,
+   "angle": 100,
+   "tilt": 10,
+   "rot": 0,
+   "depth": 16,
+   "label": "LUQ: spleen and left kidney",
+   "expect": [
+    "spleen",
+    "kidney_left"
+   ]
+  },
+  "epigastric": {
+   "frac": 0.285,
+   "angle": 344,
+   "tilt": -10,
+   "rot": 0,
+   "depth": 12,
+   "label": "Epigastric transverse: aorta, IVC, liver and pancreas",
+   "expect": [
+    "aorta",
+    "inferior_vena_cava",
+    "liver"
+   ]
+  },
+  "aorta_long": {
+   "frac": 0.069,
+   "angle": 0,
+   "tilt": 0,
+   "rot": 90,
+   "depth": 16,
+   "label": "Aorta longitudinal",
+   "expect": [
+    "aorta"
+   ]
+  },
+  "right_kidney_long": {
+   "frac": 0,
+   "angle": 240,
+   "tilt": 0,
+   "rot": 90,
+   "depth": 16,
+   "label": "Right flank longitudinal: right kidney and liver",
+   "expect": [
+    "kidney_right"
+   ]
+  },
+  "left_kidney_long": {
+   "frac": 0,
+   "angle": 120,
+   "tilt": -10,
+   "rot": 90,
+   "depth": 16,
+   "label": "Left flank longitudinal: left kidney",
+   "expect": [
+    "kidney_left"
+   ]
+  },
+  "parasternal": {
+   "frac": 0.227,
+   "angle": 30,
+   "tilt": -10,
+   "rot": 90,
+   "depth": 16,
+   "label": "Parasternal: heart",
+   "expect": [
+    "heart"
+   ]
+  }
+ },
+ "ts-s1164": {
+  "subxiphoid": {
+   "frac": 0.223,
+   "angle": 0,
+   "tilt": 10,
+   "rot": 0,
+   "depth": 16,
+   "label": "Subxiphoid: heart and liver",
+   "expect": [
+    "heart",
+    "liver"
+   ]
+  },
+  "ruq": {
+   "frac": 0.02,
+   "angle": 255,
+   "tilt": 10,
+   "rot": 0,
+   "depth": 16,
+   "label": "RUQ: liver and right kidney (Morison's pouch lies between them)",
+   "expect": [
+    "liver",
+    "kidney_right"
+   ]
+  },
+  "luq": {
+   "frac": 0,
+   "angle": 130,
+   "tilt": -10,
+   "rot": 90,
+   "depth": 16,
+   "label": "LUQ: spleen and left kidney",
+   "expect": [
+    "spleen",
+    "kidney_left"
+   ]
+  },
+  "aorta_long": {
+   "frac": 0.314,
+   "angle": 10,
+   "tilt": 10,
+   "rot": 90,
+   "depth": 16,
+   "label": "Aorta longitudinal",
+   "expect": [
+    "aorta"
+   ]
+  },
+  "right_kidney_long": {
+   "frac": 0.01,
+   "angle": 240,
+   "tilt": 10,
+   "rot": 90,
+   "depth": 16,
+   "label": "Right flank longitudinal: right kidney and liver",
+   "expect": [
+    "kidney_right"
+   ]
+  },
+  "left_kidney_long": {
+   "frac": 0,
+   "angle": 120,
+   "tilt": -10,
+   "rot": 90,
+   "depth": 16,
+   "label": "Left flank longitudinal: left kidney",
+   "expect": [
+    "kidney_left"
+   ]
+  },
+  "parasternal": {
+   "frac": 0.223,
+   "angle": 10,
+   "tilt": 0,
+   "rot": 90,
+   "depth": 16,
+   "label": "Parasternal: heart",
+   "expect": [
+    "heart"
+   ]
+  },
+  "gallbladder": {
+   "frac": 0,
+   "angle": 340,
+   "tilt": 0,
+   "rot": 90,
+   "depth": 12,
+   "label": "Subcostal: gallbladder and liver",
+   "expect": [
+    "gallbladder",
+    "liver"
+   ]
+  }
+ },
+ "ts-s0513": {
+  "subxiphoid": {
+   "frac": 0.841,
+   "angle": 15,
+   "tilt": 0,
+   "rot": 0,
+   "depth": 16,
+   "label": "Subxiphoid: heart and liver",
+   "expect": [
+    "heart",
+    "liver"
+   ]
+  },
+  "ruq": {
+   "frac": 0.571,
+   "angle": 275,
+   "tilt": -10,
+   "rot": 90,
+   "depth": 16,
+   "label": "RUQ: liver and right kidney (Morison's pouch lies between them)",
+   "expect": [
+    "liver",
+    "kidney_right"
+   ]
+  },
+  "luq": {
+   "frac": 0.681,
+   "angle": 120,
+   "tilt": 10,
+   "rot": 90,
+   "depth": 16,
+   "label": "LUQ: spleen and left kidney",
+   "expect": [
+    "spleen",
+    "kidney_left"
+   ]
+  },
+  "epigastric": {
+   "frac": 0.716,
+   "angle": 340,
+   "tilt": 0,
+   "rot": 0,
+   "depth": 12,
+   "label": "Epigastric transverse: aorta, IVC, liver and pancreas",
+   "expect": [
+    "aorta",
+    "inferior_vena_cava",
+    "liver"
+   ]
+  },
+  "aorta_long": {
+   "frac": 0.678,
+   "angle": 0,
+   "tilt": -10,
+   "rot": 90,
+   "depth": 12,
+   "label": "Aorta longitudinal",
+   "expect": [
+    "aorta"
+   ]
+  },
+  "suprapubic": {
+   "frac": 0.096,
+   "angle": 0,
+   "tilt": -20,
+   "rot": 90,
+   "depth": 12,
+   "label": "Suprapubic: bladder",
+   "expect": [
+    "urinary_bladder"
+   ]
+  },
+  "right_kidney_long": {
+   "frac": 0.539,
+   "angle": 270,
+   "tilt": -10,
+   "rot": 90,
+   "depth": 16,
+   "label": "Right flank longitudinal: right kidney and liver",
+   "expect": [
+    "kidney_right"
+   ]
+  },
+  "left_kidney_long": {
+   "frac": 0.64,
+   "angle": 120,
+   "tilt": 0,
+   "rot": 90,
+   "depth": 16,
+   "label": "Left flank longitudinal: left kidney",
+   "expect": [
+    "kidney_left"
+   ]
+  }
+ },
+ "ts-s1390": {
+  "subxiphoid": {
+   "frac": 0.869,
+   "angle": 350,
+   "tilt": 10,
+   "rot": 0,
+   "depth": 16,
+   "label": "Subxiphoid: heart and liver",
+   "expect": [
+    "heart",
+    "liver"
+   ]
+  },
+  "ruq": {
+   "frac": 0.591,
+   "angle": 265,
+   "tilt": -10,
+   "rot": 90,
+   "depth": 16,
+   "label": "RUQ: liver and right kidney (Morison's pouch lies between them)",
+   "expect": [
+    "liver",
+    "kidney_right"
+   ]
+  },
+  "luq": {
+   "frac": 0.735,
+   "angle": 100,
+   "tilt": 10,
+   "rot": 90,
+   "depth": 16,
+   "label": "LUQ: spleen and left kidney",
+   "expect": [
+    "spleen",
+    "kidney_left"
+   ]
+  },
+  "aorta_long": {
+   "frac": 0.582,
+   "angle": 10,
+   "tilt": 0,
+   "rot": 90,
+   "depth": 16,
+   "label": "Aorta longitudinal",
+   "expect": [
+    "aorta"
+   ]
+  },
+  "suprapubic": {
+   "frac": 0.187,
+   "angle": 4,
+   "tilt": 0,
+   "rot": 0,
+   "depth": 12,
+   "label": "Suprapubic: bladder",
+   "expect": [
+    "urinary_bladder"
+   ]
+  },
+  "right_kidney_long": {
+   "frac": 0.601,
+   "angle": 260,
+   "tilt": -10,
+   "rot": 90,
+   "depth": 16,
+   "label": "Right flank longitudinal: right kidney and liver",
+   "expect": [
+    "kidney_right"
+   ]
+  },
+  "left_kidney_long": {
+   "frac": 0.703,
+   "angle": 100,
+   "tilt": 10,
+   "rot": 90,
+   "depth": 16,
+   "label": "Left flank longitudinal: left kidney",
+   "expect": [
+    "kidney_left"
+   ]
+  },
+  "parasternal": {
+   "frac": 0.851,
+   "angle": 10,
+   "tilt": 10,
+   "rot": 45,
+   "depth": 16,
+   "label": "Parasternal: heart",
+   "expect": [
+    "heart"
+   ]
+  }
+ },
+ "ts-s1383": {
+  "ruq": {
+   "frac": 0.627,
+   "angle": 275,
+   "tilt": -10,
+   "rot": 90,
+   "depth": 16,
+   "label": "RUQ: liver and right kidney (Morison's pouch lies between them)",
+   "expect": [
+    "liver",
+    "kidney_right"
+   ]
+  },
+  "luq": {
+   "frac": 0.806,
+   "angle": 100,
+   "tilt": -10,
+   "rot": 0,
+   "depth": 16,
+   "label": "LUQ: spleen and left kidney",
+   "expect": [
+    "spleen",
+    "kidney_left"
+   ]
+  },
+  "aorta_long": {
+   "frac": 0.721,
+   "angle": 350,
+   "tilt": 10,
+   "rot": 90,
+   "depth": 16,
+   "label": "Aorta longitudinal",
+   "expect": [
+    "aorta"
+   ]
+  },
+  "suprapubic": {
+   "frac": 0.14,
+   "angle": 352,
+   "tilt": 0,
+   "rot": 90,
+   "depth": 12,
+   "label": "Suprapubic: bladder",
+   "expect": [
+    "urinary_bladder"
+   ]
+  },
+  "right_kidney_long": {
+   "frac": 0.626,
+   "angle": 270,
+   "tilt": -10,
+   "rot": 90,
+   "depth": 16,
+   "label": "Right flank longitudinal: right kidney and liver",
+   "expect": [
+    "kidney_right"
+   ]
+  },
+  "left_kidney_long": {
+   "frac": 0.74,
+   "angle": 100,
+   "tilt": 10,
+   "rot": 90,
+   "depth": 16,
+   "label": "Left flank longitudinal: left kidney",
+   "expect": [
+    "kidney_left"
+   ]
+  },
+  "gallbladder": {
+   "frac": 0.674,
+   "angle": 300,
+   "tilt": 20,
+   "rot": 0,
+   "depth": 12,
+   "label": "Subcostal: gallbladder and liver",
+   "expect": [
+    "gallbladder",
+    "liver"
+   ]
+  },
+  "liver_intercostal": {
+   "frac": 0.842,
+   "angle": 290,
+   "tilt": -10,
+   "rot": 0,
+   "depth": 16,
+   "label": "Right intercostal: liver and hepatic vessels",
+   "expect": [
+    "liver"
+   ]
+  }
+ }
+}

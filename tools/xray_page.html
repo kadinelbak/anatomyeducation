@@ -1,0 +1,11 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>X-ray check</title>
+<link rel="stylesheet" href="../src/renderers/xray.css">
+<style>html,body{margin:0;background:#111}#c{width:900px;height:700px;position:relative}</style></head>
+<body><div id="c"></div>
+<script type="module">
+import { createXrayRenderer } from "../src/renderers/xray.js";
+window.__xr = await createXrayRenderer({ container: document.getElementById("c"), studiesBase: "../assets/volumes/", initialStudy: "ts-s1042" });
+window.__ready = true;
+</script></body></html>

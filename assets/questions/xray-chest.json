@@ -1,0 +1,472 @@
+{
+  "version": 1,
+  "region": "xray-chest",
+  "questions": [
+    {
+      "id": "xr-chest-heart-id",
+      "kind": "Identify",
+      "renderer": "xray",
+      "study": "ts-s1042",
+      "target": "heart",
+      "accept": [
+        "heart"
+      ],
+      "prompt": "Click the heart.",
+      "hint": "On a frontal chest film it is the central soft-tissue shadow, with its apex pointing to the patient's left.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The heart lies in the middle mediastinum, two thirds to the left of the midline. On a radiograph it is a homogeneous soft-tissue density that silhouettes against the aerated lungs on both sides.",
+      "tags": {
+        "topic": "heart",
+        "region": "chest",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-chest-right-lung-id",
+      "kind": "Identify",
+      "renderer": "xray",
+      "study": "ts-s1337",
+      "target": "lung_upper_lobe_right",
+      "accept": [
+        "lung_upper_lobe_right",
+        "lung_middle_lobe_right",
+        "lung_lower_lobe_right"
+      ],
+      "prompt": "Click the right lung.",
+      "hint": "It is the dark air-filled field on the patient's right, which is the left side of the image.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The right lung has three lobes and is a little shorter than the left because the liver pushes up the right hemidiaphragm. On a radiograph the lungs are dark, with fine white vessel markings fanning out from the hila.",
+      "tags": {
+        "topic": "lungs",
+        "region": "chest",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-chest-left-lung-id",
+      "kind": "Identify",
+      "renderer": "xray",
+      "study": "ts-s1164",
+      "target": "lung_upper_lobe_left",
+      "accept": [
+        "lung_upper_lobe_left",
+        "lung_lower_lobe_left"
+      ],
+      "prompt": "Click the left lung.",
+      "hint": "It lies on the right side of the image and has the cardiac shadow bulging into its lower inner part.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The left lung has two lobes and a cardiac notch where the heart indents its anterior border. On a radiograph it is the dark field beside the heart, with the left hemidiaphragm below it.",
+      "tags": {
+        "topic": "lungs",
+        "region": "chest",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-chest-clavicle-right-id",
+      "kind": "Identify",
+      "renderer": "xray",
+      "study": "ts-s1042",
+      "target": "clavicula_right",
+      "accept": [
+        "clavicula_right"
+      ],
+      "prompt": "Click the right clavicle.",
+      "hint": "It is the S-shaped bone that runs from the sternum to the shoulder across the top of the chest.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The clavicle is the only bony strut linking the upper limb to the axial skeleton, joining the sternum medially and the acromion laterally. On a radiograph it is a dense white curved bar crossing the upper lung zones.",
+      "tags": {
+        "topic": "bones",
+        "region": "chest",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-chest-scapula-right-id",
+      "kind": "Identify",
+      "renderer": "xray",
+      "study": "ts-s1337",
+      "target": "scapula_right",
+      "accept": [
+        "scapula_right"
+      ],
+      "prompt": "Click the right scapula.",
+      "hint": "Its medial border projects over the outer part of the upper lung field.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The scapula is a flat triangular bone on the posterior chest wall that carries the glenoid fossa of the shoulder. On a frontal radiograph its medial border and body overlie the lateral lung field, and rotating the arms out of the way moves it clear.",
+      "tags": {
+        "topic": "bones",
+        "region": "chest",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-chest-sternum-id",
+      "kind": "Identify",
+      "renderer": "xray",
+      "study": "ts-s1164",
+      "target": "sternum",
+      "accept": [
+        "sternum"
+      ],
+      "prompt": "Click the sternum.",
+      "hint": "On a lateral view it is the vertical bone forming the front of the chest wall.",
+      "view": "lateral",
+      "layers": [],
+      "explain": "The sternum has a manubrium, body and xiphoid process, and is the anchor for the costal cartilages of the upper seven ribs. On a lateral radiograph it is a dense vertical bar in front of the retrosternal clear space, and on a frontal film it hides behind the spine and heart.",
+      "tags": {
+        "topic": "bones",
+        "region": "chest",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-chest-trachea-id",
+      "kind": "Identify",
+      "renderer": "xray",
+      "study": "ts-s1042",
+      "target": "trachea",
+      "accept": [
+        "trachea"
+      ],
+      "prompt": "Click the trachea.",
+      "hint": "Look for the dark vertical air column just right of the midline above the heart.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The trachea is a cartilaginous airway that runs down the midline from the larynx and divides at the carina, usually at T4 to T5. On a radiograph it appears as a narrow black column of air in the midline, slightly displaced to the right by the aortic arch.",
+      "tags": {
+        "topic": "mediastinum",
+        "region": "chest",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-chest-aortic-arch-id",
+      "kind": "Identify",
+      "renderer": "xray",
+      "study": "ts-s1337",
+      "target": "aorta",
+      "accept": [
+        "aorta"
+      ],
+      "prompt": "Click the aorta.",
+      "hint": "Its arch forms a rounded knob at the upper left border of the mediastinum.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The aorta ascends from the left ventricle, arches over the left main bronchus and descends along the left of the vertebral column. On a radiograph the arch makes the aortic knuckle, a faint rounded soft-tissue contour at the upper left mediastinal border.",
+      "tags": {
+        "topic": "mediastinum",
+        "region": "chest",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-chest-rib-fracture-8",
+      "kind": "Clinical",
+      "renderer": "xray",
+      "study": "ts-s1164",
+      "target": "rib_right_8",
+      "accept": [
+        "rib_right_8"
+      ],
+      "prompt": "A cyclist falls onto the right side of the chest and has sharp pain on deep breathing, with focal tenderness over the lateral chest wall. A frontal film shows a cortical break low in the right ribcage. Click the rib that is fractured.",
+      "hint": "Count down from the first rib at the top; this one is about two thirds of the way down the right chest.",
+      "view": "ap",
+      "layers": [],
+      "explain": "Ribs 4 to 9 are the ones fractured most often, as they are long, thin and least protected laterally. On a radiograph a rib fracture is a lucent cortical step or line, and the film is also checked for pneumothorax and haemothorax.",
+      "tags": {
+        "topic": "bones",
+        "region": "chest",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-chest-pneumothorax-right",
+      "kind": "Clinical",
+      "renderer": "xray",
+      "study": "ts-s1042",
+      "target": "lung_upper_lobe_right",
+      "accept": [
+        "lung_upper_lobe_right",
+        "lung_middle_lobe_right",
+        "lung_lower_lobe_right"
+      ],
+      "prompt": "A tall, thin young man has sudden pleuritic chest pain and breathlessness. A film shows a visible pleural edge with no lung markings beyond it on the right. Click the lung that has partly collapsed.",
+      "hint": "The collapsed side is the patient's right, which is the left of the image.",
+      "view": "ap",
+      "layers": [],
+      "explain": "In a pneumothorax air enters the pleural space, and the elastic lung recoils towards the hilum. On an erect radiograph a thin visceral pleural line is seen with absent lung markings between it and the chest wall.",
+      "tags": {
+        "topic": "lungs",
+        "region": "chest",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-chest-cardiomegaly-id",
+      "kind": "Clinical",
+      "renderer": "xray",
+      "study": "ts-s1337",
+      "target": "heart",
+      "accept": [
+        "heart"
+      ],
+      "prompt": "A patient with long-standing hypertension and breathlessness has a cardiothoracic ratio above 0.5 on an AP film. Click the structure that is enlarged.",
+      "hint": "The cardiothoracic ratio compares the width of this organ with the width of the thorax.",
+      "view": "ap",
+      "layers": [],
+      "explain": "A cardiothoracic ratio over 0.5 on a PA film suggests cardiomegaly from ventricular hypertrophy, dilated cardiomyopathy or a pericardial effusion. On a radiograph the cardiac silhouette simply looks wider, and AP films exaggerate it.",
+      "tags": {
+        "topic": "heart",
+        "region": "chest",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-chest-left-hilar-mass",
+      "kind": "Clinical",
+      "renderer": "xray",
+      "study": "ts-s1164",
+      "target": "lung_upper_lobe_left",
+      "accept": [
+        "lung_upper_lobe_left",
+        "lung_lower_lobe_left"
+      ],
+      "prompt": "A long-term smoker with a cough and haemoptysis has a dense, lobulated enlargement of the left hilum on a frontal film. Click the lung whose hilum is enlarged.",
+      "hint": "The left hilum sits half way up the left lung, beside the heart.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The hila are formed by the pulmonary arteries, veins and main bronchi with their lymph nodes, and the left hilum normally lies higher than the right. On a radiograph a hilar mass is a dense lobulated shadow at the hilum, often with loss of the normal concave outline.",
+      "tags": {
+        "topic": "lungs",
+        "region": "chest",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-chest-silhouette-right-middle",
+      "kind": "Clinical",
+      "renderer": "xray",
+      "study": "ts-s1042",
+      "target": "lung_middle_lobe_right",
+      "accept": [
+        "lung_middle_lobe_right"
+      ],
+      "prompt": "A child with fever has a blurred right heart border on a frontal chest film, while the right hemidiaphragm stays sharp. Click the lobe that is consolidated.",
+      "hint": "The lobe that touches the right heart border is the small one between the other two.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The right middle lobe lies in front and abuts the right heart border, so consolidation there loses that edge, the silhouette sign. On a radiograph, airless lung is as dense as the heart and so the two merge instead of showing a boundary.",
+      "tags": {
+        "topic": "lungs",
+        "region": "chest",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-chest-clavicle-fracture-left",
+      "kind": "Clinical",
+      "renderer": "xray",
+      "study": "ts-s1337",
+      "target": "clavicula_left",
+      "accept": [
+        "clavicula_left"
+      ],
+      "prompt": "A footballer falls onto the point of his left shoulder and cannot lift the arm; the shoulder droops and there is a bump over the collarbone. Click the bone that is fractured.",
+      "hint": "It is the long, horizontal bone at the top of the chest.",
+      "view": "ap",
+      "layers": [],
+      "explain": "Most clavicle fractures occur in the middle third, where the bone is thinnest and has no ligament or muscle protection. On a radiograph the medial fragment is pulled up by sternocleidomastoid and the lateral fragment drops with the arm.",
+      "tags": {
+        "topic": "bones",
+        "region": "chest",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-chest-humerus-surgical-neck",
+      "kind": "Clinical",
+      "renderer": "xray",
+      "study": "ts-s1164",
+      "target": "humerus_right",
+      "accept": [
+        "humerus_right"
+      ],
+      "prompt": "An older woman falls onto her outstretched right arm and has a bruised, painful shoulder; a film shows a fracture through the surgical neck. Click the bone that is fractured.",
+      "hint": "It is the long bone of the upper arm, seen at the edge of the film.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The surgical neck of the humerus lies below the tubercles and is closely related to the axillary nerve and circumflex humeral vessels. On a radiograph it is the commonest proximal humeral fracture in osteoporotic bone and the humeral head is seen in line with, or displaced from, the shaft.",
+      "tags": {
+        "topic": "bones",
+        "region": "chest",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-chest-t12-compression",
+      "kind": "Clinical",
+      "renderer": "xray",
+      "study": "ts-s1337",
+      "target": "vertebrae_T12",
+      "accept": [
+        "vertebrae_T12"
+      ],
+      "prompt": "An older woman on long-term steroids has sudden back pain after lifting a bag. A lateral film shows loss of height in the front of a vertebra at the thoracolumbar junction. Click the twelfth thoracic vertebra.",
+      "hint": "Count up from the last rib-bearing vertebra at the bottom of the thoracic spine.",
+      "view": "lateral",
+      "layers": [],
+      "explain": "T12 sits at the thoracolumbar junction, where the stiff rib-supported thoracic spine meets the mobile lumbar spine, so wedge fractures often occur there. On a lateral radiograph each vertebral body is a rectangle of dense bone and a compression fracture makes it wedge-shaped with a sclerotic endplate.",
+      "tags": {
+        "topic": "spine",
+        "region": "chest",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-chest-first-rib-id",
+      "kind": "Identify",
+      "renderer": "xray",
+      "study": "ts-s1164",
+      "target": "rib_left_1",
+      "accept": [
+        "rib_left_1"
+      ],
+      "prompt": "Click the left first rib.",
+      "hint": "It is the short, flat, sharply curved rib at the very top of the left chest, under the clavicle.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The first rib is the shortest and broadest rib and carries grooves for the subclavian vessels and a tubercle for scalenus anterior. On a radiograph it is a short horizontal arc arching below the clavicle, and a cervical rib can look like an extra bone above it.",
+      "tags": {
+        "topic": "bones",
+        "region": "chest",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-chest-tension-trachea",
+      "kind": "Clinical",
+      "renderer": "xray",
+      "study": "ts-s1337",
+      "target": "trachea",
+      "accept": [
+        "trachea"
+      ],
+      "prompt": "After a stab wound, a patient is in extreme respiratory distress with absent breath sounds on one side and a hyperlucent hemithorax. Click the midline airway that is pushed away from the affected side.",
+      "hint": "It is the dark air-filled tube that runs down the middle of the neck and upper chest.",
+      "view": "ap",
+      "layers": [],
+      "explain": "In tension pneumothorax pressure builds up and pushes the mediastinum away from the affected side, so the trachea deviates and venous return falls. On a radiograph the trachea is a black column shifted from the midline, though treatment should not wait for a film.",
+      "tags": {
+        "topic": "mediastinum",
+        "region": "chest",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-chest-heart-lateral",
+      "kind": "Identify",
+      "renderer": "xray",
+      "study": "ts-s1164",
+      "target": "heart",
+      "accept": [
+        "heart"
+      ],
+      "prompt": "On this lateral view, click the heart.",
+      "hint": "It fills the lower front of the chest, behind the sternum and in front of the spine.",
+      "view": "lateral",
+      "layers": [],
+      "explain": "On the lateral view the right ventricle forms the lower retrosternal border and the left atrium the upper posterior border. On a radiograph the heart is a soft-tissue density behind the sternum, and loss of the clear retrosternal space suggests anterior enlargement.",
+      "tags": {
+        "topic": "heart",
+        "region": "chest",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved"
+      }
+    },
+    {
+      "id": "xr-chest-left-lower-collapse",
+      "kind": "Clinical",
+      "renderer": "xray",
+      "study": "ts-s1337",
+      "target": "lung_lower_lobe_left",
+      "accept": [
+        "lung_lower_lobe_left"
+      ],
+      "prompt": "After surgery, a patient with shallow breathing has a triangular density behind the heart on a frontal film and a raised left hemidiaphragm. Click the lobe that has collapsed.",
+      "hint": "It is the posterior lower lobe of the left lung, partly hidden behind the heart.",
+      "view": "ap",
+      "layers": [],
+      "explain": "The left lower lobe lies behind and below the heart, and when it collapses it shrinks into a triangle against the spine. On a radiograph this shows as a retrocardiac triangular density with the descending aorta outline lost behind the heart.",
+      "tags": {
+        "topic": "lungs",
+        "region": "chest",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved"
+      }
+    }
+  ]
+}
