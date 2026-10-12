@@ -174,6 +174,7 @@ function renderChooser() {
       b.addEventListener("click", () => {
         selectedSet = s.id;
         renderChooser();
+        showFor(s); // the chosen set's model or scan appears behind the card right away
       });
       return b;
     }));
@@ -182,12 +183,9 @@ function renderChooser() {
 }
 renderChooser();
 
-// A shared link plays exactly its questions; otherwise the chosen set.
-let pendingShared = initial.explicit;
-
-// Make the set's renderer the active one (building a model or scan viewer on first use), then play.
-async function begin(setId, replay = false) {
-  const set = sets.find((s) => s.id === setId) || sets[0];
+// Make a set's renderer the active one (building a model or scan viewer on first use).
+// Returns false when it could not load; the page then shows why.
+async function showFor(set) {
   const isScan = set.renderer === "volume";
   const wanted = isScan ? set.study : set.model;
   const needsBuild = isScan ? renderer.study !== set.study : renderer.model !== set.model;
@@ -204,11 +202,50 @@ async function begin(setId, replay = false) {
     $("loading").textContent = `Couldn't load the ${isScan ? "scan" : "model"}. Please reload the page. (${err?.message || err})`;
     $("loading").hidden = false;
     buttons.forEach((b) => (b.disabled = false));
-    return;
+    return false;
   }
   $("loading").hidden = true;
   buttons.forEach((b) => (b.disabled = false));
-  engine.start(setId, replay);
+  return true;
+}
+
+// ---------- Explore (no questions) ----------
+// One entry per 3D model and per scan study: the viewer with its layers, zoom buttons,
+// cross-section or slice tools, and hover names, without a quiz.
+const explore = [
+  ...Object.entries(CONFIG.models).map(([model, m]) => ({ id: `model:${model}`, title: m.title, renderer: "mesh", model })),
+  ...[...new Map(bank.questions.filter((q) => q.renderer === "volume" && q.study).map((q) => [q.study, q])).values()].map((q) => ({
+    id: `study:${q.study}`, renderer: "volume", study: q.study,
+    title: `${q.tags?.modality || "CT"}: ${(q.tags?.region || "").replace(/^./, (c) => c.toUpperCase())} (${q.study.replace(/^ts-|^msd-/, "").replace(/-?example-sm$/, "sample")})`,
+  })),
+];
+$("explore-row").replaceChildren(...explore.map((e) => {
+  const b = document.createElement("button");
+  b.type = "button";
+  b.className = "chip";
+  b.textContent = e.title;
+  b.addEventListener("click", async () => {
+    if (!(await showFor(e))) return;
+    $("intro").hidden = true;
+    $("explore-title").textContent = e.title;
+    $("explore-bar").hidden = false;
+    renderer.setPickEnabled(false); // clicks and hovers show names
+    track("explore", { what: e.id });
+  });
+  return b;
+}));
+$("explore-back").addEventListener("click", () => {
+  $("explore-bar").hidden = true;
+  engine.intro();
+});
+
+// A shared link plays exactly its questions; otherwise the chosen set.
+let pendingShared = initial.explicit;
+
+// Load what the set is asked on, then play.
+async function begin(setId, replay = false) {
+  const set = sets.find((s) => s.id === setId) || sets[0];
+  if (await showFor(set)) engine.start(setId, replay);
 }
 $("start").addEventListener("click", () => {
   const id = pendingShared ? "custom" : selectedSet;
@@ -216,10 +253,9 @@ $("start").addEventListener("click", () => {
   begin(id);
 });
 $("again").addEventListener("click", () => begin(engine.set.id, true));
-$("new-set").addEventListener("click", async () => {
+$("new-set").addEventListener("click", () => {
   pendingShared = false;
-  await renderer.activate("mesh"); // back to the last model behind the chooser (already built)
-  engine.intro();
+  engine.intro(); // the last model or scan stays behind the chooser
 });
 $("next").addEventListener("click", () => engine.next());
 

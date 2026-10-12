@@ -153,8 +153,9 @@ async function playCT(page) {
   failures += failed;
   console.log("share text:", await page.evaluate(() => window.__app.engine.shareText()));
   await page.click("#new-set");
-  const shown = await page.evaluate(() => getComputedStyle(document.getElementById("controls")).display !== "none");
-  console.log(`${shown ? "ok  " : "FAIL"} mesh #controls visible again after New set`);
+  // The scan stays behind the chooser (explore mode); the set chooser is back.
+  const shown = await page.evaluate(() => !document.getElementById("intro").hidden && document.getElementById("set-chooser").children.length > 0);
+  console.log(`${shown ? "ok  " : "FAIL"} set chooser back after New set`);
   console.log(`studies played: ${[...new Set(await page.evaluate(() => window.__app.QUESTIONS.map((q) => q.study)))].join(", ")}`);
   if (shown === false) failures++;
 }
