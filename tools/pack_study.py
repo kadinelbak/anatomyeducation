@@ -25,9 +25,10 @@ GROUPS = [
     (r"^(aorta|.*artery|.*vein|.*vena_cava|portal_vein|brachiocephalic|subclavian|iliac_artery|iliac_vena|pulmonary_vein)", "vessel"),
     (r"^(vertebrae|rib_|sacrum|hip|femur|humerus|scapula|clavicula|sternum|costal_cartilages|skull|intervertebral_discs)", "bone"),
     (r"^(gluteus|iliopsoas|autochthon|quadriceps|thigh_|sartorius)", "muscle"),
-    (r"^(heart|atrial_appendage)", "heart"),
+    (r"^(heart|atrial_appendage|left_atrium)", "heart"),
     (r"^(esophagus|stomach|duodenum|small_bowel|colon|urinary_bladder)", "hollow"),
-    (r"^(brain|spinal_cord)", "nervous"),
+    (r"^(.*ventricle|csf|choroid_plexus)", "csf"),
+    (r"^(brain|spinal_cord|hippocampus|cerebral|cerebellum|thalamus|caudate|putamen|pallidum|amygdala|accumbens|ventral_diencephalon|optic_chiasm|corpus_callosum)", "nervous"),
 ]
 
 OVERRIDES = {
@@ -47,6 +48,46 @@ OVERRIDES = {
     "prostate": "Prostate",
     "peripheral_zone": "Peripheral zone of the prostate",
     "transition_zone": "Transition zone of the prostate",
+    "left_atrium": "Left atrium",
+    "hippocampus_head": "Hippocampal head (anterior hippocampus)",
+    "hippocampus_body": "Hippocampal body and tail (posterior hippocampus)",
+    # MNI152 / FreeSurfer aseg brain structures
+    "cerebral_white_matter_left": "Left cerebral white matter",
+    "cerebral_cortex_left": "Left cerebral cortex",
+    "lateral_ventricle_left": "Left lateral ventricle",
+    "inferior_lateral_ventricle_left": "Left temporal horn of the lateral ventricle",
+    "cerebellum_white_matter_left": "Left cerebellar white matter",
+    "cerebellum_cortex_left": "Left cerebellar cortex",
+    "thalamus_left": "Left thalamus",
+    "caudate_left": "Left caudate nucleus",
+    "putamen_left": "Left putamen",
+    "pallidum_left": "Left globus pallidus",
+    "third_ventricle": "Third ventricle",
+    "fourth_ventricle": "Fourth ventricle",
+    "brainstem": "Brainstem",
+    "hippocampus_left": "Left hippocampus",
+    "amygdala_left": "Left amygdala",
+    "csf": "Cerebrospinal fluid outside the ventricles",
+    "accumbens_left": "Left nucleus accumbens",
+    "ventral_diencephalon_left": "Left ventral diencephalon (hypothalamus and subthalamic region)",
+    "choroid_plexus_left": "Left choroid plexus",
+    "cerebral_white_matter_right": "Right cerebral white matter",
+    "cerebral_cortex_right": "Right cerebral cortex",
+    "lateral_ventricle_right": "Right lateral ventricle",
+    "inferior_lateral_ventricle_right": "Right temporal horn of the lateral ventricle",
+    "cerebellum_white_matter_right": "Right cerebellar white matter",
+    "cerebellum_cortex_right": "Right cerebellar cortex",
+    "thalamus_right": "Right thalamus",
+    "caudate_right": "Right caudate nucleus",
+    "putamen_right": "Right putamen",
+    "pallidum_right": "Right globus pallidus",
+    "hippocampus_right": "Right hippocampus",
+    "amygdala_right": "Right amygdala",
+    "accumbens_right": "Right nucleus accumbens",
+    "ventral_diencephalon_right": "Right ventral diencephalon (hypothalamus and subthalamic region)",
+    "choroid_plexus_right": "Right choroid plexus",
+    "optic_chiasm": "Optic chiasm",
+    "corpus_callosum": "Corpus callosum",
 }
 
 # Hounsfield presets, unchanged from the CT packer.
@@ -76,6 +117,24 @@ def group_of(key):
     for pat, g in GROUPS:
         if re.match(pat, key): return g
     return "organ"
+
+
+def reorient(img, seg, spacing, codes):
+    """Reorder stored axes labelled by `codes` (one of R/L, A/P, S/I per axis) into RAS.
+    Some public NIfTIs (the Decathlon heart set) carry an identity affine, so the
+    header cannot tell the renderer which way is up; this says it explicitly."""
+    if sorted(c in "RL" for c in codes) != [False, False, True] or len(codes) != 3 or \
+       sum(c in "AP" for c in codes) != 1 or sum(c in "SI" for c in codes) != 1:
+        sys.exit(f"--axes must name one of R/L, A/P, S/I per axis, got {codes}")
+    order, flips = [], []
+    for want, opposite in (("R", "L"), ("A", "P"), ("S", "I")):
+        ax = next(i for i, c in enumerate(codes) if c in (want, opposite))
+        order.append(ax); flips.append(codes[ax] == opposite)
+    img = np.transpose(img, order); seg = np.transpose(seg, order)
+    spacing = [spacing[i] for i in order]
+    for ax, f in enumerate(flips):
+        if f: img = np.flip(img, ax); seg = np.flip(seg, ax)
+    return np.ascontiguousarray(img), np.ascontiguousarray(seg), spacing
 
 
 def mr_rescale(img):
@@ -123,6 +182,8 @@ def main():
     ap.add_argument("--margin", type=int, default=8)
     ap.add_argument("--max-dim", type=int, default=0, help="downsample so no axis exceeds this many voxels")
     ap.add_argument("--b64", action="store_true", help="also write <file>.b64.txt copies for text-only hosts")
+    ap.add_argument("--axes", default="", help="anatomical direction of the stored axes when the NIfTI header is wrong, "
+                    "e.g. ASL (axis 0 runs to Anterior, 1 to Superior, 2 to patient Left); the arrays are reordered to RAS")
     a = ap.parse_args()
     if a.modality == "MR" and not a.sequence:
         sys.exit("--sequence is required for MR studies (T1, T2, ...)")
@@ -136,6 +197,8 @@ def main():
     if img.shape != seg.shape:
         sys.exit(f"shape mismatch: image {img.shape} vs seg {seg.shape}")
     spacing = [float(z) for z in img_img.header.get_zooms()[:3]]
+    if a.axes:
+        img, seg, spacing = reorient(img, seg, spacing, a.axes.upper())
 
     if a.crop:
         nz = np.argwhere(seg > 0)

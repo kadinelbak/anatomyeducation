@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "region": "mri-heart",
+  "study": "msd-heart-03",
+  "modality": "MRI",
+  "sequence": "3D",
+  "questions": [
+    {
+      "id": "mr-la-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "msd-heart-03",
+      "target": "left_atrium",
+      "accept": [
+        "left_atrium"
+      ],
+      "prompt": "On this 3D cardiac MRI, click the left atrium.",
+      "hint": "The chamber at the back of the heart, behind the left ventricle and in front of the spine, receiving the pulmonary veins.",
+      "view": "left_atrium",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The left atrium is the most posterior cardiac chamber, lying just in front of the oesophagus and descending aorta and receiving the four pulmonary veins. On bright-blood MRI its blood pool is bright and its thin wall is barely visible.",
+      "tags": {
+        "topic": "cardiac",
+        "region": "thorax",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "3D"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-la-af-ablation",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "msd-heart-03",
+      "target": "left_atrium",
+      "accept": [
+        "left_atrium"
+      ],
+      "prompt": "A 60-year-old with atrial fibrillation is booked for pulmonary vein isolation. A 3D MRI is acquired to map the veins' entry into the chamber the ablation is performed in. Click that chamber.",
+      "hint": "The posterior chamber that the pulmonary veins drain into.",
+      "view": "left_atrium",
+      "layers": [],
+      "explain": "Pulmonary vein isolation ablates tissue in the left atrium around the ostia of the pulmonary veins, where the ectopic beats driving atrial fibrillation usually start. A pre-procedure 3D MRI or CT of the left atrium gives the electrophysiologist the vein anatomy.",
+      "tags": {
+        "topic": "cardiac",
+        "region": "thorax",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "3D"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-la-mitral-stenosis",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "msd-heart-03",
+      "target": "left_atrium",
+      "accept": [
+        "left_atrium"
+      ],
+      "prompt": "A 55-year-old with rheumatic mitral stenosis has worsening breathlessness and a new irregular pulse. On this cardiac MRI, click the chamber that enlarges under the raised pressure upstream of the narrowed valve.",
+      "hint": "Immediately upstream of the mitral valve.",
+      "view": "left_atrium",
+      "layers": [],
+      "explain": "Mitral stenosis obstructs flow from the left atrium into the left ventricle, so left atrial pressure rises and the atrium dilates. The stretched atrium is prone to atrial fibrillation and thrombus, and the back pressure causes pulmonary congestion.",
+      "tags": {
+        "topic": "cardiac",
+        "region": "thorax",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "3D"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-la-thrombus-stroke",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "msd-heart-03",
+      "target": "left_atrium",
+      "accept": [
+        "left_atrium"
+      ],
+      "prompt": "A 72-year-old with untreated atrial fibrillation has an embolic stroke. On this cardiac MRI, click the chamber whose appendage is the usual source of the clot.",
+      "hint": "The chamber that fibrillates, at the back of the heart.",
+      "view": "left_atrium",
+      "layers": [],
+      "explain": "In atrial fibrillation the left atrium does not contract effectively, so blood stagnates, especially in the left atrial appendage, and forms thrombus that can embolise to the brain. This is why anticoagulation is given according to stroke risk scores.",
+      "tags": {
+        "topic": "cardiac",
+        "region": "thorax",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "3D"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    }
+  ]
+}

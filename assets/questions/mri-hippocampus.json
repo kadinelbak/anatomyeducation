@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "region": "mri-hippocampus",
+  "study": "msd-hippocampus-01",
+  "modality": "MRI",
+  "sequence": "T1",
+  "questions": [
+    {
+      "id": "mr-hippo-head-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "msd-hippocampus-01",
+      "target": "hippocampus_head",
+      "accept": [
+        "hippocampus_head"
+      ],
+      "prompt": "On this T1-weighted MRI, cropped around one hippocampus, click the hippocampal head.",
+      "hint": "The anterior, bulbous end of the hippocampus, which lies behind the amygdala.",
+      "view": "hippocampus_head",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The hippocampal head is the anterior, thickest part, with the digitations that give it a paw-like outline on coronal images. It lies in the medial temporal lobe just behind the amygdala and in front of the body and tail.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-hippo-body-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "msd-hippocampus-01",
+      "target": "hippocampus_body",
+      "accept": [
+        "hippocampus_body"
+      ],
+      "prompt": "On this T1-weighted MRI, cropped around one hippocampus, click the hippocampal body or tail.",
+      "hint": "The longer, thinner part running posteriorly along the floor of the temporal horn.",
+      "view": "hippocampus_body",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The body and tail of the hippocampus curve back along the floor of the temporal horn of the lateral ventricle toward the splenium of the corpus callosum. The fornix arises from the tail as the fimbria.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-hippo-alzheimer",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "msd-hippocampus-01",
+      "target": "hippocampus_head",
+      "accept": [
+        "hippocampus_head",
+        "hippocampus_body"
+      ],
+      "prompt": "A 74-year-old has two years of progressive memory loss for recent events. Volumetric MRI shows atrophy of the medial temporal lobe. Click the structure whose shrinkage is measured in this disease.",
+      "hint": "The structure this scan is cropped around.",
+      "view": "hippocampus_head",
+      "layers": [],
+      "explain": "Hippocampal atrophy, graded on coronal T1 images by the medial temporal atrophy score or measured volumetrically, is the characteristic structural finding of Alzheimer's disease and tracks episodic memory loss. Either part of the hippocampus is accepted here.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-hippo-mts",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "msd-hippocampus-01",
+      "target": "hippocampus_body",
+      "accept": [
+        "hippocampus_body",
+        "hippocampus_head"
+      ],
+      "prompt": "A 28-year-old has focal seizures with a rising epigastric aura and lip smacking since childhood febrile convulsions. MRI shows a small, bright hippocampus on T2 with loss of its internal structure. Click the structure that is sclerosed.",
+      "hint": "The structure this scan is cropped around.",
+      "view": "hippocampus_body",
+      "layers": [],
+      "explain": "Mesial temporal sclerosis, the commonest cause of drug-resistant temporal lobe epilepsy, shows as a small hippocampus with high T2 or FLAIR signal and lost internal architecture. Surgical resection can cure the seizures. Either part of the hippocampus is accepted here.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    }
+  ]
+}

@@ -3,6 +3,7 @@ import { CONFIG } from "./config.js";
 import { track, visitor, checkReturnVisit } from "./analytics.js";
 import { loadBanks } from "./bank.js";
 import { buildSets, resolveSet } from "./sets.js";
+import { buildBodyMap, buildFigure, studyLabel } from "./bodymap.js";
 import { createEngine, fmtTime } from "./engine.js";
 import { createRendererSwitch } from "./renderers/switch.js";
 import { WebGLUnavailableError, webglHelp } from "./webgl-probe.js";
@@ -78,7 +79,8 @@ try {
   bank = await loadBanks([
     "assets/questions/upper-limb.json", "assets/questions/lower-limb.json",
     "assets/questions/ct-trunk.json", "assets/questions/ct-chest.json",
-    "assets/questions/mri-abdomen.json", "assets/questions/mri-prostate.json",
+    "assets/questions/mri-abdomen.json", "assets/questions/mri-prostate.json", "assets/questions/mri-heart.json", "assets/questions/mri-hippocampus.json",
+    "assets/questions/mri-brain-t1.json", "assets/questions/mri-brain-t2.json", "assets/questions/mri-brain-pd.json",
     "assets/questions/xray-chest.json", "assets/questions/xray-abdomen.json", "assets/questions/us-trunk.json",
   ]);
 } catch (err) {
@@ -216,33 +218,71 @@ async function showFor(set) {
 }
 
 // ---------- Explore (no questions) ----------
-// One entry per 3D model and per scan study: the viewer with its layers, zoom buttons,
-// cross-section or slice tools, and hover names, without a quiz.
-const explore = [
-  ...Object.entries(CONFIG.models).map(([model, m]) => ({ id: `model:${model}`, title: m.title, renderer: "mesh", model })),
-  ...[...new Map(bank.questions.filter((q) => SCAN_KINDS.includes(q.renderer) && q.study).map((q) => [q.renderer + ":" + q.study, q])).values()].map((q) => {
-    const region = (q.tags?.region || "").replace(/^./, (c) => c.toUpperCase());
-    const study = q.study.replace(/^ts-|^msd-/, "").replace(/-?example-sm$/, "sample");
-    const lead = q.renderer === "xray" ? "X-ray" : q.renderer === "ultrasound" ? "Ultrasound" : q.tags?.modality || "CT";
-    return { id: `${q.renderer === "volume" ? "study" : q.renderer}:${q.study}`, renderer: q.renderer, study: q.study, title: `${lead}: ${region} (${study})` };
-  }),
-];
-$("explore-row").replaceChildren(...explore.map((e) => {
+// A body map: click a region of the figure (or its name), then choose what to look at there:
+// the 3D model, or a CT, MRI, X-ray or ultrasound study of that region. The viewer keeps its
+// layers, zoom buttons, cross-section or slice tools, and hover names, without a quiz.
+const regions = buildBodyMap(bank.questions, CONFIG.models);
+let exploring = null; // { region, option, study }
+const figure = buildFigure(regions);
+$("figure-slot").replaceChildren(figure);
+$("explore-row").replaceChildren(...regions.map((r) => {
   const b = document.createElement("button");
   b.type = "button";
   b.className = "chip";
-  b.textContent = e.title;
-  b.addEventListener("click", async () => {
-    if (!(await showFor(e))) return;
-    $("intro").hidden = true;
-    $("explore-title").textContent = e.title;
-    $("explore-bar").hidden = false;
-    renderer.setPickEnabled(false); // clicks and hovers show names
-    track("explore", { what: e.id });
-  });
+  b.dataset.region = r.id;
+  b.textContent = r.title;
+  b.title = r.options.map((o) => o.modality).join(", ");
   return b;
 }));
+const regionOf = (el) => regions.find((r) => r.id === el?.closest?.("[data-region]")?.dataset.region);
+figure.addEventListener("click", (e) => { const r = regionOf(e.target); if (r) exploreRegion(r); });
+figure.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { const r = regionOf(e.target); if (r) { e.preventDefault(); exploreRegion(r); } } });
+$("explore-row").addEventListener("click", (e) => { const r = regionOf(e.target); if (r) exploreRegion(r); });
+
+// Open a region on its first option (the 3D model where there is one, else the first modality).
+function exploreRegion(region) {
+  figure.querySelectorAll(".zone").forEach((z) => z.classList.toggle("selected", z.dataset.region === region.id));
+  exploreOption(region, region.options[0]);
+}
+
+async function exploreOption(region, option, study = option.studies?.[0]) {
+  exploring = { region, option, study };
+  renderExploreBar();
+  const ok = await showFor(option.renderer === "mesh" ? { renderer: "mesh", model: option.model } : { renderer: option.renderer, study });
+  if (!ok || exploring?.option !== option || exploring.study !== study) return; // a later click won
+  if (option.renderer === "mesh" && option.focus) renderer.mesh?.debug.setView?.("palmar", option.focus);
+  $("intro").hidden = true;
+  $("explore-bar").hidden = false;
+  renderer.setPickEnabled(false); // clicks and hovers show names
+  track("explore", { what: option.id, study });
+}
+
+// The explore bar: the region, one chip per modality, a study picker when a modality has several.
+function renderExploreBar() {
+  const { region, option, study } = exploring;
+  $("explore-title").textContent = region.title;
+  $("explore-modalities").replaceChildren(...region.options.map((o) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "chip";
+    b.textContent = o.label;
+    b.setAttribute("aria-pressed", String(o === option));
+    b.addEventListener("click", () => { if (o !== option) exploreOption(region, o); });
+    return b;
+  }));
+  const pick = $("explore-study");
+  if ((option.studies?.length || 0) > 1) {
+    pick.replaceChildren(...option.studies.map((id) => {
+      const op = document.createElement("option");
+      op.value = id; op.textContent = `Study: ${studyLabel(id, option.sequences?.[id])}`; op.selected = id === study;
+      return op;
+    }));
+    pick.hidden = false;
+  } else pick.hidden = true;
+}
+$("explore-study").addEventListener("change", (e) => exploreOption(exploring.region, exploring.option, e.target.value));
 $("explore-back").addEventListener("click", () => {
+  exploring = null;
   $("explore-bar").hidden = true;
   engine.intro();
 });

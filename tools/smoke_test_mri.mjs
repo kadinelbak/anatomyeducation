@@ -101,6 +101,8 @@ await play("mri:abdomen", { title: "MRI: Abdomen", badge: "MRI · T1" });
 const bank = (await (await fetch(url.split("?")[0] + "assets/questions/mri-abdomen.json")).json()).questions.map((q) => q.id);
 for (let b = 0; b * 10 < bank.length; b++) await play("q=" + bank.slice(b * 10, b * 10 + 10).join(","), { badge: "MRI · T1" });
 await play("mri:pelvis", { title: "MRI: Pelvis", badge: "MRI · T2" });
+await play("mri:thorax", { title: "MRI: Thorax", badge: "MRI · 3D" });
+await play("mri:head", { title: "MRI: Head", badge: "MRI · T1" });
 // The CT set must be untouched by the patch.
 {
   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });

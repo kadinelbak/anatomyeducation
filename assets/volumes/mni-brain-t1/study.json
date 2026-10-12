@@ -1,0 +1,432 @@
+{
+ "id": "mni-brain-t1",
+ "source": "ICBM 152 Nonlinear Asymmetrical template 2009c (T1), via TemplateFlow; labels: FreeSurfer aseg of the template",
+ "license": "MNI (free use with attribution)",
+ "attribution": "ICBM 152 2009c template (Fonov et al., MNI)",
+ "dims": [
+  130,
+  160,
+  138
+ ],
+ "spacing": [
+  1.2063,
+  1.2063,
+  1.2063
+ ],
+ "orientation": "RAS",
+ "modality": "MR",
+ "sourceUrl": "https://www.templateflow.org/",
+ "sequence": "T1",
+ "sequenceLabel": "T1-weighted (MNI152 2009c average brain, 1 mm)",
+ "intensity": {
+  "units": "arbitrary",
+  "stored_range": [
+   0,
+   4095
+  ],
+  "rescaled_from": [
+   401.67,
+   9332.02
+  ],
+  "note": "0.5th..99.8th percentile of the source image mapped to 0..4095"
+ },
+ "image": {
+  "file": "image.i16.gz",
+  "dtype": "int16"
+ },
+ "ct": {
+  "file": "image.i16.gz",
+  "dtype": "int16"
+ },
+ "labels": {
+  "file": "labels.u8.gz",
+  "dtype": "uint8"
+ },
+ "defaultWindow": "soft",
+ "windows": {
+  "soft": {
+   "width": 3970,
+   "level": 1994,
+   "label": "Default"
+  },
+  "tissue": {
+   "width": 3581,
+   "level": 2116,
+   "label": "Tissue"
+  },
+  "bright": {
+   "width": 1235,
+   "level": 3478,
+   "label": "Bright"
+  },
+  "dark": {
+   "width": 2549,
+   "level": 1275,
+   "label": "Dark"
+  }
+ },
+ "structures": {
+  "1": {
+   "key": "cerebral_white_matter_left",
+   "name": "Left cerebral white matter",
+   "group": "nervous"
+  },
+  "2": {
+   "key": "cerebral_cortex_left",
+   "name": "Left cerebral cortex",
+   "group": "nervous"
+  },
+  "3": {
+   "key": "lateral_ventricle_left",
+   "name": "Left lateral ventricle",
+   "group": "csf"
+  },
+  "4": {
+   "key": "inferior_lateral_ventricle_left",
+   "name": "Left temporal horn of the lateral ventricle",
+   "group": "csf"
+  },
+  "5": {
+   "key": "cerebellum_white_matter_left",
+   "name": "Left cerebellar white matter",
+   "group": "nervous"
+  },
+  "6": {
+   "key": "cerebellum_cortex_left",
+   "name": "Left cerebellar cortex",
+   "group": "nervous"
+  },
+  "7": {
+   "key": "thalamus_left",
+   "name": "Left thalamus",
+   "group": "nervous"
+  },
+  "8": {
+   "key": "caudate_left",
+   "name": "Left caudate nucleus",
+   "group": "nervous"
+  },
+  "9": {
+   "key": "putamen_left",
+   "name": "Left putamen",
+   "group": "nervous"
+  },
+  "10": {
+   "key": "pallidum_left",
+   "name": "Left globus pallidus",
+   "group": "nervous"
+  },
+  "11": {
+   "key": "third_ventricle",
+   "name": "Third ventricle",
+   "group": "csf"
+  },
+  "12": {
+   "key": "fourth_ventricle",
+   "name": "Fourth ventricle",
+   "group": "csf"
+  },
+  "13": {
+   "key": "brainstem",
+   "name": "Brainstem",
+   "group": "nervous"
+  },
+  "14": {
+   "key": "hippocampus_left",
+   "name": "Left hippocampus",
+   "group": "bone"
+  },
+  "15": {
+   "key": "amygdala_left",
+   "name": "Left amygdala",
+   "group": "nervous"
+  },
+  "16": {
+   "key": "csf",
+   "name": "Cerebrospinal fluid outside the ventricles",
+   "group": "csf"
+  },
+  "17": {
+   "key": "accumbens_left",
+   "name": "Left nucleus accumbens",
+   "group": "nervous"
+  },
+  "18": {
+   "key": "ventral_diencephalon_left",
+   "name": "Left ventral diencephalon (hypothalamus and subthalamic region)",
+   "group": "nervous"
+  },
+  "19": {
+   "key": "choroid_plexus_left",
+   "name": "Left choroid plexus",
+   "group": "csf"
+  },
+  "20": {
+   "key": "cerebral_white_matter_right",
+   "name": "Right cerebral white matter",
+   "group": "nervous"
+  },
+  "21": {
+   "key": "cerebral_cortex_right",
+   "name": "Right cerebral cortex",
+   "group": "nervous"
+  },
+  "22": {
+   "key": "lateral_ventricle_right",
+   "name": "Right lateral ventricle",
+   "group": "csf"
+  },
+  "23": {
+   "key": "inferior_lateral_ventricle_right",
+   "name": "Right temporal horn of the lateral ventricle",
+   "group": "csf"
+  },
+  "24": {
+   "key": "cerebellum_white_matter_right",
+   "name": "Right cerebellar white matter",
+   "group": "nervous"
+  },
+  "25": {
+   "key": "cerebellum_cortex_right",
+   "name": "Right cerebellar cortex",
+   "group": "nervous"
+  },
+  "26": {
+   "key": "thalamus_right",
+   "name": "Right thalamus",
+   "group": "nervous"
+  },
+  "27": {
+   "key": "caudate_right",
+   "name": "Right caudate nucleus",
+   "group": "nervous"
+  },
+  "28": {
+   "key": "putamen_right",
+   "name": "Right putamen",
+   "group": "nervous"
+  },
+  "29": {
+   "key": "pallidum_right",
+   "name": "Right globus pallidus",
+   "group": "nervous"
+  },
+  "30": {
+   "key": "hippocampus_right",
+   "name": "Right hippocampus",
+   "group": "bone"
+  },
+  "31": {
+   "key": "amygdala_right",
+   "name": "Right amygdala",
+   "group": "nervous"
+  },
+  "32": {
+   "key": "accumbens_right",
+   "name": "Right nucleus accumbens",
+   "group": "nervous"
+  },
+  "33": {
+   "key": "ventral_diencephalon_right",
+   "name": "Right ventral diencephalon (hypothalamus and subthalamic region)",
+   "group": "nervous"
+  },
+  "34": {
+   "key": "choroid_plexus_right",
+   "name": "Right choroid plexus",
+   "group": "csf"
+  },
+  "35": {
+   "key": "optic_chiasm",
+   "name": "Optic chiasm",
+   "group": "nervous"
+  },
+  "36": {
+   "key": "corpus_callosum",
+   "name": "Corpus callosum",
+   "group": "nervous"
+  }
+ },
+ "views": {
+  "cerebral_white_matter_left": {
+   "plane": "axial",
+   "frac": 0.584,
+   "window": "soft"
+  },
+  "cerebral_cortex_left": {
+   "plane": "axial",
+   "frac": 0.569,
+   "window": "soft"
+  },
+  "lateral_ventricle_left": {
+   "plane": "axial",
+   "frac": 0.555,
+   "window": "soft"
+  },
+  "inferior_lateral_ventricle_left": {
+   "plane": "axial",
+   "frac": 0.372,
+   "window": "soft"
+  },
+  "cerebellum_white_matter_left": {
+   "plane": "axial",
+   "frac": 0.255,
+   "window": "soft"
+  },
+  "cerebellum_cortex_left": {
+   "plane": "axial",
+   "frac": 0.248,
+   "window": "soft"
+  },
+  "thalamus_left": {
+   "plane": "axial",
+   "frac": 0.511,
+   "window": "soft"
+  },
+  "caudate_left": {
+   "plane": "axial",
+   "frac": 0.526,
+   "window": "soft"
+  },
+  "putamen_left": {
+   "plane": "axial",
+   "frac": 0.467,
+   "window": "soft"
+  },
+  "pallidum_left": {
+   "plane": "axial",
+   "frac": 0.46,
+   "window": "soft"
+  },
+  "third_ventricle": {
+   "plane": "axial",
+   "frac": 0.445,
+   "window": "soft"
+  },
+  "fourth_ventricle": {
+   "plane": "axial",
+   "frac": 0.255,
+   "window": "soft"
+  },
+  "brainstem": {
+   "plane": "axial",
+   "frac": 0.263,
+   "window": "soft"
+  },
+  "hippocampus_left": {
+   "plane": "axial",
+   "frac": 0.38,
+   "window": "soft"
+  },
+  "amygdala_left": {
+   "plane": "axial",
+   "frac": 0.35,
+   "window": "soft"
+  },
+  "csf": {
+   "plane": "axial",
+   "frac": 0.526,
+   "window": "soft"
+  },
+  "accumbens_left": {
+   "plane": "axial",
+   "frac": 0.416,
+   "window": "soft"
+  },
+  "ventral_diencephalon_left": {
+   "plane": "axial",
+   "frac": 0.401,
+   "window": "soft"
+  },
+  "choroid_plexus_left": {
+   "plane": "axial",
+   "frac": 0.526,
+   "window": "soft"
+  },
+  "cerebral_white_matter_right": {
+   "plane": "axial",
+   "frac": 0.584,
+   "window": "soft"
+  },
+  "cerebral_cortex_right": {
+   "plane": "axial",
+   "frac": 0.569,
+   "window": "soft"
+  },
+  "lateral_ventricle_right": {
+   "plane": "axial",
+   "frac": 0.555,
+   "window": "soft"
+  },
+  "inferior_lateral_ventricle_right": {
+   "plane": "axial",
+   "frac": 0.343,
+   "window": "soft"
+  },
+  "cerebellum_white_matter_right": {
+   "plane": "axial",
+   "frac": 0.255,
+   "window": "soft"
+  },
+  "cerebellum_cortex_right": {
+   "plane": "axial",
+   "frac": 0.248,
+   "window": "soft"
+  },
+  "thalamus_right": {
+   "plane": "axial",
+   "frac": 0.511,
+   "window": "soft"
+  },
+  "caudate_right": {
+   "plane": "axial",
+   "frac": 0.533,
+   "window": "soft"
+  },
+  "putamen_right": {
+   "plane": "axial",
+   "frac": 0.467,
+   "window": "soft"
+  },
+  "pallidum_right": {
+   "plane": "axial",
+   "frac": 0.46,
+   "window": "soft"
+  },
+  "hippocampus_right": {
+   "plane": "axial",
+   "frac": 0.387,
+   "window": "soft"
+  },
+  "amygdala_right": {
+   "plane": "axial",
+   "frac": 0.35,
+   "window": "soft"
+  },
+  "accumbens_right": {
+   "plane": "axial",
+   "frac": 0.423,
+   "window": "soft"
+  },
+  "ventral_diencephalon_right": {
+   "plane": "axial",
+   "frac": 0.409,
+   "window": "soft"
+  },
+  "choroid_plexus_right": {
+   "plane": "axial",
+   "frac": 0.526,
+   "window": "soft"
+  },
+  "optic_chiasm": {
+   "plane": "axial",
+   "frac": 0.365,
+   "window": "soft"
+  },
+  "corpus_callosum": {
+   "plane": "axial",
+   "frac": 0.562,
+   "window": "soft"
+  }
+ }
+}

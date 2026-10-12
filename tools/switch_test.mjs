@@ -8,7 +8,7 @@ const check = (ok, msg) => { console.log(`${ok ? "ok  " : "FAIL"} ${msg}`); if (
 await page.goto(base);
 await page.waitForFunction(() => !document.getElementById("start").disabled, null, { timeout: 90000 });
 const groups = await page.$$eval(".chooser-group", (els) => els.map((e) => e.textContent));
-check(groups.join("|") === "Upper limb|Lower limb|Scans", `chooser groups: ${groups.join(" | ")}`);
+check(groups.join("|") === "Upper limb|Lower limb|Scans|X-ray|Ultrasound", `chooser groups: ${groups.join(" | ")}`);
 const dom = () => page.evaluate(() => ({
   zoom: [...document.querySelectorAll("#zoom-row [data-focus]")].map((b) => b.textContent).join(","),
   views: [...document.querySelectorAll("[data-view]")].map((b) => b.textContent).join(","),

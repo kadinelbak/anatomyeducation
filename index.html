@@ -32,18 +32,23 @@
   <section id="intro" class="card intro">
     <p id="shared-banner" class="shared-banner" hidden></p>
     <h1>Anatomy in 3D</h1>
-    <p>Rotate, peel back layers, and click the structure. Pick a set:</p>
+    <p>Pick a region of the body, then look at it on the 3D model or on a CT, MRI, X-ray or ultrasound scan:</p>
+    <div class="bodymap">
+      <div id="figure-slot" class="figure-slot"></div>
+      <div id="explore-row" class="chooser-row explore-regions" role="group" aria-label="Explore a region"></div>
+    </div>
+    <p class="fine explore-lead">Or practise: rotate, peel back layers, and click the structure asked for. Pick a set:</p>
     <div id="set-chooser" class="chooser" role="group" aria-label="Question set"></div>
     <button id="start" class="primary" disabled>Start</button>
-    <p class="fine explore-lead">Or just look around, no questions:</p>
-    <div id="explore-row" class="chooser-row" role="group" aria-label="Explore"></div>
     <p class="fine">Free, no account. Drag to rotate in any direction, scroll or pinch to zoom, shift-drag (or right-drag, or two fingers) to pan.</p>
   </section>
 
   <!-- Explore bar (shown instead of the intro while looking around) -->
   <div id="explore-bar" class="explore-bar" hidden>
     <span id="explore-title"></span>
-    <button id="explore-back" class="ghost" type="button">Back to sets</button>
+    <div id="explore-modalities" class="chooser-row explore-modalities" role="group" aria-label="What to look at"></div>
+    <select id="explore-study" class="explore-study" aria-label="Study" hidden></select>
+    <button id="explore-back" class="ghost" type="button">Back to the body map</button>
   </div>
 
   <!-- Question -->

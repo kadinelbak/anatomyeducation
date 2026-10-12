@@ -1,0 +1,169 @@
+{
+  "version": 1,
+  "region": "mri-brain-t2",
+  "study": "mni-brain-t2",
+  "modality": "MRI",
+  "sequence": "T2",
+  "questions": [
+    {
+      "id": "mr-brain-t2-ventricle-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "mni-brain-t2",
+      "target": "lateral_ventricle_left",
+      "accept": [
+        "lateral_ventricle_left",
+        "lateral_ventricle_right"
+      ],
+      "prompt": "On this T2-weighted brain MRI, click a lateral ventricle.",
+      "hint": "CSF is bright on T2: find the bright C-shaped spaces in each hemisphere.",
+      "view": "lateral_ventricle_left",
+      "layers": [],
+      "explain": "On T2-weighted images fluid is bright, so the ventricles and the subarachnoid space light up while white matter is darker than grey. The same ventricles are dark on the T1 image of this brain.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-brain-t2-third-ventricle-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "mni-brain-t2",
+      "target": "third_ventricle",
+      "accept": [
+        "third_ventricle"
+      ],
+      "prompt": "On this T2-weighted brain MRI, click the third ventricle.",
+      "hint": "A narrow midline slit of bright fluid between the two thalami.",
+      "view": "third_ventricle",
+      "layers": [],
+      "explain": "The third ventricle is the midline cavity between the thalami, joined to the lateral ventricles by the foramina of Monro and to the fourth ventricle by the cerebral aqueduct. The hypothalamus forms its floor.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-brain-t2-fourth-ventricle-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "mni-brain-t2",
+      "target": "fourth_ventricle",
+      "accept": [
+        "fourth_ventricle"
+      ],
+      "prompt": "On this T2-weighted brain MRI, click the fourth ventricle.",
+      "hint": "A bright tent-shaped space between the pons and the cerebellum.",
+      "view": "fourth_ventricle",
+      "layers": [],
+      "explain": "The fourth ventricle lies between the brainstem in front and the cerebellum behind, and drains CSF through the foramina of Luschka and Magendie into the subarachnoid space. Obstruction here causes hydrocephalus of all the upstream ventricles.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-brain-t2-ms",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "mni-brain-t2",
+      "target": "cerebral_white_matter_left",
+      "accept": [
+        "cerebral_white_matter_left",
+        "cerebral_white_matter_right"
+      ],
+      "prompt": "A 29-year-old woman has had an episode of optic neuritis and now has numbness of one leg. T2 MRI shows several bright oval lesions beside the lateral ventricles. Click the tissue these lesions sit in.",
+      "hint": "The lesions are periventricular and perpendicular to the ventricle wall.",
+      "view": "cerebral_white_matter_left",
+      "layers": [],
+      "explain": "Multiple sclerosis plaques are areas of demyelination in white matter, typically periventricular, juxtacortical, infratentorial and in the spinal cord. They are bright on T2 and FLAIR, and new ones enhance with gadolinium.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-brain-t2-thalamic-stroke",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "mni-brain-t2",
+      "target": "thalamus_left",
+      "accept": [
+        "thalamus_left",
+        "thalamus_right"
+      ],
+      "prompt": "A 70-year-old with hypertension wakes with loss of all sensation on one side of the body, with no weakness. T2 MRI shows a small bright lacunar infarct. Click the structure that is infarcted.",
+      "hint": "The sensory relay station beside the third ventricle.",
+      "view": "thalamus_left",
+      "layers": [],
+      "explain": "A pure sensory stroke is the classic lacunar syndrome of a thalamic infarct, usually from small-vessel disease of the thalamoperforating arteries. Lacunes are bright on T2 and FLAIR and restrict diffusion when acute.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-brain-t2-hydrocephalus",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "mni-brain-t2",
+      "target": "lateral_ventricle_left",
+      "accept": [
+        "lateral_ventricle_left",
+        "lateral_ventricle_right"
+      ],
+      "prompt": "A 6-month-old has a rapidly enlarging head, a bulging fontanelle and downward-deviated eyes. MRI shows a tumour blocking the cerebral aqueduct. Click a cavity that has dilated upstream of the block.",
+      "hint": "Upstream of the aqueduct, in the hemispheres.",
+      "view": "lateral_ventricle_left",
+      "layers": [],
+      "explain": "Obstruction at the aqueduct causes non-communicating hydrocephalus: the lateral and third ventricles dilate while the fourth stays normal. In infants the open sutures let the head enlarge, and pressure on the midbrain produces the setting-sun sign.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    }
+  ]
+}

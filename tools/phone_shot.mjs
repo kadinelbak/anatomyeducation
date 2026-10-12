@@ -1,0 +1,15 @@
+import { chromium } from "playwright";
+const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium", args: ["--use-gl=angle", "--use-angle=swiftshader", "--ignore-gpu-blocklist", "--enable-unsafe-swiftshader"] });
+const page = await browser.newPage({ viewport: { width: 390, height: 780 }, isMobile: true, hasTouch: true });
+page.on("pageerror", (e) => console.log("PAGEERROR", e.message));
+const idle = () => page.waitForFunction(() => document.getElementById("loading").hidden && !document.getElementById("start").disabled, null, { timeout: 120000 });
+await page.goto("http://127.0.0.1:8124/"); await idle();
+await page.screenshot({ path: "docs/screenshots/phone-bodymap.png" });
+await page.click("#explore-row .chip:text-is('Lower limb')"); await idle(); await page.waitForTimeout(500);
+await page.screenshot({ path: "docs/screenshots/phone-explore-3d.png" });
+await page.click("#explore-back");
+await page.click("#explore-row .chip:text-is('Abdomen')"); await idle(); await page.waitForTimeout(500);
+await page.screenshot({ path: "docs/screenshots/phone-explore-ct.png" });
+await page.click("#explore-modalities .chip:text-is('Ultrasound')"); await idle(); await page.waitForTimeout(500);
+await page.screenshot({ path: "docs/screenshots/phone-explore-us.png" });
+await browser.close();

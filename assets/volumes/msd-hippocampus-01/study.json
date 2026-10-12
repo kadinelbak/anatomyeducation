@@ -1,0 +1,92 @@
+{
+ "id": "msd-hippocampus-01",
+ "source": "Medical Segmentation Decathlon Task04 Hippocampus, case hippocampus_001",
+ "license": "CC BY-SA 4.0",
+ "attribution": "Medical Segmentation Decathlon, Task04 Hippocampus (Antonelli et al., Vanderbilt University)",
+ "dims": [
+  35,
+  51,
+  35
+ ],
+ "spacing": [
+  1.0,
+  1.0,
+  1.0
+ ],
+ "orientation": "RAS",
+ "modality": "MR",
+ "sourceUrl": "http://medicaldecathlon.com/",
+ "sequence": "T1",
+ "sequenceLabel": "T1-weighted MPRAGE, hippocampus crop (1 mm)",
+ "intensity": {
+  "units": "arbitrary",
+  "stored_range": [
+   0,
+   4095
+  ],
+  "rescaled_from": [
+   7.0,
+   111.0
+  ],
+  "note": "0.5th..99.8th percentile of the source image mapped to 0..4095"
+ },
+ "image": {
+  "file": "image.i16.gz",
+  "dtype": "int16"
+ },
+ "ct": {
+  "file": "image.i16.gz",
+  "dtype": "int16"
+ },
+ "labels": {
+  "file": "labels.u8.gz",
+  "dtype": "uint8"
+ },
+ "defaultWindow": "soft",
+ "windows": {
+  "soft": {
+   "width": 3780,
+   "level": 2048,
+   "label": "Default"
+  },
+  "tissue": {
+   "width": 2520,
+   "level": 2244,
+   "label": "Tissue"
+  },
+  "bright": {
+   "width": 1142,
+   "level": 3524,
+   "label": "Bright"
+  },
+  "dark": {
+   "width": 2599,
+   "level": 1299,
+   "label": "Dark"
+  }
+ },
+ "structures": {
+  "1": {
+   "key": "hippocampus_head",
+   "name": "Hippocampal head (anterior hippocampus)",
+   "group": "bone"
+  },
+  "2": {
+   "key": "hippocampus_body",
+   "name": "Hippocampal body and tail (posterior hippocampus)",
+   "group": "bone"
+  }
+ },
+ "views": {
+  "hippocampus_head": {
+   "plane": "axial",
+   "frac": 0.324,
+   "window": "soft"
+  },
+  "hippocampus_body": {
+   "plane": "axial",
+   "frac": 0.529,
+   "window": "soft"
+  }
+ }
+}

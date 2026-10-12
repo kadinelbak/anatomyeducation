@@ -25,8 +25,8 @@ const browser = await pw.chromium.launch({
   args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"],
 });
 const KINDS = {
-  xray: { set: "xray:chest", toolbar: ".xr-toolbar", label: ".xr-label", chip: /^X-ray: Chest/ },
-  ultrasound: { set: "us:abdomen", toolbar: ".us-toolbar", label: ".us-label", chip: /^Ultrasound: Abdomen/ },
+  xray: { set: "xray:chest", toolbar: ".xr-toolbar", label: ".xr-label", region: "Chest", chip: /^X-ray$/ },
+  ultrasound: { set: "us:abdomen", toolbar: ".us-toolbar", label: ".us-label", region: "Abdomen", chip: /^Ultrasound$/ },
 };
 let fails = 0;
 const check = (ok, msg) => { console.log(`${ok ? "ok  " : "FAIL"} ${msg}`); if (!ok) fails++; };
@@ -79,12 +79,15 @@ async function run(kind, [width, height]) {
   p2.on("console", (m) => m.type() === "error" && errors.push(m.text()));
   await p2.goto(base);
   await p2.waitForFunction(() => !document.getElementById("start").disabled, null, { timeout: 120000 });
-  const chips = await p2.$$("#explore-row .chip");
+  // Body map: open the region, then pick the modality from the explore bar.
+  await p2.click(`#explore-row .chip:text-is("${K.region}")`);
+  await p2.waitForFunction(() => !document.getElementById("explore-bar").hidden, null, { timeout: 120000 });
+  const chips = await p2.$$("#explore-modalities .chip");
   let chip = null;
   for (const c of chips) if (K.chip.test((await c.textContent()).trim())) { chip = c; break; }
-  if (!chip) { check(false, `${tag} explore: no explore entry matching ${K.chip}`); await p2.close(); return; }
+  if (!chip) { check(false, `${tag} explore: no modality matching ${K.chip} for ${K.region}`); await p2.close(); return; }
   await chip.click();
-  await p2.waitForFunction(() => !document.getElementById("explore-bar").hidden, null, { timeout: 120000 });
+  await p2.waitForFunction((kind) => document.body.classList.contains("mode-" + kind), kind, { timeout: 120000 });
   await p2.waitForFunction(() => { const d = window.__app.switch.debug; return d && d.loading === 0; }, null, { timeout: 120000 });
   await p2.waitForTimeout(600);
   r = await p2.evaluate(overlapScript, K.toolbar);

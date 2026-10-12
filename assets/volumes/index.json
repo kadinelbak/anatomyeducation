@@ -98,6 +98,86 @@
    "bytes": 2578681,
    "url": "assets/volumes/ts-s1390/study.json",
    "license": "CC BY 4.0"
+  },
+  {
+   "id": "msd-heart-03",
+   "region": "thorax",
+   "modality": "MR",
+   "sequence": "3D",
+   "dims": [
+    141,
+    155,
+    130
+   ],
+   "spacing_mm": 1.37,
+   "structures": 1,
+   "bytes": 4190655,
+   "url": "assets/volumes/msd-heart-03/study.json",
+   "license": "CC BY-SA 4.0"
+  },
+  {
+   "id": "msd-hippocampus-01",
+   "region": "head",
+   "modality": "MR",
+   "sequence": "T1",
+   "dims": [
+    35,
+    51,
+    35
+   ],
+   "spacing_mm": 1.0,
+   "structures": 2,
+   "bytes": 59897,
+   "url": "assets/volumes/msd-hippocampus-01/study.json",
+   "license": "CC BY-SA 4.0"
+  },
+  {
+   "id": "mni-brain-t1",
+   "region": "head",
+   "modality": "MR",
+   "sequence": "T1",
+   "dims": [
+    130,
+    160,
+    138
+   ],
+   "spacing_mm": 1.2063,
+   "structures": 36,
+   "bytes": 4625649,
+   "url": "assets/volumes/mni-brain-t1/study.json",
+   "license": "MNI (free use with attribution)"
+  },
+  {
+   "id": "mni-brain-t2",
+   "region": "head",
+   "modality": "MR",
+   "sequence": "T2",
+   "dims": [
+    130,
+    160,
+    138
+   ],
+   "spacing_mm": 1.2063,
+   "structures": 36,
+   "bytes": 4495409,
+   "url": "assets/volumes/mni-brain-t2/study.json",
+   "license": "MNI (free use with attribution)"
+  },
+  {
+   "id": "mni-brain-pd",
+   "region": "head",
+   "modality": "MR",
+   "sequence": "PD",
+   "dims": [
+    130,
+    160,
+    138
+   ],
+   "spacing_mm": 1.2063,
+   "structures": 36,
+   "bytes": 4523872,
+   "url": "assets/volumes/mni-brain-pd/study.json",
+   "license": "MNI (free use with attribution)"
   }
  ]
 }

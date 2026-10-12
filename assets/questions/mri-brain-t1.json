@@ -1,0 +1,277 @@
+{
+  "version": 1,
+  "region": "mri-brain-t1",
+  "study": "mni-brain-t1",
+  "modality": "MRI",
+  "sequence": "T1",
+  "questions": [
+    {
+      "id": "mr-brain-caudate-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "mni-brain-t1",
+      "target": "caudate_left",
+      "accept": [
+        "caudate_left",
+        "caudate_right"
+      ],
+      "prompt": "On this T1-weighted brain MRI, click the caudate nucleus.",
+      "hint": "The grey-matter head bulging into the frontal horn of the lateral ventricle.",
+      "view": "caudate_left",
+      "layers": [],
+      "explain": "The head of the caudate forms the lateral wall of the frontal horn of the lateral ventricle. On T1 it is grey matter, darker than the adjacent white matter of the internal capsule, which separates it from the putamen.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-brain-putamen-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "mni-brain-t1",
+      "target": "putamen_left",
+      "accept": [
+        "putamen_left",
+        "putamen_right"
+      ],
+      "prompt": "On this T1-weighted brain MRI, click the putamen.",
+      "hint": "The large lens-shaped grey nucleus lateral to the internal capsule.",
+      "view": "putamen_left",
+      "layers": [],
+      "explain": "The putamen is the lateral part of the lentiform nucleus, separated from the caudate by the anterior limb of the internal capsule and from the insular cortex by the external capsule and claustrum. With the caudate it forms the striatum.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-brain-thalamus-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "mni-brain-t1",
+      "target": "thalamus_left",
+      "accept": [
+        "thalamus_left",
+        "thalamus_right"
+      ],
+      "prompt": "On this T1-weighted brain MRI, click the thalamus.",
+      "hint": "The paired egg-shaped grey mass on each side of the third ventricle, behind the internal capsule's genu.",
+      "view": "thalamus_left",
+      "layers": [],
+      "explain": "The thalami flank the third ventricle and lie medial to the posterior limb of the internal capsule. On T1 they are intermediate grey-matter signal, and they relay almost all sensory input to the cortex.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-brain-lateral-ventricle-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "mni-brain-t1",
+      "target": "lateral_ventricle_left",
+      "accept": [
+        "lateral_ventricle_left",
+        "lateral_ventricle_right"
+      ],
+      "prompt": "On this T1-weighted brain MRI, click a lateral ventricle.",
+      "hint": "CSF is dark on T1: find the dark C-shaped spaces in each hemisphere.",
+      "view": "lateral_ventricle_left",
+      "layers": [],
+      "explain": "The lateral ventricles are the largest CSF spaces, one in each hemisphere, with frontal, temporal and occipital horns around a body. CSF is dark on T1 and bright on T2, which is the fastest way to tell the two sequences apart.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-brain-corpus-callosum-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "mni-brain-t1",
+      "target": "corpus_callosum",
+      "accept": [
+        "corpus_callosum"
+      ],
+      "prompt": "On this T1-weighted brain MRI, click the corpus callosum.",
+      "hint": "The thick white-matter band arching over the lateral ventricles in the midline; try the sagittal view.",
+      "view": "sagittal:0.5:soft",
+      "layers": [],
+      "explain": "The corpus callosum is the largest commissure, joining the two hemispheres; from front to back it has a rostrum, genu, body and splenium. As compact white matter it is bright on T1, and it forms the roof of the lateral ventricles.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-brain-cerebellum-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "mni-brain-t1",
+      "target": "cerebellum_cortex_left",
+      "accept": [
+        "cerebellum_cortex_left",
+        "cerebellum_cortex_right"
+      ],
+      "prompt": "On this T1-weighted brain MRI, click the cerebellar cortex.",
+      "hint": "Below the tentorium, behind the brainstem, with a finely folded surface.",
+      "view": "cerebellum_cortex_left",
+      "layers": [],
+      "explain": "The cerebellar cortex is the thin folded grey matter (the folia) over the cerebellar white matter. The cerebellum sits in the posterior fossa behind the pons and medulla and coordinates movement and balance.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-brain-brainstem-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "mni-brain-t1",
+      "target": "brainstem",
+      "accept": [
+        "brainstem"
+      ],
+      "prompt": "On this T1-weighted brain MRI, click the brainstem.",
+      "hint": "The stalk below the thalami and in front of the cerebellum: midbrain, pons and medulla.",
+      "view": "brainstem",
+      "layers": [],
+      "explain": "The brainstem comprises the midbrain, pons and medulla and carries every long tract between the cerebrum and the spinal cord, plus the nuclei of cranial nerves III to XII. The pons is the bulge in front of the fourth ventricle.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-brain-hippocampus-t1",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "mni-brain-t1",
+      "target": "hippocampus_left",
+      "accept": [
+        "hippocampus_left",
+        "hippocampus_right"
+      ],
+      "prompt": "On this T1-weighted brain MRI, click the hippocampus.",
+      "hint": "On the floor of the temporal horn of the lateral ventricle, in the medial temporal lobe.",
+      "view": "hippocampus_left",
+      "layers": [],
+      "explain": "The hippocampus curves along the medial temporal lobe, bulging into the floor of the temporal horn, with the amygdala in front of its head. It is grey matter, so intermediate on T1, and best measured on coronal slices.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-brain-huntington",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "mni-brain-t1",
+      "target": "caudate_left",
+      "accept": [
+        "caudate_left",
+        "caudate_right"
+      ],
+      "prompt": "A 42-year-old with chorea and personality change has a parent who died of a hereditary movement disorder. MRI shows enlarged frontal horns because the nucleus beside them has shrunk. Click that nucleus.",
+      "hint": "It normally bulges into the frontal horn.",
+      "view": "caudate_left",
+      "layers": [],
+      "explain": "Huntington's disease causes early atrophy of the caudate head, so the frontal horns of the lateral ventricles look boxy and enlarged on MRI. The diagnosis is confirmed by the CAG repeat expansion in the huntingtin gene.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-brain-dbs-pallidum",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "mni-brain-t1",
+      "target": "pallidum_left",
+      "accept": [
+        "pallidum_left",
+        "pallidum_right"
+      ],
+      "prompt": "A 65-year-old with advanced Parkinson's disease and drug-induced dyskinesia is planned for deep brain stimulation. The surgeon targets the medial part of the lentiform nucleus on T1 MRI. Click that nucleus.",
+      "hint": "Medial to the putamen, lateral to the internal capsule.",
+      "view": "pallidum_left",
+      "layers": [],
+      "explain": "The globus pallidus (its internal segment) and the subthalamic nucleus are the two targets of deep brain stimulation for Parkinson's disease. Pallidal stimulation is chosen particularly when dyskinesias are the main problem.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "region": "mri-brain-pd",
+  "study": "mni-brain-pd",
+  "modality": "MRI",
+  "sequence": "PD",
+  "questions": [
+    {
+      "id": "mr-brain-pd-cortex-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "mni-brain-pd",
+      "target": "cerebral_cortex_left",
+      "accept": [
+        "cerebral_cortex_left",
+        "cerebral_cortex_right"
+      ],
+      "prompt": "On this proton-density brain MRI, click the cerebral cortex.",
+      "hint": "Grey matter is brighter than white matter on PD, so the cortex is the brighter rim.",
+      "view": "cerebral_cortex_left",
+      "layers": [],
+      "explain": "Proton-density images show signal proportional to the water content: grey matter is brighter than white matter and CSF is bright but less so than on T2. The cortex is the folded grey rim over the white matter of each gyrus.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "PD"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-brain-pd-white-matter-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "mni-brain-pd",
+      "target": "cerebral_white_matter_left",
+      "accept": [
+        "cerebral_white_matter_left",
+        "cerebral_white_matter_right"
+      ],
+      "prompt": "On this proton-density brain MRI, click the cerebral white matter.",
+      "hint": "The darker tissue under the cortex, around the ventricles.",
+      "view": "cerebral_white_matter_left",
+      "layers": [],
+      "explain": "White matter has less free water than grey matter, so it is the darker tissue on proton-density images. The centrum semiovale, corona radiata and internal capsule are all white matter.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "PD"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-brain-pd-amygdala-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "mni-brain-pd",
+      "target": "amygdala_left",
+      "accept": [
+        "amygdala_left",
+        "amygdala_right"
+      ],
+      "prompt": "On this proton-density brain MRI, click the amygdala.",
+      "hint": "The almond-shaped grey nucleus in front of the hippocampal head, in the medial temporal lobe.",
+      "view": "amygdala_left",
+      "layers": [],
+      "explain": "The amygdala lies in the uncus of the temporal lobe, just anterior to the hippocampus and the tip of the temporal horn. It is central to fear and emotional memory and is often involved in temporal lobe epilepsy.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "PD"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    },
+    {
+      "id": "mr-brain-pd-chiasm",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "mni-brain-pd",
+      "target": "optic_chiasm",
+      "accept": [
+        "optic_chiasm"
+      ],
+      "prompt": "A 45-year-old has headaches, loss of the outer half of the visual field in both eyes and galactorrhoea. MRI shows a pituitary tumour pressing upward. Click the structure it compresses to cause the visual loss.",
+      "hint": "Just above the pituitary fossa, where the optic nerves cross.",
+      "view": "optic_chiasm",
+      "layers": [],
+      "explain": "Fibres from the nasal retina cross in the optic chiasm, so compression from below by a pituitary adenoma gives bitemporal hemianopia. A prolactinoma also causes galactorrhoea and is treated medically with a dopamine agonist.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "PD"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-12"
+      }
+    }
+  ]
+}
