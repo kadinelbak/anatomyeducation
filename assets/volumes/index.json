@@ -1,0 +1,103 @@
+{
+ "version": 1,
+ "studies": [
+  {
+   "id": "ts-example-sm",
+   "region": "sample",
+   "dims": [
+    122,
+    101,
+    30
+   ],
+   "spacing_mm": 3.0,
+   "structures": 41,
+   "bytes": 499965,
+   "url": "assets/volumes/ts-example-sm/study.json",
+   "license": "CC BY 4.0 (TotalSegmentator dataset); code Apache-2.0"
+  },
+  {
+   "id": "ts-s0513",
+   "region": "abdomen",
+   "dims": [
+    138,
+    104,
+    160
+   ],
+   "spacing_mm": 3.2063,
+   "structures": 85,
+   "bytes": 2727878,
+   "url": "assets/volumes/ts-s0513/study.json",
+   "license": "CC BY 4.0"
+  },
+  {
+   "id": "ts-s1042",
+   "region": "chest",
+   "dims": [
+    160,
+    125,
+    152
+   ],
+   "spacing_mm": 2.2594,
+   "structures": 85,
+   "bytes": 4236613,
+   "url": "assets/volumes/ts-s1042/study.json",
+   "license": "CC BY 4.0"
+  },
+  {
+   "id": "ts-s1164",
+   "region": "chest",
+   "dims": [
+    160,
+    113,
+    151
+   ],
+   "spacing_mm": 2.4375,
+   "structures": 88,
+   "bytes": 3783748,
+   "url": "assets/volumes/ts-s1164/study.json",
+   "license": "CC BY 4.0"
+  },
+  {
+   "id": "ts-s1337",
+   "region": "chest",
+   "dims": [
+    160,
+    126,
+    153
+   ],
+   "spacing_mm": 2.2687,
+   "structures": 87,
+   "bytes": 4265765,
+   "url": "assets/volumes/ts-s1337/study.json",
+   "license": "CC BY 4.0"
+  },
+  {
+   "id": "ts-s1383",
+   "region": "abdomen",
+   "dims": [
+    122,
+    101,
+    160
+   ],
+   "spacing_mm": 3.0,
+   "structures": 69,
+   "bytes": 2663821,
+   "url": "assets/volumes/ts-s1383/study.json",
+   "license": "CC BY 4.0"
+  },
+  {
+   "id": "ts-s1390",
+   "region": "abdomen",
+   "dims": [
+    125,
+    98,
+    160
+   ],
+   "spacing_mm": 3.1406,
+   "structures": 74,
+   "bytes": 2578681,
+   "url": "assets/volumes/ts-s1390/study.json",
+   "license": "CC BY 4.0"
+  }
+ ]
+}

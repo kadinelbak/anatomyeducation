@@ -1,12 +1,12 @@
 # Volume renderer: interface and behaviour
 
-`createVolumeRenderer({ container, studyUrl, onPick, controls })` returns the same
+`createVolumeRenderer({ container, studiesBase, studyUrl, onPick })` returns the same
 object `createMeshRenderer` returns in anatomy-app (`src/renderers/mesh.js`), so
 `createEngine({ renderer, ... })` works unchanged:
 
 | call | mesh renderer | volume renderer |
 |---|---|---|
-| `show({ view, layers })` | camera preset + visible layers | `resolveView(view)`: plane, slice = round(frac*(depth-1)), window preset; `layers` includes `"outline"` -> draw faint outlines of every labelled structure; else no overlay. Resets zoom/pan. |
+| `show({ view, layers, study })` | camera preset + visible layers (`study` ignored) | if `study` names a different study id, load it first (fetched once, cached), then `resolveView(view)`: plane, slice = round(frac*(depth-1)), window preset; `layers` includes `"outline"` -> faint overlay of every labelled structure; else no overlay. Resets zoom/pan. Returns a promise; picks during a load are ignored. |
 | `highlight(id, "good"\|"bad")` | tint meshes | fill the structure's label mask on the current slice (green/red, ~45% alpha) and, if the structure has no voxels on the current slice, jump to the slice through its centroid in the current plane (like the mesh renderer turning a hidden layer on). Several highlights can be active. |
 | `clearHighlight()` | restore colours | remove all fills |
 | `name(id)` | display name | `study.name(key)`; unknown key -> the key itself |

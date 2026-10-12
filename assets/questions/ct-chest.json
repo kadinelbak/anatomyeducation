@@ -1,0 +1,474 @@
+{
+ "version": 1,
+ "region": "ct-chest",
+ "questions": [
+  {
+   "id": "chest-heart-id",
+   "kind": "Identify",
+   "renderer": "volume",
+   "study": "ts-s1042",
+   "target": "heart",
+   "accept": [
+    "heart"
+   ],
+   "prompt": "Click the heart.",
+   "hint": "It sits in the middle mediastinum, with the apex pointing to the patient's left.",
+   "view": "axial:0.375:soft",
+   "layers": [
+    "outline"
+   ],
+   "explain": "The heart lies in the middle mediastinum between the lungs, behind the sternum and in front of the oesophagus and descending aorta. Its apex points to the left and the right ventricle lies most anteriorly.",
+   "tags": {
+    "topic": "heart",
+    "region": "chest",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   }
+  },
+  {
+   "id": "chest-lung-middle-id",
+   "kind": "Identify",
+   "renderer": "volume",
+   "study": "ts-s1042",
+   "target": "lung_middle_lobe_right",
+   "accept": [
+    "lung_middle_lobe_right"
+   ],
+   "prompt": "Click the right middle lobe.",
+   "hint": "Use the lung window: it is the small wedge of right lung lying in front, beside the right heart border.",
+   "view": "axial:0.328:lung",
+   "layers": [],
+   "explain": "The right lung has three lobes and the middle lobe is the small anterior wedge between the horizontal and oblique fissures. Because it abuts the right heart border, middle lobe collapse blurs that border on a chest film.",
+   "tags": {
+    "topic": "lungs",
+    "region": "chest",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   }
+  },
+  {
+   "id": "chest-t7-id",
+   "kind": "Identify",
+   "renderer": "volume",
+   "study": "ts-s1042",
+   "target": "vertebrae_T7",
+   "accept": [
+    "vertebrae_T7"
+   ],
+   "prompt": "Click the T7 vertebra.",
+   "hint": "Count down from T1, or up from T12, using the ribs that articulate with each vertebra.",
+   "view": "axial:0.566:bone",
+   "layers": [],
+   "explain": "Thoracic vertebrae are identified by counting from the rib-bearing T1 downwards or the T12 upwards. T7 lies at roughly the level of the inferior angle of the scapula, and in the bone window its cortex is bright with intermediate-density marrow.",
+   "tags": {
+    "topic": "bones",
+    "region": "chest",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   }
+  },
+  {
+   "id": "chest-spinal-cord-id",
+   "kind": "Identify",
+   "renderer": "volume",
+   "study": "ts-s1042",
+   "target": "spinal_cord",
+   "accept": [
+    "spinal_cord"
+   ],
+   "prompt": "Click the spinal cord.",
+   "hint": "Look inside the vertebral canal, behind the vertebral body.",
+   "view": "axial:0.487:soft",
+   "layers": [],
+   "explain": "The spinal cord lies in the vertebral canal surrounded by cerebrospinal fluid, behind the vertebral body. On unenhanced CT the cord and CSF have similar density, so the cord is seen as a round soft-tissue structure within the bony ring.",
+   "tags": {
+    "topic": "nervous",
+    "region": "chest",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   }
+  },
+  {
+   "id": "chest-trachea-id",
+   "kind": "Identify",
+   "renderer": "volume",
+   "study": "ts-s1164",
+   "target": "trachea",
+   "accept": [
+    "trachea"
+   ],
+   "prompt": "Click the trachea.",
+   "hint": "It is the air-filled tube in the midline, in front of the oesophagus.",
+   "view": "axial:0.751:soft",
+   "layers": [
+    "outline"
+   ],
+   "explain": "The trachea is a midline air-filled tube held open by C-shaped cartilage rings, lying in front of the oesophagus. It is easy to find on CT because the air in its lumen is black in every window.",
+   "tags": {
+    "topic": "lungs",
+    "region": "chest",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   }
+  },
+  {
+   "id": "chest-esophagus-id",
+   "kind": "Identify",
+   "renderer": "volume",
+   "study": "ts-s1164",
+   "target": "esophagus",
+   "accept": [
+    "esophagus"
+   ],
+   "prompt": "Click the oesophagus.",
+   "hint": "It is a collapsed soft-tissue tube behind the trachea and in front of the spine.",
+   "view": "axial:0.573:soft",
+   "layers": [],
+   "explain": "The oesophagus lies behind the trachea and in front of the vertebral column, usually collapsed with a small amount of gas in the lumen. Lower down it passes behind the left atrium and in front of the descending aorta.",
+   "tags": {
+    "topic": "gi",
+    "region": "chest",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   }
+  },
+  {
+   "id": "chest-rib-left-4-id",
+   "kind": "Identify",
+   "renderer": "volume",
+   "study": "ts-s1164",
+   "target": "rib_left_4",
+   "accept": [
+    "rib_left_4"
+   ],
+   "prompt": "Click the left fourth rib.",
+   "hint": "Count down from the first rib, which is the short broad rib under the clavicle.",
+   "view": "axial:0.698:bone",
+   "layers": [],
+   "explain": "Ribs are counted from the first rib, which is short and flat and passes beneath the clavicle. Each rib articulates posteriorly with its own vertebra, and the fourth rib is the first that has a typical long curved shape.",
+   "tags": {
+    "topic": "bones",
+    "region": "chest",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   }
+  },
+  {
+   "id": "chest-scapula-id",
+   "kind": "Identify",
+   "renderer": "volume",
+   "study": "ts-s1164",
+   "target": "scapula_right",
+   "accept": [
+    "scapula_right"
+   ],
+   "prompt": "Click the right scapula.",
+   "hint": "It is the flat triangular bone on the back of the chest wall, lateral to the spine.",
+   "view": "axial:0.787:bone",
+   "layers": [],
+   "explain": "The scapula is a flat triangular bone lying on the posterior chest wall over the second to seventh ribs. It carries the glenoid, which forms the shoulder joint with the humeral head, and the spine and acromion.",
+   "tags": {
+    "topic": "bones",
+    "region": "chest",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   }
+  },
+  {
+   "id": "chest-aorta-id",
+   "kind": "Identify",
+   "renderer": "volume",
+   "study": "ts-s1337",
+   "target": "aorta",
+   "accept": [
+    "aorta"
+   ],
+   "prompt": "Click the aorta.",
+   "hint": "It is the largest vessel, rising from the heart and arching over to run down beside the spine.",
+   "view": "axial:0.487:soft",
+   "layers": [
+    "outline"
+   ],
+   "explain": "The thoracic aorta arises from the left ventricle, arches over the left main bronchus and descends to the left of the spine. Its diameter should be below about 4 cm in the ascending segment and about 3 cm in the descending segment.",
+   "tags": {
+    "topic": "vessels",
+    "region": "chest",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   }
+  },
+  {
+   "id": "chest-sternum-id",
+   "kind": "Identify",
+   "renderer": "volume",
+   "study": "ts-s1337",
+   "target": "sternum",
+   "accept": [
+    "sternum"
+   ],
+   "prompt": "Click the sternum.",
+   "hint": "It is the flat bone in the midline of the anterior chest wall.",
+   "view": "axial:0.691:bone",
+   "layers": [],
+   "explain": "The sternum is the flat midline bone of the anterior chest wall, made up of the manubrium, body and xiphoid process. The costal cartilages join it to ribs 1 to 7.",
+   "tags": {
+    "topic": "bones",
+    "region": "chest",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   }
+  },
+  {
+   "id": "chest-brachiocephalic-trunk-id",
+   "kind": "Identify",
+   "renderer": "volume",
+   "study": "ts-s1337",
+   "target": "brachiocephalic_trunk",
+   "accept": [
+    "brachiocephalic_trunk"
+   ],
+   "prompt": "Click the brachiocephalic trunk.",
+   "hint": "It is the first branch of the aortic arch, running up toward the right side of the neck in front of the trachea.",
+   "view": "axial:0.786:soft",
+   "layers": [],
+   "explain": "The brachiocephalic trunk is the first and largest branch of the aortic arch and divides into the right common carotid and right subclavian arteries. It runs up and to the right in front of the trachea.",
+   "tags": {
+    "topic": "vessels",
+    "region": "chest",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   }
+  },
+  {
+   "id": "chest-costal-cartilage-id",
+   "kind": "Identify",
+   "renderer": "volume",
+   "study": "ts-s1337",
+   "target": "costal_cartilages",
+   "accept": [
+    "costal_cartilages"
+   ],
+   "prompt": "Click the costal cartilages.",
+   "hint": "Look for the soft-tissue bars linking the front ends of the ribs to the sternum.",
+   "view": "axial:0.416:soft",
+   "layers": [],
+   "explain": "The costal cartilages are hyaline cartilage bars that join the anterior ends of the upper ribs to the sternum. They are less dense than bone, so they look grey in the soft-tissue window and may calcify with age.",
+   "tags": {
+    "topic": "bones",
+    "region": "chest",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   }
+  },
+  {
+   "id": "chest-pancoast",
+   "kind": "Clinical",
+   "renderer": "volume",
+   "study": "ts-s1042",
+   "target": "lung_upper_lobe_right",
+   "accept": [
+    "lung_upper_lobe_right"
+   ],
+   "prompt": "A 62-year-old smoker has right shoulder and arm pain, a drooping right eyelid and a small right pupil. CT shows a mass at the right lung apex. Click the lobe that contains the tumour.",
+   "hint": "Think of the lung segment at the very top of the chest, above the first rib.",
+   "view": "axial:0.817:lung",
+   "layers": [],
+   "explain": "A Pancoast tumour is a lung cancer at the apex, which means the upper lobe. It invades the brachial plexus and sympathetic chain, causing shoulder and arm pain and Horner syndrome (ptosis, miosis, anhidrosis). The slice shown is through the middle of the lobe and the apex lies higher.",
+   "tags": {
+    "topic": "lungs",
+    "region": "chest",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   }
+  },
+  {
+   "id": "chest-t4-metastasis",
+   "kind": "Clinical",
+   "renderer": "volume",
+   "study": "ts-s1042",
+   "target": "vertebrae_T4",
+   "accept": [
+    "vertebrae_T4"
+   ],
+   "prompt": "A 68-year-old woman with breast cancer has band-like pain around the chest, weak legs and a sensory level at the nipples. CT shows a lytic vertebral metastasis with cord compression at the T4 level. Click the vertebra involved.",
+   "hint": "The nipple line corresponds to the T4 dermatome.",
+   "view": "axial:0.76:bone",
+   "layers": [],
+   "explain": "Breast cancer commonly metastasises to bone, and a collapsed or expanded vertebra can compress the cord. The sensory level at the nipples is the T4 dermatome, so the vertebra to find is T4. This is an oncological emergency needing urgent MRI.",
+   "tags": {
+    "topic": "bones",
+    "region": "chest",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   }
+  },
+  {
+   "id": "chest-clavicle-fracture",
+   "kind": "Clinical",
+   "renderer": "volume",
+   "study": "ts-s1042",
+   "target": "clavicula_left",
+   "accept": [
+    "clavicula_left"
+   ],
+   "prompt": "A 17-year-old falls from a bike onto his left shoulder and has a visible deformity and tenderness over the front of the shoulder girdle. CT shows a fracture of the bone connecting the sternum to the acromion on the left. Click that bone.",
+   "hint": "It is the S-shaped bone lying above the first rib.",
+   "view": "axial:0.893:bone",
+   "layers": [],
+   "explain": "The clavicle links the sternum to the acromion and is the most commonly fractured bone in children and young adults. Most breaks occur in the middle third after a fall onto the shoulder, with the lateral fragment pulled down by the arm's weight.",
+   "tags": {
+    "topic": "bones",
+    "region": "chest",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   }
+  },
+  {
+   "id": "chest-aortic-dissection",
+   "kind": "Clinical",
+   "renderer": "volume",
+   "study": "ts-s1164",
+   "target": "aorta",
+   "accept": [
+    "aorta"
+   ],
+   "prompt": "A 58-year-old hypertensive man has sudden tearing chest pain radiating to the back and a blood pressure difference between his arms. CT angiography shows an intimal flap. Click the vessel that is dissected.",
+   "hint": "Think of the largest artery in the chest.",
+   "view": "axial:0.489:soft",
+   "layers": [],
+   "explain": "Aortic dissection is a tear in the intima that lets blood split the aortic wall into true and false lumens. It causes sudden tearing pain radiating to the back and unequal arm pressures. On CT angiography, look for a thin intimal flap separating the two lumens.",
+   "tags": {
+    "topic": "vessels",
+    "region": "chest",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   }
+  },
+  {
+   "id": "chest-goitre",
+   "kind": "Clinical",
+   "renderer": "volume",
+   "study": "ts-s1164",
+   "target": "thyroid_gland",
+   "accept": [
+    "thyroid_gland"
+   ],
+   "prompt": "A 60-year-old woman has a long-standing neck swelling that moves on swallowing and now causes stridor and breathlessness on lying flat. CT shows a retrosternal mass deviating the trachea. Click the gland responsible.",
+   "hint": "It lies in the lower front of the neck, wrapped around the trachea.",
+   "view": "axial:0.942:soft",
+   "layers": [],
+   "explain": "A multinodular goitre of the thyroid can extend behind the sternum and compress and deviate the trachea, causing stridor and positional breathlessness. The thyroid is brighter than muscle on unenhanced CT because of its iodine content.",
+   "tags": {
+    "topic": "organs",
+    "region": "chest",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   }
+  },
+  {
+   "id": "chest-laa-thrombus",
+   "kind": "Clinical",
+   "renderer": "volume",
+   "study": "ts-s1164",
+   "target": "atrial_appendage_left",
+   "accept": [
+    "atrial_appendage_left"
+   ],
+   "prompt": "A 74-year-old with atrial fibrillation has a sudden-onset right arm weakness and slurred speech. Echocardiography suggests the clot arose in a pouch off the left atrium. Click that structure.",
+   "hint": "It is a small ear-shaped pouch on the left side of the heart, next to the pulmonary trunk.",
+   "view": "axial:0.503:soft",
+   "layers": [],
+   "explain": "In atrial fibrillation, blood stagnates in the left atrial appendage and clots form there, causing cardioembolic stroke. On contrast CT, a persistent filling defect within the appendage suggests thrombus. Left atrial appendage occlusion is an option for patients who cannot take anticoagulants.",
+   "tags": {
+    "topic": "heart",
+    "region": "chest",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   }
+  },
+  {
+   "id": "chest-svc-syndrome",
+   "kind": "Clinical",
+   "renderer": "volume",
+   "study": "ts-s1337",
+   "target": "superior_vena_cava",
+   "accept": [
+    "superior_vena_cava"
+   ],
+   "prompt": "A 65-year-old smoker has facial swelling, dilated neck veins and arm swelling that is worse on bending forward. CT shows a right paratracheal mass. Click the vessel that is being compressed.",
+   "hint": "It is the large vein on the right side of the mediastinum, receiving both brachiocephalic veins.",
+   "view": "axial:0.628:soft",
+   "layers": [],
+   "explain": "Superior vena cava syndrome results from obstruction of the vein that drains the head, neck and arms, most often by lung cancer or lymphoma. It gives facial and arm swelling with distended neck veins. The thin-walled vein sits to the right of the ascending aorta, so it is easily compressed by right paratracheal nodes.",
+   "tags": {
+    "topic": "vessels",
+    "region": "chest",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   }
+  },
+  {
+   "id": "chest-tension-pneumothorax",
+   "kind": "Clinical",
+   "renderer": "volume",
+   "study": "ts-s1337",
+   "target": "lung_upper_lobe_right",
+   "accept": [
+    "lung_upper_lobe_right",
+    "lung_middle_lobe_right",
+    "lung_lower_lobe_right"
+   ],
+   "prompt": "A 25-year-old tall thin man has sudden breathlessness, absent breath sounds on the right and the trachea shifted to the left, with falling blood pressure. Click the lung that has collapsed.",
+   "hint": "The trachea is pushed away from the affected side.",
+   "view": "axial:0.666:lung",
+   "layers": [],
+   "explain": "In tension pneumothorax air enters the pleural space and cannot leave, so the whole lung on that side collapses and the mediastinum is pushed to the opposite side. Here the trachea is deviated away from the right, so the right lung (any of its three lobes) is the answer. It is a clinical diagnosis needing immediate needle decompression.",
+   "tags": {
+    "topic": "lungs",
+    "region": "chest",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   }
+  }
+ ]
+}

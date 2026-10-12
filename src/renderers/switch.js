@@ -1,6 +1,6 @@
 // Renderer switch: one object with the renderer interface the engine uses, delegating to a
-// mesh renderer (one per 3D model) or to a volume renderer (one per scan study). Renderers are
-// built lazily, once. `models` is CONFIG.models: { id: { modelUrl, structuresUrl } }.
+// mesh renderer (one per 3D model) or to the volume renderer (one, which swaps scan studies on
+// demand). Renderers are built lazily, once. `models` is CONFIG.models: { id: { modelUrl, structuresUrl } }.
 import { createMeshRenderer } from "./mesh.js";
 import { createVolumeRenderer } from "./volume.js";
 
@@ -14,8 +14,8 @@ export function createRendererSwitch({ viewer, onPick, models, onChange }) {
   viewer.append(meshBox, volBox);
 
   const meshes = new Map(); // model id -> renderer
-  const volumes = new Map(); // study id -> renderer
-  const building = new Map(); // "mesh:<model>" | "volume:<study>" -> promise
+  let volume = null; // the one volume renderer; it caches studies itself
+  const building = new Map(); // "mesh:<model>" | "volume" -> promise
   let current = null;
   let active = null; // "mesh" | "volume"
   let activeStudy = null;
@@ -23,7 +23,7 @@ export function createRendererSwitch({ viewer, onPick, models, onChange }) {
   let lastModel = defaultModel; // the model to come back to after a scan
 
   function show(kind, id) {
-    const next = kind === "mesh" ? meshes.get(id) : volumes.get(id);
+    const next = kind === "mesh" ? meshes.get(id) : volume;
     if (current && current !== next) {
       current.setPickEnabled(false);
       current.clearHighlight();
@@ -36,7 +36,7 @@ export function createRendererSwitch({ viewer, onPick, models, onChange }) {
     if (kind === "mesh") lastModel = id;
     meshBox.hidden = kind !== "mesh";
     volBox.hidden = kind !== "volume";
-    for (const [sid, r] of volumes) r.debug.root.hidden = !(kind === "volume" && sid === id);
+    if (volume) volume.debug.root.hidden = kind !== "volume";
     document.body.classList.toggle("mode-volume", kind === "volume");
     if (kind === "mesh") next.setActive(true);
     onChange?.(kind, id, kind === "volume" ? next?.debug.volume.meta : next?.meta);
@@ -60,13 +60,16 @@ export function createRendererSwitch({ viewer, onPick, models, onChange }) {
         }
         show("mesh", modelId);
       } else if (kind === "volume") {
-        if (!volumes.has(id)) {
+        if (!volume) {
           // The container must be visible and sized before the volume renderer is built.
           meshBox.hidden = true;
           volBox.hidden = false;
-          volumes.set(id, await build(`volume:${id}`, () => createVolumeRenderer({ container: volBox, studyUrl: `assets/volumes/${id}/study.json`, onPick })));
+          volume = await build("volume", () => createVolumeRenderer({ container: volBox, studiesBase: "assets/volumes/", initialStudy: id, onPick }));
+        } else if (id && id !== volume.studyId) {
+          await volume.loadStudy(id); // fetch while the page says "Loading the scan…"
+          await volume.show({ study: id }); // and swap now, so the attribution and badge are right behind the chooser
         }
-        show("volume", id);
+        show("volume", id || volume.studyId);
       } else throw new Error(`unknown renderer ${kind}`);
       return sw;
     },
@@ -78,7 +81,7 @@ export function createRendererSwitch({ viewer, onPick, models, onChange }) {
     setPickEnabled: (on) => current?.setPickEnabled(on),
     get debug() { return current?.debug; },
     get active() { return active; },
-    get study() { return activeStudy; },
+    get study() { return active === "volume" ? volume?.studyId ?? activeStudy : null; }, // follows per-question swaps
     get model() { return activeModel; },
     get mesh() { return active === "mesh" ? current : meshes.get(lastModel) || null; },
     get volume() { return current && active === "volume" ? current : null; },

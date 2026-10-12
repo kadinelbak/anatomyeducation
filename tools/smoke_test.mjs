@@ -90,7 +90,7 @@ async function playSet(page, label) {
 // Plays the CT set. Finds a voxel of the target on the current slice, converts it to a screen
 // point with the volume renderer's canvasOf(), checks pickAt() agrees, and does a real click.
 async function playCT(page) {
-  await page.goto(`${base}?set=ct:ts-example-sm`);
+  await page.goto(`${base}?set=${process.env.SET || "ct:abdomen"}`);
   await page.waitForFunction(() => !document.getElementById("start").disabled, null, { timeout: 90000 });
   if (await page.evaluate(() => getComputedStyle(document.getElementById("controls")).display === "none")) { failures++; console.log("FAIL controls hidden before CT start"); }
   await page.click("#start");
@@ -101,6 +101,7 @@ async function playCT(page) {
   const n = await page.evaluate(() => window.__app.QUESTIONS.length);
   let failed = 0;
   for (let i = 0; i < n; i++) {
+    await page.waitForFunction(() => !window.__app.switch.debug.loading, null, { timeout: 60000 }); // a study swap may be in flight
     await page.waitForTimeout(700);
     const spot = await page.evaluate(() => {
       const a = window.__app, q = a.QUESTIONS[a.quiz.index], d = a.switch.debug, vol = d.volume;
@@ -154,6 +155,7 @@ async function playCT(page) {
   await page.click("#new-set");
   const shown = await page.evaluate(() => getComputedStyle(document.getElementById("controls")).display !== "none");
   console.log(`${shown ? "ok  " : "FAIL"} mesh #controls visible again after New set`);
+  console.log(`studies played: ${[...new Set(await page.evaluate(() => window.__app.QUESTIONS.map((q) => q.study)))].join(", ")}`);
   if (shown === false) failures++;
 }
 

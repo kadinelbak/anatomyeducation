@@ -1,13 +1,13 @@
 {
   "version": 1,
   "region": "ct-trunk",
-  "study": "ts-example-sm",
+  "study": "ts-s0513",
   "questions": [
     {
       "id": "ct-liver-id",
       "kind": "Identify",
       "renderer": "volume",
-      "study": "ts-example-sm",
+      "study": "ts-s0513",
       "target": "liver",
       "accept": [
         "liver"
@@ -32,7 +32,7 @@
       "id": "ct-kidney-right-id",
       "kind": "Identify",
       "renderer": "volume",
-      "study": "ts-example-sm",
+      "study": "ts-s0513",
       "target": "kidney_right",
       "accept": [
         "kidney_right"
@@ -57,7 +57,7 @@
       "id": "ct-stomach-id",
       "kind": "Identify",
       "renderer": "volume",
-      "study": "ts-example-sm",
+      "study": "ts-s0513",
       "target": "stomach",
       "accept": [
         "stomach"
@@ -82,7 +82,7 @@
       "id": "ct-colon-id",
       "kind": "Identify",
       "renderer": "volume",
-      "study": "ts-example-sm",
+      "study": "ts-s0513",
       "target": "colon",
       "accept": [
         "colon"
@@ -105,7 +105,7 @@
       "id": "ct-duodenum-id",
       "kind": "Identify",
       "renderer": "volume",
-      "study": "ts-example-sm",
+      "study": "ts-s0513",
       "target": "duodenum",
       "accept": [
         "duodenum"
@@ -128,7 +128,7 @@
       "id": "ct-aorta-id",
       "kind": "Identify",
       "renderer": "volume",
-      "study": "ts-example-sm",
+      "study": "ts-s0513",
       "target": "aorta",
       "accept": [
         "aorta"
@@ -151,7 +151,7 @@
       "id": "ct-adrenal-left-id",
       "kind": "Identify",
       "renderer": "volume",
-      "study": "ts-example-sm",
+      "study": "ts-s0513",
       "target": "adrenal_gland_left",
       "accept": [
         "adrenal_gland_left"
@@ -174,7 +174,7 @@
       "id": "ct-autochthon-right-id",
       "kind": "Identify",
       "renderer": "volume",
-      "study": "ts-example-sm",
+      "study": "ts-s0513",
       "target": "autochthon_right",
       "accept": [
         "autochthon_right"
@@ -197,17 +197,16 @@
       "id": "ct-lung-left-id",
       "kind": "Identify",
       "renderer": "volume",
-      "study": "ts-example-sm",
-      "target": "lung_lower_lobe_left",
+      "study": "ts-s0513",
+      "target": "lung_upper_lobe_left",
       "accept": [
-        "lung_upper_lobe_left",
-        "lung_lower_lobe_left"
+        "lung_upper_lobe_left"
       ],
       "prompt": "Click the left lung.",
       "hint": "Use the lung window: find the dark air-filled lung on the patient's left, which is the right side of a standard axial image.",
-      "view": "axial:0.932:lung",
+      "view": "axial:0.928:lung",
       "layers": [],
-      "explain": "At the diaphragm level the left lung base is made up of the lower lobe, with the upper lobe (including the lingula) in front. In the lung window air is dark and vessels appear as bright branching dots.",
+      "explain": "At the lung base level the left lung is shown as the upper lobe (including the lingula) in front of the oblique fissure. In the lung window air is dark and vessels appear as bright branching dots.",
       "tags": {
         "topic": "lungs",
         "region": "chest",
@@ -221,17 +220,17 @@
       "id": "ct-lung-right-id",
       "kind": "Identify",
       "renderer": "volume",
-      "study": "ts-example-sm",
-      "target": "lung_lower_lobe_right",
+      "study": "ts-s0513",
+      "target": "lung_middle_lobe_right",
       "accept": [
         "lung_middle_lobe_right",
-        "lung_lower_lobe_right"
+        "lung_upper_lobe_right"
       ],
       "prompt": "Click the right lung.",
       "hint": "In the lung window, find the dark lung on the patient's right, above the liver dome.",
-      "view": "axial:0.917:lung",
+      "view": "axial:0.922:lung",
       "layers": [],
-      "explain": "The right lung base sits above the liver dome and is mainly the lower lobe, with the middle lobe anterior. Remember that patient right is displayed on the left of a standard axial image.",
+      "explain": "The right lung base sits above the liver dome and includes the middle lobe anteriorly, with the upper lobe above it. Remember that patient right is displayed on the left of a standard axial image.",
       "tags": {
         "topic": "lungs",
         "region": "chest",
@@ -245,14 +244,14 @@
       "id": "ct-t12-id",
       "kind": "Identify",
       "renderer": "volume",
-      "study": "ts-example-sm",
+      "study": "ts-s0513",
       "target": "vertebrae_T12",
       "accept": [
         "vertebrae_T12"
       ],
       "prompt": "Click the T12 vertebra.",
       "hint": "T12 is the last thoracic vertebra, bearing the lowest pair of ribs.",
-      "view": "axial:0.849:bone",
+      "view": "axial:0.695:bone",
       "layers": [],
       "explain": "T12 is the lowest vertebra to articulate with a rib, and it marks the thoracolumbar junction. In the bone window the cortex is bright and the marrow cavity is intermediate density.",
       "tags": {
@@ -268,14 +267,14 @@
       "id": "ct-rib-right-12-id",
       "kind": "Identify",
       "renderer": "volume",
-      "study": "ts-example-sm",
+      "study": "ts-s0513",
       "target": "rib_right_12",
       "accept": [
         "rib_right_12"
       ],
       "prompt": "Click the right 12th rib.",
       "hint": "It is the lowest rib, short and floating, with no cartilage connection to the sternum.",
-      "view": "axial:0.629:bone",
+      "view": "axial:0.618:bone",
       "layers": [],
       "explain": "The 12th rib is the lowest and shortest rib and has no anterior attachment. On CT, count ribs from the 12th upward after confirming it articulates with the T12 vertebra.",
       "tags": {
@@ -291,7 +290,7 @@
       "id": "ct-spleen-rupture",
       "kind": "Clinical",
       "renderer": "volume",
-      "study": "ts-example-sm",
+      "study": "ts-s0513",
       "target": "spleen",
       "accept": [
         "spleen"
@@ -314,7 +313,7 @@
       "id": "ct-pancreatitis",
       "kind": "Clinical",
       "renderer": "volume",
-      "study": "ts-example-sm",
+      "study": "ts-s0513",
       "target": "pancreas",
       "accept": [
         "pancreas"
@@ -337,7 +336,7 @@
       "id": "ct-gallstones",
       "kind": "Clinical",
       "renderer": "volume",
-      "study": "ts-example-sm",
+      "study": "ts-s0513",
       "target": "gallbladder",
       "accept": [
         "gallbladder"
@@ -360,7 +359,7 @@
       "id": "ct-ivc-thrombus",
       "kind": "Clinical",
       "renderer": "volume",
-      "study": "ts-example-sm",
+      "study": "ts-s0513",
       "target": "inferior_vena_cava",
       "accept": [
         "inferior_vena_cava"
@@ -383,7 +382,7 @@
       "id": "ct-portal-hypertension",
       "kind": "Clinical",
       "renderer": "volume",
-      "study": "ts-example-sm",
+      "study": "ts-s0513",
       "target": "portal_vein_and_splenic_vein",
       "accept": [
         "portal_vein_and_splenic_vein"
@@ -406,14 +405,14 @@
       "id": "ct-l1-burst",
       "kind": "Clinical",
       "renderer": "volume",
-      "study": "ts-example-sm",
+      "study": "ts-s0513",
       "target": "vertebrae_L1",
       "accept": [
         "vertebrae_L1"
       ],
       "prompt": "A 30-year-old falls from a ladder and has severe back pain at the thoracolumbar junction. CT shows a burst fracture with retropulsed fragments, just below T12. Click the fractured vertebra.",
       "hint": "The fracture is at the first lumbar level.",
-      "view": "axial:0.487:bone",
+      "view": "axial:0.64:bone",
       "layers": [],
       "explain": "The L1 vertebra is the first lumbar vertebra, below T12 and above L2, and burst fractures are common at the thoracolumbar junction. On bone-window CT, retropulsed bone fragments narrowing the canal indicate instability.",
       "tags": {
@@ -429,7 +428,7 @@
       "id": "ct-psoas-abscess",
       "kind": "Clinical",
       "renderer": "volume",
-      "study": "ts-example-sm",
+      "study": "ts-s0513",
       "target": "iliopsoas_right",
       "accept": [
         "iliopsoas_right"
@@ -452,7 +451,7 @@
       "id": "ct-pyelonephritis",
       "kind": "Clinical",
       "renderer": "volume",
-      "study": "ts-example-sm",
+      "study": "ts-s0513",
       "target": "kidney_left",
       "accept": [
         "kidney_left"

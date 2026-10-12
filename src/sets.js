@@ -72,16 +72,18 @@ export function buildSets(allQuestions, models = { "upper-limb": { title: "Upper
       }));
     }
   }
-  // One scan set per volume study in the bank.
-  const studies = [...new Set(allQuestions.filter((q) => q.renderer === "volume" && q.study).map((q) => q.study))];
-  for (const study of studies) {
-    const mine = allQuestions.filter((q) => q.renderer === "volume" && q.study === study);
+  // One scan set per modality and body region ("CT: Chest", "MRI: Pelvis"); a set may span several
+  // studies, since the volume renderer loads each question's study on demand. `study` is the first
+  // question's, so the page can fetch it while the student reads the intro.
+  const scanKey = (q) => `${modalityOf([q]).toLowerCase()}:${q.tags?.region || q.study}`;
+  const scans = allQuestions.filter((q) => q.renderer === "volume" && q.study);
+  for (const key of [...new Set(scans.map(scanKey))]) {
+    const mine = scans.filter((q) => scanKey(q) === key);
     const mod = modalityOf(mine);
-    const sameMod = studies.filter((s) => modalityOf(allQuestions.filter((q) => q.renderer === "volume" && q.study === s)) === mod);
     sets.push({
-      id: `ct:${study}`, renderer: "volume", study, modality: mod, group: "Scans",
-      title: sameMod.length === 1 ? `${mod} scan` : `${mod}: ${cap(mine[0]?.tags?.region || study)}`,
-      pick: (qs) => shuffled(qs.filter((q) => q.renderer === "volume" && q.study === study), Math.random() + "").slice(0, SIZE),
+      id: key, renderer: "volume", study: mine[0].study, modality: mod, group: "Scans",
+      title: `${mod}: ${cap(mine[0].tags?.region || mine[0].study)}`,
+      pick: (qs) => shuffled(qs.filter((q) => scanKey(q) === key), Math.random() + "").slice(0, SIZE),
     });
   }
   // Sets with nothing to ask are hidden from the chooser.
@@ -89,13 +91,14 @@ export function buildSets(allQuestions, models = { "upper-limb": { title: "Upper
 }
 
 // An explicit list of ids, used by share links. Mixed renderers are not supported:
-// only questions that match the first question's renderer (and study or model) are kept.
+// only questions that match the first question's renderer (and, for meshes, model) are kept;
+// scan questions may come from any study.
 export function explicitSet(ids, byId, title = "hand anatomy") {
   let list = ids.map((id) => byId.get(id)).filter(Boolean);
   const renderer = list[0]?.renderer || "mesh";
   const study = renderer === "volume" ? list[0].study : undefined;
   const model = renderer === "mesh" ? list[0]?.model : undefined;
-  list = list.filter((q) => (q.renderer || "mesh") === renderer && (renderer !== "volume" || q.study === study) && (renderer !== "mesh" || q.model === model));
+  list = list.filter((q) => (q.renderer || "mesh") === renderer && (renderer !== "mesh" || q.model === model));
   if (renderer === "volume" && title === "hand anatomy") title = `${modalityOf(list)} scan`;
   return list.length ? { id: "custom", title, renderer, study, model, pick: () => list } : null;
 }

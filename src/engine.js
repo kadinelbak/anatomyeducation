@@ -33,7 +33,8 @@ export function createEngine({ renderer, questions, sets, ui, track }) {
   function showQuestion() {
     const q = current[state.index];
     renderer.clearHighlight();
-    renderer.show({ view: q.view, layers: q.layers, focus: q.focus || FOCUS_BY_REGION[q.tags?.region] || "all" });
+    // `study` is for the volume renderer (it loads that scan on demand); the mesh renderer ignores it.
+    renderer.show({ view: q.view, layers: q.layers, study: q.study, focus: q.focus || FOCUS_BY_REGION[q.tags?.region] || "all" });
     state.state = "asking";
     state.askedAt = performance.now();
     renderer.setPickEnabled(true);

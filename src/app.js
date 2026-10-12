@@ -72,7 +72,8 @@ let bank;
 try {
   bank = await loadBanks([
     "assets/questions/upper-limb.json", "assets/questions/lower-limb.json",
-    "assets/questions/ct-trunk.json", "assets/questions/mri-abdomen.json", "assets/questions/mri-prostate.json",
+    "assets/questions/ct-trunk.json", "assets/questions/ct-chest.json",
+    "assets/questions/mri-abdomen.json", "assets/questions/mri-prostate.json",
   ]);
 } catch (err) {
   console.error(err);

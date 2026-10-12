@@ -96,15 +96,15 @@ async function play(setId, expect) {
   await page.close();
 }
 
-await play("ct:ts-mr-example-sm", { title: "MRI: Abdomen", badge: "MRI · T1" });
+await play("mri:abdomen", { title: "MRI: Abdomen", badge: "MRI · T1" });
 // Every abdomen question, ten per run (the set above is a random ten).
 const bank = (await (await fetch(url.split("?")[0] + "assets/questions/mri-abdomen.json")).json()).questions.map((q) => q.id);
 for (let b = 0; b * 10 < bank.length; b++) await play("q=" + bank.slice(b * 10, b * 10 + 10).join(","), { badge: "MRI · T1" });
-await play("ct:msd-prostate-04", { title: "MRI: Pelvis", badge: "MRI · T2" });
+await play("mri:pelvis", { title: "MRI: Pelvis", badge: "MRI · T2" });
 // The CT set must be untouched by the patch.
 {
   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
-  await page.goto(`${url.split("?")[0]}?set=ct:ts-example-sm`);
+  await page.goto(`${url.split("?")[0]}?set=ct:abdomen`);
   await page.waitForFunction(() => !document.getElementById("start").disabled, null, { timeout: 90000 });
   await page.click("#start");
   await page.waitForSelector("#question:not([hidden])", { timeout: 120000 });

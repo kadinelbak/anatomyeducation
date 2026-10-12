@@ -40,12 +40,24 @@ function el(tag, cls, text) {
   return e;
 }
 
-export async function createVolumeRenderer({ container, studyUrl, onPick, controls } = {}) {
-  const volume = await loadStudy(studyUrl);
-  const { meta, dims, spacing } = volume;
+export async function createVolumeRenderer({ container, studyUrl, studiesBase = "assets/volumes/", initialStudy, onPick, controls } = {}) {
   const id = ++uid;
-  const ctId = `vol-ct-${id}`, segId = `vol-seg-${id}`, reId = `vol-re-${id}`, vpId = `vol-vp-${id}`;
-  let cmapCounter = 0;
+  const reId = `vol-re-${id}`, vpId = `vol-vp-${id}`;
+  let cmapCounter = 0, swapCounter = 0;
+  // Per-study state, replaced by swapStudy().
+  let volume = null, meta = { windows: {}, structures: {} }, dims = [1, 1, 1], spacing = [1, 1, 1];
+  let imageData = null, ctId = null, segId = null, maxLabel = 1, studyId = null;
+  const base0 = typeof document !== "undefined" ? document.baseURI : "http://local/";
+  const studyUrlFor = (sid) => new URL(`${studiesBase.endsWith("/") ? studiesBase : studiesBase + "/"}${sid}/study.json`, base0).href;
+  const cacheByUrl = new Map(); // url -> Promise<volume>; a study is fetched once
+  const loadCached = (url) => {
+    let p = cacheByUrl.get(url);
+    if (!p) { p = loadStudy(url); cacheByUrl.set(url, p); p.catch(() => cacheByUrl.delete(url)); }
+    return p;
+  };
+  const initUrl = studyUrl || (initialStudy ? studyUrlFor(initialStudy) : null);
+  const initVol = initUrl ? await loadCached(initUrl) : null;
+  const winKeys = () => Object.keys(meta.windows || {});
 
   // ---------- DOM ----------
   const root = el("div", "vol-root");
@@ -63,10 +75,14 @@ export async function createVolumeRenderer({ container, studyUrl, onPick, contro
     const b = el("button", "vol-btn", p[0].toUpperCase() + p.slice(1)); b.type = "button"; b.dataset.plane = p;
     b.addEventListener("click", () => setPlane(p)); planeBtns[p] = b; row1.append(b);
   }
-  for (const [w, preset] of Object.entries(meta.windows || {})) {
-    // A preset may carry its own button text (MR presets: Default, Tissue, Bright, Dark); CT presets use the key.
-    const b = el("button", "vol-btn", preset.label || w[0].toUpperCase() + w.slice(1)); b.type = "button"; b.dataset.window = w;
-    b.addEventListener("click", () => setWindow(w)); winBtns[w] = b; row1.append(b);
+  const winAnchor = el("span", "vol-win-anchor"); winAnchor.hidden = true; row1.append(winAnchor);
+  function buildWindowButtons() {
+    for (const w of Object.keys(winBtns)) { winBtns[w].remove(); delete winBtns[w]; }
+    for (const w of winKeys()) {
+      // A preset may carry its own button text (MR presets: Default, Tissue, Bright, Dark); CT presets use the key.
+      const b = el("button", "vol-btn", meta.windows[w].label || w[0].toUpperCase() + w.slice(1)); b.type = "button"; b.dataset.window = w;
+      b.addEventListener("click", () => setWindow(w)); winBtns[w] = b; winAnchor.before(b);
+    }
   }
   const zin = el("button", "vol-btn vol-zoom", "+"), zout = el("button", "vol-btn vol-zoom", "−");
   zin.type = zout.type = "button"; zin.dataset.zoom = "in"; zout.dataset.zoom = "out";
@@ -75,10 +91,9 @@ export async function createVolumeRenderer({ container, studyUrl, onPick, contro
   const slider = el("input", "vol-slider"); slider.type = "range"; slider.min = 0; slider.step = 1; slider.value = 0;
   slider.setAttribute("aria-label", "Slice");
   slider.addEventListener("input", () => setDepth(Number(slider.value)));
-  // Modality and sequence badge ("MRI · T1", with the full sequence name as a tooltip), so the student
-  // always knows which weighting they are reading. CT studies show "CT".
-  const badge = el("span", "vol-badge", modalityLabel(meta));
-  if (meta.sequenceLabel) badge.title = meta.sequenceLabel;
+  // Modality and sequence badge ("CT", "MRI · T1" with the full sequence name as a tooltip), so the
+  // student always knows which weighting they are reading. Updated on every study swap.
+  const badge = el("span", "vol-badge", "");
   row2.append(slider, zout, zin);
   toolbar.append(row1, row2);
   root.append(badge, label, ring, toolbar);
@@ -92,18 +107,11 @@ export async function createVolumeRenderer({ container, studyUrl, onPick, contro
     PhotometricInterpretation: "MONOCHROME2", Modality: modality, FrameOfReferenceUID: `1.2.826.0.1.${id}`,
     ImageOrientationPatient: [-1, 0, 0, 0, -1, 0], PixelSpacing: [spacing[1], spacing[0]],
   });
-  const base = { dimensions: dims.slice(), spacing: spacing.slice(), origin: [0, 0, 0], direction: [-1, 0, 0, 0, -1, 0, 0, 0, 1] };
-  await volumeLoader.createLocalVolume(ctId, { ...base, scalarData: volume.ct.slice(), metadata: mkMeta(16, 1, meta.modality || "CT") });
-  const lab16 = volume.labels instanceof Uint16Array;
-  await volumeLoader.createLocalVolume(segId, { ...base, scalarData: volume.labels.slice(), metadata: mkMeta(lab16 ? 16 : 8, 0, "SEG") });
-  const ctVol = cache.getVolume(ctId);
-  const imageData = ctVol.imageData;
-  const maxLabel = Math.max(1, ...Object.keys(meta.structures).map(Number));
 
   const re = new RenderingEngine(reId);
-  const WIN0 = defaultWindow(meta);
-  const state = { plane: "axial", depth: 0, window: WIN0, width: meta.windows?.[WIN0]?.width ?? 400, level: meta.windows?.[WIN0]?.level ?? 40, outline: false, highlights: new Map(), pickEnabled: false, zoom: 1 };
+  const state = { plane: "axial", depth: 0, window: "soft", width: 400, level: 40, outline: false, highlights: new Map(), pickEnabled: false, zoom: 1 };
   let vp = null;
+  let loading = 0; // >0 while a study load/swap is in flight: picks are ignored
 
   function makeViewport(plane) {
     re.setViewports([{ viewportId: vpId, type: Enums.ViewportType.ORTHOGRAPHIC, element: vpEl,
@@ -111,8 +119,6 @@ export async function createVolumeRenderer({ container, studyUrl, onPick, contro
     vp = re.getViewport(vpId);
   }
   makeViewport("axial");
-  await setVolumesForViewports(re, [{ volumeId: ctId }], [vpId]);
-  await addVolumesToViewports(re, [{ volumeId: segId, visibility: true }], [vpId]);
 
   const worldToIdx = (w) => Array.from(imageData.worldToIndex(w));
   const idxToWorld = (ijk) => Array.from(imageData.indexToWorld(ijk));
@@ -145,6 +151,7 @@ export async function createVolumeRenderer({ container, studyUrl, onPick, contro
       op.push({ value: v, opacity: a });
     }
     utilities.colormap.registerColormap({ ColorSpace: "RGB", Name: name, RGBPoints: rgb });
+    if (!segId) return;
     vp.setProperties({ colormap: { name, opacity: op }, voiRange: { lower: 0, upper: maxLabel } }, segId);
     vp.render();
   }
@@ -160,6 +167,7 @@ export async function createVolumeRenderer({ container, studyUrl, onPick, contro
   }
   function applyWindow() {
     state.width = Math.max(1, state.width);
+    if (!ctId) return;
     vp.setProperties({ voiRange: utilities.windowLevel.toLowHighRange(state.width, state.level) }, ctId);
     vp.render();
   }
@@ -172,6 +180,7 @@ export async function createVolumeRenderer({ container, studyUrl, onPick, contro
   }
   // Move the camera along the plane normal so the slice passes through voxel index d on the depth axis.
   function setDepth(d) {
+    if (!volume) return;
     const a = depthAxis();
     d = clamp(Math.round(d), 0, dims[a] - 1);
     const cam = vp.getCamera();
@@ -220,6 +229,7 @@ export async function createVolumeRenderer({ container, studyUrl, onPick, contro
 
   // ---------- Pick ----------
   function pickAt(x, y) { // x, y in CSS px relative to the viewport element
+    if (loading || !volume) return null;
     const ijk = worldToIdx(vp.canvasToWorld([x, y])).map(Math.round);
     const v = volume.labelAt(ijk[0], ijk[1], ijk[2]);
     return v ? volume.keyOf(v) : null;
@@ -235,6 +245,7 @@ export async function createVolumeRenderer({ container, studyUrl, onPick, contro
     clearTimeout(flashRing.t); flashRing.t = setTimeout(() => { ring.hidden = true; }, 600);
   }
   function onTap(e) {
+    if (loading || !volume) return;
     const r = vpEl.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
     const key = pickAt(x, y);
     api.debug.lastTap = { x, y, key };
@@ -275,6 +286,7 @@ export async function createVolumeRenderer({ container, studyUrl, onPick, contro
       }
       return;
     }
+    if (loading) return;
     const dx = e.clientX - p.x, dy = e.clientY - p.y;
     p.x = e.clientX; p.y = e.clientY;
     if (!gesture) return;
@@ -318,33 +330,98 @@ export async function createVolumeRenderer({ container, studyUrl, onPick, contro
   window.addEventListener("resize", onResize);
   if (typeof ResizeObserver === "function") new ResizeObserver(onResize).observe(root);
 
-  // ---------- Initial render (Cornerstone needs a frame or two before the first draw sticks) ----------
-  state.window = WIN0;
-  applyWindow(); applyOverlay();
-  re.renderViewports([vpId]);
-  await nextFrame(); await nextFrame();
-  re.render();
-  vp.setInterpolationType(Enums.InterpolationType.LINEAR, ctId); // explicit; Cornerstone default (FAST_LINEAR) made the nearest overlay vanish
-  vp.setInterpolationType(Enums.InterpolationType.NEAREST, segId); // NOT via setProperties(): it ignores volumeId and changes the CT too
-  applyOverlay();
-  setSlab();
-  setPlane("axial", Math.round((dims[2] - 1) / 2));
-  syncUI();
+  // ---------- Study swap ----------
+  // Replaces both Cornerstone volumes. setVolumesForViewports drops the old actors from the viewport; the old
+  // volumes are then evicted from the cache so their typed arrays can be collected.
+  async function swapStudy(vol) {
+    const oldIds = [ctId, segId].filter(Boolean);
+    const n = ++swapCounter;
+    const newCt = `vol-ct-${id}-${n}`, newSeg = `vol-seg-${id}-${n}`;
+    // Update per-study lets first: mkMeta reads `spacing`.
+    volume = vol; meta = vol.meta; dims = vol.dims; spacing = vol.spacing;
+    maxLabel = Math.max(1, ...Object.keys(meta.structures).map(Number));
+    const base = { dimensions: dims.slice(), spacing: spacing.slice(), origin: [0, 0, 0], direction: [-1, 0, 0, 0, -1, 0, 0, 0, 1] };
+    await volumeLoader.createLocalVolume(newCt, { ...base, scalarData: vol.ct.slice(), metadata: mkMeta(16, 1, meta.modality || "CT") });
+    const lab16 = vol.labels instanceof Uint16Array;
+    await volumeLoader.createLocalVolume(newSeg, { ...base, scalarData: vol.labels.slice(), metadata: mkMeta(lab16 ? 16 : 8, 0, "SEG") });
+    imageData = cache.getVolume(newCt).imageData;
+    ctId = newCt; segId = newSeg;
+    await setVolumesForViewports(re, [{ volumeId: newCt }], [vpId]);
+    await addVolumesToViewports(re, [{ volumeId: newSeg, visibility: true }], [vpId]);
+    for (const old of oldIds) { try { cache.removeVolumeLoadObject(old); } catch { /* already gone */ } }
+    buildWindowButtons();
+    badge.textContent = modalityLabel(meta);
+    badge.title = meta.sequenceLabel || "";
+    state.highlights.clear(); state.outline = false; state.zoom = 1;
+    if (!meta.windows[state.window]) state.window = defaultWindow(meta); // the study's own default (MR studies name one)
+    const p = meta.windows[state.window]; if (p) { state.width = p.width; state.level = p.level; }
+    applyWindow(); applyOverlay();
+    re.renderViewports([vpId]);
+    // Cornerstone needs a frame or two before the first draw sticks (also needed after a swap, else the overlay vanishes).
+    await nextFrame(); await nextFrame();
+    re.render();
+    vp.setInterpolationType(Enums.InterpolationType.LINEAR, ctId); // explicit; Cornerstone default (FAST_LINEAR) made the nearest overlay vanish
+    vp.setInterpolationType(Enums.InterpolationType.NEAREST, segId); // NOT via setProperties(): it ignores volumeId and changes the CT too
+    applyOverlay();
+    setSlab();
+    resetView();
+    setDepth(Math.round((dims[depthAxis()] - 1) / 2));
+    syncUI();
+    studyId = vol.meta.id || pendingId;
+  }
+  let pendingId = null;
+  function getStudy(sid) { return loadCached(studyUrlFor(sid)); }
+
+  // ---------- show() queue ----------
+  let latest = 0, queue = Promise.resolve();
+  function applyShow({ view, layers } = {}) {
+    if (!volume) return;
+    const v = resolveView(meta, view);
+    state.highlights.clear();
+    state.outline = !!(layers && layers.includes("outline"));
+    if (v.plane !== state.plane) setPlane(v.plane, 0);
+    resetView();
+    const a = PLANE_AXES[v.plane].depth;
+    setDepth(Math.round(v.frac * (dims[a] - 1)));
+    setWindow(meta.windows[v.window] ? v.window : defaultWindow(meta));
+    applyOverlay();
+    label.hidden = true; ring.hidden = true;
+  }
+  async function ensureStudy(sid) {
+    if (!sid || sid === studyId) return;
+    const vol = await getStudy(sid);
+    pendingId = sid;
+    await swapStudy(vol);
+  }
+
+  // ---------- Initial study ----------
+  state.window = "soft";
+  buildWindowButtons();
+  if (initVol) {
+    pendingId = initialStudy || (studyUrl && (studyUrl.match(/([^/]+)\/study\.json/) || [])[1]) || null;
+    await swapStudy(initVol);
+    setPlane("axial", Math.round((dims[2] - 1) / 2));
+    syncUI();
+  }
 
   const api = {
-    show({ view, layers } = {}) {
-      const v = resolveView(meta, view);
-      state.highlights.clear();
-      state.outline = !!(layers && layers.includes("outline"));
-      if (v.plane !== state.plane) setPlane(v.plane, 0);
-      resetView();
-      const a = PLANE_AXES[v.plane].depth;
-      setDepth(Math.round(v.frac * (dims[a] - 1)));
-      setWindow(meta.windows[v.window] ? v.window : WIN0);
-      applyOverlay();
-      label.hidden = true; ring.hidden = true;
+    show({ view, layers, study } = {}) {
+      const ticket = ++latest;
+      if (!loading && (!study || study === studyId)) { applyShow({ view, layers }); return Promise.resolve(); }
+      loading++;
+      const run = queue.then(async () => {
+        if (ticket !== latest) return; // a newer show() supersedes this one
+        await ensureStudy(study);
+        if (ticket !== latest) return;
+        applyShow({ view, layers });
+      });
+      queue = run.catch(() => {});
+      return run.finally(() => { loading--; });
     },
+    async loadStudy(sid) { await getStudy(sid); return sid; },
+    get studyId() { return studyId; },
     highlight(key, kind) {
+      if (loading || !volume) return;
       const val = volume.valueOf(key);
       if (val === undefined) return;
       state.highlights.set(val, kind === "good" ? "good" : "bad");
@@ -354,13 +431,14 @@ export async function createVolumeRenderer({ container, studyUrl, onPick, contro
       }
       applyOverlay();
     },
-    clearHighlight() { state.highlights.clear(); applyOverlay(); },
-    name: (key) => volume.name(key),
-    setDefaultLayers() { state.outline = false; setWindow(WIN0); applyOverlay(); },
+    clearHighlight() { state.highlights.clear(); if (!loading) applyOverlay(); },
+    name: (key) => (volume ? volume.name(key) : key),
+    setDefaultLayers() { if (loading || !volume) return; state.outline = false; setWindow(defaultWindow(meta)); applyOverlay(); },
     setPickEnabled(on) { state.pickEnabled = !!on; if (on) label.hidden = true; },
     debug: {
-      volume, state, setPlane, setSlice: setDepth, setWindow, pickAt, canvasOf, currentDepth, centreVoxel,
-      get viewport() { return vp; }, renderingEngine: re, vpEl, root, panBy, zoomBy, onTap, imageData,
+      get volume() { return volume; }, state, setPlane, setSlice: setDepth, setWindow, pickAt, canvasOf, currentDepth, centreVoxel,
+      get viewport() { return vp; }, renderingEngine: re, vpEl, root, panBy, zoomBy, onTap, get imageData() { return imageData; },
+      get volumeIds() { return { ct: ctId, seg: segId }; }, get loading() { return loading; },
     },
   };
   return api;
