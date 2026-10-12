@@ -161,7 +161,7 @@ if (process.env.CT) {
   await playCT(page);
 } else if (process.env.ALL) {
   // Every question in the bank, ten per set.
-  const bank = (await (await fetch(base + "assets/questions/upper-limb.json")).json()).questions;
+  const bank = (await (await fetch(base + `assets/questions/${process.env.BANK || "upper-limb"}.json`)).json()).questions;
   console.log(`bank: ${bank.length} questions`);
   for (let b = 0; b * 10 < bank.length; b++) {
     const ids = bank.slice(b * 10, b * 10 + 10).map((q) => q.id).join(",");

@@ -43,32 +43,43 @@ const isMesh = (q) => q.renderer !== "volume";
 // Scan sets are titled by the modality the bank records carry in tags.modality ("CT", "MRI"); CT when absent.
 const modalityOf = (qs) => qs.find((q) => q.tags?.modality)?.tags.modality || "CT";
 
-export function buildSets(allQuestions) {
-  const questions = allQuestions.filter(isMesh);
-  const mk = (s) => ({ renderer: "mesh", ...s });
-  const sets = [
-    mk({ id: "daily", title: "Daily 10", pick: (qs) => shuffled(qs.filter(isMesh), utcDate()).slice(0, SIZE) }),
-    mk({ id: "random", title: "Random 10", pick: (qs) => shuffled(qs.filter(isMesh), Math.random() + "" + Date.now()).slice(0, SIZE) }),
-    mk({
-      id: "kind:Clinical", title: "Clinical cases",
-      pick: (qs) => shuffled(qs.filter((q) => isMesh(q) && q.kind === "Clinical"), Math.random() + "").slice(0, SIZE),
-    }),
-  ];
-  const topics = [...new Set(questions.map((q) => q.tags?.topic).filter(Boolean))];
-  for (const topic of topics) {
-    sets.push(mk({
-      id: `topic:${topic}`, title: TOPIC_LABELS[topic] || cap(topic),
-      pick: (qs) => shuffled(qs.filter((q) => isMesh(q) && q.tags?.topic === topic), Math.random() + "").slice(0, SIZE),
-    }));
+// `models` is CONFIG.models; each 3D model gets its own daily, random, clinical and topic sets,
+// grouped under the model's title in the chooser. The first model keeps the original ids
+// (daily, random, ...) so older share links still resolve; the others are prefixed "<model>:".
+export function buildSets(allQuestions, models = { "upper-limb": { title: "Upper limb" } }) {
+  const sets = [];
+  const modelIds = Object.keys(models);
+  for (const model of modelIds) {
+    const mine = (q) => isMesh(q) && (q.model || modelIds[0]) === model;
+    const questions = allQuestions.filter(mine);
+    if (!questions.length) continue;
+    const prefix = model === modelIds[0] ? "" : `${model}:`;
+    const group = models[model].title || cap(model);
+    const mk = (s) => ({ renderer: "mesh", model, group, ...s, id: prefix + s.id });
+    sets.push(
+      mk({ id: "daily", title: "Daily 10", pick: (qs) => shuffled(qs.filter(mine), utcDate() + prefix).slice(0, SIZE) }),
+      mk({ id: "random", title: "Random 10", pick: (qs) => shuffled(qs.filter(mine), Math.random() + "" + Date.now()).slice(0, SIZE) }),
+      mk({
+        id: "kind:Clinical", title: "Clinical cases",
+        pick: (qs) => shuffled(qs.filter((q) => mine(q) && q.kind === "Clinical"), Math.random() + "").slice(0, SIZE),
+      }),
+    );
+    const topics = [...new Set(questions.map((q) => q.tags?.topic).filter(Boolean))];
+    for (const topic of topics) {
+      sets.push(mk({
+        id: `topic:${topic}`, title: TOPIC_LABELS[topic] || cap(topic),
+        pick: (qs) => shuffled(qs.filter((q) => mine(q) && q.tags?.topic === topic), Math.random() + "").slice(0, SIZE),
+      }));
+    }
   }
-  // One CT set per volume study in the bank.
+  // One scan set per volume study in the bank.
   const studies = [...new Set(allQuestions.filter((q) => q.renderer === "volume" && q.study).map((q) => q.study))];
   for (const study of studies) {
     const mine = allQuestions.filter((q) => q.renderer === "volume" && q.study === study);
     const mod = modalityOf(mine);
     const sameMod = studies.filter((s) => modalityOf(allQuestions.filter((q) => q.renderer === "volume" && q.study === s)) === mod);
     sets.push({
-      id: `ct:${study}`, renderer: "volume", study, modality: mod,
+      id: `ct:${study}`, renderer: "volume", study, modality: mod, group: "Scans",
       title: sameMod.length === 1 ? `${mod} scan` : `${mod}: ${cap(mine[0]?.tags?.region || study)}`,
       pick: (qs) => shuffled(qs.filter((q) => q.renderer === "volume" && q.study === study), Math.random() + "").slice(0, SIZE),
     });
@@ -78,14 +89,15 @@ export function buildSets(allQuestions) {
 }
 
 // An explicit list of ids, used by share links. Mixed renderers are not supported:
-// only questions that match the first question's renderer (and study) are kept.
+// only questions that match the first question's renderer (and study or model) are kept.
 export function explicitSet(ids, byId, title = "hand anatomy") {
   let list = ids.map((id) => byId.get(id)).filter(Boolean);
   const renderer = list[0]?.renderer || "mesh";
   const study = renderer === "volume" ? list[0].study : undefined;
-  list = list.filter((q) => (q.renderer || "mesh") === renderer && (renderer !== "volume" || q.study === study));
+  const model = renderer === "mesh" ? list[0]?.model : undefined;
+  list = list.filter((q) => (q.renderer || "mesh") === renderer && (renderer !== "volume" || q.study === study) && (renderer !== "mesh" || q.model === model));
   if (renderer === "volume" && title === "hand anatomy") title = `${modalityOf(list)} scan`;
-  return list.length ? { id: "custom", title, renderer, study, pick: () => list } : null;
+  return list.length ? { id: "custom", title, renderer, study, model, pick: () => list } : null;
 }
 
 // ?q=id1,id2 wins over ?set=...; unknown or missing falls back to daily.

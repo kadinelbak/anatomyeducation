@@ -18,11 +18,17 @@ const LAYER_COLORS = {
   bone: 0xeadfc8,
 };
 const DEFAULT_LAYERS = { skin: true, muscle: true, tendon: true, ligament: false, nerve: false, vessel: false, bone: true };
+const DEFAULT_VIEW_LABELS = { palmar: "Palm", dorsal: "Back", lateral: "Thumb side" };
+const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 const HIGHLIGHT_GOOD = new THREE.Color(0x2ee68a);
 const HIGHLIGHT_BAD = new THREE.Color(0xff3b3b);
 
+// Several mesh renderers (one per model) can share the page; only the active
+// one draws, owns the layer checkboxes, slice slider, view and zoom buttons,
+// and the attribution line. The switch calls setActive().
 export async function createMeshRenderer({ container, modelUrl, structuresUrl, onPick }) {
   let LAYERS = OLD_LAYERS;
+  let active = false;
   const ATTEMPTS = [
     { antialias: true, stencil: true, powerPreference: "high-performance" },
     { antialias: false, stencil: true },
@@ -60,6 +66,7 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.localClippingEnabled = true;
+  renderer.domElement.hidden = true;
   container.appendChild(renderer.domElement);
 
   const scene = new THREE.Scene();
@@ -256,7 +263,10 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
     // Cross-section axis: shoulder -> fingertip when the model has them, else
     // elbow -> wrist; extended to cover the whole model.
     const ax = meta.axis || {};
-    const [a0, a1] = ax.shoulder && ax.fingertip ? [ax.shoulder, ax.fingertip] : [ax.elbow, ax.wrist];
+    // Axis keys are free-form names ordered proximal to distal (shoulder..fingertip, hip..toe).
+    const axPts = Object.values(ax);
+    const [a0, a1] = ax.shoulder && ax.fingertip ? [ax.shoulder, ax.fingertip]
+      : ax.elbow && ax.wrist ? [ax.elbow, ax.wrist] : [axPts[0], axPts[axPts.length - 1]];
     const elbow = new THREE.Vector3(...a0);
     const wrist = new THREE.Vector3(...a1);
     const dir = wrist.clone().sub(elbow).normalize();
@@ -276,20 +286,39 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
       }
     }
     axis = { dir, min, max };
+    for (const layer of LAYERS) if (!(meshesByLayer.get(layer) || []).length) layerOn[layer] = false;
     applySlice();
     applyLayers();
-    // Hide checkboxes for layers this model does not have (e.g. skin).
-    document.querySelectorAll("input[data-layer]").forEach((box) => {
-      const has = (meshesByLayer.get(box.dataset.layer) || []).length > 0;
-      const row = box.closest("label") || box;
-      row.hidden = !has;
-      if (!has) layerOn[box.dataset.layer] = false;
-    });
-    const v2 = (meta.version || 1) >= 2;
-    $("attr-bp3d").hidden = v2;
-    $("attr-o3d").hidden = !v2;
-    $("zoom-row").hidden = !meta.regions;
     setView("palmar", "all", false);
+  }
+
+  // The page's controls describe whichever model is active: checkboxes for the
+  // layers it has, zoom buttons for its regions, view labels in its vocabulary,
+  // and the attribution line for its source.
+  function applyDom() {
+    document.querySelectorAll("input[data-layer]").forEach((box) => {
+      const row = box.closest("label") || box;
+      row.hidden = !(meshesByLayer.get(box.dataset.layer) || []).length;
+    });
+    const bp3d = /bodyparts3d/i.test(meta.source || "") || (meta.version || 1) < 2;
+    $("attr-bp3d").hidden = !bp3d;
+    $("attr-o3d").hidden = bp3d;
+    const zoom = $("zoom-row");
+    zoom.hidden = !meta.regions;
+    if (meta.regions) {
+      const names = [...Object.keys(meta.regions).filter((k) => k !== "all"), "all"];
+      zoom.replaceChildren(...names.map((k) => {
+        const b = document.createElement("button");
+        b.type = "button"; b.dataset.focus = k;
+        b.textContent = meta.regionLabels?.[k] || cap(k);
+        b.setAttribute("aria-pressed", String(k === currentFocus));
+        return b;
+      }));
+    }
+    for (const b of document.querySelectorAll("[data-view]")) b.textContent = meta.viewLabels?.[b.dataset.view] || DEFAULT_VIEW_LABELS[b.dataset.view] || b.textContent;
+    slider.value = sliceActive ? slider.value : 0;
+    applySlice();
+    applyLayers();
   }
 
   // ---------- Layers, slice, views ----------
@@ -310,6 +339,7 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
 
   document.querySelectorAll("input[data-layer]").forEach((box) => {
     box.addEventListener("change", () => {
+      if (!active) return;
       layerOn[box.dataset.layer] = box.checked;
       applyLayers();
     });
@@ -328,7 +358,7 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
     }
     updateCaps();
   }
-  slider.addEventListener("input", applySlice);
+  slider.addEventListener("input", () => { if (active) applySlice(); });
 
   const VIEWS = {
     palmar: new THREE.Vector3(0, 0, 1),
@@ -375,8 +405,13 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
       fromTarget: controls.target.clone(), toTarget: target,
     });
   }
-  document.querySelectorAll("[data-view]").forEach((b) => b.addEventListener("click", () => setView(b.dataset.view, currentFocus)));
-  document.querySelectorAll("[data-focus]").forEach((b) => b.addEventListener("click", () => setView(currentView, b.dataset.focus)));
+  // Delegated, since the zoom buttons are rebuilt per model.
+  document.addEventListener("click", (e) => {
+    if (!active) return;
+    const v = e.target.closest?.("[data-view]"), f = e.target.closest?.("[data-focus]");
+    if (v) setView(v.dataset.view, currentFocus);
+    else if (f) setView(currentView, f.dataset.focus);
+  });
 
   // Shift + left-drag pans (right-drag and two-finger drag pan as well).
   function setShiftPan(on) {
@@ -386,10 +421,13 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
   window.addEventListener("keyup", (e) => { if (e.key === "Shift") setShiftPan(false); });
   window.addEventListener("blur", () => setShiftPan(false));
 
-  $("controls-toggle").addEventListener("click", () => {
-    const open = $("controls").classList.toggle("open");
-    $("controls-toggle").setAttribute("aria-expanded", open);
-  });
+  if (!$("controls-toggle").dataset.bound) {
+    $("controls-toggle").dataset.bound = "1";
+    $("controls-toggle").addEventListener("click", () => {
+      const open = $("controls").classList.toggle("open");
+      $("controls-toggle").setAttribute("aria-expanded", open);
+    });
+  }
 
   // ---------- Picking ----------
 
@@ -507,8 +545,10 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
       controls.target.lerpVectors(viewTween.fromTarget, viewTween.toTarget, k);
       if (t >= 1) viewTween.active = false;
     }
-    controls.update();
-    renderer.render(scene, camera);
+    if (active) {
+      controls.update();
+      renderer.render(scene, camera);
+    }
     requestAnimationFrame(tick);
   }
 
@@ -531,6 +571,17 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
       pickEnabled = !!on;
       if (pickEnabled) label.hidden = true;
     },
-    debug: { viewTween, controls, camera, meshesByStructure, pick, setView, setLayers },
+    setActive(on) {
+      active = !!on;
+      renderer.domElement.hidden = !active;
+      if (!active) { label.hidden = true; return; }
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      controls.handleResize();
+      applyDom();
+    },
+    get meta() { return meta; },
+    debug: { viewTween, controls, camera, meshesByStructure, pick, setView, setLayers, get meta() { return meta; } },
   };
 }

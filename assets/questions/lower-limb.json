@@ -1,0 +1,1197 @@
+{
+ "version": 1,
+ "region": "lower-limb",
+ "questions": [
+  {
+   "id": "sciatic-posterior-hip",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "sciatic_nerve",
+   "accept": [
+    "sciatic_nerve"
+   ],
+   "prompt": "After a head-on car crash a passenger has a shortened, internally rotated hip. The foot is dropped and the sole and the whole leg below the knee are numb apart from the medial side. Imaging shows a posterior dislocation of the hip. Click the nerve most likely stretched by the femoral head.",
+   "hint": "It leaves the pelvis below piriformis and lies just behind the hip joint on the short lateral rotators.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "nerve"
+   ],
+   "explain": "The sciatic nerve (L4 to S3) passes through the greater sciatic foramen below piriformis, behind the hip joint. Posterior dislocation or acetabular fracture can injure it, usually the common fibular part first, and the same nerve is at risk from a misplaced injection into the lower medial buttock.",
+   "tags": {
+    "topic": "nerves",
+    "region": "hip",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hip"
+  },
+  {
+   "id": "foot-drop-common-fibular",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "common_fibular_nerve",
+   "accept": [
+    "common_fibular_nerve"
+   ],
+   "prompt": "A man has a high-stepping gait and cannot lift his right foot after a tight plaster cast over the knee. There is numbness on the front of the leg and the dorsum of the foot. Click the nerve compressed as it winds round the neck of the fibula.",
+   "hint": "It is the most exposed nerve of the leg, wrapping the lateral side of the fibular neck just below the knee.",
+   "view": "lateral",
+   "layers": [
+    "bone",
+    "nerve"
+   ],
+   "explain": "The common fibular nerve is superficial as it winds round the neck of the fibula, so fractures, casts and crossed-leg compression injure it. It supplies the anterior and lateral compartments, so loss causes foot drop (high-stepping gait) and weak eversion.",
+   "tags": {
+    "topic": "nerves",
+    "region": "leg",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "leg"
+  },
+  {
+   "id": "tarsal-tunnel-tibial",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "tibial_nerve",
+   "accept": [
+    "tibial_nerve"
+   ],
+   "prompt": "A runner has burning and tingling in the sole of the foot, worse at night, with a positive Tinel sign behind the medial malleolus. Click the nerve compressed in the tarsal tunnel before it divides into the medial and lateral plantar nerves.",
+   "hint": "It runs down the back of the calf deep to soleus, then behind the medial malleolus.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "nerve"
+   ],
+   "explain": "The tibial nerve passes under the flexor retinaculum behind the medial malleolus, together with the posterior tibial vessels and the tendons of tibialis posterior, flexor digitorum longus and flexor hallucis longus. Complete loss weakens plantar flexion and inversion and removes sensation from the sole.",
+   "tags": {
+    "topic": "nerves",
+    "region": "ankle",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "ankle"
+  },
+  {
+   "id": "femoral-nerve-quadriceps",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "femoral_nerve",
+   "accept": [
+    "femoral_nerve"
+   ],
+   "prompt": "A woman with a large retroperitoneal haematoma has a knee that gives way on stairs, a weak straight-leg raise and an absent knee jerk. Sensation is lost over the front of the thigh. Click the nerve compressed in the groin lateral to the femoral artery.",
+   "hint": "It lies lateral to the femoral artery just below the inguinal ligament, outside the femoral sheath.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "nerve"
+   ],
+   "explain": "The femoral nerve (L2 to L4) supplies iliacus, the quadriceps, sartorius and pectineus and the skin of the front of the thigh, and gives the saphenous nerve. For a femoral nerve block, the needle goes just lateral to the femoral artery pulse below the inguinal ligament.",
+   "tags": {
+    "topic": "nerves",
+    "region": "hip",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hip"
+  },
+  {
+   "id": "obturator-pelvic-fracture",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "obturator_nerve",
+   "accept": [
+    "obturator_nerve"
+   ],
+   "prompt": "After a pelvic fracture, a cyclist has numbness of a patch on the medial thigh and cannot cross the right leg over the left or hold the thighs together. Click the nerve that passes through the obturator canal.",
+   "hint": "It leaves the pelvis through the obturator foramen and runs to the medial compartment of the thigh.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "nerve"
+   ],
+   "explain": "The obturator nerve (L2 to L4) enters the thigh through the obturator canal and supplies the adductor group, gracilis and obturator externus, plus a small skin patch on the medial thigh. Injury weakens adduction and can be caused by pelvic fractures, hernias or surgery.",
+   "tags": {
+    "topic": "nerves",
+    "region": "hip",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hip"
+  },
+  {
+   "id": "trendelenburg-superior-gluteal",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "superior_gluteal_nerve",
+   "accept": [
+    "superior_gluteal_nerve"
+   ],
+   "prompt": "After a hip operation, a patient's pelvis drops on the left whenever she stands on her right leg, and she waddles. Her gluteus medius and minimus are paralysed. Click the nerve that supplies them.",
+   "hint": "It leaves the pelvis above piriformis and runs between gluteus medius and minimus.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "nerve"
+   ],
+   "explain": "The superior gluteal nerve (L4 to S1) leaves above piriformis and supplies gluteus medius, gluteus minimus and tensor fasciae latae. A positive Trendelenburg sign means the pelvis falls on the unsupported side because these abductors cannot hold it level.",
+   "tags": {
+    "topic": "nerves",
+    "region": "hip",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hip"
+  },
+  {
+   "id": "inferior-gluteal-chair",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "inferior_gluteal_nerve",
+   "accept": [
+    "inferior_gluteal_nerve"
+   ],
+   "prompt": "A man who had a posterior hip approach struggles to stand up from a chair and to climb stairs without pushing on his thigh, though he can still walk on the level. Click the nerve that supplies the muscle that extends the hip.",
+   "hint": "It emerges below piriformis, behind the sciatic nerve, and enters the deep surface of the big buttock muscle.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "nerve"
+   ],
+   "explain": "The inferior gluteal nerve (L5 to S2) leaves below piriformis and supplies gluteus maximus alone. Loss of this powerful hip extensor makes it hard to rise from sitting, climb stairs and run.",
+   "tags": {
+    "topic": "nerves",
+    "region": "hip",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hip"
+  },
+  {
+   "id": "meralgia-paraesthetica",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "lateral_femoral_cutaneous_nerve",
+   "accept": [
+    "lateral_femoral_cutaneous_nerve"
+   ],
+   "prompt": "An obese man who wears a tight belt has burning and tingling on the outer thigh. Strength is normal and the knee jerk is present. Click the purely sensory nerve compressed near the anterior superior iliac spine.",
+   "hint": "It passes under or through the lateral end of the inguinal ligament.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "nerve"
+   ],
+   "explain": "The lateral femoral cutaneous nerve (L2 to L3) is sensory only. It passes close to the anterior superior iliac spine under the inguinal ligament, and compression there causes meralgia paraesthetica, with normal strength and reflexes.",
+   "tags": {
+    "topic": "nerves",
+    "region": "hip",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hip"
+  },
+  {
+   "id": "saphenous-nerve-vein-harvest",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "saphenous_nerve",
+   "accept": [
+    "saphenous_nerve"
+   ],
+   "prompt": "A patient has numbness along the medial side of the leg and foot after a knee operation and removal of a long vein for a bypass graft. Click the sensory nerve that accompanies the great saphenous vein below the knee.",
+   "hint": "It is the longest cutaneous branch of the femoral nerve and runs with the great saphenous vein.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "nerve"
+   ],
+   "explain": "The saphenous nerve is a branch of the femoral nerve that passes through the adductor canal and runs with the great saphenous vein in front of the medial malleolus. It supplies skin on the medial leg and foot, and is at risk during vein stripping or harvesting.",
+   "tags": {
+    "topic": "nerves",
+    "region": "leg",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "leg"
+  },
+  {
+   "id": "sural-nerve-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "sural_nerve",
+   "accept": [
+    "sural_nerve"
+   ],
+   "prompt": "Click the cutaneous nerve that runs down the back of the leg and behind the lateral malleolus to the lateral border of the foot, often taken for nerve biopsy.",
+   "hint": "It lies beside the small saphenous vein.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "nerve"
+   ],
+   "explain": "The sural nerve is formed from the medial sural nerve (from the tibial nerve) and a branch of the common fibular nerve. It supplies the skin of the lateral foot and little toe, and is often used for biopsy or nerve grafts, leaving numbness at the lateral border of the foot.",
+   "tags": {
+    "topic": "nerves",
+    "region": "leg",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "leg"
+  },
+  {
+   "id": "deep-fibular-first-web",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "deep_fibular_nerve",
+   "accept": [
+    "deep_fibular_nerve"
+   ],
+   "prompt": "After a fracture of the neck of the fibula, a patient has weak dorsiflexion and a small patch of numbness only in the cleft between the first and second toes. Click the nerve responsible for this small area of skin.",
+   "hint": "It runs with the anterior tibial artery in the anterior compartment, ending between the first and second toes.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "nerve"
+   ],
+   "explain": "The deep fibular nerve supplies the muscles of the anterior compartment (tibialis anterior and the long toe extensors) and the extensor digitorum brevis. Its only skin area is the first interdigital cleft, which is the standard test for this nerve.",
+   "tags": {
+    "topic": "nerves",
+    "region": "foot",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "foot"
+  },
+  {
+   "id": "superficial-fibular-dorsum",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "superficial_fibular_nerve",
+   "accept": [
+    "superficial_fibular_nerve"
+   ],
+   "prompt": "A runner with chronic lateral ankle sprains has numbness over the dorsum of the foot and toes, sparing the first web space, and weak eversion. Click the nerve that supplies the lateral compartment and then the skin of the dorsum of the foot.",
+   "hint": "It supplies the lateral compartment and pierces the deep fascia in the distal leg.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "nerve"
+   ],
+   "explain": "The superficial fibular nerve supplies fibularis longus and brevis (eversion) and the skin of the dorsum of the foot and most toes except the first web space. It can be stretched in inversion sprains.",
+   "tags": {
+    "topic": "nerves",
+    "region": "foot",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "foot"
+  },
+  {
+   "id": "medial-plantar-jogger",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "medial_plantar_nerve",
+   "accept": [
+    "medial_plantar_nerve"
+   ],
+   "prompt": "A distance runner feels burning on the medial sole and big toe when wearing arch supports, with tenderness over the navicular. Click the larger terminal branch of the tibial nerve in the foot that supplies the medial side of the sole.",
+   "hint": "It is the larger branch under abductor hallucis, comparable with the median nerve in the hand.",
+   "view": "lateral",
+   "layers": [
+    "bone",
+    "nerve"
+   ],
+   "explain": "The medial plantar nerve passes deep to abductor hallucis and supplies abductor hallucis, flexor digitorum brevis, flexor hallucis brevis, the first lumbrical and the medial three and a half toes. Entrapment under the navicular is called jogger's foot.",
+   "tags": {
+    "topic": "nerves",
+    "region": "foot",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "foot"
+  },
+  {
+   "id": "lateral-plantar-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "lateral_plantar_nerve",
+   "accept": [
+    "lateral_plantar_nerve"
+   ],
+   "prompt": "Click the terminal branch of the tibial nerve that crosses the sole to the lateral side of the foot and supplies most of the small muscles of the foot.",
+   "hint": "It is comparable with the ulnar nerve in the hand.",
+   "view": "lateral",
+   "layers": [
+    "bone",
+    "nerve"
+   ],
+   "explain": "The lateral plantar nerve supplies quadratus plantae, abductor digiti minimi, the interossei, adductor hallucis, flexor digiti minimi brevis and the lateral lumbricals, plus the skin of the lateral one and a half toes.",
+   "tags": {
+    "topic": "nerves",
+    "region": "foot",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "foot"
+  },
+  {
+   "id": "femoral-pulse-mid-inguinal",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "femoral_artery",
+   "accept": [
+    "femoral_artery"
+   ],
+   "prompt": "A cardiologist plans retrograde catheterisation through the right groin and feels a pulse at the midpoint between the anterior superior iliac spine and the pubic symphysis. Click the artery being punctured.",
+   "hint": "It lies just below the inguinal ligament, over the femoral head, with the femoral vein medial to it.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "vessel"
+   ],
+   "explain": "The femoral artery is the continuation of the external iliac and enters the thigh at the mid-inguinal point. In the femoral sheath the order from lateral to medial is nerve, artery, vein, empty space and lymphatics (NAVEL); puncture is made over the femoral head to compress it afterwards.",
+   "tags": {
+    "topic": "vessels",
+    "region": "hip",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hip"
+  },
+  {
+   "id": "femoral-vein-medial",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "femoral_vein",
+   "accept": [
+    "femoral_vein"
+   ],
+   "prompt": "Click the femoral vein, which lies medial to the femoral artery in the femoral triangle.",
+   "hint": "Remember NAVEL: the vein is just medial to the artery.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "vessel"
+   ],
+   "explain": "The femoral vein lies medial to the artery in the femoral triangle and receives the great saphenous vein at the saphenous opening. It is a common site of deep vein thrombosis and of central venous access.",
+   "tags": {
+    "topic": "vessels",
+    "region": "hip",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hip"
+  },
+  {
+   "id": "deep-femoral-artery",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "deep_femoral_artery",
+   "accept": [
+    "deep_femoral_artery"
+   ],
+   "prompt": "Click the largest branch of the femoral artery, arising about 4 cm below the inguinal ligament and supplying the thigh through perforating branches.",
+   "hint": "It passes deep to the main artery, behind adductor longus.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "vessel"
+   ],
+   "explain": "The deep femoral artery (profunda femoris) is the main blood supply to the thigh muscles and gives the medial and lateral circumflex femoral arteries, which supply the femoral head and neck, and four perforating branches. It is the key collateral if the femoral artery is blocked.",
+   "tags": {
+    "topic": "vessels",
+    "region": "thigh",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "thigh"
+  },
+  {
+   "id": "knee-dislocation-popliteal",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "popliteal_artery",
+   "accept": [
+    "popliteal_artery"
+   ],
+   "prompt": "A young man with a posterior dislocation of the knee has a cold, pale foot with absent distal pulses. Click the artery that lies deepest in the popliteal fossa, against the back of the knee joint, and is at risk.",
+   "hint": "It is the deepest structure in the fossa, lying on the back of the femur and knee capsule.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "vessel"
+   ],
+   "explain": "The popliteal artery is the deepest structure in the popliteal fossa, pressed against the knee joint and held by its branches, so it is easily torn or occluded in knee dislocation. It divides into the anterior and posterior tibial arteries, and urgent vascular assessment is needed.",
+   "tags": {
+    "topic": "vessels",
+    "region": "knee",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "knee"
+  },
+  {
+   "id": "dorsalis-pedis-pulse",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "dorsalis_pedis_artery",
+   "accept": [
+    "dorsalis_pedis_artery"
+   ],
+   "prompt": "A diabetic patient with intermittent claudication has foot pulses checked. One pulse is felt on the dorsum of the foot, lateral to the tendon of extensor hallucis longus. Click the artery being palpated.",
+   "hint": "It is the continuation of the anterior tibial artery over the tarsal bones.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "vessel"
+   ],
+   "explain": "The dorsalis pedis artery continues the anterior tibial artery in front of the ankle and is palpated lateral to extensor hallucis longus. It may be congenitally absent in a small minority, so an absent pulse alone does not prove ischaemia.",
+   "tags": {
+    "topic": "vessels",
+    "region": "foot",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "foot"
+  },
+  {
+   "id": "posterior-tibial-pulse",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "posterior_tibial_artery",
+   "accept": [
+    "posterior_tibial_artery"
+   ],
+   "prompt": "A surgeon checks perfusion of a foot after an ankle fracture and feels for a pulse in the groove behind the medial malleolus. Click the artery being palpated.",
+   "hint": "It runs with the tibial nerve, between the medial malleolus and the calcaneus.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "vessel"
+   ],
+   "explain": "The posterior tibial artery runs behind the medial malleolus, deep to the flexor retinaculum, and divides into the medial and lateral plantar arteries. It is palpated midway between the malleolus and the heel and it supplies the sole.",
+   "tags": {
+    "topic": "vessels",
+    "region": "ankle",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "ankle"
+  },
+  {
+   "id": "great-saphenous-cut-down",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "great_saphenous_vein",
+   "accept": [
+    "great_saphenous_vein"
+   ],
+   "prompt": "In an emergency, a doctor makes a cut-down for venous access just in front of the medial malleolus. The same vein is a common graft for coronary bypass and is the vein in varicose veins. Click it.",
+   "hint": "It begins on the medial side of the dorsal venous arch and ascends in front of the medial malleolus.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "vessel"
+   ],
+   "explain": "The great saphenous vein starts in front of the medial malleolus, ascends along the medial leg and thigh with the saphenous nerve, and drains into the femoral vein at the saphenous opening. Varicose veins, bypass harvesting and venous cut-down all involve it.",
+   "tags": {
+    "topic": "vessels",
+    "region": "leg",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "leg"
+  },
+  {
+   "id": "small-saphenous-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "small_saphenous_vein",
+   "accept": [
+    "small_saphenous_vein"
+   ],
+   "prompt": "Click the superficial vein that ascends behind the lateral malleolus and up the back of the calf to drain into the popliteal vein.",
+   "hint": "It travels with the sural nerve.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "vessel"
+   ],
+   "explain": "The small saphenous vein begins at the lateral end of the dorsal venous arch, passes behind the lateral malleolus and pierces the deep fascia to enter the popliteal vein. Because the sural nerve lies beside it, surgery on it can cause numbness of the lateral foot.",
+   "tags": {
+    "topic": "vessels",
+    "region": "leg",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "leg"
+  },
+  {
+   "id": "rectus-femoris-sprint",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "rectus_femoris",
+   "accept": [
+    "rectus_femoris"
+   ],
+   "prompt": "A sprinter feels a sudden pain in the front of the thigh during a kick. He is tender over the anterior inferior iliac spine and cannot flex the hip against resistance with the knee extended. Click the quadriceps head that crosses both the hip and the knee.",
+   "hint": "Only one of the four quadriceps heads attaches to the pelvis.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "Rectus femoris arises from the anterior inferior iliac spine and flexes the hip as well as extending the knee. The femoral nerve supplies it, and the quadriceps tendon becomes the patellar ligament, tapped to test the L3 and L4 knee jerk.",
+   "tags": {
+    "topic": "muscles",
+    "region": "thigh",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "thigh"
+  },
+  {
+   "id": "vastus-lateralis-injection",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "vastus_lateralis",
+   "accept": [
+    "vastus_lateralis"
+   ],
+   "prompt": "Click the muscle on the anterolateral thigh that is the preferred site for intramuscular injection in infants.",
+   "hint": "It is the biggest quadriceps head and lies on the lateral side of the femur.",
+   "view": "lateral",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "Vastus lateralis is the largest part of the quadriceps and lies away from the main nerves and vessels, which is why it is used for injections. It is supplied by the femoral nerve and extends the knee.",
+   "tags": {
+    "topic": "muscles",
+    "region": "thigh",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "thigh"
+  },
+  {
+   "id": "psoas-hip-flexion",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "psoas_major",
+   "accept": [
+    "psoas_major"
+   ],
+   "prompt": "A man with lumbar spinal tuberculosis has a fixed flexed hip and a cold swelling in the groin. Click the long muscle from the lumbar spine whose sheath carried the pus to the lesser trochanter.",
+   "hint": "It runs from the lumbar vertebrae over the pelvic brim, behind the inguinal ligament.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "Psoas major arises from the lumbar vertebrae and joins iliacus to form iliopsoas, the main hip flexor, inserting on the lesser trochanter. Pus in the psoas sheath can track beneath the inguinal ligament into the thigh; the muscle is supplied by the lumbar plexus (L1 to L3).",
+   "tags": {
+    "topic": "muscles",
+    "region": "hip",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hip"
+  },
+  {
+   "id": "gluteus-maximus-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "gluteus_maximus",
+   "accept": [
+    "gluteus_maximus"
+   ],
+   "prompt": "Click the largest and most superficial muscle of the buttock, the main extensor of the hip.",
+   "hint": "It forms the contour of the buttock.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "Gluteus maximus extends and laterally rotates the thigh and is supplied by the inferior gluteal nerve. Its upper fibres and its deep fibres insert on the iliotibial tract and the gluteal tuberosity.",
+   "tags": {
+    "topic": "muscles",
+    "region": "hip",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hip"
+  },
+  {
+   "id": "gluteus-medius-gait",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "gluteus_medius",
+   "accept": [
+    "gluteus_medius",
+    "gluteus_minimus"
+   ],
+   "prompt": "A patient with a painful hip walks with her trunk leaning toward the painful side. Click the fan-shaped muscle on the outer surface of the ilium that stops the pelvis dropping when the opposite foot is lifted.",
+   "hint": "It lies under the skin of the upper outer buttock, partly covered by gluteus maximus.",
+   "view": "lateral",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "Gluteus medius, with gluteus minimus, abducts the thigh and holds the pelvis level in single-leg stance. It is supplied by the superior gluteal nerve and is injured by a misplaced injection or hip surgery.",
+   "tags": {
+    "topic": "muscles",
+    "region": "hip",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hip"
+  },
+  {
+   "id": "tfl-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "tensor_fasciae_latae",
+   "accept": [
+    "tensor_fasciae_latae"
+   ],
+   "prompt": "Click the small muscle arising from the anterior superior iliac spine that tightens the iliotibial tract.",
+   "hint": "It lies in front and above gluteus medius on the lateral hip.",
+   "view": "lateral",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "Tensor fasciae latae helps flex and abduct the hip and keeps the iliotibial tract taut. It is supplied by the superior gluteal nerve and its tightness is implicated in iliotibial band syndrome.",
+   "tags": {
+    "topic": "muscles",
+    "region": "hip",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hip"
+  },
+  {
+   "id": "hamstring-ischial-tuberosity",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "biceps_femoris",
+   "accept": [
+    "biceps_femoris"
+   ],
+   "prompt": "A hurdler feels a snap at the back of the thigh with bruising and tenderness near the ischial tuberosity. Click the lateral hamstring muscle that inserts on the head of the fibula.",
+   "hint": "It forms the lateral border of the popliteal fossa above.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "Biceps femoris is a hamstring that extends the hip and flexes the knee. Its long head is supplied by the tibial part of the sciatic nerve and its short head by the common fibular part, and the tendon is the guide to the common fibular nerve at the knee.",
+   "tags": {
+    "topic": "muscles",
+    "region": "thigh",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "thigh"
+  },
+  {
+   "id": "gastrocnemius-tear",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "gastrocnemius",
+   "accept": [
+    "gastrocnemius"
+   ],
+   "prompt": "A middle-aged tennis player feels as if struck on the calf while lunging. The medial calf is swollen and tender, and walking is painful. Click the superficial two-headed calf muscle usually torn at this site.",
+   "hint": "Its two heads arise from the femoral condyles and form the bulk of the calf.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "A tennis leg is usually a partial tear of the medial head of gastrocnemius at the musculotendinous junction. The muscle is supplied by the tibial nerve and plantar flexes the foot, flexing the knee.",
+   "tags": {
+    "topic": "muscles",
+    "region": "leg",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "leg"
+  },
+  {
+   "id": "soleus-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "soleus",
+   "accept": [
+    "soleus"
+   ],
+   "prompt": "Click the broad flat muscle lying deep to gastrocnemius, which acts as the calf muscle pump.",
+   "hint": "Look at the outer side of the calf where it bulges beyond gastrocnemius.",
+   "view": "lateral",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "Soleus arises from the tibia and fibula and joins gastrocnemius in the calcaneal tendon. It is a powerful postural plantar flexor, supplied by the tibial nerve, and compresses deep veins, which matters in deep vein thrombosis.",
+   "tags": {
+    "topic": "muscles",
+    "region": "leg",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "leg"
+  },
+  {
+   "id": "anterior-compartment-tibialis-anterior",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "tibialis_anterior",
+   "accept": [
+    "tibialis_anterior"
+   ],
+   "prompt": "After a tibial shaft fracture, a patient has severe shin pain on passive plantar flexion, a tense anterior leg and weak dorsiflexion and inversion of the foot. Click the muscle at the front of the shin that makes up much of the compartment.",
+   "hint": "It lies just lateral to the tibial crest.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "Tibialis anterior dorsiflexes and inverts the foot and is supplied by the deep fibular nerve. In anterior compartment syndrome swelling compresses the nerve and muscle, causing foot drop.",
+   "tags": {
+    "topic": "muscles",
+    "region": "leg",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "leg"
+  },
+  {
+   "id": "fibularis-longus-eversion",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "fibularis_longus",
+   "accept": [
+    "fibularis_longus"
+   ],
+   "prompt": "A dancer who rolled over her ankle cannot evert the foot and the arch seems flatter. Click the long muscle of the lateral compartment whose tendon passes behind the lateral malleolus and under the foot.",
+   "hint": "Its tendon runs under the foot to the base of the first metatarsal.",
+   "view": "lateral",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "Fibularis longus everts the foot and supports the transverse and lateral longitudinal arches. The superficial fibular nerve supplies it, and its tendon can sublux behind the lateral malleolus.",
+   "tags": {
+    "topic": "muscles",
+    "region": "leg",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "leg"
+  },
+  {
+   "id": "sartorius-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "sartorius",
+   "accept": [
+    "sartorius"
+   ],
+   "prompt": "Click the long strap-like muscle that crosses the thigh obliquely from the anterior superior iliac spine to the medial side of the knee.",
+   "hint": "It forms the lateral border of the femoral triangle.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "Sartorius flexes, abducts and laterally rotates the hip and flexes the knee. It is supplied by the femoral nerve and overlies the adductor canal.",
+   "tags": {
+    "topic": "muscles",
+    "region": "thigh",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "thigh"
+  },
+  {
+   "id": "groin-strain-adductor-longus",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "adductor_longus",
+   "accept": [
+    "adductor_longus"
+   ],
+   "prompt": "A footballer feels sudden pain in the medial thigh when sprinting and changing direction. It hurts to squeeze the knees together against resistance. Click the adductor whose edge forms the medial border of the femoral triangle.",
+   "hint": "It arises from the pubis near the symphysis.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "Adductor longus is the commonest adductor injured in groin strains and forms the medial boundary of the femoral triangle. It is supplied by the anterior division of the obturator nerve.",
+   "tags": {
+    "topic": "muscles",
+    "region": "thigh",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "thigh"
+  },
+  {
+   "id": "pectineus-floor",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "pectineus",
+   "accept": [
+    "pectineus"
+   ],
+   "prompt": "Click the muscle that lies in the floor of the femoral triangle between psoas major and adductor longus.",
+   "hint": "It arises from the pectineal line of the pubis.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "Pectineus flexes and adducts the hip and has a dual nerve supply, from the femoral nerve and often the obturator nerve. It lies in the floor of the femoral triangle.",
+   "tags": {
+    "topic": "muscles",
+    "region": "hip",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hip"
+  },
+  {
+   "id": "femoral-neck-fracture",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "femur",
+   "accept": [
+    "femur"
+   ],
+   "prompt": "An elderly woman falls and now lies with her right leg shortened and turned outward (externally rotated), unable to stand. Click the bone that is fractured.",
+   "hint": "The break is at its upper end, just below the head.",
+   "view": "palmar",
+   "layers": [
+    "bone"
+   ],
+   "explain": "This is a femoral neck fracture. The pull of the muscles shortens the leg and rotates it externally, and damage to the retinacular branches of the medial circumflex femoral artery risks avascular necrosis of the head.",
+   "tags": {
+    "topic": "bones",
+    "region": "hip",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hip"
+  },
+  {
+   "id": "hip-bone-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "hip_bone",
+   "accept": [
+    "hip_bone"
+   ],
+   "prompt": "Click the bone formed from the fusion of the ilium, ischium and pubis, which holds the acetabulum.",
+   "hint": "It is the large flat bone that meets the sacrum behind.",
+   "view": "dorsal",
+   "layers": [
+    "bone"
+   ],
+   "explain": "The hip bone joins its fellow at the pubic symphysis and the sacrum at the sacroiliac joint. The three parts meet in the Y-shaped cartilage of the acetabulum until about 16 years.",
+   "tags": {
+    "topic": "bones",
+    "region": "hip",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hip"
+  },
+  {
+   "id": "patella-dislocation",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "patella",
+   "accept": [
+    "patella"
+   ],
+   "prompt": "A teenager twists her knee and the kneecap slides toward the outer side, leaving the knee locked and painful. Click the sesamoid bone that has dislocated.",
+   "hint": "It sits within the quadriceps tendon at the front of the knee.",
+   "view": "palmar",
+   "layers": [
+    "bone"
+   ],
+   "explain": "The patella is a sesamoid bone in the quadriceps tendon and dislocates laterally because the pull of the quadriceps is slightly lateral. Vastus medialis helps to keep it in the trochlear groove.",
+   "tags": {
+    "topic": "bones",
+    "region": "knee",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "knee"
+  },
+  {
+   "id": "tibial-plateau-bumper",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "tibia",
+   "accept": [
+    "tibia"
+   ],
+   "prompt": "A pedestrian hit by a car bumper has a swollen, tender knee that cannot bear weight. Radiographs show depression of the lateral condyle at the top of the weight-bearing bone of the leg. Click the bone with the plateau fracture.",
+   "hint": "It is the medial and larger bone of the leg.",
+   "view": "palmar",
+   "layers": [
+    "bone"
+   ],
+   "explain": "A bumper injury commonly fractures the lateral tibial plateau, with associated medial collateral ligament injury. The tibia carries body weight, and the common fibular nerve may be injured with it.",
+   "tags": {
+    "topic": "bones",
+    "region": "knee",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "knee"
+  },
+  {
+   "id": "talus-ankle-mortise",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "talus",
+   "accept": [
+    "talus"
+   ],
+   "prompt": "Click the tarsal bone that sits in the mortise formed by the tibia and the malleoli and passes body weight to the foot.",
+   "hint": "It has no muscle attachments.",
+   "view": "lateral",
+   "layers": [
+    "bone"
+   ],
+   "explain": "The talus articulates with the tibia and fibula at the ankle and with the calcaneus and navicular below. Its blood supply enters mostly from the neck, so neck fractures risk avascular necrosis of the body.",
+   "tags": {
+    "topic": "bones",
+    "region": "ankle",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "ankle"
+  },
+  {
+   "id": "calcaneus-fall-fracture",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "calcaneus",
+   "accept": [
+    "calcaneus"
+   ],
+   "prompt": "A roofer falls from a ladder and lands on his heels. He has a swollen, bruised heel and cannot bear weight. Click the bone most likely broken.",
+   "hint": "It is the largest tarsal bone, forming the heel.",
+   "view": "lateral",
+   "layers": [
+    "bone"
+   ],
+   "explain": "The calcaneus is the most commonly fractured tarsal bone, usually from a fall from a height, and the force can also fracture the lumbar spine. The calcaneal tendon attaches posteriorly and the sustentaculum tali supports the talus.",
+   "tags": {
+    "topic": "bones",
+    "region": "ankle",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "ankle"
+  },
+  {
+   "id": "jones-fracture-metatarsal-5",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "metatarsal_5",
+   "accept": [
+    "metatarsal_5"
+   ],
+   "prompt": "A basketball player has pain on the outer border of the midfoot after landing awkwardly. A fracture of the base is at the junction of the metaphysis and diaphysis, a Jones fracture. Click the bone.",
+   "hint": "It is the metatarsal with a prominent tuberosity on the lateral border of the foot.",
+   "view": "palmar",
+   "layers": [
+    "bone"
+   ],
+   "explain": "A Jones fracture of the fifth metatarsal is at the metaphyseal-diaphyseal junction and heals poorly because of limited blood supply, unlike avulsion fractures by fibularis brevis at the tuberosity.",
+   "tags": {
+    "topic": "bones",
+    "region": "foot",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "foot"
+  },
+  {
+   "id": "femoral-hernia-inguinal-ligament",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "inguinal_ligament",
+   "accept": [
+    "inguinal_ligament"
+   ],
+   "prompt": "A 70-year-old woman has a firm lump in the groin below and lateral to the pubic tubercle with signs of bowel obstruction. It is a femoral hernia. Click the ligament that forms the upper boundary of the femoral triangle and lies above the hernia.",
+   "hint": "It stretches from the anterior superior iliac spine to the pubic tubercle.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "ligament"
+   ],
+   "explain": "A femoral hernia passes through the femoral ring below and lateral to the pubic tubercle, medial to the femoral vein, and is prone to strangulation. The inguinal ligament, the lower edge of the external oblique aponeurosis, forms the base of the femoral triangle.",
+   "tags": {
+    "topic": "ligaments",
+    "region": "hip",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hip"
+  },
+  {
+   "id": "iliotibial-band-syndrome",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "iliotibial_tract",
+   "accept": [
+    "iliotibial_tract"
+   ],
+   "prompt": "A distance runner has sharp pain on the outer knee that is worst at about 30 degrees of flexion. Click the thick band of fascia on the lateral thigh whose friction over the lateral femoral epicondyle causes the pain.",
+   "hint": "It runs from the iliac crest to Gerdy's tubercle on the tibia.",
+   "view": "lateral",
+   "layers": [
+    "bone",
+    "ligament"
+   ],
+   "explain": "The iliotibial tract is a thickening of the fascia lata that receives tensor fasciae latae and the upper part of gluteus maximus and inserts on the lateral tibial condyle. Friction at the lateral femoral epicondyle causes iliotibial band syndrome.",
+   "tags": {
+    "topic": "ligaments",
+    "region": "knee",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "knee"
+  },
+  {
+   "id": "achilles-rupture-thompson",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "calcaneal_tendon",
+   "accept": [
+    "calcaneal_tendon"
+   ],
+   "prompt": "A man feels a sudden pop at the back of the heel while playing squash. A gap can be felt above the heel, and squeezing the calf produces no plantar flexion (positive Thompson test). Click the ruptured tendon.",
+   "hint": "It is the thickest and strongest tendon of the body.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "tendon"
+   ],
+   "explain": "The calcaneal (Achilles) tendon joins gastrocnemius and soleus to the calcaneus and ruptures 2 to 6 cm above the heel, where its blood supply is poorest. The Thompson test is positive when squeezing the calf does not produce plantar flexion.",
+   "tags": {
+    "topic": "ligaments",
+    "region": "ankle",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "ankle"
+  }
+ ],
+ "model": "lower-limb"
+}

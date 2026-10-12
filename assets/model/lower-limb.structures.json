@@ -1,0 +1,1185 @@
+{
+ "version": 2,
+ "source": "BodyParts3D 3.0 (DBCLS), CC BY 4.0, via github.com/Kevin-Mattheus-Moerman/BodyParts3D; nerves and arteries below the pelvis are schematic (tools/lower_nerves.py)",
+ "units": "m",
+ "layers": [
+  "muscle",
+  "tendon",
+  "ligament",
+  "nerve",
+  "vessel",
+  "bone"
+ ],
+ "nodes": [
+  {
+   "node": "FMA16202",
+   "structure": "sacrum",
+   "layer": "bone",
+   "source": "FMA16202"
+  },
+  {
+   "node": "FMA16586",
+   "structure": "hip_bone",
+   "layer": "bone",
+   "source": "FMA16586"
+  },
+  {
+   "node": "FMA24474",
+   "structure": "femur",
+   "layer": "bone",
+   "source": "FMA24474"
+  },
+  {
+   "node": "FMA24486",
+   "structure": "patella",
+   "layer": "bone",
+   "source": "FMA24486"
+  },
+  {
+   "node": "FMA24477",
+   "structure": "tibia",
+   "layer": "bone",
+   "source": "FMA24477"
+  },
+  {
+   "node": "FMA24480",
+   "structure": "fibula",
+   "layer": "bone",
+   "source": "FMA24480"
+  },
+  {
+   "node": "FMA24482",
+   "structure": "talus",
+   "layer": "bone",
+   "source": "FMA24482"
+  },
+  {
+   "node": "FMA24497",
+   "structure": "calcaneus",
+   "layer": "bone",
+   "source": "FMA24497"
+  },
+  {
+   "node": "FMA24500",
+   "structure": "navicular",
+   "layer": "bone",
+   "source": "FMA24500"
+  },
+  {
+   "node": "FMA24521",
+   "structure": "medial_cuneiform",
+   "layer": "bone",
+   "source": "FMA24521"
+  },
+  {
+   "node": "FMA24523",
+   "structure": "intermediate_cuneiform",
+   "layer": "bone",
+   "source": "FMA24523"
+  },
+  {
+   "node": "FMA24525",
+   "structure": "lateral_cuneiform",
+   "layer": "bone",
+   "source": "FMA24525"
+  },
+  {
+   "node": "FMA24528",
+   "structure": "cuboid",
+   "layer": "bone",
+   "source": "FMA24528"
+  },
+  {
+   "node": "FMA24507",
+   "structure": "metatarsal_1",
+   "layer": "bone",
+   "source": "FMA24507"
+  },
+  {
+   "node": "FMA24509",
+   "structure": "metatarsal_2",
+   "layer": "bone",
+   "source": "FMA24509"
+  },
+  {
+   "node": "FMA24511",
+   "structure": "metatarsal_3",
+   "layer": "bone",
+   "source": "FMA24511"
+  },
+  {
+   "node": "FMA24513",
+   "structure": "metatarsal_4",
+   "layer": "bone",
+   "source": "FMA24513"
+  },
+  {
+   "node": "FMA24515",
+   "structure": "metatarsal_5",
+   "layer": "bone",
+   "source": "FMA24515"
+  },
+  {
+   "node": "FMA43253",
+   "structure": "phalanges_hallux",
+   "layer": "bone",
+   "source": "FMA43253"
+  },
+  {
+   "node": "FMA32650",
+   "structure": "phalanges_hallux",
+   "layer": "bone",
+   "source": "FMA32650"
+  },
+  {
+   "node": "FMA32634",
+   "structure": "phalanges_toe_2",
+   "layer": "bone",
+   "source": "FMA32634"
+  },
+  {
+   "node": "FMA32642",
+   "structure": "phalanges_toe_2",
+   "layer": "bone",
+   "source": "FMA32642"
+  },
+  {
+   "node": "FMA32652",
+   "structure": "phalanges_toe_2",
+   "layer": "bone",
+   "source": "FMA32652"
+  },
+  {
+   "node": "FMA32636",
+   "structure": "phalanges_toe_3",
+   "layer": "bone",
+   "source": "FMA32636"
+  },
+  {
+   "node": "FMA32644",
+   "structure": "phalanges_toe_3",
+   "layer": "bone",
+   "source": "FMA32644"
+  },
+  {
+   "node": "FMA32654",
+   "structure": "phalanges_toe_3",
+   "layer": "bone",
+   "source": "FMA32654"
+  },
+  {
+   "node": "FMA32638",
+   "structure": "phalanges_toe_4",
+   "layer": "bone",
+   "source": "FMA32638"
+  },
+  {
+   "node": "FMA32646",
+   "structure": "phalanges_toe_4",
+   "layer": "bone",
+   "source": "FMA32646"
+  },
+  {
+   "node": "FMA32656",
+   "structure": "phalanges_toe_4",
+   "layer": "bone",
+   "source": "FMA32656"
+  },
+  {
+   "node": "FMA32640",
+   "structure": "phalanges_toe_5",
+   "layer": "bone",
+   "source": "FMA32640"
+  },
+  {
+   "node": "FMA230986",
+   "structure": "phalanges_toe_5",
+   "layer": "bone",
+   "source": "FMA230986"
+  },
+  {
+   "node": "FMA32658",
+   "structure": "phalanges_toe_5",
+   "layer": "bone",
+   "source": "FMA32658"
+  },
+  {
+   "node": "FMA21964",
+   "structure": "inguinal_ligament",
+   "layer": "ligament",
+   "source": "FMA21964"
+  },
+  {
+   "node": "FMA58776",
+   "structure": "iliotibial_tract",
+   "layer": "ligament",
+   "source": "FMA58776"
+  },
+  {
+   "node": "FMA44249",
+   "structure": "long_plantar_ligament",
+   "layer": "ligament",
+   "source": "FMA44249"
+  },
+  {
+   "node": "FMA258847",
+   "structure": "calcaneal_tendon",
+   "layer": "tendon",
+   "source": "FMA258847"
+  },
+  {
+   "node": "FMA22322",
+   "structure": "iliacus",
+   "layer": "muscle",
+   "source": "FMA22322"
+  },
+  {
+   "node": "FMA22342",
+   "structure": "psoas_major",
+   "layer": "muscle",
+   "source": "FMA22342"
+  },
+  {
+   "node": "FMA22328",
+   "structure": "gluteus_maximus",
+   "layer": "muscle",
+   "source": "FMA22328"
+  },
+  {
+   "node": "FMA22330",
+   "structure": "gluteus_medius",
+   "layer": "muscle",
+   "source": "FMA22330"
+  },
+  {
+   "node": "FMA22332",
+   "structure": "gluteus_minimus",
+   "layer": "muscle",
+   "source": "FMA22332"
+  },
+  {
+   "node": "FMA22425",
+   "structure": "tensor_fasciae_latae",
+   "layer": "muscle",
+   "source": "FMA22425"
+  },
+  {
+   "node": "FMA22340",
+   "structure": "piriformis",
+   "layer": "muscle",
+   "source": "FMA22340"
+  },
+  {
+   "node": "FMA22324",
+   "structure": "obturator_internus",
+   "layer": "muscle",
+   "source": "FMA22324"
+  },
+  {
+   "node": "FMA22326",
+   "structure": "obturator_externus",
+   "layer": "muscle",
+   "source": "FMA22326"
+  },
+  {
+   "node": "FMA22334",
+   "structure": "gemellus_superior",
+   "layer": "muscle",
+   "source": "FMA22334"
+  },
+  {
+   "node": "FMA22336",
+   "structure": "gemellus_inferior",
+   "layer": "muscle",
+   "source": "FMA22336"
+  },
+  {
+   "node": "FMA22338",
+   "structure": "quadratus_femoris",
+   "layer": "muscle",
+   "source": "FMA22338"
+  },
+  {
+   "node": "FMA22354",
+   "structure": "sartorius",
+   "layer": "muscle",
+   "source": "FMA22354"
+  },
+  {
+   "node": "FMA38928",
+   "structure": "rectus_femoris",
+   "layer": "muscle",
+   "source": "FMA38928"
+  },
+  {
+   "node": "FMA38930",
+   "structure": "vastus_lateralis",
+   "layer": "muscle",
+   "source": "FMA38930"
+  },
+  {
+   "node": "FMA38932",
+   "structure": "vastus_medialis",
+   "layer": "muscle",
+   "source": "FMA38932"
+  },
+  {
+   "node": "FMA38934",
+   "structure": "vastus_intermedius",
+   "layer": "muscle",
+   "source": "FMA38934"
+  },
+  {
+   "node": "FMA22450",
+   "structure": "pectineus",
+   "layer": "muscle",
+   "source": "FMA22450"
+  },
+  {
+   "node": "FMA22456",
+   "structure": "adductor_longus",
+   "layer": "muscle",
+   "source": "FMA22456"
+  },
+  {
+   "node": "FMA22452",
+   "structure": "adductor_brevis",
+   "layer": "muscle",
+   "source": "FMA22452"
+  },
+  {
+   "node": "FMA22459",
+   "structure": "adductor_magnus",
+   "layer": "muscle",
+   "source": "FMA22459"
+  },
+  {
+   "node": "FMA43886",
+   "structure": "adductor_magnus",
+   "layer": "muscle",
+   "source": "FMA43886"
+  },
+  {
+   "node": "FMA43883",
+   "structure": "gracilis",
+   "layer": "muscle",
+   "source": "FMA43883"
+  },
+  {
+   "node": "FMA45888",
+   "structure": "biceps_femoris",
+   "layer": "muscle",
+   "source": "FMA45888"
+  },
+  {
+   "node": "FMA45891",
+   "structure": "biceps_femoris",
+   "layer": "muscle",
+   "source": "FMA45891"
+  },
+  {
+   "node": "FMA22358",
+   "structure": "semitendinosus",
+   "layer": "muscle",
+   "source": "FMA22358"
+  },
+  {
+   "node": "FMA22448",
+   "structure": "semimembranosus",
+   "layer": "muscle",
+   "source": "FMA22448"
+  },
+  {
+   "node": "FMA22544",
+   "structure": "tibialis_anterior",
+   "layer": "muscle",
+   "source": "FMA22544"
+  },
+  {
+   "node": "FMA22546",
+   "structure": "extensor_hallucis_longus",
+   "layer": "muscle",
+   "source": "FMA22546"
+  },
+  {
+   "node": "FMA22548",
+   "structure": "extensor_digitorum_longus",
+   "layer": "muscle",
+   "source": "FMA22548"
+  },
+  {
+   "node": "FMA22550",
+   "structure": "fibularis_tertius",
+   "layer": "muscle",
+   "source": "FMA22550"
+  },
+  {
+   "node": "FMA22552",
+   "structure": "fibularis_longus",
+   "layer": "muscle",
+   "source": "FMA22552"
+  },
+  {
+   "node": "FMA22554",
+   "structure": "fibularis_brevis",
+   "layer": "muscle",
+   "source": "FMA22554"
+  },
+  {
+   "node": "FMA45957",
+   "structure": "gastrocnemius",
+   "layer": "muscle",
+   "source": "FMA45957"
+  },
+  {
+   "node": "FMA45960",
+   "structure": "gastrocnemius",
+   "layer": "muscle",
+   "source": "FMA45960"
+  },
+  {
+   "node": "FMA22558",
+   "structure": "soleus",
+   "layer": "muscle",
+   "source": "FMA22558"
+  },
+  {
+   "node": "FMA22560",
+   "structure": "plantaris",
+   "layer": "muscle",
+   "source": "FMA22560"
+  },
+  {
+   "node": "FMA22591",
+   "structure": "popliteus",
+   "layer": "muscle",
+   "source": "FMA22591"
+  },
+  {
+   "node": "FMA65018",
+   "structure": "tibialis_posterior",
+   "layer": "muscle",
+   "source": "FMA65018"
+  },
+  {
+   "node": "FMA65016",
+   "structure": "flexor_digitorum_longus",
+   "layer": "muscle",
+   "source": "FMA65016"
+  },
+  {
+   "node": "FMA65014",
+   "structure": "flexor_hallucis_longus",
+   "layer": "muscle",
+   "source": "FMA65014"
+  },
+  {
+   "node": "FMA51142",
+   "structure": "extensor_digitorum_brevis",
+   "layer": "muscle",
+   "source": "FMA51142"
+  },
+  {
+   "node": "FMA51144",
+   "structure": "extensor_hallucis_brevis",
+   "layer": "muscle",
+   "source": "FMA51144"
+  },
+  {
+   "node": "FMA37459",
+   "structure": "abductor_hallucis",
+   "layer": "muscle",
+   "source": "FMA37459"
+  },
+  {
+   "node": "FMA37461",
+   "structure": "flexor_digitorum_brevis",
+   "layer": "muscle",
+   "source": "FMA37461"
+  },
+  {
+   "node": "FMA37463",
+   "structure": "abductor_digiti_minimi_foot",
+   "layer": "muscle",
+   "source": "FMA37463"
+  },
+  {
+   "node": "FMA37471",
+   "structure": "flexor_digiti_minimi_brevis_foot",
+   "layer": "muscle",
+   "source": "FMA37471"
+  },
+  {
+   "node": "FMA45971",
+   "structure": "flexor_hallucis_brevis",
+   "layer": "muscle",
+   "source": "FMA45971"
+  },
+  {
+   "node": "FMA45973",
+   "structure": "flexor_hallucis_brevis",
+   "layer": "muscle",
+   "source": "FMA45973"
+  },
+  {
+   "node": "FMA46018",
+   "structure": "adductor_hallucis",
+   "layer": "muscle",
+   "source": "FMA46018"
+  },
+  {
+   "node": "FMA46020",
+   "structure": "adductor_hallucis",
+   "layer": "muscle",
+   "source": "FMA46020"
+  },
+  {
+   "node": "FMA37483",
+   "structure": "lumbricals_foot",
+   "layer": "muscle",
+   "source": "FMA37483"
+  },
+  {
+   "node": "FMA37485",
+   "structure": "lumbricals_foot",
+   "layer": "muscle",
+   "source": "FMA37485"
+  },
+  {
+   "node": "FMA37717",
+   "structure": "lumbricals_foot",
+   "layer": "muscle",
+   "source": "FMA37717"
+  },
+  {
+   "node": "FMA37719",
+   "structure": "lumbricals_foot",
+   "layer": "muscle",
+   "source": "FMA37719"
+  },
+  {
+   "node": "FMA37741",
+   "structure": "plantar_interossei_foot",
+   "layer": "muscle",
+   "source": "FMA37741"
+  },
+  {
+   "node": "FMA37743",
+   "structure": "plantar_interossei_foot",
+   "layer": "muscle",
+   "source": "FMA37743"
+  },
+  {
+   "node": "FMA37745",
+   "structure": "plantar_interossei_foot",
+   "layer": "muscle",
+   "source": "FMA37745"
+  },
+  {
+   "node": "FMA74140",
+   "structure": "dorsal_interossei_foot",
+   "layer": "muscle",
+   "source": "FMA74140"
+  },
+  {
+   "node": "FMA14765",
+   "structure": "common_iliac_artery",
+   "layer": "vessel",
+   "source": "FMA14765"
+  },
+  {
+   "node": "FMA18806",
+   "structure": "external_iliac_artery",
+   "layer": "vessel",
+   "source": "FMA18806"
+  },
+  {
+   "node": "FMA18809",
+   "structure": "internal_iliac_artery",
+   "layer": "vessel",
+   "source": "FMA18809"
+  },
+  {
+   "node": "FMA24474_marrow",
+   "structure": "femur",
+   "layer": "marrow",
+   "source": "FMA24474"
+  },
+  {
+   "node": "FMA24486_marrow",
+   "structure": "patella",
+   "layer": "marrow",
+   "source": "FMA24486"
+  },
+  {
+   "node": "FMA24477_marrow",
+   "structure": "tibia",
+   "layer": "marrow",
+   "source": "FMA24477"
+  },
+  {
+   "node": "FMA24480_marrow",
+   "structure": "fibula",
+   "layer": "marrow",
+   "source": "FMA24480"
+  },
+  {
+   "node": "FMA24482_marrow",
+   "structure": "talus",
+   "layer": "marrow",
+   "source": "FMA24482"
+  },
+  {
+   "node": "FMA24497_marrow",
+   "structure": "calcaneus",
+   "layer": "marrow",
+   "source": "FMA24497"
+  },
+  {
+   "node": "FMA24500_marrow",
+   "structure": "navicular",
+   "layer": "marrow",
+   "source": "FMA24500"
+  },
+  {
+   "node": "FMA24521_marrow",
+   "structure": "medial_cuneiform",
+   "layer": "marrow",
+   "source": "FMA24521"
+  },
+  {
+   "node": "FMA24523_marrow",
+   "structure": "intermediate_cuneiform",
+   "layer": "marrow",
+   "source": "FMA24523"
+  },
+  {
+   "node": "FMA24525_marrow",
+   "structure": "lateral_cuneiform",
+   "layer": "marrow",
+   "source": "FMA24525"
+  },
+  {
+   "node": "FMA24528_marrow",
+   "structure": "cuboid",
+   "layer": "marrow",
+   "source": "FMA24528"
+  },
+  {
+   "node": "FMA24507_marrow",
+   "structure": "metatarsal_1",
+   "layer": "marrow",
+   "source": "FMA24507"
+  },
+  {
+   "node": "FMA24509_marrow",
+   "structure": "metatarsal_2",
+   "layer": "marrow",
+   "source": "FMA24509"
+  },
+  {
+   "node": "FMA24511_marrow",
+   "structure": "metatarsal_3",
+   "layer": "marrow",
+   "source": "FMA24511"
+  },
+  {
+   "node": "FMA24513_marrow",
+   "structure": "metatarsal_4",
+   "layer": "marrow",
+   "source": "FMA24513"
+  },
+  {
+   "node": "FMA24515_marrow",
+   "structure": "metatarsal_5",
+   "layer": "marrow",
+   "source": "FMA24515"
+  },
+  {
+   "node": "FMA43253_marrow",
+   "structure": "phalanges_hallux",
+   "layer": "marrow",
+   "source": "FMA43253"
+  },
+  {
+   "node": "FMA32650_marrow",
+   "structure": "phalanges_hallux",
+   "layer": "marrow",
+   "source": "FMA32650"
+  },
+  {
+   "node": "FMA32634_marrow",
+   "structure": "phalanges_toe_2",
+   "layer": "marrow",
+   "source": "FMA32634"
+  },
+  {
+   "node": "FMA32642_marrow",
+   "structure": "phalanges_toe_2",
+   "layer": "marrow",
+   "source": "FMA32642"
+  },
+  {
+   "node": "FMA32652_marrow",
+   "structure": "phalanges_toe_2",
+   "layer": "marrow",
+   "source": "FMA32652"
+  },
+  {
+   "node": "FMA32636_marrow",
+   "structure": "phalanges_toe_3",
+   "layer": "marrow",
+   "source": "FMA32636"
+  },
+  {
+   "node": "FMA32644_marrow",
+   "structure": "phalanges_toe_3",
+   "layer": "marrow",
+   "source": "FMA32644"
+  },
+  {
+   "node": "FMA32654_marrow",
+   "structure": "phalanges_toe_3",
+   "layer": "marrow",
+   "source": "FMA32654"
+  },
+  {
+   "node": "FMA32638_marrow",
+   "structure": "phalanges_toe_4",
+   "layer": "marrow",
+   "source": "FMA32638"
+  },
+  {
+   "node": "FMA32646_marrow",
+   "structure": "phalanges_toe_4",
+   "layer": "marrow",
+   "source": "FMA32646"
+  },
+  {
+   "node": "FMA32656_marrow",
+   "structure": "phalanges_toe_4",
+   "layer": "marrow",
+   "source": "FMA32656"
+  },
+  {
+   "node": "FMA32640_marrow",
+   "structure": "phalanges_toe_5",
+   "layer": "marrow",
+   "source": "FMA32640"
+  },
+  {
+   "node": "FMA230986_marrow",
+   "structure": "phalanges_toe_5",
+   "layer": "marrow",
+   "source": "FMA230986"
+  },
+  {
+   "node": "FMA32658_marrow",
+   "structure": "phalanges_toe_5",
+   "layer": "marrow",
+   "source": "FMA32658"
+  },
+  {
+   "node": "schematic_femoral_artery",
+   "structure": "femoral_artery",
+   "layer": "vessel",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_popliteal_artery",
+   "structure": "popliteal_artery",
+   "layer": "vessel",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_femoral_vein",
+   "structure": "femoral_vein",
+   "layer": "vessel",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_deep_femoral_artery",
+   "structure": "deep_femoral_artery",
+   "layer": "vessel",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_femoral_nerve",
+   "structure": "femoral_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_femoral_nerve_sartorius",
+   "structure": "femoral_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_femoral_nerve_rectus",
+   "structure": "femoral_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_femoral_nerve_vastus_medialis",
+   "structure": "femoral_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_great_saphenous_vein",
+   "structure": "great_saphenous_vein",
+   "layer": "vessel",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_saphenous_nerve",
+   "structure": "saphenous_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_lateral_femoral_cutaneous_nerve",
+   "structure": "lateral_femoral_cutaneous_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_obturator_nerve",
+   "structure": "obturator_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_obturator_nerve_anterior",
+   "structure": "obturator_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_obturator_nerve_adductor_longus",
+   "structure": "obturator_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_obturator_nerve_posterior",
+   "structure": "obturator_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_sciatic_nerve",
+   "structure": "sciatic_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_superior_gluteal_nerve",
+   "structure": "superior_gluteal_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_inferior_gluteal_nerve",
+   "structure": "inferior_gluteal_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_tibial_nerve",
+   "structure": "tibial_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_posterior_tibial_artery",
+   "structure": "posterior_tibial_artery",
+   "layer": "vessel",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_fibular_artery",
+   "structure": "fibular_artery",
+   "layer": "vessel",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_medial_plantar_nerve",
+   "structure": "medial_plantar_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_lateral_plantar_nerve",
+   "structure": "lateral_plantar_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_common_fibular_nerve",
+   "structure": "common_fibular_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_anterior_tibial_artery",
+   "structure": "anterior_tibial_artery",
+   "layer": "vessel",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_dorsalis_pedis_artery",
+   "structure": "dorsalis_pedis_artery",
+   "layer": "vessel",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_deep_fibular_nerve",
+   "structure": "deep_fibular_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_superficial_fibular_nerve",
+   "structure": "superficial_fibular_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_sural_nerve",
+   "structure": "sural_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "schematic_small_saphenous_vein",
+   "structure": "small_saphenous_vein",
+   "layer": "vessel",
+   "source": "schematic"
+  }
+ ],
+ "structures": {
+  "sacrum": "Sacrum",
+  "hip_bone": "Hip bone",
+  "femur": "Femur",
+  "patella": "Patella",
+  "tibia": "Tibia",
+  "fibula": "Fibula",
+  "talus": "Talus",
+  "calcaneus": "Calcaneus",
+  "navicular": "Navicular",
+  "medial_cuneiform": "Medial cuneiform",
+  "intermediate_cuneiform": "Intermediate cuneiform",
+  "lateral_cuneiform": "Lateral cuneiform",
+  "cuboid": "Cuboid",
+  "metatarsal_1": "First metatarsal",
+  "metatarsal_2": "Second metatarsal",
+  "metatarsal_3": "Third metatarsal",
+  "metatarsal_4": "Fourth metatarsal",
+  "metatarsal_5": "Fifth metatarsal",
+  "phalanges_hallux": "Phalanges of the big toe",
+  "phalanges_toe_2": "Phalanges of the second toe",
+  "phalanges_toe_3": "Phalanges of the third toe",
+  "phalanges_toe_4": "Phalanges of the fourth toe",
+  "phalanges_toe_5": "Phalanges of the little toe",
+  "inguinal_ligament": "Inguinal ligament",
+  "iliotibial_tract": "Iliotibial tract",
+  "long_plantar_ligament": "Long plantar ligament",
+  "calcaneal_tendon": "Calcaneal (Achilles) tendon",
+  "iliacus": "Iliacus",
+  "psoas_major": "Psoas major",
+  "gluteus_maximus": "Gluteus maximus",
+  "gluteus_medius": "Gluteus medius",
+  "gluteus_minimus": "Gluteus minimus",
+  "tensor_fasciae_latae": "Tensor fasciae latae",
+  "piriformis": "Piriformis",
+  "obturator_internus": "Obturator internus",
+  "obturator_externus": "Obturator externus",
+  "gemellus_superior": "Superior gemellus",
+  "gemellus_inferior": "Inferior gemellus",
+  "quadratus_femoris": "Quadratus femoris",
+  "sartorius": "Sartorius",
+  "rectus_femoris": "Rectus femoris",
+  "vastus_lateralis": "Vastus lateralis",
+  "vastus_medialis": "Vastus medialis",
+  "vastus_intermedius": "Vastus intermedius",
+  "pectineus": "Pectineus",
+  "adductor_longus": "Adductor longus",
+  "adductor_brevis": "Adductor brevis",
+  "adductor_magnus": "Adductor magnus",
+  "gracilis": "Gracilis",
+  "biceps_femoris": "Biceps femoris",
+  "semitendinosus": "Semitendinosus",
+  "semimembranosus": "Semimembranosus",
+  "tibialis_anterior": "Tibialis anterior",
+  "extensor_hallucis_longus": "Extensor hallucis longus",
+  "extensor_digitorum_longus": "Extensor digitorum longus",
+  "fibularis_tertius": "Fibularis (peroneus) tertius",
+  "fibularis_longus": "Fibularis (peroneus) longus",
+  "fibularis_brevis": "Fibularis (peroneus) brevis",
+  "gastrocnemius": "Gastrocnemius",
+  "soleus": "Soleus",
+  "plantaris": "Plantaris",
+  "popliteus": "Popliteus",
+  "tibialis_posterior": "Tibialis posterior",
+  "flexor_digitorum_longus": "Flexor digitorum longus",
+  "flexor_hallucis_longus": "Flexor hallucis longus",
+  "extensor_digitorum_brevis": "Extensor digitorum brevis",
+  "extensor_hallucis_brevis": "Extensor hallucis brevis",
+  "abductor_hallucis": "Abductor hallucis",
+  "flexor_digitorum_brevis": "Flexor digitorum brevis",
+  "abductor_digiti_minimi_foot": "Abductor digiti minimi (foot)",
+  "flexor_digiti_minimi_brevis_foot": "Flexor digiti minimi brevis (foot)",
+  "flexor_hallucis_brevis": "Flexor hallucis brevis",
+  "adductor_hallucis": "Adductor hallucis",
+  "lumbricals_foot": "Lumbricals (foot)",
+  "plantar_interossei_foot": "Plantar interossei (foot)",
+  "dorsal_interossei_foot": "Dorsal interossei (foot)",
+  "common_iliac_artery": "Common iliac artery",
+  "external_iliac_artery": "External iliac artery",
+  "internal_iliac_artery": "Internal iliac artery",
+  "femoral_nerve": "Femoral nerve",
+  "saphenous_nerve": "Saphenous nerve",
+  "obturator_nerve": "Obturator nerve",
+  "lateral_femoral_cutaneous_nerve": "Lateral femoral cutaneous nerve",
+  "superior_gluteal_nerve": "Superior gluteal nerve",
+  "inferior_gluteal_nerve": "Inferior gluteal nerve",
+  "sciatic_nerve": "Sciatic nerve",
+  "tibial_nerve": "Tibial nerve",
+  "common_fibular_nerve": "Common fibular (peroneal) nerve",
+  "superficial_fibular_nerve": "Superficial fibular (peroneal) nerve",
+  "deep_fibular_nerve": "Deep fibular (peroneal) nerve",
+  "sural_nerve": "Sural nerve",
+  "medial_plantar_nerve": "Medial plantar nerve",
+  "lateral_plantar_nerve": "Lateral plantar nerve",
+  "femoral_artery": "Femoral artery",
+  "deep_femoral_artery": "Deep femoral artery (profunda femoris)",
+  "popliteal_artery": "Popliteal artery",
+  "anterior_tibial_artery": "Anterior tibial artery",
+  "dorsalis_pedis_artery": "Dorsalis pedis artery",
+  "posterior_tibial_artery": "Posterior tibial artery",
+  "fibular_artery": "Fibular (peroneal) artery",
+  "femoral_vein": "Femoral vein",
+  "great_saphenous_vein": "Great saphenous vein",
+  "small_saphenous_vein": "Small saphenous vein"
+ },
+ "regions": {
+  "hip": [
+   "hip_bone",
+   "sacrum"
+  ],
+  "thigh": [
+   "femur"
+  ],
+  "knee": [
+   "patella"
+  ],
+  "leg": [
+   "tibia",
+   "fibula"
+  ],
+  "ankle": [
+   "talus",
+   "calcaneus"
+  ],
+  "foot": [
+   "talus",
+   "calcaneus",
+   "navicular",
+   "medial_cuneiform",
+   "intermediate_cuneiform",
+   "lateral_cuneiform",
+   "cuboid",
+   "metatarsal_1",
+   "metatarsal_2",
+   "metatarsal_3",
+   "metatarsal_4",
+   "metatarsal_5",
+   "phalanges_hallux",
+   "phalanges_toe_2",
+   "phalanges_toe_3",
+   "phalanges_toe_4",
+   "phalanges_toe_5"
+  ],
+  "all": [
+   "hip_bone",
+   "sacrum",
+   "femur",
+   "patella",
+   "tibia",
+   "fibula",
+   "talus",
+   "calcaneus",
+   "navicular",
+   "medial_cuneiform",
+   "intermediate_cuneiform",
+   "lateral_cuneiform",
+   "cuboid",
+   "metatarsal_1",
+   "metatarsal_2",
+   "metatarsal_3",
+   "metatarsal_4",
+   "metatarsal_5",
+   "phalanges_hallux",
+   "phalanges_toe_2",
+   "phalanges_toe_3",
+   "phalanges_toe_4",
+   "phalanges_toe_5"
+  ]
+ },
+ "axis": {
+  "hip": [
+   -0.04,
+   0.3481,
+   -0.0264
+  ],
+  "knee": [
+   -0.0295,
+   -0.0693,
+   -0.0492
+  ],
+  "ankle": [
+   -0.0316,
+   -0.4296,
+   -0.0516
+  ],
+  "toe": [
+   -0.0372,
+   -0.4785,
+   0.0829
+  ]
+ },
+ "schematic": [
+  "anterior_tibial_artery",
+  "common_fibular_nerve",
+  "deep_femoral_artery",
+  "deep_fibular_nerve",
+  "dorsalis_pedis_artery",
+  "femoral_artery",
+  "femoral_nerve",
+  "femoral_vein",
+  "fibular_artery",
+  "great_saphenous_vein",
+  "inferior_gluteal_nerve",
+  "lateral_femoral_cutaneous_nerve",
+  "lateral_plantar_nerve",
+  "medial_plantar_nerve",
+  "obturator_nerve",
+  "popliteal_artery",
+  "posterior_tibial_artery",
+  "saphenous_nerve",
+  "sciatic_nerve",
+  "small_saphenous_vein",
+  "superficial_fibular_nerve",
+  "superior_gluteal_nerve",
+  "sural_nerve",
+  "tibial_nerve"
+ ],
+ "viewLabels": {
+  "palmar": "Front",
+  "dorsal": "Back",
+  "lateral": "Lateral"
+ }
+}

@@ -13,7 +13,8 @@ export function verdictLine(score, n) {
   return "Lots to gain here. Try again with the layers panel.";
 }
 
-const FOCUS_BY_REGION = { hand: "hand", wrist: "hand", forearm: "forearm", elbow: "forearm", arm: "arm", shoulder: "shoulder" };
+const FOCUS_BY_REGION = { hand: "hand", wrist: "hand", forearm: "forearm", elbow: "forearm", arm: "arm", shoulder: "shoulder",
+  hip: "hip", thigh: "thigh", knee: "knee", leg: "leg", ankle: "ankle", foot: "foot" };
 
 export function createEngine({ renderer, questions, sets, ui, track }) {
   // state: intro | asking | feedback | done

@@ -29,11 +29,12 @@ let selectedSet = "daily";
 
 const renderer = createRendererSwitch({
   viewer: $("viewer"),
-  modelUrl: CONFIG.modelUrl,
-  structuresUrl: "assets/model/structures.json",
+  models: CONFIG.models,
   onPick: (id) => engine.answer(id),
-  onChange: (kind, study, meta) => {
-    // One attribution line per scan modality; the study's manifest says which it is.
+  onChange: (kind, id, meta) => {
+    // One attribution line per source: the mesh renderer shows its model's line when active,
+    // and a scan shows the line for its modality (the study's manifest says which it is).
+    if (kind === "volume") $("attr-bp3d").hidden = $("attr-o3d").hidden = true;
     $("attr-ct").hidden = !(kind === "volume" && meta?.modality !== "MR");
     $("attr-mr").hidden = !(kind === "volume" && meta?.modality === "MR");
     if (meta?.modality === "MR") { // the MRI line names the study's own source: MR studies come from more than one dataset
@@ -42,12 +43,6 @@ const renderer = createRendererSwitch({
       if (meta.sourceUrl) a.href = meta.sourceUrl; else a.removeAttribute("href");
     }
   },
-});
-await renderer.activate("mesh").catch((err) => {
-  console.error(err);
-  if (err instanceof WebGLUnavailableError) showNoWebGL(err);
-  else $("loading").textContent = `Couldn't load the 3D model. Please reload the page. (${err?.message || err})`;
-  throw err;
 });
 
 // No WebGL: say why, and offer a way out of an embedded viewer.
@@ -75,17 +70,28 @@ function showNoWebGL(err) {
 
 let bank;
 try {
-  bank = await loadBanks(["assets/questions/upper-limb.json", "assets/questions/ct-trunk.json", "assets/questions/mri-abdomen.json", "assets/questions/mri-prostate.json"]);
+  bank = await loadBanks([
+    "assets/questions/upper-limb.json", "assets/questions/lower-limb.json",
+    "assets/questions/ct-trunk.json", "assets/questions/mri-abdomen.json", "assets/questions/mri-prostate.json",
+  ]);
 } catch (err) {
   console.error(err);
   $("loading").textContent = "Couldn't load the questions. Please reload the page.";
   throw err;
 }
 
-const builtin = buildSets(bank.questions);
+const builtin = buildSets(bank.questions, CONFIG.models);
 const initial = resolveSet(window.location.search, builtin, bank.byId);
 const sets = initial.explicit ? [...builtin, initial] : builtin;
 selectedSet = initial.explicit ? builtin.find((s) => s.id === initial.builtinId)?.id || builtin[0].id : initial.id;
+
+// The model behind the chooser: the one a shared link or ?set= asks for, else the default.
+await renderer.activate("mesh", initial.renderer === "mesh" ? initial.model : undefined).catch((err) => {
+  console.error(err);
+  if (err instanceof WebGLUnavailableError) showNoWebGL(err);
+  else $("loading").textContent = `Couldn't load the 3D model. Please reload the page. (${err?.message || err})`;
+  throw err;
+});
 
 const ui = {
   showIntro() {
@@ -144,8 +150,21 @@ engine = createEngine({ renderer, questions: bank.questions, sets, ui, track });
 
 const chooser = $("set-chooser");
 function renderChooser() {
-  chooser.replaceChildren(
-    ...sets.filter((s) => s.id !== "custom").map((s) => {
+  // Chips grouped by what they are asked on: each 3D model, then the scans.
+  const groups = new Map();
+  for (const s of sets) {
+    if (s.id === "custom") continue;
+    const g = s.group || "";
+    if (!groups.has(g)) groups.set(g, []);
+    groups.get(g).push(s);
+  }
+  chooser.replaceChildren(...[...groups].flatMap(([group, list]) => {
+    const h = document.createElement("div");
+    h.className = "chooser-group";
+    h.textContent = group;
+    const row = document.createElement("div");
+    row.className = "chooser-row";
+    row.append(...list.map((s) => {
       const b = document.createElement("button");
       b.type = "button";
       b.className = "chip";
@@ -156,29 +175,32 @@ function renderChooser() {
         renderChooser();
       });
       return b;
-    })
-  );
+    }));
+    return group ? [h, row] : [row];
+  }));
 }
 renderChooser();
 
 // A shared link plays exactly its questions; otherwise the chosen set.
 let pendingShared = initial.explicit;
 
-// Make the set's renderer the active one (building the CT viewer on first use), then play.
+// Make the set's renderer the active one (building a model or scan viewer on first use), then play.
 async function begin(setId, replay = false) {
   const set = sets.find((s) => s.id === setId) || sets[0];
-  const needsBuild = set.renderer === "volume" && renderer.active !== "volume";
+  const isScan = set.renderer === "volume";
+  const wanted = isScan ? set.study : set.model;
+  const needsBuild = isScan ? renderer.study !== set.study : renderer.model !== set.model;
   const buttons = ["start", "again"].map($);
   buttons.forEach((b) => (b.disabled = true));
   if (needsBuild) {
-    $("loading").textContent = "Loading the scan…";
+    $("loading").textContent = isScan ? "Loading the scan…" : "Loading the model…";
     $("loading").hidden = false;
   }
   try {
-    await renderer.activate(set.renderer || "mesh", set.study);
+    await renderer.activate(set.renderer || "mesh", wanted);
   } catch (err) {
     console.error(err);
-    $("loading").textContent = `Couldn't load the scan. Please reload the page. (${err?.message || err})`;
+    $("loading").textContent = `Couldn't load the ${isScan ? "scan" : "model"}. Please reload the page. (${err?.message || err})`;
     $("loading").hidden = false;
     buttons.forEach((b) => (b.disabled = false));
     return;
@@ -195,7 +217,7 @@ $("start").addEventListener("click", () => {
 $("again").addEventListener("click", () => begin(engine.set.id, true));
 $("new-set").addEventListener("click", async () => {
   pendingShared = false;
-  await renderer.activate("mesh"); // back to the model behind the chooser (already built)
+  await renderer.activate("mesh"); // back to the last model behind the chooser (already built)
   engine.intro();
 });
 $("next").addEventListener("click", () => engine.next());
@@ -273,6 +295,9 @@ checkReturnVisit();
 $("loading").hidden = true;
 $("start").disabled = false;
 
-// Exposed for automated checks (tools/smoke_test.mjs).
-Object.assign(app, renderer.mesh.debug, { quiz: engine.state, answer: engine.answer, engine, renderer, switch: renderer });
+// Exposed for automated checks (tools/smoke_test.mjs). The mesh debug handles follow the active model.
+for (const k of ["viewTween", "controls", "camera", "meshesByStructure", "pick", "setView", "setLayers"]) {
+  Object.defineProperty(app, k, { get: () => renderer.mesh?.debug[k] });
+}
+Object.assign(app, { quiz: engine.state, answer: engine.answer, engine, renderer, switch: renderer });
 app.QUESTIONS ||= engine.current;

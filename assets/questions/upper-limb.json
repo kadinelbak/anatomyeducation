@@ -1,1292 +1,1293 @@
 {
-  "version": 1,
-  "region": "upper-limb",
-  "questions": [
-    {
-      "id": "median-nerve-id",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "median_nerve",
-      "accept": [
-        "median_nerve"
-      ],
-      "prompt": "Click the median nerve.",
-      "hint": "Follow it down the middle of the forearm and through the carpal tunnel.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "tendon",
-        "nerve"
-      ],
-      "explain": "The median nerve runs down the middle of the forearm between flexor digitorum superficialis and profundus, then passes through the carpal tunnel deep to the flexor retinaculum.",
-      "tags": {
-        "topic": "nerves",
-        "region": "forearm",
-        "difficulty": 1
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "forearm"
-    },
-    {
-      "id": "fcu-id",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "flexor_carpi_ulnaris",
-      "accept": [
-        "flexor_carpi_ulnaris"
-      ],
-      "prompt": "Click the muscle that runs along the ulnar border of the front of the forearm and inserts on the pisiform.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "muscle",
-        "tendon"
-      ],
-      "explain": "Flexor carpi ulnaris flexes and adducts the wrist and is supplied by the ulnar nerve. At the wrist its tendon is a landmark: the ulnar nerve and artery lie just lateral to it.",
-      "tags": {
-        "topic": "muscles",
-        "region": "forearm",
-        "difficulty": 1
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "forearm"
-    },
-    {
-      "id": "carpal-tunnel-apb",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "abductor_pollicis_brevis",
-      "accept": [
-        "abductor_pollicis_brevis"
-      ],
-      "prompt": "A 52-year-old with long-standing carpal tunnel syndrome has a flattened thenar eminence and cannot lift her thumb straight up off the palm. Click the muscle that performs this movement.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "muscle",
-        "tendon"
-      ],
-      "explain": "Abductor pollicis brevis does palmar abduction of the thumb and is supplied by the recurrent (motor) branch of the median nerve, so it is the classic muscle to test and to see waste in carpal tunnel syndrome.",
-      "tags": {
-        "topic": "muscles",
-        "region": "hand",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "ulnar-nerve-id",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "ulnar_nerve",
-      "accept": [
-        "ulnar_nerve",
-        "ulnar_deep_branch"
-      ],
-      "prompt": "Click the ulnar nerve.",
-      "hint": "It passes behind the medial epicondyle and enters the hand through Guyon's canal.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "tendon",
-        "nerve"
-      ],
-      "explain": "The ulnar nerve passes behind the medial epicondyle (the 'funny bone'), runs under flexor carpi ulnaris, and enters the hand through Guyon's canal, superficial to the flexor retinaculum, not through the carpal tunnel.",
-      "tags": {
-        "topic": "nerves",
-        "region": "forearm",
-        "difficulty": 1
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "forearm"
-    },
-    {
-      "id": "froment-adductor",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "adductor_pollicis",
-      "accept": [
-        "adductor_pollicis"
-      ],
-      "prompt": "A long-distance cyclist has numbness of the little finger. When asked to grip paper between the thumb and the side of the index finger, the thumb tip flexes (Froment's sign). Click the weak muscle.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "muscle",
-        "tendon"
-      ],
-      "explain": "Adductor pollicis is supplied by the deep branch of the ulnar nerve, which handlebar pressure can compress at Guyon's canal. The patient substitutes flexor pollicis longus (median nerve), which flexes the thumb tip.",
-      "tags": {
-        "topic": "muscles",
-        "region": "hand",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "fdp-id",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "flexor_digitorum_profundus",
-      "accept": [
-        "flexor_digitorum_profundus"
-      ],
-      "prompt": "Click the muscle that flexes the distal interphalangeal joints of the fingers.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "muscle",
-        "tendon"
-      ],
-      "explain": "Flexor digitorum profundus inserts on the distal phalanges. It has a split supply: the anterior interosseous nerve (median) for the index and middle fingers, the ulnar nerve for the ring and little fingers.",
-      "tags": {
-        "topic": "muscles",
-        "region": "forearm",
-        "difficulty": 1
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "forearm"
-    },
-    {
-      "id": "ain-fpl",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "flexor_pollicis_longus",
-      "accept": [
-        "flexor_pollicis_longus"
-      ],
-      "prompt": "After a supracondylar fracture, a child cannot make an 'OK' sign: the thumb and index fingertips stay straight and touch pad to pad. Sensation is normal. Click the muscle that flexes the thumb's interphalangeal joint.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "muscle",
-        "tendon"
-      ],
-      "explain": "This is anterior interosseous nerve palsy, a purely motor branch of the median nerve. It supplies flexor pollicis longus, the lateral half of flexor digitorum profundus and pronator quadratus, so sensation is spared.",
-      "tags": {
-        "topic": "muscles",
-        "region": "forearm",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "forearm"
-    },
-    {
-      "id": "humerus-superficial-radial",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "radial_superficial_branch",
-      "accept": [
-        "radial_superficial_branch"
-      ],
-      "prompt": "A midshaft humerus fracture leaves a patient with wrist drop and numbness over the back of the first web space. Click the nerve branch that carries sensation from that skin through the forearm.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "muscle",
-        "nerve"
-      ],
-      "explain": "The radial nerve is injured in the spiral groove of the humerus. Its superficial branch runs under brachioradialis and crosses to the back of the hand to supply the skin of the first web space; wrist drop comes from losing the wrist extensors.",
-      "tags": {
-        "topic": "nerves",
-        "region": "forearm",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "forearm"
-    },
-    {
-      "id": "pin-syndrome",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "posterior_interosseous_nerve",
-      "accept": [
-        "posterior_interosseous_nerve",
-        "radial_deep_branch"
-      ],
-      "prompt": "A patient cannot extend the fingers at the knuckles but can still extend the wrist, which drifts toward the thumb side. Sensation is normal. Click the nerve compressed as it passes through supinator.",
-      "view": "dorsal",
-      "layers": [
-        "bone",
-        "muscle",
-        "nerve"
-      ],
-      "explain": "The posterior interosseous nerve (deep radial) pierces supinator and supplies the finger extensors and extensor carpi ulnaris. Extensor carpi radialis longus is supplied above the split, so the wrist still extends but deviates radially. The branch is purely motor.",
-      "tags": {
-        "topic": "nerves",
-        "region": "forearm",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "forearm"
-    },
-    {
-      "id": "dorsal-interossei",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "dorsal_interossei",
-      "accept": [
-        "dorsal_interossei"
-      ],
-      "prompt": "A patient with an ulnar nerve lesion cannot spread the index and ring fingers away from the middle finger. Click the muscles that perform this movement.",
-      "view": "dorsal",
-      "layers": [
-        "bone",
-        "muscle"
-      ],
-      "explain": "The dorsal interossei abduct the fingers away from the middle finger (DAB); the palmar interossei adduct them (PAD). Both groups are supplied by the deep branch of the ulnar nerve.",
-      "tags": {
-        "topic": "muscles",
-        "region": "hand",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "scaphoid-snuffbox",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "scaphoid",
-      "accept": [
-        "scaphoid"
-      ],
-      "prompt": "After a fall on an outstretched hand, a young adult has tenderness in the anatomical snuffbox, and the first X-ray looks normal. Click the carpal bone most likely to be fractured.",
-      "hint": "It is the lateral bone of the proximal carpal row, lying in the floor of the snuffbox.",
-      "view": "lateral",
-      "layers": [
-        "bone"
-      ],
-      "explain": "Scaphoid fractures present with snuffbox tenderness and are often occult on early films. The scaphoid's blood supply enters distally, so a waist or proximal-pole fracture risks avascular necrosis of the proximal fragment.",
-      "tags": {
-        "topic": "bones",
-        "region": "wrist",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "lunate-id",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "lunate",
-      "accept": [
-        "lunate"
-      ],
-      "prompt": "Click the crescent-shaped carpal bone in the middle of the proximal row, between the scaphoid and the triquetrum.",
-      "hint": "It articulates with the distal radius and sits proximal to the capitate.",
-      "view": "palmar",
-      "layers": [
-        "bone"
-      ],
-      "explain": "The lunate is the carpal bone most often dislocated; it can be displaced palmarly into the carpal tunnel and cause acute median nerve compression.",
-      "tags": {
-        "topic": "bones",
-        "region": "wrist",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "hook-of-hamate-golf",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "hamate",
-      "accept": [
-        "hamate"
-      ],
-      "prompt": "A golfer has deep aching pain at the base of the hypothenar eminence after striking the ground with a club, and tenderness over a bony prominence distal and lateral to the pisiform. Click the carpal bone most likely to be fractured.",
-      "hint": "Its hook projects from the palmar surface of the distal carpal row on the ulnar side.",
-      "view": "palmar",
-      "layers": [
-        "bone"
-      ],
-      "explain": "The hook of the hamate is a classic fracture in golfers and racquet-sport players. The ulnar nerve deep branch and the flexor tendons of the little finger lie close to the hook, so injury can cause neuropathy or tendon rupture.",
-      "tags": {
-        "topic": "bones",
-        "region": "wrist",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "pisiform-id",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "pisiform",
-      "accept": [
-        "pisiform"
-      ],
-      "prompt": "Click the small pea-shaped carpal bone that sits in the tendon of flexor carpi ulnaris.",
-      "hint": "You can feel it as a small bump at the base of the hypothenar eminence.",
-      "view": "palmar",
-      "layers": [
-        "bone"
-      ],
-      "explain": "The pisiform is a sesamoid bone in the tendon of flexor carpi ulnaris. It forms the medial border of Guyon's canal and is a landmark for the ulnar nerve and artery.",
-      "tags": {
-        "topic": "bones",
-        "region": "wrist",
-        "difficulty": 1
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "capitate-id",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "capitate",
-      "accept": [
-        "capitate"
-      ],
-      "prompt": "Click the largest carpal bone, which articulates with the base of the third metacarpal.",
-      "view": "palmar",
-      "layers": [
-        "bone"
-      ],
-      "explain": "The capitate sits in the centre of the distal carpal row, with the lunate proximal to it, and is the largest carpal bone.",
-      "tags": {
-        "topic": "bones",
-        "region": "wrist",
-        "difficulty": 1
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "boxers-fracture-mc5",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "metacarpal_5",
-      "accept": [
-        "metacarpal_5"
-      ],
-      "prompt": "A man punches a wall and develops swelling over the ulnar border of the dorsum of the hand; the knuckle of the little finger looks flattened and sunken. Click the bone that is fractured.",
-      "view": "dorsal",
-      "layers": [
-        "bone"
-      ],
-      "explain": "A boxer's fracture is a fracture of the neck of the fifth (sometimes fourth) metacarpal, with the head typically angulated towards the palm. The fifth metacarpal is the commonest site.",
-      "tags": {
-        "topic": "bones",
-        "region": "hand",
-        "difficulty": 1
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "bennett-fracture-mc1",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "metacarpal_1",
-      "accept": [
-        "metacarpal_1"
-      ],
-      "prompt": "A man falls onto his abducted thumb and has pain and swelling at the base of the thumb. X-ray shows an oblique intra-articular fracture-dislocation at the carpometacarpal joint, with a small fragment left in place. Click the bone whose base is fractured.",
-      "hint": "The shaft is pulled out of position by abductor pollicis longus.",
-      "view": "lateral",
-      "layers": [
-        "bone"
-      ],
-      "explain": "In a Bennett fracture the small palmar-ulnar fragment of the base of the first metacarpal stays attached by ligament, while abductor pollicis longus pulls the shaft proximally and radially. It is unstable and usually needs fixation.",
-      "tags": {
-        "topic": "bones",
-        "region": "hand",
-        "difficulty": 3
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "colles-radius",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "radius",
-      "accept": [
-        "radius"
-      ],
-      "prompt": "An older woman falls onto her outstretched hand and has a dinner-fork deformity of the wrist, with the hand displaced dorsally. Click the bone that is fractured.",
-      "view": "dorsal",
-      "layers": [
-        "bone"
-      ],
-      "explain": "A Colles fracture is a transverse fracture of the distal radius within about 2.5 cm of the wrist with dorsal displacement of the distal fragment. It is common in osteoporotic bone and is often accompanied by an ulnar styloid fracture.",
-      "tags": {
-        "topic": "bones",
-        "region": "wrist",
-        "difficulty": 1
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "interosseous-membrane-id",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "interosseous_membrane",
-      "accept": [
-        "interosseous_membrane"
-      ],
-      "prompt": "Click the fibrous sheet that connects the shafts of the radius and the ulna.",
-      "hint": "Most of its fibres run obliquely downwards and medially from the radius to the ulna.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "ligament"
-      ],
-      "explain": "The interosseous membrane binds the radius and ulna, transmits force from the radius to the ulna, and gives origin to deep flexors and extensors. The posterior interosseous nerve and the anterior interosseous nerve lie on its two surfaces.",
-      "tags": {
-        "topic": "ligaments",
-        "region": "forearm",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "forearm"
-    },
-    {
-      "id": "flexor-retinaculum-id",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "flexor_retinaculum",
-      "accept": [
-        "flexor_retinaculum"
-      ],
-      "prompt": "Click the thick fibrous band that forms the roof of the carpal tunnel.",
-      "hint": "It stretches between the pisiform and hook of the hamate medially and the scaphoid and trapezium laterally; turn on the Ligaments layer if it is hidden.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "ligament"
-      ],
-      "explain": "The flexor retinaculum (transverse carpal ligament) converts the carpal groove into the carpal tunnel. Dividing it relieves pressure on the median nerve in carpal tunnel release.",
-      "tags": {
-        "topic": "ligaments",
-        "region": "wrist",
-        "difficulty": 1
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "pronator-teres-median",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "pronator_teres",
-      "accept": [
-        "pronator_teres"
-      ],
-      "prompt": "A weightlifter has forearm aching and tingling in the thumb, index and middle fingers that worsens with forceful pronation against resistance. The median nerve is compressed where it passes between the two heads of the muscle that crosses the front of the proximal forearm obliquely. Click that muscle.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "muscle"
-      ],
-      "explain": "In pronator syndrome the median nerve is compressed between the humeral and ulnar heads of pronator teres. The muscle pronates the forearm and is supplied by the median nerve.",
-      "tags": {
-        "topic": "muscles",
-        "region": "forearm",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "forearm"
-    },
-    {
-      "id": "fcr-radial-pulse",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "flexor_carpi_radialis",
-      "accept": [
-        "flexor_carpi_radialis"
-      ],
-      "prompt": "Click the muscle whose tendon is the landmark for the radial pulse, which lies lateral to it at the wrist.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "muscle",
-        "tendon"
-      ],
-      "explain": "Flexor carpi radialis flexes and abducts the wrist and is supplied by the median nerve. Its tendon is a guide to the radial artery on its lateral side and is a reference point for the median nerve, which lies deep and slightly medial to it.",
-      "tags": {
-        "topic": "muscles",
-        "region": "forearm",
-        "difficulty": 1
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "forearm"
-    },
-    {
-      "id": "palmaris-longus-id",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "palmaris_longus",
-      "accept": [
-        "palmaris_longus"
-      ],
-      "prompt": "Click the slender muscle of the front of the forearm that is absent in about one in seven people and whose tendon is often used as a graft.",
-      "hint": "When present, its tendon stands out at the wrist if you oppose the thumb and little finger and flex the wrist.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "muscle",
-        "tendon"
-      ],
-      "explain": "Palmaris longus is a weak wrist flexor supplied by the median nerve and is absent in roughly 15% of people, often on one side only. Its tendon lies superficial to the flexor retinaculum, in front of the median nerve.",
-      "tags": {
-        "topic": "muscles",
-        "region": "forearm",
-        "difficulty": 1
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "forearm"
-    },
-    {
-      "id": "fds-pip-test",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "flexor_digitorum_superficialis",
-      "accept": [
-        "flexor_digitorum_superficialis"
-      ],
-      "prompt": "To test one finger, an examiner holds the neighbouring fingers fully extended so that the deep flexors cannot act, then asks the patient to bend only the proximal interphalangeal joint of the middle finger. Click the muscle that is being tested.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "muscle"
-      ],
-      "explain": "Flexor digitorum superficialis flexes the PIP joints and is isolated by holding the other fingers extended, because the deep flexor to those fingers shares a largely common muscle belly. It is supplied by the median nerve.",
-      "tags": {
-        "topic": "muscles",
-        "region": "forearm",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "forearm"
-    },
-    {
-      "id": "pronator-quadratus-id",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "pronator_quadratus",
-      "accept": [
-        "pronator_quadratus"
-      ],
-      "prompt": "Click the deep square muscle on the front of the distal forearm that pronates the radius.",
-      "hint": "It lies directly on the bones just above the wrist, deep to the long flexor tendons.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "muscle"
-      ],
-      "explain": "Pronator quadratus is the main pronator and passes between the distal parts of the ulna and radius. It is supplied by the anterior interosseous branch of the median nerve.",
-      "tags": {
-        "topic": "muscles",
-        "region": "forearm",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "forearm"
-    },
-    {
-      "id": "brachioradialis-radial-paradox",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "brachioradialis",
-      "accept": [
-        "brachioradialis"
-      ],
-      "prompt": "Click the forearm muscle that flexes the elbow most strongly in mid-pronation (the thumbs-up position) even though it is supplied by the radial nerve.",
-      "view": "lateral",
-      "layers": [
-        "bone",
-        "muscle"
-      ],
-      "explain": "Brachioradialis lies in the posterior (extensor) compartment developmentally but acts as an elbow flexor, an exception to the rule that the radial nerve supplies extensors. The radial nerve gives its branch above the elbow, so it is often spared in posterior interosseous nerve lesions.",
-      "tags": {
-        "topic": "muscles",
-        "region": "forearm",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "forearm"
-    },
-    {
-      "id": "tennis-elbow-ecrb",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "extensor_carpi_radialis_brevis",
-      "accept": [
-        "extensor_carpi_radialis_brevis"
-      ],
-      "prompt": "A plumber has pain over the lateral epicondyle that is reproduced by resisted wrist extension with the elbow straight and the fist clenched. The common extensor origin is involved, most often through the tendon that inserts on the base of the third metacarpal. Click that muscle.",
-      "view": "dorsal",
-      "layers": [
-        "bone",
-        "muscle"
-      ],
-      "explain": "Lateral epicondylitis (tennis elbow) most commonly involves the origin of extensor carpi radialis brevis at the common extensor origin. The muscle extends and abducts the wrist, inserts on the base of the third metacarpal and is supplied by the radial nerve (often via the posterior interosseous branch).",
-      "tags": {
-        "topic": "muscles",
-        "region": "elbow",
-        "difficulty": 3
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "forearm"
-    },
-    {
-      "id": "extensor-digitorum-id",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "extensor_digitorum",
-      "accept": [
-        "extensor_digitorum"
-      ],
-      "prompt": "Click the muscle that extends the medial four fingers at the metacarpophalangeal joints.",
-      "hint": "Its tendons fan out over the back of the hand and are joined by oblique intertendinous connections.",
-      "view": "dorsal",
-      "layers": [
-        "bone",
-        "muscle",
-        "tendon"
-      ],
-      "explain": "Extensor digitorum is supplied by the posterior interosseous nerve and inserts into the extensor expansions of the four fingers. In PIN palsy the fingers cannot be extended at the MCP joints.",
-      "tags": {
-        "topic": "muscles",
-        "region": "forearm",
-        "difficulty": 1
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "forearm"
-    },
-    {
-      "id": "de-quervain-apl-epb",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "abductor_pollicis_longus",
-      "accept": [
-        "abductor_pollicis_longus",
-        "extensor_pollicis_brevis"
-      ],
-      "prompt": "A new mother has pain over the radial side of the wrist when lifting her baby, and Finkelstein's test is positive when she ulnar-deviates the wrist with the thumb clenched in her fist. Click either of the two thumb muscles whose tendons share the inflamed first dorsal compartment.",
-      "view": "lateral",
-      "layers": [
-        "bone",
-        "muscle",
-        "tendon"
-      ],
-      "explain": "De Quervain's tenosynovitis involves the tendons of abductor pollicis longus and extensor pollicis brevis in the first dorsal extensor compartment at the radial styloid. Both are supplied by the posterior interosseous nerve.",
-      "tags": {
-        "topic": "muscles",
-        "region": "wrist",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "epl-rupture-colles",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "extensor_pollicis_longus",
-      "accept": [
-        "extensor_pollicis_longus"
-      ],
-      "prompt": "Six weeks after a distal radius fracture, a patient suddenly cannot lift the tip of the thumb off a table when the hand is lying flat, palm down. The tendon that hooks around the dorsal tubercle of the radius has ruptured. Click the muscle of that tendon.",
-      "view": "dorsal",
-      "layers": [
-        "bone",
-        "muscle",
-        "tendon"
-      ],
-      "explain": "Extensor pollicis longus runs around Lister's tubercle and is prone to late rupture after a distal radius fracture, losing extension at the thumb interphalangeal joint. It is supplied by the posterior interosseous nerve.",
-      "tags": {
-        "topic": "muscles",
-        "region": "wrist",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "extensor-indicis-id",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "extensor_indicis",
-      "accept": [
-        "extensor_indicis"
-      ],
-      "prompt": "Click the deep extensor that gives the index finger its independent extension, as when pointing.",
-      "view": "dorsal",
-      "layers": [
-        "bone",
-        "muscle"
-      ],
-      "explain": "Extensor indicis arises from the posterior ulna and interosseous membrane and joins the extensor digitorum tendon to the index finger. It is supplied by the posterior interosseous nerve and is a common tendon transfer donor.",
-      "tags": {
-        "topic": "muscles",
-        "region": "forearm",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "forearm"
-    },
-    {
-      "id": "opponens-pollicis-id",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "opponens_pollicis",
-      "accept": [
-        "opponens_pollicis"
-      ],
-      "prompt": "Click the thenar muscle that pulls the first metacarpal across the palm to oppose the thumb to the little finger.",
-      "hint": "It lies deep to abductor pollicis brevis and inserts on the whole lateral border of the first metacarpal.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "muscle"
-      ],
-      "explain": "Opponens pollicis flexes and medially rotates the first metacarpal. It is supplied by the recurrent branch of the median nerve, which makes opposition a key test of median nerve motor function at the wrist.",
-      "tags": {
-        "topic": "muscles",
-        "region": "hand",
-        "difficulty": 1
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "abductor-digiti-minimi-id",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "abductor_digiti_minimi",
-      "accept": [
-        "abductor_digiti_minimi"
-      ],
-      "prompt": "Click the most superficial muscle on the ulnar border of the palm that abducts the little finger.",
-      "hint": "It arises from the pisiform and tendon of flexor carpi ulnaris.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "muscle"
-      ],
-      "explain": "Abductor digiti minimi forms the ulnar edge of the hypothenar eminence and is supplied by the deep branch of the ulnar nerve. It is the one hypothenar muscle that is easily tested by asking the patient to spread the little finger.",
-      "tags": {
-        "topic": "muscles",
-        "region": "hand",
-        "difficulty": 1
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "lumbricals-claw",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "lumbricals",
-      "accept": [
-        "lumbricals"
-      ],
-      "prompt": "After an ulnar nerve injury at the wrist, a patient has a claw hand: the ring and little fingers hyperextend at the metacarpophalangeal joints and flex at the interphalangeal joints. Click the intrinsic muscles whose paralysis causes this deformity.",
-      "hint": "They arise from the flexor tendons in the palm and pass to the extensor expansions.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "muscle"
-      ],
-      "explain": "The lumbricals flex the MCP joints and extend the IP joints through the extensor expansions. The medial two are supplied by the ulnar nerve, so their loss leaves the long extensors and flexors unopposed. The lateral two are median-supplied.",
-      "tags": {
-        "topic": "muscles",
-        "region": "hand",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "palmar-interossei-pad",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "palmar_interossei",
-      "accept": [
-        "palmar_interossei"
-      ],
-      "prompt": "Click the muscles that adduct the fingers towards the middle finger, remembered as PAD.",
-      "hint": "They lie deep in the palm between the metacarpals.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "muscle"
-      ],
-      "explain": "The palmar interossei adduct the index, ring and little fingers towards the middle finger, and the dorsal interossei abduct. Both groups are supplied by the deep branch of the ulnar nerve.",
-      "tags": {
-        "topic": "muscles",
-        "region": "hand",
-        "difficulty": 1
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "median-nerve-carpal-tunnel",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "median_nerve",
-      "accept": [
-        "median_nerve"
-      ],
-      "prompt": "A woman has night-time tingling in her thumb, index and middle fingers that is relieved by shaking the hand. Sensation over the thenar eminence is normal. Click the nerve that is compressed.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "tendon",
-        "nerve"
-      ],
-      "explain": "In carpal tunnel syndrome the median nerve is compressed under the flexor retinaculum. The palmar cutaneous branch leaves the nerve proximal to the tunnel and passes superficial to it, so thenar skin sensation is spared.",
-      "tags": {
-        "topic": "nerves",
-        "region": "wrist",
-        "difficulty": 1
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "median-recurrent-branch-id",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "median_recurrent_branch",
-      "accept": [
-        "median_recurrent_branch"
-      ],
-      "prompt": "Click the short motor branch of the median nerve that curls proximally to supply the thenar muscles.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "tendon",
-        "nerve"
-      ],
-      "explain": "The recurrent branch, nicknamed the million dollar nerve, arises just distal to the flexor retinaculum and is easily injured by lacerations of the thenar eminence. It supplies abductor pollicis brevis, opponens pollicis and the superficial head of flexor pollicis brevis.",
-      "tags": {
-        "topic": "nerves",
-        "region": "hand",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "hand-of-benediction",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "median_nerve",
-      "accept": [
-        "median_nerve"
-      ],
-      "prompt": "After a deep stab wound to the cubital fossa, a man tries to make a fist but the index and middle fingers remain straight and the thumb cannot flex at the interphalangeal joint (hand of benediction). Click the nerve that is injured.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "tendon",
-        "nerve"
-      ],
-      "explain": "A high median nerve lesion paralyses flexor digitorum superficialis, the lateral flexor digitorum profundus and flexor pollicis longus. The index and middle fingers cannot flex; the ring and little fingers still do via the ulnar-supplied profundus.",
-      "tags": {
-        "topic": "nerves",
-        "region": "elbow",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "forearm"
-    },
-    {
-      "id": "cubital-tunnel-ulnar",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "ulnar_nerve",
-      "accept": [
-        "ulnar_nerve"
-      ],
-      "prompt": "A man who rests on his elbows at a desk has numbness of the little finger and ulnar half of the ring finger, both palm and back, and a weak grip. Tapping behind the medial epicondyle reproduces the tingling. Click the nerve that is compressed.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "tendon",
-        "nerve"
-      ],
-      "explain": "In cubital tunnel syndrome the ulnar nerve is compressed behind the medial epicondyle. Because the lesion is proximal to the dorsal cutaneous branch, sensory loss includes the dorsal ulnar hand as well as the palmar surface.",
-      "tags": {
-        "topic": "nerves",
-        "region": "elbow",
-        "difficulty": 1
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "forearm"
-    },
-    {
-      "id": "ulnar-deep-branch-hook",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "ulnar_deep_branch",
-      "accept": [
-        "ulnar_deep_branch"
-      ],
-      "prompt": "Click the motor branch of the ulnar nerve that curves around the hook of the hamate and crosses the deep palm.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "nerve"
-      ],
-      "explain": "The deep branch arises in Guyon's canal, passes between abductor digiti minimi and flexor digiti minimi brevis, and curves with the deep palmar arch to supply the hypothenar muscles, interossei, medial two lumbricals and adductor pollicis. It is vulnerable at the hook of the hamate.",
-      "tags": {
-        "topic": "nerves",
-        "region": "hand",
-        "difficulty": 3
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "wartenberg-superficial-radial",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "radial_superficial_branch",
-      "accept": [
-        "radial_superficial_branch"
-      ],
-      "prompt": "A woman wearing a tight watch strap develops burning pain and numbness over the back of the thumb and first web space, with no weakness. Click the nerve that is compressed.",
-      "hint": "It emerges from under brachioradialis in the distal forearm and passes over the radial side of the wrist.",
-      "view": "lateral",
-      "layers": [
-        "bone",
-        "tendon",
-        "nerve"
-      ],
-      "explain": "Compression of the superficial branch of the radial nerve, called Wartenberg's syndrome or cheiralgia paresthetica, causes purely sensory symptoms over the dorsolateral hand. The branch carries no motor fibres.",
-      "tags": {
-        "topic": "nerves",
-        "region": "wrist",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "radial-nerve-trunk-elbow",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "radial_nerve",
-      "accept": [
-        "radial_nerve"
-      ],
-      "prompt": "Click the nerve that runs between brachialis and brachioradialis at the elbow before dividing into superficial and deep branches.",
-      "view": "lateral",
-      "layers": [
-        "bone",
-        "nerve"
-      ],
-      "explain": "The radial nerve lies in the cubital fossa between brachialis and brachioradialis and divides near the lateral epicondyle into the superficial branch and the deep branch, which becomes the posterior interosseous nerve.",
-      "tags": {
-        "topic": "nerves",
-        "region": "elbow",
-        "difficulty": 1
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "forearm"
-    },
-    {
-      "id": "ulnar-paradox-fdp",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "flexor_digitorum_profundus",
-      "accept": [
-        "flexor_digitorum_profundus"
-      ],
-      "prompt": "A patient with an ulnar nerve injury at the elbow has a surprisingly mild claw hand, whereas a patient with a wrist laceration of the same nerve has a severe claw. Click the muscle that is paralysed in the elbow lesion but not the wrist lesion and explains this difference.",
-      "hint": "It reaches the distal phalanges of the ring and little fingers.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "muscle"
-      ],
-      "explain": "In the ulnar paradox, a high ulnar lesion paralyses the ulnar half of flexor digitorum profundus, so the ring and little finger IP joints do not flex strongly and the claw is less obvious. A low lesion spares the profundus, leaving the claw more marked.",
-      "tags": {
-        "topic": "nerves",
-        "region": "forearm",
-        "difficulty": 3
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "forearm"
-    },
-    {
-      "id": "median-nerve-wrist-tendons",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "median_nerve",
-      "accept": [
-        "median_nerve"
-      ],
-      "prompt": "Click the nerve that lies between the tendons of palmaris longus and flexor carpi radialis just proximal to the wrist crease.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "tendon",
-        "nerve"
-      ],
-      "explain": "At the wrist the median nerve is superficial, deep to palmaris longus and slightly medial to flexor carpi radialis. This makes it vulnerable to lacerations and accessible for nerve blocks.",
-      "tags": {
-        "topic": "nerves",
-        "region": "wrist",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "radial-pulse-art-line",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "radial_artery",
-      "accept": [
-        "radial_artery"
-      ],
-      "prompt": "Click the artery felt lateral to the flexor carpi radialis tendon at the wrist, the usual site of the pulse and of arterial line placement.",
-      "view": "lateral",
-      "layers": [
-        "bone",
-        "tendon",
-        "vessel"
-      ],
-      "explain": "The radial artery is superficial at the wrist, lying on the distal radius between the tendons of flexor carpi radialis and brachioradialis. This makes it the standard site for pulse palpation and arterial blood gas sampling.",
-      "tags": {
-        "topic": "vessels",
-        "region": "wrist",
-        "difficulty": 1
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "allen-test-ulnar",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "ulnar_artery",
-      "accept": [
-        "ulnar_artery"
-      ],
-      "prompt": "Before a radial arterial line is placed, the patient clenches a fist while the examiner compresses both arteries at the wrist. The fist is opened and one artery is released: if the palm flushes within a few seconds, that artery alone can supply the hand. Click the artery that is released in this test.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "vessel"
-      ],
-      "explain": "The modified Allen test checks collateral circulation. Releasing the ulnar artery and seeing the palm flush within a few seconds shows that the ulnar artery can supply the hand, so the radial artery can be used. A pale palm indicates poor ulnar supply.",
-      "tags": {
-        "topic": "vessels",
-        "region": "wrist",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "superficial-palmar-arch-id",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "superficial_palmar_arch",
-      "accept": [
-        "superficial_palmar_arch"
-      ],
-      "prompt": "Click the arterial arch across the palm, formed mainly by the ulnar artery, that gives rise to the common palmar digital arteries.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "vessel"
-      ],
-      "explain": "The superficial palmar arch lies deep to the palmar aponeurosis and superficial to the flexor tendons. It is completed on the lateral side by the superficial palmar branch of the radial artery or another branch of it.",
-      "tags": {
-        "topic": "vessels",
-        "region": "hand",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "radial-artery-snuffbox",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "radial_artery",
-      "accept": [
-        "radial_artery"
-      ],
-      "prompt": "Click the artery that crosses the floor of the anatomical snuffbox on its way to the back of the hand.",
-      "view": "lateral",
-      "layers": [
-        "bone",
-        "tendon",
-        "vessel"
-      ],
-      "explain": "After passing beneath the tendons of abductor pollicis longus and extensor pollicis brevis, the radial artery crosses the floor of the snuffbox over the scaphoid and trapezium. It then passes between the first two metacarpals into the palm.",
-      "tags": {
-        "topic": "vessels",
-        "region": "wrist",
-        "difficulty": 2
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "ulnar-artery-guyon",
-      "kind": "Identify",
-      "renderer": "mesh",
-      "target": "ulnar_artery",
-      "accept": [
-        "ulnar_artery"
-      ],
-      "prompt": "Click the artery that accompanies the ulnar nerve through the wrist and continues as the superficial palmar arch.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "vessel"
-      ],
-      "explain": "The ulnar artery is the larger terminal branch of the brachial artery. It lies lateral to the ulnar nerve at the wrist, passes through Guyon's canal and gives rise to the superficial palmar arch.",
-      "tags": {
-        "topic": "vessels",
-        "region": "wrist",
-        "difficulty": 1
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    },
-    {
-      "id": "hypothenar-hammer",
-      "kind": "Clinical",
-      "renderer": "mesh",
-      "target": "ulnar_artery",
-      "accept": [
-        "ulnar_artery",
-        "superficial_palmar_arch"
-      ],
-      "prompt": "A carpenter who uses the heel of the hand as a hammer develops a cold, painful ring finger with a pulsatile mass over the hook of the hamate. Click the artery that has been injured.",
-      "view": "palmar",
-      "layers": [
-        "bone",
-        "vessel"
-      ],
-      "explain": "In hypothenar hammer syndrome repeated trauma damages the distal ulnar artery and superficial palmar arch where they cross the hook of the hamate, causing thrombosis, aneurysm or digital ischaemia.",
-      "tags": {
-        "topic": "vessels",
-        "region": "hand",
-        "difficulty": 3
-      },
-      "review": {
-        "status": "draft"
-      },
-      "focus": "hand"
-    }
-  ]
+ "version": 1,
+ "region": "upper-limb",
+ "questions": [
+  {
+   "id": "median-nerve-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "median_nerve",
+   "accept": [
+    "median_nerve"
+   ],
+   "prompt": "Click the median nerve.",
+   "hint": "Follow it down the middle of the forearm and through the carpal tunnel.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "tendon",
+    "nerve"
+   ],
+   "explain": "The median nerve runs down the middle of the forearm between flexor digitorum superficialis and profundus, then passes through the carpal tunnel deep to the flexor retinaculum.",
+   "tags": {
+    "topic": "nerves",
+    "region": "forearm",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "forearm"
+  },
+  {
+   "id": "fcu-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "flexor_carpi_ulnaris",
+   "accept": [
+    "flexor_carpi_ulnaris"
+   ],
+   "prompt": "Click the muscle that runs along the ulnar border of the front of the forearm and inserts on the pisiform.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle",
+    "tendon"
+   ],
+   "explain": "Flexor carpi ulnaris flexes and adducts the wrist and is supplied by the ulnar nerve. At the wrist its tendon is a landmark: the ulnar nerve and artery lie just lateral to it.",
+   "tags": {
+    "topic": "muscles",
+    "region": "forearm",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "forearm"
+  },
+  {
+   "id": "carpal-tunnel-apb",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "abductor_pollicis_brevis",
+   "accept": [
+    "abductor_pollicis_brevis"
+   ],
+   "prompt": "A 52-year-old with long-standing carpal tunnel syndrome has a flattened thenar eminence and cannot lift her thumb straight up off the palm. Click the muscle that performs this movement.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle",
+    "tendon"
+   ],
+   "explain": "Abductor pollicis brevis does palmar abduction of the thumb and is supplied by the recurrent (motor) branch of the median nerve, so it is the classic muscle to test and to see waste in carpal tunnel syndrome.",
+   "tags": {
+    "topic": "muscles",
+    "region": "hand",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "ulnar-nerve-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "ulnar_nerve",
+   "accept": [
+    "ulnar_nerve",
+    "ulnar_deep_branch"
+   ],
+   "prompt": "Click the ulnar nerve.",
+   "hint": "It passes behind the medial epicondyle and enters the hand through Guyon's canal.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "tendon",
+    "nerve"
+   ],
+   "explain": "The ulnar nerve passes behind the medial epicondyle (the 'funny bone'), runs under flexor carpi ulnaris, and enters the hand through Guyon's canal, superficial to the flexor retinaculum, not through the carpal tunnel.",
+   "tags": {
+    "topic": "nerves",
+    "region": "forearm",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "forearm"
+  },
+  {
+   "id": "froment-adductor",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "adductor_pollicis",
+   "accept": [
+    "adductor_pollicis"
+   ],
+   "prompt": "A long-distance cyclist has numbness of the little finger. When asked to grip paper between the thumb and the side of the index finger, the thumb tip flexes (Froment's sign). Click the weak muscle.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle",
+    "tendon"
+   ],
+   "explain": "Adductor pollicis is supplied by the deep branch of the ulnar nerve, which handlebar pressure can compress at Guyon's canal. The patient substitutes flexor pollicis longus (median nerve), which flexes the thumb tip.",
+   "tags": {
+    "topic": "muscles",
+    "region": "hand",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "fdp-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "flexor_digitorum_profundus",
+   "accept": [
+    "flexor_digitorum_profundus"
+   ],
+   "prompt": "Click the muscle that flexes the distal interphalangeal joints of the fingers.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle",
+    "tendon"
+   ],
+   "explain": "Flexor digitorum profundus inserts on the distal phalanges. It has a split supply: the anterior interosseous nerve (median) for the index and middle fingers, the ulnar nerve for the ring and little fingers.",
+   "tags": {
+    "topic": "muscles",
+    "region": "forearm",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "forearm"
+  },
+  {
+   "id": "ain-fpl",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "flexor_pollicis_longus",
+   "accept": [
+    "flexor_pollicis_longus"
+   ],
+   "prompt": "After a supracondylar fracture, a child cannot make an 'OK' sign: the thumb and index fingertips stay straight and touch pad to pad. Sensation is normal. Click the muscle that flexes the thumb's interphalangeal joint.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle",
+    "tendon"
+   ],
+   "explain": "This is anterior interosseous nerve palsy, a purely motor branch of the median nerve. It supplies flexor pollicis longus, the lateral half of flexor digitorum profundus and pronator quadratus, so sensation is spared.",
+   "tags": {
+    "topic": "muscles",
+    "region": "forearm",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "forearm"
+  },
+  {
+   "id": "humerus-superficial-radial",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "radial_superficial_branch",
+   "accept": [
+    "radial_superficial_branch"
+   ],
+   "prompt": "A midshaft humerus fracture leaves a patient with wrist drop and numbness over the back of the first web space. Click the nerve branch that carries sensation from that skin through the forearm.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle",
+    "nerve"
+   ],
+   "explain": "The radial nerve is injured in the spiral groove of the humerus. Its superficial branch runs under brachioradialis and crosses to the back of the hand to supply the skin of the first web space; wrist drop comes from losing the wrist extensors.",
+   "tags": {
+    "topic": "nerves",
+    "region": "forearm",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "forearm"
+  },
+  {
+   "id": "pin-syndrome",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "posterior_interosseous_nerve",
+   "accept": [
+    "posterior_interosseous_nerve",
+    "radial_deep_branch"
+   ],
+   "prompt": "A patient cannot extend the fingers at the knuckles but can still extend the wrist, which drifts toward the thumb side. Sensation is normal. Click the nerve compressed as it passes through supinator.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "muscle",
+    "nerve"
+   ],
+   "explain": "The posterior interosseous nerve (deep radial) pierces supinator and supplies the finger extensors and extensor carpi ulnaris. Extensor carpi radialis longus is supplied above the split, so the wrist still extends but deviates radially. The branch is purely motor.",
+   "tags": {
+    "topic": "nerves",
+    "region": "forearm",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "forearm"
+  },
+  {
+   "id": "dorsal-interossei",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "dorsal_interossei",
+   "accept": [
+    "dorsal_interossei"
+   ],
+   "prompt": "A patient with an ulnar nerve lesion cannot spread the index and ring fingers away from the middle finger. Click the muscles that perform this movement.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "The dorsal interossei abduct the fingers away from the middle finger (DAB); the palmar interossei adduct them (PAD). Both groups are supplied by the deep branch of the ulnar nerve.",
+   "tags": {
+    "topic": "muscles",
+    "region": "hand",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "scaphoid-snuffbox",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "scaphoid",
+   "accept": [
+    "scaphoid"
+   ],
+   "prompt": "After a fall on an outstretched hand, a young adult has tenderness in the anatomical snuffbox, and the first X-ray looks normal. Click the carpal bone most likely to be fractured.",
+   "hint": "It is the lateral bone of the proximal carpal row, lying in the floor of the snuffbox.",
+   "view": "lateral",
+   "layers": [
+    "bone"
+   ],
+   "explain": "Scaphoid fractures present with snuffbox tenderness and are often occult on early films. The scaphoid's blood supply enters distally, so a waist or proximal-pole fracture risks avascular necrosis of the proximal fragment.",
+   "tags": {
+    "topic": "bones",
+    "region": "wrist",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "lunate-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "lunate",
+   "accept": [
+    "lunate"
+   ],
+   "prompt": "Click the crescent-shaped carpal bone in the middle of the proximal row, between the scaphoid and the triquetrum.",
+   "hint": "It articulates with the distal radius and sits proximal to the capitate.",
+   "view": "palmar",
+   "layers": [
+    "bone"
+   ],
+   "explain": "The lunate is the carpal bone most often dislocated; it can be displaced palmarly into the carpal tunnel and cause acute median nerve compression.",
+   "tags": {
+    "topic": "bones",
+    "region": "wrist",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "hook-of-hamate-golf",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "hamate",
+   "accept": [
+    "hamate"
+   ],
+   "prompt": "A golfer has deep aching pain at the base of the hypothenar eminence after striking the ground with a club, and tenderness over a bony prominence distal and lateral to the pisiform. Click the carpal bone most likely to be fractured.",
+   "hint": "Its hook projects from the palmar surface of the distal carpal row on the ulnar side.",
+   "view": "palmar",
+   "layers": [
+    "bone"
+   ],
+   "explain": "The hook of the hamate is a classic fracture in golfers and racquet-sport players. The ulnar nerve deep branch and the flexor tendons of the little finger lie close to the hook, so injury can cause neuropathy or tendon rupture.",
+   "tags": {
+    "topic": "bones",
+    "region": "wrist",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "pisiform-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "pisiform",
+   "accept": [
+    "pisiform"
+   ],
+   "prompt": "Click the small pea-shaped carpal bone that sits in the tendon of flexor carpi ulnaris.",
+   "hint": "You can feel it as a small bump at the base of the hypothenar eminence.",
+   "view": "palmar",
+   "layers": [
+    "bone"
+   ],
+   "explain": "The pisiform is a sesamoid bone in the tendon of flexor carpi ulnaris. It forms the medial border of Guyon's canal and is a landmark for the ulnar nerve and artery.",
+   "tags": {
+    "topic": "bones",
+    "region": "wrist",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "capitate-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "capitate",
+   "accept": [
+    "capitate"
+   ],
+   "prompt": "Click the largest carpal bone, which articulates with the base of the third metacarpal.",
+   "view": "palmar",
+   "layers": [
+    "bone"
+   ],
+   "explain": "The capitate sits in the centre of the distal carpal row, with the lunate proximal to it, and is the largest carpal bone.",
+   "tags": {
+    "topic": "bones",
+    "region": "wrist",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "boxers-fracture-mc5",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "metacarpal_5",
+   "accept": [
+    "metacarpal_5"
+   ],
+   "prompt": "A man punches a wall and develops swelling over the ulnar border of the dorsum of the hand; the knuckle of the little finger looks flattened and sunken. Click the bone that is fractured.",
+   "view": "dorsal",
+   "layers": [
+    "bone"
+   ],
+   "explain": "A boxer's fracture is a fracture of the neck of the fifth (sometimes fourth) metacarpal, with the head typically angulated towards the palm. The fifth metacarpal is the commonest site.",
+   "tags": {
+    "topic": "bones",
+    "region": "hand",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "bennett-fracture-mc1",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "metacarpal_1",
+   "accept": [
+    "metacarpal_1"
+   ],
+   "prompt": "A man falls onto his abducted thumb and has pain and swelling at the base of the thumb. X-ray shows an oblique intra-articular fracture-dislocation at the carpometacarpal joint, with a small fragment left in place. Click the bone whose base is fractured.",
+   "hint": "The shaft is pulled out of position by abductor pollicis longus.",
+   "view": "lateral",
+   "layers": [
+    "bone"
+   ],
+   "explain": "In a Bennett fracture the small palmar-ulnar fragment of the base of the first metacarpal stays attached by ligament, while abductor pollicis longus pulls the shaft proximally and radially. It is unstable and usually needs fixation.",
+   "tags": {
+    "topic": "bones",
+    "region": "hand",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "colles-radius",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "radius",
+   "accept": [
+    "radius"
+   ],
+   "prompt": "An older woman falls onto her outstretched hand and has a dinner-fork deformity of the wrist, with the hand displaced dorsally. Click the bone that is fractured.",
+   "view": "dorsal",
+   "layers": [
+    "bone"
+   ],
+   "explain": "A Colles fracture is a transverse fracture of the distal radius within about 2.5 cm of the wrist with dorsal displacement of the distal fragment. It is common in osteoporotic bone and is often accompanied by an ulnar styloid fracture.",
+   "tags": {
+    "topic": "bones",
+    "region": "wrist",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "interosseous-membrane-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "interosseous_membrane",
+   "accept": [
+    "interosseous_membrane"
+   ],
+   "prompt": "Click the fibrous sheet that connects the shafts of the radius and the ulna.",
+   "hint": "Most of its fibres run obliquely downwards and medially from the radius to the ulna.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "ligament"
+   ],
+   "explain": "The interosseous membrane binds the radius and ulna, transmits force from the radius to the ulna, and gives origin to deep flexors and extensors. The posterior interosseous nerve and the anterior interosseous nerve lie on its two surfaces.",
+   "tags": {
+    "topic": "ligaments",
+    "region": "forearm",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "forearm"
+  },
+  {
+   "id": "flexor-retinaculum-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "flexor_retinaculum",
+   "accept": [
+    "flexor_retinaculum"
+   ],
+   "prompt": "Click the thick fibrous band that forms the roof of the carpal tunnel.",
+   "hint": "It stretches between the pisiform and hook of the hamate medially and the scaphoid and trapezium laterally; turn on the Ligaments layer if it is hidden.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "ligament"
+   ],
+   "explain": "The flexor retinaculum (transverse carpal ligament) converts the carpal groove into the carpal tunnel. Dividing it relieves pressure on the median nerve in carpal tunnel release.",
+   "tags": {
+    "topic": "ligaments",
+    "region": "wrist",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "pronator-teres-median",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "pronator_teres",
+   "accept": [
+    "pronator_teres"
+   ],
+   "prompt": "A weightlifter has forearm aching and tingling in the thumb, index and middle fingers that worsens with forceful pronation against resistance. The median nerve is compressed where it passes between the two heads of the muscle that crosses the front of the proximal forearm obliquely. Click that muscle.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "In pronator syndrome the median nerve is compressed between the humeral and ulnar heads of pronator teres. The muscle pronates the forearm and is supplied by the median nerve.",
+   "tags": {
+    "topic": "muscles",
+    "region": "forearm",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "forearm"
+  },
+  {
+   "id": "fcr-radial-pulse",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "flexor_carpi_radialis",
+   "accept": [
+    "flexor_carpi_radialis"
+   ],
+   "prompt": "Click the muscle whose tendon is the landmark for the radial pulse, which lies lateral to it at the wrist.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle",
+    "tendon"
+   ],
+   "explain": "Flexor carpi radialis flexes and abducts the wrist and is supplied by the median nerve. Its tendon is a guide to the radial artery on its lateral side and is a reference point for the median nerve, which lies deep and slightly medial to it.",
+   "tags": {
+    "topic": "muscles",
+    "region": "forearm",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "forearm"
+  },
+  {
+   "id": "palmaris-longus-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "palmaris_longus",
+   "accept": [
+    "palmaris_longus"
+   ],
+   "prompt": "Click the slender muscle of the front of the forearm that is absent in about one in seven people and whose tendon is often used as a graft.",
+   "hint": "When present, its tendon stands out at the wrist if you oppose the thumb and little finger and flex the wrist.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle",
+    "tendon"
+   ],
+   "explain": "Palmaris longus is a weak wrist flexor supplied by the median nerve and is absent in roughly 15% of people, often on one side only. Its tendon lies superficial to the flexor retinaculum, in front of the median nerve.",
+   "tags": {
+    "topic": "muscles",
+    "region": "forearm",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "forearm"
+  },
+  {
+   "id": "fds-pip-test",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "flexor_digitorum_superficialis",
+   "accept": [
+    "flexor_digitorum_superficialis"
+   ],
+   "prompt": "To test one finger, an examiner holds the neighbouring fingers fully extended so that the deep flexors cannot act, then asks the patient to bend only the proximal interphalangeal joint of the middle finger. Click the muscle that is being tested.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "Flexor digitorum superficialis flexes the PIP joints and is isolated by holding the other fingers extended, because the deep flexor to those fingers shares a largely common muscle belly. It is supplied by the median nerve.",
+   "tags": {
+    "topic": "muscles",
+    "region": "forearm",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "forearm"
+  },
+  {
+   "id": "pronator-quadratus-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "pronator_quadratus",
+   "accept": [
+    "pronator_quadratus"
+   ],
+   "prompt": "Click the deep square muscle on the front of the distal forearm that pronates the radius.",
+   "hint": "It lies directly on the bones just above the wrist, deep to the long flexor tendons.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "Pronator quadratus is the main pronator and passes between the distal parts of the ulna and radius. It is supplied by the anterior interosseous branch of the median nerve.",
+   "tags": {
+    "topic": "muscles",
+    "region": "forearm",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "forearm"
+  },
+  {
+   "id": "brachioradialis-radial-paradox",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "brachioradialis",
+   "accept": [
+    "brachioradialis"
+   ],
+   "prompt": "Click the forearm muscle that flexes the elbow most strongly in mid-pronation (the thumbs-up position) even though it is supplied by the radial nerve.",
+   "view": "lateral",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "Brachioradialis lies in the posterior (extensor) compartment developmentally but acts as an elbow flexor, an exception to the rule that the radial nerve supplies extensors. The radial nerve gives its branch above the elbow, so it is often spared in posterior interosseous nerve lesions.",
+   "tags": {
+    "topic": "muscles",
+    "region": "forearm",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "forearm"
+  },
+  {
+   "id": "tennis-elbow-ecrb",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "extensor_carpi_radialis_brevis",
+   "accept": [
+    "extensor_carpi_radialis_brevis"
+   ],
+   "prompt": "A plumber has pain over the lateral epicondyle that is reproduced by resisted wrist extension with the elbow straight and the fist clenched. The common extensor origin is involved, most often through the tendon that inserts on the base of the third metacarpal. Click that muscle.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "Lateral epicondylitis (tennis elbow) most commonly involves the origin of extensor carpi radialis brevis at the common extensor origin. The muscle extends and abducts the wrist, inserts on the base of the third metacarpal and is supplied by the radial nerve (often via the posterior interosseous branch).",
+   "tags": {
+    "topic": "muscles",
+    "region": "elbow",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "forearm"
+  },
+  {
+   "id": "extensor-digitorum-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "extensor_digitorum",
+   "accept": [
+    "extensor_digitorum"
+   ],
+   "prompt": "Click the muscle that extends the medial four fingers at the metacarpophalangeal joints.",
+   "hint": "Its tendons fan out over the back of the hand and are joined by oblique intertendinous connections.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "muscle",
+    "tendon"
+   ],
+   "explain": "Extensor digitorum is supplied by the posterior interosseous nerve and inserts into the extensor expansions of the four fingers. In PIN palsy the fingers cannot be extended at the MCP joints.",
+   "tags": {
+    "topic": "muscles",
+    "region": "forearm",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "forearm"
+  },
+  {
+   "id": "de-quervain-apl-epb",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "abductor_pollicis_longus",
+   "accept": [
+    "abductor_pollicis_longus",
+    "extensor_pollicis_brevis"
+   ],
+   "prompt": "A new mother has pain over the radial side of the wrist when lifting her baby, and Finkelstein's test is positive when she ulnar-deviates the wrist with the thumb clenched in her fist. Click either of the two thumb muscles whose tendons share the inflamed first dorsal compartment.",
+   "view": "lateral",
+   "layers": [
+    "bone",
+    "muscle",
+    "tendon"
+   ],
+   "explain": "De Quervain's tenosynovitis involves the tendons of abductor pollicis longus and extensor pollicis brevis in the first dorsal extensor compartment at the radial styloid. Both are supplied by the posterior interosseous nerve.",
+   "tags": {
+    "topic": "muscles",
+    "region": "wrist",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "epl-rupture-colles",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "extensor_pollicis_longus",
+   "accept": [
+    "extensor_pollicis_longus"
+   ],
+   "prompt": "Six weeks after a distal radius fracture, a patient suddenly cannot lift the tip of the thumb off a table when the hand is lying flat, palm down. The tendon that hooks around the dorsal tubercle of the radius has ruptured. Click the muscle of that tendon.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "muscle",
+    "tendon"
+   ],
+   "explain": "Extensor pollicis longus runs around Lister's tubercle and is prone to late rupture after a distal radius fracture, losing extension at the thumb interphalangeal joint. It is supplied by the posterior interosseous nerve.",
+   "tags": {
+    "topic": "muscles",
+    "region": "wrist",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "extensor-indicis-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "extensor_indicis",
+   "accept": [
+    "extensor_indicis"
+   ],
+   "prompt": "Click the deep extensor that gives the index finger its independent extension, as when pointing.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "Extensor indicis arises from the posterior ulna and interosseous membrane and joins the extensor digitorum tendon to the index finger. It is supplied by the posterior interosseous nerve and is a common tendon transfer donor.",
+   "tags": {
+    "topic": "muscles",
+    "region": "forearm",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "forearm"
+  },
+  {
+   "id": "opponens-pollicis-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "opponens_pollicis",
+   "accept": [
+    "opponens_pollicis"
+   ],
+   "prompt": "Click the thenar muscle that pulls the first metacarpal across the palm to oppose the thumb to the little finger.",
+   "hint": "It lies deep to abductor pollicis brevis and inserts on the whole lateral border of the first metacarpal.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "Opponens pollicis flexes and medially rotates the first metacarpal. It is supplied by the recurrent branch of the median nerve, which makes opposition a key test of median nerve motor function at the wrist.",
+   "tags": {
+    "topic": "muscles",
+    "region": "hand",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "abductor-digiti-minimi-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "abductor_digiti_minimi",
+   "accept": [
+    "abductor_digiti_minimi"
+   ],
+   "prompt": "Click the most superficial muscle on the ulnar border of the palm that abducts the little finger.",
+   "hint": "It arises from the pisiform and tendon of flexor carpi ulnaris.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "Abductor digiti minimi forms the ulnar edge of the hypothenar eminence and is supplied by the deep branch of the ulnar nerve. It is the one hypothenar muscle that is easily tested by asking the patient to spread the little finger.",
+   "tags": {
+    "topic": "muscles",
+    "region": "hand",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "lumbricals-claw",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "lumbricals",
+   "accept": [
+    "lumbricals"
+   ],
+   "prompt": "After an ulnar nerve injury at the wrist, a patient has a claw hand: the ring and little fingers hyperextend at the metacarpophalangeal joints and flex at the interphalangeal joints. Click the intrinsic muscles whose paralysis causes this deformity.",
+   "hint": "They arise from the flexor tendons in the palm and pass to the extensor expansions.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "The lumbricals flex the MCP joints and extend the IP joints through the extensor expansions. The medial two are supplied by the ulnar nerve, so their loss leaves the long extensors and flexors unopposed. The lateral two are median-supplied.",
+   "tags": {
+    "topic": "muscles",
+    "region": "hand",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "palmar-interossei-pad",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "palmar_interossei",
+   "accept": [
+    "palmar_interossei"
+   ],
+   "prompt": "Click the muscles that adduct the fingers towards the middle finger, remembered as PAD.",
+   "hint": "They lie deep in the palm between the metacarpals.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "The palmar interossei adduct the index, ring and little fingers towards the middle finger, and the dorsal interossei abduct. Both groups are supplied by the deep branch of the ulnar nerve.",
+   "tags": {
+    "topic": "muscles",
+    "region": "hand",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "median-nerve-carpal-tunnel",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "median_nerve",
+   "accept": [
+    "median_nerve"
+   ],
+   "prompt": "A woman has night-time tingling in her thumb, index and middle fingers that is relieved by shaking the hand. Sensation over the thenar eminence is normal. Click the nerve that is compressed.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "tendon",
+    "nerve"
+   ],
+   "explain": "In carpal tunnel syndrome the median nerve is compressed under the flexor retinaculum. The palmar cutaneous branch leaves the nerve proximal to the tunnel and passes superficial to it, so thenar skin sensation is spared.",
+   "tags": {
+    "topic": "nerves",
+    "region": "wrist",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "median-recurrent-branch-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "median_recurrent_branch",
+   "accept": [
+    "median_recurrent_branch"
+   ],
+   "prompt": "Click the short motor branch of the median nerve that curls proximally to supply the thenar muscles.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "tendon",
+    "nerve"
+   ],
+   "explain": "The recurrent branch, nicknamed the million dollar nerve, arises just distal to the flexor retinaculum and is easily injured by lacerations of the thenar eminence. It supplies abductor pollicis brevis, opponens pollicis and the superficial head of flexor pollicis brevis.",
+   "tags": {
+    "topic": "nerves",
+    "region": "hand",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "hand-of-benediction",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "median_nerve",
+   "accept": [
+    "median_nerve"
+   ],
+   "prompt": "After a deep stab wound to the cubital fossa, a man tries to make a fist but the index and middle fingers remain straight and the thumb cannot flex at the interphalangeal joint (hand of benediction). Click the nerve that is injured.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "tendon",
+    "nerve"
+   ],
+   "explain": "A high median nerve lesion paralyses flexor digitorum superficialis, the lateral flexor digitorum profundus and flexor pollicis longus. The index and middle fingers cannot flex; the ring and little fingers still do via the ulnar-supplied profundus.",
+   "tags": {
+    "topic": "nerves",
+    "region": "elbow",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "forearm"
+  },
+  {
+   "id": "cubital-tunnel-ulnar",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "ulnar_nerve",
+   "accept": [
+    "ulnar_nerve"
+   ],
+   "prompt": "A man who rests on his elbows at a desk has numbness of the little finger and ulnar half of the ring finger, both palm and back, and a weak grip. Tapping behind the medial epicondyle reproduces the tingling. Click the nerve that is compressed.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "tendon",
+    "nerve"
+   ],
+   "explain": "In cubital tunnel syndrome the ulnar nerve is compressed behind the medial epicondyle. Because the lesion is proximal to the dorsal cutaneous branch, sensory loss includes the dorsal ulnar hand as well as the palmar surface.",
+   "tags": {
+    "topic": "nerves",
+    "region": "elbow",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "forearm"
+  },
+  {
+   "id": "ulnar-deep-branch-hook",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "ulnar_deep_branch",
+   "accept": [
+    "ulnar_deep_branch"
+   ],
+   "prompt": "Click the motor branch of the ulnar nerve that curves around the hook of the hamate and crosses the deep palm.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "nerve"
+   ],
+   "explain": "The deep branch arises in Guyon's canal, passes between abductor digiti minimi and flexor digiti minimi brevis, and curves with the deep palmar arch to supply the hypothenar muscles, interossei, medial two lumbricals and adductor pollicis. It is vulnerable at the hook of the hamate.",
+   "tags": {
+    "topic": "nerves",
+    "region": "hand",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "wartenberg-superficial-radial",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "radial_superficial_branch",
+   "accept": [
+    "radial_superficial_branch"
+   ],
+   "prompt": "A woman wearing a tight watch strap develops burning pain and numbness over the back of the thumb and first web space, with no weakness. Click the nerve that is compressed.",
+   "hint": "It emerges from under brachioradialis in the distal forearm and passes over the radial side of the wrist.",
+   "view": "lateral",
+   "layers": [
+    "bone",
+    "tendon",
+    "nerve"
+   ],
+   "explain": "Compression of the superficial branch of the radial nerve, called Wartenberg's syndrome or cheiralgia paresthetica, causes purely sensory symptoms over the dorsolateral hand. The branch carries no motor fibres.",
+   "tags": {
+    "topic": "nerves",
+    "region": "wrist",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "radial-nerve-trunk-elbow",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "radial_nerve",
+   "accept": [
+    "radial_nerve"
+   ],
+   "prompt": "Click the nerve that runs between brachialis and brachioradialis at the elbow before dividing into superficial and deep branches.",
+   "view": "lateral",
+   "layers": [
+    "bone",
+    "nerve"
+   ],
+   "explain": "The radial nerve lies in the cubital fossa between brachialis and brachioradialis and divides near the lateral epicondyle into the superficial branch and the deep branch, which becomes the posterior interosseous nerve.",
+   "tags": {
+    "topic": "nerves",
+    "region": "elbow",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "forearm"
+  },
+  {
+   "id": "ulnar-paradox-fdp",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "flexor_digitorum_profundus",
+   "accept": [
+    "flexor_digitorum_profundus"
+   ],
+   "prompt": "A patient with an ulnar nerve injury at the elbow has a surprisingly mild claw hand, whereas a patient with a wrist laceration of the same nerve has a severe claw. Click the muscle that is paralysed in the elbow lesion but not the wrist lesion and explains this difference.",
+   "hint": "It reaches the distal phalanges of the ring and little fingers.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "muscle"
+   ],
+   "explain": "In the ulnar paradox, a high ulnar lesion paralyses the ulnar half of flexor digitorum profundus, so the ring and little finger IP joints do not flex strongly and the claw is less obvious. A low lesion spares the profundus, leaving the claw more marked.",
+   "tags": {
+    "topic": "nerves",
+    "region": "forearm",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "forearm"
+  },
+  {
+   "id": "median-nerve-wrist-tendons",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "median_nerve",
+   "accept": [
+    "median_nerve"
+   ],
+   "prompt": "Click the nerve that lies between the tendons of palmaris longus and flexor carpi radialis just proximal to the wrist crease.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "tendon",
+    "nerve"
+   ],
+   "explain": "At the wrist the median nerve is superficial, deep to palmaris longus and slightly medial to flexor carpi radialis. This makes it vulnerable to lacerations and accessible for nerve blocks.",
+   "tags": {
+    "topic": "nerves",
+    "region": "wrist",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "radial-pulse-art-line",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "radial_artery",
+   "accept": [
+    "radial_artery"
+   ],
+   "prompt": "Click the artery felt lateral to the flexor carpi radialis tendon at the wrist, the usual site of the pulse and of arterial line placement.",
+   "view": "lateral",
+   "layers": [
+    "bone",
+    "tendon",
+    "vessel"
+   ],
+   "explain": "The radial artery is superficial at the wrist, lying on the distal radius between the tendons of flexor carpi radialis and brachioradialis. This makes it the standard site for pulse palpation and arterial blood gas sampling.",
+   "tags": {
+    "topic": "vessels",
+    "region": "wrist",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "allen-test-ulnar",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "ulnar_artery",
+   "accept": [
+    "ulnar_artery"
+   ],
+   "prompt": "Before a radial arterial line is placed, the patient clenches a fist while the examiner compresses both arteries at the wrist. The fist is opened and one artery is released: if the palm flushes within a few seconds, that artery alone can supply the hand. Click the artery that is released in this test.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "vessel"
+   ],
+   "explain": "The modified Allen test checks collateral circulation. Releasing the ulnar artery and seeing the palm flush within a few seconds shows that the ulnar artery can supply the hand, so the radial artery can be used. A pale palm indicates poor ulnar supply.",
+   "tags": {
+    "topic": "vessels",
+    "region": "wrist",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "superficial-palmar-arch-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "superficial_palmar_arch",
+   "accept": [
+    "superficial_palmar_arch"
+   ],
+   "prompt": "Click the arterial arch across the palm, formed mainly by the ulnar artery, that gives rise to the common palmar digital arteries.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "vessel"
+   ],
+   "explain": "The superficial palmar arch lies deep to the palmar aponeurosis and superficial to the flexor tendons. It is completed on the lateral side by the superficial palmar branch of the radial artery or another branch of it.",
+   "tags": {
+    "topic": "vessels",
+    "region": "hand",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "radial-artery-snuffbox",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "radial_artery",
+   "accept": [
+    "radial_artery"
+   ],
+   "prompt": "Click the artery that crosses the floor of the anatomical snuffbox on its way to the back of the hand.",
+   "view": "lateral",
+   "layers": [
+    "bone",
+    "tendon",
+    "vessel"
+   ],
+   "explain": "After passing beneath the tendons of abductor pollicis longus and extensor pollicis brevis, the radial artery crosses the floor of the snuffbox over the scaphoid and trapezium. It then passes between the first two metacarpals into the palm.",
+   "tags": {
+    "topic": "vessels",
+    "region": "wrist",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "ulnar-artery-guyon",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "ulnar_artery",
+   "accept": [
+    "ulnar_artery"
+   ],
+   "prompt": "Click the artery that accompanies the ulnar nerve through the wrist and continues as the superficial palmar arch.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "vessel"
+   ],
+   "explain": "The ulnar artery is the larger terminal branch of the brachial artery. It lies lateral to the ulnar nerve at the wrist, passes through Guyon's canal and gives rise to the superficial palmar arch.",
+   "tags": {
+    "topic": "vessels",
+    "region": "wrist",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  },
+  {
+   "id": "hypothenar-hammer",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "ulnar_artery",
+   "accept": [
+    "ulnar_artery",
+    "superficial_palmar_arch"
+   ],
+   "prompt": "A carpenter who uses the heel of the hand as a hammer develops a cold, painful ring finger with a pulsatile mass over the hook of the hamate. Click the artery that has been injured.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "vessel"
+   ],
+   "explain": "In hypothenar hammer syndrome repeated trauma damages the distal ulnar artery and superficial palmar arch where they cross the hook of the hamate, causing thrombosis, aneurysm or digital ischaemia.",
+   "tags": {
+    "topic": "vessels",
+    "region": "hand",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hand"
+  }
+ ],
+ "model": "upper-limb"
 }
