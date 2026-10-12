@@ -1,0 +1,1592 @@
+{
+ "1th to 4th perforating branches of the deep femoral artery.r": {
+  "structure": "perforating_arteries_thigh",
+  "layer": "vessel",
+  "name": "Perforating arteries of the thigh"
+ },
+ "Anterior lateral malleolar artery.r": {
+  "structure": "dorsal_foot_arteries",
+  "layer": "vessel",
+  "name": "Dorsal arteries of the foot"
+ },
+ "Anterior medial malleolar artery.r": {
+  "structure": "dorsal_foot_arteries",
+  "layer": "vessel",
+  "name": "Dorsal arteries of the foot"
+ },
+ "Anterior tibial artery.r": {
+  "structure": "anterior_tibial_artery",
+  "layer": "vessel",
+  "name": "Anterior tibial artery"
+ },
+ "Anterior tibial recurrent artery.r": {
+  "structure": "tibial_recurrent_arteries",
+  "layer": "vessel",
+  "name": "Tibial recurrent arteries"
+ },
+ "Arcuate artery.r": {
+  "structure": "dorsal_foot_arteries",
+  "layer": "vessel",
+  "name": "Dorsal arteries of the foot"
+ },
+ "Ascending branch of lateral circumflex femoral artery.r": {
+  "structure": "lateral_circumflex_femoral_artery",
+  "layer": "vessel",
+  "name": "Lateral circumflex femoral artery"
+ },
+ "Communicating br.of Posterior tibial a. and Femoral a..r": {
+  "structure": "posterior_tibial_communicating_artery",
+  "layer": "vessel",
+  "name": "Communicating branch of the posterior tibial artery"
+ },
+ "Deep artery of the thigh.r": {
+  "structure": "deep_femoral_artery",
+  "layer": "vessel",
+  "name": "Deep femoral artery (profunda femoris)"
+ },
+ "Deep branch of Medial plantar artery.r": {
+  "structure": "medial_plantar_artery",
+  "layer": "vessel",
+  "name": "Medial plantar artery"
+ },
+ "Deep plantar arch.r": {
+  "structure": "plantar_arch",
+  "layer": "vessel",
+  "name": "Plantar arch and plantar metatarsal arteries"
+ },
+ "Deep plantar artery.r": {
+  "structure": "plantar_arch",
+  "layer": "vessel",
+  "name": "Plantar arch and plantar metatarsal arteries"
+ },
+ "Descending branch of lateral circumflex femoral artery.r": {
+  "structure": "lateral_circumflex_femoral_artery",
+  "layer": "vessel",
+  "name": "Lateral circumflex femoral artery"
+ },
+ "Descending genicular artery.r": {
+  "structure": "genicular_arteries",
+  "layer": "vessel",
+  "name": "Genicular arteries"
+ },
+ "Dorsal digital arteries of foot.r": {
+  "structure": "dorsal_foot_arteries",
+  "layer": "vessel",
+  "name": "Dorsal arteries of the foot"
+ },
+ "Dorsal metatarsal arteries.r": {
+  "structure": "dorsal_foot_arteries",
+  "layer": "vessel",
+  "name": "Dorsal arteries of the foot"
+ },
+ "Dorsal pedis artery.r": {
+  "structure": "dorsalis_pedis_artery",
+  "layer": "vessel",
+  "name": "Dorsalis pedis artery"
+ },
+ "Femoral artery.r": {
+  "structure": "femoral_artery",
+  "layer": "vessel",
+  "name": "Femoral artery"
+ },
+ "Femoral neck vessels.r": {
+  "structure": "medial_circumflex_femoral_artery",
+  "layer": "vessel",
+  "name": "Medial circumflex femoral artery"
+ },
+ "Fibular artery.r": {
+  "structure": "fibular_artery",
+  "layer": "vessel",
+  "name": "Fibular (peroneal) artery"
+ },
+ "Inferior lateral genicular artery.r": {
+  "structure": "genicular_arteries",
+  "layer": "vessel",
+  "name": "Genicular arteries"
+ },
+ "Inferior medial genicular artery.r": {
+  "structure": "genicular_arteries",
+  "layer": "vessel",
+  "name": "Genicular arteries"
+ },
+ "Lateral calcaneal branch of fibular artery.r": {
+  "structure": "fibular_artery",
+  "layer": "vessel",
+  "name": "Fibular (peroneal) artery"
+ },
+ "Lateral circumflex femoral artery.r": {
+  "structure": "lateral_circumflex_femoral_artery",
+  "layer": "vessel",
+  "name": "Lateral circumflex femoral artery"
+ },
+ "Lateral malleolar branches of Fibular artery.r": {
+  "structure": "fibular_artery",
+  "layer": "vessel",
+  "name": "Fibular (peroneal) artery"
+ },
+ "Lateral plantar artery.r": {
+  "structure": "lateral_plantar_artery",
+  "layer": "vessel",
+  "name": "Lateral plantar artery"
+ },
+ "Lateral tarsal artery.r": {
+  "structure": "dorsal_foot_arteries",
+  "layer": "vessel",
+  "name": "Dorsal arteries of the foot"
+ },
+ "Medial calcaneal artery.r": {
+  "structure": "posterior_tibial_artery",
+  "layer": "vessel",
+  "name": "Posterior tibial artery"
+ },
+ "Medial circumflex femoral artery.r": {
+  "structure": "medial_circumflex_femoral_artery",
+  "layer": "vessel",
+  "name": "Medial circumflex femoral artery"
+ },
+ "Medial malleolar artery of Posterior tibial artery.r": {
+  "structure": "posterior_tibial_artery",
+  "layer": "vessel",
+  "name": "Posterior tibial artery"
+ },
+ "Medial plantar artery.r": {
+  "structure": "medial_plantar_artery",
+  "layer": "vessel",
+  "name": "Medial plantar artery"
+ },
+ "Medial tarsal arteries.r": {
+  "structure": "dorsal_foot_arteries",
+  "layer": "vessel",
+  "name": "Dorsal arteries of the foot"
+ },
+ "Middle genicular artery.r": {
+  "structure": "genicular_arteries",
+  "layer": "vessel",
+  "name": "Genicular arteries"
+ },
+ "Perforating br. between Arcuate a. and Deep plantar arch.r": {
+  "structure": "plantar_arch",
+  "layer": "vessel",
+  "name": "Plantar arch and plantar metatarsal arteries"
+ },
+ "Perforating branches of fibular artery.r": {
+  "structure": "fibular_artery",
+  "layer": "vessel",
+  "name": "Fibular (peroneal) artery"
+ },
+ "Plantar metatarsal arteries.r": {
+  "structure": "plantar_arch",
+  "layer": "vessel",
+  "name": "Plantar arch and plantar metatarsal arteries"
+ },
+ "Popliteal artery.r": {
+  "structure": "popliteal_artery",
+  "layer": "vessel",
+  "name": "Popliteal artery"
+ },
+ "Posterior tibial artery.r": {
+  "structure": "posterior_tibial_artery",
+  "layer": "vessel",
+  "name": "Posterior tibial artery"
+ },
+ "Posterior tibial recurrent artery.r": {
+  "structure": "tibial_recurrent_arteries",
+  "layer": "vessel",
+  "name": "Tibial recurrent arteries"
+ },
+ "Superficial branch of Medial planter artery.r": {
+  "structure": "medial_plantar_artery",
+  "layer": "vessel",
+  "name": "Medial plantar artery"
+ },
+ "Superficial circumflex iliac artery.r": {
+  "structure": "superficial_inguinal_arteries",
+  "layer": "vessel",
+  "name": "Superficial inguinal arteries (epigastric, circumflex iliac, external pudendal)"
+ },
+ "Superficial epigastric artery.r": {
+  "structure": "superficial_inguinal_arteries",
+  "layer": "vessel",
+  "name": "Superficial inguinal arteries (epigastric, circumflex iliac, external pudendal)"
+ },
+ "Superficial external pudendal artery.r": {
+  "structure": "superficial_inguinal_arteries",
+  "layer": "vessel",
+  "name": "Superficial inguinal arteries (epigastric, circumflex iliac, external pudendal)"
+ },
+ "Superior lateral genicular artery.r": {
+  "structure": "genicular_arteries",
+  "layer": "vessel",
+  "name": "Genicular arteries"
+ },
+ "Superior medial genicular artery.r": {
+  "structure": "genicular_arteries",
+  "layer": "vessel",
+  "name": "Genicular arteries"
+ },
+ "Sural artery.r": {
+  "structure": "sural_artery",
+  "layer": "vessel",
+  "name": "Sural arteries"
+ },
+ "Calcaneus.r": {
+  "structure": "calcaneus",
+  "layer": "bone",
+  "name": "Calcaneus"
+ },
+ "Coccyx": {
+  "structure": "coccyx",
+  "layer": "bone",
+  "name": "Coccyx"
+ },
+ "Cuboid bone.r": {
+  "structure": "cuboid",
+  "layer": "bone",
+  "name": "Cuboid"
+ },
+ "Distal phalanx of fifth finger of foot.r": {
+  "structure": "phalanges_toe_5",
+  "layer": "bone",
+  "name": "Phalanges of the little toe"
+ },
+ "Distal phalanx of first finger of foot.r": {
+  "structure": "phalanges_hallux",
+  "layer": "bone",
+  "name": "Phalanges of the big toe"
+ },
+ "Distal phalanx of fourth finger of foot.r": {
+  "structure": "phalanges_toe_4",
+  "layer": "bone",
+  "name": "Phalanges of the fourth toe"
+ },
+ "Distal phalanx of second finger of foot.r": {
+  "structure": "phalanges_toe_2",
+  "layer": "bone",
+  "name": "Phalanges of the second toe"
+ },
+ "Distal phalanx of third finger of foot.r": {
+  "structure": "phalanges_toe_3",
+  "layer": "bone",
+  "name": "Phalanges of the third toe"
+ },
+ "Femur.r": {
+  "structure": "femur",
+  "layer": "bone",
+  "name": "Femur"
+ },
+ "Fibula.r": {
+  "structure": "fibula",
+  "layer": "bone",
+  "name": "Fibula"
+ },
+ "Fifth metatarsal bone.r": {
+  "structure": "metatarsal_5",
+  "layer": "bone",
+  "name": "Fifth metatarsal"
+ },
+ "First metatarsal bone.r": {
+  "structure": "metatarsal_1",
+  "layer": "bone",
+  "name": "First metatarsal"
+ },
+ "Fourth metatarsal bone.r": {
+  "structure": "metatarsal_4",
+  "layer": "bone",
+  "name": "Fourth metatarsal"
+ },
+ "Hip bone.r": {
+  "structure": "hip_bone",
+  "layer": "bone",
+  "name": "Hip bone"
+ },
+ "Intermediate cuneiform bone.r": {
+  "structure": "intermediate_cuneiform",
+  "layer": "bone",
+  "name": "Intermediate cuneiform"
+ },
+ "Lateral cuneiform bone.r": {
+  "structure": "lateral_cuneiform",
+  "layer": "bone",
+  "name": "Lateral cuneiform"
+ },
+ "Medial cuneiform bone.r": {
+  "structure": "medial_cuneiform",
+  "layer": "bone",
+  "name": "Medial cuneiform"
+ },
+ "Middle phalanx of fifth finger of foot.r": {
+  "structure": "phalanges_toe_5",
+  "layer": "bone",
+  "name": "Phalanges of the little toe"
+ },
+ "Middle phalanx of fourth finger of foot.r": {
+  "structure": "phalanges_toe_4",
+  "layer": "bone",
+  "name": "Phalanges of the fourth toe"
+ },
+ "Middle phalanx of second finger of foot.r": {
+  "structure": "phalanges_toe_2",
+  "layer": "bone",
+  "name": "Phalanges of the second toe"
+ },
+ "Middle phalanx of third finger of foot.r": {
+  "structure": "phalanges_toe_3",
+  "layer": "bone",
+  "name": "Phalanges of the third toe"
+ },
+ "Navicular bone.r": {
+  "structure": "navicular",
+  "layer": "bone",
+  "name": "Navicular"
+ },
+ "Patella.r": {
+  "structure": "patella",
+  "layer": "bone",
+  "name": "Patella"
+ },
+ "Proximal phalanx of fifth finger of foot.r": {
+  "structure": "phalanges_toe_5",
+  "layer": "bone",
+  "name": "Phalanges of the little toe"
+ },
+ "Proximal phalanx of first finger of foot.r": {
+  "structure": "phalanges_hallux",
+  "layer": "bone",
+  "name": "Phalanges of the big toe"
+ },
+ "Proximal phalanx of fourth finger of foot.r": {
+  "structure": "phalanges_toe_4",
+  "layer": "bone",
+  "name": "Phalanges of the fourth toe"
+ },
+ "Proximal phalanx of second finger of foot.r": {
+  "structure": "phalanges_toe_2",
+  "layer": "bone",
+  "name": "Phalanges of the second toe"
+ },
+ "Proximal phalanx of third finger of foot.r": {
+  "structure": "phalanges_toe_3",
+  "layer": "bone",
+  "name": "Phalanges of the third toe"
+ },
+ "Sacrum": {
+  "structure": "sacrum",
+  "layer": "bone",
+  "name": "Sacrum"
+ },
+ "Second metatarsal bone.r": {
+  "structure": "metatarsal_2",
+  "layer": "bone",
+  "name": "Second metatarsal"
+ },
+ "Sesamoid bones of foot.r": {
+  "structure": "sesamoid_bones_foot",
+  "layer": "bone",
+  "name": "Sesamoid bones of the foot"
+ },
+ "Talus.r": {
+  "structure": "talus",
+  "layer": "bone",
+  "name": "Talus"
+ },
+ "Third metatarsal bone.r": {
+  "structure": "metatarsal_3",
+  "layer": "bone",
+  "name": "Third metatarsal"
+ },
+ "Tibia.r": {
+  "structure": "tibia",
+  "layer": "bone",
+  "name": "Tibia"
+ },
+ "Acetabular labrum.r": {
+  "structure": "acetabular_labrum",
+  "layer": "ligament",
+  "name": "Acetabular labrum"
+ },
+ "Art cart of calcaneus.r": {
+  "structure": "calcaneus",
+  "layer": "bone",
+  "name": "Calcaneus"
+ },
+ "Art cart of cuboid bone.r": {
+  "structure": "cuboid",
+  "layer": "bone",
+  "name": "Cuboid"
+ },
+ "Art cart of femur distal end.r": {
+  "structure": "femur",
+  "layer": "bone",
+  "name": "Femur"
+ },
+ "Art cart of femur head.r": {
+  "structure": "femur",
+  "layer": "bone",
+  "name": "Femur"
+ },
+ "Art cart of fibula proximal tibiofibular joint.r": {
+  "structure": "fibula",
+  "layer": "bone",
+  "name": "Fibula"
+ },
+ "Art cart of fibula talofibular joint.r": {
+  "structure": "fibula",
+  "layer": "bone",
+  "name": "Fibula"
+ },
+ "Art cart of hip bone pubis.r": {
+  "structure": "hip_bone",
+  "layer": "bone",
+  "name": "Hip bone"
+ },
+ "Art cart of intermediate cuneiform bone.r": {
+  "structure": "intermediate_cuneiform",
+  "layer": "bone",
+  "name": "Intermediate cuneiform"
+ },
+ "Art cart of lateral cuneiform bone.r": {
+  "structure": "lateral_cuneiform",
+  "layer": "bone",
+  "name": "Lateral cuneiform"
+ },
+ "Art cart of medial cuneiform bone.r": {
+  "structure": "medial_cuneiform",
+  "layer": "bone",
+  "name": "Medial cuneiform"
+ },
+ "Art cart of navicular bone.r": {
+  "structure": "navicular",
+  "layer": "bone",
+  "name": "Navicular"
+ },
+ "Art cart of patella.r": {
+  "structure": "patella",
+  "layer": "bone",
+  "name": "Patella"
+ },
+ "Art cart of sacrococcygeal joint on coccyx": {
+  "structure": "coccyx",
+  "layer": "bone",
+  "name": "Coccyx"
+ },
+ "Art cart of sacrococcygeal joint on sacrum": {
+  "structure": "sacrum",
+  "layer": "bone",
+  "name": "Sacrum"
+ },
+ "Art cart of sacroiliac joint on hip bone": {
+  "structure": "hip_bone",
+  "layer": "bone",
+  "name": "Hip bone"
+ },
+ "Art cart of sacroiliac joint on sacrum": {
+  "structure": "sacrum",
+  "layer": "bone",
+  "name": "Sacrum"
+ },
+ "Art cart of Sesamoid bones.r": {
+  "structure": "sesamoid_bones_foot",
+  "layer": "bone",
+  "name": "Sesamoid bones of the foot"
+ },
+ "Art cart of talus.r": {
+  "structure": "talus",
+  "layer": "bone",
+  "name": "Talus"
+ },
+ "Art cart of tibia distal end.r": {
+  "structure": "tibia",
+  "layer": "bone",
+  "name": "Tibia"
+ },
+ "Art cart of tibia proximal end.r": {
+  "structure": "tibia",
+  "layer": "bone",
+  "name": "Tibia"
+ },
+ "Art cart of tibia proximal tibiofibular joint.r": {
+  "structure": "tibia",
+  "layer": "bone",
+  "name": "Tibia"
+ },
+ "Art carts of distal phalanges of foot.r": {
+  "structure": "foot_joint_cartilage",
+  "layer": "bone",
+  "name": "Articular cartilage of the toe joints"
+ },
+ "Art carts of metatarsal bones.r": {
+  "structure": "foot_joint_cartilage",
+  "layer": "bone",
+  "name": "Articular cartilage of the toe joints"
+ },
+ "Art carts of middle phalanges of foot.r": {
+  "structure": "foot_joint_cartilage",
+  "layer": "bone",
+  "name": "Articular cartilage of the toe joints"
+ },
+ "Art carts of proximal phalanges of foot.r": {
+  "structure": "foot_joint_cartilage",
+  "layer": "bone",
+  "name": "Articular cartilage of the toe joints"
+ },
+ "Lateral meniscus.r": {
+  "structure": "lateral_meniscus",
+  "layer": "ligament",
+  "name": "Lateral meniscus"
+ },
+ "Medial meniscus.r": {
+  "structure": "medial_meniscus",
+  "layer": "ligament",
+  "name": "Medial meniscus"
+ },
+ "Flexor retinaculum of ankle.r": {
+  "structure": "flexor_retinaculum_ankle",
+  "layer": "ligament",
+  "name": "Flexor retinaculum of the ankle (tarsal tunnel roof)"
+ },
+ "Iliotibial tract.r": {
+  "structure": "iliotibial_tract",
+  "layer": "ligament",
+  "name": "Iliotibial tract"
+ },
+ "Inferior extensor retinaculum.r": {
+  "structure": "extensor_retinacula_ankle",
+  "layer": "ligament",
+  "name": "Extensor retinacula of the ankle"
+ },
+ "Inferior fibular retinaculum.r": {
+  "structure": "fibular_retinacula",
+  "layer": "ligament",
+  "name": "Fibular (peroneal) retinacula"
+ },
+ "Superior extensor retinaculum of ankle.r": {
+  "structure": "extensor_retinacula_ankle",
+  "layer": "ligament",
+  "name": "Extensor retinacula of the ankle"
+ },
+ "Superior fibular retinaculum.r": {
+  "structure": "fibular_retinacula",
+  "layer": "ligament",
+  "name": "Fibular (peroneal) retinacula"
+ },
+ "Anterior cruciate ligament.r": {
+  "structure": "anterior_cruciate_ligament",
+  "layer": "ligament",
+  "name": "Anterior cruciate ligament"
+ },
+ "Anterior horn of Lateral meniscus.r": {
+  "structure": "lateral_meniscus",
+  "layer": "ligament",
+  "name": "Lateral meniscus"
+ },
+ "Anterior horn of Medial meniscus.r": {
+  "structure": "medial_meniscus",
+  "layer": "ligament",
+  "name": "Medial meniscus"
+ },
+ "Anterior sacro-iliac ligament.r": {
+  "structure": "sacroiliac_ligaments",
+  "layer": "ligament",
+  "name": "Sacroiliac and iliolumbar ligaments"
+ },
+ "Anterior talocalcaneal ligament.r": {
+  "structure": "tarsal_ligaments_dorsal",
+  "layer": "ligament",
+  "name": "Dorsal tarsal and tarsometatarsal ligaments"
+ },
+ "Anterior talofibular ligament.r": {
+  "structure": "anterior_talofibular_ligament",
+  "layer": "ligament",
+  "name": "Anterior talofibular ligament"
+ },
+ "Anterior tibiofibular ligament.r": {
+  "structure": "tibiofibular_ligaments",
+  "layer": "ligament",
+  "name": "Tibiofibular ligaments"
+ },
+ "Anterior tibiotalar ligament (Tibiospring lig.).r": {
+  "structure": "deltoid_ligament",
+  "layer": "ligament",
+  "name": "Deltoid (medial collateral) ligament of the ankle"
+ },
+ "Articular cartilage of hip bone acetabulum.r": {
+  "structure": "hip_bone",
+  "layer": "bone",
+  "name": "Hip bone"
+ },
+ "Bifurcatum ligament": {
+  "structure": "tarsal_ligaments_dorsal",
+  "layer": "ligament",
+  "name": "Dorsal tarsal and tarsometatarsal ligaments"
+ },
+ "Calcaneofibular ligament.r": {
+  "structure": "calcaneofibular_ligament",
+  "layer": "ligament",
+  "name": "Calcaneofibular ligament"
+ },
+ "Cervical ligament (anterior talocalcaneal ligament).r": {
+  "structure": "tarsal_ligaments_dorsal",
+  "layer": "ligament",
+  "name": "Dorsal tarsal and tarsometatarsal ligaments"
+ },
+ "Cuneometatarsal interosseus ligaments.r": {
+  "structure": "tarsal_ligaments_interosseous",
+  "layer": "ligament",
+  "name": "Interosseous tarsal and metatarsal ligaments"
+ },
+ "Deep transverse metatarsal ligament.r": {
+  "structure": "transverse_metatarsal_ligaments",
+  "layer": "ligament",
+  "name": "Transverse metatarsal ligaments"
+ },
+ "Dorsal calcaneocuboid ligament.r": {
+  "structure": "tarsal_ligaments_dorsal",
+  "layer": "ligament",
+  "name": "Dorsal tarsal and tarsometatarsal ligaments"
+ },
+ "Dorsal cuboidonavicular ligament.r": {
+  "structure": "tarsal_ligaments_dorsal",
+  "layer": "ligament",
+  "name": "Dorsal tarsal and tarsometatarsal ligaments"
+ },
+ "Dorsal cuneocuboid ligament.r": {
+  "structure": "tarsal_ligaments_dorsal",
+  "layer": "ligament",
+  "name": "Dorsal tarsal and tarsometatarsal ligaments"
+ },
+ "Dorsal cuneonavicular ligaments.r": {
+  "structure": "tarsal_ligaments_dorsal",
+  "layer": "ligament",
+  "name": "Dorsal tarsal and tarsometatarsal ligaments"
+ },
+ "Dorsal intercuneiform ligaments.r": {
+  "structure": "tarsal_ligaments_dorsal",
+  "layer": "ligament",
+  "name": "Dorsal tarsal and tarsometatarsal ligaments"
+ },
+ "Dorsal metatarsal ligaments.r": {
+  "structure": "tarsal_ligaments_dorsal",
+  "layer": "ligament",
+  "name": "Dorsal tarsal and tarsometatarsal ligaments"
+ },
+ "Dorsal tarsometatarsal ligaments.r": {
+  "structure": "tarsal_ligaments_dorsal",
+  "layer": "ligament",
+  "name": "Dorsal tarsal and tarsometatarsal ligaments"
+ },
+ "Extensor apparatus of 1st toe.r": {
+  "structure": "extensor_expansions_foot",
+  "layer": "tendon",
+  "name": "Extensor expansions of the toes"
+ },
+ "Extensor apparatus of 2nd toe.r": {
+  "structure": "extensor_expansions_foot",
+  "layer": "tendon",
+  "name": "Extensor expansions of the toes"
+ },
+ "Extensor apparatus of 3rd toe.r": {
+  "structure": "extensor_expansions_foot",
+  "layer": "tendon",
+  "name": "Extensor expansions of the toes"
+ },
+ "Extensor apparatus of 4th toe.r": {
+  "structure": "extensor_expansions_foot",
+  "layer": "tendon",
+  "name": "Extensor expansions of the toes"
+ },
+ "Extensor apparatus of 5th toe.r": {
+  "structure": "extensor_expansions_foot",
+  "layer": "tendon",
+  "name": "Extensor expansions of the toes"
+ },
+ "Fibular collateral ligament.r": {
+  "structure": "fibular_collateral_ligament",
+  "layer": "ligament",
+  "name": "Fibular (lateral) collateral ligament"
+ },
+ "Iliolumbar ligament .r": {
+  "structure": "sacroiliac_ligaments",
+  "layer": "ligament",
+  "name": "Sacroiliac and iliolumbar ligaments"
+ },
+ "Intercuneiform interosseus ligaments.r": {
+  "structure": "tarsal_ligaments_interosseous",
+  "layer": "ligament",
+  "name": "Interosseous tarsal and metatarsal ligaments"
+ },
+ "Interossea / Posterior sacro-iliac ligament.r": {
+  "structure": "sacroiliac_ligaments",
+  "layer": "ligament",
+  "name": "Sacroiliac and iliolumbar ligaments"
+ },
+ "Interosseous membrane of leg.r": {
+  "structure": "interosseous_membrane_leg",
+  "layer": "ligament",
+  "name": "Interosseous membrane of the leg"
+ },
+ "Interosseus talocalcaneal ligament.r": {
+  "structure": "tarsal_ligaments_interosseous",
+  "layer": "ligament",
+  "name": "Interosseous tarsal and metatarsal ligaments"
+ },
+ "Intersesamoid ligament.r": {
+  "structure": "tarsal_ligaments_plantar",
+  "layer": "ligament",
+  "name": "Plantar tarsal and tarsometatarsal ligaments"
+ },
+ "Ligament of head of femur.r": {
+  "structure": "ligament_of_head_of_femur",
+  "layer": "ligament",
+  "name": "Ligament of the head of the femur"
+ },
+ "Ligaments of fibular head.r": {
+  "structure": "ligaments_of_fibular_head",
+  "layer": "ligament",
+  "name": "Ligaments of the fibular head"
+ },
+ "Long plantar ligament.r": {
+  "structure": "long_plantar_ligament",
+  "layer": "ligament",
+  "name": "Long plantar ligament"
+ },
+ "Medial talocalcaneal ligament.r": {
+  "structure": "tarsal_ligaments_dorsal",
+  "layer": "ligament",
+  "name": "Dorsal tarsal and tarsometatarsal ligaments"
+ },
+ "Metatarsal interosseous ligaments.r": {
+  "structure": "tarsal_ligaments_interosseous",
+  "layer": "ligament",
+  "name": "Interosseous tarsal and metatarsal ligaments"
+ },
+ "Obturator membrane.r": {
+  "structure": "obturator_membrane",
+  "layer": "ligament",
+  "name": "Obturator membrane"
+ },
+ "Plantar calcaneocuboid ligament.r": {
+  "structure": "tarsal_ligaments_plantar",
+  "layer": "ligament",
+  "name": "Plantar tarsal and tarsometatarsal ligaments"
+ },
+ "Plantar calcaneonavicular ligament.r": {
+  "structure": "plantar_calcaneonavicular_ligament",
+  "layer": "ligament",
+  "name": "Plantar calcaneonavicular (spring) ligament"
+ },
+ "Plantar cuboideonavicular ligament.r": {
+  "structure": "tarsal_ligaments_plantar",
+  "layer": "ligament",
+  "name": "Plantar tarsal and tarsometatarsal ligaments"
+ },
+ "Plantar cuneocuboid ligament.r": {
+  "structure": "tarsal_ligaments_plantar",
+  "layer": "ligament",
+  "name": "Plantar tarsal and tarsometatarsal ligaments"
+ },
+ "Plantar cuneonavicular ligaments.r": {
+  "structure": "tarsal_ligaments_plantar",
+  "layer": "ligament",
+  "name": "Plantar tarsal and tarsometatarsal ligaments"
+ },
+ "Plantar intercuneiform ligaments.r": {
+  "structure": "tarsal_ligaments_plantar",
+  "layer": "ligament",
+  "name": "Plantar tarsal and tarsometatarsal ligaments"
+ },
+ "Plantar metatarsal ligaments.r": {
+  "structure": "tarsal_ligaments_plantar",
+  "layer": "ligament",
+  "name": "Plantar tarsal and tarsometatarsal ligaments"
+ },
+ "Plantar tarsometatarsal ligaments.r": {
+  "structure": "tarsal_ligaments_plantar",
+  "layer": "ligament",
+  "name": "Plantar tarsal and tarsometatarsal ligaments"
+ },
+ "Posterior cruciate ligament.r": {
+  "structure": "posterior_cruciate_ligament",
+  "layer": "ligament",
+  "name": "Posterior cruciate ligament"
+ },
+ "Posterior horn of Lateral meniscus.r": {
+  "structure": "lateral_meniscus",
+  "layer": "ligament",
+  "name": "Lateral meniscus"
+ },
+ "Posterior horn of Medial meniscus.r": {
+  "structure": "medial_meniscus",
+  "layer": "ligament",
+  "name": "Medial meniscus"
+ },
+ "Posterior meniscofemoral ligament.r": {
+  "structure": "posterior_cruciate_ligament",
+  "layer": "ligament",
+  "name": "Posterior cruciate ligament"
+ },
+ "Posterior talocalcaneal ligament.r": {
+  "structure": "tarsal_ligaments_dorsal",
+  "layer": "ligament",
+  "name": "Dorsal tarsal and tarsometatarsal ligaments"
+ },
+ "Posterior tibiofibular ligament.r": {
+  "structure": "tibiofibular_ligaments",
+  "layer": "ligament",
+  "name": "Tibiofibular ligaments"
+ },
+ "Posterior tibiotalar ligament.r": {
+  "structure": "deltoid_ligament",
+  "layer": "ligament",
+  "name": "Deltoid (medial collateral) ligament of the ankle"
+ },
+ "Sacrospinous ligament.r": {
+  "structure": "sacrospinous_ligament",
+  "layer": "ligament",
+  "name": "Sacrospinous ligament"
+ },
+ "Sacrotuberal ligament.r": {
+  "structure": "sacrotuberous_ligament",
+  "layer": "ligament",
+  "name": "Sacrotuberous ligament"
+ },
+ "Sup, Inf, Ant, Post, Pubic ligaments": {
+  "structure": "pubic_ligaments",
+  "layer": "ligament",
+  "name": "Pubic ligaments"
+ },
+ "Superficial transverse metatarsal ligament.r": {
+  "structure": "transverse_metatarsal_ligaments",
+  "layer": "ligament",
+  "name": "Transverse metatarsal ligaments"
+ },
+ "Talonavicular ligament.r": {
+  "structure": "tarsal_ligaments_dorsal",
+  "layer": "ligament",
+  "name": "Dorsal tarsal and tarsometatarsal ligaments"
+ },
+ "Tibiocalcaneal ligament.r": {
+  "structure": "deltoid_ligament",
+  "layer": "ligament",
+  "name": "Deltoid (medial collateral) ligament of the ankle"
+ },
+ "Tibionavicular ligament.r": {
+  "structure": "deltoid_ligament",
+  "layer": "ligament",
+  "name": "Deltoid (medial collateral) ligament of the ankle"
+ },
+ "Transverse acetabular ligament.r": {
+  "structure": "acetabular_labrum",
+  "layer": "ligament",
+  "name": "Acetabular labrum"
+ },
+ "Transverse ligament of knee.r": {
+  "structure": "transverse_ligament_of_knee",
+  "layer": "ligament",
+  "name": "Transverse ligament of the knee"
+ },
+ "Transverse tibiofibular ligament.r": {
+  "structure": "tibiofibular_ligaments",
+  "layer": "ligament",
+  "name": "Tibiofibular ligaments"
+ },
+ "1st Dorsal interossei muscles of foot.r": {
+  "structure": "dorsal_interossei_foot",
+  "layer": "muscle",
+  "name": "Dorsal interossei (foot)"
+ },
+ "2nd Dorsal interossei muscles of foot.r": {
+  "structure": "dorsal_interossei_foot",
+  "layer": "muscle",
+  "name": "Dorsal interossei (foot)"
+ },
+ "3rd Dorsal interossei muscles of foot.r": {
+  "structure": "dorsal_interossei_foot",
+  "layer": "muscle",
+  "name": "Dorsal interossei (foot)"
+ },
+ "4th Dorsal interossei muscles of foot.r": {
+  "structure": "dorsal_interossei_foot",
+  "layer": "muscle",
+  "name": "Dorsal interossei (foot)"
+ },
+ "Abductor digiti minimi of foot.r": {
+  "structure": "abductor_digiti_minimi_foot",
+  "layer": "muscle",
+  "name": "Abductor digiti minimi (foot)"
+ },
+ "Abductor hallucis.r": {
+  "structure": "abductor_hallucis",
+  "layer": "muscle",
+  "name": "Abductor hallucis"
+ },
+ "Adductor brevis.r": {
+  "structure": "adductor_brevis",
+  "layer": "muscle",
+  "name": "Adductor brevis"
+ },
+ "Adductor longus.r": {
+  "structure": "adductor_longus",
+  "layer": "muscle",
+  "name": "Adductor longus"
+ },
+ "Adductor magnus.r": {
+  "structure": "adductor_magnus",
+  "layer": "muscle",
+  "name": "Adductor magnus"
+ },
+ "Articularis genus.r": {
+  "structure": "articularis_genus",
+  "layer": "muscle",
+  "name": "Articularis genus"
+ },
+ "Calcaneal tendon.r": {
+  "structure": "calcaneal_tendon",
+  "layer": "tendon",
+  "name": "Calcaneal (Achilles) tendon"
+ },
+ "Common tendon of biceps femoris.r": {
+  "structure": "biceps_femoris",
+  "layer": "tendon",
+  "name": "Biceps femoris"
+ },
+ "Common tendon of Semitendinosus and Long head of biceps femoris": {
+  "structure": "hamstring_common_origin",
+  "layer": "tendon",
+  "name": "Common hamstring origin (semitendinosus and long head of biceps femoris)"
+ },
+ "Extensor digitorum brevis.r": {
+  "structure": "extensor_digitorum_brevis",
+  "layer": "muscle",
+  "name": "Extensor digitorum brevis"
+ },
+ "Extensor digitorum longus tendons.r": {
+  "structure": "extensor_digitorum_longus",
+  "layer": "tendon",
+  "name": "Extensor digitorum longus"
+ },
+ "Extensor digitorum longus.r": {
+  "structure": "extensor_digitorum_longus",
+  "layer": "muscle",
+  "name": "Extensor digitorum longus"
+ },
+ "Extensor hallucis brevis.r": {
+  "structure": "extensor_hallucis_brevis",
+  "layer": "muscle",
+  "name": "Extensor hallucis brevis"
+ },
+ "Extensor hallucis longus.r": {
+  "structure": "extensor_hallucis_longus",
+  "layer": "muscle",
+  "name": "Extensor hallucis longus"
+ },
+ "Fibularis brevis muscle.r": {
+  "structure": "fibularis_brevis",
+  "layer": "muscle",
+  "name": "Fibularis (peroneus) brevis"
+ },
+ "Fibularis longus muscle.r": {
+  "structure": "fibularis_longus",
+  "layer": "muscle",
+  "name": "Fibularis (peroneus) longus"
+ },
+ "Fibularis tertius muscle.r": {
+  "structure": "fibularis_tertius",
+  "layer": "muscle",
+  "name": "Fibularis (peroneus) tertius"
+ },
+ "Flexor digiti minimi brevis of foot.r": {
+  "structure": "flexor_digiti_minimi_brevis_foot",
+  "layer": "muscle",
+  "name": "Flexor digiti minimi brevis (foot)"
+ },
+ "Flexor digitorum brevis.r": {
+  "structure": "flexor_digitorum_brevis",
+  "layer": "muscle",
+  "name": "Flexor digitorum brevis"
+ },
+ "Flexor digitorum longus.r": {
+  "structure": "flexor_digitorum_longus",
+  "layer": "muscle",
+  "name": "Flexor digitorum longus"
+ },
+ "Flexor hallucis longus.r": {
+  "structure": "flexor_hallucis_longus",
+  "layer": "muscle",
+  "name": "Flexor hallucis longus"
+ },
+ "Gluteus maximus muscle.r": {
+  "structure": "gluteus_maximus",
+  "layer": "muscle",
+  "name": "Gluteus maximus"
+ },
+ "Gluteus medius muscle.r": {
+  "structure": "gluteus_medius",
+  "layer": "muscle",
+  "name": "Gluteus medius"
+ },
+ "Gluteus minimus muscle.r": {
+  "structure": "gluteus_minimus",
+  "layer": "muscle",
+  "name": "Gluteus minimus"
+ },
+ "Gracilis muscle.r": {
+  "structure": "gracilis",
+  "layer": "muscle",
+  "name": "Gracilis"
+ },
+ "Iliacus muscle.r": {
+  "structure": "iliacus",
+  "layer": "muscle",
+  "name": "Iliacus"
+ },
+ "Inferior gemellus muscle.r": {
+  "structure": "gemellus_inferior",
+  "layer": "muscle",
+  "name": "Inferior gemellus"
+ },
+ "Lateral head of flexor hallucis brevis.r": {
+  "structure": "flexor_hallucis_brevis",
+  "layer": "muscle",
+  "name": "Flexor hallucis brevis"
+ },
+ "Lateral head of gastrocnemius.r": {
+  "structure": "gastrocnemius",
+  "layer": "muscle",
+  "name": "Gastrocnemius"
+ },
+ "Long head of biceps femoris.r": {
+  "structure": "biceps_femoris",
+  "layer": "muscle",
+  "name": "Biceps femoris"
+ },
+ "Lumbrical muscles of foot.r": {
+  "structure": "lumbricals_foot",
+  "layer": "muscle",
+  "name": "Lumbricals (foot)"
+ },
+ "Medial head of flexor hallucis brevis.r": {
+  "structure": "flexor_hallucis_brevis",
+  "layer": "muscle",
+  "name": "Flexor hallucis brevis"
+ },
+ "Medial head of gastrocnemius.r": {
+  "structure": "gastrocnemius",
+  "layer": "muscle",
+  "name": "Gastrocnemius"
+ },
+ "Oblique head of adductor hallucis.r": {
+  "structure": "adductor_hallucis",
+  "layer": "muscle",
+  "name": "Adductor hallucis"
+ },
+ "Obturator externus.r": {
+  "structure": "obturator_externus",
+  "layer": "muscle",
+  "name": "Obturator externus"
+ },
+ "Obturator internus.r": {
+  "structure": "obturator_internus",
+  "layer": "muscle",
+  "name": "Obturator internus"
+ },
+ "Opponens digiti minimi muscle of foot.r": {
+  "structure": "opponens_digiti_minimi_foot",
+  "layer": "muscle",
+  "name": "Opponens digiti minimi (foot)"
+ },
+ "Pectineus muscle.r": {
+  "structure": "pectineus",
+  "layer": "muscle",
+  "name": "Pectineus"
+ },
+ "Pes anserinus common tendon.r": {
+  "structure": "pes_anserinus",
+  "layer": "tendon",
+  "name": "Pes anserinus"
+ },
+ "Piriformis muscle.r": {
+  "structure": "piriformis",
+  "layer": "muscle",
+  "name": "Piriformis"
+ },
+ "Plantar aponeurosis.r": {
+  "structure": "plantar_aponeurosis",
+  "layer": "ligament",
+  "name": "Plantar aponeurosis"
+ },
+ "Plantar interossei muscles.r": {
+  "structure": "plantar_interossei_foot",
+  "layer": "muscle",
+  "name": "Plantar interossei (foot)"
+ },
+ "Plantaris muscle.r": {
+  "structure": "plantaris",
+  "layer": "muscle",
+  "name": "Plantaris"
+ },
+ "Popliteus muscle.r": {
+  "structure": "popliteus",
+  "layer": "muscle",
+  "name": "Popliteus"
+ },
+ "Psoas major.r": {
+  "structure": "psoas_major",
+  "layer": "muscle",
+  "name": "Psoas major"
+ },
+ "Psoas minor.r": {
+  "structure": "psoas_minor",
+  "layer": "muscle",
+  "name": "Psoas minor"
+ },
+ "Quadratus femoris muscle.r": {
+  "structure": "quadratus_femoris",
+  "layer": "muscle",
+  "name": "Quadratus femoris"
+ },
+ "Quadratus plantae muscle.r": {
+  "structure": "quadratus_plantae",
+  "layer": "muscle",
+  "name": "Quadratus plantae"
+ },
+ "Quadriceps common tendon and patellar ligament.r": {
+  "structure": "quadriceps_tendon_patellar_ligament",
+  "layer": "tendon",
+  "name": "Quadriceps tendon and patellar ligament"
+ },
+ "Rectus femoris.r": {
+  "structure": "rectus_femoris",
+  "layer": "muscle",
+  "name": "Rectus femoris"
+ },
+ "Sartorius muscle.r": {
+  "structure": "sartorius",
+  "layer": "muscle",
+  "name": "Sartorius"
+ },
+ "Semimembranosus muscle tendon.r": {
+  "structure": "semimembranosus",
+  "layer": "tendon",
+  "name": "Semimembranosus"
+ },
+ "Semimembranosus muscle.r": {
+  "structure": "semimembranosus",
+  "layer": "muscle",
+  "name": "Semimembranosus"
+ },
+ "Semitendinosus muscle.r": {
+  "structure": "semitendinosus",
+  "layer": "muscle",
+  "name": "Semitendinosus"
+ },
+ "Short head of biceps femoris.r": {
+  "structure": "biceps_femoris",
+  "layer": "muscle",
+  "name": "Biceps femoris"
+ },
+ "Soleus muscle.r": {
+  "structure": "soleus",
+  "layer": "muscle",
+  "name": "Soleus"
+ },
+ "Superior gemellus muscle.r": {
+  "structure": "gemellus_superior",
+  "layer": "muscle",
+  "name": "Superior gemellus"
+ },
+ "Tensor fasciae latae.r": {
+  "structure": "tensor_fasciae_latae",
+  "layer": "muscle",
+  "name": "Tensor fasciae latae"
+ },
+ "Tibialis anterior muscle.r": {
+  "structure": "tibialis_anterior",
+  "layer": "muscle",
+  "name": "Tibialis anterior"
+ },
+ "Tibialis posterior muscle.r": {
+  "structure": "tibialis_posterior",
+  "layer": "muscle",
+  "name": "Tibialis posterior"
+ },
+ "Transverse head of adductor hallucis.r": {
+  "structure": "adductor_hallucis",
+  "layer": "muscle",
+  "name": "Adductor hallucis"
+ },
+ "Vastus intermedius muscle.r": {
+  "structure": "vastus_intermedius",
+  "layer": "muscle",
+  "name": "Vastus intermedius"
+ },
+ "Vastus lateralis muscle.r": {
+  "structure": "vastus_lateralis",
+  "layer": "muscle",
+  "name": "Vastus lateralis"
+ },
+ "Vastus medialis muscle.r": {
+  "structure": "vastus_medialis",
+  "layer": "muscle",
+  "name": "Vastus medialis"
+ },
+ "Common fibular nerve.r": {
+  "structure": "common_fibular_nerve",
+  "layer": "nerve",
+  "name": "Common fibular (peroneal) nerve"
+ },
+ "Common plantar digital nerves.r": {
+  "structure": "medial_plantar_nerve",
+  "layer": "nerve",
+  "name": "Medial plantar nerve"
+ },
+ "Deep branch of Lateral plantar nerve.r": {
+  "structure": "lateral_plantar_nerve",
+  "layer": "nerve",
+  "name": "Lateral plantar nerve"
+ },
+ "Deep fibular nerve.r": {
+  "structure": "deep_fibular_nerve",
+  "layer": "nerve",
+  "name": "Deep fibular (peroneal) nerve"
+ },
+ "Dorsal digital branches of deep fibular nerve.r": {
+  "structure": "deep_fibular_nerve",
+  "layer": "nerve",
+  "name": "Deep fibular (peroneal) nerve"
+ },
+ "Dorsal digital branches of superficial fibular nerve.r": {
+  "structure": "superficial_fibular_nerve",
+  "layer": "nerve",
+  "name": "Superficial fibular (peroneal) nerve"
+ },
+ "Femoral nerve, anterior cutaneous branches.r": {
+  "structure": "femoral_nerve",
+  "layer": "nerve",
+  "name": "Femoral nerve"
+ },
+ "Femoral nerve, muscular branches.r": {
+  "structure": "femoral_nerve",
+  "layer": "nerve",
+  "name": "Femoral nerve"
+ },
+ "Femoral nerve.r": {
+  "structure": "femoral_nerve",
+  "layer": "nerve",
+  "name": "Femoral nerve"
+ },
+ "Genitofemoral nerve, femoral branch.r": {
+  "structure": "genitofemoral_nerve",
+  "layer": "nerve",
+  "name": "Genitofemoral nerve"
+ },
+ "Genitofemoral nerve, genital branch.r": {
+  "structure": "genitofemoral_nerve",
+  "layer": "nerve",
+  "name": "Genitofemoral nerve"
+ },
+ "Iliohypogastric nerve, anterior branch.r": {
+  "structure": "iliohypogastric_nerve",
+  "layer": "nerve",
+  "name": "Iliohypogastric nerve"
+ },
+ "Iliohypogastric nerve, lateral cutaneous branch.r": {
+  "structure": "iliohypogastric_nerve",
+  "layer": "nerve",
+  "name": "Iliohypogastric nerve"
+ },
+ "Ilioinguinal nerve.r": {
+  "structure": "ilioinguinal_nerve",
+  "layer": "nerve",
+  "name": "Ilioinguinal nerve"
+ },
+ "Inferior clunial br. of Post. cutaneous nerve of the thigh.": {
+  "structure": "posterior_cutaneous_nerve_of_thigh",
+  "layer": "nerve",
+  "name": "Posterior cutaneous nerve of the thigh"
+ },
+ "Inferior gluteal nerve.r": {
+  "structure": "inferior_gluteal_nerve",
+  "layer": "nerve",
+  "name": "Inferior gluteal nerve"
+ },
+ "Infrapatellar branch of Saphenous nerve.r": {
+  "structure": "saphenous_nerve",
+  "layer": "nerve",
+  "name": "Saphenous nerve"
+ },
+ "L1 root.r": {
+  "structure": "lumbar_plexus",
+  "layer": "nerve",
+  "name": "Lumbar plexus (L1-L5)"
+ },
+ "L2 root.r": {
+  "structure": "lumbar_plexus",
+  "layer": "nerve",
+  "name": "Lumbar plexus (L1-L5)"
+ },
+ "L3 root.r": {
+  "structure": "lumbar_plexus",
+  "layer": "nerve",
+  "name": "Lumbar plexus (L1-L5)"
+ },
+ "L4 root.r": {
+  "structure": "lumbar_plexus",
+  "layer": "nerve",
+  "name": "Lumbar plexus (L1-L5)"
+ },
+ "L5 root.r": {
+  "structure": "lumbar_plexus",
+  "layer": "nerve",
+  "name": "Lumbar plexus (L1-L5)"
+ },
+ "Lateral branch of deep fibular nerve.r": {
+  "structure": "deep_fibular_nerve",
+  "layer": "nerve",
+  "name": "Deep fibular (peroneal) nerve"
+ },
+ "Lateral calcaneal nerves.r": {
+  "structure": "sural_nerve",
+  "layer": "nerve",
+  "name": "Sural nerve"
+ },
+ "Lateral dorsal cutaneous nerve.r": {
+  "structure": "sural_nerve",
+  "layer": "nerve",
+  "name": "Sural nerve"
+ },
+ "Lateral femoral cuteneous nerve.r": {
+  "structure": "lateral_femoral_cutaneous_nerve",
+  "layer": "nerve",
+  "name": "Lateral femoral cutaneous nerve"
+ },
+ "Lateral plantar nerve.r": {
+  "structure": "lateral_plantar_nerve",
+  "layer": "nerve",
+  "name": "Lateral plantar nerve"
+ },
+ "Lateral sural cutaneous nerve.r": {
+  "structure": "common_fibular_nerve",
+  "layer": "nerve",
+  "name": "Common fibular (peroneal) nerve"
+ },
+ "Lumbar plexus.r": {
+  "structure": "lumbar_plexus",
+  "layer": "nerve",
+  "name": "Lumbar plexus (L1-L5)"
+ },
+ "Lumbosacral Trunk.r": {
+  "structure": "sacral_plexus",
+  "layer": "nerve",
+  "name": "Sacral plexus (L4-S5)"
+ },
+ "Medial branch of deep fibular nerve.r": {
+  "structure": "deep_fibular_nerve",
+  "layer": "nerve",
+  "name": "Deep fibular (peroneal) nerve"
+ },
+ "Medial calcaneal branches of Tibial nerve.r": {
+  "structure": "tibial_nerve",
+  "layer": "nerve",
+  "name": "Tibial nerve"
+ },
+ "Medial dorsal cutaneous nerve.r": {
+  "structure": "superficial_fibular_nerve",
+  "layer": "nerve",
+  "name": "Superficial fibular (peroneal) nerve"
+ },
+ "Medial plantar nerve.r": {
+  "structure": "medial_plantar_nerve",
+  "layer": "nerve",
+  "name": "Medial plantar nerve"
+ },
+ "Medial sural cutaneous nerve.r": {
+  "structure": "sural_nerve",
+  "layer": "nerve",
+  "name": "Sural nerve"
+ },
+ "Nerve to obturator internus (and superior gemellus).r": {
+  "structure": "nerve_to_obturator_internus",
+  "layer": "nerve",
+  "name": "Nerve to obturator internus (and superior gemellus)"
+ },
+ "Nerve to psoas major and iliacus.r": {
+  "structure": "nerve_to_psoas_and_iliacus",
+  "layer": "nerve",
+  "name": "Nerve to psoas major and iliacus"
+ },
+ "Nerve to quadratus femoris.r": {
+  "structure": "nerve_to_quadratus_femoris",
+  "layer": "nerve",
+  "name": "Nerve to quadratus femoris"
+ },
+ "Obturator nerve, anterior br, cutaneous br.r": {
+  "structure": "obturator_nerve",
+  "layer": "nerve",
+  "name": "Obturator nerve"
+ },
+ "Obturator nerve, anterior branch.r": {
+  "structure": "obturator_nerve",
+  "layer": "nerve",
+  "name": "Obturator nerve"
+ },
+ "Obturator nerve, posterior branch.r": {
+  "structure": "obturator_nerve",
+  "layer": "nerve",
+  "name": "Obturator nerve"
+ },
+ "Obturator nerve.r": {
+  "structure": "obturator_nerve",
+  "layer": "nerve",
+  "name": "Obturator nerve"
+ },
+ "Posterior cutaneous nerve of the thigh.r": {
+  "structure": "posterior_cutaneous_nerve_of_thigh",
+  "layer": "nerve",
+  "name": "Posterior cutaneous nerve of the thigh"
+ },
+ "Proper plantar digital branches (Lateral plantar nerve).r": {
+  "structure": "lateral_plantar_nerve",
+  "layer": "nerve",
+  "name": "Lateral plantar nerve"
+ },
+ "Proper plantar digital branches (Medial plantar nerve).r": {
+  "structure": "medial_plantar_nerve",
+  "layer": "nerve",
+  "name": "Medial plantar nerve"
+ },
+ "Pudendal nerve.r": {
+  "structure": "pudendal_nerve",
+  "layer": "nerve",
+  "name": "Pudendal nerve"
+ },
+ "S1 root.r": {
+  "structure": "sacral_plexus",
+  "layer": "nerve",
+  "name": "Sacral plexus (L4-S5)"
+ },
+ "S2 root.r": {
+  "structure": "sacral_plexus",
+  "layer": "nerve",
+  "name": "Sacral plexus (L4-S5)"
+ },
+ "S3 root.r": {
+  "structure": "sacral_plexus",
+  "layer": "nerve",
+  "name": "Sacral plexus (L4-S5)"
+ },
+ "S4 root.r": {
+  "structure": "sacral_plexus",
+  "layer": "nerve",
+  "name": "Sacral plexus (L4-S5)"
+ },
+ "S5 root.r": {
+  "structure": "sacral_plexus",
+  "layer": "nerve",
+  "name": "Sacral plexus (L4-S5)"
+ },
+ "Sacral plexus.r": {
+  "structure": "sacral_plexus",
+  "layer": "nerve",
+  "name": "Sacral plexus (L4-S5)"
+ },
+ "Saphenous branch of Femoralis nerve.r": {
+  "structure": "saphenous_nerve",
+  "layer": "nerve",
+  "name": "Saphenous nerve"
+ },
+ "Saphenous nerve (Medial crural cutaneous branches).r": {
+  "structure": "saphenous_nerve",
+  "layer": "nerve",
+  "name": "Saphenous nerve"
+ },
+ "Sciatic nerve.r": {
+  "structure": "sciatic_nerve",
+  "layer": "nerve",
+  "name": "Sciatic nerve"
+ },
+ "Superficial branch of Lateral plantar nerve.r": {
+  "structure": "lateral_plantar_nerve",
+  "layer": "nerve",
+  "name": "Lateral plantar nerve"
+ },
+ "Superficial fibular nerve.r": {
+  "structure": "superficial_fibular_nerve",
+  "layer": "nerve",
+  "name": "Superficial fibular (peroneal) nerve"
+ },
+ "Superior clunial nerve (posterior rami).r": {
+  "structure": "superior_clunial_nerves",
+  "layer": "nerve",
+  "name": "Superior clunial nerves"
+ },
+ "Superior gluteal nerve.r": {
+  "structure": "superior_gluteal_nerve",
+  "layer": "nerve",
+  "name": "Superior gluteal nerve"
+ },
+ "Sural nerve, Lateral dorsal cutaneous nerve.r": {
+  "structure": "sural_nerve",
+  "layer": "nerve",
+  "name": "Sural nerve"
+ },
+ "Sural nerve.r": {
+  "structure": "sural_nerve",
+  "layer": "nerve",
+  "name": "Sural nerve"
+ },
+ "Tibial nerve.r": {
+  "structure": "tibial_nerve",
+  "layer": "nerve",
+  "name": "Tibial nerve"
+ },
+ "Accessory saphenous vein.r": {
+  "structure": "accessory_saphenous_vein",
+  "layer": "vessel",
+  "name": "Accessory saphenous vein"
+ },
+ "Anterior tibial vein.r": {
+  "structure": "anterior_tibial_veins",
+  "layer": "vessel",
+  "name": "Anterior tibial veins"
+ },
+ "Deep femoral vein.r": {
+  "structure": "deep_femoral_vein",
+  "layer": "vessel",
+  "name": "Deep femoral vein"
+ },
+ "Dorsal venous arch of foot.r": {
+  "structure": "dorsal_venous_arch",
+  "layer": "vessel",
+  "name": "Dorsal venous arch of the foot"
+ },
+ "Femoral vein.r": {
+  "structure": "femoral_vein",
+  "layer": "vessel",
+  "name": "Femoral vein"
+ },
+ "Fibular vein.r": {
+  "structure": "fibular_veins",
+  "layer": "vessel",
+  "name": "Fibular (peroneal) veins"
+ },
+ "Great saphenous vein.r": {
+  "structure": "great_saphenous_vein",
+  "layer": "vessel",
+  "name": "Great saphenous vein"
+ },
+ "Popliteal vein.r": {
+  "structure": "popliteal_vein",
+  "layer": "vessel",
+  "name": "Popliteal vein"
+ },
+ "Posterior tibial vein.r": {
+  "structure": "posterior_tibial_veins",
+  "layer": "vessel",
+  "name": "Posterior tibial veins"
+ },
+ "Small saphenous vein.r": {
+  "structure": "small_saphenous_vein",
+  "layer": "vessel",
+  "name": "Small saphenous vein"
+ }
+}

@@ -1115,30 +1115,29 @@
    "focus": "foot"
   },
   {
-   "id": "femoral-hernia-inguinal-ligament",
+   "id": "acl-skier",
    "kind": "Clinical",
    "renderer": "mesh",
-   "target": "inguinal_ligament",
+   "target": "anterior_cruciate_ligament",
    "accept": [
-    "inguinal_ligament"
+    "anterior_cruciate_ligament"
    ],
-   "prompt": "A 70-year-old woman has a firm lump in the groin below and lateral to the pubic tubercle with signs of bowel obstruction. It is a femoral hernia. Click the ligament that forms the upper boundary of the femoral triangle and lies above the hernia.",
-   "hint": "It stretches from the anterior superior iliac spine to the pubic tubercle.",
+   "prompt": "A skier catches an edge, twists the knee with the foot planted, hears a pop and the knee swells within an hour. The tibia can be drawn forward on the femur with the knee flexed (positive anterior drawer and Lachman tests). Click the ligament that is torn.",
+   "hint": "It runs from the front of the tibial plateau up and back to the lateral femoral condyle, inside the joint.",
    "view": "palmar",
    "layers": [
-    "bone",
     "ligament"
    ],
-   "explain": "A femoral hernia passes through the femoral ring below and lateral to the pubic tubercle, medial to the femoral vein, and is prone to strangulation. The inguinal ligament, the lower edge of the external oblique aponeurosis, forms the base of the femoral triangle.",
+   "explain": "The anterior cruciate ligament stops the tibia sliding forward on the femur and resists hyperextension and rotation. A twisting injury on a planted foot tears it, often with the medial collateral ligament and medial meniscus (the unhappy triad); rapid swelling is a haemarthrosis.",
    "tags": {
     "topic": "ligaments",
-    "region": "hip",
+    "region": "knee",
     "difficulty": 2
    },
    "review": {
     "status": "draft"
    },
-   "focus": "hip"
+   "focus": "knee"
   },
   {
    "id": "iliotibial-band-syndrome",

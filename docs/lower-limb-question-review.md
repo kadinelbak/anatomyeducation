@@ -4,10 +4,12 @@
 (Gray's, Moore, Last's) without a clinician. Please check each stem, answer and
 explanation before launch. Every item is still marked draft.
 
-Answers are structures in the 3D model of the right lower limb, built from
-BodyParts3D 3.0 (DBCLS, CC BY 4.0). BodyParts3D has no lower-limb nerves and no
-arteries below the iliacs, so the nerves and vessels are schematic tubes; their
-courses are listed at the end for review too. Spelling is UK.
+Answers are structures in the 3D model of the right lower limb. The shipped
+model is the Open3DModel lower limb (Leiden, Utrecht, Maastricht, KU Leuven
+KULAK; CC BY-SA 4.0) with anatomist-modelled nerves and vessels. The earlier
+BodyParts3D build (assets/model-bodyparts3d/) used schematic nerve and vessel
+tubes; when that build is in use, their courses are listed at the end for
+review too. Spelling is UK.
 
 ## Bones and joints (7)
 
@@ -25,7 +27,7 @@ courses are listed at the end for review too. Spelling is UK.
 
 | # | Id | Type | Region | Stem | Answer | Also accepted | Explanation | Review status |
 |---|----|------|--------|------|--------|---------------|-------------|---------------|
-| 44 | `femoral-hernia-inguinal-ligament` | Clinical | hip | A 70-year-old woman has a firm lump in the groin below and lateral to the pubic tubercle with signs of bowel obstruction. It is a femoral hernia. Click the ligament that forms the upper boundary of the femoral triangle and lies above the hernia. | Inguinal ligament |  | A femoral hernia passes through the femoral ring below and lateral to the pubic tubercle, medial to the femoral vein, and is prone to strangulation. The inguinal ligament, the lower edge of the external oblique aponeurosis, forms the base of the femoral triangle. | draft |
+| 44 | `acl-skier` | Clinical | knee | A skier catches an edge, twists the knee with the foot planted, hears a pop and the knee swells within an hour. The tibia can be drawn forward on the femur with the knee flexed (positive anterior drawer and Lachman tests). Click the ligament that is torn. | Anterior cruciate ligament |  | The anterior cruciate ligament stops the tibia sliding forward on the femur and resists hyperextension and rotation. A twisting injury on a planted foot tears it, often with the medial collateral ligament and medial meniscus (the unhappy triad); rapid swelling is a haemarthrosis. | draft |
 | 45 | `iliotibial-band-syndrome` | Clinical | knee | A distance runner has sharp pain on the outer knee that is worst at about 30 degrees of flexion. Click the thick band of fascia on the lateral thigh whose friction over the lateral femoral epicondyle causes the pain. | Iliotibial tract |  | The iliotibial tract is a thickening of the fascia lata that receives tensor fasciae latae and the upper part of gluteus maximus and inserts on the lateral tibial condyle. Friction at the lateral femoral epicondyle causes iliotibial band syndrome. | draft |
 | 46 | `achilles-rupture-thompson` | Clinical | ankle | A man feels a sudden pop at the back of the heel while playing squash. A gap can be felt above the heel, and squeezing the calf produces no plantar flexion (positive Thompson test). Click the ruptured tendon. | Calcaneal (Achilles) tendon |  | The calcaneal (Achilles) tendon joins gastrocnemius and soleus to the calcaneus and ruptures 2 to 6 cm above the heel, where its blood supply is poorest. The Thompson test is positive when squeezing the calf does not produce plantar flexion. | draft |
 
@@ -79,138 +81,3 @@ courses are listed at the end for review too. Spelling is UK.
 | 20 | `posterior-tibial-pulse` | Clinical | ankle | A surgeon checks perfusion of a foot after an ankle fracture and feels for a pulse in the groove behind the medial malleolus. Click the artery being palpated. | Posterior tibial artery |  | The posterior tibial artery runs behind the medial malleolus, deep to the flexor retinaculum, and divides into the medial and lateral plantar arteries. It is palpated midway between the malleolus and the heel and it supplies the sole. | draft |
 | 21 | `great-saphenous-cut-down` | Clinical | leg | In an emergency, a doctor makes a cut-down for venous access just in front of the medial malleolus. The same vein is a common graft for coronary bypass and is the vein in varicose veins. Click it. | Great saphenous vein |  | The great saphenous vein starts in front of the medial malleolus, ascends along the medial leg and thigh with the saphenous nerve, and drains into the femoral vein at the saphenous opening. Varicose veins, bypass harvesting and venous cut-down all involve it. | draft |
 | 22 | `small-saphenous-id` | Identify | leg | Click the superficial vein that ascends behind the lateral malleolus and up the back of the calf to drain into the popliteal vein. | Small saphenous vein |  | The small saphenous vein begins at the lateral end of the dorsal venous arch, passes behind the lateral malleolus and pierces the deep fascia to enter the popliteal vein. Because the sural nerve lies beside it, surgery on it can cause numbness of the lateral foot. | draft |
-
-## Schematic nerve and vessel courses to review
-
-BodyParts3D 3.0 has no lower-limb nerves and no arteries below the iliacs, so
-these are tubes built by `tools/lower_nerves.py`. Their control points are
-derived in code from this model's bone landmarks and muscle sections and
-surfaces, then pushed clear of the bones. Each item below says where the path
-runs relative to named muscles and bones:
-
-- **Femoral artery**: continues the external iliac artery mesh where it
-  passes under the inguinal ligament, at about the mid-inguinal point; down
-  the femoral triangle on pectineus and adductor longus, medial to sartorius;
-  then the adductor canal between vastus medialis and the adductors, deep to
-  sartorius; ends at the adductor hiatus, posteromedial to the femur, about
-  4.5 cm above the adductor tubercle.
-- **Deep femoral artery**: leaves the femoral artery about 3 to 4 cm below the
-  inguinal ligament; runs posterolaterally and deep, behind adductor longus
-  and in front of adductor brevis and magnus, close to the medial side of the
-  femur; drawn to about mid-thigh.
-- **Femoral vein**: medial to the femoral artery at the inguinal ligament,
-  winding behind the artery down the femoral triangle so that it is posterior
-  to it in the adductor canal, to the adductor hiatus.
-- **Popliteal artery**: from the adductor hiatus onto the back of the femur
-  between the condyles and the back of the knee joint, the deepest structure
-  in the popliteal fossa; over popliteus to its lower border, where it divides.
-- **Anterior tibial artery**: forward through the gap between tibia and
-  fibula above the interosseous membrane; down the anterior compartment on
-  the membrane between tibialis anterior and extensor digitorum longus /
-  extensor hallucis longus; in front of the ankle between the extensor
-  hallucis longus and extensor digitorum longus tendons, midway between the
-  malleoli.
-- **Dorsalis pedis artery**: continues the anterior tibial artery over the
-  talus, navicular and intermediate cuneiform, lateral to the extensor
-  hallucis longus tendon, and dips into the proximal end of the first
-  intermetatarsal space.
-- **Posterior tibial artery**: from the popliteal division down the deep
-  posterior compartment on tibialis posterior, between flexor digitorum
-  longus and flexor hallucis longus, just medial to the tibial nerve; behind
-  the medial malleolus, midway between it and the heel (the posterior tibial
-  pulse), in front of the nerve in the tarsal tunnel.
-- **Fibular artery**: branches from the posterior tibial artery about 3 cm
-  below its origin and runs laterally and down along the posteromedial side of
-  the fibula, deep to flexor hallucis longus, ending above the ankle.
-- **Great saphenous vein**: from the medial end of the dorsal venous arch over
-  the first metatarsal base; along the medial side of the navicular; about 1
-  cm in front of the medial malleolus; up the medial surface of the leg along
-  the posteromedial border of the tibia; behind the medial condyle at the
-  knee (about 5 cm behind the medial border of the patella); up the medial
-  thigh over the front edge of gracilis and sartorius; through the saphenous
-  opening, about 3 cm below and lateral to the pubic tubercle, into the
-  femoral vein. Drawn just outside the muscles (subcutaneous).
-- **Small saphenous vein**: from the lateral end of the dorsal arch over the
-  base of the fifth metatarsal; below and then behind the lateral malleolus;
-  up the back of the calf on gastrocnemius / the calcaneal tendon, moving to
-  the midline between the two heads of gastrocnemius; through the deep fascia
-  into the popliteal fossa. Drawn just outside the muscles.
-- **Femoral nerve**: from the groove between psoas major and iliacus, under
-  the inguinal ligament lateral to the femoral artery; divides about 3 cm
-  below the ligament in the femoral triangle into short branches to the deep
-  surface of sartorius, to rectus femoris and to vastus medialis (other
-  muscular and cutaneous branches not drawn).
-- **Saphenous nerve**: from the femoral division, lateral and then anterior
-  to the femoral artery down the adductor canal under sartorius; leaves the
-  canal at its lower end, emerges between sartorius and gracilis on the medial
-  side of the knee, and runs down the medial leg just behind the great
-  saphenous vein to in front of the medial malleolus.
-- **Obturator nerve**: from the medial border of psoas down the lateral wall of
-  the pelvis on obturator internus to the obturator canal at the upper
-  (anterosuperior) part of the obturator foramen; out into the thigh above
-  obturator externus, where it splits: anterior division in front of adductor
-  brevis (behind adductor longus and pectineus) with a branch to adductor
-  longus, ending in gracilis; posterior division behind adductor brevis on
-  adductor magnus, ending in adductor magnus.
-- **Lateral femoral cutaneous nerve**: emerges lateral to psoas major, crosses
-  iliacus, passes under the inguinal ligament about 1.5 cm medial to the
-  anterior superior iliac spine, then superficially over sartorius and tensor
-  fasciae latae down the anterolateral thigh.
-- **Superior gluteal nerve**: leaves the greater sciatic foramen above
-  piriformis and runs laterally between gluteus medius and gluteus minimus
-  toward the posterior border of tensor fasciae latae.
-- **Inferior gluteal nerve**: leaves the greater sciatic foramen below
-  piriformis, medial to the sciatic nerve, and passes back into the deep
-  surface of gluteus maximus.
-- **Sciatic nerve**: leaves the greater sciatic foramen below piriformis;
-  deep to gluteus maximus, behind the gemelli, obturator internus and
-  quadratus femoris, midway between the ischial tuberosity and the greater
-  trochanter; down the back of the thigh on adductor magnus, deep to the long
-  head of biceps femoris; divides at the apex of the popliteal fossa, about a
-  hand's breadth (9.5 cm) above the knee joint line.
-- **Tibial nerve**: straight down the popliteal fossa, superficial and lateral
-  to the popliteal vessels; between the heads of gastrocnemius; under the
-  soleus arch; down the deep posterior compartment on tibialis posterior
-  between flexor digitorum longus and flexor hallucis longus, just lateral to
-  the posterior tibial artery; behind the medial malleolus in the tarsal
-  tunnel, midway between the malleolus and the heel; divides under abductor
-  hallucis.
-- **Medial plantar nerve**: from the tibial division forward along the sole on
-  the lateral (deep) side of abductor hallucis toward the first metatarsal
-  head and the big toe.
-- **Lateral plantar nerve**: from the tibial division obliquely forward and
-  laterally across the sole, between flexor digitorum brevis and the long
-  plantar ligament, toward the fifth metatarsal head and the little toe.
-- **Common fibular nerve**: from the sciatic division along the medial border
-  of biceps femoris and its tendon; over the lateral side of the lateral head
-  of gastrocnemius; behind the fibular head and around the lateral side of the
-  fibular neck, where it is subcutaneous; divides in fibularis longus.
-- **Deep fibular nerve**: from the division at the fibular neck forward through
-  the extensor digitorum longus origin into the anterior compartment; down the
-  interosseous membrane just lateral to the anterior tibial artery; in front
-  of the ankle with the artery; over the dorsum of the foot to the first web
-  space.
-- **Superficial fibular nerve**: from the division down the lateral compartment
-  in front of the fibula, between fibularis longus / brevis and extensor
-  digitorum longus; superficial on the anterolateral leg in the distal third;
-  in front of the ankle, lateral to the extensor tendons, onto the dorsum of
-  the foot toward the middle toes.
-- **Sural nerve**: leaves the tibial nerve in the popliteal fossa; down the
-  back of the calf in the groove between the two heads of gastrocnemius,
-  becoming subcutaneous at mid-calf; with the small saphenous vein (lateral to
-  it) along the lateral side of the calcaneal tendon, behind and below the
-  lateral malleolus, and along the lateral border of the foot past the base of
-  the fifth metatarsal.
-
-Known simplifications: single trunk diameters with no tapering except at
-the ends; most muscular, articular and cutaneous branches are omitted
-(e.g. saphenous infrapatellar branch, medial calcaneal, medial sural
-cutaneous, lateral sural cutaneous, genicular and perforating arteries,
-circumflex femoral arteries); no popliteal, tibial or plantar veins, no
-external iliac or deep veins below the adductor hiatus; no plantar arteries or
-plantar arch; the femoral vein has no valves or tributaries other than the
-great saphenous vein; the sural nerve is drawn as one trunk without the
-lateral sural communicating contribution; the saphenous opening and the
-deep fascia are not modelled, so subcutaneous paths simply sit 2 to 3 mm
-outside the muscles; positions follow this BodyParts3D model (a single
-adult male), not a population average.

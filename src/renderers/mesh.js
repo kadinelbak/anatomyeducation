@@ -372,7 +372,10 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
     const keys = meta?.regions?.[focus];
     const set = Array.isArray(keys) ? new Set(keys) : null;
     const box = new THREE.Box3();
-    for (const m of meshesByLayer.get("bone") || []) if (!set || set.has(m.userData.structure)) box.expandByObject(m);
+    // A region frames its listed structures on any layer (the knee lists the patella plus menisci and
+    // ligaments, since the patella alone sits the camera far too close); "all" and unknown regions frame the bones.
+    if (set) for (const key of set) for (const m of meshesByStructure.get(key) || []) if (m.userData.layer !== "marrow") box.expandByObject(m);
+    else for (const m of meshesByLayer.get("bone") || []) box.expandByObject(m);
     if (box.isEmpty()) for (const m of meshesByLayer.get("bone") || []) box.expandByObject(m);
     return box;
   }
