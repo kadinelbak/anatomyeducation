@@ -1,0 +1,13 @@
+import { chromium } from "playwright";
+const base = process.argv[2];
+const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium", args: ["--use-gl=angle", "--use-angle=swiftshader", "--ignore-gpu-blocklist"] });
+const page = await browser.newPage();
+const reqs = [];
+page.on("response", async (r) => { try { const b = await r.body(); reqs.push([r.url().replace(base, ""), b.length]); } catch {} });
+await page.goto(base);
+await page.waitForFunction(() => !document.getElementById("start").disabled, null, { timeout: 90000 });
+await page.waitForTimeout(500);
+const total = reqs.reduce((a, [, n]) => a + n, 0);
+console.log(`startup: ${reqs.length} requests, ${(total / 1e6).toFixed(1)} MB`);
+for (const [u, n] of reqs.sort((a, b) => b[1] - a[1]).slice(0, 6)) console.log(`  ${(n / 1e6).toFixed(2)} MB ${u}`);
+await browser.close();

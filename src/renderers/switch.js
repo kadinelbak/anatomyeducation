@@ -2,7 +2,9 @@
 // mesh renderer (one per 3D model) or to the volume renderer (one, which swaps scan studies on
 // demand). Renderers are built lazily, once. `models` is CONFIG.models: { id: { modelUrl, structuresUrl } }.
 import { createMeshRenderer } from "./mesh.js";
-import { createVolumeRenderer } from "./volume.js";
+// The volume renderer pulls in the 3 MB Cornerstone bundle, so it is imported
+// only when a scan set is first chosen; limb sets never pay for it.
+const loadVolumeRenderer = () => import("./volume.js").then((m) => m.createVolumeRenderer);
 
 export function createRendererSwitch({ viewer, onPick, models, onChange }) {
   const defaultModel = Object.keys(models)[0];
@@ -64,7 +66,7 @@ export function createRendererSwitch({ viewer, onPick, models, onChange }) {
           // The container must be visible and sized before the volume renderer is built.
           meshBox.hidden = true;
           volBox.hidden = false;
-          volume = await build("volume", () => createVolumeRenderer({ container: volBox, studiesBase: "assets/volumes/", initialStudy: id, onPick }));
+          volume = await build("volume", async () => (await loadVolumeRenderer())({ container: volBox, studiesBase: "assets/volumes/", initialStudy: id, onPick }));
         } else if (id && id !== volume.studyId) {
           await volume.loadStudy(id); // fetch while the page says "Loading the scan…"
           await volume.show({ study: id }); // and swap now, so the attribution and badge are right behind the chooser
