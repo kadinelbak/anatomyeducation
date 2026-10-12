@@ -8,6 +8,10 @@ const loadVolumeRenderer = () => import("./volume.js").then((m) => m.createVolum
 // The X-ray (DRR) and ultrasound renderers are computed in the browser from the same CT studies.
 const loadXrayRenderer = () => import("./xray.js").then((m) => m.createXrayRenderer);
 const loadUltrasoundRenderer = () => import("./ultrasound.js").then((m) => m.createUltrasoundRenderer);
+// The histology slide and 3D cell renderers (cell learning module) load their own small studies.
+const loadSlideRenderer = () => import("./slide.js").then((m) => m.createSlideRenderer);
+const loadCellRenderer = () => import("./cell.js").then((m) => m.createCellRenderer);
+const STUDIES_BASE = { volume: "assets/volumes/", xray: "assets/volumes/", ultrasound: "assets/volumes/", slide: "assets/slides/", cell: "assets/cells/" };
 
 export function createRendererSwitch({ viewer, onPick, models, onChange }) {
   const defaultModel = Object.keys(models)[0];
@@ -21,22 +25,29 @@ export function createRendererSwitch({ viewer, onPick, models, onChange }) {
   xrayBox.className = "viewer-xray";
   usBox.className = "viewer-ultrasound";
   xrayBox.hidden = usBox.hidden = true;
-  viewer.append(meshBox, volBox, xrayBox, usBox);
+  const slideBox = document.createElement("div");
+  const cellBox = document.createElement("div");
+  slideBox.className = "viewer-slide";
+  cellBox.className = "viewer-cell";
+  slideBox.hidden = cellBox.hidden = true;
+  viewer.append(meshBox, volBox, xrayBox, usBox, slideBox, cellBox);
 
   const meshes = new Map(); // model id -> renderer
   let volume = null; // the one volume renderer; it caches studies itself
   let xray = null; // likewise the one X-ray renderer
   let ultrasound = null; // and the one ultrasound renderer
+  let slide = null; // the one histology slide renderer
+  let cell = null; // and the one 3D cell renderer
   const building = new Map(); // "mesh:<model>" | "volume" -> promise
   let current = null;
-  let active = null; // "mesh" | "volume" | "xray" | "ultrasound"
+  let active = null; // "mesh" | "volume" | "xray" | "ultrasound" | "slide" | "cell"
   let activeStudy = null;
   let activeModel = null;
   let lastModel = defaultModel; // the model to come back to after a scan
 
-  const scanRenderers = () => ({ volume, xray, ultrasound });
-  const scanKinds = ["volume", "xray", "ultrasound"];
-  const boxes = { mesh: meshBox, volume: volBox, xray: xrayBox, ultrasound: usBox };
+  const scanRenderers = () => ({ volume, xray, ultrasound, slide, cell });
+  const scanKinds = ["volume", "xray", "ultrasound", "slide", "cell"]; // study-based kinds
+  const boxes = { mesh: meshBox, volume: volBox, xray: xrayBox, ultrasound: usBox, slide: slideBox, cell: cellBox };
 
   function show(kind, id) {
     const next = kind === "mesh" ? meshes.get(id) : scanRenderers()[kind];
@@ -86,17 +97,16 @@ export function createRendererSwitch({ viewer, onPick, models, onChange }) {
           await volume.show({ study: id }); // and swap now, so the attribution and badge are right behind the chooser
         }
         show("volume", id || volume.studyId);
-      } else if (kind === "xray" || kind === "ultrasound") {
-        const isXray = kind === "xray";
-        const box = isXray ? xrayBox : usBox;
-        let r = isXray ? xray : ultrasound;
+      } else if (["xray", "ultrasound", "slide", "cell"].includes(kind)) {
+        const box = boxes[kind];
+        const loaders = { xray: loadXrayRenderer, ultrasound: loadUltrasoundRenderer, slide: loadSlideRenderer, cell: loadCellRenderer };
+        let r = scanRenderers()[kind];
         if (!r) {
           // Same as the volume renderer: the container must be visible and sized before the build.
-          meshBox.hidden = volBox.hidden = true;
-          xrayBox.hidden = usBox.hidden = true;
+          for (const b of Object.values(boxes)) b.hidden = true;
           box.hidden = false;
-          r = await build(kind, async () => (await (isXray ? loadXrayRenderer : loadUltrasoundRenderer)())({ container: box, studiesBase: "assets/volumes/", initialStudy: id, onPick }));
-          if (isXray) xray = r; else ultrasound = r;
+          r = await build(kind, async () => (await loaders[kind]())({ container: box, studiesBase: STUDIES_BASE[kind], initialStudy: id, onPick }));
+          if (kind === "xray") xray = r; else if (kind === "ultrasound") ultrasound = r; else if (kind === "slide") slide = r; else cell = r;
         } else if (id && id !== r.studyId) {
           await r.loadStudy(id);
           await r.show({ study: id });
@@ -119,6 +129,8 @@ export function createRendererSwitch({ viewer, onPick, models, onChange }) {
     get volume() { return current && active === "volume" ? current : null; },
     get xray() { return current && active === "xray" ? current : null; },
     get ultrasound() { return current && active === "ultrasound" ? current : null; },
+    get slide() { return current && active === "slide" ? current : null; },
+    get cell() { return current && active === "cell" ? current : null; },
   };
   return sw;
 }

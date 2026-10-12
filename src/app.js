@@ -9,7 +9,16 @@ import { createRendererSwitch } from "./renderers/switch.js";
 import { WebGLUnavailableError, webglHelp } from "./webgl-probe.js";
 
 const $ = (id) => document.getElementById(id);
-const SCAN_KINDS = ["volume", "xray", "ultrasound"];
+const SCAN_KINDS = ["volume", "xray", "ultrasound", "slide", "cell"];
+window.__CONFIG_TEXT_ASSETS = CONFIG.textAssets; // the slide renderer reads this to fetch .b64.txt tiles
+window.__CONFIG_TILE_BUNDLES = CONFIG.tileBundles === true; // ...or one bundle per pyramid level (hosts that cap file counts)
+// Zoom index (organ -> tissue -> cell); filled by loadZoomIndex() once the banks are in.
+const cellStudies = new Map(); // CL id -> cell study id
+const slideStudies = new Map(); // slide study id -> true
+const slideMeta = new Map(); // slide id -> manifest
+const fmaModel = new Map(); // model structure key (e.g. biceps_brachii) -> model id
+const studyTitles = new Map(); // slide or cell study id -> its manifest title, for the study picker and zoom chips
+let zoomReady = false;
 const STATS_HIDDEN = () => ($("stats").hidden = true);
 
 // ---------- Shared score ----------
@@ -43,6 +52,15 @@ const renderer = createRendererSwitch({
     $("attr-mr").hidden = !(kind === "volume" && meta?.modality === "MR");
     $("attr-xray").hidden = kind !== "xray";
     $("attr-us").hidden = kind !== "ultrasound";
+    $("attr-ct").hidden = $("attr-ct").hidden || kind === "slide" || kind === "cell";
+    $("attr-hist").hidden = kind !== "slide";
+    $("attr-cell").hidden = kind !== "cell";
+    if (kind === "slide" || kind === "cell") { // one line per study: the manifest names its source and licence
+      const a = $(kind === "slide" ? "attr-hist-src" : "attr-cell-src");
+      a.textContent = `${meta?.attribution || meta?.source || id}, ${meta?.license || ""}${meta?.synthetic ? " (stylised placeholder, not a micrograph)" : ""}`;
+      if (meta?.sourceUrl) a.href = meta.sourceUrl; else a.removeAttribute("href");
+    }
+    renderZoomChips(kind, id, meta);
     if (meta?.modality === "MR") { // the MRI line names the study's own source: MR studies come from more than one dataset
       const a = $("attr-mr-src");
       a.textContent = `${meta.attribution || meta.source || meta.id}${meta.license ? ", " + meta.license : ""}`;
@@ -82,6 +100,7 @@ try {
     "assets/questions/mri-abdomen.json", "assets/questions/mri-prostate.json", "assets/questions/mri-heart.json", "assets/questions/mri-hippocampus.json",
     "assets/questions/mri-brain-t1.json", "assets/questions/mri-brain-t2.json", "assets/questions/mri-brain-pd.json",
     "assets/questions/xray-chest.json", "assets/questions/xray-abdomen.json", "assets/questions/us-trunk.json",
+    "assets/questions/histology-limb.json", "assets/questions/cells-limb.json",
   ]);
 } catch (err) {
   console.error(err);
@@ -129,6 +148,7 @@ const ui = {
     v.textContent = verdict;
     $("explain").textContent = explain;
     $("next").textContent = isLast ? "See your score" : "Next question";
+    renderQuestionZoom(engine.current[engine.state.index]);
     $("feedback").hidden = false;
   },
   updateStats({ number, total, score, seconds }) {
@@ -254,6 +274,7 @@ async function exploreOption(region, option, study = option.studies?.[0]) {
   $("intro").hidden = true;
   $("explore-bar").hidden = false;
   renderer.setPickEnabled(false); // clicks and hovers show names
+  renderZoomChips(renderer.active, renderer.study || renderer.model, renderer.slide?.meta ?? renderer.cell?.meta);
   track("explore", { what: option.id, study });
 }
 
@@ -274,7 +295,7 @@ function renderExploreBar() {
   if ((option.studies?.length || 0) > 1) {
     pick.replaceChildren(...option.studies.map((id) => {
       const op = document.createElement("option");
-      op.value = id; op.textContent = `Study: ${studyLabel(id, option.sequences?.[id])}`; op.selected = id === study;
+      op.value = id; op.textContent = `Study: ${studyTitles.get(id) || studyLabel(id, option.sequences?.[id])}`; op.selected = id === study;
       return op;
     }));
     pick.hidden = false;
@@ -286,6 +307,97 @@ $("explore-back").addEventListener("click", () => {
   $("explore-bar").hidden = true;
   engine.intro();
 });
+
+// ---------- Zoom between levels (organ -> tissue -> cell) ----------
+// A slide study lists the structures it is a section of (`sections`, structure keys of the limb models) and the cell types on it
+// (`cells`, CL ids); a cell study lists its slides. Those links become chips on the explore bar and,
+// after an answer, buttons under the explanation. Each opens the linked study (or model, with the
+// structure highlighted) in explore mode; from a question that leaves the quiz, so the button says so.
+for (const q of bank.questions) {
+  if (q.renderer === "cell" && q.study) cellStudies.set(q.tags?.cl || q.study, q.study);
+  if (q.renderer === "slide" && q.study) slideStudies.set(q.study, true);
+}
+const explorableTitle = (kind, id) => kind === "mesh" ? CONFIG.models[id]?.title || id : studyTitles.get(id) || id;
+// Open a model (with a structure highlighted) or a slide or cell study in explore mode, on the body-map
+// entry that lists it, so the explore bar shows the right region, modality chips and study picker.
+async function openExplore(kind, id, highlightKey) {
+  const region = regions.find((r) => r.options.some((o) => (kind === "mesh" ? o.model === id : o.renderer === kind && o.studies?.includes(id)))) || regions[0];
+  const option = region.options.find((o) => (kind === "mesh" ? o.model === id : o.renderer === kind && o.studies?.includes(id))) ||
+    { id: `${kind}:${id}`, label: explorableTitle(kind, id), modality: kind, renderer: kind, model: kind === "mesh" ? id : undefined, studies: kind === "mesh" ? undefined : [id] };
+  if (engine.state.state !== "intro") engine.intro();
+  figure.querySelectorAll(".zone").forEach((z) => z.classList.toggle("selected", z.dataset.region === region.id));
+  exploring = { region, option, study: kind === "mesh" ? undefined : id };
+  renderExploreBar();
+  if (!(await showFor(kind === "mesh" ? { renderer: "mesh", model: id } : { renderer: kind, study: id }))) return;
+  if (exploring?.option !== option) return; // a later click won
+  $("intro").hidden = true;
+  $("explore-bar").hidden = false;
+  renderer.setPickEnabled(false);
+  if (highlightKey) { try { renderer.highlight(highlightKey, "good"); } catch { /* the id may not be in this model */ } }
+  renderZoomChips(renderer.active, renderer.study || renderer.model, renderer.slide?.meta ?? renderer.cell?.meta);
+  track("explore", { what: `${kind}:${id}`, via: "zoom" });
+}
+// Links out of a study: [{ dir: "in"|"out", kind, id, label, key }]
+function zoomLinks(kind, id, meta) {
+  const links = [];
+  if (kind === "slide" && meta) {
+    for (const cl of meta.cells || []) { const sid = cellStudies.get(cl); if (sid) links.push({ dir: "in", kind: "cell", id: sid, label: explorableTitle("cell", sid) }); }
+    const fma = (meta.sections || [])[0];
+    if (fma) { const model = modelForFma(fma); links.push({ dir: "out", kind: "mesh", id: model, label: CONFIG.models[model]?.title || model, key: fma }); }
+  } else if (kind === "cell" && meta) {
+    for (const sid of meta.slides || []) if (slideStudies.has(sid)) links.push({ dir: "out", kind: "slide", id: sid, label: explorableTitle("slide", sid) });
+  } else if (kind === "mesh" && meta?.sections === undefined) {
+    // From a model, every slide that sections something in it.
+    for (const [sid] of slideStudies) { const m = slideMeta.get(sid); if (m && (m.sections || []).some((f) => modelForFma(f) === id)) links.push({ dir: "in", kind: "slide", id: sid, label: explorableTitle("slide", sid) }); }
+  }
+  return links;
+}
+async function loadZoomIndex() {
+  for (const [model, m] of Object.entries(CONFIG.models)) {
+    try { const st = await fetch(m.structuresUrl).then((r) => r.json()); for (const k of Object.keys(st.structures || st)) fmaModel.set(k, fmaModel.get(k) || model); } catch { /* optional */ }
+  }
+  for (const [sid] of slideStudies) {
+    try { const m = await fetch(`assets/slides/${sid}/study.json`).then((r) => r.json()); slideMeta.set(sid, m); studyTitles.set(sid, m.title || sid); } catch { /* optional */ }
+  }
+  for (const [, cid] of cellStudies) {
+    try { const m = await fetch(`assets/cells/${cid}/study.json`).then((r) => r.json()); studyTitles.set(cid, m.title || cid); } catch { /* optional */ }
+  }
+  zoomReady = true;
+  if (exploring) renderExploreBar(); // the study picker can now show manifest titles
+  renderZoomChips(renderer.active, renderer.study || renderer.model, renderer.slide?.meta ?? renderer.cell?.meta);
+}
+const modelForFma = (fma) => fmaModel.get(fma) || Object.keys(CONFIG.models)[0];
+function chipFor(l) {
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "chip zoom-chip";
+  b.textContent = `${l.dir === "in" ? "Zoom in" : "Zoom out"}: ${l.label}`;
+  b.addEventListener("click", () => openExplore(l.kind, l.id, l.key));
+  return b;
+}
+function renderZoomChips(kind, id, meta) {
+  const row = $("explore-zoom");
+  if (!row || !zoomReady) return;
+  const m = kind === "mesh" ? {} : meta || slideMeta.get(id);
+  row.replaceChildren(...zoomLinks(kind, id, m).map(chipFor));
+  row.hidden = !row.children.length;
+}
+// Under the explanation: the question's own zoom field ("model:upper-limb#biceps_brachii", "cell:cl-0008002", "slide:muscle-ls").
+function renderQuestionZoom(q) {
+  const row = $("feedback-zoom");
+  if (!row) return;
+  row.replaceChildren();
+  for (const dir of ["in", "out"]) {
+    const ref = q?.zoom?.[dir];
+    if (!ref) continue;
+    const [kind, rest] = [ref.slice(0, ref.indexOf(":")), ref.slice(ref.indexOf(":") + 1)];
+    const [id, key] = rest.split("#");
+    const k = kind === "model" ? "mesh" : kind;
+    const label = k === "mesh" ? CONFIG.models[id]?.title || id : explorableTitle(k, id);
+    row.append(chipFor({ dir, kind: k, id, key, label: `${label} (leaves the quiz)` }));
+  }
+  row.hidden = !row.children.length;
+}
+loadZoomIndex();
 
 // A shared link plays exactly its questions; otherwise the chosen set.
 let pendingShared = initial.explicit;

@@ -1,0 +1,338 @@
+{
+ "source": "Hand-written seed (2026-10-12) covering the shipped cell types, their ancestors, and the GO and Uberon ids the studies use. Names and definitions paraphrase the Cell Ontology (CC BY 4.0), Gene Ontology (CC BY 4.0) and Uberon (CC BY 3.0) from memory; tools/import_cl.py replaces this file from raw/cl/cl-basic.json once Friend downloads it, and every id here must be confirmed then.",
+ "seed": true,
+ "terms": {
+  "CL:0000000": {
+   "name": "cell",
+   "def": "A material entity of anatomical origin (part of or deriving from an organism) that has as its parts a maximally connected cell compartment surrounded by a plasma membrane.",
+   "parents": [],
+   "synonyms": []
+  },
+  "CL:0000003": {
+   "name": "native cell",
+   "def": "A cell that is found in a natural setting, which includes multicellular organism cells 'in vivo' (i.e. part of an organism), and unicellular organisms 'in environment'.",
+   "parents": [
+    "CL:0000000"
+   ],
+   "synonyms": []
+  },
+  "CL:0000255": {
+   "name": "eukaryotic cell",
+   "def": "A cell with a nucleus and membrane-bound organelles.",
+   "parents": [
+    "CL:0000003"
+   ],
+   "synonyms": []
+  },
+  "CL:0000548": {
+   "name": "animal cell",
+   "def": "A native cell that is part of some Metazoa.",
+   "parents": [
+    "CL:0000255"
+   ],
+   "synonyms": [
+    "metazoan cell"
+   ]
+  },
+  "CL:0002371": {
+   "name": "somatic cell",
+   "def": "A cell of an organism that is not a germ cell.",
+   "parents": [
+    "CL:0000548"
+   ],
+   "synonyms": []
+  },
+  "CL:0000066": {
+   "name": "epithelial cell",
+   "def": "A cell that is usually found in a two-dimensional sheet with a free surface; epithelial cells are tightly bound to each other.",
+   "parents": [
+    "CL:0002371"
+   ],
+   "synonyms": [
+    "epitheliocyte"
+   ]
+  },
+  "CL:0002320": {
+   "name": "connective tissue cell",
+   "def": "A cell of the supporting or framework tissue of the body, arising chiefly from the embryonic mesoderm.",
+   "parents": [
+    "CL:0002371"
+   ],
+   "synonyms": []
+  },
+  "CL:0000187": {
+   "name": "muscle cell",
+   "def": "A mature contractile cell, commonly known as a myocyte, that contains actin and myosin filaments.",
+   "parents": [
+    "CL:0002371"
+   ],
+   "synonyms": [
+    "myocyte",
+    "muscle fiber"
+   ]
+  },
+  "CL:0002319": {
+   "name": "neural cell",
+   "def": "A cell that is part of the nervous system.",
+   "parents": [
+    "CL:0002371"
+   ],
+   "synonyms": []
+  },
+  "CL:0000988": {
+   "name": "hematopoietic cell",
+   "def": "A cell of a hematopoietic lineage.",
+   "parents": [
+    "CL:0002371"
+   ],
+   "synonyms": [
+    "blood cell"
+   ]
+  },
+  "CL:0000737": {
+   "name": "striated muscle cell",
+   "def": "Muscle cell which has as its contractile apparatus myofibrils showing cross-striations.",
+   "parents": [
+    "CL:0000187"
+   ],
+   "synonyms": []
+  },
+  "CL:0000188": {
+   "name": "cell of skeletal muscle",
+   "def": "A muscle cell that is part of skeletal muscle.",
+   "parents": [
+    "CL:0000737"
+   ],
+   "synonyms": [
+    "skeletal muscle cell"
+   ]
+  },
+  "CL:0008002": {
+   "name": "skeletal muscle fiber",
+   "def": "A skeletal muscle cell that is a multinucleate syncytium formed by the fusion of myoblasts; the contractile unit of skeletal muscle.",
+   "parents": [
+    "CL:0000188"
+   ],
+   "synonyms": [
+    "skeletal muscle fibre",
+    "skeletal myofiber"
+   ]
+  },
+  "CL:0000594": {
+   "name": "skeletal muscle satellite cell",
+   "def": "An elongated, spindle-shaped, quiescent stem cell lying between the basal lamina and the sarcolemma of a skeletal muscle fiber; the source of new muscle nuclei in growth and repair.",
+   "parents": [
+    "CL:0000188"
+   ],
+   "synonyms": [
+    "satellite cell"
+   ]
+  },
+  "CL:0000192": {
+   "name": "smooth muscle cell",
+   "def": "A non-striated, elongated, spindle-shaped muscle cell found in the walls of hollow organs and vessels.",
+   "parents": [
+    "CL:0000187"
+   ],
+   "synonyms": [
+    "smooth muscle fiber"
+   ]
+  },
+  "CL:0000359": {
+   "name": "vascular associated smooth muscle cell",
+   "def": "A smooth muscle cell associated with the vasculature; the contractile cell of the tunica media.",
+   "parents": [
+    "CL:0000192"
+   ],
+   "synonyms": [
+    "vascular smooth muscle cell",
+    "VSMC"
+   ]
+  },
+  "CL:0000115": {
+   "name": "endothelial cell",
+   "def": "An endothelial cell comprises the outermost layer or lining of anatomical structures and can be squamous or cuboidal; it lines blood and lymphatic vessels.",
+   "parents": [
+    "CL:0000066"
+   ],
+   "synonyms": [
+    "endotheliocyte"
+   ]
+  },
+  "CL:0000057": {
+   "name": "fibroblast",
+   "def": "A connective tissue cell which secretes an extracellular matrix rich in collagen and other macromolecules; flattened and irregular in outline with branching processes.",
+   "parents": [
+    "CL:0002320"
+   ],
+   "synonyms": []
+  },
+  "CL:0000136": {
+   "name": "fat cell",
+   "def": "A fat-storing cell found mostly in the abdominal cavity and subcutaneous tissue; fat is usually stored in a single large droplet.",
+   "parents": [
+    "CL:0002320"
+   ],
+   "synonyms": [
+    "adipocyte"
+   ]
+  },
+  "CL:0001035": {
+   "name": "bone cell",
+   "def": "A connective tissue cell found in bone.",
+   "parents": [
+    "CL:0002320"
+   ],
+   "synonyms": []
+  },
+  "CL:0000062": {
+   "name": "osteoblast",
+   "def": "A bone-forming cell which secretes an extracellular matrix; hydroxyapatite crystals are then deposited into the matrix to form bone.",
+   "parents": [
+    "CL:0001035"
+   ],
+   "synonyms": []
+  },
+  "CL:0000137": {
+   "name": "osteocyte",
+   "def": "A mature osteoblast that has become embedded in the bone matrix, occupying a lacuna and communicating through canaliculi.",
+   "parents": [
+    "CL:0001035"
+   ],
+   "synonyms": [
+    "bone cell (mature)"
+   ]
+  },
+  "CL:0000092": {
+   "name": "osteoclast",
+   "def": "A specialized multinuclear phagocyte that resorbs bone; derived from monocyte precursors.",
+   "parents": [
+    "CL:0001035",
+    "CL:0000988"
+   ],
+   "synonyms": []
+  },
+  "CL:0000540": {
+   "name": "neuron",
+   "def": "The basic cellular unit of nervous tissue; each neuron consists of a body, an axon, and dendrites.",
+   "parents": [
+    "CL:0002319"
+   ],
+   "synonyms": [
+    "nerve cell"
+   ]
+  },
+  "CL:0000100": {
+   "name": "motor neuron",
+   "def": "An efferent neuron that passes from the central nervous system or a ganglion toward or to a muscle and conducts an impulse that causes movement.",
+   "parents": [
+    "CL:0000540"
+   ],
+   "synonyms": [
+    "motoneuron"
+   ]
+  },
+  "CL:0000125": {
+   "name": "glial cell",
+   "def": "A non-neuronal cell of the nervous system; glial cells provide support and nutrition, maintain homeostasis, form myelin and participate in signal transmission.",
+   "parents": [
+    "CL:0002319"
+   ],
+   "synonyms": [
+    "neuroglial cell"
+   ]
+  },
+  "CL:0002573": {
+   "name": "Schwann cell",
+   "def": "A glial cell that ensheathes axons of neurons in the peripheral nervous system and is necessary for their maintenance and function.",
+   "parents": [
+    "CL:0000125"
+   ],
+   "synonyms": [
+    "neurilemmal cell"
+   ]
+  },
+  "CL:0000232": {
+   "name": "erythrocyte",
+   "def": "A red blood cell; in mammals an anucleate, biconcave disc carrying haemoglobin.",
+   "parents": [
+    "CL:0000988"
+   ],
+   "synonyms": [
+    "red blood cell",
+    "RBC"
+   ]
+  }
+ },
+ "go": {
+  "GO:0005634": "nucleus",
+  "GO:0005730": "nucleolus",
+  "GO:0005739": "mitochondrion",
+  "GO:0005791": "rough endoplasmic reticulum",
+  "GO:0005790": "smooth endoplasmic reticulum",
+  "GO:0005794": "Golgi apparatus",
+  "GO:0005886": "plasma membrane",
+  "GO:0005764": "lysosome",
+  "GO:0005929": "cilium",
+  "GO:0005814": "centriole",
+  "GO:0030016": "myofibril",
+  "GO:0030017": "sarcomere",
+  "GO:0016529": "sarcoplasmic reticulum",
+  "GO:0030315": "T-tubule",
+  "GO:0042383": "sarcolemma",
+  "GO:0043209": "myelin sheath",
+  "GO:0030424": "axon",
+  "GO:0030425": "dendrite",
+  "GO:0005811": "lipid droplet",
+  "GO:0033272": "ruffled border",
+  "GO:0033093": "Weibel-Palade body",
+  "GO:0097433": "dense body",
+  "GO:0005737": "cytoplasm",
+  "GO:0033268": "node of Ranvier",
+  "GO:0043025": "neuronal cell body",
+  "GO:0005901": "caveola",
+  "GO:0005923": "bicellular tight junction",
+  "GO:0043292": "contractile fiber",
+  "GO:0005604": "basement membrane",
+  "GO:0042995": "cell projection",
+  "GO:0005581": "collagen trimer",
+  "GO:0031012": "extracellular matrix",
+  "GO:0030141": "secretory granule",
+  "GO:0043203": "axon hillock",
+  "GO:0070160": "tight junction",
+  "GO:0005884": "actin filament",
+  "GO:0005605": "basal lamina",
+  "GO:0030018": "Z disc"
+ },
+ "uberon": {
+  "UBERON:0001134": "skeletal muscle tissue",
+  "UBERON:0001474": "bone tissue",
+  "UBERON:0001021": "nerve",
+  "UBERON:0001637": "artery",
+  "UBERON:0001638": "vein",
+  "UBERON:0002384": "connective tissue",
+  "UBERON:0011899": "endomysium",
+  "UBERON:0011901": "perimysium",
+  "UBERON:0011900": "epimysium",
+  "UBERON:0001982": "capillary",
+  "UBERON:0010418": "osteon",
+  "UBERON:0002515": "periosteum",
+  "UBERON:0005590": "internal elastic lamina",
+  "UBERON:0000124": "epineurium",
+  "UBERON:0000123": "perineurium",
+  "UBERON:0000122": "endoneurium",
+  "UBERON:0010419": "haversian canal"
+ },
+ "tree": [
+  "CL:0000066",
+  "CL:0002320",
+  "CL:0000187",
+  "CL:0002319",
+  "CL:0000988"
+ ],
+ "unconfirmed": {
+  "FMA:9704": "tunica media (FMA id written from memory)",
+  "FMA:9623": "muscle fascicle (FMA id written from memory)",
+  "UBERON:0010420": "central (Haversian) canal (Uberon id written from memory)"
+ }
+}

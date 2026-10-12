@@ -13,6 +13,7 @@ const REGIONS = [
   { id: "abdomen", title: "Abdomen", short: "Abdomen" },
   { id: "pelvis", title: "Pelvis", short: "Pelvis" },
   { id: "lower-limb", title: "Lower limb", short: "Leg" },
+  { id: "tissue", title: "Tissues and cells", short: "Cells" }, // histology slides and 3D cells (no zone on the figure)
 ];
 
 // Which 3D model (and zoom) shows each region, when the model is configured.
@@ -23,11 +24,13 @@ const MODEL_OPTIONS = {
 };
 
 // Bank region tags that belong to a figure region under another name.
-const ALIAS = { thorax: "chest", neck: "head" };
+const ALIAS = { thorax: "chest", neck: "head",
+  // Histology and cell questions are tagged by tissue; they all live under one body-map entry.
+  "skeletal muscle": "tissue", bone: "tissue", nerve: "tissue", vessel: "tissue", "connective tissue": "tissue", generic: "tissue" };
 const regionOfQuestion = (q) => { const r = q.tags?.region; return ALIAS[r] || r; };
 
-const MODALITY = { volume: (q) => q.tags?.modality || "CT", xray: () => "X-ray", ultrasound: () => "Ultrasound" };
-const ORDER = ["3D", "CT", "MRI", "X-ray", "Ultrasound"];
+const MODALITY = { volume: (q) => q.tags?.modality || "CT", xray: () => "X-ray", ultrasound: () => "Ultrasound", slide: () => "Histology", cell: () => "Cell" };
+const ORDER = ["3D", "CT", "MRI", "X-ray", "Ultrasound", "Histology", "Cell"];
 
 export function buildBodyMap(questions, models) {
   return REGIONS.map((r) => {

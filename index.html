@@ -48,6 +48,7 @@
     <span id="explore-title"></span>
     <div id="explore-modalities" class="chooser-row explore-modalities" role="group" aria-label="What to look at"></div>
     <select id="explore-study" class="explore-study" aria-label="Study" hidden></select>
+    <div id="explore-zoom" class="chooser-row zoom-row" hidden></div>
     <button id="explore-back" class="ghost" type="button">Back to the body map</button>
   </div>
 
@@ -59,6 +60,7 @@
     <div id="feedback" class="feedback" hidden>
       <p class="verdict" id="verdict"></p>
       <p class="explain" id="explain"></p>
+      <div id="feedback-zoom" class="chooser-row zoom-row" hidden></div>
       <button id="next" class="primary">Next question</button>
     </div>
   </section>
@@ -134,6 +136,8 @@
     <span id="attr-ct" hidden>CT: <a href="https://zenodo.org/records/10047292" target="_blank" rel="noopener">TotalSegmentator dataset</a> (Wasserthal et al.), CC BY 4.0. Viewer: <a href="https://github.com/cornerstonejs/cornerstone3D" target="_blank" rel="noopener">Cornerstone3D</a>, MIT.</span>
     <span id="attr-mr" hidden>MRI: <a id="attr-mr-src" href="https://zenodo.org/records/11367005" target="_blank" rel="noopener">TotalSegmentator MRI dataset (Akinci D'Antonoli et al.), CC BY-NC-SA 4.0</a>. Viewer: <a href="https://github.com/cornerstonejs/cornerstone3D" target="_blank" rel="noopener">Cornerstone3D</a>, MIT.</span>
     <span id="attr-xray" hidden>X-ray views are digitally reconstructed radiographs computed in the browser from the TotalSegmentator CT studies above (CC BY 4.0); they are teaching simulations, not patient films.</span>
+    <span id="attr-hist" hidden>Histology: <a id="attr-hist-src" target="_blank" rel="noopener"></a>. Slides marked stylised are drawn illustrations with H&amp;E colours, not micrographs; the <a href="https://obofoundry.org/ontology/cl.html" target="_blank" rel="noopener">Cell Ontology</a> (CC BY 4.0) names the cell types.</span>
+    <span id="attr-cell" hidden>Cell: <a id="attr-cell-src" target="_blank" rel="noopener"></a>. Stylised 3D models built from primitives, not reconstructions; organelle names from the <a href="http://geneontology.org/" target="_blank" rel="noopener">Gene Ontology</a> (CC BY 4.0).</span>
     <span id="attr-us" hidden>Ultrasound views are simulated in the browser from the same CT studies (CC BY 4.0); they are teaching simulations, not real scans.</span>
   </footer>
 

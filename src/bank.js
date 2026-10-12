@@ -1,7 +1,7 @@
 // Question bank: loads the JSON records and drops drafts when the config asks.
 import { CONFIG } from "./config.js";
 
-const RENDERERS = ["mesh", "volume", "xray", "ultrasound"];
+const RENDERERS = ["mesh", "volume", "xray", "ultrasound", "slide", "cell"];
 
 export async function loadBanks(urls) {
   const files = await Promise.all(urls.map((url) => fetch(url).then((r) => {

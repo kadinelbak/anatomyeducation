@@ -39,7 +39,7 @@ export function utcDate() {
   return new Date().toISOString().slice(0, 10);
 }
 
-const SCAN_RENDERERS = ["volume", "xray", "ultrasound"];
+const SCAN_RENDERERS = ["volume", "xray", "ultrasound", "slide", "cell"];
 const isMesh = (q) => !SCAN_RENDERERS.includes(q.renderer);
 // Scan sets are titled by the modality the bank records carry in tags.modality ("CT", "MRI"); CT when absent.
 const modalityOf = (qs) => qs.find((q) => q.tags?.modality)?.tags.modality || "CT";
@@ -81,14 +81,17 @@ export function buildSets(allQuestions, models = { "upper-limb": { title: "Upper
     const region = q.tags?.region || q.study;
     if (q.renderer === "xray") return `xray:${region}`;
     if (q.renderer === "ultrasound") return `us:${region}`;
+    if (q.renderer === "slide") return `hist:${region}`;
+    if (q.renderer === "cell") return `cell:${region}`;
     return `${modalityOf([q]).toLowerCase()}:${region}`;
   };
-  const GROUPS = { volume: "Scans", xray: "X-ray", ultrasound: "Ultrasound" };
+  const GROUPS = { volume: "Scans", xray: "X-ray", ultrasound: "Ultrasound", slide: "Histology", cell: "Cells" };
+  const LEADS = { xray: "X-ray", ultrasound: "Ultrasound", slide: "Histology", cell: "Cells" };
   const scans = allQuestions.filter((q) => SCAN_RENDERERS.includes(q.renderer) && q.study);
   for (const key of [...new Set(scans.map(scanKey))]) {
     const mine = scans.filter((q) => scanKey(q) === key);
     const renderer = mine[0].renderer;
-    const mod = renderer === "xray" ? "X-ray" : renderer === "ultrasound" ? "Ultrasound" : modalityOf(mine);
+    const mod = LEADS[renderer] || modalityOf(mine);
     sets.push({
       id: key, renderer, study: mine[0].study, modality: mod, group: GROUPS[renderer],
       title: `${mod}: ${cap(mine[0].tags?.region || mine[0].study)}`,
@@ -108,7 +111,7 @@ export function explicitSet(ids, byId, title = "hand anatomy") {
   const study = renderer !== "mesh" ? list[0]?.study : undefined;
   const model = renderer === "mesh" ? list[0]?.model : undefined;
   list = list.filter((q) => (q.renderer || "mesh") === renderer && (renderer !== "mesh" || q.model === model));
-  if (renderer !== "mesh" && title === "hand anatomy") title = renderer === "xray" ? "X-ray set" : renderer === "ultrasound" ? "Ultrasound set" : `${modalityOf(list)} scan`;
+  if (renderer !== "mesh" && title === "hand anatomy") title = { xray: "X-ray set", ultrasound: "Ultrasound set", slide: "Histology set", cell: "Cells set" }[renderer] || `${modalityOf(list)} scan`;
   return list.length ? { id: "custom", title, renderer, study, model, pick: () => list } : null;
 }
 

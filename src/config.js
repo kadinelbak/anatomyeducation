@@ -11,6 +11,8 @@ export const CONFIG = {
   // On a host that serves only text files (the hosted copy), the study files
   // are fetched as their base64 ".b64.txt" copies straight away.
   textAssets: false,
+  // Slide tiles as one JSON bundle per pyramid level (tools/bundle_tiles.py) instead of one file per tile.
+  tileBundles: false,
   eventsUrl: "api/event",
   signupUrl: "api/signup",
   // The PRD requires clinician approval before public launch. Set this to

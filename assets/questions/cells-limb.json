@@ -1,0 +1,1140 @@
+{
+ "title": "Cells of the limbs (stylised 3D models)",
+ "questions": [
+  {
+   "id": "cell-fibre-sarcomere-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "cl-0008002",
+   "target": "sarcomere-1",
+   "accept": [
+    "sarcomere-1",
+    "sarcomere-2",
+    "sarcomere-3",
+    "sarcomere-4",
+    "sarcomere-5",
+    "sarcomere-6",
+    "sarcomere-7",
+    "sarcomere-8",
+    "sarcomere-9"
+   ],
+   "prompt": "Click a sarcomere.",
+   "hint": "One of the short banded segments along a myofibril.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "A sarcomere is the segment of a myofibril between two Z discs, about 2.5 micrometres long at rest. Thin actin filaments anchored at the Z discs slide over thick myosin filaments in the A band, and the whole fibre shortens because thousands of sarcomeres shorten together.",
+   "zoom": {
+    "out": "slide:muscle-ls"
+   },
+   "tags": {
+    "topic": "cells",
+    "region": "skeletal muscle",
+    "modality": "Cell",
+    "cl": "CL:0008002",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-fibre-zdisc-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "cl-0008002",
+   "target": "z-disc-1",
+   "accept": [
+    "z-disc-1",
+    "z-disc-2",
+    "z-disc-3",
+    "z-disc-4",
+    "z-disc-5",
+    "z-disc-6",
+    "z-disc-7",
+    "z-disc-8",
+    "z-disc-9",
+    "z-disc-10"
+   ],
+   "prompt": "Click a Z disc.",
+   "hint": "The thin dark plates at the ends of each sarcomere.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "Z discs are the dense plates that bound each sarcomere and anchor the actin filaments. Alpha-actinin holds the actin, and mutations in Z disc proteins cause myofibrillar myopathies.",
+   "tags": {
+    "topic": "cells",
+    "region": "skeletal muscle",
+    "modality": "Cell",
+    "cl": "CL:0008002",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-fibre-ttubule-clin",
+   "kind": "Clinical",
+   "renderer": "cell",
+   "study": "cl-0008002",
+   "target": "t-tubule-1",
+   "accept": [
+    "t-tubule-1",
+    "t-tubule-2",
+    "t-tubule-3",
+    "t-tubule-4"
+   ],
+   "prompt": "An action potential arriving at the sarcolemma must reach the interior of this fibre within milliseconds. Click the structure that carries it inward.",
+   "hint": "The tubes that run across the fibre, from the membrane inward.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "T-tubules are invaginations of the sarcolemma that run transversely into the fibre at each A-I junction. The voltage sensor in their membrane couples to the ryanodine receptor of the adjacent sarcoplasmic reticulum, which releases calcium: excitation-contraction coupling.",
+   "zoom": {
+    "out": "slide:muscle-ls"
+   },
+   "tags": {
+    "topic": "cells",
+    "region": "skeletal muscle",
+    "modality": "Cell",
+    "cl": "CL:0008002",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-fibre-sr-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "cl-0008002",
+   "target": "sr-1",
+   "accept": [
+    "sr-1",
+    "sr-2",
+    "sr-3",
+    "sr-4",
+    "sr-5"
+   ],
+   "prompt": "Click the sarcoplasmic reticulum.",
+   "hint": "The network wrapped around the myofibrils, next to the T-tubules.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "The sarcoplasmic reticulum is the smooth ER of muscle, a network of tubules wrapped around each myofibril that stores calcium. It releases calcium when the T-tubule depolarises and pumps it back with SERCA to relax the fibre.",
+   "tags": {
+    "topic": "cells",
+    "region": "skeletal muscle",
+    "modality": "Cell",
+    "cl": "CL:0008002",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-fibre-nucleus-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "cl-0008002",
+   "target": "nucleus-1",
+   "accept": [
+    "nucleus-1",
+    "nucleus-2",
+    "nucleus-r-1",
+    "nucleus-r-2",
+    "nucleus-r-3"
+   ],
+   "prompt": "Click one of the fibre's nuclei.",
+   "hint": "The flattened purple bodies at the edge of the fibre.",
+   "view": "overview",
+   "layers": [
+    "membrane",
+    "organelles"
+   ],
+   "explain": "A skeletal muscle fibre has hundreds of nuclei, all at the periphery under the sarcolemma, each governing the cytoplasm nearest to it. They came from the myoblasts that fused to form the fibre, and cannot divide again.",
+   "zoom": {
+    "out": "slide:muscle-ls"
+   },
+   "tags": {
+    "topic": "cells",
+    "region": "skeletal muscle",
+    "modality": "Cell",
+    "cl": "CL:0008002",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-fibre-mito-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "cl-0008002",
+   "target": "mitochondrion-1",
+   "accept": [
+    "mitochondrion-1",
+    "mitochondrion-2",
+    "mitochondrion-3",
+    "mitochondrion-4",
+    "mitochondrion-5",
+    "mitochondrion-6",
+    "mitochondrion-7",
+    "mitochondrion-8",
+    "mitochondrion-9",
+    "mitochondrion-10",
+    "mitochondrion-11",
+    "mitochondrion-12",
+    "mitochondrion-13",
+    "mitochondrion-14",
+    "mitochondrion-15",
+    "mitochondrion-16",
+    "mitochondrion-17",
+    "mitochondrion-18"
+   ],
+   "prompt": "Click a mitochondrion.",
+   "hint": "The small oval bodies lying between the myofibrils.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "Mitochondria lie in rows between the myofibrils and under the sarcolemma, next to the capillaries. Slow (type 1) fibres are packed with them and resist fatigue; fast glycolytic fibres have few.",
+   "tags": {
+    "topic": "cells",
+    "region": "skeletal muscle",
+    "modality": "Cell",
+    "cl": "CL:0008002",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-satellite-nucleus-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "cl-0000594",
+   "target": "nucleus",
+   "accept": [
+    "nucleus"
+   ],
+   "prompt": "Click the satellite cell's nucleus.",
+   "hint": "The nucleus of the small cell sitting on the big fibre, not a fibre nucleus.",
+   "view": "overview",
+   "layers": [
+    "membrane",
+    "organelles"
+   ],
+   "explain": "A satellite cell is a small mononuclear stem cell wedged between the fibre's sarcolemma and its basal lamina. Its nucleus is the whole cell on a light microscope; it is counted to assess a muscle's regenerative reserve.",
+   "zoom": {
+    "out": "slide:muscle-ls"
+   },
+   "tags": {
+    "topic": "cells",
+    "region": "skeletal muscle",
+    "modality": "Cell",
+    "cl": "CL:0000594",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-satellite-lamina-clin",
+   "kind": "Clinical",
+   "renderer": "cell",
+   "study": "cl-0000594",
+   "target": "basal-lamina",
+   "accept": [
+    "basal-lamina"
+   ],
+   "prompt": "Click the layer that keeps the satellite cell in its niche on the fibre surface.",
+   "hint": "The thin outer sheet over both the fibre and the satellite cell.",
+   "view": "overview",
+   "layers": [
+    "membrane",
+    "organelles"
+   ],
+   "explain": "The basal lamina is a sheet of laminin and type IV collagen around each fibre; the satellite cell lies beneath it and above the sarcolemma. In Duchenne muscular dystrophy the link from the sarcolemma to this lamina is broken, fibres tear, and satellite cells are eventually exhausted.",
+   "tags": {
+    "topic": "cells",
+    "region": "skeletal muscle",
+    "modality": "Cell",
+    "cl": "CL:0000594",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-osteocyte-process-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "cl-0000137",
+   "target": "process-1",
+   "accept": [
+    "process-1",
+    "process-2",
+    "process-3",
+    "process-4",
+    "process-5",
+    "process-6",
+    "process-front-1",
+    "process-front-2",
+    "process-front-3"
+   ],
+   "prompt": "Click one of the osteocyte's processes.",
+   "hint": "The thin arms reaching out from the cell body.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "An osteocyte extends dozens of processes through canaliculi in the matrix, joined to neighbouring osteocytes by gap junctions. This network senses strain in the bone and signals osteoblasts and osteoclasts to remodel it.",
+   "zoom": {
+    "out": "slide:bone-ts"
+   },
+   "tags": {
+    "topic": "cells",
+    "region": "bone",
+    "modality": "Cell",
+    "cl": "CL:0000137",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-osteocyte-nucleus-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "cl-0000137",
+   "target": "nucleus",
+   "accept": [
+    "nucleus"
+   ],
+   "prompt": "Click the osteocyte's nucleus.",
+   "view": "overview",
+   "layers": [
+    "membrane",
+    "organelles"
+   ],
+   "explain": "The osteocyte's nucleus fills much of its lens-shaped body inside the lacuna; the cell has little cytoplasm and few organelles because it no longer makes much matrix.",
+   "tags": {
+    "topic": "cells",
+    "region": "bone",
+    "modality": "Cell",
+    "cl": "CL:0000137",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-osteoblast-rer-clin",
+   "kind": "Clinical",
+   "renderer": "cell",
+   "study": "cl-0000062",
+   "target": "rough-er-1",
+   "accept": [
+    "rough-er-1",
+    "rough-er-2",
+    "rough-er-3",
+    "rough-er-4",
+    "rough-er-5",
+    "rough-er-6"
+   ],
+   "prompt": "This cell secretes the type I collagen of osteoid. Click the organelle where that collagen is made.",
+   "hint": "The flattened stacked sacs with ribosomes, the largest organelle system in the cell.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "Osteoblasts are protein factories: abundant rough endoplasmic reticulum synthesises procollagen, which the Golgi packages for secretion as osteoid. The same abundance of RER makes the cytoplasm basophilic on H&E.",
+   "zoom": {
+    "out": "slide:bone-ts"
+   },
+   "tags": {
+    "topic": "cells",
+    "region": "bone",
+    "modality": "Cell",
+    "cl": "CL:0000062",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-osteoblast-osteoid-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "cl-0000062",
+   "target": "osteoid",
+   "accept": [
+    "osteoid"
+   ],
+   "prompt": "Click the osteoid.",
+   "hint": "The pale new layer between the cell and the hard bone.",
+   "view": "overview",
+   "layers": [
+    "membrane",
+    "organelles"
+   ],
+   "explain": "Osteoid is the unmineralised matrix the osteoblast has just laid down on the bone surface; hydroxyapatite is deposited into it over about ten days. A wide osteoid seam is the hallmark of osteomalacia and rickets.",
+   "tags": {
+    "topic": "cells",
+    "region": "bone",
+    "modality": "Cell",
+    "cl": "CL:0000062",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-osteoclast-border-clin",
+   "kind": "Clinical",
+   "renderer": "cell",
+   "study": "cl-0000092",
+   "target": "ruffled-border-1",
+   "accept": [
+    "ruffled-border-1",
+    "ruffled-border-2",
+    "ruffled-border-3",
+    "ruffled-border-4",
+    "ruffled-border-5",
+    "ruffled-border-6",
+    "ruffled-border-7",
+    "ruffled-border-8",
+    "ruffled-border-9",
+    "ruffled-border-10",
+    "ruffled-border-11",
+    "ruffled-border-12",
+    "ruffled-border-13",
+    "ruffled-border-14"
+   ],
+   "prompt": "Bisphosphonates stop this cell resorbing bone. Click the specialised membrane through which it secretes acid and enzymes onto the bone.",
+   "hint": "The folded fringe pressed against the bone slab.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "The ruffled border is a deeply folded region of the osteoclast's membrane sealed against the bone; proton pumps and cathepsin K secreted across it dissolve mineral and digest collagen. Bisphosphonates bind the bone beneath it and poison the osteoclast when it is taken up.",
+   "zoom": {
+    "out": "slide:bone-ts"
+   },
+   "tags": {
+    "topic": "cells",
+    "region": "bone",
+    "modality": "Cell",
+    "cl": "CL:0000092",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-osteoclast-nucleus-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "cl-0000092",
+   "target": "nucleus-1",
+   "accept": [
+    "nucleus-1",
+    "nucleus-2",
+    "nucleus-r-1",
+    "nucleus-r-2",
+    "nucleus-r-3"
+   ],
+   "prompt": "Click one of the osteoclast's nuclei.",
+   "view": "overview",
+   "layers": [
+    "membrane",
+    "organelles"
+   ],
+   "explain": "An osteoclast has several nuclei because it forms by fusion of monocyte-lineage precursors under RANKL and M-CSF. Giant cells with many nuclei in a bone lesion are osteoclast-like, as in giant cell tumour of bone.",
+   "tags": {
+    "topic": "cells",
+    "region": "bone",
+    "modality": "Cell",
+    "cl": "CL:0000092",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-schwann-myelin-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "cl-0002573",
+   "target": "myelin-a-1",
+   "accept": [
+    "myelin-a-1",
+    "myelin-a-2",
+    "myelin-a-3",
+    "myelin-a-4",
+    "myelin-a-5",
+    "myelin-a-6",
+    "myelin-b-1",
+    "myelin-b-2",
+    "myelin-b-3",
+    "myelin-b-4",
+    "myelin-b-5",
+    "myelin-b-6"
+   ],
+   "prompt": "Click the myelin sheath.",
+   "hint": "The thick wrapping around the axon.",
+   "view": "overview",
+   "layers": [
+    "membrane",
+    "organelles"
+   ],
+   "explain": "The Schwann cell wraps its membrane around the axon many times; the compacted spiral of membrane is the myelin sheath. One Schwann cell myelinates one internode of one axon, unlike an oligodendrocyte, which serves many.",
+   "zoom": {
+    "out": "slide:nerve-ts"
+   },
+   "tags": {
+    "topic": "cells",
+    "region": "nerve",
+    "modality": "Cell",
+    "cl": "CL:0002573",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-schwann-node-clin",
+   "kind": "Clinical",
+   "renderer": "cell",
+   "study": "cl-0002573",
+   "target": "node",
+   "accept": [
+    "node"
+   ],
+   "prompt": "Saltatory conduction lets the impulse jump along this axon. Click the site it jumps to.",
+   "hint": "The short bare gap in the myelin.",
+   "view": "overview",
+   "layers": [
+    "membrane",
+    "organelles"
+   ],
+   "explain": "Nodes of Ranvier are the gaps between adjacent Schwann cells where the axon membrane is bare and crowded with voltage-gated sodium channels. The action potential regenerates only at the nodes, so it travels much faster than in an unmyelinated axon.",
+   "tags": {
+    "topic": "cells",
+    "region": "nerve",
+    "modality": "Cell",
+    "cl": "CL:0002573",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-neuron-nissl-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "cl-0000100",
+   "target": "nissl-body-1",
+   "accept": [
+    "nissl-body-1",
+    "nissl-body-2",
+    "nissl-body-3",
+    "nissl-body-4",
+    "nissl-body-5",
+    "nissl-body-6",
+    "nissl-body-7",
+    "nissl-body-8"
+   ],
+   "prompt": "Click a Nissl body.",
+   "hint": "The dark granular bodies in the cell body.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "Nissl bodies are clumps of rough endoplasmic reticulum and free ribosomes that make the motor neuron's cytoplasm basophilic. After an axon is cut they disperse (chromatolysis) as the cell switches to making proteins for regrowth.",
+   "zoom": {
+    "out": "slide:nerve-ts"
+   },
+   "tags": {
+    "topic": "cells",
+    "region": "nerve",
+    "modality": "Cell",
+    "cl": "CL:0000100",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-neuron-hillock-clin",
+   "kind": "Clinical",
+   "renderer": "cell",
+   "study": "cl-0000100",
+   "target": "axon-hillock",
+   "accept": [
+    "axon-hillock"
+   ],
+   "prompt": "The decision to fire an action potential is made where the inputs summed over the cell body first meet a high density of sodium channels. Click that site.",
+   "hint": "The cone where the axon leaves the cell body.",
+   "view": "overview",
+   "layers": [
+    "membrane",
+    "organelles"
+   ],
+   "explain": "The axon hillock and initial segment have the lowest threshold in the neuron; if the summed synaptic potentials reaching it pass threshold, an action potential starts there and travels down the axon. Nissl substance stops at the hillock, which is how it is recognised.",
+   "tags": {
+    "topic": "cells",
+    "region": "nerve",
+    "modality": "Cell",
+    "cl": "CL:0000100",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-neuron-dendrite-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "cl-0000100",
+   "target": "dendrite-1",
+   "accept": [
+    "dendrite-1",
+    "dendrite-2",
+    "dendrite-3",
+    "dendrite-4",
+    "dendrite-5"
+   ],
+   "prompt": "Click a dendrite.",
+   "hint": "One of the several tapering branches leaving the cell body, not the single long axon.",
+   "view": "overview",
+   "layers": [
+    "membrane",
+    "organelles"
+   ],
+   "explain": "Dendrites are the branched receiving processes of the neuron, covered in synapses; a motor neuron has several, while it has a single axon. Dendrites contain Nissl substance, the axon does not.",
+   "tags": {
+    "topic": "cells",
+    "region": "nerve",
+    "modality": "Cell",
+    "cl": "CL:0000100",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-endothelial-wpb-clin",
+   "kind": "Clinical",
+   "renderer": "cell",
+   "study": "cl-0000115",
+   "target": "weibel-palade-1",
+   "accept": [
+    "weibel-palade-1",
+    "weibel-palade-2",
+    "weibel-palade-3",
+    "weibel-palade-4",
+    "weibel-palade-5",
+    "weibel-palade-6",
+    "weibel-palade-7"
+   ],
+   "prompt": "A patient with von Willebrand disease bleeds easily. Click the organelle that normally stores von Willebrand factor.",
+   "hint": "The small rod-shaped granules in the cytoplasm.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "Weibel-Palade bodies are rod-shaped granules unique to endothelial cells that store von Willebrand factor and P-selectin. On injury or stimulation they release vWF, which captures platelets to the exposed collagen.",
+   "zoom": {
+    "out": "slide:artery-ts"
+   },
+   "tags": {
+    "topic": "cells",
+    "region": "vessel",
+    "modality": "Cell",
+    "cl": "CL:0000115",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-endothelial-junction-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "cl-0000115",
+   "target": "tight-junction-1",
+   "accept": [
+    "tight-junction-1",
+    "tight-junction-2"
+   ],
+   "prompt": "Click a tight junction between this endothelial cell and its neighbour.",
+   "hint": "The band along the edge of the cell where it meets the next.",
+   "view": "overview",
+   "layers": [
+    "membrane",
+    "organelles"
+   ],
+   "explain": "Tight junctions seal the gap between adjacent endothelial cells and control what leaks from blood into tissue. They are most complete in the brain, where they form the blood-brain barrier, and loosen in inflammation.",
+   "tags": {
+    "topic": "cells",
+    "region": "vessel",
+    "modality": "Cell",
+    "cl": "CL:0000115",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-vsmc-dense-body-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "cl-0000359",
+   "target": "dense-body-1",
+   "accept": [
+    "dense-body-1",
+    "dense-body-2",
+    "dense-body-3",
+    "dense-body-4",
+    "dense-body-5",
+    "dense-body-6",
+    "dense-body-7",
+    "dense-body-8",
+    "dense-body-9",
+    "dense-body-10",
+    "dense-body-11",
+    "dense-body-12",
+    "dense-body-13",
+    "dense-body-14"
+   ],
+   "prompt": "Click a dense body.",
+   "hint": "The dark dots the filaments attach to; smooth muscle has no Z discs.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "Smooth muscle has no sarcomeres; its actin filaments anchor to dense bodies scattered through the cytoplasm and to dense plaques on the membrane. When the cell contracts the filaments pull the dense bodies together and the cell twists and shortens.",
+   "zoom": {
+    "out": "slide:artery-ts"
+   },
+   "tags": {
+    "topic": "cells",
+    "region": "vessel",
+    "modality": "Cell",
+    "cl": "CL:0000359",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-vsmc-caveola-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "cl-0000359",
+   "target": "caveola-1",
+   "accept": [
+    "caveola-1",
+    "caveola-2",
+    "caveola-3",
+    "caveola-4",
+    "caveola-5",
+    "caveola-6",
+    "caveola-7",
+    "caveola-8",
+    "caveola-9",
+    "caveola-10",
+    "caveola-11",
+    "caveola-12",
+    "caveola-13",
+    "caveola-14",
+    "caveola-15",
+    "caveola-16",
+    "caveola-17",
+    "caveola-18",
+    "caveola-19",
+    "caveola-20"
+   ],
+   "prompt": "Click a caveola.",
+   "hint": "The tiny pockets along the cell membrane.",
+   "view": "overview",
+   "layers": [
+    "membrane",
+    "organelles"
+   ],
+   "explain": "Caveolae are flask-shaped pits in the smooth muscle cell membrane that act in place of T-tubules, bringing calcium entry close to the sarcoplasmic reticulum. They are rich in caveolin and cholesterol.",
+   "tags": {
+    "topic": "cells",
+    "region": "vessel",
+    "modality": "Cell",
+    "cl": "CL:0000359",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-fibroblast-collagen-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "cl-0000057",
+   "target": "collagen-fibril-1",
+   "accept": [
+    "collagen-fibril-1",
+    "collagen-fibril-2",
+    "collagen-fibril-3",
+    "collagen-fibril-4",
+    "collagen-fibril-5",
+    "collagen-fibril-6",
+    "collagen-fibril-b-1",
+    "collagen-fibril-b-2",
+    "collagen-fibril-b-3",
+    "collagen-fibril-b-4",
+    "collagen-fibril-b-5",
+    "collagen-fibril-b-6"
+   ],
+   "prompt": "Click a collagen fibril outside the fibroblast.",
+   "hint": "The thin fibres lying outside the cell.",
+   "view": "overview",
+   "layers": [
+    "membrane",
+    "organelles"
+   ],
+   "explain": "The fibroblast secretes procollagen, which is cleaved and assembled outside the cell into fibrils and then fibres. Scar tissue is mostly type I collagen laid down by fibroblasts; scurvy weakens it because hydroxylation of procollagen needs vitamin C.",
+   "zoom": {
+    "out": "slide:muscle-ls"
+   },
+   "tags": {
+    "topic": "cells",
+    "region": "connective tissue",
+    "modality": "Cell",
+    "cl": "CL:0000057",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-fibroblast-rer-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "cl-0000057",
+   "target": "rough-er-1",
+   "accept": [
+    "rough-er-1",
+    "rough-er-2",
+    "rough-er-3",
+    "rough-er-4",
+    "rough-er-5"
+   ],
+   "prompt": "Click the rough endoplasmic reticulum.",
+   "hint": "The stacked ribosome-studded sacs near the nucleus.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "An active fibroblast is full of rough ER making procollagen and the other matrix proteins; a resting fibrocyte has little. Transforming growth factor beta switches fibroblasts into this secretory state in wound healing and fibrosis.",
+   "tags": {
+    "topic": "cells",
+    "region": "connective tissue",
+    "modality": "Cell",
+    "cl": "CL:0000057",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-adipocyte-droplet-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "cl-0000136",
+   "target": "lipid-droplet",
+   "accept": [
+    "lipid-droplet"
+   ],
+   "prompt": "Click the lipid droplet.",
+   "hint": "The single enormous sphere filling the cell.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "A white adipocyte stores triglyceride in one huge droplet that fills the cell and pushes the nucleus and cytoplasm to a thin rim. The droplet dissolves in routine processing, which is why fat looks empty on H&E.",
+   "zoom": {
+    "out": "slide:muscle-ls"
+   },
+   "tags": {
+    "topic": "cells",
+    "region": "connective tissue",
+    "modality": "Cell",
+    "cl": "CL:0000136",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-adipocyte-nucleus-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "cl-0000136",
+   "target": "nucleus",
+   "accept": [
+    "nucleus"
+   ],
+   "prompt": "Click the adipocyte's nucleus.",
+   "hint": "Flattened, at the very edge of the cell.",
+   "view": "overview",
+   "layers": [
+    "membrane",
+    "organelles"
+   ],
+   "explain": "The nucleus is flattened against the membrane by the lipid droplet, giving the cell its signet-ring look in section. Brown adipocytes, by contrast, have a central nucleus and many small droplets among abundant mitochondria.",
+   "tags": {
+    "topic": "cells",
+    "region": "connective tissue",
+    "modality": "Cell",
+    "cl": "CL:0000136",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-generic-mito-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "generic-cell",
+   "target": "mitochondrion-1",
+   "accept": [
+    "mitochondrion-1",
+    "mitochondrion-2",
+    "mitochondrion-3",
+    "mitochondrion-4",
+    "mitochondrion-5",
+    "mitochondrion-6",
+    "mitochondrion-7",
+    "mitochondrion-8"
+   ],
+   "prompt": "Click a mitochondrion.",
+   "hint": "The oval bodies with a folded inner membrane.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "Mitochondria make most of the cell's ATP by oxidative phosphorylation across their folded inner membrane. They carry their own DNA, inherited from the mother, which is why mitochondrial diseases follow maternal lines.",
+   "tags": {
+    "topic": "cells",
+    "region": "generic",
+    "modality": "Cell",
+    "cl": "CL:0000000",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-generic-golgi-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "generic-cell",
+   "target": "golgi-1",
+   "accept": [
+    "golgi-1",
+    "golgi-2",
+    "golgi-3",
+    "golgi-4"
+   ],
+   "prompt": "Click the Golgi apparatus.",
+   "hint": "The stack of curved flattened sacs near the nucleus.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "The Golgi is a stack of flattened cisternae that receives proteins from the rough ER, modifies their sugars, sorts them and packages them into vesicles for secretion, the membrane or the lysosome.",
+   "tags": {
+    "topic": "cells",
+    "region": "generic",
+    "modality": "Cell",
+    "cl": "CL:0000000",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-generic-lysosome-clin",
+   "kind": "Clinical",
+   "renderer": "cell",
+   "study": "generic-cell",
+   "target": "lysosome-1",
+   "accept": [
+    "lysosome-1",
+    "lysosome-2",
+    "lysosome-3",
+    "lysosome-4",
+    "lysosome-5",
+    "lysosome-6"
+   ],
+   "prompt": "A child with Tay-Sachs disease lacks hexosaminidase A and accumulates ganglioside inside neurons. Click the organelle where that enzyme normally works.",
+   "hint": "The small dense vesicles scattered through the cytoplasm.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "Lysosomes are acidic vesicles filled with hydrolases that digest worn-out organelles and material taken in by endocytosis. A missing lysosomal enzyme leaves its substrate to pile up inside the organelle: a lysosomal storage disease.",
+   "tags": {
+    "topic": "cells",
+    "region": "generic",
+    "modality": "Cell",
+    "cl": "CL:0000000",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-generic-rer-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "generic-cell",
+   "target": "rough-er-1",
+   "accept": [
+    "rough-er-1",
+    "rough-er-2",
+    "rough-er-3",
+    "rough-er-4",
+    "rough-er-5"
+   ],
+   "prompt": "Click the rough endoplasmic reticulum.",
+   "hint": "The flattened sacs with ribosomes on their surface, continuous with the nuclear envelope.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "Rough ER is studded with ribosomes that feed newly made proteins into its lumen for folding and glycosylation. Proteins destined for secretion, the membrane or lysosomes all start here; cytosolic proteins are made on free ribosomes.",
+   "tags": {
+    "topic": "cells",
+    "region": "generic",
+    "modality": "Cell",
+    "cl": "CL:0000000",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-generic-nucleolus-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "generic-cell",
+   "target": "nucleolus",
+   "accept": [
+    "nucleolus"
+   ],
+   "prompt": "Click the nucleolus.",
+   "hint": "The dark body inside the nucleus.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "The nucleolus is the dense region inside the nucleus where ribosomal RNA is transcribed and ribosome subunits are assembled. Cells making a lot of protein, such as neurons and plasma cells, have large prominent nucleoli.",
+   "tags": {
+    "topic": "cells",
+    "region": "generic",
+    "modality": "Cell",
+    "cl": "CL:0000000",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  }
+ ]
+}

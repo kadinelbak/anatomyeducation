@@ -17,7 +17,7 @@ await page.goto(base);
 await idle();
 const entries = await page.$$eval("#explore-row .chip", (b) => b.map((x) => x.textContent));
 console.log("regions:", entries.join(" | "));
-check(entries.join() === "Head,Upper limb,Chest,Abdomen,Pelvis,Lower limb", "the body map lists the six regions");
+check(entries.join() === "Head,Upper limb,Chest,Abdomen,Pelvis,Lower limb,Tissues and cells", "the body map lists the six regions plus tissues and cells");
 check((await page.$$(".figure .zone[role=button]")).length === 6, "the figure has six clickable zones");
 const modalities = () => page.$$eval("#explore-modalities .chip", (b) => b.map((x) => `${x.textContent}${x.getAttribute("aria-pressed") === "true" ? "*" : ""}`));
 // Explore the lower limb from the figure.

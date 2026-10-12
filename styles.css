@@ -19,8 +19,8 @@ button { font: inherit; cursor: pointer; }
 
 #viewer { position: fixed; inset: 0; touch-action: none; }
 #viewer canvas { display: block; }
-.viewer-mesh, .viewer-volume, .viewer-xray, .viewer-ultrasound { position: absolute; inset: 0; }
-body.mode-volume #controls, body.mode-xray #controls, body.mode-ultrasound #controls { display: none; }
+.viewer-mesh, .viewer-volume, .viewer-xray, .viewer-ultrasound, .viewer-slide, .viewer-cell { position: absolute; inset: 0; }
+body.mode-volume #controls, body.mode-xray #controls, body.mode-ultrasound #controls, body.mode-slide #controls, body.mode-cell #controls { display: none; }
 
 .topbar {
   position: fixed; top: 0; left: 0; right: 0;
@@ -167,9 +167,18 @@ body.mode-volume .explore-bar { top: 90px; } /* below the CT / MRI badge */
 /* X-ray and ultrasound modes: their toolbar runs across the top from y 44 px down, so the only app
    chrome allowed in y 44..90 px is the renderer's own. The explore bar therefore moves to the bottom,
    and on phones the question panel rises a little to clear the longer licence lines. */
-body.mode-xray .explore-bar, body.mode-ultrasound .explore-bar { top: auto; bottom: 16px; }
+body.mode-xray .explore-bar, body.mode-ultrasound .explore-bar, body.mode-slide .explore-bar, body.mode-cell .explore-bar { top: auto; bottom: 16px; }
 @media (max-width: 720px) {
-  body.mode-xray .card, body.mode-ultrasound .card { bottom: 84px; max-height: 40vh; }
-  body.mode-xray .explore-bar, body.mode-ultrasound .explore-bar { bottom: 84px; }
-  body.mode-xray .attribution, body.mode-ultrasound .attribution { bottom: 4px; top: auto; }
+  body.mode-xray .card, body.mode-ultrasound .card, body.mode-slide .card, body.mode-cell .card { bottom: 84px; max-height: 40vh; }
+  body.mode-xray .explore-bar, body.mode-ultrasound .explore-bar, body.mode-slide .explore-bar, body.mode-cell .explore-bar { bottom: 84px; }
+  body.mode-xray .attribution, body.mode-ultrasound .attribution, body.mode-slide .attribution, body.mode-cell .attribution { bottom: 4px; top: auto; }
+}
+/* Zoom chips (organ -> tissue -> cell): on the explore bar and under an answer's explanation. */
+.zoom-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+.zoom-row[hidden] { display: none; }
+.explore-bar .zoom-row { margin: 0; }
+/* Slide and cell modes: the bar sits at the bottom left with its zoom chips, so the licence line keeps to the bottom right. */
+@media (min-width: 721px) {
+  body.mode-slide .explore-bar, body.mode-cell .explore-bar { max-width: min(560px, 55vw); }
+  body.mode-slide .attribution, body.mode-cell .attribution { left: auto; right: 16px; max-width: min(480px, 38vw); text-align: right; }
 }
