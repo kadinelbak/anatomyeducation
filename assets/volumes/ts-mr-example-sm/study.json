@@ -1,7 +1,7 @@
 {
  "id": "ts-mr-example-sm",
  "source": "TotalSegmentator example MR (wasserth/TotalSegmentator tests/reference_files/example_mr_sm.nii.gz, 3 mm)",
- "license": "CC BY 4.0",
+ "license": "CC BY-NC-SA 4.0",
  "attribution": "TotalSegmentator MRI dataset (Akinci D'Antonoli et al.)",
  "dims": [
   117,
