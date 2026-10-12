@@ -106,6 +106,8 @@ body.mode-volume #controls { display: none; }
   .controls-toggle { display: block; background: transparent; color: var(--text); border: 0; padding: 4px 8px; font-weight: 600; }
   .controls .controls-body { display: none; padding: 6px; width: 190px; }
   .controls.open .controls-body { display: block; }
+  body.mode-volume .card { bottom: 150px; max-height: 34vh; }
+  body.mode-volume .attribution { bottom: auto; top: 46px; left: 96px; right: 12px; text-align: right; } /* clear of the modality badge */
   .card { left: 12px; right: 12px; width: auto; bottom: 40px; max-height: 44vh; padding: 12px 14px; font-size: 0.95rem; }
   .explain { font-size: 0.88rem; }
   .card h1 { font-size: 1.25rem; }
@@ -118,6 +120,17 @@ body.mode-volume #controls { display: none; }
 .chooser { display: flex; flex-direction: column; gap: 4px; margin: 0 0 12px; }
 .chooser-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
 .explore-lead { margin-top: 12px; }
+/* Scan mode: the viewer's toolbar (planes, windows, slice slider, zoom) sits to the right of the
+   question panel on wide screens, and below a shorter panel on phones, so nothing is covered. */
+@media (min-width: 721px) and (max-width: 1000px) {
+  body.mode-volume .vol-edge-bottom { bottom: 140px; } /* the toolbar wraps taller at these widths */
+}
+@media (min-width: 721px) {
+  body.mode-volume .vol-toolbar { left: calc(16px + min(440px, calc(100vw - 32px)) + 16px); }
+  body.mode-volume .vol-edge-bottom { left: auto; right: 16px; transform: none; }
+  /* The licence line moves under the score pill, off the slider row. */
+  body.mode-volume .attribution { bottom: auto; top: 54px; left: auto; right: 16px; max-width: min(520px, 55vw); text-align: right; }
+}
 .explore-bar { position: fixed; z-index: 6; left: 16px; top: 56px; display: flex; align-items: center; gap: 10px; padding: 6px 8px 6px 12px;
   background: var(--panel); border: 1px solid var(--border); border-radius: 10px; font-weight: 600; }
 .explore-bar .ghost { padding: 6px 10px; font-size: 0.85rem; }
