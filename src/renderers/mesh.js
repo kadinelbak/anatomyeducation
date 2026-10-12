@@ -306,7 +306,9 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
     const zoom = $("zoom-row");
     zoom.hidden = !meta.regions;
     if (meta.regions) {
-      const names = [...Object.keys(meta.regions).filter((k) => k !== "all"), "all"];
+      // `hiddenRegions` are focus-only regions (used by questions) that get no zoom button.
+      const hidden = new Set(meta.hiddenRegions || []);
+      const names = [...Object.keys(meta.regions).filter((k) => k !== "all" && !hidden.has(k)), "all"];
       zoom.replaceChildren(...names.map((k) => {
         const b = document.createElement("button");
         b.type = "button"; b.dataset.focus = k;

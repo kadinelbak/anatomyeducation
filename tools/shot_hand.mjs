@@ -1,0 +1,10 @@
+import { chromium } from "playwright";
+const [base, out] = process.argv.slice(2);
+const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium", args: ["--use-gl=angle", "--use-angle=swiftshader", "--ignore-gpu-blocklist"] });
+const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+await page.goto(base);
+await page.waitForFunction(() => !document.getElementById("start").disabled, null, { timeout: 90000 });
+await page.evaluate(() => { document.getElementById("intro").hidden = true; window.__app.setLayers({ muscle: true, tendon: true, nerve: true, vessel: true, bone: true }); window.__app.setView("palmar", "hand", false); });
+await page.waitForTimeout(800);
+await page.screenshot({ path: out });
+await browser.close();

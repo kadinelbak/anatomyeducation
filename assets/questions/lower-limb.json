@@ -1190,6 +1190,516 @@
     "status": "draft"
    },
    "focus": "ankle"
+  },
+  {
+   "id": "ankle-inversion-atfl",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "anterior_talofibular_ligament",
+   "accept": [
+    "anterior_talofibular_ligament"
+   ],
+   "prompt": "A netball player lands on the side of her foot and the ankle turns inwards. There is swelling and bruising in front of the lateral malleolus, and the talus slides forwards on the anterior drawer test. Click the ligament most often torn.",
+   "hint": "It runs from the front of the lateral malleolus to the neck of the talus.",
+   "view": "lateral",
+   "layers": [
+    "ligament"
+   ],
+   "explain": "The anterior talofibular ligament is the weakest of the lateral ligaments and the first to tear in an inversion sprain with the foot plantar flexed. A positive anterior drawer test shows that it has failed.",
+   "tags": {
+    "topic": "ligaments",
+    "region": "ankle",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "ankle"
+  },
+  {
+   "id": "eversion-injury-deltoid",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "deltoid_ligament",
+   "accept": [
+    "deltoid_ligament"
+   ],
+   "prompt": "A footballer's foot is forced into eversion during a tackle. There is tenderness and swelling below the medial malleolus and a small avulsed flake of bone from its tip. Click the strong ligament on the medial side of the ankle that has been stressed.",
+   "hint": "It fans out from the medial malleolus to the talus, navicular and calcaneus.",
+   "view": "palmar",
+   "layers": [
+    "ligament"
+   ],
+   "explain": "The deltoid ligament is a strong triangular band that resists eversion, so it is much less often torn than the lateral ligaments. Eversion forces more often avulse the medial malleolus or fracture the fibula.",
+   "tags": {
+    "topic": "ligaments",
+    "region": "ankle",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "ankle"
+  },
+  {
+   "id": "dashboard-pcl",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "posterior_cruciate_ligament",
+   "accept": [
+    "posterior_cruciate_ligament"
+   ],
+   "prompt": "A front-seat passenger in a head-on collision strikes the flexed knee against the dashboard. The tibia sags backwards when the knee is flexed to 90 degrees, and the posterior drawer test is positive. Click the ligament that has ruptured.",
+   "hint": "It stops the tibia sliding backwards on the femur.",
+   "view": "dorsal",
+   "layers": [
+    "ligament"
+   ],
+   "explain": "The posterior cruciate ligament runs from the anterior part of the tibial intercondylar area to the medial femoral condyle and prevents posterior displacement of the tibia. A force on the front of the flexed tibia is the classic mechanism of rupture.",
+   "tags": {
+    "topic": "ligaments",
+    "region": "knee",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "knee"
+  },
+  {
+   "id": "varus-stress-fibular-collateral",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "fibular_collateral_ligament",
+   "accept": [
+    "fibular_collateral_ligament"
+   ],
+   "prompt": "A rugby player is tackled on the inner side of the right knee. On examination the lateral joint line opens when a varus stress is applied with the knee in slight flexion. Click the ligament on the outer side of the knee that is torn.",
+   "hint": "It is a rounded cord running from the lateral femoral epicondyle to the fibular head.",
+   "view": "lateral",
+   "layers": [
+    "ligament"
+   ],
+   "explain": "The fibular (lateral) collateral ligament resists varus stress and, unlike the tibial collateral ligament, is not attached to the lateral meniscus. The common fibular nerve lies close behind the fibular head and can be injured with it.",
+   "tags": {
+    "topic": "ligaments",
+    "region": "knee",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "knee"
+  },
+  {
+   "id": "locked-knee-medial-meniscus",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "medial_meniscus",
+   "accept": [
+    "medial_meniscus"
+   ],
+   "prompt": "A footballer twists on a flexed, weight-bearing knee. Two days later the knee is swollen, painful along the medial joint line and will not fully extend. McMurray's test produces a click on the medial side. Click the structure most likely torn.",
+   "hint": "It is a C-shaped fibrocartilage attached to the tibial collateral ligament.",
+   "view": "palmar",
+   "layers": [
+    "ligament"
+   ],
+   "explain": "The medial meniscus is firmly fixed to the deep part of the tibial collateral ligament, so it is torn more often than the lateral meniscus when the femur rotates on the fixed tibia. A displaced bucket-handle fragment can block extension and lock the knee.",
+   "tags": {
+    "topic": "ligaments",
+    "region": "knee",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "knee"
+  },
+  {
+   "id": "spring-ligament-flat-foot",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "plantar_calcaneonavicular_ligament",
+   "accept": [
+    "plantar_calcaneonavicular_ligament"
+   ],
+   "prompt": "An older woman has a progressively flattening medial arch of the foot. The tendon of tibialis posterior is degenerate and the head of the talus sags downwards and medially. Click the ligament, supporting the head of the talus, that has stretched.",
+   "hint": "It joins the sustentaculum tali to the navicular.",
+   "view": "palmar",
+   "layers": [
+    "ligament"
+   ],
+   "explain": "The plantar calcaneonavicular (spring) ligament supports the head of the talus and is reinforced by the tendon of tibialis posterior. Failure of the tendon strains the ligament and leads to an acquired flat foot.",
+   "tags": {
+    "topic": "ligaments",
+    "region": "foot",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "foot"
+  },
+  {
+   "id": "patellar-reflex-tendon",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "quadriceps_tendon_patellar_ligament",
+   "accept": [
+    "quadriceps_tendon_patellar_ligament"
+   ],
+   "prompt": "A doctor taps just below the patella of a seated patient and the leg extends sharply. Click the structure that was struck in this knee-jerk reflex.",
+   "hint": "It continues the quadriceps tendon from the patella to the tibial tuberosity.",
+   "view": "palmar",
+   "layers": [
+    "tendon"
+   ],
+   "explain": "The patellar ligament is the continuation of the quadriceps tendon and attaches to the tibial tuberosity. The knee jerk tests the femoral nerve and spinal segments L3 and L4.",
+   "tags": {
+    "topic": "ligaments",
+    "region": "knee",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "knee"
+  },
+  {
+   "id": "lumbar-plexus-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "lumbar_plexus",
+   "accept": [
+    "lumbar_plexus"
+   ],
+   "prompt": "Click the plexus formed within psoas major from the ventral rami of L1 to L4, which gives the femoral and obturator nerves.",
+   "hint": "It lies within the posterior abdominal wall, in front of the transverse processes.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "nerve"
+   ],
+   "explain": "The lumbar plexus lies in the substance of psoas major, in front of the lumbar transverse processes. Its branches include the iliohypogastric, ilioinguinal, genitofemoral, lateral femoral cutaneous, femoral and obturator nerves.",
+   "tags": {
+    "topic": "nerves",
+    "region": "hip",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "pelvis"
+  },
+  {
+   "id": "sacral-plexus-piriformis",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "sacral_plexus",
+   "accept": [
+    "sacral_plexus"
+   ],
+   "prompt": "A woman has a pelvic tumour that has spread across the front of the sacrum. She develops pain and weakness in the buttock and the back of the thigh and leg, with an absent ankle jerk. Click the plexus lying on piriformis that is compressed.",
+   "hint": "It lies on the front of piriformis, behind the internal iliac vessels.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "nerve"
+   ],
+   "explain": "The sacral plexus (L4 to S4) lies on the anterior surface of piriformis and gives the sciatic, gluteal, pudendal and posterior femoral cutaneous nerves. A mass in the pelvis can therefore produce a sciatic-type deficit without any spinal lesion.",
+   "tags": {
+    "topic": "nerves",
+    "region": "hip",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "pelvis"
+  },
+  {
+   "id": "posterior-cutaneous-thigh-numbness",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "posterior_cutaneous_nerve_of_thigh",
+   "accept": [
+    "posterior_cutaneous_nerve_of_thigh"
+   ],
+   "prompt": "After a long period of pressure on the buttock, a patient has numb skin over the back of the thigh and the lower buttock. Movements of the knee and ankle are normal. Click the purely sensory nerve involved, which leaves the pelvis beneath piriformis.",
+   "hint": "It runs down the back of the thigh deep to the fascia and supplies skin only.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "nerve"
+   ],
+   "explain": "The posterior cutaneous nerve of the thigh (S1 to S3) leaves through the greater sciatic foramen below piriformis and supplies the skin of the posterior thigh and perineum. It arises above the gluteal fold, so it is spared in a sciatic lesion below that level.",
+   "tags": {
+    "topic": "nerves",
+    "region": "thigh",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "thigh"
+  },
+  {
+   "id": "pudendal-block-ischial-spine",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "pudendal_nerve",
+   "accept": [
+    "pudendal_nerve"
+   ],
+   "prompt": "An obstetrician prepares a pudendal block before a forceps delivery. The needle is directed towards the ischial spine through the vaginal wall. Click the nerve, derived from S2 to S4, that is anaesthetised at this point.",
+   "hint": "It leaves the pelvis and re-enters through the lesser sciatic foramen.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "nerve"
+   ],
+   "explain": "The pudendal nerve passes out through the greater sciatic foramen, round the ischial spine and sacrospinous ligament, and into the pudendal canal (Alcock's canal) through the lesser sciatic foramen. It supplies the perineum and the external anal and urethral sphincters.",
+   "tags": {
+    "topic": "nerves",
+    "region": "hip",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hip"
+  },
+  {
+   "id": "ilioinguinal-hernia-numbness",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "ilioinguinal_nerve",
+   "accept": [
+    "ilioinguinal_nerve"
+   ],
+   "prompt": "After an open inguinal hernia repair, a man has numbness of the skin of the upper medial thigh and the root of the penis. The nerve ran along the spermatic cord through the superficial inguinal ring. Click the nerve damaged.",
+   "hint": "It arises from L1 and passes through the inguinal canal.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "nerve"
+   ],
+   "explain": "The ilioinguinal nerve (L1) runs through the inguinal canal and emerges at the superficial ring. It supplies skin of the upper medial thigh and the root of the penis or labium majus, and is at risk in hernia surgery.",
+   "tags": {
+    "topic": "nerves",
+    "region": "hip",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hip"
+  },
+  {
+   "id": "femoral-neck-medial-circumflex",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "medial_circumflex_femoral_artery",
+   "accept": [
+    "medial_circumflex_femoral_artery"
+   ],
+   "prompt": "An elderly woman falls and has an intracapsular fracture of the neck of the femur. Months later the femoral head collapses because of avascular necrosis. Click the artery whose retinacular branches mainly supply the femoral head.",
+   "hint": "It passes between pectineus and psoas and winds round the back of the femoral neck.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "vessel"
+   ],
+   "explain": "The medial circumflex femoral artery gives the main retinacular branches that supply the femoral head and neck. It is often damaged in intracapsular fractures or dislocation, producing avascular necrosis of the head.",
+   "tags": {
+    "topic": "vessels",
+    "region": "hip",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "hip"
+  },
+  {
+   "id": "popliteal-vein-dvt",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "popliteal_vein",
+   "accept": [
+    "popliteal_vein"
+   ],
+   "prompt": "A man returns from a long flight with a swollen, tender right calf and swelling behind the knee. Duplex ultrasound shows a thrombus in the vein lying superficial to the popliteal artery in the popliteal fossa. Click this vein.",
+   "hint": "It lies between the tibial nerve and the popliteal artery.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "vessel"
+   ],
+   "explain": "The popliteal vein is formed where the anterior and posterior tibial veins join and lies superficial to the artery in the fossa. It continues as the femoral vein and is a common site of deep vein thrombosis.",
+   "tags": {
+    "topic": "vessels",
+    "region": "knee",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "knee"
+  },
+  {
+   "id": "alt-flap-lateral-circumflex",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "lateral_circumflex_femoral_artery",
+   "accept": [
+    "lateral_circumflex_femoral_artery"
+   ],
+   "prompt": "A plastic surgeon harvests an anterolateral thigh flap to cover a defect. The flap is supplied by perforators of the descending branch of an artery arising from the deep femoral artery. Click this artery.",
+   "hint": "It runs laterally between the branches of the femoral nerve.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "vessel"
+   ],
+   "explain": "The lateral circumflex femoral artery arises from the deep femoral artery and divides into ascending, transverse and descending branches. The descending branch runs with the nerve to vastus lateralis and supplies the skin of the anterolateral thigh.",
+   "tags": {
+    "topic": "vessels",
+    "region": "thigh",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "thigh"
+  },
+  {
+   "id": "genicular-anastomosis",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "genicular_arteries",
+   "accept": [
+    "genicular_arteries"
+   ],
+   "prompt": "A patient with a blocked popliteal artery still has a weak foot pulse after several weeks. Blood reaches the leg through a network of vessels around the knee joint. Click the arteries forming this collateral anastomosis.",
+   "hint": "They arise from the popliteal artery and encircle the knee.",
+   "view": "dorsal",
+   "layers": [
+    "bone",
+    "vessel"
+   ],
+   "explain": "The superior, middle and inferior genicular branches of the popliteal artery form the periarticular genicular anastomosis, which links with branches of the femoral and tibial arteries. It can maintain flow to the leg when the popliteal artery is occluded, though often only partially.",
+   "tags": {
+    "topic": "vessels",
+    "region": "knee",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "knee"
+  },
+  {
+   "id": "dorsal-venous-arch-id",
+   "kind": "Identify",
+   "renderer": "mesh",
+   "target": "dorsal_venous_arch",
+   "accept": [
+    "dorsal_venous_arch"
+   ],
+   "prompt": "Click the venous network over the dorsum of the foot that drains into the great and small saphenous veins.",
+   "hint": "It lies on the dorsum of the foot over the metatarsals.",
+   "view": "palmar",
+   "layers": [
+    "bone",
+    "vessel"
+   ],
+   "explain": "The dorsal venous arch receives the dorsal metatarsal veins and drains medially to the great saphenous vein and laterally to the small saphenous vein. Its medial end is a common site for cannulation.",
+   "tags": {
+    "topic": "vessels",
+    "region": "foot",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "foot"
+  },
+  {
+   "id": "fibular-graft-nerve-risk",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "fibula",
+   "accept": [
+    "fibula"
+   ],
+   "prompt": "A surgeon takes a segment of bone from the middle of the leg to rebuild the jaw, leaving the lower end in place to keep the ankle stable. The common fibular nerve winds round the neck of this bone and is at risk higher up. Click the bone.",
+   "hint": "It is the slender bone on the lateral side of the leg and carries little body weight.",
+   "view": "lateral",
+   "layers": [
+    "bone"
+   ],
+   "explain": "The fibula carries little weight and gives attachment to muscles, so a graft can be taken from its shaft. The lowest quarter must be preserved for stability of the ankle mortise, and the common fibular nerve is at risk at the fibular neck.",
+   "tags": {
+    "topic": "bones",
+    "region": "leg",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "leg"
+  },
+  {
+   "id": "navicular-stress-fracture-n-spot",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "navicular",
+   "accept": [
+    "navicular"
+   ],
+   "prompt": "A middle-distance runner has vague pain on the top of the medial arch of the foot. There is tenderness over the 'N spot' on the dorsum of the midfoot, and plain films are normal. A stress fracture is suspected. Click the bone.",
+   "hint": "It lies between the head of the talus and the three cuneiforms.",
+   "view": "palmar",
+   "layers": [
+    "bone"
+   ],
+   "explain": "The navicular articulates with the talus behind and the three cuneiforms in front, and tibialis posterior inserts on its tuberosity. Its central third has a poor blood supply, so stress fractures there heal slowly and are often missed on plain films.",
+   "tags": {
+    "topic": "bones",
+    "region": "foot",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "foot"
+  },
+  {
+   "id": "sesamoiditis-first-metatarsal",
+   "kind": "Clinical",
+   "renderer": "mesh",
+   "target": "sesamoid_bones_foot",
+   "accept": [
+    "sesamoid_bones_foot"
+   ],
+   "prompt": "A ballet dancer has pain beneath the head of the first metatarsal that is worse on rising onto the toes. Two small bones lie in the tendon of flexor hallucis brevis at this site. Click these bones.",
+   "hint": "They sit under the head of the first metatarsal and lie either side of the flexor hallucis longus tendon.",
+   "view": "palmar",
+   "layers": [
+    "bone"
+   ],
+   "explain": "The sesamoid bones lie in the tendons of flexor hallucis brevis beneath the head of the first metatarsal. They take load during push-off and can be inflamed or fractured, and they protect the tendon of flexor hallucis longus.",
+   "tags": {
+    "topic": "bones",
+    "region": "foot",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "draft"
+   },
+   "focus": "foot"
   }
  ],
  "model": "lower-limb"

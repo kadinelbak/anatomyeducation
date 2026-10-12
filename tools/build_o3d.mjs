@@ -14,13 +14,19 @@ import draco3d from "draco3dgltf";
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "..");
 const args = process.argv.slice(2);
-const inFile = args.find((a, i) => !a.startsWith("--") && args[i - 1] !== "--out");
+const inFile = args.find((a, i) => !a.startsWith("--") && !["--out", "--scale", "--error"].includes(args[i - 1]));
 const outIdx = args.indexOf("--out");
 const outFile = path.resolve(outIdx >= 0 ? args[outIdx + 1] : path.join(root, "assets/model/arm.glb"));
 const structFile = path.join(path.dirname(outFile), "structures.json");
 if (!inFile) { console.error("usage: node tools/build_o3d.mjs <in.glb> [--out assets/model/arm.glb] [--list]"); process.exit(1); }
 
-const RATIO = { bone: 0.45, muscle: 0.4, tendon: 0.4, ligament: 0.35, nerve: 0.3, vessel: 0.3 };
+// --scale multiplies every per-layer simplify ratio (tune the triangle budget in one go).
+const scaleIdx = args.indexOf("--scale");
+const SCALE = scaleIdx >= 0 ? Number(args[scaleIdx + 1]) : 1;
+// --error: meshopt simplify error bound (fraction of mesh extent); the default 0.001 stops well before small ratios bite.
+const errIdx = args.indexOf("--error");
+const ERROR = errIdx >= 0 ? Number(args[errIdx + 1]) : 0.001;
+const RATIO = Object.fromEntries(Object.entries({ bone: 0.45, muscle: 0.4, tendon: 0.4, ligament: 0.35, nerve: 0.3, vessel: 0.3 }).map(([k, v]) => [k, v * SCALE]));
 const LAYERS = ["muscle", "tendon", "ligament", "nerve", "vessel", "bone"];
 const MARROW_KEYS = new Set(["humerus", "radius", "ulna", "metacarpal_1", "metacarpal_2", "metacarpal_3", "metacarpal_4", "metacarpal_5",
   "phalanges_thumb", "phalanges_index", "phalanges_middle", "phalanges_ring", "phalanges_little"]);
@@ -142,7 +148,7 @@ async function simplifyGroup(group, ratio) {
     const mesh = doc.createMesh(String(i)).addPrimitive(prim);
     sc.addChild(doc.createNode(String(i)).setMesh(mesh));
   });
-  await doc.transform(weld(), simplify({ simplifier: MeshoptSimplifier, ratio, error: 0.001, lockBorder: false }));
+  await doc.transform(weld(), simplify({ simplifier: MeshoptSimplifier, ratio, error: ERROR, lockBorder: false }));
   doc.getRoot().listNodes().forEach((n) => {
     const it = group[Number(n.getName())]; const prim = n.getMesh().listPrimitives()[0];
     const ia = prim.getIndices();

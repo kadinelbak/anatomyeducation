@@ -17,7 +17,11 @@ import draco3d from "draco3dgltf";
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "..");
 const args = process.argv.slice(2);
-const VALUE_FLAGS = ["--out", "--parts", "--scale"];
+// --error: meshopt simplify error bound (fraction of mesh extent); 0.001 stops well before small ratios bite.
+const errIdx0 = args.indexOf("--error");
+const ERROR = errIdx0 >= 0 ? Number(args[errIdx0 + 1]) : 0.001;
+
+const VALUE_FLAGS = ["--out", "--parts", "--scale", "--error"];
 const flag = (f, d) => { const i = args.indexOf(f); return i >= 0 ? args[i + 1] : d; };
 const inFile = path.resolve(args.find((a, i) => !a.startsWith("--") && !VALUE_FLAGS.includes(args[i - 1])) ?? path.join(root, "source/open3dmodel/lower-limb.glb"));
 const outFile = path.resolve(flag("--out", path.join(root, "assets/model/lower-limb.glb")));
@@ -149,7 +153,7 @@ async function simplifyGroup(group, ratio) {
     const mesh = doc.createMesh(String(i)).addPrimitive(prim);
     sc.addChild(doc.createNode(String(i)).setMesh(mesh));
   });
-  await doc.transform(weld(), simplify({ simplifier: MeshoptSimplifier, ratio, error: 0.001, lockBorder: false }));
+  await doc.transform(weld(), simplify({ simplifier: MeshoptSimplifier, ratio, error: ERROR, lockBorder: false }));
   doc.getRoot().listNodes().forEach((n) => {
     const it = group[Number(n.getName())]; const prim = n.getMesh().listPrimitives()[0];
     const ia = prim.getIndices();
@@ -257,7 +261,7 @@ const meta = {
   layers: LAYERS,
   nodes: [...kept, ...marrows].map((it) => ({ node: it.id, structure: it.structure, layer: it.layer, source: it.src })),
   structures,
-  regions: { hip: have(["hip_bone", "sacrum"]), thigh: have(["femur"]), knee: have(["patella", "medial_meniscus", "lateral_meniscus", "ligaments_of_fibular_head", "quadriceps_tendon_patellar_ligament", "fibular_collateral_ligament"]), leg: have(["tibia", "fibula"]),
+  regions: { hip: have(["hip_bone", "sacrum"]), pelvis: have(["hip_bone", "sacrum", "lumbar_plexus", "sacral_plexus"]), thigh: have(["femur"]), knee: have(["patella", "medial_meniscus", "lateral_meniscus", "ligaments_of_fibular_head", "quadriceps_tendon_patellar_ligament", "fibular_collateral_ligament"]), leg: have(["tibia", "fibula"]),
     ankle: have(["talus", "calcaneus"]), foot: footBones,
     all: have(["hip_bone", "sacrum", "femur", "patella", "tibia", "fibula"]).concat(footBones) },
   axis,
