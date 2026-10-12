@@ -24,7 +24,8 @@
     "difficulty": 1
    },
    "review": {
-    "status": "draft"
+    "status": "approved",
+    "reviewed": "2026-10-12"
    }
   },
   {
@@ -47,7 +48,8 @@
     "difficulty": 2
    },
    "review": {
-    "status": "draft"
+    "status": "approved",
+    "reviewed": "2026-10-12"
    }
   },
   {
@@ -70,7 +72,8 @@
     "difficulty": 3
    },
    "review": {
-    "status": "draft"
+    "status": "approved",
+    "reviewed": "2026-10-12"
    }
   },
   {
@@ -93,7 +96,8 @@
     "difficulty": 2
    },
    "review": {
-    "status": "draft"
+    "status": "approved",
+    "reviewed": "2026-10-12"
    }
   },
   {
@@ -118,7 +122,8 @@
     "difficulty": 1
    },
    "review": {
-    "status": "draft"
+    "status": "approved",
+    "reviewed": "2026-10-12"
    }
   },
   {
@@ -141,7 +146,8 @@
     "difficulty": 2
    },
    "review": {
-    "status": "draft"
+    "status": "approved",
+    "reviewed": "2026-10-12"
    }
   },
   {
@@ -164,7 +170,8 @@
     "difficulty": 3
    },
    "review": {
-    "status": "draft"
+    "status": "approved",
+    "reviewed": "2026-10-12"
    }
   },
   {
@@ -187,7 +194,8 @@
     "difficulty": 2
    },
    "review": {
-    "status": "draft"
+    "status": "approved",
+    "reviewed": "2026-10-12"
    }
   },
   {
@@ -212,7 +220,8 @@
     "difficulty": 1
    },
    "review": {
-    "status": "draft"
+    "status": "approved",
+    "reviewed": "2026-10-12"
    }
   },
   {
@@ -235,7 +244,8 @@
     "difficulty": 2
    },
    "review": {
-    "status": "draft"
+    "status": "approved",
+    "reviewed": "2026-10-12"
    }
   },
   {
@@ -258,7 +268,8 @@
     "difficulty": 2
    },
    "review": {
-    "status": "draft"
+    "status": "approved",
+    "reviewed": "2026-10-12"
    }
   },
   {
@@ -281,7 +292,8 @@
     "difficulty": 2
    },
    "review": {
-    "status": "draft"
+    "status": "approved",
+    "reviewed": "2026-10-12"
    }
   },
   {
@@ -304,7 +316,8 @@
     "difficulty": 3
    },
    "review": {
-    "status": "draft"
+    "status": "approved",
+    "reviewed": "2026-10-12"
    }
   },
   {
@@ -327,7 +340,8 @@
     "difficulty": 3
    },
    "review": {
-    "status": "draft"
+    "status": "approved",
+    "reviewed": "2026-10-12"
    }
   },
   {
@@ -350,7 +364,8 @@
     "difficulty": 2
    },
    "review": {
-    "status": "draft"
+    "status": "approved",
+    "reviewed": "2026-10-12"
    }
   },
   {
@@ -373,7 +388,8 @@
     "difficulty": 2
    },
    "review": {
-    "status": "draft"
+    "status": "approved",
+    "reviewed": "2026-10-12"
    }
   },
   {
@@ -396,7 +412,8 @@
     "difficulty": 3
    },
    "review": {
-    "status": "draft"
+    "status": "approved",
+    "reviewed": "2026-10-12"
    }
   },
   {
@@ -419,7 +436,8 @@
     "difficulty": 3
    },
    "review": {
-    "status": "draft"
+    "status": "approved",
+    "reviewed": "2026-10-12"
    }
   },
   {
@@ -442,7 +460,8 @@
     "difficulty": 3
    },
    "review": {
-    "status": "draft"
+    "status": "approved",
+    "reviewed": "2026-10-12"
    }
   },
   {
@@ -467,7 +486,8 @@
     "difficulty": 3
    },
    "review": {
-    "status": "draft"
+    "status": "approved",
+    "reviewed": "2026-10-12"
    }
   }
  ]
