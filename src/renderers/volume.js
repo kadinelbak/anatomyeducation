@@ -10,7 +10,7 @@ import {
   init, RenderingEngine, Enums, volumeLoader, cache, setVolumesForViewports,
   addVolumesToViewports, utilities,
 } from "../../vendor/cornerstone/cornerstone-core.bundle.js";
-import { loadStudy, resolveView, PLANES, PLANE_AXES } from "../volume.js";
+import { loadStudy, resolveView, defaultWindow, modalityLabel, PLANES, PLANE_AXES } from "../volume.js";
 
 const GOOD = [0x2e / 255, 0xe6 / 255, 0x8a / 255];
 const BAD = [1, 0x3b / 255, 0x3b / 255];
@@ -63,8 +63,9 @@ export async function createVolumeRenderer({ container, studyUrl, onPick, contro
     const b = el("button", "vol-btn", p[0].toUpperCase() + p.slice(1)); b.type = "button"; b.dataset.plane = p;
     b.addEventListener("click", () => setPlane(p)); planeBtns[p] = b; row1.append(b);
   }
-  for (const w of Object.keys(meta.windows || {})) {
-    const b = el("button", "vol-btn", w[0].toUpperCase() + w.slice(1)); b.type = "button"; b.dataset.window = w;
+  for (const [w, preset] of Object.entries(meta.windows || {})) {
+    // A preset may carry its own button text (MR presets: Default, Tissue, Bright, Dark); CT presets use the key.
+    const b = el("button", "vol-btn", preset.label || w[0].toUpperCase() + w.slice(1)); b.type = "button"; b.dataset.window = w;
     b.addEventListener("click", () => setWindow(w)); winBtns[w] = b; row1.append(b);
   }
   const zin = el("button", "vol-btn vol-zoom", "+"), zout = el("button", "vol-btn vol-zoom", "−");
@@ -74,9 +75,13 @@ export async function createVolumeRenderer({ container, studyUrl, onPick, contro
   const slider = el("input", "vol-slider"); slider.type = "range"; slider.min = 0; slider.step = 1; slider.value = 0;
   slider.setAttribute("aria-label", "Slice");
   slider.addEventListener("input", () => setDepth(Number(slider.value)));
+  // Modality and sequence badge ("MRI · T1", with the full sequence name as a tooltip), so the student
+  // always knows which weighting they are reading. CT studies show "CT".
+  const badge = el("span", "vol-badge", modalityLabel(meta));
+  if (meta.sequenceLabel) badge.title = meta.sequenceLabel;
   row2.append(slider, zout, zin);
   toolbar.append(row1, row2);
-  root.append(label, ring, toolbar);
+  root.append(badge, label, ring, toolbar);
   container.append(root);
 
   // ---------- Cornerstone ----------
@@ -88,7 +93,7 @@ export async function createVolumeRenderer({ container, studyUrl, onPick, contro
     ImageOrientationPatient: [-1, 0, 0, 0, -1, 0], PixelSpacing: [spacing[1], spacing[0]],
   });
   const base = { dimensions: dims.slice(), spacing: spacing.slice(), origin: [0, 0, 0], direction: [-1, 0, 0, 0, -1, 0, 0, 0, 1] };
-  await volumeLoader.createLocalVolume(ctId, { ...base, scalarData: volume.ct.slice(), metadata: mkMeta(16, 1, "CT") });
+  await volumeLoader.createLocalVolume(ctId, { ...base, scalarData: volume.ct.slice(), metadata: mkMeta(16, 1, meta.modality || "CT") });
   const lab16 = volume.labels instanceof Uint16Array;
   await volumeLoader.createLocalVolume(segId, { ...base, scalarData: volume.labels.slice(), metadata: mkMeta(lab16 ? 16 : 8, 0, "SEG") });
   const ctVol = cache.getVolume(ctId);
@@ -96,7 +101,8 @@ export async function createVolumeRenderer({ container, studyUrl, onPick, contro
   const maxLabel = Math.max(1, ...Object.keys(meta.structures).map(Number));
 
   const re = new RenderingEngine(reId);
-  const state = { plane: "axial", depth: 0, window: "soft", width: 400, level: 40, outline: false, highlights: new Map(), pickEnabled: false, zoom: 1 };
+  const WIN0 = defaultWindow(meta);
+  const state = { plane: "axial", depth: 0, window: WIN0, width: meta.windows?.[WIN0]?.width ?? 400, level: meta.windows?.[WIN0]?.level ?? 40, outline: false, highlights: new Map(), pickEnabled: false, zoom: 1 };
   let vp = null;
 
   function makeViewport(plane) {
@@ -246,7 +252,7 @@ export async function createVolumeRenderer({ container, studyUrl, onPick, contro
   function wlDrag(dx, dy) {
     state.window = null; Object.values(winBtns).forEach((b) => b.classList.remove("vol-active"));
     state.width = Math.max(1, state.width * (1 + dx / 200));
-    state.level += -dy * Math.max(1, state.width / 250);
+    state.level += -dy * Math.max(1, state.width / 250); // width-relative, so it suits HU and rescaled MR alike
     applyWindow();
   }
   vpEl.addEventListener("contextmenu", (e) => e.preventDefault());
@@ -313,7 +319,7 @@ export async function createVolumeRenderer({ container, studyUrl, onPick, contro
   if (typeof ResizeObserver === "function") new ResizeObserver(onResize).observe(root);
 
   // ---------- Initial render (Cornerstone needs a frame or two before the first draw sticks) ----------
-  state.window = "soft";
+  state.window = WIN0;
   applyWindow(); applyOverlay();
   re.renderViewports([vpId]);
   await nextFrame(); await nextFrame();
@@ -334,7 +340,7 @@ export async function createVolumeRenderer({ container, studyUrl, onPick, contro
       resetView();
       const a = PLANE_AXES[v.plane].depth;
       setDepth(Math.round(v.frac * (dims[a] - 1)));
-      setWindow(meta.windows[v.window] ? v.window : "soft");
+      setWindow(meta.windows[v.window] ? v.window : WIN0);
       applyOverlay();
       label.hidden = true; ring.hidden = true;
     },
@@ -350,7 +356,7 @@ export async function createVolumeRenderer({ container, studyUrl, onPick, contro
     },
     clearHighlight() { state.highlights.clear(); applyOverlay(); },
     name: (key) => volume.name(key),
-    setDefaultLayers() { state.outline = false; setWindow("soft"); applyOverlay(); },
+    setDefaultLayers() { state.outline = false; setWindow(WIN0); applyOverlay(); },
     setPickEnabled(on) { state.pickEnabled = !!on; if (on) label.hidden = true; },
     debug: {
       volume, state, setPlane, setSlice: setDepth, setWindow, pickAt, canvasOf, currentDepth, centreVoxel,

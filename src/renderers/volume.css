@@ -15,6 +15,8 @@
   color: #e6edf3; font: inherit; cursor: pointer; }
 .vol-btn.vol-active { background: #2f6feb; border-color: #2f6feb; }
 .vol-zoom { width: 38px; padding: 0; font-size: 18px; }
+.vol-badge { position: absolute; z-index: 2; top: 44px; left: 10px; padding: 0 8px; border-radius: 6px; line-height: 26px;
+  background: rgba(22,29,38,.85); border: 1px solid #3a4654; font-weight: 600; color: #ffd24a; white-space: nowrap; cursor: default; }
 .vol-slider { flex: 1; min-width: 120px; height: 34px; accent-color: #2f6feb; }
 .vol-label { position: absolute; z-index: 4; transform: translate(12px, -28px); padding: 3px 8px; border-radius: 4px;
   background: rgba(15,20,25,.92); border: 1px solid #3a4654; pointer-events: none; white-space: nowrap; }

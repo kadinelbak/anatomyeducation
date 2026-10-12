@@ -32,7 +32,16 @@ const renderer = createRendererSwitch({
   modelUrl: CONFIG.modelUrl,
   structuresUrl: "assets/model/structures.json",
   onPick: (id) => engine.answer(id),
-  onChange: (kind) => ($("attr-ct").hidden = kind !== "volume"),
+  onChange: (kind, study, meta) => {
+    // One attribution line per scan modality; the study's manifest says which it is.
+    $("attr-ct").hidden = !(kind === "volume" && meta?.modality !== "MR");
+    $("attr-mr").hidden = !(kind === "volume" && meta?.modality === "MR");
+    if (meta?.modality === "MR") { // the MRI line names the study's own source: MR studies come from more than one dataset
+      const a = $("attr-mr-src");
+      a.textContent = `${meta.attribution || meta.source || meta.id}${meta.license ? ", " + meta.license : ""}`;
+      if (meta.sourceUrl) a.href = meta.sourceUrl; else a.removeAttribute("href");
+    }
+  },
 });
 await renderer.activate("mesh").catch((err) => {
   console.error(err);
@@ -66,7 +75,7 @@ function showNoWebGL(err) {
 
 let bank;
 try {
-  bank = await loadBanks(["assets/questions/upper-limb.json", "assets/questions/ct-trunk.json"]);
+  bank = await loadBanks(["assets/questions/upper-limb.json", "assets/questions/ct-trunk.json", "assets/questions/mri-abdomen.json", "assets/questions/mri-prostate.json"]);
 } catch (err) {
   console.error(err);
   $("loading").textContent = "Couldn't load the questions. Please reload the page.";

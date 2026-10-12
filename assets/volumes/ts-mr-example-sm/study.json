@@ -1,0 +1,302 @@
+{
+ "id": "ts-mr-example-sm",
+ "source": "TotalSegmentator example MR (wasserth/TotalSegmentator tests/reference_files/example_mr_sm.nii.gz, 3 mm)",
+ "license": "CC BY 4.0",
+ "attribution": "TotalSegmentator MRI dataset (Akinci D'Antonoli et al.)",
+ "dims": [
+  117,
+  91,
+  20
+ ],
+ "spacing": [
+  3.0,
+  3.0,
+  3.0
+ ],
+ "orientation": "RAS",
+ "modality": "MR",
+ "sourceUrl": "https://zenodo.org/records/11367005",
+ "sequence": "T1",
+ "sequenceLabel": "T1-weighted, non-contrast (abdomen, 3 mm)",
+ "intensity": {
+  "units": "arbitrary",
+  "stored_range": [
+   0,
+   4095
+  ],
+  "rescaled_from": [
+   1.0,
+   726.0
+  ],
+  "note": "0.5th..99.8th percentile of the source image mapped to 0..4095"
+ },
+ "image": {
+  "file": "image.i16.gz",
+  "dtype": "int16"
+ },
+ "ct": {
+  "file": "image.i16.gz",
+  "dtype": "int16"
+ },
+ "labels": {
+  "file": "labels.u8.gz",
+  "dtype": "uint8"
+ },
+ "defaultWindow": "soft",
+ "windows": {
+  "soft": {
+   "width": 3734,
+   "level": 1872,
+   "label": "Default"
+  },
+  "tissue": {
+   "width": 2706,
+   "level": 740,
+   "label": "Tissue"
+  },
+  "bright": {
+   "width": 2146,
+   "level": 3022,
+   "label": "Bright"
+  },
+  "dark": {
+   "width": 1480,
+   "level": 740,
+   "label": "Dark"
+  }
+ },
+ "structures": {
+  "1": {
+   "key": "spleen",
+   "name": "Spleen",
+   "group": "organ"
+  },
+  "2": {
+   "key": "kidney_right",
+   "name": "Right kidney",
+   "group": "organ"
+  },
+  "3": {
+   "key": "kidney_left",
+   "name": "Left kidney",
+   "group": "organ"
+  },
+  "4": {
+   "key": "gallbladder",
+   "name": "Gallbladder",
+   "group": "organ"
+  },
+  "5": {
+   "key": "liver",
+   "name": "Liver",
+   "group": "organ"
+  },
+  "6": {
+   "key": "stomach",
+   "name": "Stomach",
+   "group": "hollow"
+  },
+  "7": {
+   "key": "pancreas",
+   "name": "Pancreas",
+   "group": "organ"
+  },
+  "8": {
+   "key": "adrenal_gland_right",
+   "name": "Right adrenal gland",
+   "group": "organ"
+  },
+  "9": {
+   "key": "adrenal_gland_left",
+   "name": "Left adrenal gland",
+   "group": "organ"
+  },
+  "11": {
+   "key": "lung_right",
+   "name": "Right lung",
+   "group": "lung"
+  },
+  "13": {
+   "key": "small_bowel",
+   "name": "Small bowel",
+   "group": "hollow"
+  },
+  "14": {
+   "key": "duodenum",
+   "name": "Duodenum",
+   "group": "hollow"
+  },
+  "15": {
+   "key": "colon",
+   "name": "Colon",
+   "group": "hollow"
+  },
+  "19": {
+   "key": "vertebrae",
+   "name": "Vertebrae",
+   "group": "bone"
+  },
+  "20": {
+   "key": "intervertebral_discs",
+   "name": "Intervertebral discs",
+   "group": "bone"
+  },
+  "21": {
+   "key": "spinal_cord",
+   "name": "Spinal cord",
+   "group": "nervous"
+  },
+  "23": {
+   "key": "aorta",
+   "name": "Aorta",
+   "group": "vessel"
+  },
+  "24": {
+   "key": "inferior_vena_cava",
+   "name": "Inferior vena cava",
+   "group": "vessel"
+  },
+  "25": {
+   "key": "portal_vein_and_splenic_vein",
+   "name": "Portal and splenic veins",
+   "group": "vessel"
+  },
+  "46": {
+   "key": "autochthon_left",
+   "name": "Left erector spinae (autochthonous back muscles)",
+   "group": "muscle"
+  },
+  "47": {
+   "key": "autochthon_right",
+   "name": "Right erector spinae (autochthonous back muscles)",
+   "group": "muscle"
+  },
+  "48": {
+   "key": "iliopsoas_left",
+   "name": "Left iliopsoas",
+   "group": "muscle"
+  },
+  "49": {
+   "key": "iliopsoas_right",
+   "name": "Right iliopsoas",
+   "group": "muscle"
+  }
+ },
+ "views": {
+  "spleen": {
+   "plane": "axial",
+   "frac": 0.789,
+   "window": "soft"
+  },
+  "kidney_right": {
+   "plane": "axial",
+   "frac": 0.263,
+   "window": "soft"
+  },
+  "kidney_left": {
+   "plane": "axial",
+   "frac": 0.211,
+   "window": "soft"
+  },
+  "gallbladder": {
+   "plane": "axial",
+   "frac": 0.421,
+   "window": "soft"
+  },
+  "liver": {
+   "plane": "axial",
+   "frac": 0.632,
+   "window": "soft"
+  },
+  "stomach": {
+   "plane": "axial",
+   "frac": 0.579,
+   "window": "soft"
+  },
+  "pancreas": {
+   "plane": "axial",
+   "frac": 0.421,
+   "window": "soft"
+  },
+  "adrenal_gland_right": {
+   "plane": "axial",
+   "frac": 0.789,
+   "window": "soft"
+  },
+  "adrenal_gland_left": {
+   "plane": "axial",
+   "frac": 0.474,
+   "window": "soft"
+  },
+  "lung_right": {
+   "plane": "axial",
+   "frac": 1.0,
+   "window": "soft"
+  },
+  "small_bowel": {
+   "plane": "axial",
+   "frac": 0.053,
+   "window": "soft"
+  },
+  "duodenum": {
+   "plane": "axial",
+   "frac": 0.211,
+   "window": "soft"
+  },
+  "colon": {
+   "plane": "axial",
+   "frac": 0.474,
+   "window": "soft"
+  },
+  "vertebrae": {
+   "plane": "axial",
+   "frac": 0.474,
+   "window": "soft"
+  },
+  "intervertebral_discs": {
+   "plane": "coronal",
+   "frac": 0.322,
+   "window": "soft"
+  },
+  "spinal_cord": {
+   "plane": "axial",
+   "frac": 0.526,
+   "window": "soft"
+  },
+  "aorta": {
+   "plane": "axial",
+   "frac": 0.579,
+   "window": "soft"
+  },
+  "inferior_vena_cava": {
+   "plane": "axial",
+   "frac": 0.474,
+   "window": "soft"
+  },
+  "portal_vein_and_splenic_vein": {
+   "plane": "axial",
+   "frac": 0.526,
+   "window": "soft"
+  },
+  "autochthon_left": {
+   "plane": "axial",
+   "frac": 0.474,
+   "window": "soft"
+  },
+  "autochthon_right": {
+   "plane": "axial",
+   "frac": 0.474,
+   "window": "soft"
+  },
+  "iliopsoas_left": {
+   "plane": "axial",
+   "frac": 0.105,
+   "window": "soft"
+  },
+  "iliopsoas_right": {
+   "plane": "axial",
+   "frac": 0.105,
+   "window": "soft"
+  }
+ }
+}

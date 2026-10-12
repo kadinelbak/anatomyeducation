@@ -31,7 +31,7 @@ export function createRendererSwitch({ viewer, onPick, modelUrl, structuresUrl, 
     volBox.hidden = kind !== "volume";
     for (const [id, r] of volumes) r.debug.root.hidden = !(kind === "volume" && id === study);
     document.body.classList.toggle("mode-volume", kind === "volume");
-    onChange?.(kind, study);
+    onChange?.(kind, study, kind === "volume" ? volumes.get(study)?.debug.volume.meta : null);
   }
 
   const sw = {

@@ -22,6 +22,19 @@ async function fetchGzip(url, ctor) {
 }
 
 export const PLANES = ["axial", "coronal", "sagittal"];
+
+// The study's default window preset: study.json's defaultWindow, else "soft" (every CT study has it), else the first preset.
+export function defaultWindow(meta) {
+  const w = meta?.windows || {};
+  if (meta?.defaultWindow && w[meta.defaultWindow]) return meta.defaultWindow;
+  return w.soft ? "soft" : Object.keys(w)[0] || "soft";
+}
+
+// Short modality label for the viewer badge and set titles: "CT", or "MRI · T1" for an MR study.
+export function modalityLabel(meta) {
+  const mod = meta?.modality === "MR" ? "MRI" : meta?.modality || "CT";
+  return meta?.sequence ? `${mod} · ${meta.sequence}` : mod;
+}
 // Which volume axis a plane steps along, and which two axes it shows (u = screen x, v = screen y).
 // RAS voxel axes: 0 = x (left->right), 1 = y (posterior->anterior), 2 = z (inferior->superior).
 export const PLANE_AXES = {
@@ -39,7 +52,7 @@ export async function loadStudy(studyUrl) {
   const n = nx * ny * nz;
   const labelCtor = meta.labels.dtype === "uint16" ? Uint16Array : Uint8Array;
   const [ct, labels] = await Promise.all([
-    fetchGzip(new URL(meta.ct.file, base), Int16Array),
+    fetchGzip(new URL((meta.image || meta.ct).file, base), Int16Array), // "image" for MR studies, "ct" for CT
     fetchGzip(new URL(meta.labels.file, base), labelCtor),
   ]);
   if (ct.length !== n || labels.length !== n) {
@@ -143,7 +156,7 @@ export function createVolume(meta, ct, labels) {
 }
 
 // Parse a question's `view`: a named view from the study, or "plane:frac[:window]".
-export function resolveView(meta, view, fallback = { plane: "axial", frac: 0.5, window: "soft" }) {
+export function resolveView(meta, view, fallback = { plane: "axial", frac: 0.5, window: defaultWindow(meta) }) {
   if (!view) return { ...fallback };
   if (meta.views && meta.views[view]) return { ...fallback, ...meta.views[view] };
   const [plane, frac, window] = String(view).split(":");

@@ -104,15 +104,19 @@ async function playCT(page) {
     await page.waitForTimeout(700);
     const spot = await page.evaluate(() => {
       const a = window.__app, q = a.QUESTIONS[a.quiz.index], d = a.switch.debug, vol = d.volume;
-      const key = q.accept[0], value = vol.valueOf(key);
       if (!d.state.pickEnabled) return { id: q.id, why: "pick not enabled" };
       const ax = { axial: [0, 1, 2], coronal: [0, 2, 1], sagittal: [1, 2, 0] }[d.state.plane]; // u, v, depth axes
-      if (vol.boundsOf(key) && d.volume.labelAt) { /* bounds exist */ }
-      const dims = vol.dims, ijk = [0, 0, 0], pts = [];
+      const dims = vol.dims, ijk = [0, 0, 0];
       ijk[ax[2]] = d.currentDepth();
-      for (let u = 0; u < dims[ax[0]]; u++) for (let v = 0; v < dims[ax[1]]; v++) {
-        ijk[ax[0]] = u; ijk[ax[1]] = v;
-        if (vol.labelAt(ijk[0], ijk[1], ijk[2]) === value) pts.push([u, v]);
+      // Any accepted structure counts; the named target first, since the view was chosen for it.
+      let key = null, pts = [];
+      for (const k of [q.target, ...q.accept].filter(Boolean)) {
+        const value = vol.valueOf(k); pts = [];
+        for (let u = 0; u < dims[ax[0]]; u++) for (let v = 0; v < dims[ax[1]]; v++) {
+          ijk[ax[0]] = u; ijk[ax[1]] = v;
+          if (vol.labelAt(ijk[0], ijk[1], ijk[2]) === value) pts.push([u, v]);
+        }
+        if (pts.length) { key = k; break; }
       }
       if (!pts.length) return { id: q.id, why: "target not on the shown slice" };
       const cu = pts.reduce((s, p) => s + p[0], 0) / pts.length, cv = pts.reduce((s, p) => s + p[1], 0) / pts.length;

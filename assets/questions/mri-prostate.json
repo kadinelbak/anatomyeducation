@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "region": "mri-prostate",
+  "study": "msd-prostate-04",
+  "modality": "MRI",
+  "sequence": "T2",
+  "questions": [
+    {
+      "id": "mr-prostate-pz-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "msd-prostate-04",
+      "target": "peripheral_zone",
+      "accept": [
+        "peripheral_zone"
+      ],
+      "prompt": "On this T2-weighted prostate MRI, click the peripheral zone.",
+      "hint": "The crescent at the back and sides of the gland, bright on T2.",
+      "view": "peripheral_zone",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The peripheral zone is the bright, glandular crescent posterior and lateral to the transition zone on T2 images, and it is where about 70 percent of prostate cancers arise. A focal dark area within it is the typical appearance of a tumour on PI-RADS reading.",
+      "tags": {
+        "topic": "organs",
+        "region": "pelvis",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "mr-prostate-tz-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "msd-prostate-04",
+      "target": "transition_zone",
+      "accept": [
+        "transition_zone"
+      ],
+      "prompt": "On this T2-weighted prostate MRI, click the transition zone.",
+      "hint": "The central part of the gland around the urethra, darker and more heterogeneous than the rim around it.",
+      "view": "transition_zone",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The transition zone surrounds the proximal urethra and enlarges with benign prostatic hyperplasia, giving a heterogeneous nodular appearance on T2. Tumours here are harder to see, so diffusion imaging adds the most value in this zone.",
+      "tags": {
+        "topic": "organs",
+        "region": "pelvis",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "mr-pirads-pz",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "msd-prostate-04",
+      "target": "peripheral_zone",
+      "accept": [
+        "peripheral_zone"
+      ],
+      "prompt": "A 66-year-old has a PSA of 9 ng/mL. On MRI there is a focal, lens-shaped dark area in the part of the gland that is normally bright on T2, with restricted diffusion. Click the zone where this lesion sits.",
+      "hint": "The bright crescent at the back of the gland.",
+      "view": "peripheral_zone",
+      "layers": [],
+      "explain": "A focal hypointense lesion in the normally bright peripheral zone with restricted diffusion is the classic PI-RADS 4 to 5 appearance of a clinically significant cancer, and the target for MRI-guided biopsy.",
+      "tags": {
+        "topic": "organs",
+        "region": "pelvis",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "mr-bph-tz",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "msd-prostate-04",
+      "target": "transition_zone",
+      "accept": [
+        "transition_zone"
+      ],
+      "prompt": "A 72-year-old has nocturia, a weak stream and a smoothly enlarged gland on examination. MRI shows a markedly enlarged central gland with well-defined nodules and a thinned bright rim. Click the zone that has enlarged.",
+      "hint": "The central part of the gland around the urethra.",
+      "view": "transition_zone",
+      "layers": [],
+      "explain": "Benign prostatic hyperplasia enlarges the transition zone, which compresses the peripheral zone into a thin bright rim on T2. Encapsulated nodules with a mix of bright and dark signal are typical of BPH rather than cancer.",
+      "tags": {
+        "topic": "organs",
+        "region": "pelvis",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "draft"
+      }
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+ "id": "msd-prostate-04",
+ "source": "Medical Segmentation Decathlon Task05 Prostate, case prostate_04 (T2 channel)",
+ "license": "CC BY-SA 4.0",
+ "attribution": "Medical Segmentation Decathlon, Task05 Prostate (Antonelli et al., Radboud UMC)",
+ "dims": [
+  184,
+  171,
+  15
+ ],
+ "spacing": [
+  0.6,
+  0.6,
+  4.0
+ ],
+ "orientation": "RAS",
+ "modality": "MR",
+ "sourceUrl": "http://medicaldecathlon.com/",
+ "sequence": "T2",
+ "sequenceLabel": "T2-weighted (prostate, 0.6 mm axial)",
+ "intensity": {
+  "units": "arbitrary",
+  "stored_range": [
+   0,
+   4095
+  ],
+  "rescaled_from": [
+   31.0,
+   1028.0
+  ],
+  "note": "0.5th..99.8th percentile of the source image mapped to 0..4095"
+ },
+ "image": {
+  "file": "image.i16.gz",
+  "dtype": "int16"
+ },
+ "ct": {
+  "file": "image.i16.gz",
+  "dtype": "int16"
+ },
+ "labels": {
+  "file": "labels.u8.gz",
+  "dtype": "uint8"
+ },
+ "defaultWindow": "soft",
+ "windows": {
+  "soft": {
+   "width": 3520,
+   "level": 1830,
+   "label": "Default"
+  },
+  "tissue": {
+   "width": 2510,
+   "level": 1339,
+   "label": "Tissue"
+  },
+  "bright": {
+   "width": 2029,
+   "level": 3080,
+   "label": "Bright"
+  },
+  "dark": {
+   "width": 1647,
+   "level": 824,
+   "label": "Dark"
+  }
+ },
+ "structures": {
+  "1": {
+   "key": "peripheral_zone",
+   "name": "Peripheral zone of the prostate",
+   "group": "organ"
+  },
+  "2": {
+   "key": "transition_zone",
+   "name": "Transition zone of the prostate",
+   "group": "organ"
+  }
+ },
+ "views": {
+  "peripheral_zone": {
+   "plane": "axial",
+   "frac": 0.571,
+   "window": "soft"
+  },
+  "transition_zone": {
+   "plane": "axial",
+   "frac": 0.643,
+   "window": "soft"
+  }
+ }
+}

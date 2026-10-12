@@ -40,6 +40,8 @@ export function utcDate() {
 }
 
 const isMesh = (q) => q.renderer !== "volume";
+// Scan sets are titled by the modality the bank records carry in tags.modality ("CT", "MRI"); CT when absent.
+const modalityOf = (qs) => qs.find((q) => q.tags?.modality)?.tags.modality || "CT";
 
 export function buildSets(allQuestions) {
   const questions = allQuestions.filter(isMesh);
@@ -62,9 +64,12 @@ export function buildSets(allQuestions) {
   // One CT set per volume study in the bank.
   const studies = [...new Set(allQuestions.filter((q) => q.renderer === "volume" && q.study).map((q) => q.study))];
   for (const study of studies) {
+    const mine = allQuestions.filter((q) => q.renderer === "volume" && q.study === study);
+    const mod = modalityOf(mine);
+    const sameMod = studies.filter((s) => modalityOf(allQuestions.filter((q) => q.renderer === "volume" && q.study === s)) === mod);
     sets.push({
-      id: `ct:${study}`, renderer: "volume", study,
-      title: studies.length === 1 ? "CT scan" : `CT: ${study}`,
+      id: `ct:${study}`, renderer: "volume", study, modality: mod,
+      title: sameMod.length === 1 ? `${mod} scan` : `${mod}: ${cap(mine[0]?.tags?.region || study)}`,
       pick: (qs) => shuffled(qs.filter((q) => q.renderer === "volume" && q.study === study), Math.random() + "").slice(0, SIZE),
     });
   }
@@ -79,7 +84,7 @@ export function explicitSet(ids, byId, title = "hand anatomy") {
   const renderer = list[0]?.renderer || "mesh";
   const study = renderer === "volume" ? list[0].study : undefined;
   list = list.filter((q) => (q.renderer || "mesh") === renderer && (renderer !== "volume" || q.study === study));
-  if (renderer === "volume" && title === "hand anatomy") title = "CT scan";
+  if (renderer === "volume" && title === "hand anatomy") title = `${modalityOf(list)} scan`;
   return list.length ? { id: "custom", title, renderer, study, pick: () => list } : null;
 }
 

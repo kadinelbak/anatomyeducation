@@ -1,0 +1,483 @@
+{
+  "version": 1,
+  "region": "mri-abdomen",
+  "study": "ts-mr-example-sm",
+  "modality": "MRI",
+  "sequence": "T1",
+  "questions": [
+    {
+      "id": "mr-liver-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-example-sm",
+      "target": "liver",
+      "accept": [
+        "liver"
+      ],
+      "prompt": "On this T1-weighted MRI, click the liver.",
+      "hint": "The largest organ in the right upper abdomen. On T1 it is brighter than the spleen.",
+      "view": "liver",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The liver is the brightest large solid organ on non-contrast T1-weighted MRI because of its glycogen and protein content, while the spleen is darker. Fatty infiltration raises its T1 signal further; iron overload lowers it.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "mr-spleen-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-example-sm",
+      "target": "spleen",
+      "accept": [
+        "spleen"
+      ],
+      "prompt": "On this T1-weighted MRI, click the spleen.",
+      "hint": "Left upper quadrant, under the diaphragm, behind the stomach. Darker than the liver on T1.",
+      "view": "spleen",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The spleen has longer T1 and T2 relaxation times than the liver, so it is darker on T1 and brighter on T2. That liver-spleen contrast is one of the quickest ways to tell a T1 from a T2 abdominal image.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "mr-kidney-left-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-example-sm",
+      "target": "kidney_left",
+      "accept": [
+        "kidney_left"
+      ],
+      "prompt": "On this T1-weighted MRI, click the left kidney.",
+      "hint": "Beside the spine, below the spleen. On T1 the cortex is slightly brighter than the medulla.",
+      "view": "kidney_left",
+      "layers": [
+        "outline"
+      ],
+      "explain": "On T1-weighted MRI without contrast the renal cortex is brighter than the medulla (corticomedullary differentiation), which is lost in many diffuse renal diseases. Remember that patient left is on the viewer's right.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "mr-pancreas-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-example-sm",
+      "target": "pancreas",
+      "accept": [
+        "pancreas"
+      ],
+      "prompt": "On this T1-weighted MRI, click the pancreas.",
+      "hint": "It lies across the upper abdomen behind the stomach, in front of the splenic vein. On T1 it is one of the brightest organs.",
+      "view": "pancreas",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The normal pancreas is bright on fat-suppressed T1 because of its protein-rich acinar cells, which is why loss of T1 signal is an early sign of pancreatitis or tumour. The splenic vein runs along its posterior surface.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "mr-gallbladder-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-example-sm",
+      "target": "gallbladder",
+      "accept": [
+        "gallbladder"
+      ],
+      "prompt": "On this T1-weighted MRI, click the gallbladder.",
+      "hint": "A sac on the underside of the liver. Its bile is usually dark on T1 and very bright on T2.",
+      "view": "gallbladder",
+      "layers": [
+        "outline"
+      ],
+      "explain": "Simple bile is fluid, so it is dark on T1 and bright on T2. Concentrated bile after fasting can become bright on T1 as well, so always compare both weightings before calling a signal change abnormal.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "mr-adrenal-right-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-example-sm",
+      "target": "adrenal_gland_right",
+      "accept": [
+        "adrenal_gland_right"
+      ],
+      "prompt": "On this T1-weighted MRI, click the right adrenal gland.",
+      "hint": "A thin Y-shaped structure above the right kidney, behind the IVC and medial to the liver.",
+      "view": "adrenal_gland_right",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The right adrenal lies posterior to the inferior vena cava, medial to the right lobe of the liver and lateral to the crus. MRI is used to characterise adrenal masses: a lipid-rich adenoma loses signal on opposed-phase T1 images.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "mr-aorta-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-example-sm",
+      "target": "aorta",
+      "accept": [
+        "aorta"
+      ],
+      "prompt": "On this T1-weighted MRI, click the abdominal aorta.",
+      "hint": "The round vessel just in front of the vertebral body, slightly left of midline. Flowing blood is dark on this sequence.",
+      "view": "aorta",
+      "layers": [
+        "outline"
+      ],
+      "explain": "On spin-echo T1 images, flowing blood gives little signal (a flow void), so the aorta appears as a dark circle anterior to the spine, left of midline. The IVC lies to its right and is usually flatter.",
+      "tags": {
+        "topic": "vessels",
+        "region": "abdomen",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "mr-ivc-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-example-sm",
+      "target": "inferior_vena_cava",
+      "accept": [
+        "inferior_vena_cava"
+      ],
+      "prompt": "On this T1-weighted MRI, click the inferior vena cava.",
+      "hint": "The large vein to the right of the aorta, behind the liver, often oval rather than round.",
+      "view": "inferior_vena_cava",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The IVC runs on the right of the aorta and passes through the bare area of the liver before the diaphragm. On MRI it may show a flow void or, with slow flow, intermediate signal; its shape changes with respiration and volume status.",
+      "tags": {
+        "topic": "vessels",
+        "region": "abdomen",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "mr-vertebrae-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-example-sm",
+      "target": "vertebrae",
+      "accept": [
+        "vertebrae"
+      ],
+      "prompt": "On this T1-weighted MRI, click a vertebral body.",
+      "hint": "The bright square blocks in the midline behind the aorta, separated by darker discs.",
+      "view": "vertebrae",
+      "layers": [
+        "outline"
+      ],
+      "explain": "Vertebral bodies are bright on T1 because adult marrow is largely fat. Marrow that is darker than the adjacent disc on T1 is abnormal and suggests infiltration, such as metastases or myeloma.",
+      "tags": {
+        "topic": "bones",
+        "region": "abdomen",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "mr-disc-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-example-sm",
+      "target": "intervertebral_discs",
+      "accept": [
+        "intervertebral_discs"
+      ],
+      "prompt": "On this T1-weighted MRI, click an intervertebral disc.",
+      "hint": "The thinner, darker bands between the bright vertebral bodies.",
+      "view": "intervertebral_discs",
+      "layers": [
+        "outline"
+      ],
+      "explain": "Discs are mostly water and proteoglycan, so they are darker than fatty marrow on T1 and bright on T2 while healthy. A disc that has lost its T2 brightness is degenerate.",
+      "tags": {
+        "topic": "bones",
+        "region": "abdomen",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "mr-spinal-cord-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-example-sm",
+      "target": "spinal_cord",
+      "accept": [
+        "spinal_cord"
+      ],
+      "prompt": "On this T1-weighted MRI, click the spinal cord.",
+      "hint": "Inside the spinal canal, behind the vertebral bodies. On T1 the cord is a little brighter than the CSF around it.",
+      "view": "spinal_cord",
+      "layers": [
+        "outline"
+      ],
+      "explain": "On T1 the cord has intermediate signal and the surrounding CSF is dark; on T2 the pattern reverses and CSF becomes bright. At these lower thoracic and upper lumbar levels the cord is narrowing toward the conus.",
+      "tags": {
+        "topic": "nerves",
+        "region": "abdomen",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "mr-iliopsoas-right-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-example-sm",
+      "target": "iliopsoas_right",
+      "accept": [
+        "iliopsoas_right"
+      ],
+      "prompt": "On this T1-weighted MRI, click the right psoas muscle.",
+      "hint": "Beside the lumbar vertebral bodies, a round muscle that grows larger lower down.",
+      "view": "iliopsoas_right",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The psoas major arises from the lumbar transverse processes and vertebral bodies and runs down to join iliacus. Muscle has intermediate signal on T1, darker than fat but brighter than fluid.",
+      "tags": {
+        "topic": "muscles",
+        "region": "abdomen",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "mr-hcc-cirrhosis",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-example-sm",
+      "target": "liver",
+      "accept": [
+        "liver"
+      ],
+      "prompt": "A 62-year-old with hepatitis B cirrhosis has a rising alpha-fetoprotein. Contrast-enhanced MRI is planned to look for hepatocellular carcinoma. Click the organ being screened.",
+      "hint": "The organ with the cirrhosis.",
+      "view": "liver",
+      "layers": [],
+      "explain": "Hepatocellular carcinoma arises in the cirrhotic liver and is diagnosed on multiphase MRI by arterial-phase enhancement with later washout and a capsule (LI-RADS). MRI is preferred to CT for small lesions because of its better soft-tissue contrast.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "mr-pancreatitis-t1",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-example-sm",
+      "target": "pancreas",
+      "accept": [
+        "pancreas"
+      ],
+      "prompt": "A 50-year-old with severe epigastric pain and a lipase five times normal has an MRI. The gland has lost its normal bright T1 signal and is swollen. Click the inflamed organ.",
+      "hint": "Behind the stomach, across the midline.",
+      "view": "pancreas",
+      "layers": [],
+      "explain": "In acute pancreatitis the oedematous gland loses the high T1 signal of the normal pancreas, enlarges, and the peripancreatic fat becomes bright on T2 from fluid. MRCP on the same study can show a causative gallstone.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "mr-adrenal-adenoma",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-example-sm",
+      "target": "adrenal_gland_left",
+      "accept": [
+        "adrenal_gland_left"
+      ],
+      "prompt": "A 45-year-old has an incidental 2 cm left adrenal nodule on CT. Chemical-shift MRI is requested to show whether it is a lipid-rich adenoma. Click the gland containing the nodule.",
+      "hint": "Above and medial to the left kidney, lateral to the crus.",
+      "view": "adrenal_gland_left",
+      "layers": [],
+      "explain": "Lipid-rich adrenal adenomas lose signal on opposed-phase compared with in-phase T1 gradient-echo images (chemical shift), which separates them from metastases and phaeochromocytoma without biopsy.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "mr-discitis",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-example-sm",
+      "target": "intervertebral_discs",
+      "accept": [
+        "intervertebral_discs"
+      ],
+      "prompt": "A 70-year-old with back pain, fever and raised CRP after a urinary infection has spinal MRI showing a bright disc on T2 with loss of the adjacent endplates. Click the structure that is infected.",
+      "hint": "The dark band between two vertebral bodies.",
+      "view": "intervertebral_discs",
+      "layers": [],
+      "explain": "Spondylodiscitis starts in the disc and adjacent endplates: the disc is bright on T2, dark on T1, and enhances after gadolinium, with marrow oedema on both sides. MRI is the imaging test of choice because it shows the changes before plain films do.",
+      "tags": {
+        "topic": "bones",
+        "region": "abdomen",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "mr-renal-mass-t1",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-example-sm",
+      "target": "kidney_right",
+      "accept": [
+        "kidney_right"
+      ],
+      "prompt": "A 58-year-old has painless haematuria. Ultrasound shows a solid right renal mass, and MRI is used to stage it and check for tumour thrombus. Click the organ containing the mass.",
+      "hint": "Beside the spine, below the liver, on the viewer's left.",
+      "view": "kidney_right",
+      "layers": [],
+      "explain": "Renal cell carcinoma is staged with MRI when CT contrast is contraindicated; the key question is whether tumour extends into the renal vein and inferior vena cava, which changes the surgical approach.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "draft"
+      }
+    },
+    {
+      "id": "mr-portal-vein-thrombosis",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-example-sm",
+      "target": "portal_vein_and_splenic_vein",
+      "accept": [
+        "portal_vein_and_splenic_vein"
+      ],
+      "prompt": "A patient with cirrhosis develops abdominal pain and new ascites. MRI shows an absent flow void and an enhancing filling defect in the vein that carries blood from the gut to the liver. Click that vein.",
+      "hint": "It runs toward the liver hilum, behind the pancreas.",
+      "view": "portal_vein_and_splenic_vein",
+      "layers": [],
+      "explain": "Portal vein thrombosis is a common complication of cirrhosis and of hepatocellular carcinoma. On MRI, lost flow void and a non-enhancing or enhancing (tumour) filling defect in the portal vein make the diagnosis.",
+      "tags": {
+        "topic": "vessels",
+        "region": "abdomen",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "draft"
+      }
+    }
+  ]
+}
