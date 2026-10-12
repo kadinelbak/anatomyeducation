@@ -8,6 +8,9 @@ export const CONFIG = {
     "upper-limb": { title: "Upper limb", modelUrl: "assets/model/arm.glb", structuresUrl: "assets/model/structures.json" },
     "lower-limb": { title: "Lower limb", modelUrl: "assets/model/lower-limb.glb", structuresUrl: "assets/model/lower-limb.structures.json" },
   },
+  // On a host that serves only text files (the hosted copy), the study files
+  // are fetched as their base64 ".b64.txt" copies straight away.
+  textAssets: false,
   eventsUrl: "api/event",
   signupUrl: "api/signup",
   // The PRD requires clinician approval before public launch. Set this to

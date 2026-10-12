@@ -1,4 +1,5 @@
 // Study loader and voxel helpers. No DOM, no rendering library.
+import { CONFIG } from "./config.js";
 // A study is study.json plus two gzip'd typed arrays (docs/volume-format.md).
 
 // Hosts that only serve text files get the same bytes base64-encoded in a
@@ -7,7 +8,7 @@ async function fetchGzip(url, ctor) {
   if (typeof DecompressionStream !== "function") {
     throw new Error("This browser cannot decompress gzip streams (DecompressionStream missing).");
   }
-  let res = await fetch(url).catch(() => null);
+  let res = CONFIG.textAssets ? null : await fetch(url).catch(() => null);
   let body;
   if (res && res.ok) {
     body = res.body;
