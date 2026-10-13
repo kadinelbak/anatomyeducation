@@ -14,6 +14,14 @@ const errors = [];
 let failures = 0;
 const ok = (cond, msg) => { console.log(`${cond ? "ok  " : "FAIL"} ${msg}`); if (!cond) failures++; };
 
+// The app shows the question at once and swaps study / jumps to the slice asynchronously; picks are ignored
+// (debug.loading > 0) until that finishes. Wait for the settled state, not a fixed delay.
+const settled = (page) => page.waitForFunction(() => {
+  const a = window.__app, d = a.switch.debug, q = a.QUESTIONS[a.quiz.index];
+  if (!d.volume || d.loading !== 0 || (q && q.study && d.volume.meta.id !== q.study)) return false;
+  return !document.querySelector(".vol-btn[data-window]") || !!document.querySelector(".vol-btn[data-window].vol-active");
+}, null, { timeout: 90000 });
+
 async function play(setId, expect) {
   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
   page.on("pageerror", (e) => errors.push(e.message));
@@ -24,8 +32,7 @@ async function play(setId, expect) {
   if (expect.title) ok(chips.includes(expect.title), `set chip "${expect.title}" offered (chips: ${chips.join(" | ")})`);
   await page.click("#start");
   await page.waitForSelector("#question:not([hidden])", { timeout: 120000 });
-  await page.waitForSelector(".vol-btn[data-window].vol-active", { timeout: 15000 }).catch(() => {});
-  await page.waitForTimeout(500);
+  await settled(page);
   const ui = await page.evaluate(() => ({
     badge: document.querySelector(".vol-badge")?.textContent, badgeTitle: document.querySelector(".vol-badge")?.title,
     wins: [...document.querySelectorAll(".vol-btn[data-window]")].map((b) => b.textContent),
@@ -42,7 +49,7 @@ async function play(setId, expect) {
   const n = await page.evaluate(() => window.__app.QUESTIONS.length);
   let failed = 0;
   for (let i = 0; i < n; i++) {
-    await page.waitForTimeout(600);
+    await settled(page);
     const spot = await page.evaluate(() => {
       const a = window.__app, q = a.QUESTIONS[a.quiz.index], d = a.switch.debug, vol = d.volume;
       const key = q.accept[0], value = vol.valueOf(key);
