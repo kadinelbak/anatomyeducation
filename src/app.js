@@ -55,14 +55,12 @@ const renderer = createRendererSwitch({
     $("attr-ct").hidden = $("attr-ct").hidden || kind === "slide" || kind === "cell";
     $("attr-hist").hidden = kind !== "slide";
     $("attr-cell").hidden = kind !== "cell";
-    if (kind === "slide" || kind === "cell") { // one line per study: the manifest names its source and licence
-      const a = $(kind === "slide" ? "attr-hist-src" : "attr-cell-src");
+    if (kind === "slide") { // one line per study: the manifest names its source and licence
+      const a = $("attr-hist-src");
       a.textContent = `${meta?.attribution || meta?.source || id}, ${meta?.license || ""}${meta?.synthetic ? " (stylised placeholder, not a micrograph)" : ""}`;
       if (meta?.sourceUrl) a.href = meta.sourceUrl; else a.removeAttribute("href");
-      if (kind === "cell") $("attr-cell-note").textContent = meta?.synthetic === false
-        ? "Surfaces reconstructed from the segmented microscope image of one real cell (membrane, nucleus and the tagged structure); other organelles are not shown"
-        : "Stylised 3D model built from primitives, not a reconstruction";
     }
+    if (kind === "cell") cellAttribution(meta, id);
     renderZoomChips(kind, id, meta);
     if (meta?.modality === "MR") { // the MRI line names the study's own source: MR studies come from more than one dataset
       const a = $("attr-mr-src");
@@ -71,6 +69,19 @@ const renderer = createRendererSwitch({
     }
   },
 });
+
+// The cell line follows the study and the cell renderer's view: a labelled diagram credits the diagram, 3D the model.
+function cellAttribution(meta, id) {
+  const a = $("attr-cell-src"), diagram = renderer.cell?.mode === "diagram" && meta?.diagram;
+  const src = diagram ? meta.diagram : meta;
+  a.textContent = `${src?.attribution || src?.source || id}, ${src?.license || ""}${meta?.synthetic && !diagram ? " (stylised placeholder, not a micrograph)" : ""}`;
+  if (!diagram && meta?.sourceUrl) a.href = meta.sourceUrl; else a.removeAttribute("href");
+  $("attr-cell-note").textContent = diagram ? "Teaching illustration, not a micrograph"
+    : meta?.synthetic === false
+      ? "Surfaces reconstructed from the segmented microscope image of one real cell (membrane, nucleus and the tagged structure); other organelles are not shown"
+      : "Stylised 3D model built from primitives, not a reconstruction";
+}
+$("viewer").addEventListener("cellmode", () => { if (renderer.active === "cell") cellAttribution(renderer.cell?.meta, renderer.study); });
 
 // No WebGL: say why, and offer a way out of an embedded viewer.
 function showNoWebGL(err) {
@@ -524,5 +535,5 @@ $("start").disabled = false;
 for (const k of ["viewTween", "controls", "camera", "meshesByStructure", "pick", "setView", "setLayers"]) {
   Object.defineProperty(app, k, { get: () => renderer.mesh?.debug[k] });
 }
-Object.assign(app, { quiz: engine.state, answer: engine.answer, engine, renderer, switch: renderer });
+Object.assign(app, { quiz: engine.state, answer: engine.answer, engine, renderer, switch: renderer, openExplore });
 app.QUESTIONS ||= engine.current;

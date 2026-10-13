@@ -17,8 +17,21 @@
 .cl-loading { position: absolute; inset: 0; z-index: 5; display: flex; align-items: center; justify-content: center;
   background: rgba(0,0,0,.6); font-size: 16px; pointer-events: none; }
 .cl-label[hidden], .cl-loading[hidden] { display: none; }
-/* Narrow screens: badge on its own row, six compact buttons on one row, all inside the top 110px. */
+/* Diagram view: the labelled SVG on a paper card below the toolbar. Regions are <g data-part>; see docs/cell-diagrams.md. */
+.cl-diagram { position: absolute; left: 0; right: 0; top: 88px; bottom: 0; background: #f6f3ec; touch-action: none; cursor: grab; }
+.cl-diagram[hidden], .cl-viewport[hidden], .cl-btn[hidden] { display: none; }
+.cl-diagram.dg-panning { cursor: grabbing; }
+.cl-svg { display: block; width: 100%; height: 100%; }
+.cl-svg [data-part] { cursor: pointer; outline: none; }
+.cl-svg [data-part].dg-hover { filter: brightness(1.1) drop-shadow(0 0 2px #2f6feb) drop-shadow(0 0 4px rgba(47,111,235,.6)); }
+.cl-svg [data-part].dg-good { filter: url(#cl-dg-good); }
+.cl-svg [data-part].dg-bad { filter: url(#cl-dg-bad); }
+.cl-svg .dg-labels { pointer-events: none; }
+.cl-svg.dg-nolabels .dg-labels { display: none; }
+.cl-btn.cl-mode + .cl-btn.cl-mode { margin-left: -4px; }
+/* Narrow screens: badge on its own row, the compact buttons on one row, all inside the top 110px. */
 @media (max-width: 600px) {
+  .cl-diagram { top: 112px; }
   .cl-toolbar { gap: 3px; padding: 2px 6px; }
   .cl-badge { line-height: 26px; font-size: 12px; }
   .cl-btn { min-height: 28px; padding: 0 8px; font-size: 12px; }

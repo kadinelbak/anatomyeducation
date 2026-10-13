@@ -9,6 +9,11 @@
 // `jitter` (number or [jx,jy,jz], deterministic random offset), `ring: [radius, axis, startDeg, perTurn]` (copies
 // spread around an axis), `spin: true` + `spinStart`/`spinArc` degrees (copies fanned about z, for tubes) and
 // `rotJitter`. Without these a stamped part's copies would all sit on top of each other.
+//
+// Diagram view (docs/cell-diagrams.md): a study with `diagram: { file, attribution, license }` also has a labelled 2D
+// SVG whose `<g data-part="KEY">` regions use the same keys as the 3D parts, so picks, highlights and question
+// accept lists work unchanged. Those studies open in the diagram by default; the Diagram / 3D buttons switch, and the
+// choice is remembered. The 3D scene is still built for them (names come from it) but not drawn while hidden.
 import * as THREE from "three";
 import { TrackballControls } from "three/addons/controls/TrackballControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
@@ -97,16 +102,24 @@ export async function createCellRenderer({ container, studiesBase = "assets/cell
     b.addEventListener("click", fn);
     return b;
   };
-  const bOverview = mkBtn("Overview", "", "Default view", () => applyView(study?.defaultView, true));
+  const bOverview = mkBtn("Overview", "", "Default view", () => (usingDiagram() ? dgHome() : applyView(study?.defaultView, true)));
   const bCut = mkBtn("Cutaway", "", "Toggle the cutaway", () => toggleLayer("cutaway"));
-  const bLabels = mkBtn("Labels", "", "Toggle the part names", () => toggleLayer("labels"));
-  const bReset = mkBtn("Reset", "", "Default layers and view", () => { setDefaultLayers(); applyView(study?.defaultView, true); });
-  const bOut = mkBtn("−", "cl-zoom", "Zoom out", () => zoomBy(1.25));
-  const bIn = mkBtn("+", "cl-zoom", "Zoom in", () => zoomBy(0.8));
-  toolbar.append(badge, bOverview, bCut, bLabels, bReset, bOut, bIn);
+  const bLabels = mkBtn("Labels", "", "Toggle the part names", () => (usingDiagram() ? setDgLabels(!dgLabels) : toggleLayer("labels")));
+  const bReset = mkBtn("Reset", "", "Default layers and view", () => { setDefaultLayers(); applyView(study?.defaultView, true); dgHome(); });
+  const bOut = mkBtn("−", "cl-zoom", "Zoom out", () => (usingDiagram() ? dgZoom(1.25) : zoomBy(1.25)));
+  const bIn = mkBtn("+", "cl-zoom", "Zoom in", () => (usingDiagram() ? dgZoom(0.8) : zoomBy(0.8)));
+  const bDiagram = mkBtn("Diagram", "cl-mode", "Labelled 2D diagram", () => setMode("diagram"));
+  const b3d = mkBtn("3D", "cl-mode", "Stylised 3D model", () => setMode("3d"));
+  toolbar.append(badge, bDiagram, b3d, bOverview, bCut, bLabels, bReset, bOut, bIn);
   const label = el("div", "cl-label"); label.hidden = true;
   const loadingEl = el("div", "cl-loading", "Loading the cell…"); loadingEl.hidden = true;
-  root.append(vp, toolbar, label, loadingEl);
+  const dgBox = el("div", "cl-diagram"); dgBox.hidden = true;
+  // Highlight filters live in their own tiny SVG so swapping the study's SVG keeps them.
+  const dgDefs = new DOMParser().parseFromString(`<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <filter id="cl-dg-good" x="-25%" y="-25%" width="150%" height="150%"><feColorMatrix in="SourceGraphic" type="matrix" values="0.35 0.25 0.1 0 0  0.25 0.55 0.2 0 0.3  0.15 0.25 0.25 0 0.12  0 0 0 1 0" result="tint"/><feMorphology in="SourceAlpha" operator="dilate" radius="3" result="d"/><feFlood flood-color="#17b26a"/><feComposite in2="d" operator="in" result="glow"/><feMerge><feMergeNode in="glow"/><feMergeNode in="tint"/></feMerge></filter>
+    <filter id="cl-dg-bad" x="-25%" y="-25%" width="150%" height="150%"><feColorMatrix in="SourceGraphic" type="matrix" values="0.55 0.25 0.1 0 0.3  0.2 0.35 0.1 0 0  0.2 0.2 0.3 0 0  0 0 0 1 0" result="tint"/><feMorphology in="SourceAlpha" operator="dilate" radius="3" result="d"/><feFlood flood-color="#e5484d"/><feComposite in2="d" operator="in" result="glow"/><feMerge><feMergeNode in="glow"/><feMergeNode in="tint"/></feMerge></filter>
+  </defs></svg>`, "image/svg+xml").documentElement;
+  root.append(vp, dgBox, toolbar, label, loadingEl, document.importNode(dgDefs, true));
   container.append(root);
 
   const controls = new TrackballControls(camera, renderer.domElement);
@@ -277,6 +290,7 @@ export async function createCellRenderer({ container, studiesBase = "assets/cell
     bCut.classList.toggle("cl-active", cut); bCut.setAttribute("aria-pressed", String(cut));
     const lb = layerSet.has("labels");
     bLabels.classList.toggle("cl-active", lb); bLabels.setAttribute("aria-pressed", String(lb));
+    if (usingDiagram()) applyDgLabels();
     mark();
   }
   function setLayers(list) { layerSet = new Set(list || []); applyLayers(); }
@@ -380,7 +394,7 @@ export async function createCellRenderer({ container, studiesBase = "assets/cell
   function onTap(e) {
     if (loading || !study) return;
     const r = container.getBoundingClientRect();
-    const key = pickCss(e.clientX - r.left, e.clientY - r.top);
+    const key = usingDiagram() ? dgPickClient(e.clientX, e.clientY) : pickCss(e.clientX - r.left, e.clientY - r.top);
     if (state.pickEnabled) { label.hidden = true; if (key && onPick) onPick(key); }
     else showLabel(key ? nameOf(key) : "", e.clientX, e.clientY);
   }
@@ -406,6 +420,8 @@ export async function createCellRenderer({ container, studiesBase = "assets/cell
   function clearHighlight() {
     for (const m of highlighted) m.material.emissive.copy(m.userData.baseEmissive);
     highlighted = []; mark();
+    for (const g of dgHighlighted) g.classList.remove("dg-good", "dg-bad");
+    dgHighlighted.clear();
   }
   function highlight(key, kind) {
     const tint = kind === "good" ? HIGHLIGHT_GOOD : HIGHLIGHT_BAD;
@@ -416,8 +432,190 @@ export async function createCellRenderer({ container, studiesBase = "assets/cell
       const l = m.userData.layer;
       if (!m.visible && !layerSet.has(l)) { layerSet.add(l); applyLayers(); }
     }
+    for (const g of dgFind(key)) { // the diagram region(s) too, so switching view keeps the marks
+      g.classList.remove("dg-good", "dg-bad"); g.classList.add(kind === "good" ? "dg-good" : "dg-bad");
+      dgHighlighted.add(g);
+    }
     mark();
   }
+
+  // ---------- Diagram view ----------
+  const MODE_KEY = "cell-view-mode";
+  let mode = "diagram";
+  try { if (localStorage.getItem(MODE_KEY) === "3d") mode = "3d"; } catch { /* storage blocked: default */ }
+  let svg = null, svgFor = null; // the current study's diagram <svg>, and the study id it belongs to
+  let vb0 = null, vb = null; // home and current viewBox [x, y, w, h]
+  let dgLabels = true; // labels on in explore; a question's explicit layers turn them off
+  let dgHover = null;
+  const dgHighlighted = new Set();
+  const diagrams = new Map(); // id -> Promise<SVG text>
+  const usingDiagram = () => mode === "diagram" && !!svg && svgFor === studyId;
+  function fetchDiagram(id, s) {
+    let p = diagrams.get(id);
+    if (!p) {
+      p = fetchText(new URL(s.diagram.file || "diagram.svg", studyUrlFor(id)).href);
+      p.catch(() => diagrams.delete(id));
+      diagrams.set(id, p);
+    }
+    return p;
+  }
+  function parseDiagram(text) {
+    const doc = new DOMParser().parseFromString(text, "image/svg+xml");
+    const s = doc.documentElement;
+    if (!s || s.nodeName !== "svg" || doc.querySelector("parsererror")) throw new Error("diagram is not valid SVG");
+    for (const bad of s.querySelectorAll("script, foreignObject, image, iframe")) bad.remove();
+    for (const e of s.querySelectorAll("*")) for (const a of [...e.attributes]) {
+      if (/^on/i.test(a.name) || (/href$/i.test(a.name) && !a.value.startsWith("#"))) e.removeAttribute(a.name);
+    }
+    const node = document.importNode(s, true);
+    node.removeAttribute("width"); node.removeAttribute("height");
+    node.setAttribute("preserveAspectRatio", "xMidYMid meet");
+    node.classList.add("cl-svg");
+    return node;
+  }
+  function buildDiagram(id, text) {
+    svg = null; svgFor = null; dgHover = null; dgHighlighted.clear();
+    dgBox.replaceChildren();
+    if (!text) return;
+    try { svg = parseDiagram(text); } catch (err) { console.warn(`cell ${id}: ${err.message}; showing the 3D model`); return; }
+    svgFor = id;
+    dgBox.append(svg);
+    const v = (svg.getAttribute("viewBox") || "0 0 1200 800").trim().split(/[\s,]+/).map(Number);
+    vb0 = v.length === 4 && v.every(Number.isFinite) ? v : [0, 0, 1200, 800];
+    vb = [...vb0];
+    for (const g of svg.querySelectorAll("[data-part]")) g.setAttribute("tabindex", "-1");
+    applyDgLabels();
+  }
+  const dgEls = () => (svg ? [...svg.querySelectorAll("[data-part]")] : []);
+  function applyDgLabels() {
+    const on = dgLabels && !state.pickEnabled; // labels would give the answer away during a question
+    svg?.classList.toggle("dg-nolabels", !on);
+    if (usingDiagram()) { bLabels.classList.toggle("cl-active", on); bLabels.setAttribute("aria-pressed", String(on)); }
+  }
+  function setDgLabels(on) { dgLabels = !!on; label.hidden = true; applyDgLabels(); }
+  function setVb(v) {
+    vb = v;
+    svg?.setAttribute("viewBox", vb.map((n) => +n.toFixed(2)).join(" "));
+  }
+  function dgHome() { if (vb0) setVb([...vb0]); }
+  // Units per CSS pixel and the drawing's offset, for "meet" fitting of the current viewBox in the box.
+  function dgFit() {
+    const r = dgBox.getBoundingClientRect();
+    const k = Math.max(vb[2] / Math.max(1, r.width), vb[3] / Math.max(1, r.height));
+    return { r, k, ox: (r.width - vb[2] / k) / 2, oy: dgTop ? 0 : (r.height - vb[3] / k) / 2 };
+  }
+  // A tall, narrow box (a phone held upright) pins the drawing under the toolbar, clear of the cards at the bottom.
+  let dgTop = false;
+  function dgAlign() {
+    if (!svg || !vb0) return;
+    const r = dgBox.getBoundingClientRect();
+    dgTop = r.height > 0 && r.width / r.height < (vb0[2] / vb0[3]) * 0.75;
+    svg.setAttribute("preserveAspectRatio", dgTop ? "xMidYMin meet" : "xMidYMid meet");
+  }
+  function dgZoom(f, cx, cy) { // zoom about client point (cx, cy), default the box centre
+    if (!svg) return;
+    const { r, k, ox, oy } = dgFit();
+    if (cx === undefined) { cx = r.left + r.width / 2; cy = r.top + r.height / 2; }
+    const w = THREE.MathUtils.clamp(vb[2] * f, vb0[2] / 10, vb0[2] * 1.6);
+    f = w / vb[2];
+    const ux = vb[0] + (cx - r.left - ox) * k, uy = vb[1] + (cy - r.top - oy) * k; // drawing point under the pointer
+    setVb([ux - (ux - vb[0]) * f, uy - (uy - vb[1]) * f, vb[2] * f, vb[3] * f]);
+  }
+  function dgPan(dx, dy) { const { k } = dgFit(); setVb([vb[0] - dx * k, vb[1] - dy * k, vb[2], vb[3]]); }
+  function dgPickClient(x, y) {
+    const hit = document.elementFromPoint(x, y);
+    const g = hit && dgBox.contains(hit) ? hit.closest("[data-part]") : null;
+    return g ? g.getAttribute("data-part") : null;
+  }
+  function dgSetHover(key) {
+    const g = key ? svg?.querySelector(`[data-part="${CSS.escape(key)}"]`) : null;
+    if (g === dgHover) return;
+    dgHover?.classList.remove("dg-hover");
+    dgHover = g; g?.classList.add("dg-hover");
+  }
+  // Elements for a key, as the 3D highlight picks meshes: an exact region, else every stamped copy of a base key.
+  function dgFind(key) {
+    if (!svg) return [];
+    const exact = svg.querySelectorAll(`[data-part="${CSS.escape(key)}"]`);
+    if (exact.length) return [...exact];
+    return dgEls().filter((g) => partOf.get(g.getAttribute("data-part"))?.key === key);
+  }
+  function dgCanvasOf(key) { // container-relative point that picks `key` (centre if it does, else the nearest pixel that does)
+    const g = dgFind(key)[0];
+    if (!g) return null;
+    const c = container.getBoundingClientRect(), b = g.getBoundingClientRect();
+    const k = g.getAttribute("data-part");
+    const cx = b.left + b.width / 2, cy = b.top + b.height / 2;
+    if (dgPickClient(cx, cy) === k) return [cx - c.left, cy - c.top];
+    let best = null, bd = Infinity;
+    const n = 24;
+    for (let i = 0; i <= n; i++) for (let j = 0; j <= n; j++) {
+      const x = b.left + (b.width * i) / n, y = b.top + (b.height * j) / n;
+      if (x < c.left || y < c.top || x > c.right || y > c.bottom) continue;
+      const d = Math.hypot(x - cx, y - cy);
+      if (d < bd && dgPickClient(x, y) === k) { bd = d; best = [x - c.left, y - c.top]; }
+    }
+    return best || [cx - c.left, cy - c.top];
+  }
+  function setMode(m, remember = true) {
+    mode = m === "3d" ? "3d" : "diagram";
+    if (remember) try { localStorage.setItem(MODE_KEY, mode); } catch { /* not remembered */ }
+    applyMode();
+    root.dispatchEvent(new CustomEvent("cellmode", { bubbles: true, detail: { mode: usingDiagram() ? "diagram" : "3d" } }));
+  }
+  function applyMode() {
+    const dg = usingDiagram(), has = !!study?.diagram && svgFor === studyId;
+    dgBox.hidden = !dg; vp.hidden = dg;
+    bDiagram.hidden = b3d.hidden = !has;
+    bDiagram.classList.toggle("cl-active", dg); bDiagram.setAttribute("aria-pressed", String(dg));
+    b3d.classList.toggle("cl-active", !dg); b3d.setAttribute("aria-pressed", String(!dg));
+    bCut.hidden = dg;
+    root.classList.toggle("cl-mode-diagram", dg);
+    label.hidden = true; dgSetHover(null);
+    if (dg) { dgAlign(); applyDgLabels(); } else { applyLayers(); resize(); mark(); startLoop(); }
+  }
+  // Pointer handling on the diagram: tap = pick or name, drag = pan, wheel and pinch = zoom.
+  const dgPointers = new Map();
+  let dgDown = null, dgPinch = 0;
+  dgBox.addEventListener("pointerdown", (e) => {
+    dgPointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    try { dgBox.setPointerCapture(e.pointerId); } catch { /* synthetic events */ }
+    label.hidden = true;
+    if (dgPointers.size === 1) dgDown = { x: e.clientX, y: e.clientY, lx: e.clientX, ly: e.clientY, moved: 0 };
+    else { dgDown = null; const [a, b] = [...dgPointers.values()]; dgPinch = Math.hypot(a.x - b.x, a.y - b.y); }
+  });
+  dgBox.addEventListener("pointermove", (e) => {
+    if (dgPointers.has(e.pointerId)) dgPointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (dgPointers.size === 2) {
+      const [a, b] = [...dgPointers.values()], d = Math.hypot(a.x - b.x, a.y - b.y);
+      if (dgPinch && d) dgZoom(dgPinch / d, (a.x + b.x) / 2, (a.y + b.y) / 2);
+      dgPinch = d; return;
+    }
+    if (dgDown && dgPointers.size === 1) {
+      dgDown.moved = Math.max(dgDown.moved, Math.hypot(e.clientX - dgDown.x, e.clientY - dgDown.y));
+      if (dgDown.moved > 6) { dgPan(e.clientX - dgDown.lx, e.clientY - dgDown.ly); dgBox.classList.add("dg-panning"); }
+      dgDown.lx = e.clientX; dgDown.ly = e.clientY;
+      return;
+    }
+    if (e.pointerType !== "mouse" || !study || loading) return;
+    const key = dgPickClient(e.clientX, e.clientY);
+    dgSetHover(key);
+    if (state.pickEnabled) { label.hidden = true; return; } // hover names would give the answer away
+    showLabel(key ? nameOf(key) : "", e.clientX, e.clientY);
+  });
+  const dgUp = (e) => {
+    const was = dgPointers.delete(e.pointerId);
+    dgBox.classList.remove("dg-panning");
+    if (dgPointers.size < 2) dgPinch = 0;
+    if (!was || !dgDown || e.type !== "pointerup") { if (!dgPointers.size) dgDown = null; return; }
+    const moved = dgDown.moved; dgDown = null;
+    if (moved <= 6) onTap(e);
+  };
+  dgBox.addEventListener("pointerup", dgUp);
+  dgBox.addEventListener("pointercancel", dgUp);
+  dgBox.addEventListener("pointerleave", (e) => { if (e.pointerType === "mouse") { label.hidden = true; dgSetHover(null); } });
+  dgBox.addEventListener("wheel", (e) => { e.preventDefault(); dgZoom(Math.exp(e.deltaY * 0.0015), e.clientX, e.clientY); }, { passive: false });
+  dgBox.addEventListener("contextmenu", (e) => e.preventDefault());
 
   // ---------- Studies ----------
   function fetchStudy(id) {
@@ -465,6 +663,7 @@ export async function createCellRenderer({ container, studiesBase = "assets/cell
     try {
       const s = await fetchStudy(id);
       if (s.model && (s.parts || []).some((p) => p.mesh)) await fetchModel(id, s);
+      if (s.diagram) await fetchDiagram(id, s).catch((err) => console.warn(`cell ${id}: diagram not loaded (${err.message})`));
       return s;
     } finally { loading--; if (!loading) loadingEl.hidden = true; }
   }
@@ -472,6 +671,7 @@ export async function createCellRenderer({ container, studiesBase = "assets/cell
     const s = await loadStudy(id);
     study = s; studyId = id;
     buildStudy(s, s.model ? await models.get(id) : null);
+    buildDiagram(id, s.diagram ? await diagrams.get(id)?.catch(() => null) : null);
     badge.textContent = `Cell · ${s.title || id}`;
     badge.title = s.scale || "";
     return s;
@@ -480,6 +680,7 @@ export async function createCellRenderer({ container, studiesBase = "assets/cell
   function resize() {
     const { w, h } = size();
     if (!container.clientWidth || !container.clientHeight) return;
+    dgAlign();
     renderer.setSize(w, h, false);
     camera.aspect = w / h; camera.updateProjectionMatrix();
     controls.handleResize(); mark();
@@ -495,7 +696,7 @@ export async function createCellRenderer({ container, studiesBase = "assets/cell
     if (!active) return;
     stepTween(now);
     controls.update(); // also fires "change" when damping still moves the camera
-    if (dirty) { renderer.render(scene, camera); dirty = false; }
+    if (dirty && !usingDiagram()) { renderer.render(scene, camera); dirty = false; }
     raf = requestAnimationFrame(tick);
   }
   function startLoop() { if (!raf && active) raf = requestAnimationFrame(tick); }
@@ -505,12 +706,18 @@ export async function createCellRenderer({ container, studiesBase = "assets/cell
 
   async function show({ study: id, view, layers } = {}) {
     const changed = !!id && id !== studyId;
-    if (changed) await switchTo(id);
+    if (changed) {
+      await switchTo(id);
+      root.dispatchEvent(new CustomEvent("cellmode", { bubbles: true, detail: { mode: usingDiagram() ? "diagram" : "3d" } }));
+    }
     if (!study) return;
     const views = study.views || {};
     const v = views[view] ? view : study.defaultView;
     setLayers(Array.isArray(layers) ? layers : views[v]?.layers || study.defaultLayers || ["membrane", "organelles"]);
+    dgLabels = Array.isArray(layers) ? layers.includes("labels") : true;
     clearHighlight();
+    dgHome();
+    applyMode();
     resize();
     applyView(v, !changed);
     startLoop();
@@ -523,8 +730,13 @@ export async function createCellRenderer({ container, studiesBase = "assets/cell
   if (initialStudy) await show({ study: initialStudy });
 
   const debug = {
-    root, scene, camera, controls, state, render, canvasOf,
-    pickAt(x, y) { finishTween(); camera.updateMatrixWorld(true); return pickCss(x, y); },
+    root, scene, camera, controls, state, render,
+    canvasOf(key) { return usingDiagram() ? dgCanvasOf(key) : canvasOf(key); },
+    pickAt(x, y) {
+      if (usingDiagram()) { const r = container.getBoundingClientRect(); return dgPickClient(r.left + x, r.top + y); }
+      finishTween(); camera.updateMatrixWorld(true); return pickCss(x, y);
+    },
+    get svg() { return svg; },
     onTap,
     get loading() { return loading > 0; },
     get meshes() { return meshes; },
@@ -535,8 +747,10 @@ export async function createCellRenderer({ container, studiesBase = "assets/cell
     highlight,
     clearHighlight,
     name: nameOf,
-    setDefaultLayers() { setDefaultLayers(); },
-    setPickEnabled(on) { state.pickEnabled = !!on; if (on) label.hidden = true; },
+    setDefaultLayers() { setDefaultLayers(); setDgLabels(true); },
+    setPickEnabled(on) { state.pickEnabled = !!on; if (on) label.hidden = true; applyDgLabels(); },
+    setMode,
+    get mode() { return usingDiagram() ? "diagram" : "3d"; },
     setActive(on) {
       active = !!on;
       if (active) { resize(); mark(); startLoop(); }
