@@ -66,3 +66,7 @@ The coordinator's brief named University of Michigan virtual slides as the inten
 - **muscle-ts:** x 24768, y 9728, 6144 x 6144, then scaled by 1/1.5.
 
 Tile sizes at JPEG quality 76 are 2.7 to 5.5 MB per slide, under the 6 MB budget. With the `.b64.txt` twins, each folder is 7 to 14 MB.
+
+## Compact bone (added 2026-10-13)
+
+`bone-ts` is now a real ground section of compact bone, "Connective Tissue: Compact Bone" by the Berkshire Community College Bioscience Image Library (Flickr 39978305360, mirrored on Wikimedia Commons). The licence was checked on the owner's Flickr page, which reads "CC0 (Public Domain Dedication)". The image is 3264 x 1840 px with an estimated 0.24 µm/px (no scale bar). It is labelled with two osteons, their canals and cement lines, interstitial lamellae and 195 lacunae. The photo shows no bone surface, so `hist-bone-osteoclast-clin` became `hist-bone-cement-clin` and the `surface-20x` view became `cement-20x`. No histology slide is stylised any more, so the footer sentence about stylised slides was removed; `src/app.js` still marks any `synthetic: true` slide in its credit line.
