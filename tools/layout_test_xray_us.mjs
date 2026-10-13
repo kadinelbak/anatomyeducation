@@ -80,7 +80,7 @@ async function run(kind, [width, height]) {
   await p2.goto(base);
   await p2.waitForFunction(() => !document.getElementById("start").disabled, null, { timeout: 120000 });
   // Body map: open the region, then pick the modality from the explore bar.
-  await p2.click(`#explore-row .chip:text-is("${K.region}")`);
+  await p2.click(`#explore-row .chip[data-region="${K.region.toLowerCase()}"]`);
   await p2.waitForFunction(() => !document.getElementById("explore-bar").hidden, null, { timeout: 120000 });
   const chips = await p2.$$("#explore-modalities .chip");
   let chip = null;

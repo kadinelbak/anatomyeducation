@@ -15,7 +15,7 @@ const st = () => page.evaluate(() => ({
 const idle = () => page.waitForFunction(() => document.getElementById("loading").hidden && !document.getElementById("start").disabled, null, { timeout: 120000 });
 await page.goto(base);
 await idle();
-const entries = await page.$$eval("#explore-row .chip", (b) => b.map((x) => x.textContent));
+const entries = await page.$$eval("#explore-row .chip", (b) => b.map((x) => x.firstChild.textContent));
 console.log("regions:", entries.join(" | "));
 check(entries.join() === "Head,Upper limb,Chest,Abdomen,Pelvis,Lower limb,Tissues and cells", "the body map lists the six regions plus tissues and cells");
 check((await page.$$(".figure .zone[role=button]")).length === 6, "the figure has six clickable zones");
@@ -34,7 +34,7 @@ console.log("hover label:", await page.evaluate(() => document.getElementById("h
 // Back, then the abdomen: CT first, then each other modality from the bar.
 await page.click("#explore-back");
 s = await st(); check(s.intro && !s.bar, "back to the intro");
-await page.click("#explore-row .chip:text-is('Abdomen')");
+await page.click("#explore-row .chip[data-region='abdomen']");
 await idle();
 s = await st();
 let mods = await modalities();
@@ -73,7 +73,7 @@ await page.selectOption("#explore-study", "mni-brain-t2"); await idle();
 s = await st(); check(s.study === "mni-brain-t2", `T2 brain selected: ${s.study}`);
 await page.screenshot({ path: "docs/screenshots/explore-head-mri.png" });
 await page.click("#explore-back");
-await page.click("#explore-row .chip:text-is('Chest')"); await idle();
+await page.click("#explore-row .chip[data-region='chest']"); await idle();
 s = await st(); mods = await modalities();
 check(s.active === "volume" && mods.join() === "CT*,MRI,X-ray,Ultrasound", `chest offers CT, MRI, X-ray, ultrasound: ${mods.join()}`);
 await page.click("#explore-modalities .chip:text-is('MRI')"); await idle();
@@ -90,10 +90,20 @@ await (await page.$$(".chip:text-is('Daily 10')"))[0].click();
 await idle();
 s = await st();
 check(s.intro && s.active === "mesh" && s.model === "upper-limb", `chip switches back to the upper limb: ${s.model}`);
-// And a quiz still starts from there.
+// And a quiz still starts from there, and can be left mid-way.
 await page.click("#start");
 await page.waitForSelector("#question:not([hidden])", { timeout: 120000 });
 check((await st()).quiz === "asking", "quiz starts after exploring");
+await page.click("#quit");
+s = await st(); check(s.intro && s.quiz === "intro" && await page.evaluate(() => document.getElementById("question").hidden && document.getElementById("stats").hidden), `Leave set returns to the intro: ${JSON.stringify(s)}`);
+// Modality-first chips open the first region that offers the modality.
+const modRow = await page.$$eval("#modality-row .chip", (b) => b.map((x) => x.textContent));
+console.log("modality row:", modRow.join(" | "));
+check(modRow.includes("X-ray") && modRow.includes("Ultrasound") && modRow.includes("Histology"), "modality row lists X-ray, Ultrasound and Histology");
+await page.click("#modality-row .chip:text-is('X-ray')"); await idle();
+s = await st(); check(s.active === "xray" && s.bar && s.title === "Chest", `X-ray chip opens the chest X-ray: ${JSON.stringify(s)}`);
+await page.click("#explore-back");
+await page.screenshot({ path: "docs/screenshots/intro-bodymap.png" });
 await browser.close();
 console.log(fails ? `${fails} failure(s)` : "ALL OK");
 process.exit(fails ? 1 : 0);

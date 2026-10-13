@@ -59,6 +59,9 @@ const renderer = createRendererSwitch({
       const a = $(kind === "slide" ? "attr-hist-src" : "attr-cell-src");
       a.textContent = `${meta?.attribution || meta?.source || id}, ${meta?.license || ""}${meta?.synthetic ? " (stylised placeholder, not a micrograph)" : ""}`;
       if (meta?.sourceUrl) a.href = meta.sourceUrl; else a.removeAttribute("href");
+      if (kind === "cell") $("attr-cell-note").textContent = meta?.synthetic === false
+        ? "Surfaces reconstructed from the segmented microscope image of one real cell (membrane, nucleus and the tagged structure); other organelles are not shown"
+        : "Stylised 3D model built from primitives, not a reconstruction";
     }
     renderZoomChips(kind, id, meta);
     if (meta?.modality === "MR") { // the MRI line names the study's own source: MR studies come from more than one dataset
@@ -251,7 +254,26 @@ $("explore-row").replaceChildren(...regions.map((r) => {
   b.className = "chip";
   b.dataset.region = r.id;
   b.textContent = r.title;
-  b.title = r.options.map((o) => o.modality).join(", ");
+  const small = document.createElement("small");
+  small.textContent = r.options.map((o) => o.modality).join(" · ");
+  b.append(small);
+  return b;
+}));
+// Modality-first: one chip per modality, opening the first region that offers it (the region's
+// other modalities stay one click away on the explore bar).
+const MODALITY_ORDER = ["3D", "CT", "MRI", "X-ray", "Ultrasound", "Histology", "Cell"];
+const modalities = [...new Set(regions.flatMap((r) => r.options.map((o) => o.modality)))].sort((a, b) => MODALITY_ORDER.indexOf(a) - MODALITY_ORDER.indexOf(b));
+$("modality-row").replaceChildren(...modalities.map((m) => {
+  const b = document.createElement("button");
+  b.type = "button";
+  b.className = "chip";
+  b.textContent = m;
+  b.title = regions.filter((r) => r.options.some((o) => o.modality === m)).map((r) => r.title).join(", ");
+  b.addEventListener("click", () => {
+    const region = regions.find((r) => r.options.some((o) => o.modality === m));
+    figure.querySelectorAll(".zone").forEach((z) => z.classList.toggle("selected", z.dataset.region === region.id));
+    exploreOption(region, region.options.find((o) => o.modality === m));
+  });
   return b;
 }));
 const regionOf = (el) => regions.find((r) => r.id === el?.closest?.("[data-region]")?.dataset.region);
@@ -418,6 +440,10 @@ $("new-set").addEventListener("click", () => {
   engine.intro(); // the last model or scan stays behind the chooser
 });
 $("next").addEventListener("click", () => engine.next());
+$("quit").addEventListener("click", () => {
+  track("quit", { set: engine.set?.id, at: engine.state.index });
+  engine.intro(); // stops the clock, clears highlights, shows the body map and sets again
+});
 
 // ---------- Share ----------
 

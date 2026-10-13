@@ -44,12 +44,12 @@ try {
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto(base); await idle(page);
   // The body map lists a "Tissues and cells" entry whose modalities are Histology and Cell.
-  const entries = await page.$$eval("#explore-row .chip", (b) => b.map((x) => x.textContent));
+  const entries = await page.$$eval("#explore-row .chip", (b) => b.map((x) => x.firstChild.textContent));
   console.log("body map entries:", entries.join(" | "));
   check(entries.includes("Tissues and cells"), "body map has a Tissues and cells entry");
-  await page.click("#explore-row .chip:text-is('Tissues and cells')");
+  await page.click("#explore-row .chip[data-region='tissue']");
   await idle(page); await settled(page); await page.waitForTimeout(600);
-  const mods = await page.$$eval("#explore-modalities .chip", (b) => b.map((x) => x.textContent));
+  const mods = await page.$$eval("#explore-modalities .chip", (b) => b.map((x) => x.firstChild.textContent));
   check(mods.includes("Histology") && mods.includes("Cell"), `modality chips: ${mods.join(" | ")}`);
   // Explore the muscle slide (the most-asked slide opens first; pick it by title if not).
   await page.click("#explore-modalities .chip:text-is('Histology')").catch(() => {});
@@ -91,7 +91,7 @@ try {
     await settled(page); await page.waitForTimeout(400);
     await page.evaluate(() => window.__app.answer(window.__app.QUESTIONS[0].accept[0]));
     await page.waitForSelector("#feedback:not([hidden])", { timeout: 5000 });
-    const chips = await page.$$eval("#feedback-zoom .chip", (b) => b.map((x) => x.textContent));
+    const chips = await page.$$eval("#feedback-zoom .chip", (b) => b.map((x) => x.firstChild.textContent));
     check(chips.some((c) => c.startsWith("Zoom in: ")), `answered slide question offers zoom links: ${chips.join(" | ")}`);
     await page.click("#feedback-zoom .chip:text-matches('^Zoom in: ')");
     await idle(page); await settled(page); await page.waitForTimeout(600);
@@ -104,7 +104,7 @@ try {
     await settled(page); await page.waitForTimeout(400);
     await page.evaluate(() => window.__app.answer(window.__app.QUESTIONS[0].accept[0]));
     await page.waitForSelector("#feedback:not([hidden])", { timeout: 5000 });
-    const chips = await page.$$eval("#feedback-zoom .chip", (b) => b.map((x) => x.textContent));
+    const chips = await page.$$eval("#feedback-zoom .chip", (b) => b.map((x) => x.firstChild.textContent));
     check(chips.some((c) => c.startsWith("Zoom out: ")), `answered cell question offers zoom out: ${chips.join(" | ")}`);
   } else check(false, "no cell question with a zoom.out link");
   await page.close();

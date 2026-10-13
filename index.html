@@ -35,7 +35,11 @@
     <p>Pick a region of the body, then look at it on the 3D model or on a CT, MRI, X-ray or ultrasound scan:</p>
     <div class="bodymap">
       <div id="figure-slot" class="figure-slot"></div>
-      <div id="explore-row" class="chooser-row explore-regions" role="group" aria-label="Explore a region"></div>
+      <div>
+        <div id="explore-row" class="chooser-row explore-regions" role="group" aria-label="Explore a region"></div>
+        <p class="fine modality-lead">Or start from a modality:</p>
+        <div id="modality-row" class="chooser-row explore-modalities" role="group" aria-label="Explore by modality"></div>
+      </div>
     </div>
     <p class="fine explore-lead">Or practise: rotate, peel back layers, and click the structure asked for. Pick a set:</p>
     <div id="set-chooser" class="chooser" role="group" aria-label="Question set"></div>
@@ -54,7 +58,10 @@
 
   <!-- Question -->
   <section id="question" class="card question" hidden>
-    <div class="qkind" id="qkind"></div>
+    <div class="qhead">
+      <div class="qkind" id="qkind"></div>
+      <button id="quit" class="ghost quit" type="button" title="Leave this set and go back to the start">Leave set</button>
+    </div>
     <p class="qprompt" id="qprompt"></p>
     <p class="qhint" id="qhint" hidden></p>
     <div id="feedback" class="feedback" hidden>
@@ -137,7 +144,7 @@
     <span id="attr-mr" hidden>MRI: <a id="attr-mr-src" href="https://zenodo.org/records/11367005" target="_blank" rel="noopener">TotalSegmentator MRI dataset (Akinci D'Antonoli et al.), CC BY-NC-SA 4.0</a>. Viewer: <a href="https://github.com/cornerstonejs/cornerstone3D" target="_blank" rel="noopener">Cornerstone3D</a>, MIT.</span>
     <span id="attr-xray" hidden>X-ray views are digitally reconstructed radiographs computed in the browser from the TotalSegmentator CT studies above (CC BY 4.0); they are teaching simulations, not patient films.</span>
     <span id="attr-hist" hidden>Histology: <a id="attr-hist-src" target="_blank" rel="noopener"></a>. Slides marked stylised are drawn illustrations with H&amp;E colours, not micrographs; the <a href="https://obofoundry.org/ontology/cl.html" target="_blank" rel="noopener">Cell Ontology</a> (CC BY 4.0) names the cell types.</span>
-    <span id="attr-cell" hidden>Cell: <a id="attr-cell-src" target="_blank" rel="noopener"></a>. Stylised 3D models built from primitives, not reconstructions; organelle names from the <a href="http://geneontology.org/" target="_blank" rel="noopener">Gene Ontology</a> (CC BY 4.0).</span>
+    <span id="attr-cell" hidden>Cell: <a id="attr-cell-src" target="_blank" rel="noopener"></a>. <span id="attr-cell-note">Stylised 3D model built from primitives, not a reconstruction</span>; organelle names from the <a href="http://geneontology.org/" target="_blank" rel="noopener">Gene Ontology</a> (CC BY 4.0).</span>
     <span id="attr-us" hidden>Ultrasound views are simulated in the browser from the same CT studies (CC BY 4.0); they are teaching simulations, not real scans.</span>
   </footer>
 
