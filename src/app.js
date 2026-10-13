@@ -98,7 +98,7 @@ function showNoWebGL(err) {
 let bank;
 try {
   bank = await loadBanks([
-    "assets/questions/upper-limb.json", "assets/questions/lower-limb.json",
+    "assets/questions/upper-limb.json", "assets/questions/lower-limb.json", "assets/questions/trunk.json",
     "assets/questions/ct-trunk.json", "assets/questions/ct-chest.json",
     "assets/questions/mri-abdomen.json", "assets/questions/mri-prostate.json", "assets/questions/mri-heart.json", "assets/questions/mri-hippocampus.json",
     "assets/questions/mri-brain-t1.json", "assets/questions/mri-brain-t2.json", "assets/questions/mri-brain-pd.json",

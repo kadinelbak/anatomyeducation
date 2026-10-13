@@ -1,0 +1,1676 @@
+{
+ "version": 2,
+ "source": "BodyParts3D 3.0 (DBCLS), CC BY 4.0, via github.com/Kevin-Mattheus-Moerman/BodyParts3D; nerves, spinal cord and a few vessels are schematic (tools/trunk_nerves.py)",
+ "units": "m",
+ "layers": [
+  "muscle",
+  "tendon",
+  "ligament",
+  "nerve",
+  "vessel",
+  "bone",
+  "organ"
+ ],
+ "nodes": [
+  {
+   "node": "FMA9165",
+   "structure": "t1_vertebra",
+   "layer": "bone",
+   "source": "FMA9165"
+  },
+  {
+   "node": "FMA9187",
+   "structure": "t2_vertebra",
+   "layer": "bone",
+   "source": "FMA9187"
+  },
+  {
+   "node": "FMA9209",
+   "structure": "t3_vertebra",
+   "layer": "bone",
+   "source": "FMA9209"
+  },
+  {
+   "node": "FMA9248",
+   "structure": "t4_vertebra",
+   "layer": "bone",
+   "source": "FMA9248"
+  },
+  {
+   "node": "FMA9922",
+   "structure": "t5_vertebra",
+   "layer": "bone",
+   "source": "FMA9922"
+  },
+  {
+   "node": "FMA9945",
+   "structure": "t6_vertebra",
+   "layer": "bone",
+   "source": "FMA9945"
+  },
+  {
+   "node": "FMA9968",
+   "structure": "t7_vertebra",
+   "layer": "bone",
+   "source": "FMA9968"
+  },
+  {
+   "node": "FMA9991",
+   "structure": "t8_vertebra",
+   "layer": "bone",
+   "source": "FMA9991"
+  },
+  {
+   "node": "FMA10014",
+   "structure": "t9_vertebra",
+   "layer": "bone",
+   "source": "FMA10014"
+  },
+  {
+   "node": "FMA10037",
+   "structure": "t10_vertebra",
+   "layer": "bone",
+   "source": "FMA10037"
+  },
+  {
+   "node": "FMA10059",
+   "structure": "t11_vertebra",
+   "layer": "bone",
+   "source": "FMA10059"
+  },
+  {
+   "node": "FMA10081",
+   "structure": "t12_vertebra",
+   "layer": "bone",
+   "source": "FMA10081"
+  },
+  {
+   "node": "FMA13072",
+   "structure": "l1_vertebra",
+   "layer": "bone",
+   "source": "FMA13072"
+  },
+  {
+   "node": "FMA13073",
+   "structure": "l2_vertebra",
+   "layer": "bone",
+   "source": "FMA13073"
+  },
+  {
+   "node": "FMA13074",
+   "structure": "l3_vertebra",
+   "layer": "bone",
+   "source": "FMA13074"
+  },
+  {
+   "node": "FMA13075",
+   "structure": "l4_vertebra",
+   "layer": "bone",
+   "source": "FMA13075"
+  },
+  {
+   "node": "FMA13076",
+   "structure": "l5_vertebra",
+   "layer": "bone",
+   "source": "FMA13076"
+  },
+  {
+   "node": "FMA10458",
+   "structure": "thoracic_discs",
+   "layer": "ligament",
+   "source": "FMA10458"
+  },
+  {
+   "node": "FMA13495",
+   "structure": "thoracic_discs",
+   "layer": "ligament",
+   "source": "FMA13495"
+  },
+  {
+   "node": "FMA13500",
+   "structure": "thoracic_discs",
+   "layer": "ligament",
+   "source": "FMA13500"
+  },
+  {
+   "node": "FMA13501",
+   "structure": "thoracic_discs",
+   "layer": "ligament",
+   "source": "FMA13501"
+  },
+  {
+   "node": "FMA13502",
+   "structure": "thoracic_discs",
+   "layer": "ligament",
+   "source": "FMA13502"
+  },
+  {
+   "node": "FMA13503",
+   "structure": "thoracic_discs",
+   "layer": "ligament",
+   "source": "FMA13503"
+  },
+  {
+   "node": "FMA13504",
+   "structure": "thoracic_discs",
+   "layer": "ligament",
+   "source": "FMA13504"
+  },
+  {
+   "node": "FMA13505",
+   "structure": "thoracic_discs",
+   "layer": "ligament",
+   "source": "FMA13505"
+  },
+  {
+   "node": "FMA13506",
+   "structure": "thoracic_discs",
+   "layer": "ligament",
+   "source": "FMA13506"
+  },
+  {
+   "node": "FMA13507",
+   "structure": "thoracic_discs",
+   "layer": "ligament",
+   "source": "FMA13507"
+  },
+  {
+   "node": "FMA13508",
+   "structure": "thoracic_discs",
+   "layer": "ligament",
+   "source": "FMA13508"
+  },
+  {
+   "node": "FMA13509",
+   "structure": "thoracic_discs",
+   "layer": "ligament",
+   "source": "FMA13509"
+  },
+  {
+   "node": "FMA16033",
+   "structure": "l1_disc",
+   "layer": "ligament",
+   "source": "FMA16033"
+  },
+  {
+   "node": "FMA16034",
+   "structure": "l2_disc",
+   "layer": "ligament",
+   "source": "FMA16034"
+  },
+  {
+   "node": "FMA16035",
+   "structure": "l3_disc",
+   "layer": "ligament",
+   "source": "FMA16035"
+  },
+  {
+   "node": "FMA16036",
+   "structure": "l4_disc",
+   "layer": "ligament",
+   "source": "FMA16036"
+  },
+  {
+   "node": "FMA16037",
+   "structure": "l5_disc",
+   "layer": "ligament",
+   "source": "FMA16037"
+  },
+  {
+   "node": "FMA7857",
+   "structure": "rib_1",
+   "layer": "bone",
+   "source": "FMA7857"
+  },
+  {
+   "node": "FMA7882",
+   "structure": "rib_2",
+   "layer": "bone",
+   "source": "FMA7882"
+  },
+  {
+   "node": "FMA7909",
+   "structure": "rib_3",
+   "layer": "bone",
+   "source": "FMA7909"
+  },
+  {
+   "node": "FMA7957",
+   "structure": "rib_4",
+   "layer": "bone",
+   "source": "FMA7957"
+  },
+  {
+   "node": "FMA8066",
+   "structure": "rib_5",
+   "layer": "bone",
+   "source": "FMA8066"
+  },
+  {
+   "node": "FMA8175",
+   "structure": "rib_6",
+   "layer": "bone",
+   "source": "FMA8175"
+  },
+  {
+   "node": "FMA8229",
+   "structure": "rib_7",
+   "layer": "bone",
+   "source": "FMA8229"
+  },
+  {
+   "node": "FMA8283",
+   "structure": "rib_8",
+   "layer": "bone",
+   "source": "FMA8283"
+  },
+  {
+   "node": "FMA8364",
+   "structure": "rib_9",
+   "layer": "bone",
+   "source": "FMA8364"
+  },
+  {
+   "node": "FMA8445",
+   "structure": "rib_10",
+   "layer": "bone",
+   "source": "FMA8445"
+  },
+  {
+   "node": "FMA8531",
+   "structure": "rib_11",
+   "layer": "bone",
+   "source": "FMA8531"
+  },
+  {
+   "node": "FMA8533",
+   "structure": "rib_12",
+   "layer": "bone",
+   "source": "FMA8533"
+  },
+  {
+   "node": "FMA7987",
+   "structure": "rib_1",
+   "layer": "bone",
+   "source": "FMA7987"
+  },
+  {
+   "node": "FMA8012",
+   "structure": "rib_2",
+   "layer": "bone",
+   "source": "FMA8012"
+  },
+  {
+   "node": "FMA8039",
+   "structure": "rib_3",
+   "layer": "bone",
+   "source": "FMA8039"
+  },
+  {
+   "node": "FMA8148",
+   "structure": "rib_4",
+   "layer": "bone",
+   "source": "FMA8148"
+  },
+  {
+   "node": "FMA8093",
+   "structure": "rib_5",
+   "layer": "bone",
+   "source": "FMA8093"
+  },
+  {
+   "node": "FMA8202",
+   "structure": "rib_6",
+   "layer": "bone",
+   "source": "FMA8202"
+  },
+  {
+   "node": "FMA8256",
+   "structure": "rib_7",
+   "layer": "bone",
+   "source": "FMA8256"
+  },
+  {
+   "node": "FMA8310",
+   "structure": "rib_8",
+   "layer": "bone",
+   "source": "FMA8310"
+  },
+  {
+   "node": "FMA8391",
+   "structure": "rib_9",
+   "layer": "bone",
+   "source": "FMA8391"
+  },
+  {
+   "node": "FMA8472",
+   "structure": "rib_10",
+   "layer": "bone",
+   "source": "FMA8472"
+  },
+  {
+   "node": "FMA8532",
+   "structure": "rib_11",
+   "layer": "bone",
+   "source": "FMA8532"
+  },
+  {
+   "node": "FMA8534",
+   "structure": "rib_12",
+   "layer": "bone",
+   "source": "FMA8534"
+  },
+  {
+   "node": "BP28",
+   "structure": "costal_cartilages",
+   "layer": "bone",
+   "source": "BP28"
+  },
+  {
+   "node": "BP24",
+   "structure": "costal_cartilages",
+   "layer": "bone",
+   "source": "BP24"
+  },
+  {
+   "node": "FMA7486",
+   "structure": "manubrium",
+   "layer": "bone",
+   "source": "FMA7486"
+  },
+  {
+   "node": "FMA7487",
+   "structure": "body_of_sternum",
+   "layer": "bone",
+   "source": "FMA7487"
+  },
+  {
+   "node": "FMA7488",
+   "structure": "xiphoid_process",
+   "layer": "bone",
+   "source": "FMA7488"
+  },
+  {
+   "node": "FMA16202",
+   "structure": "sacrum",
+   "layer": "bone",
+   "source": "FMA16202"
+  },
+  {
+   "node": "FMA16586",
+   "structure": "hip_bone",
+   "layer": "bone",
+   "source": "FMA16586"
+  },
+  {
+   "node": "FMA16587",
+   "structure": "hip_bone",
+   "layer": "bone",
+   "source": "FMA16587"
+  },
+  {
+   "node": "FMA13322",
+   "structure": "clavicle",
+   "layer": "bone",
+   "source": "FMA13322"
+  },
+  {
+   "node": "FMA13395",
+   "structure": "scapula",
+   "layer": "bone",
+   "source": "FMA13395"
+  },
+  {
+   "node": "FMA21964",
+   "structure": "inguinal_ligament",
+   "layer": "ligament",
+   "source": "FMA21964"
+  },
+  {
+   "node": "FMA11336",
+   "structure": "linea_alba",
+   "layer": "ligament",
+   "source": "FMA11336"
+  },
+  {
+   "node": "FMA46442",
+   "structure": "tendinous_arch_of_levator_ani",
+   "layer": "ligament",
+   "source": "FMA46442"
+  },
+  {
+   "node": "FMA34690",
+   "structure": "pectoralis_major",
+   "layer": "muscle",
+   "source": "FMA34690"
+  },
+  {
+   "node": "FMA79979",
+   "structure": "pectoralis_major",
+   "layer": "muscle",
+   "source": "FMA79979"
+  },
+  {
+   "node": "FMA45874",
+   "structure": "pectoralis_major",
+   "layer": "muscle",
+   "source": "FMA45874"
+  },
+  {
+   "node": "FMA13375",
+   "structure": "pectoralis_minor",
+   "layer": "muscle",
+   "source": "FMA13375"
+  },
+  {
+   "node": "FMA13412",
+   "structure": "subclavius",
+   "layer": "muscle",
+   "source": "FMA13412"
+  },
+  {
+   "node": "FMA13398",
+   "structure": "serratus_anterior",
+   "layer": "muscle",
+   "source": "FMA13398"
+  },
+  {
+   "node": "FMA9756",
+   "structure": "external_intercostals",
+   "layer": "muscle",
+   "source": "FMA9756"
+  },
+  {
+   "node": "FMA9757",
+   "structure": "internal_intercostals",
+   "layer": "muscle",
+   "source": "FMA9757"
+  },
+  {
+   "node": "FMA9758",
+   "structure": "innermost_intercostals",
+   "layer": "muscle",
+   "source": "FMA9758"
+  },
+  {
+   "node": "FMA9761",
+   "structure": "transversus_thoracis",
+   "layer": "muscle",
+   "source": "FMA9761"
+  },
+  {
+   "node": "FMA74075",
+   "structure": "levatores_costarum",
+   "layer": "muscle",
+   "source": "FMA74075"
+  },
+  {
+   "node": "FMA74077",
+   "structure": "levatores_costarum",
+   "layer": "muscle",
+   "source": "FMA74077"
+  },
+  {
+   "node": "FMA13295",
+   "structure": "diaphragm",
+   "layer": "muscle",
+   "source": "FMA13295"
+  },
+  {
+   "node": "FMA33586",
+   "structure": "trapezius",
+   "layer": "muscle",
+   "source": "FMA33586"
+  },
+  {
+   "node": "FMA33584",
+   "structure": "trapezius",
+   "layer": "muscle",
+   "source": "FMA33584"
+  },
+  {
+   "node": "FMA33581",
+   "structure": "trapezius",
+   "layer": "muscle",
+   "source": "FMA33581"
+  },
+  {
+   "node": "FMA13358",
+   "structure": "latissimus_dorsi",
+   "layer": "muscle",
+   "source": "FMA13358"
+  },
+  {
+   "node": "FMA13381",
+   "structure": "rhomboid_major",
+   "layer": "muscle",
+   "source": "FMA13381"
+  },
+  {
+   "node": "FMA13383",
+   "structure": "rhomboid_minor",
+   "layer": "muscle",
+   "source": "FMA13383"
+  },
+  {
+   "node": "FMA32540",
+   "structure": "levator_scapulae",
+   "layer": "muscle",
+   "source": "FMA32540"
+  },
+  {
+   "node": "FMA13403",
+   "structure": "serratus_posterior_superior",
+   "layer": "muscle",
+   "source": "FMA13403"
+  },
+  {
+   "node": "FMA13405",
+   "structure": "serratus_posterior_inferior",
+   "layer": "muscle",
+   "source": "FMA13405"
+  },
+  {
+   "node": "FMA22740",
+   "structure": "iliocostalis",
+   "layer": "muscle",
+   "source": "FMA22740"
+  },
+  {
+   "node": "FMA22742",
+   "structure": "iliocostalis",
+   "layer": "muscle",
+   "source": "FMA22742"
+  },
+  {
+   "node": "FMA22744",
+   "structure": "iliocostalis",
+   "layer": "muscle",
+   "source": "FMA22744"
+  },
+  {
+   "node": "FMA22751",
+   "structure": "longissimus",
+   "layer": "muscle",
+   "source": "FMA22751"
+  },
+  {
+   "node": "FMA22757",
+   "structure": "longissimus",
+   "layer": "muscle",
+   "source": "FMA22757"
+  },
+  {
+   "node": "FMA22754",
+   "structure": "longissimus",
+   "layer": "muscle",
+   "source": "FMA22754"
+  },
+  {
+   "node": "FMA22779",
+   "structure": "spinalis",
+   "layer": "muscle",
+   "source": "FMA22779"
+  },
+  {
+   "node": "FMA22781",
+   "structure": "spinalis",
+   "layer": "muscle",
+   "source": "FMA22781"
+  },
+  {
+   "node": "FMA22878",
+   "structure": "multifidus",
+   "layer": "muscle",
+   "source": "FMA22878"
+  },
+  {
+   "node": "FMA23083",
+   "structure": "rotatores",
+   "layer": "muscle",
+   "source": "FMA23083"
+  },
+  {
+   "node": "FMA23089",
+   "structure": "rotatores",
+   "layer": "muscle",
+   "source": "FMA23089"
+  },
+  {
+   "node": "FMA22348",
+   "structure": "quadratus_lumborum",
+   "layer": "muscle",
+   "source": "FMA22348"
+  },
+  {
+   "node": "FMA13377",
+   "structure": "rectus_abdominis",
+   "layer": "muscle",
+   "source": "FMA13377"
+  },
+  {
+   "node": "FMA22346",
+   "structure": "pyramidalis",
+   "layer": "muscle",
+   "source": "FMA22346"
+  },
+  {
+   "node": "FMA13336",
+   "structure": "external_oblique",
+   "layer": "muscle",
+   "source": "FMA13336"
+  },
+  {
+   "node": "FMA13892",
+   "structure": "internal_oblique",
+   "layer": "muscle",
+   "source": "FMA13892"
+  },
+  {
+   "node": "FMA22344",
+   "structure": "transversus_abdominis",
+   "layer": "muscle",
+   "source": "FMA22344"
+  },
+  {
+   "node": "FMA22342",
+   "structure": "psoas_major",
+   "layer": "muscle",
+   "source": "FMA22342"
+  },
+  {
+   "node": "FMA22322",
+   "structure": "iliacus",
+   "layer": "muscle",
+   "source": "FMA22322"
+  },
+  {
+   "node": "FMA45854",
+   "structure": "levator_ani",
+   "layer": "muscle",
+   "source": "FMA45854"
+  },
+  {
+   "node": "FMA45856",
+   "structure": "levator_ani",
+   "layer": "muscle",
+   "source": "FMA45856"
+  },
+  {
+   "node": "FMA45858",
+   "structure": "levator_ani",
+   "layer": "muscle",
+   "source": "FMA45858"
+  },
+  {
+   "node": "FMA46443",
+   "structure": "coccygeus",
+   "layer": "muscle",
+   "source": "FMA46443"
+  },
+  {
+   "node": "FMA22324",
+   "structure": "obturator_internus",
+   "layer": "muscle",
+   "source": "FMA22324"
+  },
+  {
+   "node": "FMA22340",
+   "structure": "piriformis",
+   "layer": "muscle",
+   "source": "FMA22340"
+  },
+  {
+   "node": "FMA21930",
+   "structure": "external_anal_sphincter",
+   "layer": "muscle",
+   "source": "FMA21930"
+  },
+  {
+   "node": "FMA22328",
+   "structure": "gluteus_maximus",
+   "layer": "muscle",
+   "source": "FMA22328"
+  },
+  {
+   "node": "FMA22330",
+   "structure": "gluteus_medius",
+   "layer": "muscle",
+   "source": "FMA22330"
+  },
+  {
+   "node": "FMA3736",
+   "structure": "ascending_aorta",
+   "layer": "vessel",
+   "source": "FMA3736"
+  },
+  {
+   "node": "FMA3768",
+   "structure": "aortic_arch",
+   "layer": "vessel",
+   "source": "FMA3768"
+  },
+  {
+   "node": "FMA3784",
+   "structure": "descending_aorta",
+   "layer": "vessel",
+   "source": "FMA3784"
+  },
+  {
+   "node": "FMA4720",
+   "structure": "superior_vena_cava",
+   "layer": "vessel",
+   "source": "FMA4720"
+  },
+  {
+   "node": "FMA10951",
+   "structure": "inferior_vena_cava",
+   "layer": "vessel",
+   "source": "FMA10951"
+  },
+  {
+   "node": "FMA66326",
+   "structure": "pulmonary_artery",
+   "layer": "vessel",
+   "source": "FMA66326"
+  },
+  {
+   "node": "FMA66643",
+   "structure": "pulmonary_veins",
+   "layer": "vessel",
+   "source": "FMA66643"
+  },
+  {
+   "node": "FMA4685",
+   "structure": "left_coronary_artery",
+   "layer": "vessel",
+   "source": "FMA4685"
+  },
+  {
+   "node": "FMA3862nsn",
+   "structure": "left_coronary_artery",
+   "layer": "vessel",
+   "source": "FMA3862nsn"
+  },
+  {
+   "node": "FMA3895",
+   "structure": "left_coronary_artery",
+   "layer": "vessel",
+   "source": "FMA3895"
+  },
+  {
+   "node": "FMA3802",
+   "structure": "right_coronary_artery",
+   "layer": "vessel",
+   "source": "FMA3802"
+  },
+  {
+   "node": "FMA3818",
+   "structure": "right_coronary_artery",
+   "layer": "vessel",
+   "source": "FMA3818"
+  },
+  {
+   "node": "FMA3840nsn",
+   "structure": "right_coronary_artery",
+   "layer": "vessel",
+   "source": "FMA3840nsn"
+  },
+  {
+   "node": "FMA4706",
+   "structure": "coronary_sinus",
+   "layer": "vessel",
+   "source": "FMA4706"
+  },
+  {
+   "node": "FMA4707",
+   "structure": "coronary_sinus",
+   "layer": "vessel",
+   "source": "FMA4707"
+  },
+  {
+   "node": "FMA3953",
+   "structure": "subclavian_artery",
+   "layer": "vessel",
+   "source": "FMA3953"
+  },
+  {
+   "node": "FMA4755",
+   "structure": "subclavian_vein",
+   "layer": "vessel",
+   "source": "FMA4755"
+  },
+  {
+   "node": "FMA3941",
+   "structure": "common_carotid_artery",
+   "layer": "vessel",
+   "source": "FMA3941"
+  },
+  {
+   "node": "FMA4754",
+   "structure": "internal_jugular_vein",
+   "layer": "vessel",
+   "source": "FMA4754"
+  },
+  {
+   "node": "FMA50737",
+   "structure": "celiac_trunk",
+   "layer": "vessel",
+   "source": "FMA50737"
+  },
+  {
+   "node": "FMA14771",
+   "structure": "common_hepatic_artery",
+   "layer": "vessel",
+   "source": "FMA14771"
+  },
+  {
+   "node": "FMA14768",
+   "structure": "left_gastric_artery",
+   "layer": "vessel",
+   "source": "FMA14768"
+  },
+  {
+   "node": "FMA14773",
+   "structure": "splenic_artery",
+   "layer": "vessel",
+   "source": "FMA14773"
+  },
+  {
+   "node": "FMA14749",
+   "structure": "superior_mesenteric_artery",
+   "layer": "vessel",
+   "source": "FMA14749"
+  },
+  {
+   "node": "FMA14750",
+   "structure": "inferior_mesenteric_artery",
+   "layer": "vessel",
+   "source": "FMA14750"
+  },
+  {
+   "node": "FMA14752",
+   "structure": "renal_artery",
+   "layer": "vessel",
+   "source": "FMA14752"
+  },
+  {
+   "node": "FMA14753",
+   "structure": "renal_artery",
+   "layer": "vessel",
+   "source": "FMA14753"
+  },
+  {
+   "node": "FMA14335",
+   "structure": "renal_vein",
+   "layer": "vessel",
+   "source": "FMA14335"
+  },
+  {
+   "node": "FMA14336",
+   "structure": "renal_vein",
+   "layer": "vessel",
+   "source": "FMA14336"
+  },
+  {
+   "node": "FMA14331",
+   "structure": "splenic_vein",
+   "layer": "vessel",
+   "source": "FMA14331"
+  },
+  {
+   "node": "FMA14332",
+   "structure": "superior_mesenteric_vein",
+   "layer": "vessel",
+   "source": "FMA14332"
+  },
+  {
+   "node": "FMA14765",
+   "structure": "common_iliac_artery",
+   "layer": "vessel",
+   "source": "FMA14765"
+  },
+  {
+   "node": "FMA14766",
+   "structure": "common_iliac_artery",
+   "layer": "vessel",
+   "source": "FMA14766"
+  },
+  {
+   "node": "FMA18806",
+   "structure": "external_iliac_artery",
+   "layer": "vessel",
+   "source": "FMA18806"
+  },
+  {
+   "node": "FMA18807",
+   "structure": "external_iliac_artery",
+   "layer": "vessel",
+   "source": "FMA18807"
+  },
+  {
+   "node": "FMA18809",
+   "structure": "internal_iliac_artery",
+   "layer": "vessel",
+   "source": "FMA18809"
+  },
+  {
+   "node": "FMA18810",
+   "structure": "internal_iliac_artery",
+   "layer": "vessel",
+   "source": "FMA18810"
+  },
+  {
+   "node": "FMA21387",
+   "structure": "common_iliac_vein",
+   "layer": "vessel",
+   "source": "FMA21387"
+  },
+  {
+   "node": "FMA21388",
+   "structure": "common_iliac_vein",
+   "layer": "vessel",
+   "source": "FMA21388"
+  },
+  {
+   "node": "FMA18885",
+   "structure": "external_iliac_vein",
+   "layer": "vessel",
+   "source": "FMA18885"
+  },
+  {
+   "node": "FMA18886",
+   "structure": "external_iliac_vein",
+   "layer": "vessel",
+   "source": "FMA18886"
+  },
+  {
+   "node": "FMA18887",
+   "structure": "internal_iliac_vein",
+   "layer": "vessel",
+   "source": "FMA18887"
+  },
+  {
+   "node": "FMA18888",
+   "structure": "internal_iliac_vein",
+   "layer": "vessel",
+   "source": "FMA18888"
+  },
+  {
+   "node": "FMA7274",
+   "structure": "heart",
+   "layer": "organ",
+   "source": "FMA7274"
+  },
+  {
+   "node": "FMA7333",
+   "structure": "right_lung",
+   "layer": "organ",
+   "source": "FMA7333"
+  },
+  {
+   "node": "FMA7383",
+   "structure": "right_lung",
+   "layer": "organ",
+   "source": "FMA7383"
+  },
+  {
+   "node": "FMA7337",
+   "structure": "right_lung",
+   "layer": "organ",
+   "source": "FMA7337"
+  },
+  {
+   "node": "FMA7370",
+   "structure": "left_lung",
+   "layer": "organ",
+   "source": "FMA7370"
+  },
+  {
+   "node": "FMA7371",
+   "structure": "left_lung",
+   "layer": "organ",
+   "source": "FMA7371"
+  },
+  {
+   "node": "FMA7394",
+   "structure": "trachea",
+   "layer": "organ",
+   "source": "FMA7394"
+  },
+  {
+   "node": "FMA7409",
+   "structure": "bronchi",
+   "layer": "organ",
+   "source": "FMA7409"
+  },
+  {
+   "node": "FMA7131",
+   "structure": "esophagus",
+   "layer": "organ",
+   "source": "FMA7131"
+  },
+  {
+   "node": "FMA71194",
+   "structure": "thymus",
+   "layer": "organ",
+   "source": "FMA71194"
+  },
+  {
+   "node": "FMA71195",
+   "structure": "thymus",
+   "layer": "organ",
+   "source": "FMA71195"
+  },
+  {
+   "node": "FMA7148",
+   "structure": "stomach",
+   "layer": "organ",
+   "source": "FMA7148"
+  },
+  {
+   "node": "FMA7197",
+   "structure": "liver",
+   "layer": "organ",
+   "source": "FMA7197"
+  },
+  {
+   "node": "FMA7202",
+   "structure": "gallbladder",
+   "layer": "organ",
+   "source": "FMA7202"
+  },
+  {
+   "node": "FMA7196",
+   "structure": "spleen",
+   "layer": "organ",
+   "source": "FMA7196"
+  },
+  {
+   "node": "FMA7198nsn",
+   "structure": "pancreas",
+   "layer": "organ",
+   "source": "FMA7198nsn"
+  },
+  {
+   "node": "FMA7206",
+   "structure": "duodenum",
+   "layer": "organ",
+   "source": "FMA7206"
+  },
+  {
+   "node": "FMA7207",
+   "structure": "small_intestine",
+   "layer": "organ",
+   "source": "FMA7207"
+  },
+  {
+   "node": "FMA7208",
+   "structure": "small_intestine",
+   "layer": "organ",
+   "source": "FMA7208"
+  },
+  {
+   "node": "FMA14543nsn",
+   "structure": "colon",
+   "layer": "organ",
+   "source": "FMA14543nsn"
+  },
+  {
+   "node": "FMA14542",
+   "structure": "appendix",
+   "layer": "organ",
+   "source": "FMA14542"
+  },
+  {
+   "node": "FMA14544",
+   "structure": "rectum",
+   "layer": "organ",
+   "source": "FMA14544"
+  },
+  {
+   "node": "FMA7204",
+   "structure": "right_kidney",
+   "layer": "organ",
+   "source": "FMA7204"
+  },
+  {
+   "node": "FMA7205",
+   "structure": "left_kidney",
+   "layer": "organ",
+   "source": "FMA7205"
+  },
+  {
+   "node": "FMA15629",
+   "structure": "adrenal_gland",
+   "layer": "organ",
+   "source": "FMA15629"
+  },
+  {
+   "node": "FMA15630",
+   "structure": "adrenal_gland",
+   "layer": "organ",
+   "source": "FMA15630"
+  },
+  {
+   "node": "FMA15571",
+   "structure": "ureter",
+   "layer": "organ",
+   "source": "FMA15571"
+  },
+  {
+   "node": "FMA15572",
+   "structure": "ureter",
+   "layer": "organ",
+   "source": "FMA15572"
+  },
+  {
+   "node": "FMA15900",
+   "structure": "urinary_bladder",
+   "layer": "organ",
+   "source": "FMA15900"
+  },
+  {
+   "node": "FMA9600",
+   "structure": "prostate",
+   "layer": "organ",
+   "source": "FMA9600"
+  },
+  {
+   "node": "sch_spinal_cord",
+   "structure": "spinal_cord",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_cauda_equina",
+   "structure": "cauda_equina",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_l4_nerve_root",
+   "structure": "l4_nerve_root",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_lumbosacral_trunk",
+   "structure": "lumbosacral_trunk",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_l5_nerve_root",
+   "structure": "l5_nerve_root",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_s1_nerve_root",
+   "structure": "s1_nerve_root",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_sciatic_nerve",
+   "structure": "sciatic_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_pudendal_nerve",
+   "structure": "pudendal_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_obturator_nerve",
+   "structure": "obturator_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_femoral_nerve",
+   "structure": "femoral_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_femoral_artery_stub",
+   "structure": "femoral_artery_stub",
+   "layer": "vessel",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_lateral_femoral_cutaneous_nerve",
+   "structure": "lateral_femoral_cutaneous_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_genitofemoral_nerve",
+   "structure": "genitofemoral_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_iliohypogastric_nerve",
+   "structure": "iliohypogastric_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_ilioinguinal_nerve",
+   "structure": "ilioinguinal_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_intercostal_nerve_t4",
+   "structure": "intercostal_nerve_t4",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_intercostal_nerve_t7",
+   "structure": "intercostal_nerve_t7",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_intercostal_nerve_t10",
+   "structure": "intercostal_nerve_t10",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_subcostal_nerve",
+   "structure": "subcostal_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_posterior_intercostal_artery_t7",
+   "structure": "posterior_intercostal_artery_t7",
+   "layer": "vessel",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_sympathetic_trunk",
+   "structure": "sympathetic_trunk",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_azygos_vein",
+   "structure": "azygos_vein",
+   "layer": "vessel",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_thoracic_duct",
+   "structure": "thoracic_duct",
+   "layer": "vessel",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_brachiocephalic_trunk",
+   "structure": "brachiocephalic_trunk",
+   "layer": "vessel",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_phrenic_nerve",
+   "structure": "phrenic_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_vagus_nerve",
+   "structure": "vagus_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_internal_thoracic_artery",
+   "structure": "internal_thoracic_artery",
+   "layer": "vessel",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_superior_epigastric_artery",
+   "structure": "superior_epigastric_artery",
+   "layer": "vessel",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_inferior_epigastric_artery",
+   "structure": "inferior_epigastric_artery",
+   "layer": "vessel",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_long_thoracic_nerve",
+   "structure": "long_thoracic_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_thoracodorsal_nerve",
+   "structure": "thoracodorsal_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_dorsal_scapular_nerve",
+   "structure": "dorsal_scapular_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  },
+  {
+   "node": "sch_spinal_accessory_nerve",
+   "structure": "spinal_accessory_nerve",
+   "layer": "nerve",
+   "source": "schematic"
+  }
+ ],
+ "structures": {
+  "t1_vertebra": "T1 vertebra",
+  "t2_vertebra": "T2 vertebra",
+  "t3_vertebra": "T3 vertebra",
+  "t4_vertebra": "T4 vertebra",
+  "t5_vertebra": "T5 vertebra",
+  "t6_vertebra": "T6 vertebra",
+  "t7_vertebra": "T7 vertebra",
+  "t8_vertebra": "T8 vertebra",
+  "t9_vertebra": "T9 vertebra",
+  "t10_vertebra": "T10 vertebra",
+  "t11_vertebra": "T11 vertebra",
+  "t12_vertebra": "T12 vertebra",
+  "l1_vertebra": "L1 vertebra",
+  "l2_vertebra": "L2 vertebra",
+  "l3_vertebra": "L3 vertebra",
+  "l4_vertebra": "L4 vertebra",
+  "l5_vertebra": "L5 vertebra",
+  "thoracic_discs": "Thoracic intervertebral discs",
+  "l1_disc": "L1/L2 intervertebral disc",
+  "l2_disc": "L2/L3 intervertebral disc",
+  "l3_disc": "L3/L4 intervertebral disc",
+  "l4_disc": "L4/L5 intervertebral disc",
+  "l5_disc": "L5/S1 intervertebral disc",
+  "rib_1": "Rib 1",
+  "rib_2": "Rib 2",
+  "rib_3": "Rib 3",
+  "rib_4": "Rib 4",
+  "rib_5": "Rib 5",
+  "rib_6": "Rib 6",
+  "rib_7": "Rib 7",
+  "rib_8": "Rib 8",
+  "rib_9": "Rib 9",
+  "rib_10": "Rib 10",
+  "rib_11": "Rib 11",
+  "rib_12": "Rib 12",
+  "costal_cartilages": "Costal cartilages",
+  "manubrium": "Manubrium of sternum",
+  "body_of_sternum": "Body of sternum",
+  "xiphoid_process": "Xiphoid process",
+  "sacrum": "Sacrum",
+  "hip_bone": "Hip bone",
+  "clavicle": "Clavicle",
+  "scapula": "Scapula",
+  "inguinal_ligament": "Inguinal ligament",
+  "linea_alba": "Linea alba",
+  "tendinous_arch_of_levator_ani": "Tendinous arch of levator ani",
+  "pectoralis_major": "Pectoralis major",
+  "pectoralis_minor": "Pectoralis minor",
+  "subclavius": "Subclavius",
+  "serratus_anterior": "Serratus anterior",
+  "external_intercostals": "External intercostal muscles",
+  "internal_intercostals": "Internal intercostal muscles",
+  "innermost_intercostals": "Innermost intercostal muscles",
+  "transversus_thoracis": "Transversus thoracis",
+  "levatores_costarum": "Levatores costarum",
+  "diaphragm": "Diaphragm",
+  "trapezius": "Trapezius",
+  "latissimus_dorsi": "Latissimus dorsi",
+  "rhomboid_major": "Rhomboid major",
+  "rhomboid_minor": "Rhomboid minor",
+  "levator_scapulae": "Levator scapulae",
+  "serratus_posterior_superior": "Serratus posterior superior",
+  "serratus_posterior_inferior": "Serratus posterior inferior",
+  "iliocostalis": "Iliocostalis (erector spinae)",
+  "longissimus": "Longissimus (erector spinae)",
+  "spinalis": "Spinalis (erector spinae)",
+  "multifidus": "Multifidus",
+  "rotatores": "Rotatores",
+  "quadratus_lumborum": "Quadratus lumborum",
+  "rectus_abdominis": "Rectus abdominis",
+  "pyramidalis": "Pyramidalis",
+  "external_oblique": "External oblique",
+  "internal_oblique": "Internal oblique",
+  "transversus_abdominis": "Transversus abdominis",
+  "psoas_major": "Psoas major",
+  "iliacus": "Iliacus",
+  "levator_ani": "Levator ani",
+  "coccygeus": "Coccygeus",
+  "obturator_internus": "Obturator internus",
+  "piriformis": "Piriformis",
+  "external_anal_sphincter": "External anal sphincter",
+  "gluteus_maximus": "Gluteus maximus",
+  "gluteus_medius": "Gluteus medius",
+  "ascending_aorta": "Ascending aorta",
+  "aortic_arch": "Arch of the aorta",
+  "descending_aorta": "Descending aorta",
+  "superior_vena_cava": "Superior vena cava",
+  "inferior_vena_cava": "Inferior vena cava",
+  "pulmonary_artery": "Pulmonary trunk and arteries",
+  "pulmonary_veins": "Pulmonary veins",
+  "left_coronary_artery": "Left coronary artery",
+  "right_coronary_artery": "Right coronary artery",
+  "coronary_sinus": "Coronary sinus and great cardiac vein",
+  "subclavian_artery": "Subclavian artery",
+  "subclavian_vein": "Subclavian vein",
+  "common_carotid_artery": "Common carotid artery",
+  "internal_jugular_vein": "Internal jugular vein",
+  "celiac_trunk": "Celiac trunk",
+  "common_hepatic_artery": "Common hepatic artery",
+  "left_gastric_artery": "Left gastric artery",
+  "splenic_artery": "Splenic artery",
+  "superior_mesenteric_artery": "Superior mesenteric artery",
+  "inferior_mesenteric_artery": "Inferior mesenteric artery",
+  "renal_artery": "Renal artery",
+  "renal_vein": "Renal vein",
+  "splenic_vein": "Splenic vein",
+  "superior_mesenteric_vein": "Superior mesenteric vein",
+  "common_iliac_artery": "Common iliac artery",
+  "external_iliac_artery": "External iliac artery",
+  "internal_iliac_artery": "Internal iliac artery",
+  "common_iliac_vein": "Common iliac vein",
+  "external_iliac_vein": "External iliac vein",
+  "internal_iliac_vein": "Internal iliac vein",
+  "heart": "Heart",
+  "right_lung": "Right lung",
+  "left_lung": "Left lung",
+  "trachea": "Trachea",
+  "bronchi": "Main bronchi",
+  "esophagus": "Esophagus",
+  "thymus": "Thymus",
+  "stomach": "Stomach",
+  "liver": "Liver",
+  "gallbladder": "Gallbladder",
+  "spleen": "Spleen",
+  "pancreas": "Pancreas",
+  "duodenum": "Duodenum",
+  "small_intestine": "Small intestine (jejunum and ileum)",
+  "colon": "Colon",
+  "appendix": "Appendix",
+  "rectum": "Rectum",
+  "right_kidney": "Right kidney",
+  "left_kidney": "Left kidney",
+  "adrenal_gland": "Adrenal (suprarenal) gland",
+  "ureter": "Ureter",
+  "urinary_bladder": "Urinary bladder",
+  "prostate": "Prostate",
+  "spinal_cord": "Spinal cord",
+  "cauda_equina": "Cauda equina",
+  "phrenic_nerve": "Phrenic nerve",
+  "vagus_nerve": "Vagus nerve",
+  "sympathetic_trunk": "Sympathetic trunk",
+  "intercostal_nerve_t4": "Fourth intercostal nerve",
+  "intercostal_nerve_t7": "Seventh intercostal nerve",
+  "intercostal_nerve_t10": "Tenth intercostal nerve",
+  "subcostal_nerve": "Subcostal nerve (T12)",
+  "long_thoracic_nerve": "Long thoracic nerve",
+  "thoracodorsal_nerve": "Thoracodorsal nerve",
+  "dorsal_scapular_nerve": "Dorsal scapular nerve",
+  "spinal_accessory_nerve": "Spinal accessory nerve (CN XI)",
+  "iliohypogastric_nerve": "Iliohypogastric nerve",
+  "ilioinguinal_nerve": "Ilioinguinal nerve",
+  "genitofemoral_nerve": "Genitofemoral nerve",
+  "lateral_femoral_cutaneous_nerve": "Lateral femoral cutaneous nerve",
+  "femoral_nerve": "Femoral nerve",
+  "obturator_nerve": "Obturator nerve",
+  "lumbosacral_trunk": "Lumbosacral trunk",
+  "sciatic_nerve": "Sciatic nerve",
+  "pudendal_nerve": "Pudendal nerve",
+  "l4_nerve_root": "L4 nerve root",
+  "l5_nerve_root": "L5 nerve root",
+  "s1_nerve_root": "S1 nerve root",
+  "internal_thoracic_artery": "Internal thoracic artery",
+  "posterior_intercostal_artery_t7": "Seventh posterior intercostal artery",
+  "azygos_vein": "Azygos vein",
+  "superior_epigastric_artery": "Superior epigastric artery",
+  "inferior_epigastric_artery": "Inferior epigastric artery",
+  "thoracic_duct": "Thoracic duct",
+  "brachiocephalic_trunk": "Brachiocephalic trunk",
+  "femoral_artery_stub": "Femoral artery (below the inguinal ligament)"
+ },
+ "regions": {
+  "thorax": [
+   "rib_1",
+   "rib_2",
+   "rib_3",
+   "rib_4",
+   "rib_5",
+   "rib_6",
+   "rib_7",
+   "rib_8",
+   "rib_9",
+   "rib_10",
+   "rib_11",
+   "rib_12",
+   "manubrium",
+   "body_of_sternum",
+   "xiphoid_process",
+   "t1_vertebra"
+  ],
+  "back": [
+   "t1_vertebra",
+   "t2_vertebra",
+   "t3_vertebra",
+   "t4_vertebra",
+   "t5_vertebra",
+   "t6_vertebra",
+   "t7_vertebra",
+   "t8_vertebra",
+   "t9_vertebra",
+   "t10_vertebra",
+   "t11_vertebra",
+   "t12_vertebra",
+   "l1_vertebra",
+   "l2_vertebra",
+   "l3_vertebra",
+   "l4_vertebra",
+   "l5_vertebra",
+   "sacrum",
+   "scapula"
+  ],
+  "abdomen": [
+   "rib_10",
+   "rib_12",
+   "l1_vertebra",
+   "l5_vertebra",
+   "hip_bone",
+   "xiphoid_process"
+  ],
+  "pelvis": [
+   "hip_bone",
+   "sacrum",
+   "l5_vertebra"
+  ],
+  "all": [
+   "clavicle",
+   "rib_1",
+   "rib_12",
+   "manubrium",
+   "t1_vertebra",
+   "l5_vertebra",
+   "sacrum",
+   "hip_bone"
+  ]
+ },
+ "axis": {
+  "t1": [
+   0.0138,
+   0.3024,
+   -0.036
+  ],
+  "t12": [
+   0.0153,
+   0.0167,
+   -0.0393
+  ],
+  "l5": [
+   0.0169,
+   -0.1346,
+   -0.0297
+  ],
+  "sacrum": [
+   0.0185,
+   -0.1964,
+   -0.0543
+  ]
+ },
+ "schematic": [
+  "azygos_vein",
+  "brachiocephalic_trunk",
+  "cauda_equina",
+  "dorsal_scapular_nerve",
+  "femoral_artery_stub",
+  "femoral_nerve",
+  "genitofemoral_nerve",
+  "iliohypogastric_nerve",
+  "ilioinguinal_nerve",
+  "inferior_epigastric_artery",
+  "intercostal_nerve_t10",
+  "intercostal_nerve_t4",
+  "intercostal_nerve_t7",
+  "internal_thoracic_artery",
+  "l4_nerve_root",
+  "l5_nerve_root",
+  "lateral_femoral_cutaneous_nerve",
+  "long_thoracic_nerve",
+  "lumbosacral_trunk",
+  "obturator_nerve",
+  "phrenic_nerve",
+  "posterior_intercostal_artery_t7",
+  "pudendal_nerve",
+  "s1_nerve_root",
+  "sciatic_nerve",
+  "spinal_accessory_nerve",
+  "spinal_cord",
+  "subcostal_nerve",
+  "superior_epigastric_artery",
+  "sympathetic_trunk",
+  "thoracic_duct",
+  "thoracodorsal_nerve",
+  "vagus_nerve"
+ ],
+ "triangles": 186434,
+ "viewLabels": {
+  "palmar": "Front",
+  "dorsal": "Back",
+  "lateral": "Side"
+ }
+}

@@ -14,7 +14,7 @@ export function verdictLine(score, n) {
 }
 
 const FOCUS_BY_REGION = { hand: "hand", wrist: "hand", forearm: "forearm", elbow: "forearm", arm: "arm", shoulder: "shoulder",
-  hip: "hip", thigh: "thigh", knee: "knee", leg: "leg", ankle: "ankle", foot: "foot" };
+  hip: "hip", thigh: "thigh", knee: "knee", leg: "leg", ankle: "ankle", foot: "foot", trunk: "all", thorax: "thorax", back: "back", abdomen: "abdomen", pelvis: "pelvis" };
 
 export function createEngine({ renderer, questions, sets, ui, track }) {
   // state: intro | asking | feedback | done

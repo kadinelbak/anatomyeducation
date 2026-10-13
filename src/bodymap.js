@@ -4,7 +4,7 @@
 // buildBodyMap(questions, models) -> [{ id, title, options: [{ id, label, renderer, model?, focus?, studies? }] }]
 // Scan options come from the question banks: every study a bank asks about, grouped by region
 // (tags.region) and modality; the study with most questions comes first. Model options are fixed:
-// each limb model covers its own limb, and the lower-limb model's hip region doubles as the pelvis.
+// each limb model covers its own limb, the trunk model covers chest, abdomen and pelvis, and the lower-limb model's hip region is a second pelvis entry.
 
 const REGIONS = [
   { id: "head", title: "Head", short: "Head" },
@@ -20,11 +20,13 @@ const REGIONS = [
 const MODEL_OPTIONS = {
   "upper-limb": [{ model: "upper-limb", focus: "all", label: "3D model" }],
   "lower-limb": [{ model: "lower-limb", focus: "all", label: "3D model" }],
-  pelvis: [{ model: "lower-limb", focus: "hip", label: "3D: hip bones" }],
+  chest: [{ model: "trunk", focus: "thorax", label: "3D model" }],
+  abdomen: [{ model: "trunk", focus: "abdomen", label: "3D model" }],
+  pelvis: [{ model: "trunk", focus: "pelvis", label: "3D model" }, { model: "lower-limb", focus: "hip", label: "3D: hip bones" }],
 };
 
 // Bank region tags that belong to a figure region under another name.
-const ALIAS = { thorax: "chest", neck: "head", knee: "lower-limb", "whole-body": "chest", wholebody: "chest",
+const ALIAS = { thorax: "chest", back: "chest", neck: "head", knee: "lower-limb", "whole-body": "chest", wholebody: "chest",
   // Histology and cell questions are tagged by tissue; they all live under one body-map entry.
   "skeletal muscle": "tissue", bone: "tissue", nerve: "tissue", vessel: "tissue", "connective tissue": "tissue", generic: "tissue" };
 const regionOfQuestion = (q) => { const r = q.tags?.region; return ALIAS[r] || r; };

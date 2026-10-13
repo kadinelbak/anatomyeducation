@@ -1,0 +1,1603 @@
+{
+  "version": 1,
+  "region": "trunk",
+  "model": "trunk",
+  "questions": [
+    {
+      "id": "first-rib-thoracic-outlet",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "rib_1",
+      "accept": [
+        "rib_1"
+      ],
+      "prompt": "A woman has an aching arm that swells and turns pale when she lifts it overhead, with weak grip and tingling along the ulnar border. Subclavian vessels and lower trunk of the brachial plexus are compressed against a bone. Click the bone.",
+      "hint": "It is the shortest, broadest and most curved rib, lying under the clavicle.",
+      "view": "palmar",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The first rib forms the floor of the thoracic outlet, with the scalene tubercle separating subclavian vein and artery. A cervical rib or a healed clavicle or first rib fracture narrows the space and compresses the plexus and subclavian artery.",
+      "tags": {
+        "topic": "bones",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "floating-rib-flank-trauma",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "rib_12",
+      "accept": [
+        "rib_12",
+        "rib_11"
+      ],
+      "prompt": "After a fall onto a fence post a man has sharp flank pain and blood in the urine. Examination suggests a fracture of the lowest rib on the right, which has no costal cartilage attached. Click the rib.",
+      "hint": "It is the shortest rib and ends freely in the posterior abdominal wall.",
+      "view": "lateral",
+      "layers": [
+        "bone"
+      ],
+      "explain": "Ribs 11 and 12 are floating ribs with free anterior ends. The twelfth rib lies behind the kidney and pleura, so fractures can injure the kidney, and incisions near it risk opening the pleural cavity.",
+      "tags": {
+        "topic": "bones",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "chance-fracture-thoracolumbar",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "l1_vertebra",
+      "accept": [
+        "l1_vertebra",
+        "t12_vertebra"
+      ],
+      "prompt": "A restrained passenger in a head-on collision has severe midline back pain at the thoracolumbar junction. A flexion injury is suspected at the level where the spinal cord ends. Click the first lumbar vertebra.",
+      "hint": "It is the first vertebra below the last one that carries a rib.",
+      "view": "lateral",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The thoracolumbar junction (T12 to L2) is a transition from the rigid rib-supported thoracic spine to the mobile lumbar spine, so it is the commonest site for burst and flexion fractures. The conus medullaris lies at about the L1/L2 level.",
+      "tags": {
+        "topic": "bones",
+        "region": "trunk",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "back"
+    },
+    {
+      "id": "cpr-xiphoid-fracture",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "xiphoid_process",
+      "accept": [
+        "xiphoid_process"
+      ],
+      "prompt": "During cardiopulmonary resuscitation the rescuer's hands slip too low, and a small bony tip at the bottom of the sternum fractures and may press on the liver. Click this part of the sternum.",
+      "hint": "It is the lowest, smallest part of the sternum and is cartilaginous in youth.",
+      "view": "palmar",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The xiphoid process lies at about T9 and ossifies in adults. Compressions should be over the lower half of the body of the sternum, above it, since a displaced xiphoid can injure the liver or diaphragm.",
+      "tags": {
+        "topic": "bones",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "sternal-angle-manubrium",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "manubrium",
+      "accept": [
+        "manubrium"
+      ],
+      "prompt": "Click the manubrium of the sternum, the upper part whose junction with the body forms the sternal angle opposite the second costal cartilage.",
+      "hint": "It is the broad, upper part of the sternum with the jugular notch on top.",
+      "view": "palmar",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The manubrium articulates with the clavicles and first costal cartilages. The manubriosternal joint (sternal angle, T4/T5) is the landmark for counting ribs, the carina and the start and end of the aortic arch.",
+      "tags": {
+        "topic": "bones",
+        "region": "trunk",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "scapula-identify",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "scapula",
+      "accept": [
+        "scapula"
+      ],
+      "prompt": "Click the scapula, the flat triangular bone on the upper back with a spine and acromion that covers ribs 2 to 7.",
+      "hint": "It sits on the posterior chest wall and carries the glenoid cavity.",
+      "view": "dorsal",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The scapula is held to the thorax by muscles only, so it moves freely. The spine of the scapula is a landmark at about T3 and the inferior angle lies at about T7.",
+      "tags": {
+        "topic": "bones",
+        "region": "trunk",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "back"
+    },
+    {
+      "id": "sacrum-identify",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "sacrum",
+      "accept": [
+        "sacrum"
+      ],
+      "prompt": "Click the sacrum, the wedge of five fused vertebrae between the two hip bones that carries the weight of the trunk to the pelvis.",
+      "hint": "It is the triangular bone at the base of the spine.",
+      "view": "dorsal",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The sacrum articulates with L5 above, the coccyx below and the ilia at the sacroiliac joints. Its anterior foramina transmit ventral rami and its canal holds the lowest nerve roots of the cauda equina.",
+      "tags": {
+        "topic": "bones",
+        "region": "trunk",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "pelvis"
+    },
+    {
+      "id": "clavicle-identify",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "clavicle",
+      "accept": [
+        "clavicle"
+      ],
+      "prompt": "Click the clavicle, the S-shaped bone that links the sternum to the acromion and is the commonest long bone to fracture in childhood.",
+      "hint": "It lies horizontally above the first rib.",
+      "view": "palmar",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The clavicle is the only bony strut between the upper limb and the axial skeleton. It breaks most often at the junction of its middle and lateral thirds, where the medial fragment is pulled up by sternocleidomastoid.",
+      "tags": {
+        "topic": "bones",
+        "region": "trunk",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "t12-last-rib-vertebra",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "t12_vertebra",
+      "accept": [
+        "t12_vertebra"
+      ],
+      "prompt": "Click the twelfth thoracic vertebra, the last one to articulate with a rib and the level at which the aorta passes behind the diaphragm.",
+      "hint": "The lowest rib attaches to it, just above the first lumbar vertebra.",
+      "view": "lateral",
+      "layers": [
+        "bone"
+      ],
+      "explain": "T12 carries the twelfth rib and marks the aortic hiatus of the diaphragm. It has features of both thoracic and lumbar vertebrae, which is why the thoracolumbar junction is vulnerable.",
+      "tags": {
+        "topic": "bones",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "back"
+    },
+    {
+      "id": "l5-vertebra-spondylolisthesis",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "l5_vertebra",
+      "accept": [
+        "l5_vertebra"
+      ],
+      "prompt": "Click the fifth lumbar vertebra, the lowest mobile vertebra, which most often slips forward on the sacrum in spondylolisthesis.",
+      "hint": "It sits directly above the sacrum and is the largest vertebra.",
+      "view": "lateral",
+      "layers": [
+        "bone"
+      ],
+      "explain": "L5 has the largest body and the lumbosacral angle is at its junction with S1. A defect in its pars interarticularis allows the vertebra to slip forwards, which may stretch the L5 root.",
+      "tags": {
+        "topic": "bones",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "back"
+    },
+    {
+      "id": "femoral-hernia-inguinal-ligament",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "inguinal_ligament",
+      "accept": [
+        "inguinal_ligament"
+      ],
+      "prompt": "An elderly woman has a firm tender lump in the groin that lies below and lateral to the pubic tubercle. A hernia sac passes through the femoral canal. Click the ligament that the sac passes below.",
+      "hint": "It runs from the anterior superior iliac spine to the pubic tubercle.",
+      "view": "palmar",
+      "layers": [
+        "ligament",
+        "bone"
+      ],
+      "explain": "A femoral hernia passes below and lateral to the pubic tubercle, under the inguinal ligament, whereas an inguinal hernia lies above and medial. Femoral hernias have a narrow neck and a high risk of strangulation.",
+      "tags": {
+        "topic": "wall",
+        "region": "trunk",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "pelvis"
+    },
+    {
+      "id": "midline-laparotomy-linea-alba",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "linea_alba",
+      "accept": [
+        "linea_alba"
+      ],
+      "prompt": "A surgeon opens the abdomen for a perforated ulcer through a midline incision, chosen because it passes between the rectus muscles with little bleeding or nerve damage. Click the fibrous midline structure she divides.",
+      "hint": "It runs from the xiphoid process to the pubic symphysis.",
+      "view": "palmar",
+      "layers": [
+        "ligament"
+      ],
+      "explain": "The linea alba is a relatively bloodless fibrous raphe formed by the fused aponeuroses of the three flat muscles. It allows fast, wide access and is the commonest site for an incisional hernia.",
+      "tags": {
+        "topic": "wall",
+        "region": "trunk",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "abdomen"
+    },
+    {
+      "id": "lumbar-puncture-l3-l4",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "l3_disc",
+      "accept": [
+        "l3_disc",
+        "l4_disc"
+      ],
+      "prompt": "A child with suspected meningitis needs a lumbar puncture. The needle is passed in the midline at the level of the iliac crests, below the end of the spinal cord. Click the disc at this level.",
+      "hint": "A line joining the highest points of the iliac crests crosses this disc or the spine of L4.",
+      "view": "lateral",
+      "layers": [
+        "bone",
+        "ligament"
+      ],
+      "explain": "The supracristal plane crosses L4 or the L3/L4 disc. The cord ends at L1/L2, so a needle in the L3/L4 or L4/L5 space reaches CSF in the lumbar cistern, where the roots float and move away from the needle.",
+      "tags": {
+        "topic": "wall",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "back"
+    },
+    {
+      "id": "disc-herniation-l5-root",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "l4_disc",
+      "accept": [
+        "l4_disc"
+      ],
+      "prompt": "A labourer has sudden back pain with sciatica. There is weak dorsiflexion of the great toe and numbness over the dorsum of the foot. A posterolateral herniation of the disc compresses the exiting L5 root. Click the disc.",
+      "hint": "The L5 root is compressed by the disc one level above the vertebra it is named for.",
+      "view": "lateral",
+      "layers": [
+        "bone",
+        "ligament",
+        "nerve"
+      ],
+      "explain": "A posterolateral herniation at L4/L5 compresses the traversing L5 root, causing weak extensor hallucis longus and loss of sensation on the dorsum of the foot. The exiting L4 root usually escapes.",
+      "tags": {
+        "topic": "wall",
+        "region": "trunk",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "back"
+    },
+    {
+      "id": "disc-herniation-s1-root",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "l5_disc",
+      "accept": [
+        "l5_disc"
+      ],
+      "prompt": "A woman has sciatica radiating to the heel and lateral foot, an absent ankle jerk and weak plantar flexion. A posterolateral herniation of the lowest lumbar disc compresses the S1 root. Click the disc.",
+      "hint": "It lies between the last lumbar vertebra and the sacrum.",
+      "view": "palmar",
+      "layers": [
+        "bone",
+        "ligament"
+      ],
+      "explain": "A posterolateral herniation at L5/S1 compresses the S1 root, giving a lost ankle reflex, weak plantar flexion and lateral foot numbness. It is the lowest and often the most mobile lumbar disc.",
+      "tags": {
+        "topic": "wall",
+        "region": "trunk",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "pelvis"
+    },
+    {
+      "id": "levator-ani-pelvic-floor",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "levator_ani",
+      "accept": [
+        "levator_ani",
+        "coccygeus"
+      ],
+      "prompt": "Click the levator ani, the broad, funnel-shaped muscle that forms most of the pelvic floor and supports the pelvic organs.",
+      "hint": "It arises from the pubis and the obturator fascia and slings round the anorectal junction.",
+      "view": "lateral",
+      "layers": [
+        "muscle"
+      ],
+      "explain": "Levator ani (puborectalis, pubococcygeus and iliococcygeus) supports the pelvic viscera and keeps the anorectal angle. Damage in childbirth contributes to prolapse and incontinence.",
+      "tags": {
+        "topic": "wall",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "pelvis"
+    },
+    {
+      "id": "rectus-abdominis-sheath",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "rectus_abdominis",
+      "accept": [
+        "rectus_abdominis",
+        "pyramidalis"
+      ],
+      "prompt": "Click the rectus abdominis, the paired vertical strap muscle with tendinous intersections that lies inside the rectus sheath.",
+      "hint": "It runs from the pubic crest to the xiphoid process and lower ribs, on either side of the linea alba.",
+      "view": "palmar",
+      "layers": [
+        "muscle"
+      ],
+      "explain": "Rectus abdominis flexes the trunk and is crossed by tendinous intersections that give the 'six-pack'. Its sheath holds the superior and inferior epigastric vessels, which can bleed into the sheath after trauma or a hard cough.",
+      "tags": {
+        "topic": "wall",
+        "region": "trunk",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "abdomen"
+    },
+    {
+      "id": "internal-intercostal-layer",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "internal_intercostals",
+      "accept": [
+        "internal_intercostals",
+        "innermost_intercostals"
+      ],
+      "prompt": "Click the middle layer of an intercostal space, whose fibres run obliquely downward and backward at right angles to the layer outside it.",
+      "hint": "It lies between the external and innermost intercostal muscles.",
+      "view": "palmar",
+      "layers": [
+        "muscle"
+      ],
+      "explain": "The neurovascular bundle runs between the internal and innermost intercostal muscles, high in the space under the rib above. The internal intercostals depress the ribs during forced expiration.",
+      "tags": {
+        "topic": "wall",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "chest-drain-safe-triangle",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "latissimus_dorsi",
+      "accept": [
+        "latissimus_dorsi"
+      ],
+      "prompt": "A trauma doctor inserts a chest drain for a haemothorax in the 'safe triangle' in the fifth intercostal space. Its posterior border is the anterior edge of which broad muscle of the back that wraps round the lateral thoracic wall?",
+      "hint": "It runs from the iliac crest and thoracolumbar region to the humerus and forms the posterior axillary fold.",
+      "view": "lateral",
+      "layers": [
+        "muscle"
+      ],
+      "explain": "The safe triangle is bordered by the lateral edge of pectoralis major, the anterior edge of latissimus dorsi and a line above the nipple level. The drain goes over the top of the rib below to avoid the neurovascular bundle.",
+      "tags": {
+        "topic": "muscles",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "winged-scapula-serratus-anterior",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "serratus_anterior",
+      "accept": [
+        "serratus_anterior"
+      ],
+      "prompt": "After a radical mastectomy a patient has a prominent medial border of the scapula that gets worse when she pushes against a wall. Click the muscle that normally holds the scapula against the chest wall.",
+      "hint": "It arises from the upper eight or nine ribs and inserts on the medial border of the scapula.",
+      "view": "lateral",
+      "layers": [
+        "muscle"
+      ],
+      "explain": "Serratus anterior protracts the scapula and holds it flat on the thorax. It is supplied by the long thoracic nerve, whose damage produces a winged scapula that is most obvious on pushing forwards.",
+      "tags": {
+        "topic": "muscles",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "psoas-sign-appendicitis",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "psoas_major",
+      "accept": [
+        "psoas_major",
+        "iliacus"
+      ],
+      "prompt": "A young man with a swollen, tender right lower quadrant is more comfortable with the right hip flexed, and extending the hip causes pain. An inflamed retrocaecal appendix is irritating a muscle on the posterior abdominal wall. Click it.",
+      "hint": "It runs from the lumbar vertebrae to the lesser trochanter, lateral to the vertebral bodies.",
+      "view": "palmar",
+      "layers": [
+        "muscle"
+      ],
+      "explain": "A retrocaecal appendix or a psoas abscess irritates psoas major, so stretching the hip into extension is painful and the patient lies with the hip flexed. The psoas sign supports an inflamed appendix or a psoas abscess, for example from spinal tuberculosis.",
+      "tags": {
+        "topic": "muscles",
+        "region": "trunk",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "abdomen"
+    },
+    {
+      "id": "renal-incision-quadratus-lumborum",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "quadratus_lumborum",
+      "accept": [
+        "quadratus_lumborum"
+      ],
+      "prompt": "A surgeon removes a kidney through a flank incision at the twelfth rib. Behind the kidney lies a quadrangular muscle that she must retract before reaching it. Click this muscle of the posterior abdominal wall.",
+      "hint": "It runs between the twelfth rib, the lumbar transverse processes and the iliac crest.",
+      "view": "dorsal",
+      "layers": [
+        "muscle"
+      ],
+      "explain": "Quadratus lumborum forms part of the posterior abdominal wall behind the kidney and fixes the twelfth rib during respiration. It lies behind the subcostal nerve and vessels and is retracted in a flank approach to the kidney.",
+      "tags": {
+        "topic": "muscles",
+        "region": "trunk",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "back"
+    },
+    {
+      "id": "perineal-tear-external-anal-sphincter",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "external_anal_sphincter",
+      "accept": [
+        "external_anal_sphincter"
+      ],
+      "prompt": "A woman who had a forceps delivery cannot hold flatus and leaks liquid stool. A third-degree perineal tear has torn a ring of voluntary muscle round the anal canal. Click it.",
+      "hint": "It is the voluntary circular muscle at the lowest end of the anal canal.",
+      "view": "lateral",
+      "layers": [
+        "muscle"
+      ],
+      "explain": "The external anal sphincter is striated muscle supplied by the inferior rectal branch of the pudendal nerve. A third-degree tear involves it and needs careful repair to prevent faecal incontinence.",
+      "tags": {
+        "topic": "muscles",
+        "region": "trunk",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "pelvis"
+    },
+    {
+      "id": "hiatus-hernia-diaphragm",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "diaphragm",
+      "accept": [
+        "diaphragm"
+      ],
+      "prompt": "A man has heartburn that is worse on lying flat. Imaging shows part of the stomach lying in the chest after it has slid through the oesophageal opening at T10. Click the muscle that has this opening.",
+      "hint": "It is the dome-shaped sheet that separates the thorax from the abdomen.",
+      "view": "palmar",
+      "layers": [
+        "muscle"
+      ],
+      "explain": "The diaphragm has openings for the vena cava (T8), oesophagus (T10) and aorta (T12). A hiatus hernia occurs when the stomach herniates through the oesophageal hiatus into the thorax.",
+      "tags": {
+        "topic": "muscles",
+        "region": "trunk",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "abdomen"
+    },
+    {
+      "id": "trapezius-identify",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "trapezius",
+      "accept": [
+        "trapezius"
+      ],
+      "prompt": "Click the trapezius, the large triangular superficial muscle of the back and neck that elevates, retracts and rotates the scapula.",
+      "hint": "It is the most superficial muscle of the upper back, attached to the spine of the scapula.",
+      "view": "dorsal",
+      "layers": [
+        "muscle"
+      ],
+      "explain": "Trapezius is supplied by the spinal accessory nerve and by C3 and C4 proprioceptive branches. It arises from the occiput and the spines of C7 to T12 and inserts on the clavicle, acromion and scapular spine.",
+      "tags": {
+        "topic": "muscles",
+        "region": "trunk",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "back"
+    },
+    {
+      "id": "pectoralis-major-identify",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "pectoralis_major",
+      "accept": [
+        "pectoralis_major"
+      ],
+      "prompt": "Click pectoralis major, the large fan-shaped muscle of the anterior chest wall that forms the anterior axillary fold.",
+      "hint": "It runs from the clavicle, sternum and costal cartilages to the humerus.",
+      "view": "palmar",
+      "layers": [
+        "muscle"
+      ],
+      "explain": "Pectoralis major adducts and medially rotates the humerus. It is supplied by the medial and lateral pectoral nerves and lies in front of pectoralis minor.",
+      "tags": {
+        "topic": "muscles",
+        "region": "trunk",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "erector-spinae-longissimus",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "longissimus",
+      "accept": [
+        "longissimus",
+        "iliocostalis",
+        "spinalis"
+      ],
+      "prompt": "Click the intermediate column of the erector spinae, which lies between iliocostalis laterally and spinalis medially.",
+      "hint": "It forms the thick band alongside the thoracic and lumbar spines.",
+      "view": "dorsal",
+      "layers": [
+        "muscle"
+      ],
+      "explain": "Erector spinae has three columns, iliocostalis, longissimus and spinalis, from lateral to medial. They extend the vertebral column and are supplied by dorsal rami of spinal nerves.",
+      "tags": {
+        "topic": "muscles",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "back"
+    },
+    {
+      "id": "transversus-abdominis-identify",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "transversus_abdominis",
+      "accept": [
+        "transversus_abdominis",
+        "internal_oblique"
+      ],
+      "prompt": "Click transversus abdominis, the deepest of the three flat muscles of the anterolateral abdominal wall, whose fibres run horizontally.",
+      "hint": "It is the innermost flat muscle, like a corset round the abdomen.",
+      "view": "palmar",
+      "layers": [
+        "muscle"
+      ],
+      "explain": "Transversus abdominis compresses the abdominal contents. Its lowest fibres arch over the inguinal canal and join internal oblique to form the conjoint tendon.",
+      "tags": {
+        "topic": "muscles",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "abdomen"
+    },
+    {
+      "id": "rhomboid-major-identify",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "rhomboid_major",
+      "accept": [
+        "rhomboid_major",
+        "rhomboid_minor"
+      ],
+      "prompt": "Click rhomboid major, which lies deep to trapezius and draws the scapula towards the spine.",
+      "hint": "It runs from the spines of T2 to T5 to the medial border of the scapula below its spine.",
+      "view": "dorsal",
+      "layers": [
+        "muscle"
+      ],
+      "explain": "Rhomboid major retracts the scapula. It is supplied by the dorsal scapular nerve, which also supplies rhomboid minor and levator scapulae.",
+      "tags": {
+        "topic": "muscles",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "back"
+    },
+    {
+      "id": "external-oblique-inguinal-hernia-repair",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "external_oblique",
+      "accept": [
+        "external_oblique"
+      ],
+      "prompt": "Click external oblique, the most superficial flat muscle of the abdominal wall, whose fibres run down and forward like putting hands in the pockets.",
+      "hint": "Its aponeurosis forms the inguinal ligament and the roof of the inguinal canal.",
+      "view": "lateral",
+      "layers": [
+        "muscle"
+      ],
+      "explain": "External oblique's aponeurosis is opened in inguinal hernia repair to reach the canal. Its lower border folds back as the inguinal ligament.",
+      "tags": {
+        "topic": "muscles",
+        "region": "trunk",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "abdomen"
+    },
+    {
+      "id": "chest-drain-intercostal-bundle",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "intercostal_nerve_t7",
+      "accept": [
+        "intercostal_nerve_t7"
+      ],
+      "prompt": "A chest drain is inserted just above a rib, never below one, because the nerve and vessels run in a groove along its lower border. Click the nerve of the seventh intercostal space.",
+      "hint": "It runs along the lower border of the rib above its space.",
+      "view": "lateral",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "Intercostal nerves run in the costal groove with the posterior intercostal artery and vein, below the rib. A drain placed above the lower rib of a space avoids the bundle and prevents painful neuralgia and bleeding.",
+      "tags": {
+        "topic": "nerves",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "winged-scapula-long-thoracic",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "long_thoracic_nerve",
+      "accept": [
+        "long_thoracic_nerve"
+      ],
+      "prompt": "After an axillary node clearance a woman's scapula protrudes from the back when she pushes against a wall. The nerve that supplies serratus anterior runs on the surface of that muscle. Click it.",
+      "hint": "It descends on the lateral thoracic wall, deep to the axillary vessels.",
+      "view": "lateral",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The long thoracic nerve (C5 to C7) lies on serratus anterior and is vulnerable in axillary surgery and blows to the shoulder. Its injury produces a winged scapula.",
+      "tags": {
+        "topic": "nerves",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "accessory-nerve-node-biopsy",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "spinal_accessory_nerve",
+      "accept": [
+        "spinal_accessory_nerve"
+      ],
+      "prompt": "After a lymph node biopsy in the posterior triangle a man cannot shrug his right shoulder, and the shoulder droops. A superficial cranial nerve supplying trapezius has been cut. Click the nerve.",
+      "hint": "It crosses the posterior triangle of the neck on levator scapulae before reaching trapezius.",
+      "view": "dorsal",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The spinal accessory nerve (CN XI) is superficial in the posterior triangle, so it is easily damaged in node biopsy. Loss of trapezius leaves a drooping shoulder with weak elevation and difficulty abducting above the horizontal.",
+      "tags": {
+        "topic": "nerves",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "back"
+    },
+    {
+      "id": "thoracodorsal-axillary-surgery",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "thoracodorsal_nerve",
+      "accept": [
+        "thoracodorsal_nerve"
+      ],
+      "prompt": "During axillary clearance a surgeon preserves the nerve that runs with the subscapular vessels to latissimus dorsi, because without it the patient will find climbing and pulling up difficult. Click the nerve.",
+      "hint": "It descends along the posterior axillary wall from the posterior cord.",
+      "view": "dorsal",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The thoracodorsal nerve (C6 to C8) supplies latissimus dorsi and runs with the thoracodorsal vessels. It is preserved if possible so that the muscle can be used for a pedicled flap in breast reconstruction.",
+      "tags": {
+        "topic": "nerves",
+        "region": "trunk",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "back"
+    },
+    {
+      "id": "raised-hemidiaphragm-phrenic",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "phrenic_nerve",
+      "accept": [
+        "phrenic_nerve"
+      ],
+      "prompt": "A man has breathlessness after cardiac surgery, and a chest film shows a raised right hemidiaphragm that moves paradoxically on sniffing. The nerve crossing the pericardium to the diaphragm has been injured. Click it.",
+      "hint": "It arises from C3, C4 and C5 and descends in front of the root of the lung.",
+      "view": "palmar",
+      "layers": [
+        "nerve"
+      ],
+      "explain": "The phrenic nerve is the motor nerve of the diaphragm and also carries pain from its central part. Injury, by surgery or invasion by a lung tumour, paralyses the hemidiaphragm, which rises.",
+      "tags": {
+        "topic": "nerves",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "horners-apical-tumour-sympathetic",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "sympathetic_trunk",
+      "accept": [
+        "sympathetic_trunk"
+      ],
+      "prompt": "A smoker has a drooping eyelid, a small pupil and no sweating on one side of the face. A tumour at the apex of the lung is compressing the chain of ganglia that lies on the heads of the ribs. Click it.",
+      "hint": "It runs along the sides of the vertebral column from neck to coccyx.",
+      "view": "lateral",
+      "layers": [
+        "nerve"
+      ],
+      "explain": "A Pancoast tumour at the lung apex can invade the sympathetic trunk and stellate ganglion, causing Horner syndrome (ptosis, miosis, anhidrosis). It often invades the C8 and T1 roots, causing arm pain.",
+      "tags": {
+        "topic": "nerves",
+        "region": "trunk",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "cauda-equina-syndrome",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "cauda_equina",
+      "accept": [
+        "cauda_equina"
+      ],
+      "prompt": "A man has severe back pain with saddle numbness, urinary retention and bilateral leg weakness after a central disc prolapse. Below the end of the spinal cord, the bundle of lumbar and sacral roots is compressed. Click it.",
+      "hint": "The roots hang in the lumbar cistern like a horse's tail.",
+      "view": "dorsal",
+      "layers": [
+        "nerve"
+      ],
+      "explain": "The cauda equina is the bundle of lumbar, sacral and coccygeal roots below the conus medullaris at about L1/L2. Compression by a large central disc is a surgical emergency, since delay can leave permanent bladder, bowel and sexual dysfunction.",
+      "tags": {
+        "topic": "nerves",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "back"
+    },
+    {
+      "id": "appendicectomy-iliohypogastric",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "iliohypogastric_nerve",
+      "accept": [
+        "iliohypogastric_nerve",
+        "ilioinguinal_nerve"
+      ],
+      "prompt": "After a gridiron incision for appendicectomy a boy has numbness above the pubis and later develops a weak bulge in the muscle layer. A nerve running between internal oblique and transversus has been cut. Click it.",
+      "hint": "It arises from L1 and emerges at the lateral border of psoas, above the ilioinguinal nerve.",
+      "view": "palmar",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The iliohypogastric and ilioinguinal nerves (L1) lie between internal oblique and transversus abdominis and are at risk in lower abdominal incisions at McBurney's point. Injury may weaken the abdominal wall and predispose to an inguinal hernia.",
+      "tags": {
+        "topic": "nerves",
+        "region": "trunk",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "abdomen"
+    },
+    {
+      "id": "vagus-nerve-identify",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "vagus_nerve",
+      "accept": [
+        "vagus_nerve"
+      ],
+      "prompt": "Click the vagus nerve, which passes behind the root of the lung and forms a plexus on the oesophagus before passing through the diaphragm.",
+      "hint": "It is the tenth cranial nerve, and the left one gives off the recurrent laryngeal nerve under the aortic arch.",
+      "view": "palmar",
+      "layers": [
+        "nerve"
+      ],
+      "explain": "The vagus runs through the thorax behind the lung root and forms the anterior and posterior vagal trunks on the oesophagus. The left recurrent laryngeal branch hooks under the aortic arch.",
+      "tags": {
+        "topic": "nerves",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "spinal-cord-ends-l1-l2",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "spinal_cord",
+      "accept": [
+        "spinal_cord",
+        "cauda_equina"
+      ],
+      "prompt": "Click the spinal cord, which in an adult ends at the L1/L2 vertebral level as the conus medullaris and does not reach the lumbar puncture site.",
+      "hint": "It is the single thick cord above the horse-tail of lower roots.",
+      "view": "dorsal",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "In an adult the spinal cord ends at about L1/L2, whereas in a newborn it ends at L3. Lumbar puncture below L2 therefore samples CSF from the cistern containing only nerve roots.",
+      "tags": {
+        "topic": "nerves",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "back"
+    },
+    {
+      "id": "pudendal-block-ischial-spine",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "pudendal_nerve",
+      "accept": [
+        "pudendal_nerve"
+      ],
+      "prompt": "Before forceps delivery an obstetrician injects local anaesthetic round the nerve that loops over the ischial spine and carries sensation from the perineum. Click this nerve.",
+      "hint": "It arises from S2 to S4, leaves the pelvis through the greater sciatic foramen and re-enters through the lesser one.",
+      "view": "dorsal",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The pudendal nerve (S2 to S4) is palpated against the ischial spine for a block. It supplies the external anal sphincter, perineum and external genitalia.",
+      "tags": {
+        "topic": "nerves",
+        "region": "trunk",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "pelvis"
+    },
+    {
+      "id": "l5-root-identify",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "l5_nerve_root",
+      "accept": [
+        "l5_nerve_root",
+        "lumbosacral_trunk"
+      ],
+      "prompt": "Click the L5 nerve root, which supplies great-toe dorsiflexion and passes behind the L4/L5 disc.",
+      "hint": "It leaves the canal under the L5 pedicle, beside the L5 vertebra.",
+      "view": "lateral",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The L5 root exits below the L5 pedicle and is commonly compressed by a posterolateral L4/L5 disc herniation or lateral recess stenosis, causing weak great-toe extension and foot drop.",
+      "tags": {
+        "topic": "nerves",
+        "region": "trunk",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "back"
+    },
+    {
+      "id": "hoarseness-aortic-arch-aneurysm",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "aortic_arch",
+      "accept": [
+        "aortic_arch"
+      ],
+      "prompt": "An elderly man has a persistent hoarse voice and a bovine cough. A chest film shows a mediastinal bulge from a thoracic aneurysm that stretches the left recurrent laryngeal nerve. Click the part of the aorta involved.",
+      "hint": "The nerve hooks round the ligamentum arteriosum beneath this part of the aorta.",
+      "view": "palmar",
+      "layers": [
+        "vessel"
+      ],
+      "explain": "The left recurrent laryngeal nerve loops under the aortic arch, so an aneurysm of the arch can stretch it, causing a hoarse voice and ineffective cough.",
+      "tags": {
+        "topic": "vessels",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "cabg-internal-thoracic-artery",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "internal_thoracic_artery",
+      "accept": [
+        "internal_thoracic_artery",
+        "superior_epigastric_artery"
+      ],
+      "prompt": "A surgeon harvests an artery running about a thumb's breadth lateral to the sternum on the back of the costal cartilages and uses it to bypass a blocked left anterior descending artery. Click this graft artery.",
+      "hint": "It arises from the subclavian artery and ends as the superior epigastric artery.",
+      "view": "palmar",
+      "layers": [
+        "vessel"
+      ],
+      "explain": "The internal thoracic artery has a high long-term patency as a coronary graft. It runs behind the costal cartilages, lateral to the sternum, and continues as the superior epigastric artery in the rectus sheath.",
+      "tags": {
+        "topic": "vessels",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "left-coronary-anterior-infarct",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "left_coronary_artery",
+      "accept": [
+        "left_coronary_artery"
+      ],
+      "prompt": "A man has crushing central chest pain and ST elevation in the anterior leads. An angiogram shows a blockage in the artery that supplies the front of the left ventricle and the anterior interventricular septum. Click the artery.",
+      "hint": "It arises from the left aortic sinus and divides into anterior interventricular and circumflex branches.",
+      "view": "palmar",
+      "layers": [
+        "organ",
+        "vessel"
+      ],
+      "explain": "The left coronary artery gives the anterior interventricular (LAD) branch, which supplies the anterior left ventricle and most of the septum, and the circumflex branch. Occlusion of the LAD causes an anterior infarct.",
+      "tags": {
+        "topic": "vessels",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "chylothorax-thoracic-duct",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "thoracic_duct",
+      "accept": [
+        "thoracic_duct"
+      ],
+      "prompt": "After oesophagectomy a patient has a milky pleural effusion with a high triglyceride content. A lymphatic channel running on the vertebral column between the azygos vein and the aorta has been injured. Click it.",
+      "hint": "It starts at the cisterna chyli and crosses from right to left at about T5.",
+      "view": "palmar",
+      "layers": [
+        "vessel"
+      ],
+      "explain": "The thoracic duct drains lymph from the whole body except the right upper quadrant. It ascends in the posterior mediastinum and injury during chest surgery leaks chyle into the pleural cavity.",
+      "tags": {
+        "topic": "vessels",
+        "region": "trunk",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "mesenteric-ischaemia-sma",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "superior_mesenteric_artery",
+      "accept": [
+        "superior_mesenteric_artery"
+      ],
+      "prompt": "A man with atrial fibrillation has sudden, severe abdominal pain out of proportion to the findings. An embolus lodged in the artery that supplies the midgut, arising at L1 behind the pancreas. Click the artery.",
+      "hint": "It arises from the aorta just below the coeliac trunk, at about L1.",
+      "view": "palmar",
+      "layers": [
+        "vessel"
+      ],
+      "explain": "The superior mesenteric artery supplies the midgut from the duodenum to the transverse colon. An embolus causes acute mesenteric ischaemia, which carries a high mortality unless treated quickly.",
+      "tags": {
+        "topic": "vessels",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "abdomen"
+    },
+    {
+      "id": "inguinal-hernia-inferior-epigastric",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "inferior_epigastric_artery",
+      "accept": [
+        "inferior_epigastric_artery"
+      ],
+      "prompt": "A surgeon repairing a groin hernia identifies the artery that ascends medial to the deep ring. A sac lateral to it is an indirect hernia, and a sac medial to it is a direct hernia. Click this artery.",
+      "hint": "It arises from the external iliac artery just above the inguinal ligament.",
+      "view": "palmar",
+      "layers": [
+        "vessel"
+      ],
+      "explain": "The inferior epigastric artery forms the lateral boundary of Hesselbach's triangle. Indirect hernias leave lateral to it and direct hernias medial to it.",
+      "tags": {
+        "topic": "vessels",
+        "region": "trunk",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "abdomen"
+    },
+    {
+      "id": "pelvic-fracture-bleeding-internal-iliac",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "internal_iliac_artery",
+      "accept": [
+        "internal_iliac_artery"
+      ],
+      "prompt": "A cyclist has a crushed pelvis and falling blood pressure. A large retroperitoneal haematoma suggests damage to the main artery of the pelvis, whose branches supply pelvic viscera and gluteal region. Click it.",
+      "hint": "It descends in the pelvis from the bifurcation of the common iliac artery.",
+      "view": "palmar",
+      "layers": [
+        "vessel",
+        "bone"
+      ],
+      "explain": "The internal iliac artery and its branches supply the pelvic organs, perineum and gluteal region. Pelvic fractures can tear its branches or the presacral venous plexus, causing life-threatening retroperitoneal bleeding.",
+      "tags": {
+        "topic": "vessels",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "pelvis"
+    },
+    {
+      "id": "descending-aorta-t12-hiatus",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "descending_aorta",
+      "accept": [
+        "descending_aorta"
+      ],
+      "prompt": "Click the descending thoracic aorta, which passes behind the median arcuate ligament of the diaphragm at T12 and is the site of type B dissection.",
+      "hint": "It lies in the posterior mediastinum to the left of the vertebral column.",
+      "view": "lateral",
+      "layers": [
+        "vessel"
+      ],
+      "explain": "The descending aorta passes through the aortic hiatus at T12 with the thoracic duct and azygos vein. A tear in its wall causes tearing back pain.",
+      "tags": {
+        "topic": "vessels",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "celiac-trunk-foregut",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "celiac_trunk",
+      "accept": [
+        "celiac_trunk",
+        "common_hepatic_artery",
+        "left_gastric_artery",
+        "splenic_artery"
+      ],
+      "prompt": "Click the coeliac trunk, the short artery arising from the aorta at T12 that supplies the foregut through its left gastric, splenic and common hepatic branches.",
+      "hint": "It arises just below the aortic hiatus and splits into three.",
+      "view": "palmar",
+      "layers": [
+        "vessel"
+      ],
+      "explain": "The coeliac trunk supplies the abdominal oesophagus, stomach, liver, spleen and upper duodenum and pancreas, which are derived from the foregut.",
+      "tags": {
+        "topic": "vessels",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "abdomen"
+    },
+    {
+      "id": "azygos-vein-identify",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "azygos_vein",
+      "accept": [
+        "azygos_vein"
+      ],
+      "prompt": "Click the azygos vein, which ascends on the right of the vertebral column and arches over the right main bronchus to enter the superior vena cava.",
+      "hint": "It provides a collateral route if the vena cava is blocked.",
+      "view": "palmar",
+      "layers": [
+        "vessel"
+      ],
+      "explain": "The azygos vein drains the posterior intercostal veins on the right and joins the superior vena cava at T4. It links the superior and inferior caval systems.",
+      "tags": {
+        "topic": "vessels",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "inferior-mesenteric-artery-identify",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "inferior_mesenteric_artery",
+      "accept": [
+        "inferior_mesenteric_artery"
+      ],
+      "prompt": "Click the inferior mesenteric artery, which arises from the aorta at L3 and supplies the hindgut from the distal transverse colon to the upper rectum.",
+      "hint": "It is a small artery that branches from the front of the aorta below the renal arteries.",
+      "view": "palmar",
+      "layers": [
+        "vessel"
+      ],
+      "explain": "The inferior mesenteric artery supplies the left colon and upper rectum and arises at L3. It continues as the superior rectal artery.",
+      "tags": {
+        "topic": "vessels",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "abdomen"
+    },
+    {
+      "id": "portal-vein-superior-mesenteric",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "superior_mesenteric_vein",
+      "accept": [
+        "superior_mesenteric_vein",
+        "splenic_vein"
+      ],
+      "prompt": "Click the superior mesenteric vein, which joins the splenic vein behind the neck of the pancreas to form the portal vein.",
+      "hint": "It ascends in the root of the mesentery, to the right of its artery.",
+      "view": "palmar",
+      "layers": [
+        "vessel"
+      ],
+      "explain": "The superior mesenteric vein joins the splenic vein to form the portal vein behind the pancreatic neck. Portal hypertension opens portosystemic anastomoses and causes oesophageal varices.",
+      "tags": {
+        "topic": "vessels",
+        "region": "trunk",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "abdomen"
+    },
+    {
+      "id": "heart-identify",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "heart",
+      "accept": [
+        "heart"
+      ],
+      "prompt": "Click the heart, which lies in the middle mediastinum behind the sternum with its apex pointing to the left.",
+      "hint": "It is enclosed within the pericardium between the lungs.",
+      "view": "palmar",
+      "layers": [
+        "organ"
+      ],
+      "explain": "The heart lies behind the body of the sternum and ribs 2 to 6 with its apex in the left fifth intercostal space, in the midclavicular line.",
+      "tags": {
+        "topic": "organs",
+        "region": "trunk",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "right-lung-identify",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "right_lung",
+      "accept": [
+        "right_lung",
+        "left_lung"
+      ],
+      "prompt": "Click the right lung, which has three lobes and two fissures, unlike the left.",
+      "hint": "It is the larger and shorter of the two lungs.",
+      "view": "palmar",
+      "layers": [
+        "organ"
+      ],
+      "explain": "The right lung has upper, middle and lower lobes separated by oblique and horizontal fissures. The left lung has two lobes and a cardiac notch.",
+      "tags": {
+        "topic": "organs",
+        "region": "trunk",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    },
+    {
+      "id": "liver-identify",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "liver",
+      "accept": [
+        "liver"
+      ],
+      "prompt": "Click the liver, the largest abdominal organ, lying mostly under the right dome of the diaphragm.",
+      "hint": "It occupies the right upper quadrant under the lower ribs.",
+      "view": "palmar",
+      "layers": [
+        "organ"
+      ],
+      "explain": "The liver lies in the right hypochondrium and epigastrium and is protected by the lower ribs. It receives blood from the hepatic artery and the portal vein.",
+      "tags": {
+        "topic": "organs",
+        "region": "trunk",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "abdomen"
+    },
+    {
+      "id": "stomach-identify",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "stomach",
+      "accept": [
+        "stomach"
+      ],
+      "prompt": "Click the stomach, the J-shaped organ in the left upper abdomen that continues from the oesophagus.",
+      "hint": "It lies between the oesophagus and the duodenum, beneath the left dome of the diaphragm.",
+      "view": "palmar",
+      "layers": [
+        "organ"
+      ],
+      "explain": "The stomach receives the oesophagus at the cardia and drains through the pylorus into the duodenum. Its blood supply comes from branches of the coeliac trunk.",
+      "tags": {
+        "topic": "organs",
+        "region": "trunk",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "abdomen"
+    },
+    {
+      "id": "right-kidney-identify",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "right_kidney",
+      "accept": [
+        "right_kidney",
+        "left_kidney"
+      ],
+      "prompt": "Click the right kidney, which lies lower than the left and sits behind the peritoneum on the posterior abdominal wall.",
+      "hint": "It lies lateral to the vertebral column, at about T12 to L3.",
+      "view": "dorsal",
+      "layers": [
+        "organ"
+      ],
+      "explain": "The right kidney is displaced downward by the liver, so it lies lower than the left. Both kidneys lie behind the peritoneum and the twelfth rib passes behind them.",
+      "tags": {
+        "topic": "organs",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "abdomen"
+    },
+    {
+      "id": "esophagus-identify",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "esophagus",
+      "accept": [
+        "esophagus"
+      ],
+      "prompt": "Click the oesophagus, which descends behind the trachea and heart and passes through the diaphragm at T10.",
+      "hint": "It lies in the posterior mediastinum in front of the vertebral column.",
+      "view": "palmar",
+      "layers": [
+        "organ"
+      ],
+      "explain": "The oesophagus is about 25 cm long and passes through the diaphragm at T10, where it meets the vagal trunks. It is narrowed behind the left bronchus and where it crosses the diaphragm.",
+      "tags": {
+        "topic": "organs",
+        "region": "trunk",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thorax"
+    }
+  ]
+}

@@ -16,8 +16,9 @@ const LAYER_COLORS = {
   nerve: 0xffe066,
   vessel: 0xe0403f,
   bone: 0xeadfc8,
+  organ: 0xcf8e7c,
 };
-const DEFAULT_LAYERS = { skin: true, muscle: true, tendon: true, ligament: false, nerve: false, vessel: false, bone: true };
+const DEFAULT_LAYERS = { skin: true, muscle: true, tendon: true, ligament: false, nerve: false, vessel: false, bone: true, organ: false };
 const DEFAULT_VIEW_LABELS = { palmar: "Palm", dorsal: "Back", lateral: "Thumb side" };
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 const HIGHLIGHT_GOOD = new THREE.Color(0x2ee68a);
@@ -102,7 +103,7 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
   const marrowMeshes = [];
   const stencilByLayer = new Map(); // layer -> [stencil meshes]
   const caps = []; // { layer, mesh, offset }
-  const CAP_COLORS = { skin: 0xe8c99a, muscle: 0xb5433b, tendon: 0xe3dccb, ligament: 0xbfae84, nerve: 0xe6c94a, vessel: 0xb01f24, bone: 0xd8ccb0, marrow: 0xb4553f };
+  const CAP_COLORS = { skin: 0xe8c99a, muscle: 0xb5433b, tendon: 0xe3dccb, ligament: 0xbfae84, nerve: 0xe6c94a, vessel: 0xb01f24, bone: 0xd8ccb0, marrow: 0xb4553f, organ: 0xc98b7a };
   const CAP_ORDER = ["skin", "muscle", "tendon", "ligament", "nerve", "vessel", "bone", "marrow"];
 
   // Back faces of cut meshes render as a flat darker cap so the slice reads as solid.
@@ -123,7 +124,7 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
 
   function makeMaterial(layer, structure) {
     const color = new THREE.Color(LAYER_COLORS[layer]);
-    if (layer === "muscle") color.offsetHSL(hashJitter(structure) * 0.04, 0, hashJitter(structure + "l") * 0.12);
+    if (layer === "muscle" || layer === "organ") color.offsetHSL(hashJitter(structure) * 0.04, 0, hashJitter(structure + "l") * 0.12);
     if (layer === "skin") {
       return new THREE.MeshStandardMaterial({
         color, roughness: 0.7, transparent: true, opacity: 0.3, depthWrite: false,
