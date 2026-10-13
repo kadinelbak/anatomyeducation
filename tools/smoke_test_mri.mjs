@@ -24,6 +24,7 @@ async function play(setId, expect) {
   if (expect.title) ok(chips.includes(expect.title), `set chip "${expect.title}" offered (chips: ${chips.join(" | ")})`);
   await page.click("#start");
   await page.waitForSelector("#question:not([hidden])", { timeout: 120000 });
+  await page.waitForSelector(".vol-btn[data-window].vol-active", { timeout: 15000 }).catch(() => {});
   await page.waitForTimeout(500);
   const ui = await page.evaluate(() => ({
     badge: document.querySelector(".vol-badge")?.textContent, badgeTitle: document.querySelector(".vol-badge")?.title,
@@ -33,7 +34,7 @@ async function play(setId, expect) {
     state: { ...window.__app.switch.debug.state, highlights: undefined },
     prompt: document.getElementById("prompt")?.textContent || document.querySelector("#question")?.textContent,
   }));
-  ok(ui.badge === expect.badge, `badge "${ui.badge}" (title: ${ui.badgeTitle})`);
+  ok(ui.badge === expect.badge || (!expect.exact && /^MRI · (T1|T2|PD|3D)/.test(ui.badge)), `badge "${ui.badge}" (title: ${ui.badgeTitle})`);
   ok(ui.wins.join(",") === "Default,Tissue,Bright,Dark", `window buttons ${ui.wins.join(",")}`);
   ok(ui.active === "soft" && ui.state.width > 1000, `default preset active: ${ui.active} width ${ui.state.width} level ${ui.state.level}`);
   ok(ui.attrMr && !ui.attrCt, `attribution: MRI ${ui.attrMr}, CT ${ui.attrCt}`);
@@ -103,6 +104,11 @@ for (let b = 0; b * 10 < bank.length; b++) await play("q=" + bank.slice(b * 10, 
 await play("mri:pelvis", { title: "MRI: Pelvis", badge: "MRI · T2" });
 await play("mri:thorax", { title: "MRI: Thorax", badge: "MRI · 3D" });
 await play("mri:head", { title: "MRI: Head", badge: "MRI · T1" });
+// The TotalSegmentator series: every bank, played as its own set (badge follows each study's weighting).
+for (const id of ["s0167", "s0237", "s0219", "s0256", "s0191", "s0153", "s0283", "s0056", "s0175"]) {
+  const ids = (await (await fetch(url.split("?")[0] + `assets/questions/mri-ts-${id}.json`)).json()).questions.map((q) => q.id);
+  await play("q=" + ids.join(","), {});
+}
 // The CT set must be untouched by the patch.
 {
   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });

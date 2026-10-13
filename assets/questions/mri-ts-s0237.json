@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "region": "pelvis",
+  "study": "ts-mr-s0237",
+  "modality": "MRI",
+  "sequence": "T1",
+  "questions": [
+    {
+      "id": "mr-s0237-bladder-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0237",
+      "target": "urinary_bladder",
+      "accept": [
+        "urinary_bladder"
+      ],
+      "prompt": "On this T1-weighted MRI of the abdomen and pelvis, click the urinary bladder.",
+      "hint": "The midline hollow organ in the pelvis, behind the pubic bones.",
+      "view": "urinary_bladder",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The urinary bladder lies behind the pubic symphysis and in front of the rectum or uterus. On T1 the urine is dark, contrasting with the intermediate signal of the wall.",
+      "tags": {
+        "topic": "organs",
+        "region": "pelvis",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0237-gluteus-maximus-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0237",
+      "target": "gluteus_maximus_left",
+      "accept": [
+        "gluteus_maximus_left",
+        "gluteus_maximus_right"
+      ],
+      "prompt": "On this T1-weighted MRI of the abdomen and pelvis, click the gluteus maximus.",
+      "hint": "The largest, most superficial buttock muscle.",
+      "view": "gluteus_maximus_left",
+      "layers": [
+        "outline"
+      ],
+      "explain": "Gluteus maximus is the main extensor of the hip and forms the bulk of the buttock. On T1 muscle is intermediate in signal, with bright intramuscular fat striations.",
+      "tags": {
+        "topic": "muscles",
+        "region": "pelvis",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0237-hip-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0237",
+      "target": "hip_left",
+      "accept": [
+        "hip_left",
+        "hip_right"
+      ],
+      "prompt": "On this T1-weighted MRI of the abdomen and pelvis, click the hip bone.",
+      "hint": "The large flared bone of the pelvis that contains the socket for the thigh.",
+      "view": "hip_left",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The hip bone (os coxae) is formed by the ilium, ischium and pubis fused at the acetabulum. On T1 the marrow fat is bright and the cortex is dark.",
+      "tags": {
+        "topic": "bones",
+        "region": "pelvis",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0237-sacrum-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0237",
+      "target": "sacrum",
+      "accept": [
+        "sacrum"
+      ],
+      "prompt": "On this T1-weighted MRI of the abdomen and pelvis, click the sacrum.",
+      "hint": "The triangular bone wedged between the two hip bones at the back of the pelvis.",
+      "view": "sacrum",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The sacrum is formed of five fused vertebrae and articulates with the ilium at the sacroiliac joints. On T1 its marrow is bright because of fat.",
+      "tags": {
+        "topic": "bones",
+        "region": "pelvis",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0237-iliac-vein-clin",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-s0237",
+      "target": "iliac_vena_left",
+      "accept": [
+        "iliac_vena_left"
+      ],
+      "prompt": "A 62-year-old woman has a swollen, painful left leg three days after pelvic surgery, and a proximal deep vein thrombosis is suspected. On this T1-weighted MRI, click the left vein that drains the leg within the pelvis.",
+      "hint": "It runs alongside the iliac artery on the pelvic brim.",
+      "view": "iliac_vena_left",
+      "layers": [],
+      "explain": "The common and external iliac veins carry blood from the lower limb toward the inferior vena cava, and clot here causes marked leg swelling. On T1 flowing blood is generally of low to intermediate signal, and an expanded vein with intermediate signal clot suggests thrombosis.",
+      "tags": {
+        "topic": "vessels",
+        "region": "pelvis",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0237-femur-clin",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-s0237",
+      "target": "femur_left",
+      "accept": [
+        "femur_left"
+      ],
+      "prompt": "An elderly woman falls onto her left side and cannot weight-bear, with a shortened and externally rotated leg. On this T1-weighted MRI, click the long bone of the thigh that is most likely injured.",
+      "hint": "It extends from the hip socket down to the knee.",
+      "view": "femur_left",
+      "layers": [],
+      "explain": "The femur is the longest bone in the body, and its neck is a common fracture site in older people. On T1 the marrow fat is bright, and a fracture line shows as a dark band.",
+      "tags": {
+        "topic": "bones",
+        "region": "pelvis",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    }
+  ]
+}

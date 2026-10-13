@@ -178,6 +178,150 @@
    "bytes": 4523872,
    "url": "assets/volumes/mni-brain-pd/study.json",
    "license": "MNI (free use with attribution)"
+  },
+  {
+   "id": "ts-mr-s0167",
+   "region": "abdomen",
+   "modality": "MR",
+   "sequence": "T1",
+   "dims": [
+    160,
+    141,
+    160
+   ],
+   "spacing_mm": 2.8126,
+   "structures": 42,
+   "bytes": 4960558,
+   "url": "assets/volumes/ts-mr-s0167/study.json",
+   "license": "CC BY-NC-SA 4.0"
+  },
+  {
+   "id": "ts-mr-s0237",
+   "region": "pelvis",
+   "modality": "MR",
+   "sequence": "T1",
+   "dims": [
+    160,
+    118,
+    160
+   ],
+   "spacing_mm": 2.9374,
+   "structures": 46,
+   "bytes": 3296955,
+   "url": "assets/volumes/ts-mr-s0237/study.json",
+   "license": "CC BY-NC-SA 4.0"
+  },
+  {
+   "id": "ts-mr-s0219",
+   "region": "abdomen",
+   "modality": "MR",
+   "sequence": "T2",
+   "dims": [
+    160,
+    160,
+    86
+   ],
+   "spacing_mm": 6.0,
+   "structures": 50,
+   "bytes": 3111560,
+   "url": "assets/volumes/ts-mr-s0219/study.json",
+   "license": "CC BY-NC-SA 4.0"
+  },
+  {
+   "id": "ts-mr-s0256",
+   "region": "abdomen",
+   "modality": "MR",
+   "sequence": "T2",
+   "dims": [
+    160,
+    160,
+    80
+   ],
+   "spacing_mm": 4.8,
+   "structures": 40,
+   "bytes": 2838598,
+   "url": "assets/volumes/ts-mr-s0256/study.json",
+   "license": "CC BY-NC-SA 4.0"
+  },
+  {
+   "id": "ts-mr-s0191",
+   "region": "pelvis",
+   "modality": "MR",
+   "sequence": "T2",
+   "dims": [
+    160,
+    160,
+    68
+   ],
+   "spacing_mm": 4.8003,
+   "structures": 34,
+   "bytes": 2617126,
+   "url": "assets/volumes/ts-mr-s0191/study.json",
+   "license": "CC BY-NC-SA 4.0"
+  },
+  {
+   "id": "ts-mr-s0153",
+   "region": "thorax",
+   "modality": "MR",
+   "sequence": "T1",
+   "dims": [
+    160,
+    112,
+    160
+   ],
+   "spacing_mm": 2.8125,
+   "structures": 29,
+   "bytes": 3248676,
+   "url": "assets/volumes/ts-mr-s0153/study.json",
+   "license": "CC BY-NC-SA 4.0"
+  },
+  {
+   "id": "ts-mr-s0283",
+   "region": "head",
+   "modality": "MR",
+   "sequence": "T1",
+   "dims": [
+    160,
+    158,
+    160
+   ],
+   "spacing_mm": 1.5313,
+   "structures": 10,
+   "bytes": 5026921,
+   "url": "assets/volumes/ts-mr-s0283/study.json",
+   "license": "CC BY-NC-SA 4.0"
+  },
+  {
+   "id": "ts-mr-s0056",
+   "region": "knee",
+   "modality": "MR",
+   "sequence": "PD",
+   "dims": [
+    160,
+    26,
+    160
+   ],
+   "spacing_mm": 3.6,
+   "structures": 7,
+   "bytes": 838547,
+   "url": "assets/volumes/ts-mr-s0056/study.json",
+   "license": "CC BY-NC-SA 4.0"
+  },
+  {
+   "id": "ts-mr-s0175",
+   "region": "whole-body",
+   "modality": "MR",
+   "sequence": "T1",
+   "dims": [
+    160,
+    160,
+    160
+   ],
+   "spacing_mm": 6.75,
+   "structures": 52,
+   "bytes": 2914804,
+   "url": "assets/volumes/ts-mr-s0175/study.json",
+   "license": "CC BY-NC-SA 4.0"
   }
  ]
 }

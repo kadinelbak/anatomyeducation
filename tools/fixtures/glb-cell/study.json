@@ -1,0 +1,19 @@
+{
+  "id": "glb-fixture",
+  "kind": "cell",
+  "title": "GLB fixture cell",
+  "synthetic": true,
+  "model": "model.glb",
+  "micronsPerUnit": 2.0,
+  "defaultView": "overview",
+  "defaultLayers": ["membrane", "organelles"],
+  "cell": { "key": "cell", "name": "Fixture cell" },
+  "views": {
+    "overview": { "eye": [0, 3, 18], "target": [0, 0, 0] }
+  },
+  "parts": [
+    { "key": "membrane", "name": "Membrane", "mesh": "membrane", "layer": "membrane", "color": "#e9c46a", "opacity": 0.35 },
+    { "key": "nucleus", "name": "Nucleus", "mesh": "nucleus", "layer": "organelles", "color": "#4361ee" },
+    { "key": "structure", "name": "Structure", "mesh": "structure", "layer": "organelles", "color": "#e63946" }
+  ]
+}

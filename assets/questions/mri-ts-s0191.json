@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "region": "pelvis",
+  "study": "ts-mr-s0191",
+  "modality": "MRI",
+  "sequence": "T2",
+  "questions": [
+    {
+      "id": "mr-s0191-bladder-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0191",
+      "target": "urinary_bladder",
+      "accept": [
+        "urinary_bladder"
+      ],
+      "prompt": "On this T2-weighted MRI of the pelvis, click the urinary bladder.",
+      "hint": "The midline hollow organ behind the pubic bones.",
+      "view": "urinary_bladder",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The urinary bladder is the midline pelvic reservoir for urine. On T2 the urine is bright, contrasting with the dark muscular wall.",
+      "tags": {
+        "topic": "organs",
+        "region": "pelvis",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0191-prostate-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0191",
+      "target": "prostate",
+      "accept": [
+        "prostate"
+      ],
+      "prompt": "On this T2-weighted MRI of the pelvis, click the prostate.",
+      "hint": "A walnut-sized gland just below the bladder, in front of the rectum.",
+      "view": "prostate",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The prostate surrounds the proximal urethra below the bladder neck. On T2 the peripheral zone is bright and the central gland is darker and more heterogeneous.",
+      "tags": {
+        "topic": "organs",
+        "region": "pelvis",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0191-femur-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0191",
+      "target": "femur_left",
+      "accept": [
+        "femur_left",
+        "femur_right"
+      ],
+      "prompt": "On this T2-weighted MRI of the pelvis, click the femur.",
+      "hint": "The long bone of the thigh whose rounded head fits into the pelvis.",
+      "view": "femur_left",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The femur is the longest bone, and its head articulates with the acetabulum. On T2 the marrow is intermediate to bright and the cortex is dark.",
+      "tags": {
+        "topic": "bones",
+        "region": "pelvis",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0191-gluteus-maximus-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0191",
+      "target": "gluteus_maximus_left",
+      "accept": [
+        "gluteus_maximus_left",
+        "gluteus_maximus_right"
+      ],
+      "prompt": "On this T2-weighted MRI of the pelvis, click the gluteus maximus.",
+      "hint": "The largest, most superficial buttock muscle.",
+      "view": "gluteus_maximus_left",
+      "layers": [
+        "outline"
+      ],
+      "explain": "Gluteus maximus is the main extensor of the hip and forms the bulk of the buttock. On T2 muscle is darker than fat and fluid, with fine bright fat striations.",
+      "tags": {
+        "topic": "muscles",
+        "region": "pelvis",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0191-hip-clin",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-s0191",
+      "target": "hip_left",
+      "accept": [
+        "hip_left"
+      ],
+      "prompt": "A 30-year-old man has fever, severe hip pain and refuses to bear weight on the left leg, and septic arthritis is suspected. On this T2-weighted MRI, click the bone that forms the socket of this joint.",
+      "hint": "The large pelvic bone that contains the acetabulum.",
+      "view": "hip_left",
+      "layers": [],
+      "explain": "The acetabulum of the hip bone forms the socket of the hip joint, where infection produces a joint effusion. On T2 the effusion appears bright within the joint space.",
+      "tags": {
+        "topic": "bones",
+        "region": "pelvis",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0191-colon-clin",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-s0191",
+      "target": "colon",
+      "accept": [
+        "colon"
+      ],
+      "prompt": "A 65-year-old woman has left lower abdominal pain, fever and altered bowel habit, and diverticulitis is suspected. On this T2-weighted MRI, click the part of the bowel most likely to be inflamed.",
+      "hint": "It frames the small bowel and passes down the left side of the pelvis.",
+      "view": "colon",
+      "layers": [],
+      "explain": "Diverticulitis involves inflamed outpouchings of the sigmoid colon, with wall thickening and pericolic fat stranding. On T2 the thickened wall and surrounding fluid are bright.",
+      "tags": {
+        "topic": "organs",
+        "region": "pelvis",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    }
+  ]
+}

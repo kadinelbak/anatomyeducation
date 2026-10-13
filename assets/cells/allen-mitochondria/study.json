@@ -1,0 +1,100 @@
+{
+  "id": "allen-mitochondria",
+  "kind": "cell",
+  "title": "Real cell: hiPSC with mitochondria (Allen Cell)",
+  "cell": {
+    "key": "cell",
+    "id": "CL:0002248",
+    "name": "Human induced pluripotent stem cell"
+  },
+  "synthetic": false,
+  "source": "Allen Institute for Cell Science, hiPSC Single-Cell Image Dataset (WTC-11 line), CellId 231229, structure TOMM20",
+  "sourceUrl": "https://open.quiltdata.com/b/allencell/packages/aics/hipsc_single_cell_image_dataset",
+  "license": "CC BY 4.0 (Allen Institute Terms of Use; cite Viana et al., Nature 2023)",
+  "attribution": "Allen Institute for Cell Science",
+  "tissue": "UBERON:0000479",
+  "tissues": [],
+  "slides": [],
+  "cells": [
+    "CL:0002248"
+  ],
+  "sections": [],
+  "scale": "A hiPSC is about 15-20 um across; this segmented cell is scaled so its longest axis is 10 scene units, so one unit is 3.3755 micrometres",
+  "model": "model.glb",
+  "micronsPerUnit": 3.3755,
+  "defaultView": "overview",
+  "defaultLayers": [
+    "membrane",
+    "organelles"
+  ],
+  "views": {
+    "overview": {
+      "eye": [
+        0,
+        8,
+        17
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ]
+    },
+    "cutaway": {
+      "eye": [
+        11,
+        8,
+        11
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "layers": [
+        "organelles",
+        "cutaway"
+      ]
+    }
+  },
+  "parts": [
+    {
+      "key": "membrane",
+      "name": "Cell membrane",
+      "id": "GO:0005886",
+      "layer": "membrane",
+      "mesh": "membrane",
+      "color": "#d9c9b3",
+      "opacity": 0.35
+    },
+    {
+      "key": "nucleus",
+      "name": "Nucleus",
+      "id": "GO:0005634",
+      "layer": "organelles",
+      "mesh": "nucleus",
+      "color": "#6b5bd6",
+      "opacity": 0.9
+    },
+    {
+      "key": "mitochondria",
+      "name": "Mitochondria (TOMM20-tagged)",
+      "id": "GO:0005739",
+      "layer": "organelles",
+      "mesh": "structure",
+      "color": "#f0a04b"
+    }
+  ],
+  "provenance": {
+    "CellId": "231229",
+    "FOVId": "5",
+    "structure_name": "TOMM20",
+    "scale_micron": [
+      0.108333,
+      0.108333,
+      0.108333
+    ],
+    "crop_seg": "crop_seg/45abee4eefc77f10ee76866c5681f80521ea7e278750410b18d52b8c708d57ac_segmentation.ome.tif",
+    "cell_stage": "M0"
+  }
+}

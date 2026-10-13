@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "region": "whole-body",
+  "study": "ts-mr-s0175",
+  "modality": "MRI",
+  "sequence": "T1",
+  "questions": [
+    {
+      "id": "mr-s0175-humerus-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0175",
+      "target": "humerus_left",
+      "accept": [
+        "humerus_left",
+        "humerus_right"
+      ],
+      "prompt": "On this T1-weighted whole-body MRI, click the humerus.",
+      "hint": "The long bone of the upper arm.",
+      "view": "humerus_left",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The humerus extends from the shoulder to the elbow, with its head articulating with the scapula. On T1 the marrow fat is bright and the cortex is dark.",
+      "tags": {
+        "topic": "bones",
+        "region": "whole-body",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0175-lung-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0175",
+      "target": "lung_left",
+      "accept": [
+        "lung_left",
+        "lung_right"
+      ],
+      "prompt": "On this T1-weighted whole-body MRI, click the lung.",
+      "hint": "Dark air-filled tissue on either side of the heart.",
+      "view": "lung_left",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The lungs fill the pleural cavities of the chest and flank the mediastinum. On T1 they appear very dark because they contain mostly air.",
+      "tags": {
+        "topic": "organs",
+        "region": "whole-body",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0175-hip-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0175",
+      "target": "hip_left",
+      "accept": [
+        "hip_left",
+        "hip_right"
+      ],
+      "prompt": "On this T1-weighted whole-body MRI, click the hip bone.",
+      "hint": "The large flared bone of the pelvis that contains the socket for the thigh.",
+      "view": "hip_left",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The hip bone is made of the ilium, ischium and pubis fused at the acetabulum. On T1 its marrow is bright from fat.",
+      "tags": {
+        "topic": "bones",
+        "region": "whole-body",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0175-bladder-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0175",
+      "target": "urinary_bladder",
+      "accept": [
+        "urinary_bladder"
+      ],
+      "prompt": "On this T1-weighted whole-body MRI, click the urinary bladder.",
+      "hint": "The midline hollow organ in the pelvis, behind the pubic bones.",
+      "view": "urinary_bladder",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The urinary bladder lies in the pelvis behind the pubic symphysis. On T1 urine is dark and the wall is intermediate in signal.",
+      "tags": {
+        "topic": "organs",
+        "region": "whole-body",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0175-brain-clin",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-s0175",
+      "target": "brain",
+      "accept": [
+        "brain"
+      ],
+      "prompt": "A 72-year-old man has sudden right-sided weakness and slurred speech, and a stroke is suspected. On this T1-weighted MRI, click the organ in the skull that is affected.",
+      "hint": "It occupies the cranial cavity at the top of the body.",
+      "view": "brain",
+      "layers": [],
+      "explain": "A stroke is an interruption of blood supply to part of the brain, causing sudden focal deficits. On T1 an acute infarct is often subtly dark, with grey matter darker than the white matter.",
+      "tags": {
+        "topic": "neuro",
+        "region": "whole-body",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0175-vertebrae-clin",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-s0175",
+      "target": "vertebrae",
+      "accept": [
+        "vertebrae"
+      ],
+      "prompt": "A 78-year-old woman with osteoporosis develops sudden back pain after lifting a shopping bag, and a vertebral compression fracture is suspected. On this T1-weighted MRI, click the bones of the spine.",
+      "hint": "They form the bony column along the back of the trunk.",
+      "view": "vertebrae",
+      "layers": [],
+      "explain": "Osteoporotic vertebral compression fractures commonly affect the thoracolumbar vertebrae and reduce vertebral body height. On T1 the normal marrow is bright, while an acute fracture shows replacement with dark signal.",
+      "tags": {
+        "topic": "bones",
+        "region": "whole-body",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    }
+  ]
+}

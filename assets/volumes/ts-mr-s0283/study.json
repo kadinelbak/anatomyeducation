@@ -1,0 +1,172 @@
+{
+ "id": "ts-mr-s0283",
+ "source": "TotalSegmentator MRI dataset v1.0.0, series s0283 (head-neck)",
+ "license": "CC BY-NC-SA 4.0",
+ "attribution": "TotalSegmentator MRI dataset (Akinci D'Antonoli et al.)",
+ "dims": [
+  160,
+  158,
+  160
+ ],
+ "spacing": [
+  0.957,
+  0.8999,
+  1.5313
+ ],
+ "orientation": "RAS",
+ "modality": "MR",
+ "sourceUrl": "https://zenodo.org/records/11367005",
+ "sequence": "T1",
+ "sequenceLabel": "T1-weighted gradient echo, head and neck, 0.9 mm",
+ "intensity": {
+  "units": "arbitrary",
+  "stored_range": [
+   0,
+   4095
+  ],
+  "rescaled_from": [
+   1.0,
+   666.0
+  ],
+  "note": "0.5th..99.8th percentile of the source image mapped to 0..4095"
+ },
+ "image": {
+  "file": "image.i16.gz",
+  "dtype": "int16"
+ },
+ "ct": {
+  "file": "image.i16.gz",
+  "dtype": "int16"
+ },
+ "labels": {
+  "file": "labels.u8.gz",
+  "dtype": "uint8"
+ },
+ "defaultWindow": "soft",
+ "windows": {
+  "soft": {
+   "width": 3664,
+   "level": 1838,
+   "label": "Default"
+  },
+  "tissue": {
+   "width": 2352,
+   "level": 1016,
+   "label": "Tissue"
+  },
+  "bright": {
+   "width": 2617,
+   "level": 2786,
+   "label": "Bright"
+  },
+  "dark": {
+   "width": 1318,
+   "level": 659,
+   "label": "Dark"
+  }
+ },
+ "structures": {
+  "10": {
+   "key": "lung_left",
+   "name": "Left lung",
+   "group": "lung"
+  },
+  "11": {
+   "key": "lung_right",
+   "name": "Right lung",
+   "group": "lung"
+  },
+  "12": {
+   "key": "esophagus",
+   "name": "Esophagus",
+   "group": "hollow"
+  },
+  "19": {
+   "key": "vertebrae",
+   "name": "Vertebrae",
+   "group": "bone"
+  },
+  "21": {
+   "key": "spinal_cord",
+   "name": "Spinal cord",
+   "group": "nervous"
+  },
+  "46": {
+   "key": "autochthon_left",
+   "name": "Left erector spinae (autochthonous back muscles)",
+   "group": "muscle"
+  },
+  "47": {
+   "key": "autochthon_right",
+   "name": "Right erector spinae (autochthonous back muscles)",
+   "group": "muscle"
+  },
+  "50": {
+   "key": "brain",
+   "name": "Brain",
+   "group": "nervous"
+  },
+  "53": {
+   "key": "quadriceps_femoris_left",
+   "name": "Left quadriceps femoris",
+   "group": "muscle"
+  },
+  "54": {
+   "key": "quadriceps_femoris_right",
+   "name": "Right quadriceps femoris",
+   "group": "muscle"
+  }
+ },
+ "views": {
+  "lung_left": {
+   "plane": "axial",
+   "frac": 0.0,
+   "window": "soft"
+  },
+  "lung_right": {
+   "plane": "axial",
+   "frac": 0.006,
+   "window": "soft"
+  },
+  "esophagus": {
+   "plane": "axial",
+   "frac": 0.0,
+   "window": "soft"
+  },
+  "vertebrae": {
+   "plane": "axial",
+   "frac": 0.019,
+   "window": "soft"
+  },
+  "spinal_cord": {
+   "plane": "axial",
+   "frac": 0.239,
+   "window": "soft"
+  },
+  "autochthon_left": {
+   "plane": "axial",
+   "frac": 0.006,
+   "window": "soft"
+  },
+  "autochthon_right": {
+   "plane": "axial",
+   "frac": 0.006,
+   "window": "soft"
+  },
+  "brain": {
+   "plane": "axial",
+   "frac": 0.767,
+   "window": "soft"
+  },
+  "quadriceps_femoris_left": {
+   "plane": "axial",
+   "frac": 0.956,
+   "window": "soft"
+  },
+  "quadriceps_femoris_right": {
+   "plane": "axial",
+   "frac": 0.975,
+   "window": "soft"
+  }
+ }
+}

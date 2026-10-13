@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "region": "head",
+  "study": "ts-mr-s0283",
+  "modality": "MRI",
+  "sequence": "T1",
+  "questions": [
+    {
+      "id": "mr-s0283-brain-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0283",
+      "target": "brain",
+      "accept": [
+        "brain"
+      ],
+      "prompt": "On this T1-weighted MRI of the head and neck, click the brain.",
+      "hint": "The large organ filling the cranial cavity.",
+      "view": "brain",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The brain comprises the cerebrum, cerebellum and brainstem within the skull. On T1 white matter is brighter than grey matter, and CSF is dark.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0283-vertebrae-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0283",
+      "target": "vertebrae",
+      "accept": [
+        "vertebrae"
+      ],
+      "prompt": "On this T1-weighted MRI of the head and neck, click the vertebrae.",
+      "hint": "The stack of bones forming the spinal column behind the airway.",
+      "view": "vertebrae",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The vertebrae form the spinal column and enclose the spinal canal. On T1 the vertebral body marrow is bright because of fat.",
+      "tags": {
+        "topic": "bones",
+        "region": "head",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0283-lung-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0283",
+      "target": "lung_left",
+      "accept": [
+        "lung_left",
+        "lung_right"
+      ],
+      "prompt": "On this T1-weighted MRI of the head and neck, click the lung.",
+      "hint": "Air-filled tissue at the lower edge of the field of view.",
+      "view": "lung_left",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The lung apices rise above the first rib into the base of the neck. On T1 the lungs are very dark because they contain mostly air.",
+      "tags": {
+        "topic": "organs",
+        "region": "head",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0283-cord-clin",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-s0283",
+      "target": "spinal_cord",
+      "accept": [
+        "spinal_cord"
+      ],
+      "prompt": "A 30-year-old man has neck pain, tingling in both hands and progressive weakness after a diving accident. On this T1-weighted MRI, click the structure inside the spinal canal that carries nerve fibres from the brain.",
+      "hint": "It sits within the vertebral canal, surrounded by CSF.",
+      "view": "spinal_cord",
+      "layers": [],
+      "explain": "The spinal cord runs within the vertebral canal and is injured by trauma or compression. On T1 it is intermediate in signal, surrounded by dark CSF.",
+      "tags": {
+        "topic": "neuro",
+        "region": "head",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    }
+  ]
+}

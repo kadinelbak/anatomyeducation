@@ -102,8 +102,9 @@ try {
     "assets/questions/ct-trunk.json", "assets/questions/ct-chest.json",
     "assets/questions/mri-abdomen.json", "assets/questions/mri-prostate.json", "assets/questions/mri-heart.json", "assets/questions/mri-hippocampus.json",
     "assets/questions/mri-brain-t1.json", "assets/questions/mri-brain-t2.json", "assets/questions/mri-brain-pd.json",
+    "assets/questions/mri-ts-s0167.json", "assets/questions/mri-ts-s0237.json", "assets/questions/mri-ts-s0219.json", "assets/questions/mri-ts-s0256.json", "assets/questions/mri-ts-s0191.json", "assets/questions/mri-ts-s0153.json", "assets/questions/mri-ts-s0283.json", "assets/questions/mri-ts-s0056.json", "assets/questions/mri-ts-s0175.json",
     "assets/questions/xray-chest.json", "assets/questions/xray-abdomen.json", "assets/questions/us-trunk.json",
-    "assets/questions/histology-limb.json", "assets/questions/cells-limb.json",
+    "assets/questions/histology-limb.json", "assets/questions/cells-limb.json", "assets/questions/cells-real.json",
   ]);
 } catch (err) {
   console.error(err);

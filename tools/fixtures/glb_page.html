@@ -1,0 +1,11 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>GLB cell fixture page</title>
+<script type="importmap">{"imports":{"three":"/vendor/three/three.module.js","three/addons/":"/vendor/three/addons/"}}</script>
+<style>html,body{margin:0;background:#111}#c{width:900px;height:700px;position:relative}</style></head>
+<body><div id="c"></div>
+<script type="module">
+import { createCellRenderer } from "/src/renderers/cell.js";
+window.__picks = [];
+window.__cl = await createCellRenderer({ container: document.getElementById("c"), studiesBase: "/tools/fixtures/", initialStudy: "glb-cell", onPick: (k) => window.__picks.push(k) });
+window.__ready = true;
+</script></body></html>

@@ -1,0 +1,100 @@
+{
+  "id": "allen-golgi",
+  "kind": "cell",
+  "title": "Real cell: hiPSC with Golgi apparatus (Allen Cell)",
+  "cell": {
+    "key": "cell",
+    "id": "CL:0002248",
+    "name": "Human induced pluripotent stem cell"
+  },
+  "synthetic": false,
+  "source": "Allen Institute for Cell Science, hiPSC Single-Cell Image Dataset (WTC-11 line), CellId 435525, structure ST6GAL1",
+  "sourceUrl": "https://open.quiltdata.com/b/allencell/packages/aics/hipsc_single_cell_image_dataset",
+  "license": "CC BY 4.0 (Allen Institute Terms of Use; cite Viana et al., Nature 2023)",
+  "attribution": "Allen Institute for Cell Science",
+  "tissue": "UBERON:0000479",
+  "tissues": [],
+  "slides": [],
+  "cells": [
+    "CL:0002248"
+  ],
+  "sections": [],
+  "scale": "A hiPSC is about 15-20 um across; this segmented cell is scaled so its longest axis is 10 scene units, so one unit is 2.4626 micrometres",
+  "model": "model.glb",
+  "micronsPerUnit": 2.4626,
+  "defaultView": "overview",
+  "defaultLayers": [
+    "membrane",
+    "organelles"
+  ],
+  "views": {
+    "overview": {
+      "eye": [
+        0,
+        8,
+        17
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ]
+    },
+    "cutaway": {
+      "eye": [
+        11,
+        8,
+        11
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "layers": [
+        "organelles",
+        "cutaway"
+      ]
+    }
+  },
+  "parts": [
+    {
+      "key": "membrane",
+      "name": "Cell membrane",
+      "id": "GO:0005886",
+      "layer": "membrane",
+      "mesh": "membrane",
+      "color": "#d9c9b3",
+      "opacity": 0.35
+    },
+    {
+      "key": "nucleus",
+      "name": "Nucleus",
+      "id": "GO:0005634",
+      "layer": "organelles",
+      "mesh": "nucleus",
+      "color": "#6b5bd6",
+      "opacity": 0.9
+    },
+    {
+      "key": "golgi",
+      "name": "Golgi apparatus (ST6GAL1-tagged)",
+      "id": "GO:0005794",
+      "layer": "organelles",
+      "mesh": "structure",
+      "color": "#f2b84b"
+    }
+  ],
+  "provenance": {
+    "CellId": "435525",
+    "FOVId": "5747",
+    "structure_name": "ST6GAL1",
+    "scale_micron": [
+      0.108333,
+      0.108333,
+      0.108333
+    ],
+    "crop_seg": "crop_seg/86c7153ee3af17659ce20d51dc8919147d3072326462ff1b23807bfc6a2c4eab_segmentation.ome.tif",
+    "cell_stage": "M0"
+  }
+}

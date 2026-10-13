@@ -1,0 +1,353 @@
+{
+ "title": "Real segmented cells (Allen Cell Explorer hiPSC)",
+ "questions": [
+  {
+   "id": "cell-real-mitochondria-nucleus-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "allen-mitochondria",
+   "target": "nucleus",
+   "accept": [
+    "nucleus"
+   ],
+   "prompt": "This is a real segmented human induced pluripotent stem cell from the Allen Cell Explorer. Click the nucleus.",
+   "hint": "The largest rounded organelle, with the DNA inside.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "The nucleus holds the cell's DNA inside a double membrane, the nuclear envelope, which is perforated by nuclear pores. In a stem cell it fills a large share of the cell volume.",
+   "tags": {
+    "topic": "cells",
+    "region": "generic",
+    "modality": "Cell",
+    "cl": "CL:0002248",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-real-mitochondria-mitochondria-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "allen-mitochondria",
+   "target": "mitochondria",
+   "accept": [
+    "mitochondria"
+   ],
+   "prompt": "This is a real segmented human induced pluripotent stem cell from the Allen Cell Explorer. The TOMM20-tagged structure is shown. Click the mitochondria.",
+   "hint": "The tagged network that makes most of the cell's ATP.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "Mitochondria make most of the cell's ATP by oxidative phosphorylation. In this stem cell they form a branching, connected network rather than separate bean shapes, which is how living cells usually look.",
+   "tags": {
+    "topic": "cells",
+    "region": "generic",
+    "modality": "Cell",
+    "cl": "CL:0002248",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-real-mitochondria-mitochondria-clin",
+   "kind": "Clinical",
+   "renderer": "cell",
+   "study": "allen-mitochondria",
+   "target": "mitochondria",
+   "accept": [
+    "mitochondria"
+   ],
+   "prompt": "This is a real segmented human induced pluripotent stem cell from the Allen Cell Explorer. A mutation in the mitochondrial genome causes a mitochondrial disease that hits muscle and brain hardest. In this real cell the tagged protein TOMM20 sits in the membrane that wraps each of these organelles. Click the organelle that TOMM20 marks.",
+   "hint": "Look for the TOMM20-tagged structure shown in colour.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "TOMM20 is a receptor in the outer mitochondrial membrane that imports nuclear-encoded proteins. Because it coats the whole organelle surface, tagging it outlines the entire mitochondrial network; the organelle also carries its own small genome, so mitochondrial disease is inherited maternally.",
+   "tags": {
+    "topic": "cells",
+    "region": "generic",
+    "modality": "Cell",
+    "cl": "CL:0002248",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-real-er-nucleus-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "allen-er",
+   "target": "nucleus",
+   "accept": [
+    "nucleus"
+   ],
+   "prompt": "This is a real segmented human induced pluripotent stem cell from the Allen Cell Explorer. Click the nucleus.",
+   "hint": "The largest rounded organelle, with the DNA inside.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "The nucleus holds the cell's DNA inside a double membrane, the nuclear envelope, which is perforated by nuclear pores. In a stem cell it fills a large share of the cell volume.",
+   "tags": {
+    "topic": "cells",
+    "region": "generic",
+    "modality": "Cell",
+    "cl": "CL:0002248",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-real-er-er-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "allen-er",
+   "target": "er",
+   "accept": [
+    "er"
+   ],
+   "prompt": "This is a real segmented human induced pluripotent stem cell from the Allen Cell Explorer. The SEC61B-tagged structure is shown. Click the endoplasmic reticulum.",
+   "hint": "The tagged membrane network that spreads out from around the nucleus.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "The endoplasmic reticulum is one continuous membrane network whose lumen is joined to the space between the two nuclear membranes. It makes secreted and membrane proteins (rough ER) and lipids (smooth ER).",
+   "tags": {
+    "topic": "cells",
+    "region": "generic",
+    "modality": "Cell",
+    "cl": "CL:0002248",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-real-er-er-clin",
+   "kind": "Clinical",
+   "renderer": "cell",
+   "study": "allen-er",
+   "target": "er",
+   "accept": [
+    "er"
+   ],
+   "prompt": "This is a real segmented human induced pluripotent stem cell from the Allen Cell Explorer. Cystic fibrosis is often caused by CFTR protein that misfolds and is destroyed before leaving the organelle where membrane proteins are first made and folded. In this real cell the tagged SEC61B is part of the translocon channel in that organelle's membrane. Click the organelle.",
+   "hint": "Look for the SEC61B-tagged structure shown in colour.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "SEC61B belongs to the Sec61 translocon, the channel that threads new proteins into the ER membrane or lumen. Misfolded proteins such as the common CFTR variant are detected by ER quality control and degraded, so they never reach the cell surface.",
+   "tags": {
+    "topic": "cells",
+    "region": "generic",
+    "modality": "Cell",
+    "cl": "CL:0002248",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-real-golgi-nucleus-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "allen-golgi",
+   "target": "nucleus",
+   "accept": [
+    "nucleus"
+   ],
+   "prompt": "This is a real segmented human induced pluripotent stem cell from the Allen Cell Explorer. Click the nucleus.",
+   "hint": "The largest rounded organelle, with the DNA inside.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "The nucleus holds the cell's DNA inside a double membrane, the nuclear envelope, which is perforated by nuclear pores. In a stem cell it fills a large share of the cell volume.",
+   "tags": {
+    "topic": "cells",
+    "region": "generic",
+    "modality": "Cell",
+    "cl": "CL:0002248",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-real-golgi-golgi-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "allen-golgi",
+   "target": "golgi",
+   "accept": [
+    "golgi"
+   ],
+   "prompt": "This is a real segmented human induced pluripotent stem cell from the Allen Cell Explorer. The ST6GAL1-tagged structure is shown. Click the Golgi apparatus.",
+   "hint": "The compact stacked-sac structure beside the nucleus.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "The Golgi apparatus is a stack of flattened cisternae that modifies, sorts and packages proteins and lipids from the ER. It is usually a compact structure near the nucleus.",
+   "tags": {
+    "topic": "cells",
+    "region": "generic",
+    "modality": "Cell",
+    "cl": "CL:0002248",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-real-golgi-golgi-clin",
+   "kind": "Clinical",
+   "renderer": "cell",
+   "study": "allen-golgi",
+   "target": "golgi",
+   "accept": [
+    "golgi"
+   ],
+   "prompt": "This is a real segmented human induced pluripotent stem cell from the Allen Cell Explorer. Lysosomal enzymes are sorted by a mannose 6-phosphate tag added in the stacked-sac organelle that receives cargo from the ER. In this real cell the tagged ST6GAL1 is a sialyltransferase that works in the late (trans) face of that organelle. Click the organelle.",
+   "hint": "Look for the ST6GAL1-tagged structure shown in colour.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "ST6GAL1 adds sialic acid to glycoproteins in the trans-Golgi, the exit face of the stack where cargo is finished and sorted. Without correct Golgi tagging, lysosomal enzymes are secreted instead of reaching lysosomes, as in I-cell disease.",
+   "tags": {
+    "topic": "cells",
+    "region": "generic",
+    "modality": "Cell",
+    "cl": "CL:0002248",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-real-nucleolus-nucleus-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "allen-nucleolus",
+   "target": "nucleus",
+   "accept": [
+    "nucleus"
+   ],
+   "prompt": "This is a real segmented human induced pluripotent stem cell from the Allen Cell Explorer. Click the nucleus.",
+   "hint": "The largest rounded organelle, with the DNA inside.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "The nucleus holds the cell's DNA inside a double membrane, the nuclear envelope, which is perforated by nuclear pores. In a stem cell it fills a large share of the cell volume.",
+   "tags": {
+    "topic": "cells",
+    "region": "generic",
+    "modality": "Cell",
+    "cl": "CL:0002248",
+    "difficulty": 1
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-real-nucleolus-nucleolus-id",
+   "kind": "Identify",
+   "renderer": "cell",
+   "study": "allen-nucleolus",
+   "target": "nucleolus",
+   "accept": [
+    "nucleolus"
+   ],
+   "prompt": "This is a real segmented human induced pluripotent stem cell from the Allen Cell Explorer. The FBL-tagged structure is shown. Click the nucleolus.",
+   "hint": "The dense body inside the nucleus.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "The nucleolus is a dense, non-membrane-bound region inside the nucleus where ribosomal RNA is made and ribosomal subunits begin to be assembled. A cell with high protein synthesis, like a stem cell, has prominent nucleoli.",
+   "tags": {
+    "topic": "cells",
+    "region": "generic",
+    "modality": "Cell",
+    "cl": "CL:0002248",
+    "difficulty": 2
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  },
+  {
+   "id": "cell-real-nucleolus-nucleolus-clin",
+   "kind": "Clinical",
+   "renderer": "cell",
+   "study": "allen-nucleolus",
+   "target": "nucleolus",
+   "accept": [
+    "nucleolus"
+   ],
+   "prompt": "This is a real segmented human induced pluripotent stem cell from the Allen Cell Explorer. Treacher Collins syndrome and some other ribosomopathies arise from faulty ribosome production. In this real cell the tagged protein FBL, fibrillarin, marks the nuclear body where rRNA is made and modified. Click that body.",
+   "hint": "Look for the FBL-tagged structure shown in colour.",
+   "view": "cutaway",
+   "layers": [
+    "organelles",
+    "cutaway"
+   ],
+   "explain": "Fibrillarin (FBL) is a methyltransferase in the dense fibrillar component of the nucleolus that modifies newly made rRNA. Defects in ribosome biogenesis cause ribosomopathies, which often affect tissues with rapidly dividing cells.",
+   "tags": {
+    "topic": "cells",
+    "region": "generic",
+    "modality": "Cell",
+    "cl": "CL:0002248",
+    "difficulty": 3
+   },
+   "review": {
+    "status": "approved",
+    "reviewed": "2026-10-12"
+   }
+  }
+ ]
+}

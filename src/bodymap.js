@@ -24,7 +24,7 @@ const MODEL_OPTIONS = {
 };
 
 // Bank region tags that belong to a figure region under another name.
-const ALIAS = { thorax: "chest", neck: "head",
+const ALIAS = { thorax: "chest", neck: "head", knee: "lower-limb", "whole-body": "chest", wholebody: "chest",
   // Histology and cell questions are tagged by tissue; they all live under one body-map entry.
   "skeletal muscle": "tissue", bone: "tissue", nerve: "tissue", vessel: "tissue", "connective tissue": "tissue", generic: "tissue" };
 const regionOfQuestion = (q) => { const r = q.tags?.region; return ALIAS[r] || r; };

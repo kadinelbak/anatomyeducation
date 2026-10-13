@@ -11,6 +11,8 @@
 // `rotJitter`. Without these a stamped part's copies would all sit on top of each other.
 import * as THREE from "three";
 import { TrackballControls } from "three/addons/controls/TrackballControls.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import { probeWebGL } from "../webgl-probe.js";
 
 // The stylesheet is attached here as well as via index.html, so the module works on any page.
@@ -22,6 +24,9 @@ try {
   }
 } catch { /* styling is cosmetic */ }
 
+// Mesh studies: top-level `model` ("model.glb", relative to the study folder) and optional `micronsPerUnit`; a part
+// with `mesh: "<node or mesh name>"` is built from that named mesh of the GLB (already centred, 10 units long)
+// instead of shape/pos/size. With window.__CONFIG_TEXT_ASSETS === true "<model>.b64.txt" is fetched and decoded.
 const HIGHLIGHT_GOOD = new THREE.Color(0x2ee68a);
 const HIGHLIGHT_BAD = new THREE.Color(0xff3b3b);
 const CUT_OPACITY = 0.15;
@@ -146,12 +151,36 @@ export async function createCellRenderer({ container, studiesBase = "assets/cell
       default: return [unit.sphere, [s[0] ?? 0.3, s[0] ?? 0.3, s[0] ?? 0.3]]; // sphere
     }
   }
+  // Geometry of the named GLB node(s), world transform baked in, as a private copy owned by this study.
+  function meshGeometryFor(p, gltf) {
+    let found = null;
+    gltf.scene.updateMatrixWorld(true);
+    gltf.scene.traverse((o) => { if (!found && o.name === p.mesh) found = o; });
+    if (!found) gltf.scene.traverse((o) => { if (!found && o.isMesh && (o.userData.name === p.mesh || o.geometry?.name === p.mesh)) found = o; });
+    if (!found) throw new Error(`cell part "${p.key}": mesh "${p.mesh}" not found in the model`);
+    const gs = [];
+    found.traverse((o) => {
+      if (!o.isMesh) return;
+      const g = o.geometry.clone().applyMatrix4(o.matrixWorld);
+      for (const k of Object.keys(g.attributes)) if (k !== "position" && k !== "normal") g.deleteAttribute(k);
+      if (!g.attributes.normal) g.computeVertexNormals();
+      gs.push(g);
+    });
+    if (!gs.length) throw new Error(`cell part "${p.key}": "${p.mesh}" has no geometry`);
+    let g = gs[0];
+    if (gs.length > 1) {
+      const m = gs.every((x) => !!x.index === !!gs[0].index) ? mergeGeometries(gs) : null;
+      g = m || gs[0];
+    }
+    own.push(g);
+    return g;
+  }
   function makeMaterial(p) {
     const opacity = p.opacity ?? 1;
     const m = new THREE.MeshStandardMaterial({
       color: new THREE.Color(p.color || "#cccccc"), roughness: 0.6, metalness: 0.05,
       opacity, transparent: opacity < 1, depthWrite: opacity >= 1,
-      side: p.layer === "membrane" || p.shape === "tube" || p.shape === "torus" ? THREE.DoubleSide : THREE.FrontSide,
+      side: p.layer === "membrane" || p.mesh || p.shape === "tube" || p.shape === "torus" ? THREE.DoubleSide : THREE.FrontSide,
     });
     if (p.layer === "membrane") m.clippingPlanes = [clipPlane];
     own.push(m);
@@ -182,10 +211,10 @@ export async function createCellRenderer({ container, studiesBase = "assets/cell
     own.length = 0; meshes = []; sprites = []; highlighted = [];
     byKey.clear(); byBase.clear(); partOf.clear();
   }
-  function buildStudy(s) {
+  function buildStudy(s, gltf) {
     clearStudy();
     for (const p of s.parts || []) {
-      const [geo, scl] = geometryFor(p);
+      const [geo, scl] = p.mesh ? [meshGeometryFor(p, gltf), [1, 1, 1]] : geometryFor(p);
       const n = Math.max(1, p.count | 0 || 1);
       const jit = Array.isArray(p.jitter) ? p.jitter : [p.jitter || 0, p.jitter || 0, p.jitter || 0];
       const step = vec3(p.step);
@@ -197,14 +226,14 @@ export async function createCellRenderer({ container, studiesBase = "assets/cell
         const mesh = new THREE.Mesh(geo, i ? mat.clone() : mat);
         if (i) own.push(mesh.material);
         mesh.scale.set(...scl);
-        mesh.position.copy(vec3(p.pos)).addScaledVector(step, i);
+        if (!p.mesh) mesh.position.copy(vec3(p.pos)).addScaledVector(step, i);
         if (p.ring) { // copies evenly around an axis: ring = [radius, axis 0|1|2, start degrees, copies per turn]
           const [R, ax = 0, st = 0, per] = p.ring, a = ((st + 360 * i / (per || n)) * Math.PI) / 180, c = R * Math.cos(a), sn = R * Math.sin(a);
           mesh.position.add(ax === 0 ? new THREE.Vector3(0, c, sn) : ax === 1 ? new THREE.Vector3(c, 0, sn) : new THREE.Vector3(c, sn, 0));
         }
         if (n > 1) mesh.position.add(new THREE.Vector3((rnd() - 0.5) * 2 * jit[0], (rnd() - 0.5) * 2 * jit[1], (rnd() - 0.5) * 2 * jit[2]));
         const r = vec3(p.rot);
-        mesh.rotation.set(r.x, r.y, r.z);
+        if (!p.mesh) mesh.rotation.set(r.x, r.y, r.z);
         if (p.spin) { // copies fanned about z: spinStart degrees, spinArc degrees in total (360 = full turn)
           const arc = p.spinArc ?? 360;
           mesh.rotation.z += (((p.spinStart ?? 0) + (arc >= 360 ? (arc * i) / n : n > 1 ? (arc * i) / (n - 1) : 0)) * Math.PI) / 180;
@@ -217,7 +246,8 @@ export async function createCellRenderer({ container, studiesBase = "assets/cell
       byBase.set(p.key, list);
       partOf.set(p.key, p);
       if (!p.nolabel && p.layer !== "cutaway") {
-        const sp = textSprite((p.name || p.key).replace(/\s*\(.*\)\s*/, ""), list[0].position);
+        const at = p.mesh ? new THREE.Box3().setFromObject(list[0]).getCenter(new THREE.Vector3()) : list[0].position;
+        const sp = textSprite((p.name || p.key).replace(/\s*\(.*\)\s*/, ""), at);
         sp.userData.layer = "labels"; root3.add(sp); sprites.push(sp);
       }
     }
@@ -399,14 +429,49 @@ export async function createCellRenderer({ container, studiesBase = "assets/cell
     }
     return p;
   }
+  // Mesh studies: the GLB (or its .b64.txt twin) is fetched once per study and cached as a promise.
+  const models = new Map(); // id -> Promise<gltf>
+  async function fetchText(url) {
+    let lastErr;
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        const r = await fetch(url, { cache: attempt ? "reload" : "default" });
+        if (!r.ok) throw new Error(`${url}: HTTP ${r.status}`);
+        return await r.text();
+      } catch (err) { lastErr = err; }
+    }
+    throw lastErr;
+  }
+  async function loadGltf(url) {
+    const loader = new GLTFLoader();
+    if (window.__CONFIG_TEXT_ASSETS !== true) return loader.loadAsync(url);
+    const b64 = (await fetchText(url + ".b64.txt")).replace(/\s+/g, "");
+    let bin;
+    try { bin = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0)); }
+    catch (err) { throw new Error(`model text is not valid base64 (${b64.length} chars): ${err.message}`); }
+    return loader.parseAsync(bin.buffer, "");
+  }
+  function fetchModel(id, s) {
+    let p = models.get(id);
+    if (!p) {
+      p = loadGltf(new URL(s.model, studyUrlFor(id)).href);
+      p.catch(() => models.delete(id));
+      models.set(id, p);
+    }
+    return p;
+  }
   async function loadStudy(id) {
     loading++; loadingEl.hidden = false;
-    try { return await fetchStudy(id); } finally { loading--; if (!loading) loadingEl.hidden = true; }
+    try {
+      const s = await fetchStudy(id);
+      if (s.model && (s.parts || []).some((p) => p.mesh)) await fetchModel(id, s);
+      return s;
+    } finally { loading--; if (!loading) loadingEl.hidden = true; }
   }
   async function switchTo(id) {
     const s = await loadStudy(id);
     study = s; studyId = id;
-    buildStudy(s);
+    buildStudy(s, s.model ? await models.get(id) : null);
     badge.textContent = `Cell · ${s.title || id}`;
     badge.title = s.scale || "";
     return s;

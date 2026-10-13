@@ -1,0 +1,142 @@
+{
+ "id": "ts-mr-s0056",
+ "source": "TotalSegmentator MRI dataset v1.0.0, series s0056 (knee)",
+ "license": "CC BY-NC-SA 4.0",
+ "attribution": "TotalSegmentator MRI dataset (Akinci D'Antonoli et al.)",
+ "dims": [
+  160,
+  26,
+  160
+ ],
+ "spacing": [
+  0.6469,
+  3.6,
+  1.0
+ ],
+ "orientation": "RAS",
+ "modality": "MR",
+ "sourceUrl": "https://zenodo.org/records/11367005",
+ "sequence": "PD",
+ "sequenceLabel": "Intermediate-weighted (proton density) spin echo, knee, 3 mm slices",
+ "intensity": {
+  "units": "arbitrary",
+  "stored_range": [
+   0,
+   4095
+  ],
+  "rescaled_from": [
+   2.0,
+   601.0
+  ],
+  "note": "0.5th..99.8th percentile of the source image mapped to 0..4095"
+ },
+ "image": {
+  "file": "image.i16.gz",
+  "dtype": "int16"
+ },
+ "ct": {
+  "file": "image.i16.gz",
+  "dtype": "int16"
+ },
+ "labels": {
+  "file": "labels.u8.gz",
+  "dtype": "uint8"
+ },
+ "defaultWindow": "soft",
+ "windows": {
+  "soft": {
+   "width": 3056,
+   "level": 1548,
+   "label": "Default"
+  },
+  "tissue": {
+   "width": 1955,
+   "level": 800,
+   "label": "Tissue"
+  },
+  "bright": {
+   "width": 2810,
+   "level": 2690,
+   "label": "Bright"
+  },
+  "dark": {
+   "width": 998,
+   "level": 499,
+   "label": "Dark"
+  }
+ },
+ "structures": {
+  "36": {
+   "key": "femur_left",
+   "name": "Left femur",
+   "group": "bone"
+  },
+  "51": {
+   "key": "fibula",
+   "name": "Fibula",
+   "group": "bone"
+  },
+  "52": {
+   "key": "tibia",
+   "name": "Tibia",
+   "group": "bone"
+  },
+  "53": {
+   "key": "quadriceps_femoris_left",
+   "name": "Left quadriceps femoris",
+   "group": "muscle"
+  },
+  "55": {
+   "key": "sartorius_left",
+   "name": "Left sartorius",
+   "group": "muscle"
+  },
+  "57": {
+   "key": "thigh_medial_compartment_left",
+   "name": "Left medial thigh compartment (adductors)",
+   "group": "muscle"
+  },
+  "59": {
+   "key": "thigh_posterior_compartment_left",
+   "name": "Left posterior thigh compartment (hamstrings)",
+   "group": "muscle"
+  }
+ },
+ "views": {
+  "femur_left": {
+   "plane": "axial",
+   "frac": 0.654,
+   "window": "soft"
+  },
+  "fibula": {
+   "plane": "axial",
+   "frac": 0.189,
+   "window": "soft"
+  },
+  "tibia": {
+   "plane": "axial",
+   "frac": 0.258,
+   "window": "soft"
+  },
+  "quadriceps_femoris_left": {
+   "plane": "axial",
+   "frac": 0.874,
+   "window": "soft"
+  },
+  "sartorius_left": {
+   "plane": "axial",
+   "frac": 0.679,
+   "window": "soft"
+  },
+  "thigh_medial_compartment_left": {
+   "plane": "axial",
+   "frac": 0.717,
+   "window": "soft"
+  },
+  "thigh_posterior_compartment_left": {
+   "plane": "axial",
+   "frac": 0.811,
+   "window": "soft"
+  }
+ }
+}

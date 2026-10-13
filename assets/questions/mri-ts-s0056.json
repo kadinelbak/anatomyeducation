@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "region": "knee",
+  "study": "ts-mr-s0056",
+  "modality": "MRI",
+  "sequence": "PD",
+  "questions": [
+    {
+      "id": "mr-s0056-femur-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0056",
+      "target": "femur_left",
+      "accept": [
+        "femur_left"
+      ],
+      "prompt": "On this proton-density-weighted MRI of the knee, click the femur.",
+      "hint": "The long bone above the knee joint.",
+      "view": "femur_left",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The femur is the long bone of the thigh and its condyles form the upper part of the knee joint. On proton-density imaging its marrow is intermediate to bright and its cortex is dark.",
+      "tags": {
+        "topic": "bones",
+        "region": "knee",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "PD"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0056-tibia-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0056",
+      "target": "tibia",
+      "accept": [
+        "tibia"
+      ],
+      "prompt": "On this proton-density-weighted MRI of the knee, click the tibia.",
+      "hint": "The larger of the two lower leg bones, below the knee joint.",
+      "view": "tibia",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The tibia is the weight-bearing shin bone and its plateau articulates with the femoral condyles. On proton-density imaging marrow is intermediate in signal and cortex is dark.",
+      "tags": {
+        "topic": "bones",
+        "region": "knee",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "PD"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0056-fibula-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0056",
+      "target": "fibula",
+      "accept": [
+        "fibula"
+      ],
+      "prompt": "On this proton-density-weighted MRI of the knee, click the fibula.",
+      "hint": "The slender lateral bone of the lower leg.",
+      "view": "fibula",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The fibula lies lateral to the tibia and does not bear much weight. On proton-density imaging its marrow is intermediate in signal and its cortex is dark.",
+      "tags": {
+        "topic": "bones",
+        "region": "knee",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "PD"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0056-quadriceps-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0056",
+      "target": "quadriceps_femoris_left",
+      "accept": [
+        "quadriceps_femoris_left"
+      ],
+      "prompt": "On this proton-density-weighted MRI of the knee, click the quadriceps femoris.",
+      "hint": "The large muscle group on the front of the thigh.",
+      "view": "quadriceps_femoris_left",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The quadriceps femoris extends the knee and attaches to the tibial tuberosity via the patellar tendon. On proton-density imaging muscle is intermediate in signal, darker than fat.",
+      "tags": {
+        "topic": "muscles",
+        "region": "knee",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "PD"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0056-hamstrings-clin",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-s0056",
+      "target": "thigh_posterior_compartment_left",
+      "accept": [
+        "thigh_posterior_compartment_left"
+      ],
+      "prompt": "A sprinter feels a sudden pull and sharp pain in the back of the thigh while accelerating. On this proton-density-weighted MRI, click the muscle group that is most likely strained.",
+      "hint": "It lies on the back of the thigh and flexes the knee.",
+      "view": "thigh_posterior_compartment_left",
+      "layers": [],
+      "explain": "The posterior thigh compartment contains the hamstrings, which extend the hip and flex the knee, and they are often torn during sprinting. On proton-density imaging a strain shows as feathery bright signal within the muscle.",
+      "tags": {
+        "topic": "muscles",
+        "region": "knee",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "PD"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0056-tibia-clin",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-s0056",
+      "target": "tibia",
+      "accept": [
+        "tibia"
+      ],
+      "prompt": "A 28-year-old falls from a ladder and lands on a straight leg; the knee swells at once and she cannot bear weight. On this proton-density-weighted MRI, click the bone whose plateau is most likely fractured.",
+      "hint": "The weight-bearing surface just below the knee joint.",
+      "view": "tibia",
+      "layers": [],
+      "explain": "Axial loading drives the femoral condyles into the tibial plateau, fracturing it, with a lipohaemarthrosis in the joint. On proton-density and fat-suppressed images the fracture line and marrow oedema are seen even when radiographs look normal.",
+      "tags": {
+        "topic": "muscles",
+        "region": "knee",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "PD"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    }
+  ]
+}

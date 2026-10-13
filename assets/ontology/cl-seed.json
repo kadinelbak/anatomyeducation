@@ -270,6 +270,7 @@
   "GO:0005739": "mitochondrion",
   "GO:0005791": "rough endoplasmic reticulum",
   "GO:0005790": "smooth endoplasmic reticulum",
+  "GO:0005783": "endoplasmic reticulum",
   "GO:0005794": "Golgi apparatus",
   "GO:0005886": "plasma membrane",
   "GO:0005764": "lysosome",

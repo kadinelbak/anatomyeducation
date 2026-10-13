@@ -1,0 +1,228 @@
+{
+  "version": 1,
+  "region": "abdomen",
+  "study": "ts-mr-s0167",
+  "modality": "MRI",
+  "sequence": "T1",
+  "questions": [
+    {
+      "id": "mr-s0167-stomach-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0167",
+      "target": "stomach",
+      "accept": [
+        "stomach"
+      ],
+      "prompt": "On this T1-weighted MRI of the abdomen, click the stomach.",
+      "hint": "The J-shaped hollow organ in the left upper abdomen, under the left hemidiaphragm.",
+      "view": "stomach",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The stomach lies between the oesophagus and the duodenum, mostly in the left upper quadrant. On T1 its wall is intermediate in signal and the lumen contents are usually darker.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0167-colon-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0167",
+      "target": "colon",
+      "accept": [
+        "colon"
+      ],
+      "prompt": "On this T1-weighted MRI of the abdomen, click the colon.",
+      "hint": "The large bowel framing the abdominal cavity, with haustra along its wall.",
+      "view": "colon",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The colon forms a frame around the small bowel, running from caecum to rectum. On T1 its wall is intermediate in signal and its contents vary with faecal and gas content.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0167-small-bowel-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0167",
+      "target": "small_bowel",
+      "accept": [
+        "small_bowel"
+      ],
+      "prompt": "On this T1-weighted MRI of the abdomen, click the small bowel.",
+      "hint": "The coiled loops filling the central abdomen, within the frame of the colon.",
+      "view": "small_bowel",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The small bowel (jejunum and ileum) occupies the central and lower abdomen suspended by mesentery. On T1 the collapsed wall is intermediate in signal, with dark lumen fluid.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0167-duodenum-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0167",
+      "target": "duodenum",
+      "accept": [
+        "duodenum"
+      ],
+      "prompt": "On this T1-weighted MRI of the abdomen, click the duodenum.",
+      "hint": "The C-shaped first part of the small bowel curving around the pancreatic head.",
+      "view": "duodenum",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The duodenum receives gastric contents and wraps around the head of the pancreas. On T1 it appears as a tubular intermediate-signal structure with darker luminal fluid.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0167-portal-vein-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0167",
+      "target": "portal_vein_and_splenic_vein",
+      "accept": [
+        "portal_vein_and_splenic_vein"
+      ],
+      "prompt": "On this T1-weighted MRI of the abdomen, click the portal and splenic vein.",
+      "hint": "It runs behind the pancreas toward the liver hilum.",
+      "view": "portal_vein_and_splenic_vein",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The splenic vein joins the superior mesenteric vein behind the neck of the pancreas to form the portal vein, which enters the liver hilum. On T1 gradient echo, flowing blood is usually of intermediate signal, distinct from the surrounding fat.",
+      "tags": {
+        "topic": "vessels",
+        "region": "abdomen",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0167-esophagus-clin",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-s0167",
+      "target": "esophagus",
+      "accept": [
+        "esophagus"
+      ],
+      "prompt": "A 58-year-old man has had several months of difficulty swallowing solid food and heartburn, and a hiatus hernia is suspected. On this T1-weighted MRI, click the muscular tube that carries food from the throat to the stomach.",
+      "hint": "It descends behind the heart and in front of the aorta before crossing the diaphragm.",
+      "view": "esophagus",
+      "layers": [],
+      "explain": "The oesophagus passes through the diaphragm at T10 to join the stomach, and a hiatus hernia is a protrusion of the stomach through this opening. On T1 its collapsed wall is intermediate in signal and lies close to the aorta.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0167-bladder-clin",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-s0167",
+      "target": "urinary_bladder",
+      "accept": [
+        "urinary_bladder"
+      ],
+      "prompt": "A 70-year-old man has poor urinary stream and incomplete emptying, and the clinician wants to assess bladder wall thickening. On this T1-weighted MRI, click the organ that stores urine in the pelvis.",
+      "hint": "It lies in the midline behind the pubic symphysis.",
+      "view": "urinary_bladder",
+      "layers": [],
+      "explain": "The urinary bladder is a midline pelvic organ whose wall hypertrophies when there is chronic outflow obstruction. On T1 the urine is dark and the muscular wall is intermediate in signal.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0167-hip-clin",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-s0167",
+      "target": "hip_left",
+      "accept": [
+        "hip_left",
+        "hip_right"
+      ],
+      "prompt": "A 45-year-old man on long-term steroids has groin pain on weight-bearing, and avascular necrosis of the femoral head is suspected. On this T1-weighted MRI, click the hip bone that forms the socket of this joint.",
+      "hint": "The large bone of the pelvis that includes the acetabulum.",
+      "view": "hip_left",
+      "layers": [],
+      "explain": "The acetabulum of the hip bone articulates with the femoral head, which is vulnerable to avascular necrosis because of its tenuous blood supply. On T1 normal marrow fat is bright, and necrosis appears as a dark band.",
+      "tags": {
+        "topic": "bones",
+        "region": "abdomen",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    }
+  ]
+}

@@ -1,0 +1,532 @@
+{
+ "id": "ts-mr-s0237",
+ "source": "TotalSegmentator MRI dataset v1.0.0, series s0237 (abdomen-pelvis)",
+ "license": "CC BY-NC-SA 4.0",
+ "attribution": "TotalSegmentator MRI dataset (Akinci D'Antonoli et al.)",
+ "dims": [
+  160,
+  118,
+  160
+ ],
+ "spacing": [
+  2.1388,
+  1.5,
+  2.9374
+ ],
+ "orientation": "RAS",
+ "modality": "MR",
+ "sourceUrl": "https://zenodo.org/records/11367005",
+ "sequence": "T1",
+ "sequenceLabel": "T1-weighted gradient echo (VIBE), abdomen and pelvis, 1.5 mm",
+ "intensity": {
+  "units": "arbitrary",
+  "stored_range": [
+   0,
+   4095
+  ],
+  "rescaled_from": [
+   1.0,
+   550.0
+  ],
+  "note": "0.5th..99.8th percentile of the source image mapped to 0..4095"
+ },
+ "image": {
+  "file": "image.i16.gz",
+  "dtype": "int16"
+ },
+ "ct": {
+  "file": "image.i16.gz",
+  "dtype": "int16"
+ },
+ "labels": {
+  "file": "labels.u8.gz",
+  "dtype": "uint8"
+ },
+ "defaultWindow": "soft",
+ "windows": {
+  "soft": {
+   "width": 3513,
+   "level": 1764,
+   "label": "Default"
+  },
+  "tissue": {
+   "width": 1992,
+   "level": 134,
+   "label": "Tissue"
+  },
+  "bright": {
+   "width": 3580,
+   "level": 2305,
+   "label": "Bright"
+  },
+  "dark": {
+   "width": 254,
+   "level": 127,
+   "label": "Dark"
+  }
+ },
+ "structures": {
+  "1": {
+   "key": "spleen",
+   "name": "Spleen",
+   "group": "organ"
+  },
+  "2": {
+   "key": "kidney_right",
+   "name": "Right kidney",
+   "group": "organ"
+  },
+  "3": {
+   "key": "kidney_left",
+   "name": "Left kidney",
+   "group": "organ"
+  },
+  "5": {
+   "key": "liver",
+   "name": "Liver",
+   "group": "organ"
+  },
+  "6": {
+   "key": "stomach",
+   "name": "Stomach",
+   "group": "hollow"
+  },
+  "8": {
+   "key": "adrenal_gland_right",
+   "name": "Right adrenal gland",
+   "group": "organ"
+  },
+  "9": {
+   "key": "adrenal_gland_left",
+   "name": "Left adrenal gland",
+   "group": "organ"
+  },
+  "10": {
+   "key": "lung_left",
+   "name": "Left lung",
+   "group": "lung"
+  },
+  "11": {
+   "key": "lung_right",
+   "name": "Right lung",
+   "group": "lung"
+  },
+  "12": {
+   "key": "esophagus",
+   "name": "Esophagus",
+   "group": "hollow"
+  },
+  "13": {
+   "key": "small_bowel",
+   "name": "Small bowel",
+   "group": "hollow"
+  },
+  "14": {
+   "key": "duodenum",
+   "name": "Duodenum",
+   "group": "hollow"
+  },
+  "15": {
+   "key": "colon",
+   "name": "Colon",
+   "group": "hollow"
+  },
+  "16": {
+   "key": "urinary_bladder",
+   "name": "Urinary bladder",
+   "group": "hollow"
+  },
+  "18": {
+   "key": "sacrum",
+   "name": "Sacrum",
+   "group": "bone"
+  },
+  "19": {
+   "key": "vertebrae",
+   "name": "Vertebrae",
+   "group": "bone"
+  },
+  "20": {
+   "key": "intervertebral_discs",
+   "name": "Intervertebral discs",
+   "group": "bone"
+  },
+  "21": {
+   "key": "spinal_cord",
+   "name": "Spinal cord",
+   "group": "nervous"
+  },
+  "22": {
+   "key": "heart",
+   "name": "Heart",
+   "group": "heart"
+  },
+  "23": {
+   "key": "aorta",
+   "name": "Aorta",
+   "group": "vessel"
+  },
+  "24": {
+   "key": "inferior_vena_cava",
+   "name": "Inferior vena cava",
+   "group": "vessel"
+  },
+  "25": {
+   "key": "portal_vein_and_splenic_vein",
+   "name": "Portal and splenic veins",
+   "group": "vessel"
+  },
+  "26": {
+   "key": "iliac_artery_left",
+   "name": "Left iliac artery",
+   "group": "vessel"
+  },
+  "27": {
+   "key": "iliac_artery_right",
+   "name": "Right iliac artery",
+   "group": "vessel"
+  },
+  "28": {
+   "key": "iliac_vena_left",
+   "name": "Left iliac vein",
+   "group": "vessel"
+  },
+  "29": {
+   "key": "iliac_vena_right",
+   "name": "Right iliac vein",
+   "group": "vessel"
+  },
+  "36": {
+   "key": "femur_left",
+   "name": "Left femur",
+   "group": "bone"
+  },
+  "37": {
+   "key": "femur_right",
+   "name": "Right femur",
+   "group": "bone"
+  },
+  "38": {
+   "key": "hip_left",
+   "name": "Left hip",
+   "group": "bone"
+  },
+  "39": {
+   "key": "hip_right",
+   "name": "Right hip",
+   "group": "bone"
+  },
+  "40": {
+   "key": "gluteus_maximus_left",
+   "name": "Left gluteus maximus",
+   "group": "muscle"
+  },
+  "41": {
+   "key": "gluteus_maximus_right",
+   "name": "Right gluteus maximus",
+   "group": "muscle"
+  },
+  "42": {
+   "key": "gluteus_medius_left",
+   "name": "Left gluteus medius",
+   "group": "muscle"
+  },
+  "43": {
+   "key": "gluteus_medius_right",
+   "name": "Right gluteus medius",
+   "group": "muscle"
+  },
+  "44": {
+   "key": "gluteus_minimus_left",
+   "name": "Left gluteus minimus",
+   "group": "muscle"
+  },
+  "45": {
+   "key": "gluteus_minimus_right",
+   "name": "Right gluteus minimus",
+   "group": "muscle"
+  },
+  "46": {
+   "key": "autochthon_left",
+   "name": "Left erector spinae (autochthonous back muscles)",
+   "group": "muscle"
+  },
+  "47": {
+   "key": "autochthon_right",
+   "name": "Right erector spinae (autochthonous back muscles)",
+   "group": "muscle"
+  },
+  "48": {
+   "key": "iliopsoas_left",
+   "name": "Left iliopsoas",
+   "group": "muscle"
+  },
+  "49": {
+   "key": "iliopsoas_right",
+   "name": "Right iliopsoas",
+   "group": "muscle"
+  },
+  "53": {
+   "key": "quadriceps_femoris_left",
+   "name": "Left quadriceps femoris",
+   "group": "muscle"
+  },
+  "54": {
+   "key": "quadriceps_femoris_right",
+   "name": "Right quadriceps femoris",
+   "group": "muscle"
+  },
+  "55": {
+   "key": "sartorius_left",
+   "name": "Left sartorius",
+   "group": "muscle"
+  },
+  "56": {
+   "key": "sartorius_right",
+   "name": "Right sartorius",
+   "group": "muscle"
+  },
+  "57": {
+   "key": "thigh_medial_compartment_left",
+   "name": "Left medial thigh compartment (adductors)",
+   "group": "muscle"
+  },
+  "58": {
+   "key": "thigh_medial_compartment_right",
+   "name": "Right medial thigh compartment (adductors)",
+   "group": "muscle"
+  }
+ },
+ "views": {
+  "spleen": {
+   "plane": "axial",
+   "frac": 0.774,
+   "window": "soft"
+  },
+  "kidney_right": {
+   "plane": "axial",
+   "frac": 0.61,
+   "window": "soft"
+  },
+  "kidney_left": {
+   "plane": "axial",
+   "frac": 0.692,
+   "window": "soft"
+  },
+  "liver": {
+   "plane": "axial",
+   "frac": 0.755,
+   "window": "soft"
+  },
+  "stomach": {
+   "plane": "axial",
+   "frac": 0.774,
+   "window": "soft"
+  },
+  "adrenal_gland_right": {
+   "plane": "axial",
+   "frac": 0.736,
+   "window": "soft"
+  },
+  "adrenal_gland_left": {
+   "plane": "axial",
+   "frac": 0.748,
+   "window": "soft"
+  },
+  "lung_left": {
+   "plane": "axial",
+   "frac": 0.893,
+   "window": "soft"
+  },
+  "lung_right": {
+   "plane": "axial",
+   "frac": 0.931,
+   "window": "soft"
+  },
+  "esophagus": {
+   "plane": "axial",
+   "frac": 0.868,
+   "window": "soft"
+  },
+  "small_bowel": {
+   "plane": "axial",
+   "frac": 0.409,
+   "window": "soft"
+  },
+  "duodenum": {
+   "plane": "axial",
+   "frac": 0.591,
+   "window": "soft"
+  },
+  "colon": {
+   "plane": "axial",
+   "frac": 0.472,
+   "window": "soft"
+  },
+  "urinary_bladder": {
+   "plane": "axial",
+   "frac": 0.157,
+   "window": "soft"
+  },
+  "sacrum": {
+   "plane": "axial",
+   "frac": 0.302,
+   "window": "soft"
+  },
+  "vertebrae": {
+   "plane": "axial",
+   "frac": 0.654,
+   "window": "soft"
+  },
+  "intervertebral_discs": {
+   "plane": "axial",
+   "frac": 0.623,
+   "window": "soft"
+  },
+  "spinal_cord": {
+   "plane": "axial",
+   "frac": 0.648,
+   "window": "soft"
+  },
+  "heart": {
+   "plane": "axial",
+   "frac": 0.918,
+   "window": "soft"
+  },
+  "aorta": {
+   "plane": "axial",
+   "frac": 0.711,
+   "window": "soft"
+  },
+  "inferior_vena_cava": {
+   "plane": "axial",
+   "frac": 0.667,
+   "window": "soft"
+  },
+  "portal_vein_and_splenic_vein": {
+   "plane": "axial",
+   "frac": 0.692,
+   "window": "soft"
+  },
+  "iliac_artery_left": {
+   "plane": "coronal",
+   "frac": 0.718,
+   "window": "soft"
+  },
+  "iliac_artery_right": {
+   "plane": "axial",
+   "frac": 0.34,
+   "window": "soft"
+  },
+  "iliac_vena_left": {
+   "plane": "axial",
+   "frac": 0.277,
+   "window": "soft"
+  },
+  "iliac_vena_right": {
+   "plane": "axial",
+   "frac": 0.314,
+   "window": "soft"
+  },
+  "femur_left": {
+   "plane": "axial",
+   "frac": 0.088,
+   "window": "soft"
+  },
+  "femur_right": {
+   "plane": "axial",
+   "frac": 0.113,
+   "window": "soft"
+  },
+  "hip_left": {
+   "plane": "axial",
+   "frac": 0.252,
+   "window": "soft"
+  },
+  "hip_right": {
+   "plane": "axial",
+   "frac": 0.264,
+   "window": "soft"
+  },
+  "gluteus_maximus_left": {
+   "plane": "axial",
+   "frac": 0.164,
+   "window": "soft"
+  },
+  "gluteus_maximus_right": {
+   "plane": "axial",
+   "frac": 0.201,
+   "window": "soft"
+  },
+  "gluteus_medius_left": {
+   "plane": "axial",
+   "frac": 0.264,
+   "window": "soft"
+  },
+  "gluteus_medius_right": {
+   "plane": "axial",
+   "frac": 0.296,
+   "window": "soft"
+  },
+  "gluteus_minimus_left": {
+   "plane": "axial",
+   "frac": 0.226,
+   "window": "soft"
+  },
+  "gluteus_minimus_right": {
+   "plane": "axial",
+   "frac": 0.252,
+   "window": "soft"
+  },
+  "autochthon_left": {
+   "plane": "axial",
+   "frac": 0.585,
+   "window": "soft"
+  },
+  "autochthon_right": {
+   "plane": "axial",
+   "frac": 0.585,
+   "window": "soft"
+  },
+  "iliopsoas_left": {
+   "plane": "axial",
+   "frac": 0.365,
+   "window": "soft"
+  },
+  "iliopsoas_right": {
+   "plane": "axial",
+   "frac": 0.365,
+   "window": "soft"
+  },
+  "quadriceps_femoris_left": {
+   "plane": "axial",
+   "frac": 0.113,
+   "window": "soft"
+  },
+  "quadriceps_femoris_right": {
+   "plane": "axial",
+   "frac": 0.119,
+   "window": "soft"
+  },
+  "sartorius_left": {
+   "plane": "axial",
+   "frac": 0.164,
+   "window": "soft"
+  },
+  "sartorius_right": {
+   "plane": "coronal",
+   "frac": 0.855,
+   "window": "soft"
+  },
+  "thigh_medial_compartment_left": {
+   "plane": "axial",
+   "frac": 0.088,
+   "window": "soft"
+  },
+  "thigh_medial_compartment_right": {
+   "plane": "axial",
+   "frac": 0.088,
+   "window": "soft"
+  }
+ }
+}

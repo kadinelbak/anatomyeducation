@@ -1,0 +1,227 @@
+{
+  "version": 1,
+  "region": "abdomen",
+  "study": "ts-mr-s0219",
+  "modality": "MRI",
+  "sequence": "T2",
+  "questions": [
+    {
+      "id": "mr-s0219-liver-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0219",
+      "target": "liver",
+      "accept": [
+        "liver"
+      ],
+      "prompt": "On this T2-weighted MRI of the abdomen, click the liver.",
+      "hint": "The largest solid organ, filling the right upper abdomen under the diaphragm.",
+      "view": "liver",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The liver occupies the right hypochondrium and extends across the midline. On T2 it is intermediate to low in signal and slightly darker than the spleen.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0219-spleen-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0219",
+      "target": "spleen",
+      "accept": [
+        "spleen"
+      ],
+      "prompt": "On this T2-weighted MRI of the abdomen, click the spleen.",
+      "hint": "A solid organ in the left upper abdomen, tucked beneath the left ribs.",
+      "view": "spleen",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The spleen lies posterolaterally in the left upper quadrant behind the stomach. On T2 it is brighter than the liver, and this relative difference helps identify it.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0219-kidney-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0219",
+      "target": "kidney_left",
+      "accept": [
+        "kidney_left"
+      ],
+      "prompt": "On this T2-weighted MRI of the abdomen, click the left kidney.",
+      "hint": "A bean-shaped retroperitoneal organ lateral to the spine on the left.",
+      "view": "kidney_left",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The left kidney lies in the retroperitoneum beside the upper lumbar vertebrae. On T2 renal parenchyma is fairly bright and urine in the collecting system is very bright.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0219-gallbladder-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0219",
+      "target": "gallbladder",
+      "accept": [
+        "gallbladder"
+      ],
+      "prompt": "On this T2-weighted MRI of the abdomen, click the gallbladder.",
+      "hint": "A small pear-shaped sac under the inferior surface of the liver.",
+      "view": "gallbladder",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The gallbladder stores bile in a fossa on the underside of the liver. On T2 the bile within it is bright, like other fluid.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0219-bladder-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0219",
+      "target": "urinary_bladder",
+      "accept": [
+        "urinary_bladder"
+      ],
+      "prompt": "On this T2-weighted MRI of the abdomen, click the urinary bladder.",
+      "hint": "The midline hollow organ in the pelvis, behind the pubic bones.",
+      "view": "urinary_bladder",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The urinary bladder sits behind the pubic symphysis and stores urine. On T2 urine is homogeneously bright, outlining the thin intermediate wall.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0219-prostate-clin",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-s0219",
+      "target": "prostate",
+      "accept": [
+        "prostate"
+      ],
+      "prompt": "A 68-year-old man has frequency and nocturia with a weak stream, and the prostate is thought to be enlarged. On this T2-weighted MRI, click the gland that surrounds the proximal urethra just below the bladder.",
+      "hint": "It sits below the bladder neck, in front of the rectum.",
+      "view": "prostate",
+      "layers": [],
+      "explain": "The prostate surrounds the urethra below the bladder, and benign enlargement of the transition zone narrows it. On T2 the peripheral zone is bright while the enlarged transition zone is heterogeneous and darker.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0219-pancreas-clin",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-s0219",
+      "target": "pancreas",
+      "accept": [
+        "pancreas"
+      ],
+      "prompt": "A 45-year-old man has severe epigastric pain radiating to the back after heavy alcohol intake, and his amylase is raised. On this T2-weighted MRI, click the gland most likely to be inflamed.",
+      "hint": "It lies behind the stomach, with the splenic vein along its back.",
+      "view": "pancreas",
+      "layers": [],
+      "explain": "The pancreas is a retroperitoneal gland behind the stomach, and acute pancreatitis causes oedema and peripancreatic fluid. On T2 the oedematous gland and surrounding fluid appear bright.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0219-discs-clin",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-s0219",
+      "target": "intervertebral_discs",
+      "accept": [
+        "intervertebral_discs"
+      ],
+      "prompt": "A 55-year-old man has chronic low back pain that is worse on sitting, and degenerative disc disease is suspected. On this T2-weighted MRI, click the structures between the vertebral bodies that act as cushions.",
+      "hint": "They are the pads sandwiched between adjacent vertebral bodies.",
+      "view": "intervertebral_discs",
+      "layers": [],
+      "explain": "The intervertebral discs have a gelatinous nucleus pulposus inside a fibrous annulus, and they dehydrate with age. On T2 a healthy disc is bright and a degenerate disc loses signal and becomes dark.",
+      "tags": {
+        "topic": "bones",
+        "region": "abdomen",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    }
+  ]
+}

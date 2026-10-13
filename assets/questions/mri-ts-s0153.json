@@ -1,0 +1,174 @@
+{
+  "version": 1,
+  "region": "thorax",
+  "study": "ts-mr-s0153",
+  "modality": "MRI",
+  "sequence": "T1",
+  "questions": [
+    {
+      "id": "mr-s0153-heart-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0153",
+      "target": "heart",
+      "accept": [
+        "heart"
+      ],
+      "prompt": "On this T1-weighted MRI of the thorax, click the heart.",
+      "hint": "The muscular organ in the middle of the chest, slightly left of midline.",
+      "view": "heart",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The heart lies in the middle mediastinum within the pericardium. On T1 the myocardium is intermediate in signal and flowing blood is usually dark or intermediate.",
+      "tags": {
+        "topic": "organs",
+        "region": "thorax",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0153-lung-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0153",
+      "target": "lung_left",
+      "accept": [
+        "lung_left",
+        "lung_right"
+      ],
+      "prompt": "On this T1-weighted MRI of the thorax, click the lung.",
+      "hint": "The air-filled organ on the left of the chest, flanking the heart.",
+      "view": "lung_left",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The left lung has two lobes and a cardiac notch where it wraps around the heart. On T1 the lung appears very dark because it is mostly air.",
+      "tags": {
+        "topic": "organs",
+        "region": "thorax",
+        "difficulty": 1,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0153-esophagus-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0153",
+      "target": "esophagus",
+      "accept": [
+        "esophagus"
+      ],
+      "prompt": "On this T1-weighted MRI of the thorax, click the oesophagus.",
+      "hint": "A collapsed tube in the posterior mediastinum, in front of the spine.",
+      "view": "esophagus",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The oesophagus runs behind the trachea and the left atrium before passing through the diaphragm. On T1 its collapsed wall is intermediate in signal and sits beside the aorta.",
+      "tags": {
+        "topic": "organs",
+        "region": "thorax",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0153-humerus-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0153",
+      "target": "humerus_left",
+      "accept": [
+        "humerus_left"
+      ],
+      "prompt": "On this T1-weighted MRI of the thorax, click the left humerus.",
+      "hint": "The bone of the upper arm at the lateral edge of the scan.",
+      "view": "humerus_left",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The humerus is the long bone of the arm, and its head articulates with the glenoid of the scapula. On T1 its marrow fat is bright and the cortex is dark.",
+      "tags": {
+        "topic": "bones",
+        "region": "thorax",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0153-aorta-clin",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-s0153",
+      "target": "aorta",
+      "accept": [
+        "aorta"
+      ],
+      "prompt": "A 65-year-old man with long-standing hypertension has sudden tearing chest pain radiating to his back, and aortic dissection is suspected. On this T1-weighted MRI, click the large artery that carries blood from the heart.",
+      "hint": "It arises from the heart and arches over the left lung root.",
+      "view": "aorta",
+      "layers": [],
+      "explain": "Aortic dissection is a tear in the intima of the aorta that lets blood split the wall. On T1 the flowing blood is dark and the dissection flap appears as a thin linear structure within the lumen.",
+      "tags": {
+        "topic": "vessels",
+        "region": "thorax",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0153-stomach-clin",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-s0153",
+      "target": "stomach",
+      "accept": [
+        "stomach"
+      ],
+      "prompt": "A 70-year-old woman has retrosternal burning and regurgitation, and a hiatus hernia is suspected on imaging. On this T1-weighted MRI, click the organ that has herniated through the diaphragm.",
+      "hint": "It lies just below the left hemidiaphragm.",
+      "view": "stomach",
+      "layers": [],
+      "explain": "In a hiatus hernia part of the stomach slides above the diaphragm through the oesophageal opening. On T1 the stomach wall is intermediate in signal and its lumen contents are dark.",
+      "tags": {
+        "topic": "organs",
+        "region": "thorax",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "T1"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    }
+  ]
+}

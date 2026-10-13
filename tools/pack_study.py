@@ -23,7 +23,7 @@ import nibabel as nib
 GROUPS = [
     (r"^(lung_|trachea)", "lung"),
     (r"^(aorta|.*artery|.*vein|.*vena_cava|portal_vein|brachiocephalic|subclavian|iliac_artery|iliac_vena|pulmonary_vein)", "vessel"),
-    (r"^(vertebrae|rib_|sacrum|hip|femur|humerus|scapula|clavicula|sternum|costal_cartilages|skull|intervertebral_discs)", "bone"),
+    (r"^(vertebrae|rib_|sacrum|hip|femur|humerus|scapula|clavicula|sternum|costal_cartilages|skull|intervertebral_discs|tibia|fibula)", "bone"),
     (r"^(gluteus|iliopsoas|autochthon|quadriceps|thigh_|sartorius)", "muscle"),
     (r"^(heart|atrial_appendage|left_atrium)", "heart"),
     (r"^(esophagus|stomach|duodenum|small_bowel|colon|urinary_bladder)", "hollow"),

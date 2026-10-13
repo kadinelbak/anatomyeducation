@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "region": "abdomen",
+  "study": "ts-mr-s0256",
+  "modality": "MRI",
+  "sequence": "T2",
+  "questions": [
+    {
+      "id": "mr-s0256-kidney-right-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0256",
+      "target": "kidney_right",
+      "accept": [
+        "kidney_right"
+      ],
+      "prompt": "On this T2-weighted MRI of the abdomen, click the right kidney.",
+      "hint": "A bean-shaped retroperitoneal organ beside the spine, sitting slightly lower than its partner.",
+      "view": "kidney_right",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The right kidney lies lower than the left because of the liver above it. On T2 the renal parenchyma is fairly bright and urine in the pelvis is very bright.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0256-stomach-id",
+      "kind": "Identify",
+      "renderer": "volume",
+      "study": "ts-mr-s0256",
+      "target": "stomach",
+      "accept": [
+        "stomach"
+      ],
+      "prompt": "On this T2-weighted MRI of the abdomen, click the stomach.",
+      "hint": "The J-shaped hollow organ in the left upper abdomen, under the left hemidiaphragm.",
+      "view": "stomach",
+      "layers": [
+        "outline"
+      ],
+      "explain": "The stomach lies in the left upper quadrant between the oesophagus and the duodenum. On T2 fluid in its lumen is bright, outlining a wall of intermediate signal.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 2,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0256-gallbladder-clin",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-s0256",
+      "target": "gallbladder",
+      "accept": [
+        "gallbladder"
+      ],
+      "prompt": "A 40-year-old woman has right upper quadrant pain after fatty meals, with fever and a positive Murphy sign. On this T2-weighted MRI, click the organ whose wall is likely thickened.",
+      "hint": "It hangs below the liver edge in the right upper abdomen.",
+      "view": "gallbladder",
+      "layers": [],
+      "explain": "Acute cholecystitis typically follows an obstructing gallstone in the cystic duct and thickens the gallbladder wall. On T2 the bile and pericholecystic fluid are bright, and stones appear as dark filling defects.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    },
+    {
+      "id": "mr-s0256-liver-clin",
+      "kind": "Clinical",
+      "renderer": "volume",
+      "study": "ts-mr-s0256",
+      "target": "liver",
+      "accept": [
+        "liver"
+      ],
+      "prompt": "A 50-year-old man with hereditary haemochromatosis has raised liver enzymes, and iron overload is suspected. On this T2-weighted MRI, click the organ that stores the excess iron.",
+      "hint": "It is the largest solid organ, in the right upper abdomen.",
+      "view": "liver",
+      "layers": [],
+      "explain": "Haemochromatosis causes iron deposition in the liver, which can lead to cirrhosis. On T2 iron causes marked signal loss, so the liver appears much darker than normal and than the spleen.",
+      "tags": {
+        "topic": "organs",
+        "region": "abdomen",
+        "difficulty": 3,
+        "modality": "MRI",
+        "sequence": "T2"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      }
+    }
+  ]
+}
