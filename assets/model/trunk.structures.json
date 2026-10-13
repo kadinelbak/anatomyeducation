@@ -1,6 +1,6 @@
 {
  "version": 2,
- "source": "BodyParts3D 3.0 (DBCLS), CC BY 4.0, via github.com/Kevin-Mattheus-Moerman/BodyParts3D; nerves, spinal cord and a few vessels are schematic (tools/trunk_nerves.py)",
+ "source": "BodyParts3D 3.0 (DBCLS), CC BY 4.0, via github.com/Kevin-Mattheus-Moerman/BodyParts3D; heart chambers, bronchi, colon segments, bile ducts and portal system from BodyParts3D 4.0 (CC BY 4.0, via github.com/ashemag/human-atlas); nerves, spinal cord and a few vessels are schematic (tools/trunk_nerves.py)",
  "units": "m",
  "layers": [
   "muscle",
@@ -997,38 +997,50 @@
    "source": "FMA18888"
   },
   {
-   "node": "FMA7274",
-   "structure": "heart",
+   "node": "FMA9457",
+   "structure": "right_atrium",
    "layer": "organ",
-   "source": "FMA7274"
+   "source": "FMA9457"
+  },
+  {
+   "node": "FMA9531",
+   "structure": "left_atrium",
+   "layer": "organ",
+   "source": "FMA9531"
+  },
+  {
+   "node": "FMA13884",
+   "structure": "ventricles",
+   "layer": "organ",
+   "source": "FMA13884"
   },
   {
    "node": "FMA7333",
-   "structure": "right_lung",
+   "structure": "right_upper_lobe",
    "layer": "organ",
    "source": "FMA7333"
   },
   {
    "node": "FMA7383",
-   "structure": "right_lung",
+   "structure": "right_middle_lobe",
    "layer": "organ",
    "source": "FMA7383"
   },
   {
    "node": "FMA7337",
-   "structure": "right_lung",
+   "structure": "right_lower_lobe",
    "layer": "organ",
    "source": "FMA7337"
   },
   {
    "node": "FMA7370",
-   "structure": "left_lung",
+   "structure": "left_upper_lobe",
    "layer": "organ",
    "source": "FMA7370"
   },
   {
    "node": "FMA7371",
-   "structure": "left_lung",
+   "structure": "left_lower_lobe",
    "layer": "organ",
    "source": "FMA7371"
   },
@@ -1039,10 +1051,16 @@
    "source": "FMA7394"
   },
   {
-   "node": "FMA7409",
-   "structure": "bronchi",
+   "node": "FMA68418",
+   "structure": "right_main_bronchus",
    "layer": "organ",
-   "source": "FMA7409"
+   "source": "FMA68418"
+  },
+  {
+   "node": "FMA7396",
+   "structure": "left_main_bronchus",
+   "layer": "organ",
+   "source": "FMA7396"
   },
   {
    "node": "FMA7131",
@@ -1081,6 +1099,30 @@
    "source": "FMA7202"
   },
   {
+   "node": "FMA14668",
+   "structure": "bile_ducts",
+   "layer": "organ",
+   "source": "FMA14668"
+  },
+  {
+   "node": "FMA14539",
+   "structure": "bile_ducts",
+   "layer": "organ",
+   "source": "FMA14539"
+  },
+  {
+   "node": "FMA14669",
+   "structure": "bile_ducts",
+   "layer": "organ",
+   "source": "FMA14669"
+  },
+  {
+   "node": "FMA14670",
+   "structure": "bile_ducts",
+   "layer": "organ",
+   "source": "FMA14670"
+  },
+  {
    "node": "FMA7196",
    "structure": "spleen",
    "layer": "organ",
@@ -1111,10 +1153,22 @@
    "source": "FMA7208"
   },
   {
-   "node": "FMA14543nsn",
-   "structure": "colon",
+   "node": "FMA14545",
+   "structure": "ascending_colon",
    "layer": "organ",
-   "source": "FMA14543nsn"
+   "source": "FMA14545"
+  },
+  {
+   "node": "FMA14546",
+   "structure": "transverse_colon",
+   "layer": "organ",
+   "source": "FMA14546"
+  },
+  {
+   "node": "FMA14547",
+   "structure": "descending_colon",
+   "layer": "organ",
+   "source": "FMA14547"
   },
   {
    "node": "FMA14542",
@@ -1171,10 +1225,94 @@
    "source": "FMA15900"
   },
   {
+   "node": "FMA19667",
+   "structure": "urethra",
+   "layer": "organ",
+   "source": "FMA19667"
+  },
+  {
    "node": "FMA9600",
    "structure": "prostate",
    "layer": "organ",
    "source": "FMA9600"
+  },
+  {
+   "node": "FMA19387",
+   "structure": "seminal_vesicle",
+   "layer": "organ",
+   "source": "FMA19387"
+  },
+  {
+   "node": "FMA19235",
+   "structure": "deferent_duct",
+   "layer": "organ",
+   "source": "FMA19235"
+  },
+  {
+   "node": "FMA7211",
+   "structure": "testis",
+   "layer": "organ",
+   "source": "FMA7211"
+  },
+  {
+   "node": "FMA18256",
+   "structure": "epididymis",
+   "layer": "organ",
+   "source": "FMA18256"
+  },
+  {
+   "node": "FMA50735",
+   "structure": "portal_vein",
+   "layer": "vessel",
+   "source": "FMA50735"
+  },
+  {
+   "node": "FMA82697",
+   "structure": "portal_vein",
+   "layer": "vessel",
+   "source": "FMA82697"
+  },
+  {
+   "node": "FMA82695",
+   "structure": "portal_vein",
+   "layer": "vessel",
+   "source": "FMA82695"
+  },
+  {
+   "node": "FMA14338",
+   "structure": "hepatic_veins",
+   "layer": "vessel",
+   "source": "FMA14338"
+  },
+  {
+   "node": "FMA14339",
+   "structure": "hepatic_veins",
+   "layer": "vessel",
+   "source": "FMA14339"
+  },
+  {
+   "node": "FMA14340",
+   "structure": "hepatic_veins",
+   "layer": "vessel",
+   "source": "FMA14340"
+  },
+  {
+   "node": "FMA15391",
+   "structure": "inferior_mesenteric_vein",
+   "layer": "vessel",
+   "source": "FMA15391"
+  },
+  {
+   "node": "FMA14759",
+   "structure": "testicular_vessels",
+   "layer": "vessel",
+   "source": "FMA14759"
+  },
+  {
+   "node": "FMA14341",
+   "structure": "testicular_vessels",
+   "layer": "vessel",
+   "source": "FMA14341"
   },
   {
    "node": "sch_spinal_cord",
@@ -1489,21 +1627,30 @@
   "common_iliac_vein": "Common iliac vein",
   "external_iliac_vein": "External iliac vein",
   "internal_iliac_vein": "Internal iliac vein",
-  "heart": "Heart",
-  "right_lung": "Right lung",
-  "left_lung": "Left lung",
+  "right_atrium": "Right atrium",
+  "left_atrium": "Left atrium",
+  "ventricles": "Ventricles of the heart",
+  "right_upper_lobe": "Upper lobe of the right lung",
+  "right_middle_lobe": "Middle lobe of the right lung",
+  "right_lower_lobe": "Lower lobe of the right lung",
+  "left_upper_lobe": "Upper lobe of the left lung",
+  "left_lower_lobe": "Lower lobe of the left lung",
   "trachea": "Trachea",
-  "bronchi": "Main bronchi",
+  "right_main_bronchus": "Right main bronchus",
+  "left_main_bronchus": "Left main bronchus",
   "esophagus": "Esophagus",
   "thymus": "Thymus",
   "stomach": "Stomach",
   "liver": "Liver",
   "gallbladder": "Gallbladder",
+  "bile_ducts": "Hepatic and cystic ducts",
   "spleen": "Spleen",
   "pancreas": "Pancreas",
   "duodenum": "Duodenum",
   "small_intestine": "Small intestine (jejunum and ileum)",
-  "colon": "Colon",
+  "ascending_colon": "Ascending colon",
+  "transverse_colon": "Transverse colon",
+  "descending_colon": "Descending and sigmoid colon",
   "appendix": "Appendix",
   "rectum": "Rectum",
   "right_kidney": "Right kidney",
@@ -1511,7 +1658,16 @@
   "adrenal_gland": "Adrenal (suprarenal) gland",
   "ureter": "Ureter",
   "urinary_bladder": "Urinary bladder",
+  "urethra": "Urethra",
   "prostate": "Prostate",
+  "seminal_vesicle": "Seminal vesicle",
+  "deferent_duct": "Ductus (vas) deferens",
+  "testis": "Testis",
+  "epididymis": "Epididymis",
+  "portal_vein": "Hepatic portal vein",
+  "hepatic_veins": "Hepatic veins",
+  "inferior_mesenteric_vein": "Inferior mesenteric vein",
+  "testicular_vessels": "Testicular artery and vein",
   "spinal_cord": "Spinal cord",
   "cauda_equina": "Cauda equina",
   "phrenic_nerve": "Phrenic nerve",
@@ -1613,23 +1769,23 @@
  "axis": {
   "t1": [
    0.0138,
-   0.3024,
-   -0.036
+   0.3025,
+   -0.0362
   ],
   "t12": [
-   0.0153,
-   0.0167,
-   -0.0393
+   0.0158,
+   0.0165,
+   -0.0395
   ],
   "l5": [
-   0.0169,
-   -0.1346,
-   -0.0297
+   0.0173,
+   -0.1345,
+   -0.0302
   ],
   "sacrum": [
-   0.0185,
-   -0.1964,
-   -0.0543
+   0.0178,
+   -0.1968,
+   -0.0544
   ]
  },
  "schematic": [
@@ -1667,7 +1823,7 @@
   "thoracodorsal_nerve",
   "vagus_nerve"
  ],
- "triangles": 186434,
+ "triangles": 180968,
  "viewLabels": {
   "palmar": "Front",
   "dorsal": "Back",

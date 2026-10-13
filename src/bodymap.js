@@ -18,6 +18,7 @@ const REGIONS = [
 
 // Which 3D model (and zoom) shows each region, when the model is configured.
 const MODEL_OPTIONS = {
+  head: [{ model: "head", focus: "all", label: "3D model" }, { model: "neck", focus: "all", label: "3D: neck" }],
   "upper-limb": [{ model: "upper-limb", focus: "all", label: "3D model" }],
   "lower-limb": [{ model: "lower-limb", focus: "all", label: "3D model" }],
   chest: [{ model: "trunk", focus: "thorax", label: "3D model" }],

@@ -8,6 +8,8 @@ export const CONFIG = {
     "upper-limb": { title: "Upper limb", modelUrl: "assets/model/arm.glb", structuresUrl: "assets/model/structures.json" },
     "lower-limb": { title: "Lower limb", modelUrl: "assets/model/lower-limb.glb", structuresUrl: "assets/model/lower-limb.structures.json" },
     "trunk": { title: "Trunk", modelUrl: "assets/model/trunk.glb", structuresUrl: "assets/model/trunk.structures.json" },
+    "neck": { title: "Neck", modelUrl: "assets/model/neck.glb", structuresUrl: "assets/model/neck.structures.json" },
+    "head": { title: "Head", modelUrl: "assets/model/head.glb", structuresUrl: "assets/model/head.structures.json" },
   },
   // On a host that serves only text files (the hosted copy), the study files
   // are fetched as their base64 ".b64.txt" copies straight away.

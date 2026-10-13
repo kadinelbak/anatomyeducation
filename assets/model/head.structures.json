@@ -1,0 +1,1481 @@
+{
+ "version": 2,
+ "source": "Z-Anatomy (CC BY-SA 4.0), geometry only; schematic additions listed under schematic",
+ "units": "m",
+ "layers": [
+  "muscle",
+  "tendon",
+  "ligament",
+  "nerve",
+  "vessel",
+  "bone",
+  "organ"
+ ],
+ "nodes": [
+  {
+   "node": "head_0001",
+   "structure": "parotid_gland",
+   "layer": "organ",
+   "source": "zanatomy",
+   "name": "(Accessory parotid gland).r"
+  },
+  {
+   "node": "head_0002",
+   "structure": "abducens_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Abducens nerve (VI).r"
+  },
+  {
+   "node": "head_0003",
+   "structure": "middle_meningeal_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Accessory branch of middle meningeal artery.r"
+  },
+  {
+   "node": "head_0004",
+   "structure": "facial_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Angular artery.r"
+  },
+  {
+   "node": "head_0005",
+   "structure": "digastric",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Anterior belly of digastric muscle.r"
+  },
+  {
+   "node": "head_0006",
+   "structure": "mandibular_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Anterior division of mandibular nerve.r"
+  },
+  {
+   "node": "head_0007",
+   "structure": "temporomandibular_joint",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Articular capsule of temporomandibular joint.r"
+  },
+  {
+   "node": "head_0008",
+   "structure": "temporomandibular_joint",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Articular disc of temporomandibular joint.r"
+  },
+  {
+   "node": "head_0009",
+   "structure": "atlas",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Atlas (C1)"
+  },
+  {
+   "node": "head_0010",
+   "structure": "axis",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Axis (C2)"
+  },
+  {
+   "node": "head_0011",
+   "structure": "buccal_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Buccal nerve.r"
+  },
+  {
+   "node": "head_0012",
+   "structure": "buccinator",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Bucinator.r"
+  },
+  {
+   "node": "head_0013",
+   "structure": "chorda_tympani",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Chorda tympani.r"
+  },
+  {
+   "node": "head_0014",
+   "structure": "eyeball",
+   "layer": "organ",
+   "source": "zanatomy",
+   "name": "Cornea.r"
+  },
+  {
+   "node": "head_0015",
+   "structure": "corrugator_supercilii",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Corrugator supercilii.r"
+  },
+  {
+   "node": "head_0016",
+   "structure": "masseter",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Deep part of masseter.r"
+  },
+  {
+   "node": "head_0017",
+   "structure": "depressor_anguli_oris",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Depressor anguli oris.r"
+  },
+  {
+   "node": "head_0018",
+   "structure": "depressor_labii_inferioris",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Depressor labii inferioris.r"
+  },
+  {
+   "node": "head_0019",
+   "structure": "nasalis",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Depressor septi nasi.r"
+  },
+  {
+   "node": "head_0020",
+   "structure": "epicranial_aponeurosis",
+   "layer": "tendon",
+   "source": "zanatomy",
+   "name": "Epicranial aponeurosis.r"
+  },
+  {
+   "node": "head_0021",
+   "structure": "ethmoid_bone",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Ethmoid bone"
+  },
+  {
+   "node": "head_0022",
+   "structure": "external_carotid_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "External carotid artery.r"
+  },
+  {
+   "node": "head_0023",
+   "structure": "external_jugular_vein",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "External jugular vein.r"
+  },
+  {
+   "node": "head_0024",
+   "structure": "facial_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Facial artery.r"
+  },
+  {
+   "node": "head_0025",
+   "structure": "facial_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Facial nerve (VII).r"
+  },
+  {
+   "node": "head_0026",
+   "structure": "facial_vein",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Facial vein.r"
+  },
+  {
+   "node": "head_0027",
+   "structure": "frontal_bone",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Frontal bone"
+  },
+  {
+   "node": "head_0028",
+   "structure": "superficial_temporal_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Frontal branch of superficial temporal artery.r"
+  },
+  {
+   "node": "head_0029",
+   "structure": "frontalis",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Frontalis muscle.r"
+  },
+  {
+   "node": "head_0030",
+   "structure": "glossopharyngeal_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Glossopharyngeal nerve (IX).r"
+  },
+  {
+   "node": "head_0031",
+   "structure": "hyoid_bone",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Hyoid bone"
+  },
+  {
+   "node": "head_0032",
+   "structure": "hypoglossal_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Hypoglossal nerve (XII).r"
+  },
+  {
+   "node": "head_0033",
+   "structure": "inferior_alveolar_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Inferior alveolar artery.r"
+  },
+  {
+   "node": "head_0034",
+   "structure": "inferior_alveolar_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Inferior alveolar nerve.r"
+  },
+  {
+   "node": "head_0035",
+   "structure": "lateral_pterygoid",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Inferior head of lateral pterygoid muscle.r"
+  },
+  {
+   "node": "head_0036",
+   "structure": "facial_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Inferior labial artery.r"
+  },
+  {
+   "node": "head_0037",
+   "structure": "inferior_nasal_concha",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Inferior nasal concha bone.l"
+  },
+  {
+   "node": "head_0038",
+   "structure": "inferior_nasal_concha",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Inferior nasal concha bone.r"
+  },
+  {
+   "node": "head_0039",
+   "structure": "infraorbital_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Infra-orbital artery.r"
+  },
+  {
+   "node": "head_0040",
+   "structure": "internal_carotid_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Internal carotid artery.r"
+  },
+  {
+   "node": "head_0041",
+   "structure": "internal_jugular_vein",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Internal jugular vein.r"
+  },
+  {
+   "node": "head_0042",
+   "structure": "lacrimal_bone",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Lacrimal bone.l"
+  },
+  {
+   "node": "head_0043",
+   "structure": "lacrimal_bone",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Lacrimal bone.r"
+  },
+  {
+   "node": "head_0044",
+   "structure": "lacrimal_gland",
+   "layer": "organ",
+   "source": "zanatomy",
+   "name": "Lacrimal gland.r"
+  },
+  {
+   "node": "head_0045",
+   "structure": "nasal_cartilages",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Lateral process of nasal septal cartilage.l"
+  },
+  {
+   "node": "head_0046",
+   "structure": "nasal_cartilages",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Lateral process of nasal septal cartilage.r"
+  },
+  {
+   "node": "head_0047",
+   "structure": "lateral_tmj_ligament",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Lateral temporomandibular ligament.r"
+  },
+  {
+   "node": "head_0048",
+   "structure": "levator_anguli_oris",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Levator anguli oris.r"
+  },
+  {
+   "node": "head_0049",
+   "structure": "levator_labii_superioris",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Levator labii superioris.r"
+  },
+  {
+   "node": "head_0050",
+   "structure": "levator_labii_superioris_alaeque_nasi",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Levator nasolabialis.r"
+  },
+  {
+   "node": "head_0051",
+   "structure": "levator_palpebrae_superioris",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Levator palpebrae superioris.r"
+  },
+  {
+   "node": "head_0052",
+   "structure": "lingual_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Lingual nerve.r"
+  },
+  {
+   "node": "head_0053",
+   "structure": "lower_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Lower canine.l"
+  },
+  {
+   "node": "head_0054",
+   "structure": "lower_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Lower canine.r"
+  },
+  {
+   "node": "head_0055",
+   "structure": "lower_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Lower first molar tooth.l"
+  },
+  {
+   "node": "head_0056",
+   "structure": "lower_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Lower first molar tooth.r"
+  },
+  {
+   "node": "head_0057",
+   "structure": "lower_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Lower first premolar.l"
+  },
+  {
+   "node": "head_0058",
+   "structure": "lower_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Lower first premolar.r"
+  },
+  {
+   "node": "head_0059",
+   "structure": "lower_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Lower lateral incisor.l"
+  },
+  {
+   "node": "head_0060",
+   "structure": "lower_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Lower lateral incisor.r"
+  },
+  {
+   "node": "head_0061",
+   "structure": "lower_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Lower medial incisor.l"
+  },
+  {
+   "node": "head_0062",
+   "structure": "lower_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Lower medial incisor.r"
+  },
+  {
+   "node": "head_0063",
+   "structure": "lower_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Lower second molar tooth.l"
+  },
+  {
+   "node": "head_0064",
+   "structure": "lower_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Lower second molar tooth.r"
+  },
+  {
+   "node": "head_0065",
+   "structure": "lower_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Lower second premolar.l"
+  },
+  {
+   "node": "head_0066",
+   "structure": "lower_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Lower second premolar.r"
+  },
+  {
+   "node": "head_0067",
+   "structure": "nasal_cartilages",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Major alar cartilage.l"
+  },
+  {
+   "node": "head_0068",
+   "structure": "nasal_cartilages",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Major alar cartilage.r"
+  },
+  {
+   "node": "head_0069",
+   "structure": "mandible",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Mandible"
+  },
+  {
+   "node": "head_0070",
+   "structure": "maxilla",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Maxilla.l"
+  },
+  {
+   "node": "head_0071",
+   "structure": "maxilla",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Maxilla.r"
+  },
+  {
+   "node": "head_0072",
+   "structure": "maxillary_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Maxillary artery.r"
+  },
+  {
+   "node": "head_0073",
+   "structure": "maxillary_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Maxillary nerve.r"
+  },
+  {
+   "node": "head_0074",
+   "structure": "medial_pterygoid",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Medial pterygoid muscle.r"
+  },
+  {
+   "node": "head_0075",
+   "structure": "mental_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Mental nerve.r"
+  },
+  {
+   "node": "head_0076",
+   "structure": "mentalis",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Mentalis muscle.r"
+  },
+  {
+   "node": "head_0077",
+   "structure": "middle_meningeal_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Middle meningeal artery.r"
+  },
+  {
+   "node": "head_0078",
+   "structure": "mylohyoid",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Mylohyoid muscle.r"
+  },
+  {
+   "node": "head_0079",
+   "structure": "nasal_bone",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Nasal bone.l"
+  },
+  {
+   "node": "head_0080",
+   "structure": "nasal_bone",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Nasal bone.r"
+  },
+  {
+   "node": "head_0081",
+   "structure": "nasal_cartilages",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Nasal septal cartilage"
+  },
+  {
+   "node": "head_0082",
+   "structure": "nasalis",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Nasalis muscle.r"
+  },
+  {
+   "node": "head_0083",
+   "structure": "nerve_to_mylohyoid",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Nerve to mylohyoid muscle.r"
+  },
+  {
+   "node": "head_0084",
+   "structure": "occipital_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Occipital artery.r"
+  },
+  {
+   "node": "head_0085",
+   "structure": "occipital_bone",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Occipital bone"
+  },
+  {
+   "node": "head_0086",
+   "structure": "occipitalis",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Occipitalis muscle.r"
+  },
+  {
+   "node": "head_0087",
+   "structure": "oculomotor_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Oculomotor nerve (III).r"
+  },
+  {
+   "node": "head_0088",
+   "structure": "olfactory_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Olfactory nerve (I).r"
+  },
+  {
+   "node": "head_0089",
+   "structure": "ophthalmic_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Ophthalmic nerve.r"
+  },
+  {
+   "node": "head_0090",
+   "structure": "optic_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Optic nerve (II).r"
+  },
+  {
+   "node": "head_0091",
+   "structure": "orbicularis_oris",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Orbicularis oris muscle.r"
+  },
+  {
+   "node": "head_0092",
+   "structure": "orbicularis_oculi",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Orbital part of orbicularis oculi.r"
+  },
+  {
+   "node": "head_0093",
+   "structure": "palatine_bone",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Palatine bone.l"
+  },
+  {
+   "node": "head_0094",
+   "structure": "palatine_bone",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Palatine bone.r"
+  },
+  {
+   "node": "head_0095",
+   "structure": "orbicularis_oculi",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Palpebral part of orbicularis oculi.r"
+  },
+  {
+   "node": "head_0096",
+   "structure": "parietal_bone",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Parietal bone.l"
+  },
+  {
+   "node": "head_0097",
+   "structure": "parietal_bone",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Parietal bone.r"
+  },
+  {
+   "node": "head_0098",
+   "structure": "parotid_duct",
+   "layer": "organ",
+   "source": "zanatomy",
+   "name": "Parotid duct.r"
+  },
+  {
+   "node": "head_0099",
+   "structure": "parotid_gland",
+   "layer": "organ",
+   "source": "zanatomy",
+   "name": "Parotid gland.r"
+  },
+  {
+   "node": "head_0100",
+   "structure": "digastric",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Posterior belly of digastric muscle.r"
+  },
+  {
+   "node": "head_0101",
+   "structure": "mandibular_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Posterior division of mandibular nerve.r"
+  },
+  {
+   "node": "head_0102",
+   "structure": "procerus",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Procerus muscle.r"
+  },
+  {
+   "node": "head_0103",
+   "structure": "retromandibular_vein",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Retromandibular vein.r"
+  },
+  {
+   "node": "head_0104",
+   "structure": "risorius",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Risorius muscle.r"
+  },
+  {
+   "node": "head_0105",
+   "structure": "eyeball",
+   "layer": "organ",
+   "source": "zanatomy",
+   "name": "Sclera.r"
+  },
+  {
+   "node": "head_0106",
+   "structure": "sphenoid_bone",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Sphenoid bone"
+  },
+  {
+   "node": "head_0107",
+   "structure": "sphenomandibular_ligament",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Sphenomandibular ligament.r"
+  },
+  {
+   "node": "head_0108",
+   "structure": "sternocleidomastoid",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Sternocleidomastoid muscle.r"
+  },
+  {
+   "node": "head_0109",
+   "structure": "stylohyoid",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Stylohyoid muscle.r"
+  },
+  {
+   "node": "head_0110",
+   "structure": "stylomandibular_ligament",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Stylomandibular ligament.r"
+  },
+  {
+   "node": "head_0111",
+   "structure": "sublingual_gland",
+   "layer": "organ",
+   "source": "zanatomy",
+   "name": "Sublingual gland.r"
+  },
+  {
+   "node": "head_0112",
+   "structure": "submandibular_gland",
+   "layer": "organ",
+   "source": "zanatomy",
+   "name": "Submandibular gland.r"
+  },
+  {
+   "node": "head_0113",
+   "structure": "masseter",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Superficial part of masseter.r"
+  },
+  {
+   "node": "head_0114",
+   "structure": "superficial_temporal_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Superficial temporal artery.r"
+  },
+  {
+   "node": "head_0115",
+   "structure": "superficial_temporal_vein",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Superficial temporal veins.r"
+  },
+  {
+   "node": "head_0116",
+   "structure": "lateral_pterygoid",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Superior head of lateral pterygoid muscle.r"
+  },
+  {
+   "node": "head_0117",
+   "structure": "facial_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Superior labial artery.r"
+  },
+  {
+   "node": "head_0118",
+   "structure": "supraorbital_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Supra-orbital artery.r"
+  },
+  {
+   "node": "head_0119",
+   "structure": "supratrochlear_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Supratrochlear artery.r"
+  },
+  {
+   "node": "head_0120",
+   "structure": "temporal_bone",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Temporal bone.l"
+  },
+  {
+   "node": "head_0121",
+   "structure": "temporal_bone",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Temporal bone.r"
+  },
+  {
+   "node": "head_0122",
+   "structure": "temporalis",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Temporalis muscle.r"
+  },
+  {
+   "node": "head_0123",
+   "structure": "tongue",
+   "layer": "organ",
+   "source": "zanatomy",
+   "name": "Tongue"
+  },
+  {
+   "node": "head_0124",
+   "structure": "transverse_facial_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Transverse facial artery.r"
+  },
+  {
+   "node": "head_0125",
+   "structure": "trigeminal_ganglion",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Trigeminal nerve (V).r"
+  },
+  {
+   "node": "head_0126",
+   "structure": "trochlear_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Trochlear nerve (IV).r"
+  },
+  {
+   "node": "head_0127",
+   "structure": "upper_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Upper canine.l"
+  },
+  {
+   "node": "head_0128",
+   "structure": "upper_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Upper canine.r"
+  },
+  {
+   "node": "head_0129",
+   "structure": "upper_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Upper first molar tooth.l"
+  },
+  {
+   "node": "head_0130",
+   "structure": "upper_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Upper first molar tooth.r"
+  },
+  {
+   "node": "head_0131",
+   "structure": "upper_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Upper first premolar.l"
+  },
+  {
+   "node": "head_0132",
+   "structure": "upper_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Upper first premolar.r"
+  },
+  {
+   "node": "head_0133",
+   "structure": "upper_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Upper lateral incisor.l"
+  },
+  {
+   "node": "head_0134",
+   "structure": "upper_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Upper lateral incisor.r"
+  },
+  {
+   "node": "head_0135",
+   "structure": "upper_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Upper medial incisor.l"
+  },
+  {
+   "node": "head_0136",
+   "structure": "upper_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Upper medial incisor.r"
+  },
+  {
+   "node": "head_0137",
+   "structure": "upper_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Upper second molar tooth.l"
+  },
+  {
+   "node": "head_0138",
+   "structure": "upper_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Upper second molar tooth.r"
+  },
+  {
+   "node": "head_0139",
+   "structure": "upper_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Upper second premolar.l"
+  },
+  {
+   "node": "head_0140",
+   "structure": "upper_teeth",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Upper second premolar.r"
+  },
+  {
+   "node": "head_0141",
+   "structure": "vestibulocochlear_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Vestibulocochlear nerve (VIII).r"
+  },
+  {
+   "node": "head_0142",
+   "structure": "vomer",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Vomer"
+  },
+  {
+   "node": "head_0143",
+   "structure": "zygomatic_bone",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Zygomatic bone.l"
+  },
+  {
+   "node": "head_0144",
+   "structure": "zygomatic_bone",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Zygomatic bone.r"
+  },
+  {
+   "node": "head_0145",
+   "structure": "zygomaticus_major",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Zygomaticus major muscle.r"
+  },
+  {
+   "node": "head_0146",
+   "structure": "zygomaticus_minor",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Zygomaticus minor muscle.r"
+  },
+  {
+   "node": "head_0147",
+   "structure": "spinal_accessory_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Accessory nerve (XI).r"
+  },
+  {
+   "node": "head_0148",
+   "structure": "platysma",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Platysma.r"
+  },
+  {
+   "node": "head_0149",
+   "structure": "vagus_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Vagus nerve (X).r"
+  },
+  {
+   "node": "head_0150",
+   "structure": "supraorbital_nerve",
+   "layer": "nerve",
+   "source": "schematic",
+   "name": "supraorbital_nerve"
+  },
+  {
+   "node": "head_0151",
+   "structure": "infraorbital_nerve",
+   "layer": "nerve",
+   "source": "schematic",
+   "name": "infraorbital_nerve"
+  },
+  {
+   "node": "head_0152",
+   "structure": "coronal_suture",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "coronal_suture"
+  },
+  {
+   "node": "head_0153",
+   "structure": "sagittal_suture",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "sagittal_suture"
+  },
+  {
+   "node": "head_0154",
+   "structure": "lambdoid_suture",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "lambdoid_suture"
+  },
+  {
+   "node": "head_0155",
+   "structure": "squamous_suture",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "squamous_suture"
+  },
+  {
+   "node": "head_0156",
+   "structure": "bregma",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "bregma"
+  },
+  {
+   "node": "head_0157",
+   "structure": "lambda",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "lambda"
+  },
+  {
+   "node": "head_0158",
+   "structure": "pterion",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "pterion"
+  },
+  {
+   "node": "head_0159",
+   "structure": "foramen_magnum",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "foramen_magnum"
+  },
+  {
+   "node": "head_0160",
+   "structure": "hypoglossal_canal",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "hypoglossal_canal"
+  },
+  {
+   "node": "head_0161",
+   "structure": "jugular_foramen",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "jugular_foramen"
+  },
+  {
+   "node": "head_0162",
+   "structure": "carotid_canal",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "carotid_canal"
+  },
+  {
+   "node": "head_0163",
+   "structure": "stylomastoid_foramen",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "stylomastoid_foramen"
+  },
+  {
+   "node": "head_0164",
+   "structure": "internal_acoustic_meatus",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "internal_acoustic_meatus"
+  },
+  {
+   "node": "head_0165",
+   "structure": "foramen_ovale",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "foramen_ovale"
+  },
+  {
+   "node": "head_0166",
+   "structure": "foramen_spinosum",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "foramen_spinosum"
+  },
+  {
+   "node": "head_0167",
+   "structure": "foramen_rotundum",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "foramen_rotundum"
+  },
+  {
+   "node": "head_0168",
+   "structure": "optic_canal",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "optic_canal"
+  },
+  {
+   "node": "head_0169",
+   "structure": "superior_orbital_fissure",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "superior_orbital_fissure"
+  },
+  {
+   "node": "head_0170",
+   "structure": "cribriform_plate",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "cribriform_plate"
+  },
+  {
+   "node": "head_0171",
+   "structure": "supraorbital_foramen",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "supraorbital_foramen"
+  },
+  {
+   "node": "head_0172",
+   "structure": "infraorbital_foramen",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "infraorbital_foramen"
+  },
+  {
+   "node": "head_0173",
+   "structure": "mental_foramen",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "mental_foramen"
+  },
+  {
+   "node": "head_0174",
+   "structure": "mandibular_foramen",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "mandibular_foramen"
+  },
+  {
+   "node": "head_0175",
+   "structure": "external_acoustic_meatus",
+   "layer": "bone",
+   "source": "schematic",
+   "name": "external_acoustic_meatus"
+  }
+ ],
+ "structures": {
+  "parotid_gland": "Parotid gland",
+  "abducens_nerve": "Abducens nerve (CN VI)",
+  "middle_meningeal_artery": "Middle meningeal artery",
+  "facial_artery": "Facial artery",
+  "digastric": "Digastric",
+  "mandibular_nerve": "Mandibular nerve (V3)",
+  "temporomandibular_joint": "Temporomandibular joint (articular disc)",
+  "atlas": "Atlas (C1)",
+  "axis": "Axis (C2)",
+  "buccal_nerve": "Buccal nerve (V3)",
+  "buccinator": "Buccinator",
+  "chorda_tympani": "Chorda tympani",
+  "eyeball": "Eyeball",
+  "corrugator_supercilii": "Corrugator supercilii",
+  "masseter": "Masseter",
+  "depressor_anguli_oris": "Depressor anguli oris",
+  "depressor_labii_inferioris": "Depressor labii inferioris",
+  "nasalis": "Nasalis",
+  "epicranial_aponeurosis": "Epicranial aponeurosis (galea)",
+  "ethmoid_bone": "Ethmoid bone",
+  "external_carotid_artery": "External carotid artery",
+  "external_jugular_vein": "External jugular vein",
+  "facial_nerve": "Facial nerve (CN VII) trunk",
+  "facial_vein": "Facial vein",
+  "frontal_bone": "Frontal bone",
+  "superficial_temporal_artery": "Superficial temporal artery",
+  "frontalis": "Frontalis (occipitofrontalis)",
+  "glossopharyngeal_nerve": "Glossopharyngeal nerve (CN IX)",
+  "hyoid_bone": "Hyoid bone",
+  "hypoglossal_nerve": "Hypoglossal nerve (CN XII)",
+  "inferior_alveolar_artery": "Inferior alveolar artery",
+  "inferior_alveolar_nerve": "Inferior alveolar nerve (V3)",
+  "lateral_pterygoid": "Lateral pterygoid",
+  "inferior_nasal_concha": "Inferior nasal concha",
+  "infraorbital_artery": "Infraorbital artery",
+  "internal_carotid_artery": "Internal carotid artery",
+  "internal_jugular_vein": "Internal jugular vein",
+  "lacrimal_bone": "Lacrimal bone",
+  "lacrimal_gland": "Lacrimal gland",
+  "nasal_cartilages": "Nasal cartilages",
+  "lateral_tmj_ligament": "Lateral ligament of the temporomandibular joint",
+  "levator_anguli_oris": "Levator anguli oris",
+  "levator_labii_superioris": "Levator labii superioris",
+  "levator_labii_superioris_alaeque_nasi": "Levator labii superioris alaeque nasi",
+  "levator_palpebrae_superioris": "Levator palpebrae superioris",
+  "lingual_nerve": "Lingual nerve (V3)",
+  "lower_teeth": "Lower (mandibular) teeth",
+  "mandible": "Mandible",
+  "maxilla": "Maxilla",
+  "maxillary_artery": "Maxillary artery",
+  "maxillary_nerve": "Maxillary nerve (V2)",
+  "medial_pterygoid": "Medial pterygoid",
+  "mental_nerve": "Mental nerve (V3)",
+  "mentalis": "Mentalis",
+  "mylohyoid": "Mylohyoid",
+  "nasal_bone": "Nasal bone",
+  "nerve_to_mylohyoid": "Nerve to mylohyoid",
+  "occipital_artery": "Occipital artery",
+  "occipital_bone": "Occipital bone",
+  "occipitalis": "Occipitalis (occipitofrontalis)",
+  "oculomotor_nerve": "Oculomotor nerve (CN III)",
+  "olfactory_nerve": "Olfactory nerve (CN I)",
+  "ophthalmic_nerve": "Ophthalmic nerve (V1)",
+  "optic_nerve": "Optic nerve (CN II)",
+  "orbicularis_oris": "Orbicularis oris",
+  "orbicularis_oculi": "Orbicularis oculi",
+  "palatine_bone": "Palatine bone",
+  "parietal_bone": "Parietal bone",
+  "parotid_duct": "Parotid duct",
+  "procerus": "Procerus",
+  "retromandibular_vein": "Retromandibular vein",
+  "risorius": "Risorius",
+  "sphenoid_bone": "Sphenoid bone",
+  "sphenomandibular_ligament": "Sphenomandibular ligament",
+  "sternocleidomastoid": "Sternocleidomastoid",
+  "stylohyoid": "Stylohyoid",
+  "stylomandibular_ligament": "Stylomandibular ligament",
+  "sublingual_gland": "Sublingual gland",
+  "submandibular_gland": "Submandibular gland",
+  "superficial_temporal_vein": "Superficial temporal vein",
+  "supraorbital_artery": "Supraorbital artery",
+  "supratrochlear_artery": "Supratrochlear artery",
+  "temporal_bone": "Temporal bone",
+  "temporalis": "Temporalis",
+  "tongue": "Tongue",
+  "transverse_facial_artery": "Transverse facial artery",
+  "trigeminal_ganglion": "Trigeminal ganglion",
+  "trochlear_nerve": "Trochlear nerve (CN IV)",
+  "upper_teeth": "Upper (maxillary) teeth",
+  "vestibulocochlear_nerve": "Vestibulocochlear nerve (CN VIII)",
+  "vomer": "Vomer",
+  "zygomatic_bone": "Zygomatic bone",
+  "zygomaticus_major": "Zygomaticus major",
+  "zygomaticus_minor": "Zygomaticus minor",
+  "spinal_accessory_nerve": "Spinal accessory nerve (CN XI)",
+  "platysma": "Platysma",
+  "vagus_nerve": "Vagus nerve (CN X)",
+  "supraorbital_nerve": "Supraorbital nerve (V1)",
+  "infraorbital_nerve": "Infraorbital nerve (V2)",
+  "coronal_suture": "Coronal suture",
+  "sagittal_suture": "Sagittal suture",
+  "lambdoid_suture": "Lambdoid suture",
+  "squamous_suture": "Squamous suture",
+  "bregma": "Bregma",
+  "lambda": "Lambda",
+  "pterion": "Pterion",
+  "foramen_magnum": "Foramen magnum",
+  "hypoglossal_canal": "Hypoglossal canal",
+  "jugular_foramen": "Jugular foramen",
+  "carotid_canal": "Carotid canal",
+  "stylomastoid_foramen": "Stylomastoid foramen",
+  "internal_acoustic_meatus": "Internal acoustic meatus",
+  "foramen_ovale": "Foramen ovale",
+  "foramen_spinosum": "Foramen spinosum",
+  "foramen_rotundum": "Foramen rotundum",
+  "optic_canal": "Optic canal",
+  "superior_orbital_fissure": "Superior orbital fissure",
+  "cribriform_plate": "Cribriform plate",
+  "supraorbital_foramen": "Supraorbital foramen (notch)",
+  "infraorbital_foramen": "Infraorbital foramen",
+  "mental_foramen": "Mental foramen",
+  "mandibular_foramen": "Mandibular foramen",
+  "external_acoustic_meatus": "External acoustic meatus"
+ },
+ "regions": {
+  "skull": [
+   "frontal_bone",
+   "parietal_bone",
+   "occipital_bone",
+   "temporal_bone",
+   "mandible"
+  ],
+  "skull_base": [
+   "sphenoid_bone",
+   "occipital_bone",
+   "temporal_bone",
+   "ethmoid_bone"
+  ],
+  "face": [
+   "frontal_bone",
+   "maxilla",
+   "zygomatic_bone",
+   "nasal_bone",
+   "mandible"
+  ],
+  "orbit": [
+   "eyeball",
+   "lacrimal_bone",
+   "zygomatic_bone",
+   "nasal_bone"
+  ],
+  "jaw": [
+   "mandible",
+   "temporal_bone",
+   "zygomatic_bone",
+   "masseter"
+  ],
+  "all": [
+   "frontal_bone",
+   "parietal_bone",
+   "occipital_bone",
+   "mandible",
+   "hyoid_bone"
+  ]
+ },
+ "regionLabels": {
+  "skull": "Skull",
+  "skull_base": "Skull base",
+  "face": "Face",
+  "orbit": "Orbit",
+  "jaw": "Jaw"
+ },
+ "regionTree": {
+  "skull": {
+   "skull_base": null
+  },
+  "face": {
+   "orbit": null,
+   "jaw": null
+  }
+ },
+ "hiddenRegions": [],
+ "viewLabels": {
+  "palmar": "Front",
+  "dorsal": "Back",
+  "lateral": "Lateral",
+  "inferior": "Base"
+ },
+ "axis": {
+  "vertex": [
+   0.0002,
+   0.107,
+   -0.0104
+  ],
+  "orbit": [
+   0.0001,
+   -0.0093,
+   0.0288
+  ],
+  "palate": [
+   0.0001,
+   -0.0386,
+   0.0661
+  ],
+  "chin": [
+   -0.0058,
+   -0.1022,
+   0.0781
+  ]
+ },
+ "schematic": [
+  "supraorbital_nerve",
+  "infraorbital_nerve",
+  "coronal_suture",
+  "sagittal_suture",
+  "lambdoid_suture",
+  "squamous_suture",
+  "bregma",
+  "lambda",
+  "pterion",
+  "foramen_magnum",
+  "hypoglossal_canal",
+  "jugular_foramen",
+  "carotid_canal",
+  "stylomastoid_foramen",
+  "internal_acoustic_meatus",
+  "foramen_ovale",
+  "foramen_spinosum",
+  "foramen_rotundum",
+  "optic_canal",
+  "superior_orbital_fissure",
+  "cribriform_plate",
+  "supraorbital_foramen",
+  "infraorbital_foramen",
+  "mental_foramen",
+  "mandibular_foramen",
+  "external_acoustic_meatus"
+ ],
+ "triangles": 192646
+}

@@ -47,7 +47,7 @@ const renderer = createRendererSwitch({
     // and a scan shows the line for its modality (the study's manifest says which it is).
     // X-ray and ultrasound are computed from the CT studies, so they show the CT line with their own.
     const scan = SCAN_KINDS.includes(kind);
-    if (scan) $("attr-bp3d").hidden = $("attr-o3d").hidden = true;
+    if (scan) $("attr-bp3d").hidden = $("attr-o3d").hidden = $("attr-za").hidden = true;
     $("attr-ct").hidden = !(scan && (kind !== "volume" || meta?.modality !== "MR"));
     $("attr-mr").hidden = !(kind === "volume" && meta?.modality === "MR");
     $("attr-xray").hidden = kind !== "xray";
@@ -99,6 +99,7 @@ let bank;
 try {
   bank = await loadBanks([
     "assets/questions/upper-limb.json", "assets/questions/lower-limb.json", "assets/questions/trunk.json",
+    "assets/questions/neck.json", "assets/questions/head.json",
     "assets/questions/ct-trunk.json", "assets/questions/ct-chest.json",
     "assets/questions/mri-abdomen.json", "assets/questions/mri-prostate.json", "assets/questions/mri-heart.json", "assets/questions/mri-hippocampus.json",
     "assets/questions/mri-brain-t1.json", "assets/questions/mri-brain-t2.json", "assets/questions/mri-brain-pd.json",

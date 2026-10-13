@@ -1,0 +1,1266 @@
+{
+ "version": 2,
+ "source": "Z-Anatomy (CC BY-SA 4.0), geometry only; schematic additions listed under schematic",
+ "units": "m",
+ "layers": [
+  "muscle",
+  "tendon",
+  "ligament",
+  "nerve",
+  "vessel",
+  "bone",
+  "organ"
+ ],
+ "nodes": [
+  {
+   "node": "neck_0001",
+   "structure": "digastric",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Anterior belly of digastric muscle.r"
+  },
+  {
+   "node": "neck_0002",
+   "structure": "lower_trunk",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Anterior division of inferior trunk of brachial plexus.r"
+  },
+  {
+   "node": "neck_0003",
+   "structure": "middle_trunk",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Anterior division of middle trunk of brachial plexus.r"
+  },
+  {
+   "node": "neck_0004",
+   "structure": "upper_trunk",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Anterior division of superior trunk of brachial plexus.r"
+  },
+  {
+   "node": "neck_0005",
+   "structure": "anterior_jugular_vein",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Anterior jugular vein.r"
+  },
+  {
+   "node": "neck_0006",
+   "structure": "arytenoid_cartilages",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Arytenoid cartilage.r"
+  },
+  {
+   "node": "neck_0007",
+   "structure": "ascending_pharyngeal_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Ascending pharyngeal artery.r"
+  },
+  {
+   "node": "neck_0008",
+   "structure": "atlas",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Atlas (C1)"
+  },
+  {
+   "node": "neck_0009",
+   "structure": "axis",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Axis (C2)"
+  },
+  {
+   "node": "neck_0010",
+   "structure": "brachiocephalic_trunk",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Brachiocephalic trunk"
+  },
+  {
+   "node": "neck_0011",
+   "structure": "clavicle",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Clavicle.l"
+  },
+  {
+   "node": "neck_0012",
+   "structure": "clavicle",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Clavicle.r"
+  },
+  {
+   "node": "neck_0013",
+   "structure": "facial_vein",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Common facial vein.r"
+  },
+  {
+   "node": "neck_0014",
+   "structure": "arytenoid_cartilages",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Corniculate cartilage.r"
+  },
+  {
+   "node": "neck_0015",
+   "structure": "costocervical_trunk",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Costocervical trunk.r"
+  },
+  {
+   "node": "neck_0016",
+   "structure": "cricoid_cartilage",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Cricoid cartilage"
+  },
+  {
+   "node": "neck_0017",
+   "structure": "dorsal_scapular_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Dorsal scapular nerve.r"
+  },
+  {
+   "node": "neck_0018",
+   "structure": "epiglottis",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Epiglottis"
+  },
+  {
+   "node": "neck_0019",
+   "structure": "external_carotid_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "External carotid artery.r"
+  },
+  {
+   "node": "neck_0020",
+   "structure": "external_jugular_vein",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "External jugular vein.r"
+  },
+  {
+   "node": "neck_0021",
+   "structure": "facial_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Facial artery.r"
+  },
+  {
+   "node": "neck_0022",
+   "structure": "facial_vein",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Facial vein.r"
+  },
+  {
+   "node": "neck_0023",
+   "structure": "rib_1",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "First rib.l"
+  },
+  {
+   "node": "neck_0024",
+   "structure": "rib_1",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "First rib.r"
+  },
+  {
+   "node": "neck_0025",
+   "structure": "sympathetic_trunk",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Ganglia of sympathetic trunk.r"
+  },
+  {
+   "node": "neck_0026",
+   "structure": "geniohyoid",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Geniohyoid muscle.r"
+  },
+  {
+   "node": "neck_0027",
+   "structure": "glossopharyngeal_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Glossopharyngeal nerve (IX).r"
+  },
+  {
+   "node": "neck_0028",
+   "structure": "hyoid_bone",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Hyoid bone"
+  },
+  {
+   "node": "neck_0029",
+   "structure": "hypoglossal_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Hypoglossal nerve (XII).r"
+  },
+  {
+   "node": "neck_0030",
+   "structure": "parathyroid_glands",
+   "layer": "organ",
+   "source": "zanatomy",
+   "name": "Inferior parathyroid gland.r"
+  },
+  {
+   "node": "neck_0031",
+   "structure": "inferior_constrictor",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Inferior pharyngeal constrictor.r"
+  },
+  {
+   "node": "neck_0032",
+   "structure": "inferior_thyroid_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Inferior thyroid artery.r"
+  },
+  {
+   "node": "neck_0033",
+   "structure": "lower_trunk",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Inferior trunk of brachial plexus.r"
+  },
+  {
+   "node": "neck_0034",
+   "structure": "digastric",
+   "layer": "tendon",
+   "source": "zanatomy",
+   "name": "Intermediate tendon of digastric muscle.r"
+  },
+  {
+   "node": "neck_0035",
+   "structure": "internal_carotid_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Internal carotid artery.r"
+  },
+  {
+   "node": "neck_0036",
+   "structure": "internal_jugular_vein",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Internal jugular vein.r"
+  },
+  {
+   "node": "neck_0037",
+   "structure": "c2_c3_disc",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Intervertebral disc C2-C3"
+  },
+  {
+   "node": "neck_0038",
+   "structure": "c3_c4_disc",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Intervertebral disc C3-C4"
+  },
+  {
+   "node": "neck_0039",
+   "structure": "c4_c5_disc",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Intervertebral disc C4-C5"
+  },
+  {
+   "node": "neck_0040",
+   "structure": "c5_c6_disc",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Intervertebral disc C5-C6"
+  },
+  {
+   "node": "neck_0041",
+   "structure": "c6_c7_disc",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Intervertebral disc C6-C7"
+  },
+  {
+   "node": "neck_0042",
+   "structure": "c7_t1_disc",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Intervertebral disc C7-T1"
+  },
+  {
+   "node": "neck_0043",
+   "structure": "t1_t2_disc",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Intervertebral disc T1-T2"
+  },
+  {
+   "node": "neck_0044",
+   "structure": "pharynx",
+   "layer": "organ",
+   "source": "zanatomy",
+   "name": "Laryngopharynx"
+  },
+  {
+   "node": "neck_0045",
+   "structure": "thyrohyoid_membrane",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Lateral thyrohyoid ligament.r"
+  },
+  {
+   "node": "neck_0046",
+   "structure": "levator_scapulae",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Levator scapulae.r"
+  },
+  {
+   "node": "neck_0047",
+   "structure": "long_thoracic_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Long thoracic nerve.r"
+  },
+  {
+   "node": "neck_0048",
+   "structure": "longissimus_capitis",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Longissimus capitis muscle.r"
+  },
+  {
+   "node": "neck_0049",
+   "structure": "longus_capitis",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Longus capitis muscle.r"
+  },
+  {
+   "node": "neck_0050",
+   "structure": "longus_colli",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Longus colli muscle.r"
+  },
+  {
+   "node": "neck_0051",
+   "structure": "mandible",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Mandible"
+  },
+  {
+   "node": "neck_0052",
+   "structure": "manubrium",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Manubrium of sternum"
+  },
+  {
+   "node": "neck_0053",
+   "structure": "cricothyroid_membrane",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Median cricothyroid ligament"
+  },
+  {
+   "node": "neck_0054",
+   "structure": "thyrohyoid_membrane",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Median thyrohyoid ligament"
+  },
+  {
+   "node": "neck_0055",
+   "structure": "middle_constrictor",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Middle pharyngeal constrictor.r"
+  },
+  {
+   "node": "neck_0056",
+   "structure": "middle_trunk",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Middle trunk of brachial plexus.r"
+  },
+  {
+   "node": "neck_0057",
+   "structure": "mylohyoid",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Mylohyoid muscle.r"
+  },
+  {
+   "node": "neck_0058",
+   "structure": "pharynx",
+   "layer": "organ",
+   "source": "zanatomy",
+   "name": "Nasopharynx"
+  },
+  {
+   "node": "neck_0059",
+   "structure": "nuchal_ligament",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Nuchal ligament"
+  },
+  {
+   "node": "neck_0060",
+   "structure": "cricothyroid",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Oblique part of cricothyroid muscle.r"
+  },
+  {
+   "node": "neck_0061",
+   "structure": "obliquus_capitis_inferior",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Obliquus inferior capitis muscle.r"
+  },
+  {
+   "node": "neck_0062",
+   "structure": "obliquus_capitis_superior",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Obliquus superior capitis muscle.r"
+  },
+  {
+   "node": "neck_0063",
+   "structure": "occipital_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Occipital artery.r"
+  },
+  {
+   "node": "neck_0064",
+   "structure": "occipital_bone",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Occipital bone"
+  },
+  {
+   "node": "neck_0065",
+   "structure": "omohyoid",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Omohyoid muscle.r"
+  },
+  {
+   "node": "neck_0066",
+   "structure": "pharynx",
+   "layer": "organ",
+   "source": "zanatomy",
+   "name": "Oropharynx"
+  },
+  {
+   "node": "neck_0067",
+   "structure": "parotid_gland",
+   "layer": "organ",
+   "source": "zanatomy",
+   "name": "Parotid gland.r"
+  },
+  {
+   "node": "neck_0068",
+   "structure": "digastric",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Posterior belly of digastric muscle.r"
+  },
+  {
+   "node": "neck_0069",
+   "structure": "posterior_cricoarytenoid",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Posterior crico-arytenoid muscle.r"
+  },
+  {
+   "node": "neck_0070",
+   "structure": "lower_trunk",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Posterior division of inferior trunk of brachial plexus.r"
+  },
+  {
+   "node": "neck_0071",
+   "structure": "middle_trunk",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Posterior division of middle trunk of brachial plexus.r"
+  },
+  {
+   "node": "neck_0072",
+   "structure": "upper_trunk",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Posterior division of superior trunk of brachial plexus.r"
+  },
+  {
+   "node": "neck_0073",
+   "structure": "rectus_capitis_anterior",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Rectus anterior capitis muscle.r"
+  },
+  {
+   "node": "neck_0074",
+   "structure": "rectus_capitis_lateralis",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Rectus lateralis capitis muscle.r"
+  },
+  {
+   "node": "neck_0075",
+   "structure": "rectus_capitis_posterior_major",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Rectus posterior major capitis muscle.r"
+  },
+  {
+   "node": "neck_0076",
+   "structure": "rectus_capitis_posterior_minor",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Rectus posterior minor capitis muscle.r"
+  },
+  {
+   "node": "neck_0077",
+   "structure": "retromandibular_vein",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Retromandibular vein.r"
+  },
+  {
+   "node": "neck_0078",
+   "structure": "brachiocephalic_vein",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Right brachiocephalic vein"
+  },
+  {
+   "node": "neck_0079",
+   "structure": "common_carotid_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Right common carotid artery"
+  },
+  {
+   "node": "neck_0080",
+   "structure": "subclavian_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Right subclavian artery"
+  },
+  {
+   "node": "neck_0081",
+   "structure": "subclavian_vein",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Right subclavian vein"
+  },
+  {
+   "node": "neck_0082",
+   "structure": "brachial_plexus_roots",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Roots of brachial plexus.r"
+  },
+  {
+   "node": "neck_0083",
+   "structure": "scalenus_anterior",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Scalenus anterior muscle.r"
+  },
+  {
+   "node": "neck_0084",
+   "structure": "scalenus_medius",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Scalenus medius muscle.r"
+  },
+  {
+   "node": "neck_0085",
+   "structure": "scalenus_posterior",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Scalenus posterior muscle.r"
+  },
+  {
+   "node": "neck_0086",
+   "structure": "semispinalis_cervicis",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Semispinalis colli muscle.r"
+  },
+  {
+   "node": "neck_0087",
+   "structure": "splenius_capitis",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Splenius capitis muscle.r"
+  },
+  {
+   "node": "neck_0088",
+   "structure": "splenius_cervicis",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Splenius colli muscle.r"
+  },
+  {
+   "node": "neck_0089",
+   "structure": "sternocleidomastoid",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Sternocleidomastoid muscle.r"
+  },
+  {
+   "node": "neck_0090",
+   "structure": "sternohyoid",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Sternohyoid muscle.r"
+  },
+  {
+   "node": "neck_0091",
+   "structure": "sternothyroid",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Sternothyroid muscle.r"
+  },
+  {
+   "node": "neck_0092",
+   "structure": "cricothyroid",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Straight part of cricothyroid muscle.r"
+  },
+  {
+   "node": "neck_0093",
+   "structure": "stylohyoid_ligament",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Stylohyoid ligament.r"
+  },
+  {
+   "node": "neck_0094",
+   "structure": "stylohyoid",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Stylohyoid muscle.r"
+  },
+  {
+   "node": "neck_0095",
+   "structure": "submandibular_gland",
+   "layer": "organ",
+   "source": "zanatomy",
+   "name": "Submandibular gland.r"
+  },
+  {
+   "node": "neck_0096",
+   "structure": "parathyroid_glands",
+   "layer": "organ",
+   "source": "zanatomy",
+   "name": "Superior parathyroid gland.r"
+  },
+  {
+   "node": "neck_0097",
+   "structure": "superior_constrictor",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Superior pharyngeal constrictor.r"
+  },
+  {
+   "node": "neck_0098",
+   "structure": "superior_thyroid_vein",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Superior thyroid vein.r"
+  },
+  {
+   "node": "neck_0099",
+   "structure": "upper_trunk",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Superior trunk of brachial plexus.r"
+  },
+  {
+   "node": "neck_0100",
+   "structure": "suprascapular_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Suprascapular artery.r"
+  },
+  {
+   "node": "neck_0101",
+   "structure": "suprascapular_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Suprascapular nerve.r"
+  },
+  {
+   "node": "neck_0102",
+   "structure": "temporal_bone",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Temporal bone.l"
+  },
+  {
+   "node": "neck_0103",
+   "structure": "temporal_bone",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Temporal bone.r"
+  },
+  {
+   "node": "neck_0104",
+   "structure": "thyrocervical_trunk",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Thyrocervical trunk.r"
+  },
+  {
+   "node": "neck_0105",
+   "structure": "thyrohyoid",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Thyrohyoid muscle.r"
+  },
+  {
+   "node": "neck_0106",
+   "structure": "thyroid_cartilage",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Thyroid cartilage"
+  },
+  {
+   "node": "neck_0107",
+   "structure": "thyroid_gland",
+   "layer": "organ",
+   "source": "zanatomy",
+   "name": "Thyroid gland"
+  },
+  {
+   "node": "neck_0108",
+   "structure": "transverse_cervical_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Transverse cervical artery.r"
+  },
+  {
+   "node": "neck_0109",
+   "structure": "c3_vertebra",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Vertebra C3"
+  },
+  {
+   "node": "neck_0110",
+   "structure": "c4_vertebra",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Vertebra C4"
+  },
+  {
+   "node": "neck_0111",
+   "structure": "c5_vertebra",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Vertebra C5"
+  },
+  {
+   "node": "neck_0112",
+   "structure": "c6_vertebra",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Vertebra C6"
+  },
+  {
+   "node": "neck_0113",
+   "structure": "c7_vertebra",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Vertebra C7"
+  },
+  {
+   "node": "neck_0114",
+   "structure": "t1_vertebra",
+   "layer": "bone",
+   "source": "zanatomy",
+   "name": "Vertebra T1"
+  },
+  {
+   "node": "neck_0115",
+   "structure": "vertebral_artery",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Vertebral artery.r"
+  },
+  {
+   "node": "neck_0116",
+   "structure": "vertebral_vein",
+   "layer": "vessel",
+   "source": "zanatomy",
+   "name": "Vertebral vein.r"
+  },
+  {
+   "node": "neck_0117",
+   "structure": "spinal_accessory_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Accessory nerve (XI).r"
+  },
+  {
+   "node": "neck_0118",
+   "structure": "spinal_cord",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Anterior horn of spinal cord"
+  },
+  {
+   "node": "neck_0119",
+   "structure": "cervical_nerve_roots",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Anterior root of spinal nerve.r"
+  },
+  {
+   "node": "neck_0120",
+   "structure": "trapezius",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Descending part of trapezius muscle.r"
+  },
+  {
+   "node": "neck_0121",
+   "structure": "esophagus",
+   "layer": "organ",
+   "source": "zanatomy",
+   "name": "Oesophagus"
+  },
+  {
+   "node": "neck_0122",
+   "structure": "platysma",
+   "layer": "muscle",
+   "source": "zanatomy",
+   "name": "Platysma.r"
+  },
+  {
+   "node": "neck_0123",
+   "structure": "spinal_cord",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Posterior horn of spinal cord"
+  },
+  {
+   "node": "neck_0124",
+   "structure": "cervical_nerve_roots",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Posterior root of spinal nerve.r"
+  },
+  {
+   "node": "neck_0125",
+   "structure": "spinal_dura",
+   "layer": "ligament",
+   "source": "zanatomy",
+   "name": "Spinal dura"
+  },
+  {
+   "node": "neck_0126",
+   "structure": "cervical_nerve_roots",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Spinal ganglion.r"
+  },
+  {
+   "node": "neck_0127",
+   "structure": "sympathetic_trunk",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Sympathetic trunk.r"
+  },
+  {
+   "node": "neck_0128",
+   "structure": "trachea",
+   "layer": "organ",
+   "source": "zanatomy",
+   "name": "Trachea"
+  },
+  {
+   "node": "neck_0129",
+   "structure": "vagus_nerve",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "Vagus nerve (X).r"
+  },
+  {
+   "node": "neck_0130",
+   "structure": "spinal_cord",
+   "layer": "nerve",
+   "source": "zanatomy",
+   "name": "White matter of spinal cord"
+  },
+  {
+   "node": "neck_0131",
+   "structure": "phrenic_nerve",
+   "layer": "nerve",
+   "source": "schematic",
+   "name": "phrenic_nerve"
+  },
+  {
+   "node": "neck_0132",
+   "structure": "ansa_cervicalis",
+   "layer": "nerve",
+   "source": "schematic",
+   "name": "ansa_cervicalis"
+  },
+  {
+   "node": "neck_0133",
+   "structure": "recurrent_laryngeal_nerve",
+   "layer": "nerve",
+   "source": "schematic",
+   "name": "recurrent_laryngeal_nerve"
+  },
+  {
+   "node": "neck_0134",
+   "structure": "superior_laryngeal_nerve",
+   "layer": "nerve",
+   "source": "schematic",
+   "name": "superior_laryngeal_nerve"
+  },
+  {
+   "node": "neck_0135",
+   "structure": "internal_laryngeal_nerve",
+   "layer": "nerve",
+   "source": "schematic",
+   "name": "internal_laryngeal_nerve"
+  },
+  {
+   "node": "neck_0136",
+   "structure": "external_laryngeal_nerve",
+   "layer": "nerve",
+   "source": "schematic",
+   "name": "external_laryngeal_nerve"
+  },
+  {
+   "node": "neck_0137",
+   "structure": "superior_thyroid_artery",
+   "layer": "vessel",
+   "source": "schematic",
+   "name": "superior_thyroid_artery"
+  },
+  {
+   "node": "neck_0138",
+   "structure": "carotid_sinus",
+   "layer": "vessel",
+   "source": "schematic",
+   "name": "carotid_sinus"
+  },
+  {
+   "node": "neck_0139",
+   "structure": "great_auricular_nerve",
+   "layer": "nerve",
+   "source": "schematic",
+   "name": "great_auricular_nerve"
+  },
+  {
+   "node": "neck_0140",
+   "structure": "transverse_cervical_nerve",
+   "layer": "nerve",
+   "source": "schematic",
+   "name": "transverse_cervical_nerve"
+  },
+  {
+   "node": "neck_0141",
+   "structure": "lesser_occipital_nerve",
+   "layer": "nerve",
+   "source": "schematic",
+   "name": "lesser_occipital_nerve"
+  },
+  {
+   "node": "neck_0142",
+   "structure": "supraclavicular_nerves",
+   "layer": "nerve",
+   "source": "schematic",
+   "name": "supraclavicular_nerves"
+  },
+  {
+   "node": "neck_0143",
+   "structure": "greater_occipital_nerve",
+   "layer": "nerve",
+   "source": "schematic",
+   "name": "greater_occipital_nerve"
+  },
+  {
+   "node": "neck_0144",
+   "structure": "transverse_ligament_of_atlas",
+   "layer": "ligament",
+   "source": "schematic",
+   "name": "transverse_ligament_of_atlas"
+  }
+ ],
+ "structures": {
+  "digastric": "Digastric",
+  "lower_trunk": "Lower trunk of the brachial plexus",
+  "middle_trunk": "Middle trunk of the brachial plexus",
+  "upper_trunk": "Upper trunk of the brachial plexus",
+  "anterior_jugular_vein": "Anterior jugular vein",
+  "arytenoid_cartilages": "Arytenoid cartilages",
+  "ascending_pharyngeal_artery": "Ascending pharyngeal artery",
+  "atlas": "Atlas (C1)",
+  "axis": "Axis (C2)",
+  "brachiocephalic_trunk": "Brachiocephalic trunk",
+  "clavicle": "Clavicle",
+  "facial_vein": "Facial vein",
+  "costocervical_trunk": "Costocervical trunk",
+  "cricoid_cartilage": "Cricoid cartilage",
+  "dorsal_scapular_nerve": "Dorsal scapular nerve",
+  "epiglottis": "Epiglottis",
+  "external_carotid_artery": "External carotid artery",
+  "external_jugular_vein": "External jugular vein",
+  "facial_artery": "Facial artery",
+  "rib_1": "First rib",
+  "sympathetic_trunk": "Cervical sympathetic trunk",
+  "geniohyoid": "Geniohyoid",
+  "glossopharyngeal_nerve": "Glossopharyngeal nerve (CN IX)",
+  "hyoid_bone": "Hyoid bone",
+  "hypoglossal_nerve": "Hypoglossal nerve (CN XII)",
+  "parathyroid_glands": "Parathyroid glands",
+  "inferior_constrictor": "Inferior pharyngeal constrictor",
+  "inferior_thyroid_artery": "Inferior thyroid artery",
+  "internal_carotid_artery": "Internal carotid artery",
+  "internal_jugular_vein": "Internal jugular vein",
+  "c2_c3_disc": "C2/C3 intervertebral disc",
+  "c3_c4_disc": "C3/C4 intervertebral disc",
+  "c4_c5_disc": "C4/C5 intervertebral disc",
+  "c5_c6_disc": "C5/C6 intervertebral disc",
+  "c6_c7_disc": "C6/C7 intervertebral disc",
+  "c7_t1_disc": "C7/T1 intervertebral disc",
+  "t1_t2_disc": "T1/T2 intervertebral disc",
+  "pharynx": "Pharynx",
+  "thyrohyoid_membrane": "Thyrohyoid membrane",
+  "levator_scapulae": "Levator scapulae",
+  "long_thoracic_nerve": "Long thoracic nerve",
+  "longissimus_capitis": "Longissimus capitis",
+  "longus_capitis": "Longus capitis",
+  "longus_colli": "Longus colli",
+  "mandible": "Mandible",
+  "manubrium": "Manubrium of sternum",
+  "cricothyroid_membrane": "Cricothyroid membrane (median cricothyroid ligament)",
+  "middle_constrictor": "Middle pharyngeal constrictor",
+  "mylohyoid": "Mylohyoid",
+  "nuchal_ligament": "Nuchal ligament",
+  "cricothyroid": "Cricothyroid muscle",
+  "obliquus_capitis_inferior": "Obliquus capitis inferior",
+  "obliquus_capitis_superior": "Obliquus capitis superior",
+  "occipital_artery": "Occipital artery",
+  "occipital_bone": "Occipital bone",
+  "omohyoid": "Omohyoid",
+  "parotid_gland": "Parotid gland",
+  "posterior_cricoarytenoid": "Posterior cricoarytenoid muscle",
+  "rectus_capitis_anterior": "Rectus capitis anterior",
+  "rectus_capitis_lateralis": "Rectus capitis lateralis",
+  "rectus_capitis_posterior_major": "Rectus capitis posterior major",
+  "rectus_capitis_posterior_minor": "Rectus capitis posterior minor",
+  "retromandibular_vein": "Retromandibular vein",
+  "brachiocephalic_vein": "Brachiocephalic vein",
+  "common_carotid_artery": "Common carotid artery",
+  "subclavian_artery": "Subclavian artery",
+  "subclavian_vein": "Subclavian vein",
+  "brachial_plexus_roots": "Roots of the brachial plexus (C5 to T1)",
+  "scalenus_anterior": "Scalenus anterior",
+  "scalenus_medius": "Scalenus medius",
+  "scalenus_posterior": "Scalenus posterior",
+  "semispinalis_cervicis": "Semispinalis cervicis",
+  "splenius_capitis": "Splenius capitis",
+  "splenius_cervicis": "Splenius cervicis",
+  "sternocleidomastoid": "Sternocleidomastoid",
+  "sternohyoid": "Sternohyoid",
+  "sternothyroid": "Sternothyroid",
+  "stylohyoid_ligament": "Stylohyoid ligament",
+  "stylohyoid": "Stylohyoid",
+  "submandibular_gland": "Submandibular gland",
+  "superior_constrictor": "Superior pharyngeal constrictor",
+  "superior_thyroid_vein": "Superior thyroid vein",
+  "suprascapular_artery": "Suprascapular artery",
+  "suprascapular_nerve": "Suprascapular nerve",
+  "temporal_bone": "Temporal bone",
+  "thyrocervical_trunk": "Thyrocervical trunk",
+  "thyrohyoid": "Thyrohyoid",
+  "thyroid_cartilage": "Thyroid cartilage",
+  "thyroid_gland": "Thyroid gland",
+  "transverse_cervical_artery": "Transverse cervical artery",
+  "c3_vertebra": "C3 vertebra",
+  "c4_vertebra": "C4 vertebra",
+  "c5_vertebra": "C5 vertebra",
+  "c6_vertebra": "C6 vertebra",
+  "c7_vertebra": "C7 vertebra (vertebra prominens)",
+  "t1_vertebra": "T1 vertebra",
+  "vertebral_artery": "Vertebral artery",
+  "vertebral_vein": "Vertebral vein",
+  "spinal_accessory_nerve": "Spinal accessory nerve (CN XI)",
+  "spinal_cord": "Spinal cord (cervical)",
+  "cervical_nerve_roots": "Spinal nerve roots and ganglia",
+  "trapezius": "Trapezius",
+  "esophagus": "Oesophagus",
+  "platysma": "Platysma",
+  "spinal_dura": "Spinal dura mater",
+  "trachea": "Trachea",
+  "vagus_nerve": "Vagus nerve (CN X)",
+  "phrenic_nerve": "Phrenic nerve",
+  "ansa_cervicalis": "Ansa cervicalis",
+  "recurrent_laryngeal_nerve": "Recurrent laryngeal nerve",
+  "superior_laryngeal_nerve": "Superior laryngeal nerve",
+  "internal_laryngeal_nerve": "Internal branch of the superior laryngeal nerve",
+  "external_laryngeal_nerve": "External branch of the superior laryngeal nerve",
+  "superior_thyroid_artery": "Superior thyroid artery",
+  "carotid_sinus": "Carotid sinus (bifurcation)",
+  "great_auricular_nerve": "Great auricular nerve",
+  "transverse_cervical_nerve": "Transverse cervical nerve",
+  "lesser_occipital_nerve": "Lesser occipital nerve",
+  "supraclavicular_nerves": "Supraclavicular nerves",
+  "greater_occipital_nerve": "Greater occipital nerve (C2)",
+  "transverse_ligament_of_atlas": "Transverse ligament of the atlas"
+ },
+ "regions": {
+  "anterior_triangle": [
+   "mandible",
+   "hyoid_bone",
+   "thyroid_cartilage",
+   "sternocleidomastoid",
+   "manubrium"
+  ],
+  "posterior_triangle": [
+   "sternocleidomastoid",
+   "clavicle",
+   "scalenus_posterior",
+   "levator_scapulae",
+   "trapezius"
+  ],
+  "larynx": [
+   "hyoid_bone",
+   "thyroid_cartilage",
+   "c3_vertebra",
+   "c7_vertebra"
+  ],
+  "cervical_spine": [
+   "occipital_bone",
+   "atlas",
+   "axis",
+   "c3_vertebra",
+   "c4_vertebra",
+   "c5_vertebra",
+   "c6_vertebra",
+   "c7_vertebra",
+   "t1_vertebra"
+  ],
+  "thyroid": [
+   "thyroid_cartilage",
+   "c5_vertebra",
+   "c7_vertebra",
+   "manubrium",
+   "sternocleidomastoid"
+  ],
+  "root_of_neck": [
+   "clavicle",
+   "rib_1",
+   "manubrium",
+   "t1_vertebra",
+   "c7_vertebra"
+  ],
+  "all": [
+   "occipital_bone",
+   "mandible",
+   "clavicle",
+   "rib_1",
+   "manubrium",
+   "t1_vertebra"
+  ]
+ },
+ "regionLabels": {
+  "anterior_triangle": "Anterior triangle",
+  "posterior_triangle": "Posterior triangle",
+  "larynx": "Larynx",
+  "cervical_spine": "Cervical spine",
+  "thyroid": "Thyroid",
+  "root_of_neck": "Root of neck"
+ },
+ "regionTree": {
+  "anterior_triangle": null,
+  "posterior_triangle": null,
+  "larynx": {
+   "thyroid": null
+  },
+  "cervical_spine": null,
+  "root_of_neck": null
+ },
+ "hiddenRegions": [
+  "thyroid"
+ ],
+ "viewLabels": {
+  "palmar": "Front",
+  "dorsal": "Back",
+  "lateral": "Lateral"
+ },
+ "axis": {
+  "skull_base": [
+   -0.0001,
+   0.0528,
+   -0.0167
+  ],
+  "c2": [
+   0,
+   0.0228,
+   -0.0101
+  ],
+  "c5": [
+   0,
+   -0.0235,
+   -0.0122
+  ],
+  "t1": [
+   0,
+   -0.0646,
+   -0.0279
+  ]
+ },
+ "schematic": [
+  "phrenic_nerve",
+  "ansa_cervicalis",
+  "recurrent_laryngeal_nerve",
+  "superior_laryngeal_nerve",
+  "internal_laryngeal_nerve",
+  "external_laryngeal_nerve",
+  "superior_thyroid_artery",
+  "carotid_sinus",
+  "great_auricular_nerve",
+  "transverse_cervical_nerve",
+  "lesser_occipital_nerve",
+  "supraclavicular_nerves",
+  "greater_occipital_nerve",
+  "transverse_ligament_of_atlas"
+ ],
+ "triangles": 149578
+}

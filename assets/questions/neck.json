@@ -1,0 +1,1095 @@
+{
+  "version": 1,
+  "region": "neck",
+  "model": "neck",
+  "questions": [
+    {
+      "id": "spinal-accessory-posterior-triangle-biopsy",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "spinal_accessory_nerve",
+      "accept": [
+        "spinal_accessory_nerve"
+      ],
+      "prompt": "A man has a lymph node biopsied from the posterior triangle of the neck. Afterwards his right shoulder droops, the scapula wings and he cannot shrug or lift the arm fully above the horizontal. Click the injured nerve.",
+      "hint": "It crosses the posterior triangle superficially, close to the middle of the posterior border of sternocleidomastoid.",
+      "view": "lateral",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The spinal accessory nerve supplies sternocleidomastoid and trapezius. It lies on levator scapulae in the roof of the posterior triangle, where it is subcutaneous and easily cut during node biopsy, causing trapezius weakness and a winged scapula.",
+      "tags": {
+        "topic": "nerves",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "posterior_triangle"
+    },
+    {
+      "id": "recurrent-laryngeal-palsy-thyroidectomy",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "recurrent_laryngeal_nerve",
+      "accept": [
+        "recurrent_laryngeal_nerve"
+      ],
+      "prompt": "After a total thyroidectomy a woman has a hoarse, breathy voice. Laryngoscopy shows the right vocal fold fixed near the midline. Click the nerve that was damaged near the lower pole of the gland.",
+      "hint": "It ascends in the groove between the trachea and oesophagus after looping under a great vessel on the right.",
+      "view": "palmar",
+      "layers": [
+        "nerve",
+        "organ",
+        "bone"
+      ],
+      "explain": "The recurrent laryngeal nerve supplies all intrinsic laryngeal muscles except cricothyroid. On the right it hooks around the subclavian artery and runs close to the inferior thyroid artery, so it is at risk during thyroidectomy. Bilateral injury can obstruct the airway.",
+      "tags": {
+        "topic": "nerves",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thyroid"
+    },
+    {
+      "id": "external-laryngeal-nerve-superior-thyroid-ligation",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "external_laryngeal_nerve",
+      "accept": [
+        "external_laryngeal_nerve",
+        "superior_laryngeal_nerve"
+      ],
+      "prompt": "A professional singer cannot reach high notes and tires quickly after thyroid surgery, although her airway is normal. The nerve to cricothyroid was caught when the superior pole vessels were tied. Click the nerve.",
+      "hint": "It runs with the superior thyroid artery, then descends on the inferior constrictor towards cricothyroid.",
+      "view": "lateral",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The external branch of the superior laryngeal nerve tenses the vocal folds through cricothyroid. It lies close to the superior thyroid artery, so surgeons tie that artery on the gland itself, close to the upper pole.",
+      "tags": {
+        "topic": "nerves",
+        "region": "neck",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "larynx"
+    },
+    {
+      "id": "hypoglossal-nerve-tongue-deviation",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "hypoglossal_nerve",
+      "accept": [
+        "hypoglossal_nerve"
+      ],
+      "prompt": "A man with a deep neck stab wound pokes his tongue out and it deviates to the right, with wasting on that side. Click the nerve that has been cut as it hooks forward above the hyoid bone.",
+      "hint": "It loops around the occipital artery and crosses the external and internal carotid arteries.",
+      "view": "lateral",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The hypoglossal nerve supplies the intrinsic tongue muscles and the extrinsic muscles except palatoglossus. Genioglossus on the damaged side cannot push the tongue forward, so it deviates towards the lesion.",
+      "tags": {
+        "topic": "nerves",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "anterior_triangle"
+    },
+    {
+      "id": "horner-syndrome-sympathetic-trunk",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "sympathetic_trunk",
+      "accept": [
+        "sympathetic_trunk"
+      ],
+      "prompt": "A smoker has a drooping eyelid, a small pupil and a dry flushed face on the right. A tumour at the lung apex is compressing a chain lying on the prevertebral muscles. Click the structure.",
+      "hint": "It lies behind the carotid sheath, in front of the transverse processes.",
+      "view": "lateral",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The cervical sympathetic trunk carries sympathetic fibres to the head. Interruption produces Horner syndrome: ptosis, miosis, anhidrosis and apparent enophthalmos. Apical lung tumours, thyroid surgery and carotid dissection can all damage it.",
+      "tags": {
+        "topic": "nerves",
+        "region": "neck",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "root_of_neck"
+    },
+    {
+      "id": "interscalene-block-upper-trunk",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "upper_trunk",
+      "accept": [
+        "upper_trunk",
+        "middle_trunk",
+        "lower_trunk"
+      ],
+      "prompt": "Before shoulder surgery an anaesthetist injects local anaesthetic into the groove between scalenus anterior and scalenus medius. Click the structures it is aiming to numb.",
+      "hint": "They emerge together between two scalene muscles, above the subclavian artery.",
+      "view": "lateral",
+      "layers": [
+        "nerve",
+        "muscle",
+        "bone"
+      ],
+      "explain": "The roots of the brachial plexus form three trunks in the interscalene groove. A block here anaesthetises the shoulder well but often spares the lower trunk (C8, T1), and phrenic nerve paralysis is common.",
+      "tags": {
+        "topic": "nerves",
+        "region": "neck",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "posterior_triangle"
+    },
+    {
+      "id": "phrenic-nerve-block-diaphragm",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "phrenic_nerve",
+      "accept": [
+        "phrenic_nerve"
+      ],
+      "prompt": "After an interscalene block a patient is breathless and chest radiography shows the right hemidiaphragm raised. Click the nerve that runs down the front of scalenus anterior.",
+      "hint": "It crosses scalenus anterior from lateral to medial, behind the prevertebral fascia.",
+      "view": "lateral",
+      "layers": [
+        "nerve",
+        "muscle",
+        "bone"
+      ],
+      "explain": "The phrenic nerve (C3, C4, C5) lies on the anterior surface of scalenus anterior and is motor to the diaphragm. Local anaesthetic spreading from the interscalene groove can paralyse it.",
+      "tags": {
+        "topic": "nerves",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "posterior_triangle"
+    },
+    {
+      "id": "ansa-cervicalis-strap-muscles",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "ansa_cervicalis",
+      "accept": [
+        "ansa_cervicalis"
+      ],
+      "prompt": "Click the loop of nerves from C1 to C3 that supplies the infrahyoid strap muscles.",
+      "hint": "It lies on or within the carotid sheath and gives branches to sternohyoid, sternothyroid and omohyoid.",
+      "view": "lateral",
+      "layers": [
+        "nerve",
+        "muscle",
+        "vessel"
+      ],
+      "explain": "The ansa cervicalis is formed by superior and inferior roots, the superior root travelling with the hypoglossal nerve. It supplies the strap muscles except thyrohyoid, which receives C1 fibres via the hypoglossal.",
+      "tags": {
+        "topic": "nerves",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "anterior_triangle"
+    },
+    {
+      "id": "great-auricular-nerve-parotid-numb",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "great_auricular_nerve",
+      "accept": [
+        "great_auricular_nerve"
+      ],
+      "prompt": "Click the cutaneous nerve that emerges at the middle of the posterior border of sternocleidomastoid and runs up over the muscle to the ear and angle of the jaw.",
+      "hint": "It ascends vertically on sternocleidomastoid towards the parotid region.",
+      "view": "lateral",
+      "layers": [
+        "nerve",
+        "muscle"
+      ],
+      "explain": "The great auricular nerve (C2, C3) supplies skin over the parotid gland, the mastoid and the lower ear. Numbness of the ear lobe is common after parotid and neck surgery.",
+      "tags": {
+        "topic": "nerves",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "posterior_triangle"
+    },
+    {
+      "id": "greater-occipital-nerve-headache",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "greater_occipital_nerve",
+      "accept": [
+        "greater_occipital_nerve"
+      ],
+      "prompt": "Click the nerve, the dorsal ramus of C2, that pierces trapezius to supply the scalp at the back of the head and is blocked for occipital neuralgia.",
+      "hint": "It winds round the lower border of obliquus capitis inferior and ascends medial to the occipital artery.",
+      "view": "dorsal",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The greater occipital nerve (C2 dorsal ramus) supplies the skin of the posterior scalp as far forward as the vertex. Compression between the posterior neck muscles can cause occipital neuralgia.",
+      "tags": {
+        "topic": "nerves",
+        "region": "neck",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "cervical_spine"
+    },
+    {
+      "id": "carotid-bifurcation-endarterectomy",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "carotid_sinus",
+      "accept": [
+        "carotid_sinus",
+        "internal_carotid_artery",
+        "common_carotid_artery"
+      ],
+      "prompt": "A man has had a transient loss of vision in his right eye and a bruit is heard over the neck at the level of the upper border of the thyroid cartilage. Doppler imaging shows plaque at the bifurcation. Click the dilated site where the baroreceptors lie.",
+      "hint": "It is a slight widening of the common carotid artery at its division.",
+      "view": "lateral",
+      "layers": [
+        "vessel",
+        "bone"
+      ],
+      "explain": "The carotid bifurcation at C3/C4 is the commonest site of atheroma. Embolisation into the internal carotid artery causes amaurosis fugax and stroke, so it is the target of endarterectomy. The sinus contains baroreceptors innervated by CN IX.",
+      "tags": {
+        "topic": "vessels",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "anterior_triangle"
+    },
+    {
+      "id": "central-line-internal-jugular",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "internal_jugular_vein",
+      "accept": [
+        "internal_jugular_vein"
+      ],
+      "prompt": "An intensive care doctor needs central venous access. Using ultrasound guidance and lying the patient head down, he punctures a large vein lying lateral to the common carotid artery between the heads of sternocleidomastoid. Click the vein.",
+      "hint": "It runs within the carotid sheath, lateral to the common carotid artery.",
+      "view": "palmar",
+      "layers": [
+        "vessel",
+        "bone"
+      ],
+      "explain": "The internal jugular vein is a large, superficial and compressible target, entered at the apex of the triangle between the sternal and clavicular heads of sternocleidomastoid. Risks include carotid puncture and pneumothorax from a low approach.",
+      "tags": {
+        "topic": "vessels",
+        "region": "neck",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "anterior_triangle"
+    },
+    {
+      "id": "vertebral-artery-dissection-neck-manipulation",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "vertebral_artery",
+      "accept": [
+        "vertebral_artery"
+      ],
+      "prompt": "After vigorous neck manipulation a young woman develops sudden neck pain, vertigo, double vision and unsteady gait. A dissection is suspected in an artery passing through the transverse foramina. Click the artery.",
+      "hint": "It ascends through foramina in the transverse processes from C6 upwards.",
+      "view": "dorsal",
+      "layers": [
+        "vessel",
+        "bone"
+      ],
+      "explain": "The vertebral artery arises from the subclavian artery, enters the transverse foramen of C6 and winds behind the lateral mass of the atlas. Dissection here causes posterior circulation ischaemia, with brainstem and cerebellar signs.",
+      "tags": {
+        "topic": "vessels",
+        "region": "neck",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "cervical_spine"
+    },
+    {
+      "id": "superior-thyroid-artery-upper-pole",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "superior_thyroid_artery",
+      "accept": [
+        "superior_thyroid_artery"
+      ],
+      "prompt": "Click the first anterior branch of the external carotid artery, which runs down to the upper pole of the thyroid gland.",
+      "hint": "It arises just above the carotid bifurcation and passes deep to the infrahyoid muscles.",
+      "view": "lateral",
+      "layers": [
+        "vessel",
+        "bone"
+      ],
+      "explain": "The superior thyroid artery supplies the thyroid and gives a superior laryngeal branch. It is ligated close to the gland to protect the external laryngeal nerve.",
+      "tags": {
+        "topic": "vessels",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thyroid"
+    },
+    {
+      "id": "external-jugular-vein-crossing-scm",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "external_jugular_vein",
+      "accept": [
+        "external_jugular_vein"
+      ],
+      "prompt": "Click the vein that crosses sternocleidomastoid superficially and drains down to the subclavian vein, becoming prominent in a patient with raised venous pressure.",
+      "hint": "It runs on the surface of sternocleidomastoid, deep to platysma.",
+      "view": "lateral",
+      "layers": [
+        "vessel",
+        "muscle"
+      ],
+      "explain": "The external jugular vein is formed behind the angle of the mandible and pierces the deep fascia above the clavicle. It is often used for peripheral access and is visibly distended in right heart failure.",
+      "tags": {
+        "topic": "vessels",
+        "region": "neck",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "posterior_triangle"
+    },
+    {
+      "id": "subclavian-artery-between-scalenes",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "subclavian_artery",
+      "accept": [
+        "subclavian_artery"
+      ],
+      "prompt": "Click the artery that passes over the first rib behind scalenus anterior, together with the roots of the brachial plexus.",
+      "hint": "It is divided into three parts by scalenus anterior.",
+      "view": "palmar",
+      "layers": [
+        "vessel",
+        "bone"
+      ],
+      "explain": "The second part of the subclavian artery lies behind scalenus anterior. The artery and plexus pass through the gap between scalenus anterior and medius, while the vein lies in front of the muscle.",
+      "tags": {
+        "topic": "vessels",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "root_of_neck"
+    },
+    {
+      "id": "thyrocervical-trunk-branches",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "thyrocervical_trunk",
+      "accept": [
+        "thyrocervical_trunk"
+      ],
+      "prompt": "Click the short trunk from the first part of the subclavian artery that gives the inferior thyroid, suprascapular and transverse cervical arteries.",
+      "hint": "It arises medial to scalenus anterior.",
+      "view": "palmar",
+      "layers": [
+        "vessel",
+        "bone"
+      ],
+      "explain": "The thyrocervical trunk arises close to the vertebral artery and gives three branches. The inferior thyroid artery runs to the posterior thyroid gland and is a key relation of the recurrent laryngeal nerve.",
+      "tags": {
+        "topic": "vessels",
+        "region": "neck",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "root_of_neck"
+    },
+    {
+      "id": "torticollis-sternocleidomastoid",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "sternocleidomastoid",
+      "accept": [
+        "sternocleidomastoid"
+      ],
+      "prompt": "A baby has her head tilted to the right with the chin turned to the left. A firm, non-tender lump is felt in the lower neck. Click the muscle with the fibrous shortening.",
+      "hint": "It has a sternal and a clavicular head and a mastoid insertion.",
+      "view": "lateral",
+      "layers": [
+        "muscle",
+        "bone"
+      ],
+      "explain": "Congenital torticollis comes from fibrosis of sternocleidomastoid, probably after birth trauma or in-utero positioning. The muscle tilts the head to its own side and rotates the face to the opposite side.",
+      "tags": {
+        "topic": "muscles",
+        "region": "neck",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "anterior_triangle"
+    },
+    {
+      "id": "omohyoid-posterior-triangle-landmark",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "omohyoid",
+      "accept": [
+        "omohyoid"
+      ],
+      "prompt": "Click the muscle whose inferior belly crosses the posterior triangle and divides it into an upper occipital and a lower supraclavicular part.",
+      "hint": "It has two bellies and an intermediate tendon bound to the clavicle by fascia.",
+      "view": "lateral",
+      "layers": [
+        "muscle",
+        "bone"
+      ],
+      "explain": "The inferior belly of omohyoid is a landmark for the subclavian artery, brachial plexus and supraclavicular nodes. Supplied by the ansa cervicalis, it depresses the hyoid.",
+      "tags": {
+        "topic": "muscles",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "posterior_triangle"
+    },
+    {
+      "id": "platysma-superficial-sheet",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "platysma",
+      "accept": [
+        "platysma"
+      ],
+      "prompt": "Click the thin subcutaneous sheet that tenses the skin of the neck and draws down the corner of the mouth.",
+      "hint": "It lies in the superficial fascia and is supplied by the cervical branch of the facial nerve.",
+      "view": "palmar",
+      "layers": [
+        "muscle"
+      ],
+      "explain": "Platysma covers the anterior neck and is cut through in most neck incisions, so it is repaired in layers. Injury to the cervical branch of the facial nerve weakens it.",
+      "tags": {
+        "topic": "muscles",
+        "region": "neck",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "anterior_triangle"
+    },
+    {
+      "id": "levator-scapulae-posterior-triangle-floor",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "levator_scapulae",
+      "accept": [
+        "levator_scapulae"
+      ],
+      "prompt": "Click the strap-like muscle in the floor of the posterior triangle that elevates the scapula, attached to the transverse processes of the upper four cervical vertebrae.",
+      "hint": "The accessory nerve crosses its surface.",
+      "view": "lateral",
+      "layers": [
+        "muscle",
+        "bone"
+      ],
+      "explain": "Levator scapulae is supplied by the dorsal scapular nerve and C3 and C4. Together with splenius capitis and scalenus medius it forms the muscular floor of the posterior triangle.",
+      "tags": {
+        "topic": "muscles",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "posterior_triangle"
+    },
+    {
+      "id": "digastric-hyoid-sling",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "digastric",
+      "accept": [
+        "digastric"
+      ],
+      "prompt": "Click the two-bellied muscle that connects the mastoid region to the chin and is held to the hyoid bone by a fibrous sling.",
+      "hint": "Its anterior belly is supplied by the nerve to mylohyoid, the posterior belly by the facial nerve.",
+      "view": "lateral",
+      "layers": [
+        "muscle",
+        "bone"
+      ],
+      "explain": "Digastric bounds the submandibular triangle and is a landmark for the facial artery and hypoglossal nerve. It opens the jaw and raises the hyoid in swallowing.",
+      "tags": {
+        "topic": "muscles",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "anterior_triangle"
+    },
+    {
+      "id": "scalenus-anterior-landmark",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "scalenus_anterior",
+      "accept": [
+        "scalenus_anterior"
+      ],
+      "prompt": "Click the muscle in the root of the neck that has the phrenic nerve on its front and the subclavian vein, but not the artery, anterior to it.",
+      "hint": "It attaches to the scalene tubercle of the first rib.",
+      "view": "lateral",
+      "layers": [
+        "muscle"
+      ],
+      "explain": "Scalenus anterior is the key to the root of the neck: the subclavian vein lies in front, the subclavian artery and brachial plexus behind. It raises the first rib in inspiration.",
+      "tags": {
+        "topic": "muscles",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "root_of_neck"
+    },
+    {
+      "id": "c5-c6-radiculopathy-disc",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "c5_c6_disc",
+      "accept": [
+        "c5_c6_disc",
+        "c4_c5_disc",
+        "c6_c7_disc"
+      ],
+      "prompt": "A middle-aged man has neck pain radiating down the arm to the thumb and index finger, with a weak biceps and diminished biceps reflex. MRI shows a posterolateral prolapse at the most mobile lower cervical level. Click the disc.",
+      "hint": "It is the cervical disc between the fifth and sixth vertebrae.",
+      "view": "lateral",
+      "layers": [
+        "bone",
+        "ligament"
+      ],
+      "explain": "Cervical discs herniate most often at C5/C6 and C6/C7. A prolapse at C5/C6 compresses the exiting C6 root, causing thumb sensory loss and weak elbow flexion and wrist extension.",
+      "tags": {
+        "topic": "bones",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "cervical_spine"
+    },
+    {
+      "id": "atlantoaxial-instability-ra",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "transverse_ligament_of_atlas",
+      "accept": [
+        "transverse_ligament_of_atlas",
+        "axis"
+      ],
+      "prompt": "A woman with long-standing rheumatoid arthritis has occipital pain and electric shocks down the spine on neck flexion. Imaging shows the dens moving back towards the cord. Click the ligament whose failure allows this.",
+      "hint": "It holds the dens against the front of the atlas.",
+      "view": "dorsal",
+      "layers": [
+        "ligament",
+        "bone"
+      ],
+      "explain": "The transverse ligament of the atlas keeps the dens in contact with the anterior arch. Rheumatoid erosion or trauma lets the atlas slide forward, compressing the cord, a risk before intubation and in Down syndrome.",
+      "tags": {
+        "topic": "bones",
+        "region": "neck",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "cervical_spine"
+    },
+    {
+      "id": "first-rib-thoracic-outlet-neck-side",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "rib_1",
+      "accept": [
+        "rib_1"
+      ],
+      "prompt": "A woman has arm swelling and pallor on raising the arm, with wasting of the hand. Examination of the neck reveals a bony bump above the clavicle. Click the bone that forms the floor of the compression site.",
+      "hint": "It is the flattest and shortest of the ribs, carrying the scalene tubercle.",
+      "view": "palmar",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The first rib forms the base of the thoracic outlet. Subclavian vessels and the lower trunk can be compressed by a cervical rib, a fibrous band or a callus from a fractured clavicle.",
+      "tags": {
+        "topic": "bones",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "root_of_neck"
+    },
+    {
+      "id": "vertebra-prominens-c7",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "c7_vertebra",
+      "accept": [
+        "c7_vertebra"
+      ],
+      "prompt": "To count spinous processes before an epidural, a doctor flexes a patient's neck and feels the most prominent bump at the base of the neck. Click this vertebra.",
+      "hint": "Its long, non-bifid spinous process is easily palpable.",
+      "view": "dorsal",
+      "layers": [
+        "bone"
+      ],
+      "explain": "C7 is the vertebra prominens. Its spinous process anchors nuchal ligament and trapezius, and it is a starting point for numbering the vertebrae from above.",
+      "tags": {
+        "topic": "bones",
+        "region": "neck",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "cervical_spine"
+    },
+    {
+      "id": "cervical-cord-injury-diving",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "spinal_cord",
+      "accept": [
+        "spinal_cord"
+      ],
+      "prompt": "A young man dives into shallow water and loses movement and sensation in all four limbs. A fracture-dislocation of the cervical spine is found. Click the structure that was compressed.",
+      "hint": "It lies inside the vertebral canal.",
+      "view": "lateral",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The cervical spinal cord has enlargements for the brachial plexus. Injury above C5 threatens breathing because the phrenic nerve arises from C3, C4 and C5.",
+      "tags": {
+        "topic": "bones",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "cervical_spine"
+    },
+    {
+      "id": "hyoid-bone-landmark",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "hyoid_bone",
+      "accept": [
+        "hyoid_bone"
+      ],
+      "prompt": "Click the U-shaped bone in the neck, at the level of C3, that does not articulate with any other bone.",
+      "hint": "It sits above the thyroid cartilage and is suspended by muscles.",
+      "view": "lateral",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The hyoid carries attachments for the suprahyoid and infrahyoid muscles and the thyrohyoid membrane. Fractures suggest strangulation.",
+      "tags": {
+        "topic": "bones",
+        "region": "neck",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "larynx"
+    },
+    {
+      "id": "atlas-no-vertebral-body",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "atlas",
+      "accept": [
+        "atlas"
+      ],
+      "prompt": "Click the first cervical vertebra, a ring without a body or spinous process that supports the skull.",
+      "hint": "It articulates with the occipital condyles.",
+      "view": "dorsal",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The atlas has anterior and posterior arches and two lateral masses. It rotates around the dens of the axis, producing the 'no' movement.",
+      "tags": {
+        "topic": "bones",
+        "region": "neck",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "cervical_spine"
+    },
+    {
+      "id": "nuchal-ligament-landmark",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "nuchal_ligament",
+      "accept": [
+        "nuchal_ligament"
+      ],
+      "prompt": "Click the midline sheet of connective tissue running from the external occipital protuberance to the spinous process of C7.",
+      "hint": "It is the cervical continuation of the supraspinous ligament.",
+      "view": "lateral",
+      "layers": [
+        "ligament"
+      ],
+      "explain": "The nuchal ligament gives attachment to trapezius, splenius and rhomboids, limits flexion and supports the head.",
+      "tags": {
+        "topic": "bones",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "cervical_spine"
+    },
+    {
+      "id": "cricothyroidotomy-emergency",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "cricothyroid_membrane",
+      "accept": [
+        "cricothyroid_membrane"
+      ],
+      "prompt": "A man with massive facial trauma cannot be intubated or ventilated. The doctor makes an emergency incision through a membrane just below the thyroid cartilage in the midline. Click the membrane.",
+      "hint": "It lies between the thyroid and cricoid cartilages.",
+      "view": "palmar",
+      "layers": [
+        "ligament",
+        "bone"
+      ],
+      "explain": "Cricothyroidotomy is the front-of-neck access when oral and nasal routes fail. The membrane is superficial, avascular and easily palpated below the laryngeal prominence.",
+      "tags": {
+        "topic": "airway",
+        "region": "neck",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "larynx"
+    },
+    {
+      "id": "tracheostomy-level-trachea",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "trachea",
+      "accept": [
+        "trachea"
+      ],
+      "prompt": "For prolonged ventilation a surgeon makes a tracheostomy through the second to fourth tracheal rings, below the isthmus of the thyroid. Click the airway tube entered.",
+      "hint": "The C-shaped rings begin below the cricoid cartilage.",
+      "view": "palmar",
+      "layers": [
+        "organ",
+        "bone",
+        "ligament"
+      ],
+      "explain": "A tracheostomy is made below the cricoid to avoid subglottic stenosis. The thyroid isthmus overlies rings 2 to 4, and the left brachiocephalic vein and thyroidea ima may cross lower down.",
+      "tags": {
+        "topic": "airway",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "larynx"
+    },
+    {
+      "id": "parathyroid-hypocalcaemia-after-thyroidectomy",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "parathyroid_glands",
+      "accept": [
+        "parathyroid_glands",
+        "thyroid_gland"
+      ],
+      "prompt": "On the second day after total thyroidectomy a woman has tingling around the mouth, carpopedal spasm and a low serum calcium. Click the small glands whose blood supply was damaged.",
+      "hint": "They lie on the posterior surface of the thyroid lobes.",
+      "view": "palmar",
+      "layers": [
+        "organ",
+        "bone",
+        "ligament"
+      ],
+      "explain": "The four parathyroid glands lie behind the thyroid and depend on branches of the inferior thyroid artery. Devascularisation causes hypoparathyroidism and hypocalcaemia.",
+      "tags": {
+        "topic": "airway",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thyroid"
+    },
+    {
+      "id": "submandibular-gland-stone",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "submandibular_gland",
+      "accept": [
+        "submandibular_gland"
+      ],
+      "prompt": "A man has pain and swelling below his jaw whenever he eats. A stone is felt in the duct, and the gland itself is hard. Click the gland.",
+      "hint": "It lies below the body of the mandible in the digastric triangle.",
+      "view": "lateral",
+      "layers": [
+        "organ",
+        "bone",
+        "ligament"
+      ],
+      "explain": "The submandibular gland lies against the mylohyoid and hooks round its posterior border. Stones are commoner here than in the parotid, because of its thicker, alkaline saliva and upward-running duct.",
+      "tags": {
+        "topic": "airway",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "anterior_triangle"
+    },
+    {
+      "id": "thyroid-gland-isthmus-swelling",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "thyroid_gland",
+      "accept": [
+        "thyroid_gland"
+      ],
+      "prompt": "Click the endocrine gland with two lobes joined by an isthmus lying over the second to fourth tracheal rings.",
+      "hint": "It moves upwards on swallowing.",
+      "view": "palmar",
+      "layers": [
+        "organ",
+        "bone",
+        "ligament"
+      ],
+      "explain": "The thyroid is enclosed in pretracheal fascia, which is why a thyroid swelling moves on swallowing. It is supplied by the superior and inferior thyroid arteries.",
+      "tags": {
+        "topic": "airway",
+        "region": "neck",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "thyroid"
+    },
+    {
+      "id": "epiglottis-laryngeal-inlet",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "epiglottis",
+      "accept": [
+        "epiglottis"
+      ],
+      "prompt": "Click the leaf-shaped cartilage that folds back to cover the laryngeal inlet during swallowing.",
+      "hint": "It attaches to the back of the thyroid cartilage.",
+      "view": "lateral",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The epiglottis is elastic cartilage attached to the thyroid cartilage and the hyoid. In children, epiglottitis causes rapidly progressive airway obstruction.",
+      "tags": {
+        "topic": "airway",
+        "region": "neck",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "larynx"
+    },
+    {
+      "id": "cricoid-only-complete-ring",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "cricoid_cartilage",
+      "accept": [
+        "cricoid_cartilage"
+      ],
+      "prompt": "Click the only complete ring of the airway, below the thyroid cartilage.",
+      "hint": "It is at the level of C6 and marks the start of the trachea.",
+      "view": "lateral",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The cricoid is a signet-ring cartilage, broad posteriorly. The oesophagus begins and the trachea starts at its lower border, and cricoid pressure compresses the oesophagus.",
+      "tags": {
+        "topic": "airway",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "larynx"
+    },
+    {
+      "id": "thyroid-cartilage-laryngeal-prominence",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "thyroid_cartilage",
+      "accept": [
+        "thyroid_cartilage"
+      ],
+      "prompt": "Click the largest laryngeal cartilage, whose angle forms the laryngeal prominence.",
+      "hint": "It is more prominent in men.",
+      "view": "lateral",
+      "layers": [
+        "bone",
+        "organ"
+      ],
+      "explain": "The thyroid cartilage consists of two laminae meeting anteriorly. Its upper horn joins the hyoid by the thyrohyoid membrane and the lower horn articulates with the cricoid.",
+      "tags": {
+        "topic": "airway",
+        "region": "neck",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "larynx"
+    },
+    {
+      "id": "oesophagus-behind-trachea",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "esophagus",
+      "accept": [
+        "esophagus"
+      ],
+      "prompt": "Click the muscular tube that starts at the level of C6 behind the cricoid and lies behind the trachea.",
+      "hint": "It lies slightly left of the midline at the base of the neck.",
+      "view": "lateral",
+      "layers": [
+        "organ",
+        "bone"
+      ],
+      "explain": "The cervical oesophagus lies against the prevertebral fascia and is endangered in penetrating neck injury. The recurrent laryngeal nerve runs in the groove alongside it.",
+      "tags": {
+        "topic": "airway",
+        "region": "neck",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "larynx"
+    }
+  ]
+}

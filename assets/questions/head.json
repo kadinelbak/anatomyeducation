@@ -1,0 +1,1607 @@
+{
+  "version": 1,
+  "region": "head",
+  "model": "head",
+  "questions": [
+    {
+      "id": "pterion-extradural-haematoma",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "pterion",
+      "accept": [
+        "pterion"
+      ],
+      "prompt": "After being struck on the side of the head by a cricket ball a boy is briefly knocked out, recovers, then becomes drowsy with a dilating right pupil. A scan shows a lens-shaped bleed beneath the thin bone here. Click the landmark where four bones meet on the side of the skull.",
+      "hint": "It is an H-shaped junction of frontal, parietal, squamous temporal and greater wing of sphenoid, about 3 cm behind the frontozygomatic suture.",
+      "view": "lateral",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The pterion is the thinnest part of the lateral skull wall and overlies the anterior branch of the middle meningeal artery. A fracture here tears the artery and an extradural haematoma strips the dura from the bone, giving a lucid interval before raised pressure causes drowsiness and a blown pupil.",
+      "tags": {
+        "topic": "bones",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull"
+    },
+    {
+      "id": "nasal-bone-fracture",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "nasal_bone",
+      "accept": [
+        "nasal_bone"
+      ],
+      "prompt": "After an elbow to the face during a basketball game a man has a swollen, deviated nose with bleeding from both nostrils and a palpable step over the bridge. Click the paired bone that forms the bridge of the nose.",
+      "hint": "They are two small rectangular bones between the frontal processes of the maxillae.",
+      "view": "palmar",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The nasal bones are the most commonly fractured facial bones because they project and are thin. Swelling hides the deformity early, so reduction is usually delayed a few days. A septal haematoma must be excluded because it can destroy the septal cartilage.",
+      "tags": {
+        "topic": "bones",
+        "region": "head",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "face"
+    },
+    {
+      "id": "le-fort-i-maxilla",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "maxilla",
+      "accept": [
+        "maxilla"
+      ],
+      "prompt": "After a heavy blow to the mouth the upper teeth and hard palate move together as one block when the examiner grips the front teeth, and there is bruising of the upper vestibule. A horizontal fracture line runs above the tooth roots. Click the bone that carries the upper teeth.",
+      "hint": "It forms the upper jaw, the cheek side of the nose and the floor of the orbit.",
+      "view": "palmar",
+      "layers": [
+        "bone"
+      ],
+      "explain": "A Le Fort I (Guerin) fracture separates the alveolar part of the maxilla and the hard palate from the rest of the face, giving a floating palate. Le Fort II is pyramidal through the nasal bridge and infraorbital rims, and Le Fort III separates the facial skeleton from the base of the skull.",
+      "tags": {
+        "topic": "bones",
+        "region": "head",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "face"
+    },
+    {
+      "id": "le-fort-iii-zygomatic",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "zygomatic_bone",
+      "accept": [
+        "zygomatic_bone",
+        "maxilla"
+      ],
+      "prompt": "After a car crash a woman has a long, flattened face with bilateral black eyes. The fracture lines run through the frontozygomatic sutures, across the orbits and back through the zygomatic arches. Click the bone that forms the prominence of the cheek.",
+      "hint": "It joins the frontal bone above, the maxilla in front and the temporal bone by its arch behind.",
+      "view": "palmar",
+      "layers": [
+        "bone"
+      ],
+      "explain": "A Le Fort III (craniofacial dysjunction) fracture passes through the frontozygomatic suture, the orbital floors and walls, the nasal root and the zygomatic arches. The zygomatic bone is the key buttress and is frequently also broken alone in a tripod fracture.",
+      "tags": {
+        "topic": "bones",
+        "region": "head",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "face"
+    },
+    {
+      "id": "zygomatic-arch-fracture",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "zygomatic_bone",
+      "accept": [
+        "zygomatic_bone",
+        "temporal_bone"
+      ],
+      "prompt": "A man struck by a bottle on the cheek cannot open his mouth fully, and a dent can be felt in front of the ear. The coronoid process is catching on a depressed fragment of the arch. Click the bone that forms the front part of the arch.",
+      "hint": "The arch is formed by this bone in front and a process of the temporal bone behind.",
+      "view": "lateral",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The zygomatic arch is made up of the temporal process of the zygomatic bone and the zygomatic process of the temporal bone. Temporalis passes deep to the arch to reach the coronoid process, so a depressed fracture can block mandibular movement and cause trismus.",
+      "tags": {
+        "topic": "bones",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "face"
+    },
+    {
+      "id": "mandible-angle-fracture",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "mandible",
+      "accept": [
+        "mandible"
+      ],
+      "prompt": "A man is punched on the left side of the jaw and has pain, malocclusion and a step in the lower dental arch. An X-ray shows a fracture at the angle with a second fracture on the right body. Click the bone.",
+      "hint": "It is the only mobile bone of the skull and has a ramus, body and condyle.",
+      "view": "lateral",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The mandible is a ring of bone, so it usually breaks in two places. The angle is weakened by an unerupted third molar and is the commonest site after the condyle. The inferior alveolar nerve runs in the canal in the body and may be torn, giving numbness of the lower lip.",
+      "tags": {
+        "topic": "bones",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "jaw"
+    },
+    {
+      "id": "coronal-suture-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "coronal_suture",
+      "accept": [
+        "coronal_suture"
+      ],
+      "prompt": "Click the coronal suture, the joint that runs across the top of the skull between the frontal bone and the two parietal bones.",
+      "hint": "It runs from side to side in front of the vertex, behind the forehead.",
+      "view": "lateral",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The coronal suture meets the sagittal suture at bregma. Premature fusion (craniosynostosis) gives a short, broad head (brachycephaly) or, if one side fuses, a flattened forehead on that side (plagiocephaly).",
+      "tags": {
+        "topic": "bones",
+        "region": "head",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull"
+    },
+    {
+      "id": "sagittal-suture-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "sagittal_suture",
+      "accept": [
+        "sagittal_suture"
+      ],
+      "prompt": "Click the sagittal suture, the midline suture between the two parietal bones.",
+      "hint": "It runs front to back along the top of the skull from bregma to lambda.",
+      "view": "dorsal",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The sagittal suture joins the coronal suture at bregma and the lambdoid suture at lambda. Early fusion limits widening of the skull and gives a long, narrow head (scaphocephaly), the commonest form of craniosynostosis.",
+      "tags": {
+        "topic": "bones",
+        "region": "head",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull"
+    },
+    {
+      "id": "lambdoid-suture-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "lambdoid_suture",
+      "accept": [
+        "lambdoid_suture"
+      ],
+      "prompt": "Click the lambdoid suture, the joint between the parietal bones and the occipital bone.",
+      "hint": "It lies at the back of the skull and has the shape of the Greek letter lambda.",
+      "view": "dorsal",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The lambdoid suture runs between the parietal and occipital bones and continues laterally as the occipitomastoid suture. Sutural (Wormian) bones are common along it. The transverse sinus lies deep to its lower part.",
+      "tags": {
+        "topic": "bones",
+        "region": "head",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull"
+    },
+    {
+      "id": "bregma-anterior-fontanelle",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "bregma",
+      "accept": [
+        "bregma"
+      ],
+      "prompt": "Click bregma, the point where the coronal and sagittal sutures meet, which is the site of the anterior fontanelle in an infant.",
+      "hint": "It lies on the top of the skull, in the midline, behind the forehead.",
+      "view": "lateral",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The anterior fontanelle is diamond shaped and normally closes at about 18 months. It is felt in infants to assess hydration (sunken) or raised intracranial pressure (bulging).",
+      "tags": {
+        "topic": "bones",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull"
+    },
+    {
+      "id": "lambda-posterior-fontanelle",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "lambda",
+      "accept": [
+        "lambda"
+      ],
+      "prompt": "Click lambda, the point where the sagittal suture meets the lambdoid suture, the site of the posterior fontanelle.",
+      "hint": "It lies in the midline at the back of the skull, above the occipital protuberance.",
+      "view": "dorsal",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The triangular posterior fontanelle closes by about 2 to 3 months. In the adult, lambda is a landmark for the occipital lobe and the superior sagittal sinus runs just in front of it.",
+      "tags": {
+        "topic": "bones",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull"
+    },
+    {
+      "id": "temporomandibular-joint-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "temporomandibular_joint",
+      "accept": [
+        "temporomandibular_joint"
+      ],
+      "prompt": "Click the temporomandibular joint, the synovial joint with an articular disc between the mandibular condyle and the temporal bone.",
+      "hint": "It is felt just in front of the tragus when the mouth is opened.",
+      "view": "lateral",
+      "layers": [
+        "bone",
+        "ligament"
+      ],
+      "explain": "The joint cavity is divided by a fibrocartilaginous disc into an upper gliding compartment and a lower hinge compartment. The lateral ligament and the sphenomandibular and stylomandibular ligaments limit movement.",
+      "tags": {
+        "topic": "bones",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "jaw"
+    },
+    {
+      "id": "upper-teeth-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "upper_teeth",
+      "accept": [
+        "upper_teeth"
+      ],
+      "prompt": "Click the upper (maxillary) teeth, which are held in the alveolar process of the maxilla.",
+      "hint": "In an adult there are 16 including the molars, rooted in the upper jaw.",
+      "view": "palmar",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The permanent upper teeth are supplied by the superior alveolar branches of the maxillary nerve. Upper molar roots lie close to the floor of the maxillary sinus, so extraction can open into the sinus.",
+      "tags": {
+        "topic": "bones",
+        "region": "head",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "face"
+    },
+    {
+      "id": "foramen-magnum-tonsillar-herniation",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "foramen_magnum",
+      "accept": [
+        "foramen_magnum"
+      ],
+      "prompt": "A man with a posterior fossa tumour develops neck stiffness, head tilt and then slowed breathing as the cerebellar tonsils are forced downwards. Click the opening they are being pushed through.",
+      "hint": "It is the largest opening in the skull and lies in the occipital bone.",
+      "view": "inferior_post",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The foramen magnum transmits the medulla oblongata with the meninges, the spinal roots of the accessory nerves, the vertebral arteries and the spinal arteries. Tonsillar herniation (coning) compresses the medulla and is fatal if unrelieved.",
+      "tags": {
+        "topic": "foramina",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull_base"
+    },
+    {
+      "id": "jugular-foramen-ix-x-xi",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "jugular_foramen",
+      "accept": [
+        "jugular_foramen"
+      ],
+      "prompt": "After a fracture at the base of the skull a man has a hoarse voice, difficulty swallowing and weak shrugging on the same side. Glossopharyngeal, vagus and accessory nerves leave the skull together here. Click the foramen.",
+      "hint": "It lies between the petrous temporal and the occipital bone, behind the carotid canal.",
+      "view": "inferior_post",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The jugular foramen carries CN IX, X and XI and the sigmoid sinus draining into the internal jugular vein, plus meningeal branches. Combined injury is called Vernet syndrome.",
+      "tags": {
+        "topic": "foramina",
+        "region": "head",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull_base"
+    },
+    {
+      "id": "hypoglossal-canal-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "hypoglossal_canal",
+      "accept": [
+        "hypoglossal_canal"
+      ],
+      "prompt": "Click the hypoglossal canal, which carries the nerve that moves the tongue.",
+      "hint": "It runs through the occipital bone just above the front of the foramen magnum.",
+      "view": "inferior_post",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The hypoglossal nerve (CN XII) leaves through this canal in the occipital condyle. Damage makes the tongue deviate towards the lesion on protrusion.",
+      "tags": {
+        "topic": "foramina",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull_base"
+    },
+    {
+      "id": "carotid-canal-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "carotid_canal",
+      "accept": [
+        "carotid_canal"
+      ],
+      "prompt": "Click the carotid canal, the passage in the petrous temporal bone for the internal carotid artery.",
+      "hint": "It opens on the lower surface of the petrous part, in front of the jugular foramen.",
+      "view": "inferior",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The internal carotid artery enters the skull here with its sympathetic plexus, runs forwards and medially in the canal, then turns up beside the foramen lacerum and into the cavernous sinus.",
+      "tags": {
+        "topic": "foramina",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull_base"
+    },
+    {
+      "id": "foramen-ovale-mandibular-nerve",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "foramen_ovale",
+      "accept": [
+        "foramen_ovale"
+      ],
+      "prompt": "A man with severe facial pain has a needle passed through the cheek to treat the trigeminal ganglion. The needle enters the middle cranial fossa through the opening that carries the mandibular nerve. Click the foramen.",
+      "hint": "It is an oval hole in the greater wing of the sphenoid, behind the foramen rotundum.",
+      "view": "lateral",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The foramen ovale transmits the mandibular nerve (V3), the accessory meningeal artery, the lesser petrosal nerve and an emissary vein. Percutaneous radiofrequency rhizotomy uses this route.",
+      "tags": {
+        "topic": "foramina",
+        "region": "head",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull_base"
+    },
+    {
+      "id": "foramen-spinosum-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "foramen_spinosum",
+      "accept": [
+        "foramen_spinosum"
+      ],
+      "prompt": "Click the foramen spinosum, the small hole behind the foramen ovale that carries the middle meningeal artery.",
+      "hint": "It is a small round hole in the greater wing of the sphenoid, lateral to the foramen ovale.",
+      "view": "lateral",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The middle meningeal artery enters the skull here with the meningeal branch of V3, which also returns through it. The artery then runs on the inner surface of the pterion.",
+      "tags": {
+        "topic": "foramina",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull_base"
+    },
+    {
+      "id": "foramen-rotundum-maxillary-nerve",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "foramen_rotundum",
+      "accept": [
+        "foramen_rotundum"
+      ],
+      "prompt": "Click the foramen rotundum, the round opening through which the maxillary nerve leaves the middle cranial fossa.",
+      "hint": "It lies in the greater wing of the sphenoid, below the superior orbital fissure and in front of the foramen ovale.",
+      "view": "palmar",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The foramen rotundum opens into the pterygopalatine fossa and transmits the maxillary nerve (V2). Anaesthesia of the face between the lower eyelid and upper lip suggests a lesion at or distal to this point.",
+      "tags": {
+        "topic": "foramina",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull_base"
+    },
+    {
+      "id": "optic-canal-trauma",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "optic_canal",
+      "accept": [
+        "optic_canal",
+        "optic_nerve"
+      ],
+      "prompt": "After a blow to the brow a man has sudden loss of vision in the right eye with a relative afferent pupillary defect. A fracture of the lesser wing of the sphenoid may be pinching the nerve. Click the bony canal that carries the optic nerve and the ophthalmic artery.",
+      "hint": "It lies at the back of the orbit in the lesser wing of the sphenoid.",
+      "view": "palmar",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The optic canal transmits the optic nerve with its meninges and the ophthalmic artery. It is separated from the superior orbital fissure by the optic strut, and a fracture here can cause traumatic optic neuropathy.",
+      "tags": {
+        "topic": "foramina",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "orbit"
+    },
+    {
+      "id": "superior-orbital-fissure-syndrome",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "superior_orbital_fissure",
+      "accept": [
+        "superior_orbital_fissure"
+      ],
+      "prompt": "After a facial injury a woman has a drooping eyelid, a fixed dilated pupil, an eye that cannot move in any direction and numb forehead. Oculomotor, trochlear, abducent and ophthalmic nerves are involved. Click the cleft they pass through.",
+      "hint": "It is a long cleft between the lesser and greater wings of the sphenoid.",
+      "view": "palmar",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The superior orbital fissure carries CN III, IV, VI, the lacrimal, frontal and nasociliary branches of V1 and the superior ophthalmic vein. Damage causes ophthalmoplegia, ptosis and loss of forehead sensation (superior orbital fissure syndrome).",
+      "tags": {
+        "topic": "foramina",
+        "region": "head",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull_base"
+    },
+    {
+      "id": "internal-acoustic-meatus-schwannoma",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "internal_acoustic_meatus",
+      "accept": [
+        "internal_acoustic_meatus"
+      ],
+      "prompt": "A woman has gradual hearing loss, ringing in one ear and unsteadiness, then facial weakness. Imaging shows a tumour of the vestibular nerve in the canal that holds both the facial and vestibulocochlear nerves. Click the opening.",
+      "hint": "It is an opening on the posterior face of the petrous temporal bone.",
+      "view": "inferior_post",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The internal acoustic meatus carries the facial and vestibulocochlear nerves and the labyrinthine artery. A vestibular schwannoma (acoustic neuroma) widens it and may later affect the facial nerve and the trigeminal nerve.",
+      "tags": {
+        "topic": "foramina",
+        "region": "head",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull_base"
+    },
+    {
+      "id": "stylomastoid-foramen-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "stylomastoid_foramen",
+      "accept": [
+        "stylomastoid_foramen"
+      ],
+      "prompt": "Click the stylomastoid foramen, where the facial nerve leaves the skull.",
+      "hint": "It lies between the styloid and mastoid processes of the temporal bone.",
+      "view": "inferior",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The facial nerve exits here and immediately gives off the posterior auricular nerve and branches to the stylohyoid and posterior belly of digastric, before entering the parotid gland.",
+      "tags": {
+        "topic": "foramina",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull_base"
+    },
+    {
+      "id": "cribriform-plate-anosmia",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "cribriform_plate",
+      "accept": [
+        "cribriform_plate"
+      ],
+      "prompt": "After a head injury in a road accident a man notices he cannot smell his coffee, and clear fluid drips from his nose. Fine nerve fibres have been torn as they cross the bone. Click the sieve-like plate.",
+      "hint": "It forms the roof of the nasal cavity and is part of the ethmoid bone.",
+      "view": "inferior_ant",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The olfactory nerve fibres pass through the cribriform plate to the olfactory bulb. A fracture here causes anosmia and CSF rhinorrhoea, with a risk of meningitis.",
+      "tags": {
+        "topic": "foramina",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull_base"
+    },
+    {
+      "id": "supraorbital-foramen-block",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "supraorbital_foramen",
+      "accept": [
+        "supraorbital_foramen"
+      ],
+      "prompt": "Before suturing a forehead laceration a doctor injects local anaesthetic into the notch felt in the upper margin of the orbit, about 2.5 cm from the midline. Click the foramen.",
+      "hint": "It is a notch or hole in the frontal bone at the medial third of the supraorbital margin.",
+      "view": "palmar",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The supraorbital nerve and vessels leave the orbit here, supplying skin of the forehead and scalp to the vertex. A supraorbital nerve block anaesthetises most of the forehead.",
+      "tags": {
+        "topic": "foramina",
+        "region": "head",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "face"
+    },
+    {
+      "id": "infraorbital-foramen-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "infraorbital_foramen",
+      "accept": [
+        "infraorbital_foramen"
+      ],
+      "prompt": "Click the infraorbital foramen, which transmits the nerve that supplies the skin of the cheek and upper lip.",
+      "hint": "It lies about 1 cm below the middle of the infraorbital margin.",
+      "view": "palmar",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The infraorbital nerve is the terminal branch of V2. A block here anaesthetises the lower eyelid, side of the nose and upper lip. Numbness is a sign of an orbital floor (blow-out) fracture.",
+      "tags": {
+        "topic": "foramina",
+        "region": "head",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "face"
+    },
+    {
+      "id": "mental-foramen-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "mental_foramen",
+      "accept": [
+        "mental_foramen"
+      ],
+      "prompt": "Click the mental foramen on the outer surface of the mandible.",
+      "hint": "It lies below the second premolar tooth, halfway between the upper and lower borders of the body.",
+      "view": "palmar",
+      "layers": [
+        "bone"
+      ],
+      "explain": "The mental nerve emerges here to supply the skin of the chin and lower lip. It is a landmark for the inferior alveolar block, and numb chin may be a sign of malignancy.",
+      "tags": {
+        "topic": "foramina",
+        "region": "head",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "jaw"
+    },
+    {
+      "id": "bell-palsy-facial-trunk",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "facial_nerve",
+      "accept": [
+        "facial_nerve"
+      ],
+      "prompt": "A man wakes with a drooping right corner of the mouth, cannot close his right eye and cannot wrinkle his forehead on that side. He also has altered taste and sensitivity to sound. Click the cranial nerve, at its trunk, that is affected.",
+      "hint": "It is cranial nerve VII, which supplies all the muscles of facial expression.",
+      "view": "lateral",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "Bell palsy is a lower motor neurone paralysis of the facial nerve, often with swelling in the facial canal. The forehead is also paralysed, unlike an upper motor lesion, where the forehead is spared by bilateral cortical supply.",
+      "tags": {
+        "topic": "nerves",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "face"
+    },
+    {
+      "id": "marginal-mandibular-submandibular-surgery",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "facial_nerve",
+      "accept": [
+        "facial_nerve"
+      ],
+      "prompt": "After removal of the submandibular gland a woman has a lopsided smile, because the lower lip no longer pulls down on the right side. The incision was made too close to the border of the jaw. Click the nerve branch injured.",
+      "hint": "It arches below the angle of the mandible and runs along its lower border.",
+      "view": "lateral",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The marginal mandibular branch supplies depressor anguli oris and depressor labii inferioris. It is vulnerable because it runs low in the neck, so the skin incision is made at least 2 cm below the mandible.",
+      "tags": {
+        "topic": "nerves",
+        "region": "head",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "jaw"
+    },
+    {
+      "id": "parotidectomy-facial-nerve",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "facial_nerve",
+      "accept": [
+        "facial_nerve"
+      ],
+      "prompt": "A surgeon is removing a lump from the superficial lobe of the parotid gland. The nerve that divides the gland into superficial and deep parts must be found and preserved. Click this nerve at its trunk.",
+      "hint": "It enters the gland after leaving the stylomastoid foramen.",
+      "view": "lateral",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The facial nerve passes through the parotid gland, dividing it into superficial and deep lobes, and gives its five terminal branches there. It is usually identified at the tympanomastoid suture or by the posterior belly of digastric.",
+      "tags": {
+        "topic": "nerves",
+        "region": "head",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "face"
+    },
+    {
+      "id": "temporal-branch-brow-ptosis",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "facial_nerve",
+      "accept": [
+        "facial_nerve"
+      ],
+      "prompt": "After a laceration over the zygomatic arch a man cannot raise his right eyebrow or wrinkle his forehead. Click the facial nerve branch that runs over the arch to frontalis.",
+      "hint": "It crosses the zygomatic arch and is also called the frontal branch.",
+      "view": "lateral",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The temporal branch crosses the arch superficially in the temporoparietal fascia and supplies frontalis and the upper part of orbicularis oculi. It has few anastomoses, so injury produces a permanent brow drop.",
+      "tags": {
+        "topic": "nerves",
+        "region": "head",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "face"
+    },
+    {
+      "id": "trigeminal-neuralgia-ganglion",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "trigeminal_ganglion",
+      "accept": [
+        "trigeminal_ganglion"
+      ],
+      "prompt": "A woman has brief, electric-shock pain in the cheek and jaw triggered by brushing her teeth or a cold wind. A vessel is thought to be compressing the root of the nerve whose sensory ganglion lies in the middle cranial fossa. Click the ganglion.",
+      "hint": "It lies on the petrous apex in a recess of dura called Meckel cave.",
+      "view": "lateral",
+      "layers": [
+        "nerve"
+      ],
+      "explain": "Trigeminal neuralgia usually affects V2 or V3 and is classically due to compression of the root by a loop of the superior cerebellar artery. Carbamazepine, rhizotomy through the foramen ovale or microvascular decompression are treatments.",
+      "tags": {
+        "topic": "nerves",
+        "region": "head",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull_base"
+    },
+    {
+      "id": "inferior-alveolar-nerve-mandible",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "inferior_alveolar_nerve",
+      "accept": [
+        "inferior_alveolar_nerve",
+        "mandibular_nerve"
+      ],
+      "prompt": "After a fracture of the angle of the mandible a man has numbness of the lower lip and lower teeth. Click the nerve that runs in the mandibular canal.",
+      "hint": "It enters the mandibular foramen and ends as the mental nerve.",
+      "view": "lateral",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The inferior alveolar nerve (V3) supplies the lower teeth and gums and gives off the mylohyoid nerve before entering the mandibular canal. It is also at risk during lower third molar removal.",
+      "tags": {
+        "topic": "nerves",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "jaw"
+    },
+    {
+      "id": "zygomatic-branch-facial-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "facial_nerve",
+      "accept": [
+        "facial_nerve"
+      ],
+      "prompt": "Click the zygomatic branch of the facial nerve, which supplies orbicularis oculi.",
+      "hint": "It runs towards the lateral corner of the eye, just below the temporal branch.",
+      "view": "lateral",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The five terminal branches of the facial nerve are temporal, zygomatic, buccal, marginal mandibular and cervical (\"To Zanzibar By Motor Car\"). Zygomatic fibres close the eyelids.",
+      "tags": {
+        "topic": "nerves",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "face"
+    },
+    {
+      "id": "buccal-branch-facial-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "facial_nerve",
+      "accept": [
+        "facial_nerve"
+      ],
+      "prompt": "Click the buccal branch of the facial nerve, which supplies buccinator and the muscles around the nose and upper lip.",
+      "hint": "It runs forwards across the masseter below the parotid duct.",
+      "view": "lateral",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The buccal branch supplies buccinator, nasalis and orbicularis oris. A lesion causes food to pool in the cheek and a flaccid cheek on blowing.",
+      "tags": {
+        "topic": "nerves",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "face"
+    },
+    {
+      "id": "supraorbital-nerve-v1",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "supraorbital_nerve",
+      "accept": [
+        "supraorbital_nerve",
+        "ophthalmic_nerve"
+      ],
+      "prompt": "Click the supraorbital nerve, the branch of the ophthalmic division of the trigeminal nerve that supplies the forehead and scalp.",
+      "hint": "It leaves the orbit above the eye, through a notch in the upper margin.",
+      "view": "palmar",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The supraorbital nerve is the continuation of the frontal nerve (V1). It supplies the forehead, upper eyelid and scalp to the vertex, and is involved in herpes zoster ophthalmicus.",
+      "tags": {
+        "topic": "nerves",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "face"
+    },
+    {
+      "id": "infraorbital-nerve-v2",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "infraorbital_nerve",
+      "accept": [
+        "infraorbital_nerve",
+        "maxillary_nerve"
+      ],
+      "prompt": "Click the infraorbital nerve, the terminal branch of the maxillary division of the trigeminal nerve that supplies the cheek and upper lip.",
+      "hint": "It emerges below the orbit.",
+      "view": "palmar",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The infraorbital nerve enters the orbital floor from the pterygopalatine fossa, runs in the infraorbital canal and emerges through the foramen. It supplies the lower eyelid, side of the nose and upper lip.",
+      "tags": {
+        "topic": "nerves",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "face"
+    },
+    {
+      "id": "mental-nerve-v3",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "mental_nerve",
+      "accept": [
+        "mental_nerve",
+        "inferior_alveolar_nerve",
+        "mandibular_nerve"
+      ],
+      "prompt": "Click the mental nerve, the terminal branch of the mandibular division of the trigeminal nerve that supplies the chin and lower lip.",
+      "hint": "It emerges at the side of the mandible, below the premolar teeth.",
+      "view": "palmar",
+      "layers": [
+        "nerve",
+        "bone"
+      ],
+      "explain": "The mental nerve is a terminal branch of the inferior alveolar nerve (V3). Along with the supraorbital and infraorbital nerves, the three exits lie in a vertical line in the plane of the pupil.",
+      "tags": {
+        "topic": "nerves",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "jaw"
+    },
+    {
+      "id": "optic-nerve-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "optic_nerve",
+      "accept": [
+        "optic_nerve"
+      ],
+      "prompt": "Click the optic nerve (CN II), which carries vision from the retina to the optic chiasm.",
+      "hint": "It leaves the back of the eyeball and runs through the optic canal.",
+      "view": "palmar",
+      "layers": [
+        "nerve",
+        "organ",
+        "bone"
+      ],
+      "explain": "The optic nerve is a tract of the central nervous system covered by meninges, so raised intracranial pressure causes papilloedema. It is damaged in orbital trauma and in optic neuritis.",
+      "tags": {
+        "topic": "nerves",
+        "region": "head",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "orbit"
+    },
+    {
+      "id": "eyeball-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "eyeball",
+      "accept": [
+        "eyeball"
+      ],
+      "prompt": "Click the eyeball, the sphere that sits in the bony orbit in a cushion of orbital fat.",
+      "hint": "It lies in the orbit between the eyelids and the optic nerve.",
+      "view": "palmar",
+      "layers": [
+        "organ",
+        "bone"
+      ],
+      "explain": "The eyeball is about 24 mm in diameter and is moved by six extraocular muscles. The orbit protects it, but a blow to the eye may cause a blow-out fracture of the thin orbital floor.",
+      "tags": {
+        "topic": "nerves",
+        "region": "head",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "orbit"
+    },
+    {
+      "id": "tmj-dislocation-lateral-pterygoid",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "lateral_pterygoid",
+      "accept": [
+        "lateral_pterygoid"
+      ],
+      "prompt": "After a wide yawn a woman cannot close her mouth, and the jaw feels locked open with the condyles in front of the joint. Click the muscle that pulls the condyle and disc forwards.",
+      "hint": "It runs from the infratemporal surface of the greater wing of the sphenoid to the neck of the mandible.",
+      "view": "dorsal",
+      "layers": [
+        "muscle"
+      ],
+      "explain": "The lateral pterygoid is the only muscle of mastication that opens the jaw, by drawing the condyle and disc forwards. In dislocation the condyle slides in front of the articular eminence and spasm of the muscles holds it there.",
+      "tags": {
+        "topic": "muscles",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "jaw"
+    },
+    {
+      "id": "parotid-duct-masseter",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "parotid_duct",
+      "accept": [
+        "parotid_duct"
+      ],
+      "prompt": "A man has a swelling in front of the ear that enlarges with eating, caused by a stone in the duct that opens opposite the upper second molar. Click the duct as it crosses the muscle of the cheek.",
+      "hint": "It crosses the masseter, then pierces buccinator.",
+      "view": "lateral",
+      "layers": [
+        "organ",
+        "muscle",
+        "bone"
+      ],
+      "explain": "The parotid duct (Stensen) passes across the masseter, turns round its anterior border and pierces buccinator to open opposite the upper second molar. It can be rolled against the muscle when the jaw is clenched.",
+      "tags": {
+        "topic": "muscles",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "jaw"
+    },
+    {
+      "id": "buccinator-food-pocketing",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "buccinator",
+      "accept": [
+        "buccinator"
+      ],
+      "prompt": "After facial paralysis a man complains that food collects between his gums and cheek on the affected side and he cannot blow out his cheeks. Click the muscle that keeps food between the teeth.",
+      "hint": "It forms the muscular wall of the cheek.",
+      "view": "lateral",
+      "layers": [
+        "muscle",
+        "bone"
+      ],
+      "explain": "Buccinator compresses the cheek against the teeth during chewing and is supplied by the buccal branch of the facial nerve. It also helps in blowing and sucking.",
+      "tags": {
+        "topic": "muscles",
+        "region": "head",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "face"
+    },
+    {
+      "id": "orbicularis-oculi-lagophthalmos",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "orbicularis_oculi",
+      "accept": [
+        "orbicularis_oculi"
+      ],
+      "prompt": "A woman with facial palsy cannot close her left eye, which becomes dry and red, and tears spill over the lower lid. Click the sphincter muscle around the eye.",
+      "hint": "It has orbital and palpebral parts.",
+      "view": "palmar",
+      "layers": [
+        "muscle",
+        "bone"
+      ],
+      "explain": "Orbicularis oculi closes the eyelids, supplied by the temporal and zygomatic branches. Loss causes lagophthalmos, exposure keratitis and ectropion with epiphora; treatment includes lubricants and tarsorrhaphy.",
+      "tags": {
+        "topic": "muscles",
+        "region": "head",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "orbit"
+    },
+    {
+      "id": "frontalis-forehead-sparing",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "frontalis",
+      "accept": [
+        "frontalis"
+      ],
+      "prompt": "A man with a stroke has a drooping mouth on the right but can still wrinkle both sides of the forehead. A man with Bell palsy cannot. Click the muscle that raises the eyebrow and wrinkles the forehead.",
+      "hint": "It is the anterior belly of occipitofrontalis, attached to the galea aponeurotica.",
+      "view": "palmar",
+      "layers": [
+        "muscle",
+        "bone"
+      ],
+      "explain": "Frontalis is supplied by the temporal branch of the facial nerve. The upper face has bilateral cortical supply, so it is spared in an upper motor neurone lesion but paralysed in a lower motor neurone lesion.",
+      "tags": {
+        "topic": "muscles",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull"
+    },
+    {
+      "id": "zygomaticus-major-smile",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "zygomaticus_major",
+      "accept": [
+        "zygomaticus_major"
+      ],
+      "prompt": "A boy born with a facial injury cannot smile on one side because the muscle that pulls the corner of the mouth up and out is not working. Click the muscle.",
+      "hint": "It runs from the zygomatic bone to the angle of the mouth.",
+      "view": "palmar",
+      "layers": [
+        "muscle",
+        "bone"
+      ],
+      "explain": "Zygomaticus major draws the angle of the mouth upwards and laterally in smiling. It is supplied by the zygomatic and buccal branches of the facial nerve.",
+      "tags": {
+        "topic": "muscles",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "face"
+    },
+    {
+      "id": "masseter-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "masseter",
+      "accept": [
+        "masseter"
+      ],
+      "prompt": "Click the masseter, the thick muscle of mastication that closes the jaw and lies over the ramus of the mandible.",
+      "hint": "It passes from the zygomatic arch to the angle and ramus of the mandible.",
+      "view": "lateral",
+      "layers": [
+        "muscle",
+        "bone"
+      ],
+      "explain": "Masseter is supplied by the masseteric nerve (V3) and is the strongest elevator of the mandible. It can be felt when the teeth are clenched.",
+      "tags": {
+        "topic": "muscles",
+        "region": "head",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "jaw"
+    },
+    {
+      "id": "temporalis-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "temporalis",
+      "accept": [
+        "temporalis"
+      ],
+      "prompt": "Click the temporalis, the fan-shaped muscle on the side of the skull that elevates and retracts the mandible.",
+      "hint": "It fills the temporal fossa and passes deep to the zygomatic arch to the coronoid process.",
+      "view": "lateral",
+      "layers": [
+        "muscle",
+        "bone"
+      ],
+      "explain": "Temporalis is supplied by the deep temporal nerves (V3). Its posterior fibres retract the jaw. It is covered by temporal fascia, and wasting is seen in motor trigeminal lesions.",
+      "tags": {
+        "topic": "muscles",
+        "region": "head",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "jaw"
+    },
+    {
+      "id": "orbicularis-oris-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "orbicularis_oris",
+      "accept": [
+        "orbicularis_oris"
+      ],
+      "prompt": "Click the orbicularis oris, the sphincter muscle around the mouth used in whistling and pursing the lips.",
+      "hint": "It encircles the opening of the mouth within the lips.",
+      "view": "palmar",
+      "layers": [
+        "muscle",
+        "bone"
+      ],
+      "explain": "Orbicularis oris closes and protrudes the lips and is supplied by the buccal and marginal mandibular branches. It is blended with buccinator at the modiolus.",
+      "tags": {
+        "topic": "muscles",
+        "region": "head",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "face"
+    },
+    {
+      "id": "occipitalis-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "occipitalis",
+      "accept": [
+        "occipitalis"
+      ],
+      "prompt": "Click the occipitalis, the posterior belly of occipitofrontalis, over the back of the skull.",
+      "hint": "It arises from the superior nuchal line and ends in the galea aponeurotica.",
+      "view": "dorsal",
+      "layers": [
+        "muscle",
+        "bone"
+      ],
+      "explain": "Occipitalis is supplied by the posterior auricular branch of the facial nerve. With frontalis it moves the scalp, linked by the galea aponeurotica.",
+      "tags": {
+        "topic": "muscles",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull"
+    },
+    {
+      "id": "parotid-gland-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "parotid_gland",
+      "accept": [
+        "parotid_gland"
+      ],
+      "prompt": "Click the parotid gland, the largest salivary gland, which lies in front of and below the ear.",
+      "hint": "It lies over the ramus of the mandible and the posterior border of masseter.",
+      "view": "lateral",
+      "layers": [
+        "organ",
+        "muscle",
+        "bone"
+      ],
+      "explain": "The parotid gland is enclosed in a tough fascia, so swelling in mumps is painful. The facial nerve, retromandibular vein and external carotid artery pass through it. It is supplied with secretomotor fibres by the glossopharyngeal nerve through the otic ganglion.",
+      "tags": {
+        "topic": "muscles",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "face"
+    },
+    {
+      "id": "submandibular-gland-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "submandibular_gland",
+      "accept": [
+        "submandibular_gland"
+      ],
+      "prompt": "Click the submandibular gland, the salivary gland that lies below the body of the mandible and wraps around the posterior border of mylohyoid.",
+      "hint": "It lies in the digastric triangle, under the angle of the jaw.",
+      "view": "lateral",
+      "layers": [
+        "organ"
+      ],
+      "explain": "The submandibular gland has superficial and deep parts either side of mylohyoid. Its duct (Wharton) opens at the sublingual papilla and stones here cause painful swelling at mealtimes.",
+      "tags": {
+        "topic": "muscles",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "jaw"
+    },
+    {
+      "id": "middle-meningeal-artery-edh",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "middle_meningeal_artery",
+      "accept": [
+        "middle_meningeal_artery"
+      ],
+      "prompt": "A scan of a man who fractured his temporal bone shows a biconvex collection of blood between the skull and dura. The artery that supplies the dura enters through the foramen spinosum. Click the artery torn.",
+      "hint": "It is a branch of the maxillary artery that runs on the inner surface of the skull.",
+      "view": "lateral",
+      "layers": [
+        "vessel"
+      ],
+      "explain": "The middle meningeal artery grooves the inner table of the pterion and its anterior branch is torn by a fracture there. Arterial blood strips the dura and may cause death within hours without evacuation.",
+      "tags": {
+        "topic": "vessels",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull"
+    },
+    {
+      "id": "superficial-temporal-scalp-laceration",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "superficial_temporal_artery",
+      "accept": [
+        "superficial_temporal_artery"
+      ],
+      "prompt": "A man with a scalp laceration above the ear bleeds heavily, because the cut vessel retracts in dense connective tissue and cannot constrict. A pulse is felt in front of the tragus. Click the artery.",
+      "hint": "It is one of the terminal branches of the external carotid artery, with a pulse in front of the ear.",
+      "view": "lateral",
+      "layers": [
+        "vessel",
+        "bone"
+      ],
+      "explain": "The superficial temporal artery supplies much of the scalp, which has a rich anastomosis. Scalp wounds bleed profusely because the vessels are tethered open by dense connective tissue. Temporal arteritis (giant cell) causes tenderness along this artery.",
+      "tags": {
+        "topic": "vessels",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull"
+    },
+    {
+      "id": "maxillary-artery-epistaxis",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "maxillary_artery",
+      "accept": [
+        "maxillary_artery"
+      ],
+      "prompt": "A man with a severe nosebleed that does not stop with pressure to the front of the nose needs the artery in the pterygopalatine fossa tied off. Click the larger terminal branch of the external carotid artery that passes deep to the neck of the mandible.",
+      "hint": "It is the larger terminal branch of the external carotid, running into the infratemporal fossa.",
+      "view": "lateral",
+      "layers": [
+        "vessel",
+        "bone"
+      ],
+      "explain": "The maxillary artery gives off the middle meningeal, inferior alveolar and sphenopalatine arteries. Severe posterior epistaxis arises from the sphenopalatine artery, so it can be ligated in the pterygopalatine fossa.",
+      "tags": {
+        "topic": "vessels",
+        "region": "head",
+        "difficulty": 3
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "jaw"
+    },
+    {
+      "id": "facial-artery-lip-bleeding",
+      "kind": "Clinical",
+      "renderer": "mesh",
+      "target": "facial_artery",
+      "accept": [
+        "facial_artery"
+      ],
+      "prompt": "A boy falls on a step and splits his lower lip, which bleeds heavily from a branch of the artery that crosses the lower border of the mandible. Click the artery that supplies the lips.",
+      "hint": "It curves round the lower border of the mandible, at the anterior edge of masseter, and runs to the corner of the nose.",
+      "view": "lateral",
+      "layers": [
+        "vessel",
+        "bone"
+      ],
+      "explain": "The facial artery gives the superior and inferior labial arteries, which anastomose at the midline, so lip wounds need to be controlled at both sides. It can be felt at the anterior border of masseter.",
+      "tags": {
+        "topic": "vessels",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "face"
+    },
+    {
+      "id": "middle-meningeal-artery-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "middle_meningeal_artery",
+      "accept": [
+        "middle_meningeal_artery"
+      ],
+      "prompt": "Click the middle meningeal artery, the branch of the maxillary artery that enters the skull through the foramen spinosum.",
+      "hint": "It runs upwards on the inner surface of the skull, beneath the pterion.",
+      "view": "lateral",
+      "layers": [
+        "vessel"
+      ],
+      "explain": "The artery divides into frontal (anterior) and parietal (posterior) branches. The anterior branch is the one that lies beneath the pterion.",
+      "tags": {
+        "topic": "vessels",
+        "region": "head",
+        "difficulty": 2
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull"
+    },
+    {
+      "id": "superficial-temporal-pulse",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "superficial_temporal_artery",
+      "accept": [
+        "superficial_temporal_artery"
+      ],
+      "prompt": "Click the superficial temporal artery, whose pulse is felt just in front of the ear.",
+      "hint": "It lies in front of the tragus, over the zygomatic arch.",
+      "view": "lateral",
+      "layers": [
+        "vessel",
+        "bone"
+      ],
+      "explain": "The artery begins in the parotid gland as one of the two terminal branches of the external carotid and divides into frontal and parietal branches that supply the scalp.",
+      "tags": {
+        "topic": "vessels",
+        "region": "head",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "skull"
+    },
+    {
+      "id": "facial-artery-mandible-id",
+      "kind": "Identify",
+      "renderer": "mesh",
+      "target": "facial_artery",
+      "accept": [
+        "facial_artery"
+      ],
+      "prompt": "Click the facial artery, the branch of the external carotid that passes over the lower border of the mandible at the anterior border of masseter.",
+      "hint": "It then runs towards the corner of the mouth and the medial corner of the eye.",
+      "view": "lateral",
+      "layers": [
+        "vessel",
+        "bone"
+      ],
+      "explain": "The facial pulse is felt where the artery crosses the mandible. It ends as the angular artery, which anastomoses with the dorsal nasal branch of the ophthalmic artery, linking external and internal carotid.",
+      "tags": {
+        "topic": "vessels",
+        "region": "head",
+        "difficulty": 1
+      },
+      "review": {
+        "status": "approved",
+        "reviewed": "2026-10-13"
+      },
+      "focus": "face"
+    }
+  ]
+}

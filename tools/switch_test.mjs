@@ -8,10 +8,10 @@ const check = (ok, msg) => { console.log(`${ok ? "ok  " : "FAIL"} ${msg}`); if (
 await page.goto(base);
 await page.waitForFunction(() => !document.getElementById("start").disabled, null, { timeout: 90000 });
 const groups = await page.$$eval(".chooser-group", (els) => els.map((e) => e.textContent));
-check(groups.join("|") === "Upper limb|Lower limb|Trunk|Scans|X-ray|Ultrasound|Histology|Cells", `chooser groups: ${groups.join(" | ")}`);
+check(groups.join("|") === "Upper limb|Lower limb|Trunk|Neck|Head|Scans|X-ray|Ultrasound|Histology|Cells", `chooser groups: ${groups.join(" | ")}`);
 const dom = () => page.evaluate(() => ({
   zoom: [...document.querySelectorAll("#zoom-row [data-focus]")].map((b) => b.textContent).join(","),
-  views: [...document.querySelectorAll("[data-view]")].map((b) => b.textContent).join(","),
+  views: [...document.querySelectorAll("[data-view]")].filter((b) => !b.hidden).map((b) => b.textContent).join(","),
   bp3d: !document.getElementById("attr-bp3d").hidden, o3d: !document.getElementById("attr-o3d").hidden,
   model: window.__app.switch.model, canvases: [...document.querySelectorAll(".viewer-mesh canvas")].map((c) => c.hidden).join(","),
   layers: [...document.querySelectorAll("input[data-layer]")].filter((b) => !b.closest("label").hidden).map((b) => b.dataset.layer).join(","),

@@ -14,7 +14,10 @@ export function verdictLine(score, n) {
 }
 
 const FOCUS_BY_REGION = { hand: "hand", wrist: "hand", forearm: "forearm", elbow: "forearm", arm: "arm", shoulder: "shoulder",
-  hip: "hip", thigh: "thigh", knee: "knee", leg: "leg", ankle: "ankle", foot: "foot", trunk: "all", thorax: "thorax", back: "back", abdomen: "abdomen", pelvis: "pelvis" };
+  hip: "hip", thigh: "thigh", knee: "knee", leg: "leg", ankle: "ankle", foot: "foot", trunk: "all", thorax: "thorax", back: "back", abdomen: "abdomen", pelvis: "pelvis",
+  neck: "all", head: "all", anterior_triangle: "anterior_triangle", posterior_triangle: "posterior_triangle", larynx: "larynx",
+  cervical_spine: "cervical_spine", thyroid: "thyroid", root_of_neck: "root_of_neck",
+  skull: "skull", skull_base: "skull_base", face: "face", orbit: "orbit", jaw: "jaw" };
 
 export function createEngine({ renderer, questions, sets, ui, track }) {
   // state: intro | asking | feedback | done

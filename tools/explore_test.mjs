@@ -72,7 +72,12 @@ await page.click("#explore-back");
 // Head: the hippocampus MRI; chest: CT first, with the heart MRI among the options.
 await page.click(".figure .zone[data-region='head'] circle"); await idle();
 s = await st(); mods = await modalities();
-check(s.active === "volume" && s.study === "mni-brain-t1" && mods.join() === "MRI*", `head opens on the T1 brain MRI: ${s.study} ${mods.join()}`);
+check(s.active === "mesh" && s.model === "head" && mods.join() === "3D model*,3D: neck,MRI", `head opens on the head 3D model: ${s.model} ${mods.join()}`);
+await page.click("#explore-modalities .chip:text-is('3D: neck')"); await idle();
+s = await st(); check(s.active === "mesh" && s.model === "neck", `head region neck option: ${s.model}`);
+await page.click("#explore-modalities .chip:text-is('MRI')"); await idle();
+s = await st();
+check(s.active === "volume" && s.study === "mni-brain-t1", `head MRI opens on the T1 brain MRI: ${s.study}`);
 const weightings = await page.$$eval("#explore-study option", (o) => o.map((x) => x.textContent));
 console.log("head studies:", weightings.join(" | "));
 check(weightings.join() === "Study: T1 · brain t1,Study: T2 · brain t2,Study: T1 · hippocampus 01,Study: PD · brain pd,Study: T1 · mr s0283", "the head study picker offers the three weightings, the hippocampus crop and the head-and-neck series");

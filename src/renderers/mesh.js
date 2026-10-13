@@ -19,7 +19,7 @@ const LAYER_COLORS = {
   organ: 0xcf8e7c,
 };
 const DEFAULT_LAYERS = { skin: true, muscle: true, tendon: true, ligament: false, nerve: false, vessel: false, bone: true, organ: false };
-const DEFAULT_VIEW_LABELS = { palmar: "Palm", dorsal: "Back", lateral: "Thumb side" };
+const DEFAULT_VIEW_LABELS = { palmar: "Palm", dorsal: "Back", lateral: "Thumb side", inferior: "Base" };
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 const HIGHLIGHT_GOOD = new THREE.Color(0x2ee68a);
 const HIGHLIGHT_BAD = new THREE.Color(0xff3b3b);
@@ -301,9 +301,11 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
       const row = box.closest("label") || box;
       row.hidden = !(meshesByLayer.get(box.dataset.layer) || []).length;
     });
-    const bp3d = /bodyparts3d/i.test(meta.source || "") || (meta.version || 1) < 2;
+    const za = /z-anatomy/i.test(meta.source || "");
+    const bp3d = !za && (/bodyparts3d/i.test(meta.source || "") || (meta.version || 1) < 2);
     $("attr-bp3d").hidden = !bp3d;
-    $("attr-o3d").hidden = bp3d;
+    $("attr-o3d").hidden = za || bp3d;
+    $("attr-za").hidden = !za;
     const zoom = $("zoom-row");
     zoom.hidden = !meta.regions;
     if (meta.regions) {
@@ -318,6 +320,7 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
         return b;
       }));
     }
+    for (const b of document.querySelectorAll("[data-view]")) b.hidden = b.dataset.view === "inferior" && !meta.viewLabels?.inferior;
     for (const b of document.querySelectorAll("[data-view]")) b.textContent = meta.viewLabels?.[b.dataset.view] || DEFAULT_VIEW_LABELS[b.dataset.view] || b.textContent;
     slider.value = sliceActive ? slider.value : 0;
     applySlice();
@@ -367,7 +370,12 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
     palmar: new THREE.Vector3(0, 0, 1),
     dorsal: new THREE.Vector3(0, 0, -1),
     lateral: new THREE.Vector3(-1, 0, 0.25),
+    inferior: new THREE.Vector3(0, -1, 0.001), // skull seen from below; the button is only offered when the manifest labels it
+    inferior_post: new THREE.Vector3(0.57, -0.6, -0.57), // question-only oblique base views (no button): see past the atlas and axis
+    inferior_ant: new THREE.Vector3(0, -0.6, 0.8),
   };
+  const VIEW_UP = { inferior: new THREE.Vector3(0, 0, 1), inferior_post: new THREE.Vector3(0, 0, 1), inferior_ant: new THREE.Vector3(0, 0, 1) }; // anterior at the top of the screen; others use +y
+  const UP_Y = new THREE.Vector3(0, 1, 0);
   const viewTween = { active: false };
   let currentView = "palmar";
   let currentFocus = "all";
@@ -400,11 +408,11 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
     if (!animate) {
       controls.target.copy(target);
       camera.position.copy(pos);
-      camera.up.set(0, 1, 0);
+      camera.up.copy(VIEW_UP[name] || UP_Y);
       controls.update();
       return;
     }
-    camera.up.set(0, 1, 0);
+    camera.up.copy(VIEW_UP[name] || UP_Y);
     Object.assign(viewTween, {
       active: true, start: performance.now(),
       fromPos: camera.position.clone(), toPos: pos,
