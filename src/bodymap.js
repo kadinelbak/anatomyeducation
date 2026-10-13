@@ -109,3 +109,29 @@ export function buildFigure(regions) {
   ], "Lower limb");
   return svg;
 }
+
+// Swap the outline for the drawn figure (assets/bodymap/figure.svg, traced from the 3D models by
+// tools/build_bodymap_figure.*) when it loads. The same <svg> element is kept, so its listeners stay.
+// Zones are elements with data-region; those with nothing to show are greyed out like the outline's.
+export async function upgradeFigure(svg, regions, url = "assets/bodymap/figure.svg") {
+  let doc;
+  try {
+    const text = await fetch(url).then((r) => (r.ok ? r.text() : Promise.reject(new Error(r.status))));
+    doc = new DOMParser().parseFromString(text, "image/svg+xml").documentElement;
+    if (doc.nodeName !== "svg") return false;
+  } catch { return false; }
+  const has = new Set(regions.map((r) => r.id));
+  const titles = Object.fromEntries(regions.map((r) => [r.id, r.title]));
+  svg.setAttribute("viewBox", doc.getAttribute("viewBox"));
+  svg.replaceChildren(...[...doc.childNodes].map((n) => document.importNode(n, true)));
+  for (const z of svg.querySelectorAll("[data-region]")) {
+    const id = z.dataset.region;
+    z.classList.add("zone");
+    if (has.has(id)) {
+      z.setAttribute("tabindex", "0"); z.setAttribute("role", "button"); z.setAttribute("aria-label", titles[id]);
+      if (!z.querySelector("title")) { const t = document.createElementNS("http://www.w3.org/2000/svg", "title"); t.textContent = titles[id]; z.prepend(t); }
+    } else z.classList.add("inert");
+  }
+  svg.classList.add("figure-drawn");
+  return true;
+}

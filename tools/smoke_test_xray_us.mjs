@@ -62,7 +62,7 @@ async function playSet(setId, [width, height]) {
       await page.waitForTimeout(500);
       const info = await page.evaluate(() => {
         const a = window.__app, q = a.QUESTIONS[a.quiz.index], d = a.switch.debug, vr = d.vpEl.getBoundingClientRect();
-        const cards = ["question", "intro", "controls"].map((id) => document.getElementById(id).getBoundingClientRect());
+        const cards = ["question", "intro", "controls", "explore-bar", "details", "quiz-fab"].map((id) => document.getElementById(id)?.getBoundingClientRect() || { width: 0 });
         const cands = [], whys = [];
         for (const key of [q.target, ...q.accept].filter((k, j, arr) => k && arr.indexOf(k) === j)) {
           const c = d.canvasOf(key);

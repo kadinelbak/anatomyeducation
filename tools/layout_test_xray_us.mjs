@@ -39,7 +39,7 @@ const overlapScript = (toolbarSel) => {
   const tbs = [...document.querySelectorAll(toolbarSel)].filter(vis);
   if (!tbs.length) return { error: "toolbar not visible" };
   const tbEl = tbs[0], parts = [tbEl, ...tbEl.querySelectorAll("button, input, label, span")].filter(vis);
-  const others = { "#question": document.getElementById("question"), "#controls": document.getElementById("controls"), "#explore-bar": document.getElementById("explore-bar"), "#intro": document.getElementById("intro"), "top bar brand": document.querySelector("header.topbar .brand"), "top bar stats": document.querySelector("header.topbar .stats"), "footer": document.querySelector("footer.attribution") };
+  const others = { "#question": document.getElementById("question"), "#controls": document.getElementById("controls"), "#explore-bar": document.getElementById("explore-bar"), "#intro": document.getElementById("intro"), "top bar brand": document.querySelector("header.topbar .brand"), "top bar stats": document.querySelector("header.topbar .stats"), "#details": document.getElementById("details"), "#quiz-fab": document.getElementById("quiz-fab"), "#explore-zoom": document.getElementById("explore-zoom"), "footer (#credits, when open)": document.getElementById("credits") };
   const hits = [];
   for (const [name, e] of Object.entries(others)) {
     const o = vis(e); if (!o) continue;
@@ -82,6 +82,7 @@ async function run(kind, [width, height]) {
   // Body map: open the region, then pick the modality from the explore bar.
   await p2.click(`#explore-row .chip[data-region="${K.region.toLowerCase()}"]`);
   await p2.waitForFunction(() => !document.getElementById("explore-bar").hidden, null, { timeout: 120000 });
+  await p2.click("#region-crumb"); // the modality chips live in the region dropdown
   const chips = await p2.$$("#explore-modalities .chip");
   let chip = null;
   for (const c of chips) if (K.chip.test((await c.textContent()).trim())) { chip = c; break; }

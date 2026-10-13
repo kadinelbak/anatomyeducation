@@ -31,6 +31,7 @@ const st = (page) => page.evaluate(() => ({
   model: window.__app.switch.model, study: window.__app.switch.study, quiz: window.__app.quiz.state,
   chips: [...document.querySelectorAll("#explore-zoom .chip")].map((b) => b.textContent),
 }));
+const openMenu = async (page) => { if (await page.$eval("#region-menu", (e) => e.hidden)) await page.click("#region-crumb"); };
 const idle = (page) => page.waitForFunction(() => document.getElementById("loading").hidden && !document.getElementById("start").disabled, null, { timeout: 120000 });
 const settled = (page) => page.waitForFunction(() => { const d = window.__app.switch.debug; return !d || !d.loading; }, null, { timeout: 60000 });
 
@@ -52,30 +53,31 @@ try {
   const mods = await page.$$eval("#explore-modalities .chip", (b) => b.map((x) => x.firstChild.textContent));
   check(mods.includes("Histology") && mods.includes("Cell"), `modality chips: ${mods.join(" | ")}`);
   // Explore the muscle slide (the most-asked slide opens first; pick it by title if not).
-  await page.click("#explore-modalities .chip:text-is('Histology')").catch(() => {});
+  await openMenu(page); await page.click("#explore-modalities .chip:text-is('Histology')").catch(() => {});
   await idle(page); await settled(page); await page.waitForTimeout(400);
+  await openMenu(page);
   const picks = await page.$$eval("#explore-study option", (o) => o.map((x) => [x.value, x.textContent]));
   console.log("study picker:", picks.map((p) => p[1]).join(" | "));
   check(picks.length === 5 && picks.every((p) => !/^Study: (cl |muscle |bone |nerve |artery )/.test(p[1])), "study picker lists the five slides by manifest title");
-  if ((await page.$eval("#explore-study", (e) => e.value)) !== "muscle-ls") { await page.selectOption("#explore-study", "muscle-ls"); await idle(page); await settled(page); await page.waitForTimeout(600); }
+  if ((await page.$eval("#explore-study", (e) => e.value)) !== "muscle-ls") { await openMenu(page); await page.selectOption("#explore-study", "muscle-ls"); await idle(page); await settled(page); await page.waitForTimeout(600); }
   let s = await st(page);
   check(!s.intro && s.bar && s.active === "slide" && s.quiz === "intro", `explore slide: ${JSON.stringify({ ...s, chips: s.chips.length })}`);
-  check(s.chips.some((c) => c.startsWith("Zoom in: ")) && s.chips.some((c) => c.startsWith("Zoom out: ")), `slide explore bar has zoom chips: ${s.chips.join(" | ")}`);
+  check(s.chips.some((c) => c.startsWith("Zoom to a cell: ")) && s.chips.some((c) => c.startsWith("See it in 3D: ")), `slide zoom chips (zoom in = "Zoom to a cell", zoom out = "See it in 3D"): ${s.chips.join(" | ")}`);
   check(await page.evaluate(() => getComputedStyle(document.getElementById("controls")).display === "none"), "layer controls hidden on a slide");
   await page.screenshot({ path: "tools/shots/zoom-slide-explore.png" });
   // Zoom in to a cell.
-  await page.click("#explore-zoom .chip:text-matches('^Zoom in: ')");
+  await page.click("#explore-zoom .chip:text-matches('^Zoom to a cell: ')");
   await idle(page); await settled(page); await page.waitForTimeout(600);
   s = await st(page);
   check(s.active === "cell" && s.bar && /^cl-|^generic/.test(s.study || ""), `zoom in opened a cell: ${s.study} (${s.title})`);
-  check(s.chips.some((c) => c.startsWith("Zoom out: ")), `cell explore bar offers zoom out: ${s.chips.join(" | ")}`);
+  check(s.chips.some((c) => c.startsWith("Slide: ")), `cell explore bar offers zoom out (Slide): ${s.chips.join(" | ")}`);
   await page.screenshot({ path: "tools/shots/zoom-cell-explore.png" });
   // Zoom out to the slide, then out again to the model with the structure highlighted.
-  await page.click("#explore-zoom .chip:text-matches('^Zoom out: ')");
+  await page.click("#explore-zoom .chip:text-matches('^Slide: ')");
   await idle(page); await settled(page); await page.waitForTimeout(400);
   s = await st(page);
   check(s.active === "slide", `zoom out returned to the slide: ${s.study}`);
-  await page.click("#explore-zoom .chip:text-matches('^Zoom out: ')");
+  await page.click("#explore-zoom .chip:text-matches('^See it in 3D: ')");
   await idle(page); await page.waitForTimeout(800);
   s = await st(page);
   check(s.active === "mesh" && s.bar, `zoom out reached the model: ${s.model} (${s.title})`);
@@ -92,8 +94,8 @@ try {
     await page.evaluate(() => window.__app.answer(window.__app.QUESTIONS[0].accept[0]));
     await page.waitForSelector("#feedback:not([hidden])", { timeout: 5000 });
     const chips = await page.$$eval("#feedback-zoom .chip", (b) => b.map((x) => x.firstChild.textContent));
-    check(chips.some((c) => c.startsWith("Zoom in: ")), `answered slide question offers zoom links: ${chips.join(" | ")}`);
-    await page.click("#feedback-zoom .chip:text-matches('^Zoom in: ')");
+    check(chips.some((c) => c.startsWith("Zoom to a cell: ")), `answered slide question offers zoom links: ${chips.join(" | ")}`);
+    await page.click("#feedback-zoom .chip:text-matches('^Zoom to a cell: ')");
     await idle(page); await settled(page); await page.waitForTimeout(600);
     s = await st(page);
     check(s.active === "cell" && s.bar && s.quiz === "intro", `question zoom link opened the cell in explore mode: ${s.study}`);
@@ -105,7 +107,7 @@ try {
     await page.evaluate(() => window.__app.answer(window.__app.QUESTIONS[0].accept[0]));
     await page.waitForSelector("#feedback:not([hidden])", { timeout: 5000 });
     const chips = await page.$$eval("#feedback-zoom .chip", (b) => b.map((x) => x.firstChild.textContent));
-    check(chips.some((c) => c.startsWith("Zoom out: ")), `answered cell question offers zoom out: ${chips.join(" | ")}`);
+    check(chips.some((c) => /^(Slide|See it in 3D): /.test(c)), `answered cell question offers zoom out: ${chips.join(" | ")}`);
   } else check(false, "no cell question with a zoom.out link");
   await page.close();
   // Phone layout: the toolbar of each kind must sit above the question panel while a question is open.

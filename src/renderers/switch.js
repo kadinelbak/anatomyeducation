@@ -13,7 +13,7 @@ const loadSlideRenderer = () => import("./slide.js").then((m) => m.createSlideRe
 const loadCellRenderer = () => import("./cell.js").then((m) => m.createCellRenderer);
 const STUDIES_BASE = { volume: "assets/volumes/", xray: "assets/volumes/", ultrasound: "assets/volumes/", slide: "assets/slides/", cell: "assets/cells/" };
 
-export function createRendererSwitch({ viewer, onPick, models, onChange }) {
+export function createRendererSwitch({ viewer, onPick, onSelect, models, onChange }) {
   const defaultModel = Object.keys(models)[0];
   const meshBox = document.createElement("div");
   const volBox = document.createElement("div");
@@ -83,7 +83,7 @@ export function createRendererSwitch({ viewer, onPick, models, onChange }) {
         const modelId = id && models[id] ? id : lastModel;
         if (!meshes.has(modelId)) {
           const { modelUrl, structuresUrl } = models[modelId];
-          meshes.set(modelId, await build(`mesh:${modelId}`, () => createMeshRenderer({ container: meshBox, modelUrl, structuresUrl, onPick })));
+          meshes.set(modelId, await build(`mesh:${modelId}`, () => createMeshRenderer({ container: meshBox, modelUrl, structuresUrl, onPick, onSelect: (s) => onSelect?.(s, modelId) })));
         }
         show("mesh", modelId);
       } else if (kind === "volume") {

@@ -52,7 +52,7 @@ async function playSet(page, label) {
     const spot = await page.evaluate(() => {
       const a = window.__app;
       const q = a.QUESTIONS[a.quiz.index];
-      const cards = ["question", "controls", "intro"].map((id) => document.getElementById(id).getBoundingClientRect());
+      const cards = ["question", "controls", "intro", "explore-bar", "details", "quiz-fab", "explore-zoom"].map((id) => document.getElementById(id)?.getBoundingClientRect() || { width: 0 });
       const covered = (x, y) => cards.some((r) => r.width && x >= r.left && x <= r.right && y >= r.top && y <= r.bottom);
       const v = new a.camera.position.constructor();
       let tried = 0;
@@ -92,7 +92,7 @@ async function playSet(page, label) {
 async function playCT(page) {
   await page.goto(`${base}?set=${process.env.SET || "ct:abdomen"}`);
   await page.waitForFunction(() => !document.getElementById("start").disabled, null, { timeout: 90000 });
-  if (await page.evaluate(() => getComputedStyle(document.getElementById("controls")).display === "none")) { failures++; console.log("FAIL controls hidden before CT start"); }
+  if (await page.evaluate(() => getComputedStyle(document.getElementById("controls")).display === "none") === false) { failures++; console.log("FAIL toolbar should be hidden under the landing card before CT start"); }
   await page.click("#start");
   await page.waitForSelector("#question:not([hidden])", { timeout: 120000 });
   const hiddenDuring = await page.evaluate(() => getComputedStyle(document.getElementById("controls")).display === "none");
@@ -122,7 +122,7 @@ async function playCT(page) {
       if (!pts.length) return { id: q.id, why: "target not on the shown slice" };
       const cu = pts.reduce((s, p) => s + p[0], 0) / pts.length, cv = pts.reduce((s, p) => s + p[1], 0) / pts.length;
       pts.sort((p, r) => Math.hypot(p[0] - cu, p[1] - cv) - Math.hypot(r[0] - cu, r[1] - cv));
-      const cards = ["question", "intro"].map((id) => document.getElementById(id).getBoundingClientRect());
+      const cards = ["question", "intro", "controls", "explore-bar", "details", "quiz-fab"].map((id) => document.getElementById(id)?.getBoundingClientRect() || { width: 0 });
       const vr = d.vpEl.getBoundingClientRect();
       for (const [u, v] of pts.slice(0, 200)) {
         ijk[ax[0]] = u; ijk[ax[1]] = v;

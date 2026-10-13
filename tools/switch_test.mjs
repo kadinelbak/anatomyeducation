@@ -7,6 +7,7 @@ let fails = 0;
 const check = (ok, msg) => { console.log(`${ok ? "ok  " : "FAIL"} ${msg}`); if (!ok) fails++; };
 await page.goto(base);
 await page.waitForFunction(() => !document.getElementById("start").disabled, null, { timeout: 90000 });
+await page.click("#mode-quiz");
 const groups = await page.$$eval(".chooser-group", (els) => els.map((e) => e.textContent));
 check(groups.join("|") === "Upper limb|Lower limb|Trunk|Neck|Head|Scans|X-ray|Ultrasound|Histology|Cells", `chooser groups: ${groups.join(" | ")}`);
 const dom = () => page.evaluate(() => ({
@@ -33,7 +34,7 @@ await page.evaluate(() => window.__app.answer(window.__app.QUESTIONS[0].accept[0
 await page.waitForSelector("#feedback:not([hidden])");
 check((await page.textContent("#verdict")).startsWith("Correct"), "answer accepted on the lower limb");
 // Zoom button click works on the active renderer.
-await page.click("#zoom-row [data-focus='foot']");
+await page.evaluate(() => document.querySelector("#zoom-row [data-focus='foot']").click()); // the zoom row sits in the region menu, closed during a quiz
 check(await page.evaluate(() => window.__app.viewTween.active), "zoom button drives the active model");
 // Back to the chooser and play upper limb.
 await page.evaluate(() => { for (let i = 0; i < 10; i++) { window.__app.engine.next(); if (window.__app.quiz.state === "done") break; window.__app.answer(window.__app.QUESTIONS[window.__app.quiz.index].accept[0]); } });

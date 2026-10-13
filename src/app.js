@@ -3,7 +3,7 @@ import { CONFIG } from "./config.js";
 import { track, visitor, checkReturnVisit } from "./analytics.js";
 import { loadBanks } from "./bank.js";
 import { buildSets, resolveSet } from "./sets.js";
-import { buildBodyMap, buildFigure, studyLabel } from "./bodymap.js";
+import { buildBodyMap, buildFigure, upgradeFigure, studyLabel } from "./bodymap.js";
 import { createEngine, fmtTime } from "./engine.js";
 import { createRendererSwitch } from "./renderers/switch.js";
 import { WebGLUnavailableError, webglHelp } from "./webgl-probe.js";
@@ -17,6 +17,7 @@ const cellStudies = new Map(); // CL id -> cell study id
 const slideStudies = new Map(); // slide study id -> true
 const slideMeta = new Map(); // slide id -> manifest
 const fmaModel = new Map(); // model structure key (e.g. biceps_brachii) -> model id
+const structureLayer = new Map(); // model structure key -> its layer, for the details panel's tissue fallback
 const studyTitles = new Map(); // slide or cell study id -> its manifest title, for the study picker and zoom chips
 let zoomReady = false;
 const STATS_HIDDEN = () => ($("stats").hidden = true);
@@ -42,6 +43,7 @@ const renderer = createRendererSwitch({
   viewer: $("viewer"),
   models: CONFIG.models,
   onPick: (id) => engine.answer(id),
+  onSelect: (id) => onStructureClick(id),
   onChange: (kind, id, meta) => {
     // One attribution line per source: the mesh renderer shows its model's line when active,
     // and a scan shows the line for its modality (the study's manifest says which it is).
@@ -141,14 +143,20 @@ const ui = {
   showIntro() {
     $("question").hidden = true;
     $("results").hidden = true;
-    $("intro").hidden = false;
     STATS_HIDDEN();
+    showLanding();
   },
   started(list) {
     app.QUESTIONS = list;
+    exploring = null;
+    closeDetails();
     $("intro").hidden = true;
     $("results").hidden = true;
+    $("explore-bar").hidden = true;
+    $("explore-zoom").hidden = true;
     $("stats").hidden = false;
+    setMode("quiz", { stay: true });
+    setChrome();
   },
   showQuestion({ number, kind, prompt, hint }) {
     $("qkind").textContent = `Question ${number} · ${kind}`;
@@ -157,6 +165,7 @@ const ui = {
     $("qhint").hidden = !hint;
     $("feedback").hidden = true;
     $("question").hidden = false;
+    setChrome();
   },
   showFeedback({ correct, verdict, explain, isLast }) {
     const v = $("verdict");
@@ -186,6 +195,7 @@ const ui = {
     );
     $("share-status").hidden = true;
     $("results").hidden = false;
+    setChrome();
   },
 };
 
@@ -198,7 +208,7 @@ function renderChooser() {
   // Chips grouped by what they are asked on: each 3D model, then the scans.
   const groups = new Map();
   for (const s of sets) {
-    if (s.id === "custom") continue;
+    if (s.id === "custom" || s.id === "focus") continue;
     const g = s.group || "";
     if (!groups.has(g)) groups.set(g, []);
     groups.get(g).push(s);
@@ -261,6 +271,7 @@ const regions = buildBodyMap(bank.questions, CONFIG.models);
 let exploring = null; // { region, option, study }
 const figure = buildFigure(regions);
 $("figure-slot").replaceChildren(figure);
+upgradeFigure(figure, regions);
 $("explore-row").replaceChildren(...regions.map((r) => {
   const b = document.createElement("button");
   b.type = "button";
@@ -302,18 +313,28 @@ function exploreRegion(region) {
 
 async function exploreOption(region, option, study = option.studies?.[0]) {
   exploring = { region, option, study };
+  closeDetails();
+  closeMenus();
   renderExploreBar();
   const ok = await showFor(option.renderer === "mesh" ? { renderer: "mesh", model: option.model } : { renderer: option.renderer, study });
   if (!ok || exploring?.option !== option || exploring.study !== study) return; // a later click won
-  if (option.renderer === "mesh" && option.focus) renderer.mesh?.debug.setView?.("palmar", option.focus);
-  $("intro").hidden = true;
-  $("explore-bar").hidden = false;
-  renderer.setPickEnabled(false); // clicks and hovers show names
+  if (option.renderer === "mesh") { renderer.mesh?.showAll?.(); if (option.focus) renderer.mesh?.debug.setView?.("palmar", option.focus); }
+  enterExplore();
   renderZoomChips(renderer.active, renderer.study || renderer.model, renderer.slide?.meta ?? renderer.cell?.meta);
   track("explore", { what: option.id, study });
 }
 
-// The explore bar: the region, one chip per modality, a study picker when a modality has several.
+// Leave the landing card for a viewer in explore mode: breadcrumb on, quiz off, hover and click show names.
+function enterExplore() {
+  $("intro").hidden = true;
+  $("explore-bar").hidden = false;
+  renderer.setPickEnabled(false);
+  renderCrumbs();
+  setChrome();
+}
+
+// The breadcrumb's region menu: what to look at in this region, a study picker, the model's zoom
+// regions (filled by the mesh renderer) and the other regions of the body.
 function renderExploreBar() {
   const { region, option, study } = exploring;
   $("explore-title").textContent = region.title;
@@ -323,7 +344,7 @@ function renderExploreBar() {
     b.className = "chip";
     b.textContent = o.label;
     b.setAttribute("aria-pressed", String(o === option));
-    b.addEventListener("click", () => { if (o !== option) exploreOption(region, o); });
+    b.addEventListener("click", () => { if (o !== option || deep) exploreOption(region, o); });
     return b;
   }));
   const pick = $("explore-study");
@@ -335,11 +356,20 @@ function renderExploreBar() {
     }));
     pick.hidden = false;
   } else pick.hidden = true;
+  $("region-list").replaceChildren(...regions.filter((r) => r !== region).map((r) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "chip"; b.textContent = r.title;
+    b.addEventListener("click", () => exploreRegion(r));
+    return b;
+  }));
 }
 $("explore-study").addEventListener("change", (e) => exploreOption(exploring.region, exploring.option, e.target.value));
 $("explore-back").addEventListener("click", () => {
   exploring = null;
-  $("explore-bar").hidden = true;
+  deep = null;
+  closeDetails();
+  if (engine.state.state !== "intro") track("quit", { set: engine.set?.id, at: engine.state.index });
+  setMode("explore", { stay: true });
   engine.intro();
 });
 
@@ -365,10 +395,11 @@ async function openExplore(kind, id, highlightKey) {
   renderExploreBar();
   if (!(await showFor(kind === "mesh" ? { renderer: "mesh", model: id } : { renderer: kind, study: id }))) return;
   if (exploring?.option !== option) return; // a later click won
-  $("intro").hidden = true;
-  $("explore-bar").hidden = false;
-  renderer.setPickEnabled(false);
-  if (highlightKey) { try { renderer.highlight(highlightKey, "good"); } catch { /* the id may not be in this model */ } }
+  closeDetails();
+  if (kind === "mesh") deep = null;
+  enterExplore();
+  if (highlightKey && kind === "mesh") { openDetails(highlightKey); renderer.mesh?.fit?.(highlightKey); }
+  else if (highlightKey) { try { renderer.highlight(highlightKey, "good"); } catch { /* the id may not be in this model */ } }
   renderZoomChips(renderer.active, renderer.study || renderer.model, renderer.slide?.meta ?? renderer.cell?.meta);
   track("explore", { what: `${kind}:${id}`, via: "zoom" });
 }
@@ -389,7 +420,11 @@ function zoomLinks(kind, id, meta) {
 }
 async function loadZoomIndex() {
   for (const [model, m] of Object.entries(CONFIG.models)) {
-    try { const st = await fetch(m.structuresUrl).then((r) => r.json()); for (const k of Object.keys(st.structures || st)) fmaModel.set(k, fmaModel.get(k) || model); } catch { /* optional */ }
+    try {
+      const st = await fetch(m.structuresUrl).then((r) => r.json());
+      for (const k of Object.keys(st.structures || st)) fmaModel.set(k, fmaModel.get(k) || model);
+      for (const n of st.nodes || []) if (n.structure && n.layer && !structureLayer.has(n.structure)) structureLayer.set(n.structure, n.layer);
+    } catch { /* optional */ }
   }
   for (const [sid] of slideStudies) {
     try { const m = await fetch(`assets/slides/${sid}/study.json`).then((r) => r.json()); slideMeta.set(sid, m); studyTitles.set(sid, m.title || sid); } catch { /* optional */ }
@@ -405,7 +440,8 @@ const modelForFma = (fma) => fmaModel.get(fma) || Object.keys(CONFIG.models)[0];
 function chipFor(l) {
   const b = document.createElement("button");
   b.type = "button"; b.className = "chip zoom-chip";
-  b.textContent = `${l.dir === "in" ? "Zoom in" : "Zoom out"}: ${l.label}`;
+  // "Zoom" is kept for the camera; moving between scales says where it goes.
+  b.textContent = l.kind === "cell" ? `Zoom to a cell: ${l.label}` : l.kind === "slide" ? `Slide: ${l.label}` : `See it in 3D: ${l.label}`;
   b.addEventListener("click", () => openExplore(l.kind, l.id, l.key));
   return b;
 }
@@ -413,8 +449,8 @@ function renderZoomChips(kind, id, meta) {
   const row = $("explore-zoom");
   if (!row || !zoomReady) return;
   const m = kind === "mesh" ? {} : meta || slideMeta.get(id);
-  row.replaceChildren(...zoomLinks(kind, id, m).map(chipFor));
-  row.hidden = !row.children.length;
+  row.replaceChildren(...(kind === "mesh" ? [] : zoomLinks(kind, id, m).map(chipFor)));
+  row.hidden = !row.children.length || !$("intro").hidden || engine.state.state !== "intro";
 }
 // Under the explanation: the question's own zoom field ("model:upper-limb#biceps_brachii", "cell:cl-0008002", "slide:muscle-ls").
 function renderQuestionZoom(q) {
@@ -433,6 +469,363 @@ function renderQuestionZoom(q) {
   row.hidden = !row.children.length;
 }
 loadZoomIndex();
+
+// ---------- Page chrome: landing, modes, menus ----------
+// One landing card with two panes: the body map (Explore) and the set chooser with search (Quiz).
+// Everything else on screen depends on what is showing; setChrome() keeps it in step.
+let mode = "explore";
+let deep = null; // { kind, id, from: { model, key, camera } } while a slide, cell or scan opened from a structure is showing
+let selected = null; // structure key open in the details panel
+function setMode(m, { stay = false } = {}) {
+  mode = m;
+  $("mode-explore").setAttribute("aria-pressed", String(m === "explore"));
+  $("mode-quiz").setAttribute("aria-pressed", String(m === "quiz"));
+  $("explore-home").hidden = m !== "explore";
+  $("quiz-home").hidden = m !== "quiz";
+  if (stay) return;
+  if (engine.state.state !== "intro") { track("quit", { set: engine.set?.id, at: engine.state.index }); }
+  exploring = null; deep = null;
+  closeDetails();
+  engine.intro(); // stops any quiz and shows the landing card in this mode
+  if (m === "quiz") setTimeout(() => $("quiz-search").focus(), 0);
+}
+$("mode-explore").addEventListener("click", () => setMode("explore"));
+$("mode-quiz").addEventListener("click", () => setMode("quiz"));
+
+function showLanding() {
+  $("intro").hidden = false;
+  $("explore-bar").hidden = true;
+  $("explore-zoom").hidden = true;
+  closeDetails();
+  closeMenus();
+  setMode(mode, { stay: true });
+  setChrome();
+}
+
+// Body classes the stylesheet keys on: landing (the card is up), quizzing (a question or the results).
+function setChrome() {
+  const landing = !$("intro").hidden;
+  const quizzing = !$("question").hidden || !$("results").hidden;
+  document.body.classList.toggle("landing", landing);
+  document.body.classList.toggle("quizzing", quizzing);
+  $("quiz-fab").hidden = landing || quizzing || !quizSetForView();
+  if (landing || quizzing) $("slice-bar").hidden = true;
+}
+
+function closeMenus(except) {
+  for (const [btn, menu] of MENUS) if (menu !== except) { $(menu).hidden = true; $(btn).setAttribute("aria-expanded", "false"); }
+}
+const MENUS = [["region-crumb", "region-menu"], ["views-toggle", "views-menu"], ["controls-toggle", "layers-menu"]];
+for (const [btn, menu] of MENUS) {
+  $(btn).addEventListener("click", () => {
+    const open = $(menu).hidden;
+    closeMenus(menu);
+    $(menu).hidden = !open;
+    $(btn).setAttribute("aria-expanded", String(open));
+  });
+}
+// A click outside every menu closes them (clicks inside still bubble to the mesh renderer's view and zoom handler).
+document.addEventListener("click", (e) => { if (!e.target.closest?.(".menu-wrap")) closeMenus(); });
+// A view or zoom choice closes its menu (the mesh renderer moves the camera on the same click).
+$("views-menu").addEventListener("click", (e) => { if (e.target.closest("[data-view]")) setTimeout(() => closeMenus(), 0); });
+$("zoom-row").addEventListener("click", (e) => { if (e.target.closest("[data-focus]")) setTimeout(() => closeMenus(), 0); });
+
+$("credits-toggle").addEventListener("click", () => {
+  const open = $("credits").hidden;
+  $("credits").hidden = !open;
+  $("credits-toggle").setAttribute("aria-expanded", String(open));
+});
+$("credits-close").addEventListener("click", () => { $("credits").hidden = true; $("credits-toggle").setAttribute("aria-expanded", "false"); });
+
+// ---------- 3D toolbar ----------
+$("zoom-in").addEventListener("click", () => renderer.mesh?.zoomBy?.(0.8));
+$("zoom-out").addEventListener("click", () => renderer.mesh?.zoomBy?.(1.25));
+$("fit").addEventListener("click", () => renderer.mesh?.fit?.(selected));
+function setSlice(on) {
+  $("slice-bar").hidden = !on;
+  $("slice-toggle").setAttribute("aria-pressed", String(on));
+  if (!on) { $("slice").value = 0; $("slice").dispatchEvent(new Event("input")); }
+}
+$("slice-toggle").addEventListener("click", () => setSlice($("slice-bar").hidden));
+$("show-all").addEventListener("click", () => { renderer.mesh?.showAll?.(); updateShowAll(); });
+const updateShowAll = () => { $("show-all").hidden = !renderer.mesh?.hiddenCount; };
+
+document.addEventListener("keydown", (e) => {
+  if (e.target.closest?.("input, select, textarea") || e.metaKey || e.ctrlKey || e.altKey) return;
+  const mesh = renderer.active === "mesh" && $("intro").hidden;
+  if (e.key === "Escape") {
+    if (MENUS.some(([, m]) => !$(m).hidden)) closeMenus();
+    else if (!$("credits").hidden) $("credits").hidden = true;
+    else if (deep) backToStructure();
+    else if (selected) closeDetails();
+    return;
+  }
+  if (!mesh) return;
+  if (e.key === "f" || e.key === "F") renderer.mesh?.fit?.(selected);
+  else if (e.key === "l" || e.key === "L") $("controls-toggle").click();
+  else if (e.key === "+" || e.key === "=") renderer.mesh?.zoomBy?.(0.8);
+  else if (e.key === "-" || e.key === "_") renderer.mesh?.zoomBy?.(1.25);
+});
+
+// ---------- Breadcrumb ----------
+// Region › structure › deeper view (a slide, cell or scan opened from that structure).
+function renderCrumbs() {
+  const s = selected || deep?.from.key;
+  const name = s ? (deep ? deep.from.name : renderer.name(s)) : "";
+  $("crumb-structure").textContent = name;
+  $("crumb-structure").hidden = $("crumb-structure-sep").hidden = !name;
+  $("crumb-structure").disabled = !deep;
+  $("crumb-structure").title = deep ? `Back to ${name} on the 3D model (Esc)` : "";
+  $("crumb-deep").textContent = deep?.label || "";
+  $("crumb-deep").hidden = $("crumb-deep-sep").hidden = !deep;
+}
+$("crumb-structure").addEventListener("click", () => { if (deep) backToStructure(); });
+
+// ---------- Details panel ----------
+const LAYER_LABELS = { skin: "Skin", muscle: "Muscle", tendon: "Tendon", ligament: "Ligament", nerve: "Nerve", vessel: "Vessel", bone: "Bone", organ: "Organ" };
+const modelTitle = (id) => CONFIG.models[id]?.title || id;
+
+function onStructureClick(key) {
+  if (!$("intro").hidden || engine.state.state !== "intro") return; // the landing card is up, or a quiz is running
+  if (!key) { closeDetails(); return; }
+  openDetails(key);
+}
+
+function openDetails(key) {
+  if (selected && selected !== key) renderer.clearHighlight();
+  selected = key;
+  const mesh = renderer.mesh;
+  renderer.highlight(key, "select");
+  const layer = mesh?.layerOf?.(key);
+  $("details-name").textContent = renderer.name(key);
+  $("details-meta").textContent = [LAYER_LABELS[layer] || layer, modelTitle(renderer.model)].filter(Boolean).join(" · ");
+  const hist = slidesFor(key, layer), img = imagingFor(key);
+  setGo($("go-histology"), hist.slides.length, "No slide yet for this tissue");
+  setGo($("go-imaging"), img.length, "Not visible on the scans we have");
+  $("details-list").hidden = true;
+  $("details-note").hidden = true;
+  $("act-quiz").hidden = !questionsAbout(key).length;
+  $("details").hidden = false;
+  document.body.classList.add("details-open");
+  renderCrumbs();
+  track("select", { model: renderer.model, structure: key });
+}
+function setGo(btn, n, why) {
+  btn.disabled = !n;
+  btn.title = n ? "" : why;
+  btn.setAttribute("aria-pressed", "false");
+}
+function closeDetails() {
+  if (selected && renderer.active === "mesh") renderer.clearHighlight();
+  selected = null;
+  $("details").hidden = true;
+  document.body.classList.remove("details-open");
+  if ($("explore-bar") && !$("explore-bar").hidden) renderCrumbs();
+}
+$("details-close").addEventListener("click", closeDetails);
+$("act-isolate").addEventListener("click", () => {
+  const m = renderer.mesh; if (!m || !selected) return;
+  m.isolate(m.isolated === selected ? null : selected);
+  $("act-isolate").textContent = m.isolated ? "Show everything" : "Isolate";
+  updateShowAll();
+});
+$("act-hide").addEventListener("click", () => {
+  const m = renderer.mesh; if (!m || !selected) return;
+  m.hide(selected);
+  closeDetails();
+  updateShowAll();
+});
+$("act-quiz").addEventListener("click", () => {
+  if (!selected) return;
+  const list = questionsAbout(selected);
+  startFocus({ title: renderer.name(selected), renderer: "mesh", model: renderer.model, list });
+});
+
+// A list under the two buttons: one row per destination, grouped under small headings.
+function showList(groups, note) {
+  const box = $("details-list");
+  box.replaceChildren(...groups.flatMap(({ heading, items }) => {
+    const out = [];
+    if (heading) { const h = document.createElement("div"); h.className = "menu-label"; h.textContent = heading; out.push(h); }
+    for (const it of items) {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "list-item"; b.textContent = it.label;
+      if (it.sub) { const sm = document.createElement("small"); sm.textContent = it.sub; b.append(sm); }
+      b.addEventListener("click", it.go);
+      out.push(b);
+    }
+    return out;
+  }));
+  box.hidden = false;
+  $("details-note").textContent = note || "";
+  $("details-note").hidden = !note;
+}
+
+// Histology: slides that section this structure; failing that, a slide of the same tissue (by layer).
+function slidesFor(key, layer) {
+  const direct = [...slideMeta].filter(([, m]) => (m.sections || []).includes(key)).map(([id]) => id);
+  if (direct.length) return { slides: direct, representative: false };
+  const byLayer = [...slideMeta].filter(([, m]) => (m.sections || []).some((k) => layerOfAny(k) === layer)).map(([id]) => id);
+  return { slides: layer ? byLayer : [], representative: true };
+}
+// The layer of a structure key in whichever loaded model has it.
+function layerOfAny(key) {
+  return renderer.mesh?.layerOf?.(key) || structureLayer.get(key) || null;
+}
+$("go-histology").addEventListener("click", () => {
+  if (!selected) return;
+  const { slides, representative } = slidesFor(selected, renderer.mesh?.layerOf?.(selected));
+  const note = representative ? "Representative tissue: no slide of this exact structure yet." : "";
+  if (slides.length === 1 && !representative) { openDeep("slide", slides[0]); return; }
+  $("go-histology").setAttribute("aria-pressed", "true"); $("go-imaging").setAttribute("aria-pressed", "false");
+  showList([{ items: slides.map((id) => ({ label: studyTitles.get(id) || id, go: () => openDeep("slide", id) })) }], note);
+});
+
+// Imaging: every study whose labels include this structure, as CT or MRI, plus X-ray and ultrasound
+// for the CT studies those viewers use.
+let crosswalk = { map: {}, studies: {} };
+fetch("assets/imaging-crosswalk.json").then((r) => r.json()).then((x) => { crosswalk = x; if (selected) openDetails(selected); }).catch(() => {});
+const xrayStudies = new Set(bank.questions.filter((q) => q.renderer === "xray").map((q) => q.study));
+const usStudies = new Set(bank.questions.filter((q) => q.renderer === "ultrasound").map((q) => q.study));
+function imagingFor(key) {
+  const keys = crosswalk.map[key] || [];
+  if (!keys.length) return [];
+  const out = [];
+  for (const [study, st] of Object.entries(crosswalk.studies)) {
+    const here = keys.filter((k) => st.keys.includes(k));
+    if (!here.length) continue;
+    const label = studyTitles.get(study) || (st.modality === "CT" ? `Study ${studyLabel(study)}` : st.title);
+    out.push({ modality: st.modality, kind: "volume", study, keys: here, label });
+    if (st.modality === "CT" && xrayStudies.has(study)) out.push({ modality: "X-ray", kind: "xray", study, keys: here, label: `Radiograph from study ${studyLabel(study)}` });
+    if (st.modality === "CT" && usStudies.has(study)) out.push({ modality: "Ultrasound", kind: "ultrasound", study, keys: here, label: `Simulated from study ${studyLabel(study)}` });
+  }
+  return out;
+}
+$("go-imaging").addEventListener("click", () => {
+  if (!selected) return;
+  const list = imagingFor(selected);
+  $("go-imaging").setAttribute("aria-pressed", "true"); $("go-histology").setAttribute("aria-pressed", "false");
+  const groups = ["CT", "MRI", "X-ray", "Ultrasound"].map((m) => ({ heading: m, items: list.filter((x) => x.modality === m).map((x) => ({ label: x.label, go: () => openDeep(x.kind, x.study, x.keys) })) })).filter((g) => g.items.length);
+  showList(groups);
+});
+
+// Open a slide or scan from the selected structure, remembering the 3D view to come back to.
+async function openDeep(kind, id, scanKeys = []) {
+  const m = renderer.mesh;
+  const from = deep?.from || { model: renderer.model, key: selected, name: renderer.name(selected),
+    camera: m && { pos: m.debug.camera.position.clone(), target: m.debug.controls.target.clone(), up: m.debug.camera.up.clone() } };
+  const label = kind === "slide" ? `Histology: ${studyTitles.get(id) || id}` : kind === "cell" ? `Cell: ${studyTitles.get(id) || id}`
+    : `${{ volume: crosswalk.studies[id]?.modality || "CT", xray: "X-ray", ultrasound: "Ultrasound" }[kind]}: ${renderer.name(from.key)}`;
+  deep = { kind, id, from, label };
+  closeDetails();
+  if (!(await showFor({ renderer: kind, study: id }))) return;
+  if (deep?.id !== id) return; // a later click won
+  renderer.setPickEnabled(false);
+  renderer.clearHighlight();
+  for (const k of scanKeys) { try { renderer.highlight(k, "good"); } catch { /* not in this study */ } }
+  enterExplore();
+  renderZoomChips(renderer.active, renderer.study || renderer.model, renderer.slide?.meta ?? renderer.cell?.meta);
+  track("explore", { what: `${kind}:${id}`, via: "details", structure: from.key });
+}
+async function backToStructure() {
+  const from = deep?.from;
+  deep = null;
+  if (!from?.model) { renderCrumbs(); return; }
+  if (!(await showFor({ renderer: "mesh", model: from.model }))) return;
+  const m = renderer.mesh;
+  if (from.camera && m) {
+    m.debug.camera.position.copy(from.camera.pos);
+    m.debug.camera.up.copy(from.camera.up);
+    m.debug.controls.target.copy(from.camera.target);
+    m.debug.controls.update();
+  }
+  enterExplore();
+  $("explore-zoom").hidden = true;
+  if (from.key) openDetails(from.key);
+}
+
+// ---------- Quiz: search, focus sets, the quiz button in each view ----------
+// A "focus" set is built on the fly (one structure, one search result, one view) and replaces the last one.
+function startFocus({ title, renderer: r, model, study, list }) {
+  if (!list.length) return;
+  const set = { id: "focus", title, renderer: r, model, study: study || list[0].study, group: "", pick: () => shuffle(list).slice(0, 10) };
+  const i = sets.findIndex((s) => s.id === "focus");
+  if (i >= 0) sets[i] = set; else sets.push(set);
+  exploring = null; deep = null;
+  begin("focus");
+}
+const shuffle = (a) => { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+const isMeshQ = (q) => !SCAN_KINDS.includes(q.renderer);
+const qModel = (q) => q.model || Object.keys(CONFIG.models)[0];
+function questionsAbout(key) {
+  return bank.questions.filter((q) => isMeshQ(q) && qModel(q) === renderer.model && (q.target === key || (q.accept || []).includes(key)));
+}
+
+// The set the quiz button starts for what is on screen: the model's random 10, or the set asked on this scan.
+function quizSetForView() {
+  if (renderer.active === "mesh") {
+    const prefix = renderer.model === Object.keys(CONFIG.models)[0] ? "" : `${renderer.model}:`;
+    return sets.find((s) => s.id === `${prefix}random`) || null;
+  }
+  const study = renderer.study;
+  return sets.find((s) => s.renderer === renderer.active && s.study === study)
+    || sets.find((s) => s.renderer === renderer.active && bank.questions.some((q) => q.renderer === s.renderer && q.study === study && s.pick([q], "").length))
+    || sets.find((s) => s.renderer === renderer.active) || null;
+}
+$("quiz-fab").addEventListener("click", () => {
+  const set = quizSetForView();
+  if (!set) return;
+  track("quiz_fab", { set: set.id });
+  exploring = null; deep = null;
+  closeDetails();
+  selectedSet = set.id;
+  renderChooser();
+  begin(set.id);
+});
+
+// Search: every word must appear in a question's prompt, target, topic, region or kind.
+// Results are grouped by where the questions are asked (a 3D model, or a modality and region).
+const RENDERER_LABEL = { xray: "X-ray", ultrasound: "Ultrasound", slide: "Histology", cell: "Cells" };
+const haystack = new Map(bank.questions.map((q) => [q, [q.prompt, q.target, ...(q.accept || []), q.tags?.topic, q.tags?.region, q.kind, q.tags?.modality].filter(Boolean).join(" ").toLowerCase().replaceAll("_", " ")]));
+function searchQuestions(text) {
+  const words = text.toLowerCase().split(/\s+/).filter((w) => w.length > 1);
+  if (!words.length) return [];
+  const groups = new Map();
+  for (const [q, h] of haystack) {
+    if (!words.every((w) => h.includes(w))) continue;
+    const mesh = isMeshQ(q);
+    const key = mesh ? `mesh:${qModel(q)}` : `${q.renderer}:${q.tags?.modality || ""}:${q.tags?.region || q.study}`;
+    if (!groups.has(key)) {
+      const region = q.tags?.region ? q.tags.region[0].toUpperCase() + q.tags.region.slice(1) : q.study;
+      groups.set(key, { title: mesh ? `${modelTitle(qModel(q))} in 3D` : `${RENDERER_LABEL[q.renderer] || q.tags?.modality || "CT"}: ${region}`, renderer: mesh ? "mesh" : q.renderer, model: mesh ? qModel(q) : undefined, list: [] });
+    }
+    groups.get(key).list.push(q);
+  }
+  return [...groups.values()].sort((a, b) => b.list.length - a.list.length);
+}
+function renderSearch() {
+  const text = $("quiz-search").value.trim();
+  const box = $("quiz-results");
+  if (text.length < 2) { box.hidden = true; $("set-chooser").hidden = false; $("start").hidden = false; return; }
+  const lower = text.toLowerCase();
+  const setHits = sets.filter((s) => s.id !== "custom" && s.id !== "focus" && `${s.group} ${s.title}`.toLowerCase().includes(lower));
+  const groups = searchQuestions(text);
+  const rows = [];
+  for (const s of setHits.slice(0, 6)) rows.push({ label: s.group ? `${s.group}: ${s.title}` : s.title, sub: "Question set", go: () => { selectedSet = s.id; renderChooser(); begin(s.id); } });
+  for (const g of groups.slice(0, 8)) rows.push({ label: g.title, sub: `${g.list.length} question${g.list.length === 1 ? "" : "s"} about “${text}”`, go: () => startFocus({ title: `${text} · ${g.title}`, renderer: g.renderer, model: g.model, list: g.list }) });
+  box.replaceChildren(...(rows.length ? rows.map((it) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "list-item"; b.textContent = it.label;
+    const sm = document.createElement("small"); sm.textContent = it.sub; b.append(sm);
+    b.addEventListener("click", it.go);
+    return b;
+  }) : [Object.assign(document.createElement("p"), { className: "fine", textContent: "No questions match that yet." })]));
+  box.hidden = false;
+  $("set-chooser").hidden = true;
+  $("start").hidden = true;
+}
+$("quiz-search").addEventListener("input", renderSearch);
+$("quiz-search").addEventListener("keydown", (e) => { if (e.key === "Enter") $("quiz-results").querySelector(".list-item")?.click(); });
 
 // A shared link plays exactly its questions; otherwise the chosen set.
 let pendingShared = initial.explicit;
@@ -530,10 +923,13 @@ checkReturnVisit();
 
 $("loading").hidden = true;
 $("start").disabled = false;
+// A shared score or a ?set= link opens on the quiz; everything else on the body map.
+setMode(initial.explicit || new URLSearchParams(window.location.search).has("set") ? "quiz" : "explore", { stay: true });
+setChrome();
 
 // Exposed for automated checks (tools/smoke_test.mjs). The mesh debug handles follow the active model.
 for (const k of ["viewTween", "controls", "camera", "meshesByStructure", "pick", "setView", "setLayers"]) {
   Object.defineProperty(app, k, { get: () => renderer.mesh?.debug[k] });
 }
-Object.assign(app, { quiz: engine.state, answer: engine.answer, engine, renderer, switch: renderer, openExplore });
+Object.assign(app, { quiz: engine.state, answer: engine.answer, engine, renderer, switch: renderer, openExplore, openDetails, openDeep, backToStructure, setMode, imagingFor, slidesFor: (k) => slidesFor(k, layerOfAny(k)) });
 app.QUESTIONS ||= engine.current;

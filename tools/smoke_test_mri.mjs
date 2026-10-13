@@ -64,7 +64,7 @@ async function play(setId, expect) {
       if (!pts.length) return { id: q.id, why: "target not on the shown slice" };
       const cu = pts.reduce((s, p) => s + p[0], 0) / pts.length, cv = pts.reduce((s, p) => s + p[1], 0) / pts.length;
       pts.sort((p, r) => Math.hypot(p[0] - cu, p[1] - cv) - Math.hypot(r[0] - cu, r[1] - cv));
-      const cards = ["question", "intro"].map((id) => document.getElementById(id).getBoundingClientRect());
+      const cards = ["question", "intro", "controls", "explore-bar", "details", "quiz-fab"].map((id) => document.getElementById(id)?.getBoundingClientRect() || { width: 0 });
       const vr = d.vpEl.getBoundingClientRect();
       for (const [u, v] of pts.slice(0, 200)) {
         ijk[ax[0]] = u; ijk[ax[1]] = v;

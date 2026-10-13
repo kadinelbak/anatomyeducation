@@ -67,11 +67,6 @@ body.mode-volume #controls, body.mode-xray #controls, body.mode-ultrasound #cont
 .review .good { color: var(--good); }
 .review .bad { color: var(--bad); }
 
-.controls {
-  position: fixed; top: 52px; right: 16px; width: 200px;
-  background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px;
-}
-.controls-toggle { display: none; }
 .layers { border: 0; padding: 0; margin: 0 0 10px; display: grid; gap: 4px; }
 .layers legend { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 4px; }
 .layers label { display: flex; gap: 8px; align-items: center; font-size: 0.92rem; }
@@ -90,28 +85,18 @@ body.mode-volume #controls, body.mode-xray #controls, body.mode-ultrasound #cont
   background: rgba(0, 0, 0, 0.75); font-size: 0.82rem; transform: translate(12px, -50%);
 }
 
-.attribution {
-  position: fixed; right: 16px; bottom: 8px; max-width: min(520px, calc(100vw - 480px));
-  font-size: 0.7rem; color: var(--muted); text-align: right;
-}
 .attribution a { color: var(--muted); }
 
 .signup { background: #161c24; color: var(--text); border: 1px solid var(--border); border-radius: 14px; width: min(420px, calc(100vw - 32px)); padding: 20px; }
 .signup::backdrop { background: rgba(0, 0, 0, 0.6); }
 .signup input[type=email] { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: #0f1419; color: var(--text); font: inherit; }
 
-/* Phones: controls collapse to a button, cards span the width. */
+/* Phones: cards span the width. */
 @media (max-width: 720px) {
-  .controls { top: 48px; right: 16px; width: auto; padding: 6px; }
-  .controls-toggle { display: block; background: transparent; color: var(--text); border: 0; padding: 4px 8px; font-weight: 600; }
-  .controls .controls-body { display: none; padding: 6px; width: 190px; }
-  .controls.open .controls-body { display: block; }
   body.mode-volume .card { bottom: 150px; max-height: 34vh; }
-  body.mode-volume .attribution { bottom: auto; top: 46px; left: 96px; right: 12px; text-align: right; } /* clear of the modality badge */
   .card { left: 12px; right: 12px; width: auto; bottom: 40px; max-height: 44vh; padding: 12px 14px; font-size: 0.95rem; }
   .explain { font-size: 0.88rem; }
   .card h1 { font-size: 1.25rem; }
-  .attribution { left: 16px; right: 16px; max-width: none; bottom: 4px; text-align: center; font-size: 0.62rem; }
   .brand { font-size: 0.95rem; }
   .stats { gap: 10px; font-size: 0.9rem; }
 }
@@ -128,13 +113,7 @@ body.mode-volume #controls, body.mode-xray #controls, body.mode-ultrasound #cont
 @media (min-width: 721px) {
   body.mode-volume .vol-toolbar { left: calc(16px + min(440px, calc(100vw - 32px)) + 16px); }
   body.mode-volume .vol-edge-bottom { left: auto; right: 16px; transform: none; }
-  /* The licence line moves under the score pill, off the slider row. */
-  body.mode-volume .attribution { bottom: auto; top: 54px; left: auto; right: 16px; max-width: min(520px, 55vw); text-align: right; }
 }
-.explore-bar { position: fixed; z-index: 6; left: 16px; top: 56px; display: flex; align-items: center; gap: 10px; padding: 6px 8px 6px 12px;
-  background: var(--panel); border: 1px solid var(--border); border-radius: 10px; font-weight: 600; }
-.explore-bar { flex-wrap: wrap; max-width: min(440px, calc(100vw - 32px)); }
-.explore-bar .ghost { padding: 6px 10px; font-size: 0.85rem; }
 .explore-modalities { margin: 0; }
 .explore-modalities .chip { padding: 4px 10px; font-size: 0.82rem; }
 .explore-study { background: transparent; color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 4px 6px; font: inherit; font-size: 0.82rem; }
@@ -150,12 +129,6 @@ body.mode-volume #controls, body.mode-xray #controls, body.mode-ultrasound #cont
 .figure .zone.inert { fill: rgba(255, 255, 255, 0.08); stroke: var(--border); cursor: default; }
 .explore-regions { align-content: flex-start; gap: 6px; margin: 0; }
 .figure { width: 72px; height: 150px; }
-.explore-bar[hidden] { display: none; }
-body.mode-volume .explore-bar { top: 90px; } /* below the CT / MRI badge */
-@media (max-width: 720px) {
-  /* Below the modality badge, the licence line and the Layers toggle, which share the top edge on phones. */
-  .explore-bar { top: 96px; }
-}
 .chooser-group { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted, #8b98a5); margin-top: 2px; }
 .chip { background: transparent; color: var(--text); border: 1px solid var(--border); border-radius: 999px; padding: 6px 12px; font-size: 0.88rem; font-weight: 600; }
 .chip[aria-pressed="true"] { background: rgba(79, 179, 255, 0.18); border-color: var(--accent); color: var(--accent); }
@@ -167,11 +140,8 @@ body.mode-volume .explore-bar { top: 90px; } /* below the CT / MRI badge */
 /* X-ray and ultrasound modes: their toolbar runs across the top from y 44 px down, so the only app
    chrome allowed in y 44..90 px is the renderer's own. The explore bar therefore moves to the bottom,
    and on phones the question panel rises a little to clear the longer licence lines. */
-body.mode-xray .explore-bar, body.mode-ultrasound .explore-bar, body.mode-slide .explore-bar, body.mode-cell .explore-bar { top: auto; bottom: 16px; }
 @media (max-width: 720px) {
   body.mode-xray .card, body.mode-ultrasound .card, body.mode-slide .card, body.mode-cell .card { bottom: 84px; max-height: 40vh; }
-  body.mode-xray .explore-bar, body.mode-ultrasound .explore-bar, body.mode-slide .explore-bar, body.mode-cell .explore-bar { bottom: 84px; }
-  body.mode-xray .attribution, body.mode-ultrasound .attribution, body.mode-slide .attribution, body.mode-cell .attribution { bottom: 4px; top: auto; }
 }
 /* Zoom chips (organ -> tissue -> cell): on the explore bar and under an answer's explanation. */
 .qhead { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
@@ -180,9 +150,127 @@ body.mode-xray .explore-bar, body.mode-ultrasound .explore-bar, body.mode-slide 
 .explore-regions .chip small { display: block; font-weight: 500; font-size: 0.68rem; color: var(--muted); letter-spacing: 0; }
 .zoom-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
 .zoom-row[hidden] { display: none; }
-.explore-bar .zoom-row { margin: 0; }
 /* Slide and cell modes: the bar sits at the bottom left with its zoom chips, so the licence line keeps to the bottom right. */
-@media (min-width: 721px) {
-  body.mode-slide .explore-bar, body.mode-cell .explore-bar { max-width: min(560px, 55vw); }
-  body.mode-slide .attribution, body.mode-cell .attribution { left: auto; right: 16px; max-width: min(480px, 38vw); text-align: right; }
+
+/* ---------- Education shell (PRD: clean main screen) ---------- */
+/* Top bar: home, breadcrumb, mode switch, credits. Stays within 44 px: the scan viewers' own toolbars start there. */
+.topbar { z-index: 10; height: 44px; padding: 0 12px; gap: 10px; justify-content: flex-start;
+  background: linear-gradient(rgba(15, 20, 25, 0.92), rgba(15, 20, 25, 0.6)); border-bottom: 1px solid var(--border); }
+.topbar > * { pointer-events: auto; }
+.topbar .brand { background: none; border: 0; color: var(--text); padding: 4px 2px; white-space: nowrap; font-size: 1rem; }
+.brand-short { display: none; }
+.topbar-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.stats { padding: 3px 10px; font-size: 0.88rem; }
+.crumbs { display: flex; align-items: center; gap: 6px; min-width: 0; flex: 0 1 auto; }
+.crumbs[hidden] { display: none; }
+.crumb { background: none; border: 0; color: var(--text); padding: 4px 6px; border-radius: 8px; font-size: 0.92rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 28vw; }
+.crumb:not(:disabled):hover { background: rgba(255, 255, 255, 0.07); }
+.crumb:disabled { cursor: default; opacity: 1; }
+.crumb.current { color: var(--muted); }
+.crumb-sep { color: var(--muted); }
+.mode-toggle { display: flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; }
+.mode-toggle button { background: transparent; color: var(--muted); border: 0; padding: 4px 12px; font-size: 0.85rem; font-weight: 600; }
+.mode-toggle button[aria-pressed="true"] { background: rgba(79, 179, 255, 0.18); color: var(--accent); }
+.credits-toggle { background: none; border: 0; color: var(--muted); font-size: 0.82rem; padding: 4px; }
+
+/* Menus and popovers (region menu, views, layers). */
+.menu-wrap { position: relative; }
+.popover { position: absolute; z-index: 20; top: calc(100% + 6px); left: 0; min-width: 200px; max-width: min(360px, calc(100vw - 24px));
+  background: #161c24; border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); }
+.menu-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 8px 0 4px; }
+.menu-label:first-child { margin-top: 0; }
+.region-menu .chooser-row { margin-bottom: 4px; }
+.region-menu .explore-study { margin: 4px 0; max-width: 100%; }
+.views { display: flex; flex-wrap: wrap; gap: 4px; }
+.views button { flex: 1 1 auto; font-size: 0.8rem; padding: 6px 8px; border-radius: 8px; background: transparent; color: var(--text); border: 1px solid var(--border); }
+.views button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+
+/* The 3D toolbar: one pill at the bottom centre; its menus open upwards. */
+.toolbar { position: fixed; z-index: 8; left: 50%; bottom: 16px; transform: translateX(-50%); display: flex; align-items: center; gap: 2px;
+  background: var(--panel); border: 1px solid var(--border); border-radius: 999px; padding: 4px 6px; }
+.toolbar .tool { background: transparent; border: 0; color: var(--text); padding: 6px 12px; border-radius: 999px; font-size: 0.9rem; font-weight: 600; min-width: 36px; }
+.toolbar .tool:hover, .toolbar .tool[aria-expanded="true"], .toolbar .tool[aria-pressed="true"] { background: rgba(79, 179, 255, 0.16); color: var(--accent); }
+.toolbar .popover { top: auto; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%); }
+.layers-menu { min-width: 170px; }
+.layers { border: 0; padding: 0; margin: 0; display: grid; gap: 4px; }
+.layers legend { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 4px; font-weight: 700; }
+.layers label { display: flex; gap: 8px; align-items: center; font-size: 0.92rem; }
+.layers label[hidden] { display: none; }
+.views-menu { min-width: 240px; }
+body.landing #controls, body.landing #slice-bar { display: none; }
+body.quizzing .toolbar { left: auto; right: 16px; transform: none; }
+.slice-bar { position: fixed; z-index: 8; left: 50%; bottom: 68px; transform: translateX(-50%); width: min(360px, calc(100vw - 32px));
+  display: grid; gap: 4px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted);
+  background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 8px 12px; }
+.slice-bar input { width: 100%; }
+body.quizzing .slice-bar { left: auto; right: 16px; transform: none; }
+
+/* Details panel: the selected structure and the ways to go deeper. */
+.details { position: fixed; z-index: 7; right: 16px; top: 56px; width: min(300px, calc(100vw - 32px)); max-height: calc(100vh - 140px); overflow: auto;
+  background: var(--panel); border: 1px solid var(--accent); border-radius: 14px; padding: 14px 16px; backdrop-filter: blur(6px); }
+.details-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.details h2 { font-size: 1.1rem; margin: 0 0 2px; }
+.details .fine { margin: 0; }
+.icon-btn { background: none; border: 0; color: var(--muted); font-size: 1.3rem; line-height: 1; padding: 2px 6px; border-radius: 8px; }
+.icon-btn:hover { color: var(--text); background: rgba(255, 255, 255, 0.07); }
+.details-go { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0 8px; }
+.go { background: rgba(79, 179, 255, 0.14); color: var(--text); border: 1px solid var(--accent); border-radius: 10px; padding: 9px 8px; font-weight: 700; }
+.go[aria-pressed="true"] { background: rgba(79, 179, 255, 0.32); }
+.go:disabled { opacity: 0.4; border-color: var(--border); background: transparent; cursor: not-allowed; }
+#details-note { margin: 2px 0 6px; }
+.details-list, .quiz-results { display: grid; gap: 4px; margin: 4px 0 8px; }
+.list-item { text-align: left; background: transparent; color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 7px 10px; font-size: 0.88rem; font-weight: 600; }
+.list-item:hover { border-color: var(--accent); }
+.list-item small { display: block; font-weight: 500; color: var(--muted); font-size: 0.75rem; }
+.details-actions { display: flex; flex-wrap: wrap; gap: 4px 14px; border-top: 1px solid var(--border); padding-top: 8px; margin-top: 4px; }
+.link { background: none; border: 0; padding: 2px 0; color: var(--accent); font-size: 0.85rem; font-weight: 600; }
+.link[hidden] { display: none; }
+
+/* Landing card: the body map or the quiz chooser, on the left under the top bar. */
+.card.intro { top: 56px; bottom: auto; max-height: calc(100vh - 72px); width: min(480px, calc(100vw - 32px)); }
+.intro .lead { color: var(--muted); }
+.bodymap { gap: 18px; }
+.figure { width: auto; height: min(52vh, 400px); max-width: 180px; }
+.bodymap-side { min-width: 0; }
+.search input { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: #0f1419; color: var(--text); font: inherit; margin: 4px 0 10px; }
+.search input:focus { outline: 2px solid var(--accent); outline-offset: 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Links between scales in a slide or cell view, and the quiz button in every view. */
+.deep-links { position: fixed; z-index: 7; left: 16px; bottom: 16px; display: flex; flex-wrap: wrap; gap: 6px; max-width: min(560px, calc(100vw - 140px)); }
+.deep-links .chip { background: var(--panel); }
+.quiz-fab { position: fixed; z-index: 8; right: 16px; bottom: 22px; display: flex; align-items: center; gap: 6px;
+  background: var(--panel); color: var(--text); border: 1px solid var(--accent); border-radius: 999px; padding: 7px 14px 7px 8px; font-weight: 700; font-size: 0.88rem; }
+.quiz-fab span { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #04121f; font-size: 0.85rem; }
+body.mode-volume .quiz-fab { bottom: 80px; }
+
+/* Credits: the licence lines, one click away; a short study note stays on screen. */
+.attribution { position: fixed; z-index: 15; right: 16px; top: 52px; width: min(440px, calc(100vw - 32px)); max-height: calc(100vh - 70px); overflow: auto;
+  background: #161c24; border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; font-size: 0.76rem; color: var(--muted); display: grid; gap: 6px; }
+.credits-head { display: flex; justify-content: space-between; align-items: center; color: var(--text); font-size: 0.85rem; }
+.study-note { position: fixed; right: 16px; bottom: 2px; margin: 0; font-size: 0.66rem; pointer-events: none; }
+body.mode-volume .study-note, body.quizzing .study-note { display: none; }
+
+@media (max-width: 720px) {
+  .topbar { padding: 0 8px; gap: 6px; }
+  .topbar .brand { font-size: 0.9rem; }
+  body:not(.landing) .brand-full { display: none; } /* a home mark leaves room for the breadcrumb */
+  body:not(.landing) .brand-short { display: inline; font-size: 1.15rem; }
+  body.details-open .quiz-fab, body:not(.landing) .study-note { display: none; }
+  .crumb { max-width: 30vw; font-size: 0.85rem; padding: 4px 3px; }
+  .mode-toggle button { padding: 4px 8px; font-size: 0.78rem; }
+  .credits-toggle { font-size: 0.75rem; }
+  .card.intro { left: 8px; right: 8px; width: auto; top: 52px; max-height: calc(100vh - 60px); }
+  .figure { height: min(38vh, 300px); max-width: 120px; }
+  .toolbar { bottom: 8px; }
+  .toolbar .tool { padding: 6px 9px; }
+  body.mode-mesh .card.question, body.mode-mesh .card.results { bottom: 64px; }
+  body.quizzing .toolbar { left: 50%; right: auto; transform: translateX(-50%); }
+  .details { left: 8px; right: 8px; width: auto; top: auto; bottom: 64px; max-height: 46vh; }
+  .slice-bar { bottom: 60px; }
+  body.quizzing .slice-bar { left: 50%; right: auto; transform: translateX(-50%); }
+  .quiz-fab { bottom: 64px; right: 8px; }
+  .deep-links { left: 8px; bottom: 8px; max-width: calc(100vw - 110px); }
 }
+/* Over a scan, film or slide the bar stays see-through, so the viewer's own edge letters show beneath it. */
+body:not(.mode-mesh):not(.landing) .topbar { background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0)); border-bottom-color: transparent; }

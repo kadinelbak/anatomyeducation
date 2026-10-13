@@ -23,11 +23,12 @@ const DEFAULT_VIEW_LABELS = { palmar: "Palm", dorsal: "Back", lateral: "Thumb si
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 const HIGHLIGHT_GOOD = new THREE.Color(0x2ee68a);
 const HIGHLIGHT_BAD = new THREE.Color(0xff3b3b);
+const HIGHLIGHT_SELECT = new THREE.Color(0x4fb3ff); // explore mode: the structure open in the details panel
 
 // Several mesh renderers (one per model) can share the page; only the active
 // one draws, owns the layer checkboxes, slice slider, view and zoom buttons,
 // and the attribution line. The switch calls setActive().
-export async function createMeshRenderer({ container, modelUrl, structuresUrl, onPick }) {
+export async function createMeshRenderer({ container, modelUrl, structuresUrl, onPick, onSelect }) {
   let LAYERS = OLD_LAYERS;
   let active = false;
   const ATTEMPTS = [
@@ -331,12 +332,17 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
 
   function applyLayers() {
     for (const layer of LAYERS) {
-      for (const mesh of meshesByLayer.get(layer) || []) mesh.visible = layerOn[layer];
+      for (const mesh of meshesByLayer.get(layer) || []) mesh.visible = layerOn[layer] && shown(mesh.userData.structure);
       const box = document.querySelector(`input[data-layer="${layer}"]`);
       if (box) box.checked = layerOn[layer];
     }
     updateCaps();
   }
+
+  // Explore mode can hide one structure or isolate one (everything else hidden); layers still apply.
+  const hiddenStructures = new Set();
+  let isolated = null;
+  const shown = (s) => !hiddenStructures.has(s) && (!isolated || s === isolated);
 
   function setLayers(spec) {
     for (const layer of LAYERS) layerOn[layer] = !!spec[layer];
@@ -435,14 +441,6 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
   window.addEventListener("keyup", (e) => { if (e.key === "Shift") setShiftPan(false); });
   window.addEventListener("blur", () => setShiftPan(false));
 
-  if (!$("controls-toggle").dataset.bound) {
-    $("controls-toggle").dataset.bound = "1";
-    $("controls-toggle").addEventListener("click", () => {
-      const open = $("controls").classList.toggle("open");
-      $("controls-toggle").setAttribute("aria-expanded", open);
-    });
-  }
-
   // ---------- Picking ----------
 
   const raycaster = new THREE.Raycaster();
@@ -464,7 +462,7 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
 
   function pick(clientX, clientY) {
     const targets = [];
-    for (const [layer, meshes] of meshesByLayer) if (layer !== "skin" && layerOn[layer]) targets.push(...meshes);
+    for (const [layer, meshes] of meshesByLayer) if (layer !== "skin" && layerOn[layer]) targets.push(...meshes.filter((m) => m.visible));
     const direct = pickAt(clientX, clientY, targets);
     if (direct && THIN_LAYERS.has(direct.layer)) return direct.structure;
     const thin = targets.filter((m) => THIN_LAYERS.has(m.userData.layer));
@@ -504,6 +502,7 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
       if (s) onPick(s);
     } else {
       showLabel(s, e.clientX, e.clientY);
+      onSelect?.(s); // explore mode: a click opens (or, on empty space, closes) the details panel
     }
   });
 
@@ -566,18 +565,63 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
     requestAnimationFrame(tick);
   }
 
+  // Dolly the camera towards (f < 1) or away from (f > 1) the orbit target.
+  function zoomBy(f) {
+    const offset = camera.position.clone().sub(controls.target);
+    const len = THREE.MathUtils.clamp(offset.length() * f, controls.minDistance, controls.maxDistance);
+    Object.assign(viewTween, {
+      active: true, start: performance.now(),
+      fromPos: camera.position.clone(), toPos: controls.target.clone().add(offset.setLength(len)),
+      fromTarget: controls.target.clone(), toTarget: controls.target.clone(),
+    });
+  }
+  // Frame one structure from the current viewing direction (or the current region when none is given).
+  function fit(structure) {
+    const meshes = (structure && meshesByStructure.get(structure)) || [];
+    if (!meshes.length) { setView(currentView, currentFocus); return; }
+    const box = new THREE.Box3();
+    for (const m of meshes) box.expandByObject(m);
+    const center = box.getCenter(new THREE.Vector3());
+    const size = Math.max(box.getSize(new THREE.Vector3()).length(), 0.08);
+    const aspect = window.innerWidth / window.innerHeight;
+    const dist = THREE.MathUtils.clamp((size * 0.6) / Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) / Math.min(1, aspect * 1.4), controls.minDistance * 1.5, controls.maxDistance);
+    const dir = camera.position.clone().sub(controls.target).normalize();
+    Object.assign(viewTween, {
+      active: true, start: performance.now(),
+      fromPos: camera.position.clone(), toPos: center.clone().add(dir.multiplyScalar(dist)),
+      fromTarget: controls.target.clone(), toTarget: center,
+    });
+  }
+
   await loadModel();
   tick();
 
   return {
     show({ view, layers, focus = "all" }) {
+      hiddenStructures.clear(); isolated = null; // a question always sees the whole model
       slider.value = 0;
       applySlice();
       setLayers(Object.fromEntries(layers.map((l) => [l, true])));
       setView(view, focus);
       label.hidden = true;
     },
-    highlight(id, kind) { highlight(id, kind === "good" ? HIGHLIGHT_GOOD : HIGHLIGHT_BAD); },
+    highlight(id, kind) { highlight(id, kind === "good" ? HIGHLIGHT_GOOD : kind === "select" ? HIGHLIGHT_SELECT : HIGHLIGHT_BAD); },
+    zoomBy,
+    fit,
+    // The layer a structure is drawn on ("muscle", "nerve", ...), or null if the model lacks it.
+    layerOf(id) { return meshesByStructure.get(id)?.[0]?.userData.layer || null; },
+    has(id) { return meshesByStructure.has(id); },
+    hide(id) { hiddenStructures.add(id); if (isolated === id) isolated = null; applyLayers(); },
+    isolate(id) { isolated = id || null; applyLayers(); },
+    get isolated() { return isolated; },
+    get hiddenCount() { return hiddenStructures.size + (isolated ? 1 : 0); },
+    showAll() { hiddenStructures.clear(); isolated = null; applyLayers(); },
+    // The region (zoom button) whose structures include this one, for the breadcrumb.
+    regionOf(id) {
+      const hidden = new Set(meta?.hiddenRegions || []);
+      for (const [k, keys] of Object.entries(meta?.regions || {})) if (k !== "all" && !hidden.has(k) && Array.isArray(keys) && keys.includes(id)) return k;
+      return null;
+    },
     clearHighlight,
     name: labelName,
     setDefaultLayers() { setLayers(DEFAULT_LAYERS); },

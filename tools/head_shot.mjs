@@ -1,15 +1,16 @@
 // Screenshot the head model from the body map, then its Base view: node tools/head_shot.mjs [base]
 import { chromium } from "playwright";
-const base = process.argv[2] || "http://127.0.0.1:8124/";
+const base = process.argv[2] || "http://127.0.0.1:8000/";
 const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium", args: ["--use-gl=angle", "--use-angle=swiftshader", "--ignore-gpu-blocklist", "--enable-unsafe-swiftshader"] });
 const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
 page.on("pageerror", (e) => console.log("PAGEERROR", e.message));
 const idle = () => page.waitForFunction(() => document.getElementById("loading").hidden && !document.getElementById("start").disabled, null, { timeout: 180000 });
 await page.goto(base); await idle();
-await page.click(".figure .zone[data-region='head'] circle"); await idle();
+await page.click(".figure .zone[data-region='head']"); await idle();
 await page.click("#controls-toggle").catch(() => {});
 await page.waitForTimeout(1200);
 await page.screenshot({ path: "docs/screenshots/head-model.png" });
+await page.click("#views-toggle");
 await page.click("[data-view='inferior']");
 await page.waitForFunction(() => !window.__app.viewTween.active);
 await page.waitForTimeout(1200);
