@@ -41,6 +41,11 @@ class Handler(SimpleHTTPRequestHandler):
         ".json": "application/json",
     }
 
+    def end_headers(self):
+        # Local dev server: always revalidate, so a reload picks up a fresh sync.
+        self.send_header("Cache-Control", "no-cache")
+        super().end_headers()
+
     def log_message(self, fmt, *args):
         if self.command == "GET":
             return  # quiet static logging
