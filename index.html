@@ -191,7 +191,7 @@
         <button type="button" class="ghost" id="signup-cancel">Not now</button>
       </div>
       <p id="signup-status" class="fine" hidden></p>
-      <p class="fine">One email when new questions launch. No spam, unsubscribe any time.</p>
+      <p class="fine">One email when new questions launch. No spam, unsubscribe any time. We store your email with your score and an anonymous visitor id, and delete it on request. See Credits for the privacy notice.</p>
     </form>
   </dialog>
 
@@ -209,6 +209,8 @@
     <span id="attr-cell" hidden>Cell: <a id="attr-cell-src" target="_blank" rel="noopener"></a>. <span id="attr-cell-note">Stylised 3D model built from primitives, not a reconstruction</span>; organelle names from the <a href="http://geneontology.org/" target="_blank" rel="noopener">Gene Ontology</a> (CC BY 4.0).</span>
     <span id="attr-us" hidden>Ultrasound views are simulated in the browser from the same CT studies (CC BY 4.0); they are teaching simulations, not real scans.</span>
     <span id="attr-bodymap">Body map: outline traced from the whole-body skin and bones of <a href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/" target="_blank" rel="noopener">BodyParts3D</a> (DBCLS), <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.</span>
+    <span id="attr-more">Also used: scans from the <a href="https://medicalsegmentationdecathlon.com/" target="_blank" rel="noopener">Medical Segmentation Decathlon</a> (Antonelli et al., CC BY-SA 4.0), the ICBM 152 2009c brain template (Fonov et al., Montreal Neurological Institute, used with attribution), Allen Institute for Cell Science hiPSC cell images (CC BY 4.0; Viana et al., Nature 2023), and histology from the GTEx Consortium via the NCI Imaging Data Commons (CC BY 4.0) and the Berkshire Community College Bioscience Image Library (CC0). Libraries: <a href="https://threejs.org/" target="_blank" rel="noopener">three.js</a> and Cornerstone3D, both MIT (licence texts in <code>vendor/</code>). We changed the models and scans for this app (simplified, recoloured, cropped, downsampled, labelled). The adapted files keep their source licences; the MRI scans are for non-commercial use only. The app is free and non-commercial; the code is MIT licensed. See <code>NOTICE.md</code> in the project for details.</span>
+    <span id="privacy"><strong>Privacy.</strong> The app stores a random visitor id in your browser (localStorage and sessionStorage) and sends anonymous usage events to our server: which questions you answer, scores, set choices and timing. We do not collect names, accounts or cookies. If you join the notify list, we store your email, score and visitor id to send one email when new questions launch, and delete it on request. To ask for deletion, email elbakkouri.kadin@gmail.com.</span>
   </footer>
 
   <script type="module" src="src/app.js"></script>
