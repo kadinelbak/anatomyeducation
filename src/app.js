@@ -874,7 +874,9 @@ $("share").addEventListener("click", async () => {
 // ---------- Email signup ----------
 
 const dialog = $("signup");
+if (!CONFIG.signupEnabled) $("more").hidden = true;
 $("more").addEventListener("click", () => {
+  if (!CONFIG.signupEnabled) return;
   track("signup_open", { score: engine.state.score });
   $("signup-status").hidden = true;
   dialog.showModal();

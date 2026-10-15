@@ -18,6 +18,8 @@ export const CONFIG = {
   tileBundles: false,
   eventsUrl: "api/event",
   signupUrl: "api/signup",
+  // Email signup is switched off for the public copy. Set to true to show the "more questions" signup again.
+  signupEnabled: false,
   // The PRD requires clinician approval before public launch. Set this to
   // false to hide every question whose review.status is not "approved".
   includeDraftQuestions: true,

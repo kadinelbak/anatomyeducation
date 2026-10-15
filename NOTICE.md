@@ -22,4 +22,4 @@ Changes made: models simplified, recoloured and annotated; scans cropped, downsa
 
 ## Privacy
 
-The app keeps a random visitor id in the browser and sends anonymous usage events (questions answered, scores, set choices, timing) to the project's server. No names, accounts or cookies. Email signups store the email, score and visitor id, and are deleted on request (elbakkouri.kadin@gmail.com). Stored files: `data/events.jsonl`, `data/signups.jsonl` (gitignored).
+The app keeps a random visitor id in the browser and sends anonymous usage events (questions answered, scores, set choices, timing) to the project's server. No names, emails, accounts or cookies. Email signup is switched off (`signupEnabled: false` in `src/config.js`); if it is turned back on, the notice must say that emails are stored. Contact: elbakkouri.kadin@gmail.com. Stored files: `data/events.jsonl`, `data/signups.jsonl` (gitignored).

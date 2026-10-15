@@ -274,3 +274,7 @@ body.mode-volume .study-note, body.quizzing .study-note { display: none; }
 }
 /* Over a scan, film or slide the bar stays see-through, so the viewer's own edge letters show beneath it. */
 body:not(.mode-mesh):not(.landing) .topbar { background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0)); border-bottom-color: transparent; }
+
+.privacy-note { display: block; margin-top: 6px; font-size: 0.72rem; color: var(--muted); }
+.privacy-note summary { cursor: pointer; display: inline; text-decoration: underline; }
+#more[hidden] { display: none; }
