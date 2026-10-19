@@ -11,17 +11,31 @@ clinical cases). No accounts, no build step.
 python3 tools/serve.py            # http://127.0.0.1:8000
 ```
 
-`serve.py` serves the page and also collects anonymous analytics events and
-email signups into `data/events.jsonl` and `data/signups.jsonl`. Read the
-milestone metrics with:
+`serve.py` serves the page and also keeps a local JSON copy of the analytics
+events in `data/events.jsonl` (and of signups in `data/signups.jsonl` when the
+built-in signup dialog is used). Read the milestone metrics with:
 
 ```
 python3 tools/report.py
 ```
 
-Any static host can serve the page too (everything is plain files); point
-`src/config.js` at wherever events and signups should go, or set both URLs to
-`""` to disable them.
+Any static host can serve the page too (everything is plain files).
+
+## Hosted services
+
+Two third-party scripts are loaded from `index.html`; the page works without
+them (ad blockers, offline), it just counts and collects nothing.
+
+- **Kit** (kit.com) hosts the email signup. The "Get 50 more questions" button
+  opens Kit's modal form `0580fa41c5` (`kitFormUid` in `src/config.js`); Kit
+  stores the emails, and the dashboard at kit.com lists subscribers. Set
+  `kitFormUid` to `""` to use the built-in dialog that posts to `signupUrl`
+  instead. The form's display timing is set on kit.com (Grow › Forms › Settings
+  › Display): leave it to open only on click, or Kit pops it up on its own.
+- **GoatCounter** (kadin.goatcounter.com) counts page views and the events
+  below. It stores nothing in the visitor's browser and keeps no IP addresses.
+  Views from localhost are not counted, so local testing does not show up
+  there; the local `data/events.jsonl` copy does record them.
 
 ## Layout
 
@@ -139,6 +153,11 @@ a third argument if Playwright has no browser of its own.
 `visit` (with `via`: direct, referral, share), `return_visit` (a visitor back
 between 1 hour and 7 days after their first visit), `start` (`set`, `n`),
 `answer` (`q`, `qid`, `correct`, `clicked`, `ms`, `set`, `n`), `finish`
-(`score`, `seconds`, `set`, `n`), `share_click`, `signup_open`, `signup`. Every event carries a random `visitor` id
-(localStorage) and `session` id (sessionStorage); no personal data. Emails go
-only to `data/signups.jsonl`.
+(`score`, `seconds`, `set`, `n`), `share_click`, `signup_open`, `signup` (on
+Kit's `ckjs:submission:complete` event), plus `explore`, `select`, `quit` and
+`quiz_fab` from the explore UI. `src/analytics.js` sends each one to
+GoatCounter as an event count (`start`, `answer-correct`, `answer-wrong`,
+`finish-7of10`, `share-click`, `signup-open`, `signup`, `visit-share`, ...;
+GoatCounter keeps counts per name, so the other fields are dropped) and, when
+`eventsUrl` is set, as JSON to `serve.py` with a random `visitor` id
+(localStorage) and `session` id (sessionStorage); no personal data.

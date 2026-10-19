@@ -875,8 +875,20 @@ $("share").addEventListener("click", async () => {
 
 const dialog = $("signup");
 if (!CONFIG.signupEnabled) $("more").hidden = true;
+if (CONFIG.kitFormUid) {
+  // Kit's runtime (loaded by the data-uid script tag in index.html) opens its modal form on
+  // any click of an element with data-formkit-toggle, so the button needs no handler of its own.
+  $("more").dataset.formkitToggle = CONFIG.kitFormUid;
+  $("more").addEventListener("click", () => {
+    track("signup_open", { score: engine.state.score });
+    // If the Kit script was blocked or has not loaded, open the form page instead.
+    if (!document.querySelector(`form[data-uid="${CONFIG.kitFormUid}"]`) && CONFIG.kitFormUrl) window.open(CONFIG.kitFormUrl, "_blank", "noopener");
+  });
+  // Kit fires this (bubbling) when a subscription was accepted.
+  document.addEventListener("ckjs:submission:complete", () => track("signup", { score: engine.state.score }));
+}
 $("more").addEventListener("click", () => {
-  if (!CONFIG.signupEnabled) return;
+  if (!CONFIG.signupEnabled || CONFIG.kitFormUid) return;
   track("signup_open", { score: engine.state.score });
   $("signup-status").hidden = true;
   dialog.showModal();

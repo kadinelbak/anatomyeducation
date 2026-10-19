@@ -16,10 +16,16 @@ export const CONFIG = {
   textAssets: false,
   // Slide tiles as one JSON bundle per pyramid level (tools/bundle_tiles.py) instead of one file per tile.
   tileBundles: false,
+  // Optional JSON copy of each event for tools/serve.py and tools/report.py (local only; "" to
+  // disable). Counts always go to GoatCounter when its script tag is on the page (see index.html).
   eventsUrl: "api/event",
+  // Kit (kit.com) modal signup form. When set, "Get 50 more questions" opens this form and
+  // signupUrl is unused. Set to "" to fall back to the built-in dialog that posts to signupUrl.
+  kitFormUid: "0580fa41c5",
+  kitFormUrl: "https://kadin-el-bakkouri.kit.com/0580fa41c5",
   signupUrl: "api/signup",
-  // Email signup is switched off for the public copy. Set to true to show the "more questions" signup again.
-  signupEnabled: false,
+  // Shows the "Get 50 more questions" button on the results card.
+  signupEnabled: true,
   // The PRD requires clinician approval before public launch. Set this to
   // false to hide every question whose review.status is not "approved".
   includeDraftQuestions: true,

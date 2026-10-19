@@ -200,11 +200,15 @@ if (process.env.CT) {
     console.log("note: clipboard not readable here, skipped the shared-link check");
   }
 
-  await page.click("#more");
-  await page.fill("#signup-email", "smoke-test@example.com");
-  await page.click("#signup-submit");
-  await page.waitForSelector("#signup-status:not([hidden])");
-  console.log("signup:", await page.textContent("#signup-status"));
+  if (await page.getAttribute("#more", "data-formkit-toggle")) {
+    console.log("signup: Kit form configured, built-in dialog not tested");
+  } else {
+    await page.click("#more");
+    await page.fill("#signup-email", "smoke-test@example.com");
+    await page.click("#signup-submit");
+    await page.waitForSelector("#signup-status:not([hidden])");
+    console.log("signup:", await page.textContent("#signup-status"));
+  }
 }
 
 if (errors.length) { failures++; console.log("page errors:\n  " + errors.join("\n  ")); }
