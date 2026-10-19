@@ -1,6 +1,6 @@
 # Notices and licences
 
-The app's code is released under the MIT licence (see `LICENSE`). The app is run as a non-commercial, free educational project. Third-party material keeps its own licence, listed below and not covered by the MIT licence. The same list is shown in the app under Credits.
+The app's code is released under the PolyForm Noncommercial License 1.0.0 (see `LICENSE`), and the project's own content (question text, labels, maps, body map, stylised cells and diagrams) under CC BY-NC-SA 4.0 (see `LICENSE-CONTENT.md`). The app is run as a non-commercial, free educational project. Third-party material keeps its own licence, listed below and not covered by either project licence. The same list is shown in the app under Credits.
 
 | Material | Licence | Credit |
 |---|---|---|
@@ -14,7 +14,7 @@ The app's code is released under the MIT licence (see `LICENSE`). The app is run
 | Allen Cell hiPSC models | CC BY 4.0 | Allen Institute for Cell Science; Viana et al., Nature 2023 |
 | GTEx histology via NCI Imaging Data Commons | CC BY 4.0 | GTEx Consortium |
 | Bone histology | CC0 | Berkshire Community College Bioscience Image Library |
-| Stylised cell models and diagrams | CC BY-SA 4.0 | Hand Nerves 3D project |
+| Stylised cell models and diagrams, question text, labels, body map | CC BY-NC-SA 4.0 | Hand Nerves 3D project |
 | Cell Ontology, Gene Ontology | CC BY 4.0 | OBO Foundry, Gene Ontology Consortium |
 | three.js, Cornerstone3D | MIT | see `vendor/*/LICENSE` |
 
