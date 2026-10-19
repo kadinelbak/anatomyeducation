@@ -14,6 +14,7 @@ import { loadStudy, resolveView, defaultWindow, modalityLabel, PLANES, PLANE_AXE
 
 const GOOD = [0x2e / 255, 0xe6 / 255, 0x8a / 255];
 const BAD = [1, 0x3b / 255, 0x3b / 255];
+const SELECT = [0x4f / 255, 0xb3 / 255, 1];
 const ORIENT = {
   axial: Enums.OrientationAxis.AXIAL,
   coronal: Enums.OrientationAxis.CORONAL,
@@ -146,7 +147,7 @@ export async function createVolumeRenderer({ container, studyUrl, studiesBase = 
       let c = [0, 0, 0], a = 0;
       if (v > 0 && state.outline && meta.structures[String(v)]) { c = hsv(((v * 0.381966) % 1)); a = 0.18; }
       const h = state.highlights.get(v);
-      if (v > 0 && h) { c = h === "good" ? GOOD : BAD; a = 0.45; }
+      if (v > 0 && h) { c = h === "good" ? GOOD : h === "select" ? SELECT : BAD; a = 0.45; }
       rgb.push(v, c[0], c[1], c[2]);
       op.push({ value: v, opacity: a });
     }
@@ -424,7 +425,7 @@ export async function createVolumeRenderer({ container, studyUrl, studiesBase = 
       if (loading || !volume) return;
       const val = volume.valueOf(key);
       if (val === undefined) return;
-      state.highlights.set(val, kind === "good" ? "good" : "bad");
+      state.highlights.set(val, kind === "good" || kind === "select" ? kind : "bad");
       if (!sliceHas(val)) {
         const b = volume.boundsOf(key);
         if (b) setDepth(b.centroid[depthAxis()]);

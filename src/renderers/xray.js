@@ -13,7 +13,7 @@ try {
   }
 } catch { /* styling is cosmetic */ }
 
-const TINT = { good: "#3fb950", bad: "#f85149" };
+const TINT = { good: "#3fb950", bad: "#f85149", select: "#4fb3ff" };
 const GROUP_COLOR = { bone: "#ffd24a", heart: "#ff6b6b", organ: "#4ecdc4", lung: "#7cc4ff", hollow: "#ffa657",
   vessel: "#ff7eb6", muscle: "#c9a0ff", nervous: "#a5f36b" };
 const GROUPS = { all: null, bones: ["bone"], lungs: ["lung"], heart: ["heart", "vessel"], organs: ["organ", "hollow", "muscle"] };
@@ -489,7 +489,7 @@ export async function createXrayRenderer({ container, studiesBase = "assets/volu
       if (loading || !volume) return;
       const v = volume.valueOf(key);
       if (v === undefined) return;
-      highlights.set(v, kind === "good" ? "good" : "bad");
+      highlights.set(v, TINT[kind] ? kind : "bad");
       hlDirty = true; syncUI(); mark();
     },
     clearHighlight() { highlights.clear(); hlDirty = true; if (volume) syncUI(); mark(); },
