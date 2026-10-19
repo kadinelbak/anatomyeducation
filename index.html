@@ -181,6 +181,15 @@
 
   <button id="quiz-fab" class="quiz-fab" type="button" title="Quiz me on this view" hidden><span aria-hidden="true">?</span> Quiz</button>
 
+  <!-- A tapped structure is highlighted and waits here until it is confirmed as the answer -->
+  <div id="answer-confirm" class="answer-confirm" role="group" aria-label="Confirm your answer" hidden>
+    <p>Confirm this answer?</p>
+    <div class="answer-actions">
+      <button type="button" class="primary" id="answer-confirm-ok">Confirm</button>
+      <button type="button" class="ghost answer-close" id="answer-confirm-close" aria-label="Pick again">&times;</button>
+    </div>
+  </div>
+
   <div id="hover-label" class="hover-label" hidden></div>
 
   <!-- Email signup -->

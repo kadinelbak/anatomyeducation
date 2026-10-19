@@ -87,6 +87,15 @@ body.mode-volume #controls, body.mode-xray #controls, body.mode-ultrasound #cont
 
 .attribution a { color: var(--muted); }
 
+/* Answer confirmation: a small bar along the bottom edge while a tapped structure waits to be confirmed. */
+.answer-confirm { position: fixed; z-index: 9; left: 50%; bottom: 24px; transform: translateX(-50%); width: min(480px, calc(100vw - 32px)); padding: 12px 14px;
+  display: flex; align-items: center; gap: 12px; background: #161c24; color: var(--text); border: 1px solid var(--border); border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45); }
+.answer-confirm[hidden] { display: none; }
+.answer-confirm p { margin: 0; flex: 1; line-height: 1.4; }
+.answer-actions { display: flex; align-items: center; gap: 6px; }
+.answer-close { padding: 6px 11px; font-size: 1.1rem; line-height: 1; }
+@media (max-width: 720px) { .answer-confirm { bottom: 72px; } }
 .signup { background: #161c24; color: var(--text); border: 1px solid var(--border); border-radius: 14px; width: min(420px, calc(100vw - 32px)); padding: 20px; }
 .signup::backdrop { background: rgba(0, 0, 0, 0.6); }
 .signup input[type=email] { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: #0f1419; color: var(--text); font: inherit; }

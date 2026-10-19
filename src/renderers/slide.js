@@ -13,7 +13,7 @@ try {
   }
 } catch { /* styling is cosmetic */ }
 
-const TINT = { good: "#3fb950", bad: "#f85149" };
+const TINT = { good: "#3fb950", bad: "#f85149", select: "#4fb3ff" };
 const GROUP_COLOR = { cell: "#2f6feb", organelle: "#ffd24a", connective: "#3fb9a8", vessel: "#ff7a00", nerve: "#a5f36b", bone: "#8b949e" };
 const GROUP_LABEL = { all: "All", cell: "Cells", organelle: "Organelles", connective: "Connective", vessel: "Vessels" };
 const MAX_ZOOM = 40, CACHE_MAX = 500;
@@ -507,7 +507,7 @@ export async function createSlideRenderer({ container, studiesBase = "assets/sli
     get studyId() { return studyId; },
     highlight(key, kind) {
       if (!cur || !cur.byKey.has(key)) return;
-      highlights.set(key, kind === "good" ? "good" : "bad"); mark();
+      highlights.set(key, TINT[kind] ? kind : "bad"); mark();
     },
     clearHighlight() { highlights.clear(); mark(); },
     name: (key) => cur?.byKey.get(key)?.name || cur?.study.structures?.[key]?.name || key,

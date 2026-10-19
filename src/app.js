@@ -42,7 +42,7 @@ let selectedSet = "daily";
 const renderer = createRendererSwitch({
   viewer: $("viewer"),
   models: CONFIG.models,
-  onPick: (id) => engine.answer(id),
+  onPick: (id) => proposeAnswer(id),
   onSelect: (id) => onStructureClick(id),
   onChange: (kind, id, meta) => {
     // One attribution line per source: the mesh renderer shows its model's line when active,
@@ -141,6 +141,7 @@ await renderer.activate("mesh", initial.renderer === "mesh" ? initial.model : un
 
 const ui = {
   showIntro() {
+    clearAnswerProposal();
     $("question").hidden = true;
     $("results").hidden = true;
     STATS_HIDDEN();
@@ -159,6 +160,7 @@ const ui = {
     setChrome();
   },
   showQuestion({ number, kind, prompt, hint }) {
+    clearAnswerProposal();
     $("qkind").textContent = `Question ${number} · ${kind}`;
     $("qprompt").textContent = prompt;
     $("qhint").textContent = hint;
@@ -372,6 +374,32 @@ $("explore-back").addEventListener("click", () => {
   setMode("explore", { stay: true });
   engine.intro();
 });
+
+// ---------- Confirming an answer ----------
+// A tap on a structure does not answer yet: the structure is highlighted and a small bar along the
+// bottom edge asks to confirm, so a slip of the finger can be undone. Confirm sends the answer; the X
+// clears it and the question stays, and tapping another structure moves the highlight to that one.
+// The bar does not name the structure, so it never gives the answer away.
+let pendingAnswer = null;
+function proposeAnswer(id) {
+  if (engine.state.state !== "asking") return;
+  pendingAnswer = id;
+  renderer.clearHighlight();
+  try { renderer.highlight(id, "select"); } catch { /* not every renderer can tint every key */ }
+  $("answer-confirm").hidden = false;
+}
+function clearAnswerProposal() {
+  if (pendingAnswer !== null) renderer.clearHighlight();
+  pendingAnswer = null;
+  $("answer-confirm").hidden = true;
+}
+$("answer-confirm-ok").addEventListener("click", () => {
+  const id = pendingAnswer;
+  if (id === null) return;
+  clearAnswerProposal();
+  engine.answer(id);
+});
+$("answer-confirm-close").addEventListener("click", () => clearAnswerProposal());
 
 // ---------- Zoom between levels (organ -> tissue -> cell) ----------
 // A slide study lists the structures it is a section of (`sections`, structure keys of the limb models) and the cell types on it

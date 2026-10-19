@@ -34,6 +34,7 @@ try {
 // instead of shape/pos/size. With window.__CONFIG_TEXT_ASSETS === true "<model>.b64.txt" is fetched and decoded.
 const HIGHLIGHT_GOOD = new THREE.Color(0x2ee68a);
 const HIGHLIGHT_BAD = new THREE.Color(0xff3b3b);
+const HIGHLIGHT_SELECT = new THREE.Color(0x4fb3ff); // a tapped structure waiting to be confirmed
 const CUT_OPACITY = 0.15;
 const TWEEN_MS = 400;
 const nextFrame = () => new Promise((r) => requestAnimationFrame(r));
@@ -424,7 +425,7 @@ export async function createCellRenderer({ container, studiesBase = "assets/cell
     dgHighlighted.clear();
   }
   function highlight(key, kind) {
-    const tint = kind === "good" ? HIGHLIGHT_GOOD : HIGHLIGHT_BAD;
+    const tint = kind === "good" ? HIGHLIGHT_GOOD : kind === "select" ? HIGHLIGHT_SELECT : HIGHLIGHT_BAD;
     const list = byKey.has(key) ? [byKey.get(key)] : byBase.get(key) || []; // a base key tints every stamped copy
     for (const m of list) {
       m.material.emissive.copy(tint).multiplyScalar(0.7);

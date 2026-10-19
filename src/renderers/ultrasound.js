@@ -5,7 +5,7 @@ import { skinContour, probePose, renderBMode, scanConvert, labelAtPixel, depthTo
 
 const W = 512, H = 512, SECTOR = 70, MINI = 150;
 const GROUP_RGB = { bone: [230, 237, 243], heart: [255, 107, 107], hollow: [240, 160, 48], lung: [126, 200, 255], muscle: [199, 125, 74], nervous: [255, 225, 74], organ: [95, 224, 138], vessel: [255, 79, 163] };
-const GOOD = [63, 185, 80], BAD = [248, 81, 73];
+const GOOD = [63, 185, 80], BAD = [248, 81, 73], SELECT = [79, 179, 255];
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const wrap360 = (a) => ((a % 360) + 360) % 360;
 
@@ -160,7 +160,7 @@ export async function createUltrasoundRenderer({ container, studiesBase = "asset
       for (let p = 0; p < n; p++) {
         const q = pix[p], h = state.highlights.get(labelPix[q]);
         if (!h) continue;
-        const c = h === "good" ? GOOD : BAD, o = q * 4;
+        const c = h === "good" ? GOOD : h === "select" ? SELECT : BAD, o = q * 4;
         d[o] = d[o] * 0.55 + c[0] * 0.45; d[o + 1] = d[o + 1] * 0.55 + c[1] * 0.45; d[o + 2] = d[o + 2] * 0.55 + c[2] * 0.45;
       }
     }
@@ -435,7 +435,7 @@ export async function createUltrasoundRenderer({ container, studiesBase = "asset
       if (loading || !volume) return;
       const v = volume.valueOf(key);
       if (v === undefined) return;
-      state.highlights.set(v, kind === "good" ? "good" : "bad");
+      state.highlights.set(v, kind === "good" || kind === "select" ? kind : "bad");
       if (frame.valid) draw();
     },
     clearHighlight() { state.highlights.clear(); if (frame.valid && !loading) draw(); },
