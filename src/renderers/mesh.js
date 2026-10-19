@@ -66,7 +66,9 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
   window.addEventListener("pagehide", releaseGL);
   window.addEventListener("beforeunload", releaseGL);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  // The viewer fills its container, not the window: on phones the Explore shelf shortens it (styles.css).
+  const viewSize = () => ({ w: container.clientWidth || window.innerWidth, h: container.clientHeight || window.innerHeight });
+  { const { w, h } = viewSize(); renderer.setSize(w, h); }
   renderer.localClippingEnabled = true;
   renderer.domElement.hidden = true;
   container.appendChild(renderer.domElement);
@@ -396,6 +398,39 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
     if (box.isEmpty()) for (const m of meshesByLayer.get("bone") || []) box.expandByObject(m);
     return box;
   }
+  // Camera distance and target that frame a box in the viewer at its current size.
+  function framing(box) {
+    const center = box.getCenter(new THREE.Vector3());
+    const size = box.getSize(new THREE.Vector3()).length();
+    const { w, h } = viewSize();
+    const aspect = w / h;
+    let dist = (size * 0.5) / Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) / Math.min(1, aspect * 1.4);
+    if (h < window.innerHeight) dist *= 1.12; // a shelf below the viewer: pull back so the model clears the top bar too
+    const target = center.clone();
+    // On a tall phone viewer the question or details card covers the lower half, so aim below the
+    // model's centre to push it into the top half of the screen. On the landing nothing covers the
+    // viewer (the Explore shelf sits below it), so the model stays centred.
+    if (aspect < 0.8 && !document.body.classList.contains("landing")) target.y -= size * 0.3;
+    return { dist, target };
+  }
+  // Keep the current region framed after the viewer changes size (phone shelf, rotation), from the current direction.
+  function reframe() {
+    if (!meta) return;
+    const box = focusBox(currentFocus);
+    if (box.isEmpty()) return;
+    const { dist, target } = framing(box);
+    const center = box.getCenter(new THREE.Vector3());
+    if (viewTween.active) { // a view change is under way: retarget it rather than cutting it short
+      const dir = viewTween.toPos.clone().sub(viewTween.toTarget).normalize();
+      viewTween.toTarget = target;
+      viewTween.toPos = center.add(dir.multiplyScalar(dist));
+      return;
+    }
+    const dir = camera.position.clone().sub(controls.target).normalize();
+    controls.target.copy(target);
+    camera.position.copy(center.add(dir.multiplyScalar(dist)));
+    controls.update();
+  }
   function setView(name, focus = "all", animate = true) {
     if (!VIEWS[name]) name = "palmar";
     currentView = name;
@@ -403,13 +438,7 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
     document.querySelectorAll("[data-focus]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.focus === focus)));
     const box = focusBox(focus);
     const center = box.getCenter(new THREE.Vector3());
-    const size = box.getSize(new THREE.Vector3()).length();
-    const aspect = window.innerWidth / window.innerHeight;
-    const dist = (size * 0.5) / Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) / Math.min(1, aspect * 1.4);
-    const target = center.clone();
-    // On phones the question card covers the lower half, so aim below the
-    // model's centre to push it into the top half of the screen.
-    if (aspect < 0.8) target.y -= size * 0.3;
+    const { dist, target } = framing(box);
     const pos = center.clone().add(VIEWS[name].clone().normalize().multiplyScalar(dist));
     if (!animate) {
       controls.target.copy(target);
@@ -543,12 +572,17 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
     }
   }
 
-  window.addEventListener("resize", () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
+  let lastSize = viewSize();
+  function resize() {
+    const { w, h } = viewSize();
+    camera.aspect = w / h;
     camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(w, h);
     controls.handleResize();
-  });
+    if (w !== lastSize.w || h !== lastSize.h) { lastSize = { w, h }; reframe(); }
+  }
+  window.addEventListener("resize", resize);
+  if (typeof ResizeObserver === "function") new ResizeObserver(() => { if (active) resize(); }).observe(container);
 
   function tick() {
     if (viewTween.active) {
@@ -633,10 +667,7 @@ export async function createMeshRenderer({ container, modelUrl, structuresUrl, o
       active = !!on;
       renderer.domElement.hidden = !active;
       if (!active) { label.hidden = true; return; }
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      controls.handleResize();
+      resize();
       applyDom();
     },
     get meta() { return meta; },
