@@ -18,6 +18,8 @@ html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: 
 button { font: inherit; cursor: pointer; }
 
 #viewer { position: fixed; inset: 0; touch-action: none; }
+/* On phones the Explore landing is a bottom shelf (see below); the viewer ends where the shelf begins. */
+body.shelf #viewer { bottom: var(--shelf-h, 0px); }
 #viewer canvas { display: block; }
 .viewer-mesh, .viewer-volume, .viewer-xray, .viewer-ultrasound, .viewer-slide, .viewer-cell { position: absolute; inset: 0; }
 body.mode-volume #controls, body.mode-xray #controls, body.mode-ultrasound #controls, body.mode-slide #controls, body.mode-cell #controls { display: none; }
@@ -283,6 +285,31 @@ body.mode-volume .study-note, body.quizzing .study-note { display: none; }
 }
 /* Over a scan, film or slide the bar stays see-through, so the viewer's own edge letters show beneath it. */
 body:not(.mode-mesh):not(.landing) .topbar { background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0)); border-bottom-color: transparent; }
+
+/* Phones: the Explore landing is a shelf along the bottom that the student can fold down to a handle.
+   app.js sets body.shelf while the Explore landing is up, body.shelf-closed when it is folded, and
+   --shelf-h to the shelf's current height so the viewer above it is never covered. */
+.shelf-handle { display: none; }
+@media (max-width: 600px) {
+  body.shelf .card.intro { top: auto; bottom: 0; left: 0; right: 0; width: auto; max-height: 50vh;
+    border-radius: 16px 16px 0 0; border-bottom: 0; padding: 0 14px 12px; display: flex; flex-direction: column; }
+  body.shelf .shelf-handle { display: flex; flex: 0 0 auto; align-items: center; gap: 10px; width: calc(100% + 28px); margin: 0 -14px 6px;
+    padding: 8px 14px 6px; background: none; border: 0; border-bottom: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 1.05rem; text-align: left; }
+  body.shelf .shelf-grip { position: absolute; top: 4px; left: 50%; width: 36px; height: 4px; margin-left: -18px; border-radius: 2px; background: var(--border); }
+  body.shelf .shelf-title { flex: 1 1 auto; }
+  body.shelf .shelf-chevron { color: var(--muted); font-size: 1rem; transition: transform 0.15s; }
+  body.shelf.shelf-closed .shelf-chevron { transform: rotate(180deg); }
+  body.shelf.shelf-closed .card.intro { padding-bottom: 4px; }
+  body.shelf.shelf-closed .shelf-handle { border-bottom: 0; margin-bottom: 0; }
+  body.shelf.shelf-closed #explore-home { display: none; }
+  body.shelf #explore-home { min-height: 0; overflow: auto; }
+  body.shelf #explore-home h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); } /* the handle carries the title */
+  body.shelf .intro .lead { font-size: 0.86rem; margin-bottom: 8px; }
+  body.shelf .bodymap { gap: 12px; margin-bottom: 4px; }
+  body.shelf .figure { height: min(26vh, 220px); max-width: 100px; }
+  body.shelf .explore-regions .chip { padding: 4px 10px; }
+  body.shelf .study-note { display: none; }
+}
 
 .privacy-note { display: block; margin-top: 6px; font-size: 0.72rem; color: var(--muted); }
 .privacy-note summary { cursor: pointer; display: inline; text-decoration: underline; }

@@ -536,9 +536,34 @@ function setChrome() {
   const quizzing = !$("question").hidden || !$("results").hidden;
   document.body.classList.toggle("landing", landing);
   document.body.classList.toggle("quizzing", quizzing);
+  setShelf(landing && mode === "explore");
   $("quiz-fab").hidden = landing || quizzing || !quizSetForView();
   if (landing || quizzing) $("slice-bar").hidden = true;
 }
+
+// Phones: the Explore landing is a shelf along the bottom (styles.css, body.shelf). The student can fold it
+// down to its handle; the choice is remembered. --shelf-h follows the shelf's height so the viewer sits above it.
+const SHELF_KEY = "anatomy.shelf";
+const shelfMedia = window.matchMedia("(max-width: 600px)");
+let shelfClosed = (() => { try { return localStorage.getItem(SHELF_KEY) === "closed"; } catch { return false; } })();
+function setShelf(on) {
+  document.body.classList.toggle("shelf", on);
+  document.body.classList.toggle("shelf-closed", on && shelfClosed);
+  $("shelf-toggle").hidden = !on;
+  $("shelf-toggle").setAttribute("aria-expanded", String(!shelfClosed));
+  measureShelf();
+}
+function measureShelf() {
+  const on = document.body.classList.contains("shelf") && shelfMedia.matches;
+  document.documentElement.style.setProperty("--shelf-h", on ? `${$("intro").offsetHeight}px` : "0px");
+}
+$("shelf-toggle").addEventListener("click", () => {
+  shelfClosed = !shelfClosed;
+  try { localStorage.setItem(SHELF_KEY, shelfClosed ? "closed" : "open"); } catch { /* private mode */ }
+  setShelf(true);
+});
+if (typeof ResizeObserver === "function") new ResizeObserver(measureShelf).observe($("intro"));
+shelfMedia.addEventListener("change", measureShelf);
 
 function closeMenus(except) {
   for (const [btn, menu] of MENUS) if (menu !== except) { $(menu).hidden = true; $(btn).setAttribute("aria-expanded", "false"); }
