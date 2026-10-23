@@ -322,6 +322,66 @@
    "bytes": 2914804,
    "url": "assets/volumes/ts-mr-s0175/study.json",
    "license": "CC BY-NC-SA 4.0"
+  },
+  {
+   "id": "vh-forearm",
+   "region": "forearm",
+   "modality": "CT",
+   "dims": [
+    145,
+    150,
+    105
+   ],
+   "spacing_mm": 1.875,
+   "structures": 4,
+   "bytes": 397702,
+   "url": "assets/volumes/vh-forearm/study.json",
+   "license": "Public domain (NLM Visible Human); labels TotalSegmentator Apache-2.0"
+  },
+  {
+   "id": "vh-thigh",
+   "region": "thigh",
+   "modality": "CT",
+   "dims": [
+    113,
+    136,
+    100
+   ],
+   "spacing_mm": 1.875,
+   "structures": 5,
+   "bytes": 1309386,
+   "url": "assets/volumes/vh-thigh/study.json",
+   "license": "Public domain (NLM Visible Human); labels TotalSegmentator Apache-2.0"
+  },
+  {
+   "id": "vh-leg",
+   "region": "leg",
+   "modality": "CT",
+   "dims": [
+    96,
+    109,
+    190
+   ],
+   "spacing_mm": 1.875,
+   "structures": 5,
+   "bytes": 885862,
+   "url": "assets/volumes/vh-leg/study.json",
+   "license": "Public domain (NLM Visible Human); labels TotalSegmentator Apache-2.0"
+  },
+  {
+   "id": "vh-head-neck",
+   "region": "head",
+   "modality": "CT",
+   "dims": [
+    100,
+    108,
+    127
+   ],
+   "spacing_mm": 2.1094,
+   "structures": 14,
+   "bytes": 908814,
+   "url": "assets/volumes/vh-head-neck/study.json",
+   "license": "Public domain (NLM Visible Human); labels TotalSegmentator Apache-2.0"
   }
  ]
 }
