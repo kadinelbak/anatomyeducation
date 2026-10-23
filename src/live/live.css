@@ -56,3 +56,12 @@ body.live #explore-bar { display: none; }
 .live-toolbar .tool.unavailable { opacity: 0.5; }
 .live-toolnote { margin: 0 8px; align-self: center; font-size: 13px; color: var(--muted, #9aa7b3); white-space: nowrap; }
 .live-toolnote:empty { display: none; }
+
+/* Lock, calibrate, record */
+.live-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.live-calibrate, .live-pill .live-unlock, .live-pill .live-record { flex: none; border-radius: 999px; border: 1px solid var(--border); background: rgba(255, 255, 255, 0.08); color: var(--text); font-size: 0.8rem; font-weight: 600; padding: 4px 10px; cursor: pointer; }
+.live-calibrate:hover, .live-pill .live-unlock:hover, .live-pill .live-record:hover { border-color: var(--accent); }
+.live-pill .live-unlock { background: rgba(79, 179, 255, 0.18); color: var(--accent); }
+.live-pill .live-unlock[hidden] { display: none; }
+.live-pill[data-state="recording"] .dot, .live-pill.recording .dot { background: #ff4d4d; animation: live-pulse 1s ease-in-out infinite; }
+.live-stage { cursor: pointer; }

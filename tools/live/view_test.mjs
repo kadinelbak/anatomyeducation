@@ -36,6 +36,14 @@ const pill = await page.waitForFunction(() => document.querySelector(".live-pill
 check(pill.length > 0, `status pill text: "${pill}"`);
 check(await page.evaluate(() => getComputedStyle(document.querySelector("#live video")).transform !== "none"), "video is mirrored");
 await page.waitForTimeout(1500);
+// Calibration: the card is offered once tracking starts; Skip is remembered.
+const skipSel = ".live-card:not([hidden]) button:not(.primary)";
+await page.waitForSelector(skipSel, { timeout: 60000 });
+check((await page.textContent(skipSel)) === "Skip" && (await page.textContent(".live-card button.primary")).startsWith("Calibrate"), "calibration card offers Calibrate and Skip");
+await page.click(skipSel);
+check(await page.evaluate(() => localStorage.getItem("live.calibration.skipped")) === "1", "Skip stores live.calibration.skipped");
+check(await page.isVisible(".live-calibrate"), "Calibrate button in the panel");
+check((await page.$(".live-record")) === null, "no Record button without ?live-debug=1");
 check((await page.evaluate(() => location.hash)) === "#live", "history entry #live pushed");
 const topbar = await page.evaluate(() => document.querySelector(".topbar").getBoundingClientRect().height);
 check(topbar <= 44, `top bar height ${topbar}`);
@@ -53,6 +61,10 @@ for (const how of ["back", "brand"]) {
   await openLive(page);
   await page.click(".live-card button.primary");
   await page.waitForFunction(() => document.querySelector("#live video")?.srcObject);
+  if (how === "back") {
+    await page.waitForTimeout(6000);
+    check(await page.evaluate(() => document.querySelector(".live-card")?.hidden !== false || !/Calibrate/.test(document.querySelector(".live-card h1")?.textContent || "")), "skip is remembered (no calibration card again)");
+  }
   if (how === "back") await page.goBack(); else await page.click("#explore-back");
   await page.waitForSelector("#live", { state: "hidden" });
   check(await page.evaluate(() => document.querySelector("#live video").srcObject === null), `exit via ${how} stops the stream`);

@@ -28,6 +28,9 @@ async function openLive(fixture) {
   await openLiveFromHome(page);
   await page.waitForSelector("#live:not([hidden])");
   await page.click(".live-card button.primary");
+  // First use asks to calibrate once tracking starts; skip it.
+  await page.waitForFunction(() => [...document.querySelectorAll(".live-card button")].some((b) => b.textContent === "Skip" && !b.closest("[hidden]")), null, { timeout: 60000 });
+  await page.click(".live-card button:not(.primary)");
   return { ctx, page, errors, mp };
 }
 
@@ -38,6 +41,8 @@ async function openLive(fixture) {
     .then((h) => h.jsonValue()).catch(() => null);
   check(!!label, `region label names a forearm: "${label}"`);
   await page.waitForSelector(".live-structs li", { timeout: 10000 });
+  check(await page.locator(".live-unlock").isVisible(), "Unlock button appears once locked");
+  check(/locked/.test(await page.textContent(".live-pill .text")), `pill says locked: "${await page.textContent(".live-pill .text")}"`);
   const names = await page.$$eval(".live-structs li", (l) => l.length);
   check(names >= 4, `structures panel lists ${names} structures (>= 4)`);
   // Each listed structure's key exists in structures.json: click-through uses the key, so compare names to the file.
@@ -52,6 +57,16 @@ async function openLive(fixture) {
   const fus = await page.waitForFunction(() => { const b = document.querySelector("#live .viewer-ultrasound:not([hidden])"); return b && b.querySelector("canvas") && /simulated/i.test(document.querySelector(".live-caption")?.textContent || ""); }, null, { timeout: 90000 })
     .then(() => true, () => false);
   check(fus, `Ultrasound on the forearm shows a simulated caption: "${await page.textContent(".live-caption").catch(() => "")}"`);
+  // Record 10 s with R, then Unlock.
+  {
+    const [dl] = await Promise.all([page.waitForEvent("download", { timeout: 30000 }), page.keyboard.press("r")]);
+    check(/^live-recording-.*\.json$/.test(dl.suggestedFilename()), `R downloads ${dl.suggestedFilename()}`);
+    const rec = JSON.parse(await (await import("node:fs/promises")).readFile(await dl.path(), "utf8"));
+    check(rec.frames?.length > 0 && rec.frames[0].pose?.landmarks?.length === 33 && rec.frames[0].pose.mask === null && rec.frames.length <= 600, `recording has ${rec.frames?.length} frames, first pose has ${rec.frames?.[0]?.pose?.landmarks?.length} landmarks`);
+  }
+  await page.click(".live-unlock");
+  const cleared = await page.waitForFunction(() => document.querySelector(".live-structs")?.children.length === 0, null, { timeout: 5000 }).then(() => true, () => false);
+  check(cleared, "clicking Unlock clears the panel");
   check(mp.length === 0, `fixture path loads no MediaPipe files${mp.length ? ": " + mp[0] : ""}`);
   check(errors.length === 0, `no page errors${errors.length ? ": " + errors.join(" | ") : ""}`);
   await ctx.close();

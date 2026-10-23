@@ -10,8 +10,16 @@ const MODALITIES = [{ id: "ct", label: "CT" }, { id: "mri", label: "MRI" }, { id
 
 // segments.json names the upper limb model "arm"; CONFIG.models (and so openExplore) call it "upper-limb".
 const EXPLORE_MODEL = { arm: "upper-limb" };
+const ACCENT = "#4fb3ff";
+const CAL_KEY = "live.calibration.v1", CAL_SKIP = "live.calibration.skipped";
+const CAL_SAMPLES = 30, CAL_MS = 3000, REC_MS = 10000, REC_MAX = 600;
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch {} },
+};
 const NO_SCANS = "No scans for this region yet";
 // ?live-fixture=<path> replays recorded tracker frames instead of opening a camera (tests, demos).
+const debugMode = () => { try { return new URLSearchParams(location.search).get("live-debug") === "1"; } catch { return false; } };
 const fixtureUrl = () => { try { return new URLSearchParams(location.search).get("live-fixture") || null; } catch { return null; } };
 
 // ---------- The view ----------
@@ -24,6 +32,11 @@ export function createLiveView({ root, onExit, openExplore, config }) {
   let modality = null;
   let lastKey = null, lastReqKey = null, applying = false;
   let hiddenTimer = null;
+  let statusText = "Point at your body", statusState = "loading";
+  let locked = false;
+  let cal = null; // calibration run in progress: { samples, t0, last }
+  let rec = null; // recording in progress: { frames, t0 }
+  let calTimer = null;
   let session = 0; // bumps on every open/close so late async work can tell it is stale
   let el = {};
   const h = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
@@ -43,7 +56,19 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     el.x = h("button", "live-x", "✕");
     el.x.type = "button"; el.x.setAttribute("aria-label", "Close Live"); el.x.title = "Close Live";
     el.x.addEventListener("click", () => exit());
-    el.pill.append(el.pillText, el.x);
+    el.unlock = h("button", "live-unlock", "Unlock");
+    el.unlock.type = "button"; el.unlock.hidden = true; el.unlock.title = "Release the locked region";
+    el.unlock.addEventListener("click", unlockNow);
+    el.recBtn = null;
+    el.pill.append(el.pillText);
+    if (debugMode()) {
+      el.recBtn = h("button", "live-record", "Record 10 s");
+      el.recBtn.type = "button";
+      el.recBtn.addEventListener("click", startRecording);
+      el.pill.append(el.recBtn);
+    }
+    el.pill.append(el.unlock, el.x);
+    el.stage.addEventListener("click", onStageClick);
     el.stage.append(el.video, el.canvas);
 
     el.panel = h("aside", "live-panel");
@@ -58,7 +83,12 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     el.scanView = h("div", "live-scan-view");
     el.scan.append(el.scanView);
     el.caption = h("p", "live-caption");
-    el.panel.append(el.grab, el.title, el.hint, el.list, el.scan, el.caption);
+    el.calBtn = h("button", "live-calibrate", "Calibrate");
+    el.calBtn.type = "button"; el.calBtn.title = "Measure your arm proportions for better pointing";
+    el.calBtn.addEventListener("click", () => showCalibrateCard());
+    el.head = h("div", "live-head");
+    el.head.append(el.title, el.calBtn);
+    el.panel.append(el.grab, el.head, el.hint, el.list, el.scan, el.caption);
 
     el.toolbar = h("div", "toolbar live-toolbar");
     el.toolbar.setAttribute("role", "toolbar"); el.toolbar.setAttribute("aria-label", "Scan type");
@@ -69,7 +99,7 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     wireSheet();
   }
 
-  function showCard(title, body, buttons) {
+  function showCard(title, body, buttons, keepPanel) {
     el.card.replaceChildren(h("h1", "", title), h("p", "", body));
     const row = h("div", "row");
     for (const b of buttons) {
@@ -80,8 +110,10 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     }
     el.card.append(row);
     el.card.hidden = false;
-    el.panel.hidden = true; el.toolbar.hidden = true;
-    setPill("loading", "Live needs a camera");
+    if (!keepPanel) {
+      el.panel.hidden = true; el.toolbar.hidden = true;
+      setPill("loading", "Live needs a camera");
+    }
     row.querySelector("button")?.focus();
   }
   const unsupported = (why) => showCard("Live needs a camera", `${why} You can still explore every model with the mouse or touch.`, [{ label: "Open Explore", primary: true, onClick: () => exit() }]);
@@ -111,6 +143,7 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     try { history.pushState({ live: 1 }, "", "#live"); } catch {}
     window.addEventListener("popstate", onPop);
     document.addEventListener("visibilitychange", onVisibility);
+    document.addEventListener("keydown", onKey);
     window.addEventListener("resize", sizeCanvas);
     setPill("loading", "Camera permission");
     if (!navigator.mediaDevices?.getUserMedia) return unsupported("This browser cannot open a camera.");
@@ -147,7 +180,8 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     const onStatus = (status, message) => {
       if (mine !== session) return;
       const text = message || { loading: "Loading tracking", tracking: "Point at your body", "no-person": "Step back so I can see you", slow: "Running slowly", error: "Tracking problem" }[status] || status;
-      setPill(status, text);
+      statusState = status; statusText = text;
+      if (!cal && !rec && !(locked && status === "tracking")) setPill(status, text);
     };
     let t, p, pr, us;
     try {
@@ -167,13 +201,20 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     }
     if (mine !== session || !active) { t.dispose?.(); return; }
     tracker = t; pointer = p; probe = pr; usProbe = us;
+    try {
+      const saved = store.get(CAL_KEY);
+      if (saved) pointer.setCalibration?.(JSON.parse(saved));
+    } catch (e) { console.warn("live: stored calibration ignored", e); }
     tracker.start();
+    if (!store.get(CAL_KEY) && !store.get(CAL_SKIP)) showCalibrateCard();
   }
 
   function stopAll() {
     session++;
     try { tracker?.stop(); tracker?.dispose?.(); } catch {}
     tracker = null; pointer = null; probe = null; usProbe = null;
+    cal = null; rec = null; locked = false; clearTimeout(calTimer);
+    document.removeEventListener("keydown", onKey);
     if (stream) stream.getTracks().forEach((t) => t.stop());
     stream = null;
     if (el.video) { el.video.pause(); el.video.srcObject = null; }
@@ -190,6 +231,7 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     root.hidden = true;
     document.body.classList.remove("live");
     modality = null; lastKey = null; lastReqKey = null; applying = false;
+    if (el.unlock) el.unlock.hidden = true;
     if (el.list) { el.list.replaceChildren(); el.toolbar.replaceChildren(); el.toolbar.hidden = true; el.scan.hidden = true; el.caption.textContent = ""; }
     if (location.hash === "#live") { try { history.back(); } catch {} }
   }
@@ -256,19 +298,48 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     const ctx = el.canvas.getContext("2d");
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, cw, ch);
+    if (rec) recordFrame(frame);
+    if (cal) { drawPose(ctx, frame); calibrateStep(frame); return; }
     drawPose(ctx, frame);
     let result = null;
     try { result = pointer?.update(frame) || null; } catch (e) { console.warn("live: pointing failed", e); }
-    if (result) drawPointing(ctx, frame, result);
-    if (result?.stable) {
+    lastResultSeen = !!result;
+    locked = !!(result ? (result.locked ?? result.stable) : pointer?.locked);
+    try { drawZones(ctx, frame, result); } catch (e) { console.warn("live: zones failed", e); }
+    if (result) drawPointing(ctx, result);
+    el.unlock.hidden = !locked;
+    if (locked && result) {
       const key = `${result.region.model}:${result.region.key}`;
       if (key !== lastKey) { lastKey = key; fillPanel(result); }
-      setPill("tracking", result.region.label);
+      if (!rec) setPill("tracking", `${result.region.label} \u00b7 locked`);
       const other = frame.hands.find((hd) => hd.side !== result.hand);
       if (other) probeStep(ctx, frame, result, other);
-    } else if (lastKey && !result) {
-      lastKey = null; clearPanel();
+    } else if (!locked) {
+      if (lastKey) { lastKey = null; clearPanel(); }
+      if (!rec) {
+        if (result) setPill("tracking", `Hold on: ${result.coarse?.label || result.region?.label || "..."}`);
+        else setPill(statusState, statusText);
+      }
     }
+    if (rec) pillRecording();
+  }
+
+  function unlockNow() {
+    try { pointer?.unlock?.(); } catch {}
+    locked = false; lastKey = null;
+    if (el.unlock) el.unlock.hidden = true;
+    clearPanel();
+  }
+  let lastResultSeen = false;
+  function onStageClick() {
+    if (!active || cal) return;
+    if (locked) return unlockNow();
+    if (lastResultSeen) try { pointer?.lock?.(); } catch {}
+  }
+  function onKey(e) {
+    if (!active || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.key === "Escape" && locked) { e.preventDefault(); unlockNow(); }
+    else if ((e.key === "r" || e.key === "R") && tracker && !cal && !rec && el.card.hidden) startRecording();
   }
 
   function drawPose(ctx, frame) {
@@ -284,23 +355,49 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     ctx.restore();
   }
 
-  function drawPointing(ctx, frame, r) {
+  function polyPath(ctx, poly) {
+    const pts = poly.map(toPx);
+    ctx.beginPath(); pts.forEach((p, i) => (i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y))); ctx.closePath();
+    return pts;
+  }
+  // Every visible zone as a faint dashed outline; the one being led is brighter, the locked one solid accent with its label.
+  function drawZones(ctx, frame, r) {
+    const outlines = pointer?.outlines?.(frame) || [];
+    const lead = r?.coarse;
     ctx.save();
-    let poly = [];
-    try { poly = pointer.outline(frame, r.segment) || []; } catch {}
-    const label = r.region.label;
-    if (poly.length > 2) {
-      const pts = poly.map(toPx);
-      ctx.beginPath(); pts.forEach((p, i) => (i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y))); ctx.closePath();
-      ctx.fillStyle = r.stable ? "rgba(79,179,255,0.18)" : "rgba(79,179,255,0.08)"; ctx.fill();
-      ctx.strokeStyle = "rgba(79,179,255,0.9)"; ctx.lineWidth = 2; ctx.stroke();
-      const top = pts.reduce((a, p) => (p.y < a.y ? p : a), pts[0]);
-      drawLabel(ctx, label, top.x, top.y - 10);
+    ctx.lineJoin = "round";
+    let focus = null;
+    for (const o of outlines) {
+      if (!o.poly || o.poly.length < 3) continue;
+      const isLead = lead && o.id === lead.segment && (lead.side == null || o.side == null || o.side === lead.side);
+      if (isLead) { focus = o; continue; }
+      polyPath(ctx, o.poly);
+      ctx.setLineDash([6, 6]); ctx.lineWidth = 1.5; ctx.strokeStyle = "rgba(255,255,255,0.22)"; ctx.stroke();
     }
+    if (focus) {
+      const pts = polyPath(ctx, focus.poly);
+      if (locked) {
+        ctx.setLineDash([]); ctx.fillStyle = "rgba(79,179,255,0.18)"; ctx.fill();
+        ctx.lineWidth = 3; ctx.strokeStyle = ACCENT; ctx.stroke();
+        const top = pts.reduce((a, p) => (p.y < a.y ? p : a), pts[0]);
+        drawLabel(ctx, focus.label || lead.label || "", top.x, top.y - 10);
+      } else {
+        ctx.setLineDash([6, 6]); ctx.fillStyle = "rgba(255,255,255,0.10)"; ctx.fill();
+        ctx.lineWidth = 2; ctx.strokeStyle = "rgba(255,255,255,0.7)"; ctx.stroke();
+      }
+    }
+    ctx.restore();
+  }
+
+  function drawPointing(ctx, r) {
+    ctx.save();
     const t = toPx(r.tip);
     ctx.beginPath(); ctx.arc(t.x, t.y, 7, 0, Math.PI * 2);
-    ctx.fillStyle = "#4fb3ff"; ctx.fill(); ctx.strokeStyle = "#fff"; ctx.lineWidth = 2; ctx.stroke();
-    if (poly.length <= 2) drawLabel(ctx, label, t.x, t.y - 16);
+    ctx.fillStyle = ACCENT; ctx.fill(); ctx.strokeStyle = "#fff"; ctx.lineWidth = 2; ctx.stroke();
+    if (!locked && r.progress > 0) {
+      ctx.beginPath(); ctx.arc(t.x, t.y, 15, -Math.PI / 2, -Math.PI / 2 + Math.min(1, r.progress) * Math.PI * 2);
+      ctx.strokeStyle = ACCENT; ctx.lineWidth = 3; ctx.lineCap = "round"; ctx.stroke();
+    }
     ctx.restore();
   }
   function drawLabel(ctx, text, x, y) {
@@ -352,6 +449,87 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     el.scan.hidden = false;
     // probe.apply activates the renderer kind for the study (volume, xray, ultrasound) and shows the view.
     Promise.resolve(probe.apply(req)).then(() => { el.scanView.dataset.kind = req.kind; el.scanView.dataset.study = req.study; }).catch((e) => console.warn("live: scan failed", e)).finally(() => { applying = false; });
+  }
+
+  // ---------- Calibration ----------
+  function showCalibrateCard() {
+    if (!pointer || cal) return;
+    showCard("Calibrate pointing", "Stand back and hold both arms straight out to the sides for 3 seconds. This tunes the zones to your body.", [
+      { label: "Calibrate (3 s)", primary: true, onClick: startCalibration },
+      { label: "Skip", onClick: () => { store.set(CAL_SKIP, "1"); el.card.hidden = true; setPill(statusState, statusText); } },
+    ], true);
+  }
+  function startCalibration() {
+    el.card.hidden = true;
+    cal = { samples: [], t0: 0 };
+    if (locked) unlockNow();
+    setPill("loading", "Hold your arms out to the sides");
+  }
+  function endCalibration(text) {
+    cal = null;
+    setPill("tracking", text);
+    clearTimeout(calTimer);
+    calTimer = setTimeout(() => { if (!cal && !rec) setPill(statusState, statusText); }, 2000);
+  }
+  function calibrateStep(frame) {
+    let m = null;
+    try { m = pointer?.measure?.(frame) || null; } catch (e) { console.warn("live: measure failed", e); }
+    if (!pointer?.measure) return endCalibration("Calibration unavailable");
+    const now = performance.now();
+    if (!m?.sample) {
+      if (!cal.t0) setPill("loading", m?.hint || "Hold your arms out to the sides");
+      else { cal.samples = []; cal.t0 = 0; setPill("loading", m?.hint || "Hold your arms out to the sides"); }
+      return;
+    }
+    if (!cal.t0) { cal.t0 = now; cal.last = -1e9; }
+    if (now - cal.last >= CAL_MS / CAL_SAMPLES) { cal.samples.push(m.sample); cal.last = now; }
+    const left = Math.max(0, CAL_MS - (now - cal.t0));
+    setPill("loading", `Hold still ${Math.ceil(left / 1000)}`);
+    if (left > 0 && cal.samples.length < CAL_SAMPLES * 2) return;
+    try {
+      const c = pointer.calibrate(cal.samples);
+      pointer.setCalibration(c);
+      store.set(CAL_KEY, JSON.stringify(c));
+      endCalibration("Calibrated");
+    } catch (e) {
+      console.warn("live: calibration failed", e);
+      endCalibration("Calibration failed, try again");
+    }
+  }
+
+  // ---------- Landmark recorder (offline tuning) ----------
+  const plain = (l) => ({ x: +l.x, y: +l.y, z: +(l.z || 0), v: +(l.v ?? 1) });
+  const plainList = (a) => (a || []).map(plain);
+  function startRecording() {
+    if (rec || cal || !tracker) return;
+    rec = { frames: [], t0: performance.now(), w: vw, h: vh };
+    el.pill.classList.add("recording");
+    if (el.recBtn) el.recBtn.disabled = true;
+    pillRecording();
+  }
+  function pillRecording() { el.pillText.textContent = "Recording 10 s"; el.pill.dataset.state = "recording"; }
+  function recordFrame(frame) {
+    const t = performance.now() - rec.t0;
+    if (t < REC_MS && rec.frames.length < REC_MAX) {
+      rec.frames.push({
+        pose: frame.pose ? { landmarks: plainList(frame.pose.landmarks), world: plainList(frame.pose.world), mask: null } : null,
+        hands: (frame.hands || []).map((hd) => ({ side: hd.side, score: hd.score, landmarks: plainList(hd.landmarks), world: plainList(hd.world) })),
+      });
+    }
+    if (t >= REC_MS || rec.frames.length >= REC_MAX) finishRecording(t);
+  }
+  function finishRecording(ms) {
+    const r = rec; rec = null;
+    el.pill.classList.remove("recording");
+    if (el.recBtn) el.recBtn.disabled = false;
+    setPill(statusState, statusText);
+    const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+    const data = { name: `live-recording-${stamp}`, fps: Math.max(1, Math.round(r.frames.length / Math.max(0.1, ms / 1000))), width: r.w, height: r.h, frames: r.frames };
+    const url = URL.createObjectURL(new Blob([JSON.stringify(data)], { type: "application/json" }));
+    const a = document.createElement("a");
+    a.href = url; a.download = `live-recording-${stamp}.json`;
+    document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 10000);
   }
 
   // ---------- Panel and toolbar ----------

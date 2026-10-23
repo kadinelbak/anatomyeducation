@@ -1,19 +1,47 @@
 // Live mode, workstream C: which body segment is the user pointing at?
-// Pure functions of a tracker frame (see src/live/CONTRACTS.md, section 3). No DOM.
+// A function of tracker frames plus internal smoothing / lock state (see src/live/CONTRACTS.md,
+// section 3). No DOM.
+//
+// Coarse then fine: the selection is a segment instance (segment id + side). It is chosen with
+// a generous contact radius, hysteresis and a plurality vote, and then locked after LOCK_MS.
+// Bands, frac, aspect and structures are refinement computed from the fingertip every frame and
+// never change which segment is selected.
 import { CONFIG } from "../config.js";
 
 const MIN_VIS = 0.3;            // landmarks less visible than this are ignored
-const LIMB_RADIUS = 0.35;       // contact radius, in shoulder widths
+const LIMB_RADIUS = 0.35;       // default limb radius (half-width), in shoulder widths
+const SEEK = 1.4;               // contact radius while seeking, in segment radii
+const HOLD = 1.3;               // the leader keeps the lead out to HOLD * SEEK radii
+const SWITCH = 0.6;             // a challenger must score below SWITCH * the leader's distance...
+const SWITCH_MARGIN = 0.15;     // ...and at least this much lower (near-zero distances are noise)
+const RESTING = 0.5;            // ranking penalty for a hanging arm's finger on its own thigh / leg
+const HANGING = 0.87;           // an arm hangs when both its bones are within 30 degrees of straight down
+const POLY_INSIDE = 0.5;        // normalised distance for a tip inside the trunk / head polygon
 const EXTENDED = 1.1;           // fingertip-to-palm distance / hand size for an extended finger
-const STABLE_MS = 400;
 const VOTE_FRAMES = 8;
-const NULL_RESET_MS = 200;      // this long without a hit forgets the history
+const LOCK_MS = 900;            // the same coarse key leading this long locks it
+const UNLOCK_MS = 1500;         // this long without any pointing candidate releases a lock
+const RETARGET_MS = 1500;       // locked, but a different segment leads this long: release so it can lock
+const NULL_RESET_MS = 200;      // (unlocked) this long without a hit forgets the history
+const DEPTH_TOL = 0.6;          // pose index tip this far (shoulder widths) nearer than the limb = in front
+const INDEX_NEAR = 1.0;         // pose index tip must be within this many shoulder widths of the hand tip
 const CENTRE_FRAC = 0.4;        // |offset| below this many radii counts as "on the front/back surface"
+const CAL_SEGMENTS = ["upper_arm", "forearm", "thigh", "leg"];
+const CAL_MIN_SAMPLES = 10;
+const STANCE_OUT = 1.1;         // calibration: |wrist x - shoulder x| above this many shoulder widths
+const STANCE_LEVEL = 0.5;       // calibration: |wrist y - shoulder y| below this many shoulder widths
 const MODEL_ALIAS = { arm: "upper-limb" };   // segments.json says "arm", CONFIG.models says "upper-limb"
 const OWN_ARM = ["upper_arm", "forearm", "hand"]; // never the target of the hand that is pointing
 
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+const mid = (p, q) => ({ x: (p.x + q.x) / 2, y: (p.y + q.y) / 2, z: (p.z + q.z) / 2 });
+const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+const keyOf = (id, side) => `${id}|${side}`;
+function median(xs) {
+  const s = [...xs].sort((a, b) => a - b), n = s.length;
+  return n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2;
+}
 
 async function fetchJson(url) {
   const r = await fetch(url);
@@ -35,23 +63,33 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
     models[name] = { structures: j.structures || {}, regions: j.regions || {}, regionLabels: j.regionLabels || {}, layers };
   }
 
-  // --- smoothing state ---
+  // --- smoothing / lock state ---
   let history = [];             // last VOTE_FRAMES entries: { key, res } or null
-  let lastKey = null, keyStart = 0, nullSince = null;
-  let last = null;              // last result, used by outline() to pick a side
+  let leaderKey = null, leadStart = 0, nullSince = null;
+  let locked = false, lockedKey = null, lastCandT = 0, lastT = 0;
+  let awaySince = null;        // locked, and the finger has led a different segment since this time
+  let last = null;              // last result
+  let calibration = null;
+
+  const defaultRadius = (id) => segments[id]?.radius ?? LIMB_RADIUS;
+  const radiusOf = (id) => calibration?.radii?.[id] ?? defaultRadius(id);
+  function coarseLabel(id, side) {
+    const l = segments[id]?.label || id;
+    return side ? `${cap(side)} ${l.charAt(0).toLowerCase()}${l.slice(1)}` : l;
+  }
 
   // ---- geometry (pixel space, so a non-square frame does not skew distances) ----
   function scaleOf(frame) { return { W: frame.width || 1, H: frame.height || 1 }; }
   function pxPoint(lm, sc) { return { x: lm.x * sc.W, y: lm.y * sc.H }; }
-  function point(spec, lms, sc) {      // landmark index, or the mean of a list of indices
+  function point(spec, lms, sc) {      // landmark index, or the mean of a list of indices; z stays normalised
     const idx = Array.isArray(spec) ? spec : [spec];
-    let x = 0, y = 0;
+    let x = 0, y = 0, z = 0;
     for (const i of idx) {
       const l = lms[i];
       if (!l || (l.v ?? 1) < MIN_VIS) return null;
-      x += l.x * sc.W; y += l.y * sc.H;
+      x += l.x * sc.W; y += l.y * sc.H; z += Number.isFinite(l.z) ? l.z : NaN;
     }
-    return { x: x / idx.length, y: y / idx.length };
+    return { x: x / idx.length, y: y / idx.length, z: z / idx.length };
   }
   function pointInPoly(p, poly) {
     let inside = false;
@@ -60,6 +98,16 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
       if ((a.y > p.y) !== (b.y > p.y) && p.x < ((b.x - a.x) * (p.y - a.y)) / (b.y - a.y) + a.x) inside = !inside;
     }
     return inside;
+  }
+  function segDist(p, a, b) {
+    const dx = b.x - a.x, dy = b.y - a.y, len2 = dx * dx + dy * dy;
+    const t = len2 > 0 ? clamp(((p.x - a.x) * dx + (p.y - a.y) * dy) / len2, 0, 1) : 0;
+    return Math.hypot(p.x - (a.x + t * dx), p.y - (a.y + t * dy));
+  }
+  function polyEdgeDist(p, poly) {
+    let d = Infinity;
+    for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) d = Math.min(d, segDist(p, poly[j], poly[i]));
+    return d;
   }
   function headEllipse(seg, lms, sc) {
     const e1 = point(7, lms, sc), e2 = point(8, lms, sc);
@@ -72,25 +120,29 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
     for (let i = 0; i < 16; i++) { const a = (i / 16) * Math.PI * 2; pts.push({ x: cx + rx * Math.cos(a), y: cy + ry * Math.sin(a) }); }
     return { poly: pts, top, bottom };
   }
+  function meanZ(indices, lms) {
+    let z = 0;
+    for (const i of indices.flat()) z += Number.isFinite(lms[i]?.z) ? lms[i].z : NaN;
+    return z / indices.flat().length;
+  }
 
   // The geometry of one segment on one side, or null when its landmarks are not visible.
   function instance(id, seg, side, lms, sc) {
     const i = side === "left" ? 0 : 1;
     if (seg.shape?.kind === "head") {
       const h = headEllipse(seg, lms, sc);
-      return h && { id, seg, side: null, kind: "poly", poly: h.poly, top: h.top, bottom: h.bottom };
+      return h && { id, seg, side: null, kind: "poly", poly: h.poly, top: h.top, bottom: h.bottom, z: meanZ(seg.poly || [0], lms) };
     }
     if (seg.poly) {
       const poly = seg.poly.map((k) => point(k, lms, sc));
       if (poly.some((p) => !p)) return null;
-      return { id, seg, side: null, kind: "poly", poly, axis: [mid(poly[0], poly[1]), mid(poly[2], poly[3])] };
+      return { id, seg, side: null, kind: "poly", poly, axis: [mid(poly[0], poly[1]), mid(poly[2], poly[3])], z: meanZ(seg.poly, lms) };
     }
     const a = point(seg.line ? seg.line[0] : seg.from[i], lms, sc);
     const b = point(seg.line ? seg.line[1] : seg.to[i], lms, sc);
     if (!a || !b || dist(a, b) < 1e-6) return null;
     return { id, seg, side: seg.midline ? null : side, kind: "capsule", a, b };
   }
-  const mid = (p, q) => ({ x: (p.x + q.x) / 2, y: (p.y + q.y) / 2 });
 
   function instances(frame) {
     const lms = frame.pose?.landmarks;
@@ -104,14 +156,24 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
     for (const [id, seg] of Object.entries(segments)) {
       for (const side of seg.midline ? [null] : ["left", "right"]) {
         const inst = instance(id, seg, side, lms, sc);
-        if (inst) { inst.radius = (seg.radius ?? LIMB_RADIUS) * sw; out.push(inst); }
+        if (inst) { inst.radius = radiusOf(id) * sw; inst.key = keyOf(inst.id, inst.side); out.push(inst); }
       }
     }
     // Un-mirrored image: a person facing the camera shows their LEFT shoulder (11) on the image
     // RIGHT (larger x), because their left is the camera's right. So x11 > x12 means we see the front;
     // x11 < x12 means the person turned their back to the camera.
     const facing = lms[11].x >= lms[12].x ? "front" : "back";
-    return { list: out, sc, sw, facing, midX: (ls.x + rs.x) / 2 };
+    // Depth is usable only when the model filled it in (synthetic fixtures have z = 0 everywhere).
+    const hasZ = lms.some((l) => Number.isFinite(l?.z) && l.z !== 0);
+    const swN = Math.hypot(lms[11].x - lms[12].x, lms[11].y - lms[12].y);   // shoulder width, normalised units
+    // A hand at the end of a hanging arm, with its index lying on the thigh, is resting, not pointing.
+    const down = (p, q) => p && q && q.y > p.y && (q.y - p.y) / Math.max(dist(p, q), 1e-6) > HANGING;
+    const hanging = {};
+    for (const [side, [s, e, w]] of [["left", [11, 13, 15]], ["right", [12, 14, 16]]]) {
+      const S = point(s, lms, sc), E = point(e, lms, sc), Wr = point(w, lms, sc);
+      hanging[side] = !!(down(S, E) && down(E, Wr));
+    }
+    return { list: out, sc, sw, swN, hasZ, lms, facing, hanging, midX: (ls.x + rs.x) / 2 };
   }
 
   // ---- finger test ----
@@ -138,33 +200,66 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
     return m.data[y * m.width + x] > 127;
   }
 
-  // The best contact of one tip against every segment: { inst, score, frac, aspect, band... } or null.
-  function contact(ctx, tip, ownSide) {
-    let best = null;
-    for (const inst of ctx.list) {
-      if (ownSide && inst.side === ownSide && OWN_ARM.includes(inst.id)) continue;
-      let score, frac, off = 0, closest = null;
-      if (inst.kind === "poly") {
-        if (!pointInPoly(tip.px, inst.poly)) continue;
-        score = 0.5;                       // a limb whose axis is within half a radius beats the trunk behind it
-        if (inst.axis) {
-          const [p, q] = inst.axis, dx = q.x - p.x, dy = q.y - p.y;
-          frac = ((tip.px.x - p.x) * dx + (tip.px.y - p.y) * dy) / (dx * dx + dy * dy);
-        } else frac = (tip.px.y - inst.top) / (inst.bottom - inst.top);
-      } else {
-        const dx = inst.b.x - inst.a.x, dy = inst.b.y - inst.a.y, len2 = dx * dx + dy * dy;
-        const t = Math.min(1, Math.max(0, ((tip.px.x - inst.a.x) * dx + (tip.px.y - inst.a.y) * dy) / len2));
-        closest = { x: inst.a.x + t * dx, y: inst.a.y + t * dy };
-        const d = dist(tip.px, closest);
-        if (d > inst.radius) continue;
-        score = d / inst.radius;
-        frac = t;
-        off = ((tip.px.x - inst.a.x) * dy - (tip.px.y - inst.a.y) * dx) / Math.sqrt(len2);   // signed, pixels
-      }
-      frac = Math.min(1, Math.max(0, frac));
-      if (!best || score < best.score) best = { inst, score, frac, off, closest, tip: tip.px };
+  // The contact of one tip with one segment instance, at any distance:
+  // { inst, key, norm (distance / radius), rank (norm, plus RESTING for a hanging hand on its own
+  //   leg), frac, off, closest, z (limb depth), tip, hand }.
+  function contactWith(ctx, inst, tip, hand) {
+    let norm, frac, off = 0, closest = null, z = inst.z;
+    if (inst.kind === "poly") {
+      norm = pointInPoly(tip.px, inst.poly) ? POLY_INSIDE : 1 + polyEdgeDist(tip.px, inst.poly) / (LIMB_RADIUS * ctx.sw);
+      if (inst.axis) {
+        const [p, q] = inst.axis, dx = q.x - p.x, dy = q.y - p.y;
+        frac = ((tip.px.x - p.x) * dx + (tip.px.y - p.y) * dy) / (dx * dx + dy * dy);
+      } else frac = (tip.px.y - inst.top) / (inst.bottom - inst.top);
+    } else {
+      const dx = inst.b.x - inst.a.x, dy = inst.b.y - inst.a.y, len2 = dx * dx + dy * dy;
+      const t = clamp(((tip.px.x - inst.a.x) * dx + (tip.px.y - inst.a.y) * dy) / len2, 0, 1);
+      closest = { x: inst.a.x + t * dx, y: inst.a.y + t * dy };
+      norm = dist(tip.px, closest) / inst.radius;
+      frac = t;
+      off = ((tip.px.x - inst.a.x) * dy - (tip.px.y - inst.a.y) * dx) / Math.sqrt(len2);   // signed, pixels
+      z = inst.a.z + t * (inst.b.z - inst.a.z);
     }
-    return best;
+    const rank = norm + (ctx.hanging[hand] && inst.side === hand && (inst.id === "thigh" || inst.id === "leg") ? RESTING : 0);
+    return { inst, key: inst.key, norm, rank, frac: clamp(frac, 0, 1), off, closest, z, tip, hand };
+  }
+
+  // Depth hint: the pose model's own index fingertip (19 left, 20 right) carries z in the body's
+  // frame. A fingertip clearly nearer the camera than the limb at the contact point is in front of it.
+  function depthOk(ctx, c) {
+    if (!ctx.hasZ || !c.hand || !Number.isFinite(c.z)) return true;
+    const p = ctx.lms[c.hand === "left" ? 19 : 20];
+    if (!p || !Number.isFinite(p.z) || (p.v ?? 1) < MIN_VIS) return true;
+    if (dist(pxPoint(p, ctx.sc), c.tip.px) > INDEX_NEAR * ctx.sw) return true;   // not the same finger
+    return !(c.z - p.z > DEPTH_TOL * ctx.swN);
+  }
+
+  // Every usable contact of every pointing tip in the frame (no distance limit yet).
+  function contacts(frame, ctx) {
+    const all = [];
+    let tips = 0;
+    for (const hand of frame.hands || []) {
+      const tip = pointingTip(hand, ctx.sc);
+      if (!tip || tip.x < 0 || tip.x > 1 || tip.y < 0 || tip.y > 1 || !maskHit(frame, tip)) continue;
+      tips++;
+      for (const inst of ctx.list) {
+        if (hand.side && inst.side === hand.side && OWN_ARM.includes(inst.id)) continue;
+        const c = contactWith(ctx, inst, tip, hand.side);
+        if (c.norm <= SEEK * HOLD && depthOk(ctx, c)) all.push(c);
+      }
+    }
+    return { all, tips };
+  }
+  const bestOf = (list) => list.reduce((b, c) => (!b || c.rank < b.rank ? c : b), null);
+
+  // Coarse selection with hysteresis against the current leader: the leader keeps the lead while
+  // it is within HOLD * SEEK radii, unless a challenger is clearly better.
+  function select(all, leader) {
+    const best = bestOf(all.filter((c) => c.norm <= SEEK));
+    const lead = leader && bestOf(all.filter((c) => c.key === leader));   // already within SEEK * HOLD
+    if (!lead || !best || best.key === leader) return lead || best;
+    const clearly = best.rank < SWITCH * lead.rank && lead.rank - best.rank > SWITCH_MARGIN;
+    return clearly ? best : lead;
   }
 
   // front/back when the tip is near the limb's axis (we look at one surface); otherwise the
@@ -174,7 +269,7 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
     if (inst.kind === "poly") return ctx.facing;
     if (Math.abs(c.off) <= CENTRE_FRAC * inst.radius) return ctx.facing;
     if (inst.seg.midline) return "outer";
-    return Math.abs(c.tip.x - ctx.midX) < Math.abs(c.closest.x - ctx.midX) ? "inner" : "outer";
+    return Math.abs(c.tip.px.x - ctx.midX) < Math.abs(c.closest.x - ctx.midX) ? "inner" : "outer";
   }
 
   function bandOf(seg, frac) {
@@ -182,7 +277,8 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
   }
   const pick = (v, aspect, facing) => (v && typeof v === "object" && !Array.isArray(v) ? (v[aspect] ?? v[facing] ?? v.default ?? Object.values(v)[0]) : v);
 
-  function build(frame, ctx, c, tip, hand) {
+  // The fine result for a contact.
+  function build(ctx, c) {
     const { inst } = c;
     const seg = inst.seg, model = models[seg.model];
     const aspect = aspectOf(ctx, c);
@@ -199,58 +295,88 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
     (head[aspect] || head[ctx.facing] || Object.values(head)[0] || []).forEach(add);
     (model.regions[regionKey] || []).forEach(add);
     return {
-      key: `${inst.id}|${inst.side}|${regionKey}`,
-      res: {
-        hand,
-        tip: { x: tip.x, y: tip.y },
-        segment: inst.id,
-        side: inst.side,
-        frac: c.frac,
-        facing: ctx.facing,
-        aspect,
-        region: { model: seg.model, key: regionKey, label },
-        structures: keys.map((k) => ({ key: k, name: model.structures[k], layer: model.layers.get(k) || "other" })),
-        stable: false,
-      },
+      hand: c.hand,
+      tip: { x: c.tip.x, y: c.tip.y },
+      segment: inst.id,
+      side: inst.side,
+      coarse: { segment: inst.id, side: inst.side, label: coarseLabel(inst.id, inst.side) },
+      frac: c.frac,
+      facing: ctx.facing,
+      aspect,
+      region: { model: seg.model, key: regionKey, label },
+      structures: keys.map((k) => ({ key: k, name: model.structures[k], layer: model.layers.get(k) || "other" })),
+      progress: 0,
+      locked: false,
+      stable: false,
     };
   }
+  const finish = (res, progress) => ({ ...res, progress, locked, stable: locked });
 
-  function candidate(frame) {
-    const ctx = instances(frame);
-    if (!ctx) return null;
-    let best = null;
-    for (const hand of frame.hands || []) {
-      const tip = pointingTip(hand, ctx.sc);
-      if (!tip || tip.x < 0 || tip.x > 1 || tip.y < 0 || tip.y > 1 || !maskHit(frame, tip)) continue;
-      const c = contact(ctx, tip, hand.side);
-      if (c) {
-        if (!best || c.score < best.c.score) best = { c, tip, hand: hand.side };
-      }
-    }
-    if (!best) return null;
-    return build(frame, ctx, best.c, best.tip, best.hand);
+  function forget() { history = []; leaderKey = null; nullSince = null; }
+  function doUnlock() {
+    locked = false; lockedKey = null; awaySince = null;
+    forget();
+    if (last) last = { ...last, progress: 0, locked: false, stable: false };
+  }
+  function doLock(key) {
+    locked = true; lockedKey = key; lastCandT = lastT;
+    if (last) last = { ...last, progress: 1, locked: true, stable: true };
   }
 
   function update(frame) {
     const t = frame.t ?? 0;
-    const cur = candidate(frame);
-    history.push(cur);
+    lastT = t;
+    const ctx = instances(frame);
+    const { all } = ctx ? contacts(frame, ctx) : { all: [] };
+    const sel = select(all, locked ? lockedKey : leaderKey);
+    if (sel) lastCandT = t;
+    if (!sel || !locked || sel.key === lockedKey) awaySince = null;
+    else if (awaySince === null) awaySince = t;
+
+    if (locked) {
+      const away = awaySince !== null && t - awaySince > RETARGET_MS;
+      if (!away && (sel || t - lastCandT <= UNLOCK_MS)) {
+        // Segment and side are frozen; refine frac / band / aspect when the tip is on the locked segment.
+        const on = bestOf(all.filter((c) => c.key === lockedKey));
+        last = on ? finish(build(ctx, on), 1) : { ...last, tip: sel ? { x: sel.tip.x, y: sel.tip.y } : last.tip };
+        return last;
+      }
+      doUnlock();
+    }
+
+    history.push(sel ? { key: sel.key, res: build(ctx, sel) } : null);
     if (history.length > VOTE_FRAMES) history.shift();
-    if (!cur) {
+    if (!sel) {
       if (nullSince === null) nullSince = t;
-      if (t - nullSince > NULL_RESET_MS) { history = []; lastKey = null; }
+      if (t - nullSince > NULL_RESET_MS) forget();
       return null;
     }
     nullSince = null;
-    // Plurality vote over the recent frames; the current frame wins ties.
+    // Plurality vote over the recent frames on the coarse key; the current frame wins ties.
     const counts = new Map();
     for (const h of history) if (h) counts.set(h.key, (counts.get(h.key) || 0) + 1);
-    let winner = cur.key;
+    let winner = sel.key;
     for (const [k, n] of counts) if (n > counts.get(winner)) winner = k;
-    const entry = [...history].reverse().find((h) => h && h.key === winner);
-    if (winner !== lastKey) { lastKey = winner; keyStart = t; }
-    last = { ...entry.res, tip: cur.res.tip, stable: t - keyStart >= STABLE_MS };
+    if (winner !== leaderKey) { leaderKey = winner; leadStart = t; }
+    const progress = clamp((t - leadStart) / LOCK_MS, 0, 1);
+    if (progress >= 1) { locked = true; lockedKey = winner; }
+    // Refine from this frame's tip when it is on the winner; otherwise reuse the winner's last result.
+    const on = winner === sel.key ? sel : bestOf(all.filter((c) => c.key === winner));
+    const res = on ? build(ctx, on) : { ...[...history].reverse().find((h) => h && h.key === winner).res, tip: { x: sel.tip.x, y: sel.tip.y } };
+    last = finish(res, progress);
     return last;
+  }
+
+  // ---- overlay geometry ----
+  function polyOf(inst, sw, sc) {
+    const toImg = (p) => ({ x: p.x / sc.W, y: p.y / sc.H });
+    if (inst.kind === "poly") return inst.poly.map(toImg);
+    const r = radiusOf(inst.id) * sw;
+    const ang = Math.atan2(inst.b.y - inst.a.y, inst.b.x - inst.a.x);
+    const pts = [];
+    for (let i = 0; i < 6; i++) { const a = ang - Math.PI / 2 + (i * Math.PI) / 5; pts.push({ x: inst.b.x + r * Math.cos(a), y: inst.b.y + r * Math.sin(a) }); }
+    for (let i = 0; i < 6; i++) { const a = ang + Math.PI / 2 + (i * Math.PI) / 5; pts.push({ x: inst.a.x + r * Math.cos(a), y: inst.a.y + r * Math.sin(a) }); }
+    return pts.map(toImg);
   }
 
   // The polygon for the overlay. segmentId may be "forearm", "forearm:left" or take a third argument.
@@ -263,16 +389,107 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
     const sc = scaleOf(frame);
     const inst = instance(id, seg, side, lms, sc);
     if (!inst) return [];
-    const toImg = (p) => ({ x: p.x / sc.W, y: p.y / sc.H });
-    if (inst.kind === "poly") return inst.poly.map(toImg);
     const ctx = instances(frame);
-    const r = (seg.radius ?? LIMB_RADIUS) * (ctx ? ctx.sw : 0);
-    const ang = Math.atan2(inst.b.y - inst.a.y, inst.b.x - inst.a.x);
-    const pts = [];
-    for (let i = 0; i < 6; i++) { const a = ang - Math.PI / 2 + (i * Math.PI) / 5; pts.push({ x: inst.b.x + r * Math.cos(a), y: inst.b.y + r * Math.sin(a) }); }
-    for (let i = 0; i < 6; i++) { const a = ang + Math.PI / 2 + (i * Math.PI) / 5; pts.push({ x: inst.a.x + r * Math.cos(a), y: inst.a.y + r * Math.sin(a) }); }
-    return pts.map(toImg);
+    return polyOf(inst, ctx ? ctx.sw : 0, sc);
   }
 
-  return { update, outline, reset() { history = []; lastKey = null; nullSince = null; last = null; } };
+  // Every visible segment instance, for drawing the whole body map.
+  function outlines(frame) {
+    const ctx = instances(frame);
+    if (!ctx) return [];
+    return ctx.list.map((inst) => ({ id: inst.id, side: inst.side, label: coarseLabel(inst.id, inst.side), poly: polyOf(inst, ctx.sw, ctx.sc) }));
+  }
+
+  // ---- calibration ----
+  // Full width of a capsule at its midpoint from the person mask, in pixels, or null.
+  function maskWidth(mask, inst, sc, sw) {
+    const m = mid(inst.a, inst.b);
+    const len = dist(inst.a, inst.b);
+    const n = { x: -(inst.b.y - inst.a.y) / len, y: (inst.b.x - inst.a.x) / len };
+    const inside = (p) => {
+      const x = Math.floor((p.x / sc.W) * mask.width), y = Math.floor((p.y / sc.H) * mask.height);
+      return x >= 0 && y >= 0 && x < mask.width && y < mask.height && mask.data[y * mask.width + x] > 127;
+    };
+    if (!inside(m)) return null;
+    const step = 0.5 * Math.min(sc.W / mask.width, sc.H / mask.height);
+    const walk = (s) => {
+      for (let d = step; d <= 2 * sw; d += step) if (!inside({ x: m.x + s * n.x * d, y: m.y + s * n.y * d })) return d - step / 2;
+      return null;
+    };
+    const d1 = walk(1), d2 = walk(-1);
+    if (d1 === null || d2 === null) return null;
+    // One side running on much further usually means the limb touches the body or the other limb.
+    const lo = Math.min(d1, d2), hi = Math.max(d1, d2);
+    return hi > 2 * lo ? 2 * lo : d1 + d2;
+  }
+
+  function measure(frame) {
+    const lms = frame.pose?.landmarks;
+    if (!lms || lms.length < 33) return { sample: null, hint: "Step into view" };
+    const sc = scaleOf(frame);
+    const ls = point(11, lms, sc), rs = point(12, lms, sc);
+    if (!ls || !rs || dist(ls, rs) < 1e-6) return { sample: null, hint: "Face the camera so I can see your shoulders" };
+    if (!point(23, lms, sc) || !point(24, lms, sc)) return { sample: null, hint: "Step back so I can see your hips" };
+    const sw = dist(ls, rs);
+    const lw = point(15, lms, sc), rw = point(16, lms, sc);
+    const out = (w, s) => w && Math.abs(w.x - s.x) > STANCE_OUT * sw && Math.abs(w.y - s.y) < STANCE_LEVEL * sw;
+    if (!out(lw, ls) || !out(rw, rs)) return { sample: null, hint: "Hold your arms out to the sides" };
+    const mask = frame.pose.mask?.data ? frame.pose.mask : null;
+    const sample = { t: frame.t ?? 0, lengths: {}, widths: {} };
+    for (const id of CAL_SEGMENTS) {
+      const seg = segments[id];
+      if (!seg) continue;
+      for (const side of ["left", "right"]) {
+        const inst = instance(id, seg, side, lms, sc);
+        if (!inst || inst.kind !== "capsule") continue;
+        (sample.lengths[id] ||= {})[side] = dist(inst.a, inst.b) / sw;
+        const w = mask && maskWidth(mask, inst, sc, sw);
+        if (w) (sample.widths[id] ||= {})[side] = w / sw;
+      }
+    }
+    return { sample, hint: null };
+  }
+
+  function calibrate(samples) {
+    const ok = (samples || []).filter(Boolean);
+    if (ok.length < CAL_MIN_SAMPLES) return null;
+    const radii = {}, lengths = {};
+    for (const id of CAL_SEGMENTS) {
+      const w = ok.flatMap((s) => Object.values(s.widths?.[id] || {})).filter(Number.isFinite);
+      const l = ok.flatMap((s) => Object.values(s.lengths?.[id] || {})).filter(Number.isFinite);
+      const def = defaultRadius(id);
+      if (w.length >= CAL_MIN_SAMPLES) radii[id] = clamp(median(w) / 2, 0.5 * def, 2 * def);
+      if (l.length >= CAL_MIN_SAMPLES) lengths[id] = median(l);
+    }
+    return { version: 1, at: new Date().toISOString(), samples: ok.length, radii, lengths };
+  }
+
+  function setCalibration(cal) {
+    if (!cal || cal.version !== 1 || typeof cal.radii !== "object") { calibration = null; return null; }
+    const radii = {};
+    for (const [id, r] of Object.entries(cal.radii)) {
+      if (segments[id] && Number.isFinite(r)) radii[id] = clamp(r, 0.5 * defaultRadius(id), 2 * defaultRadius(id));
+    }
+    calibration = { ...cal, radii };
+    return calibration;
+  }
+
+  return {
+    update,
+    outline,
+    outlines,
+    measure,
+    calibrate,
+    setCalibration,
+    getCalibration: () => calibration,
+    lock() {                     // force-lock the current leader (the view calls this on a tap)
+      if (locked) return true;
+      if (!leaderKey) return false;
+      doLock(leaderKey);
+      return true;
+    },
+    unlock() { doUnlock(); },
+    get locked() { return locked; },
+    reset() { forget(); locked = false; lockedKey = null; last = null; },
+  };
 }

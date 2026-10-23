@@ -56,9 +56,33 @@ person pointing at their own right forearm, and one `two-hands-probe.json`.
 
 ```js
 export async function createPointer({ segmentsUrl = "assets/live/segments.json" }) -> Pointer
-pointer.update(frame) -> PointResult | null       // pure function of the frame, no DOM
-pointer.outline(frame, segmentId) -> {x,y}[]      // polygon in image space for the overlay
+pointer.update(frame) -> PointResult | null       // frames + internal vote/lock state, no DOM
+pointer.lock() -> bool        // force-lock the current leader now (the view calls it on a tap); false if none
+pointer.unlock()              // release the lock; seeking restarts on the next frame
+pointer.locked                // getter, bool
+pointer.reset()               // forget all smoothing and lock state
+pointer.outline(frame, segmentId, side?) -> {x,y}[]   // polygon in image space; "forearm" or "forearm:left"
+pointer.outlines(frame) -> [ { id, side, label: "Right forearm", poly: {x,y}[] } ]  // every visible segment
+pointer.measure(frame) -> { sample: Sample | null, hint: string | null }  // one calibration sample
+pointer.calibrate(samples) -> Calibration | null  // median of >= 10 samples; null when too few
+pointer.setCalibration(cal | null)                // override segment radii (null = defaults)
+pointer.getCalibration() -> Calibration | null
 ```
+
+Selection is **coarse then fine**. The coarse key is the segment instance (`segment` + `side`).
+It is chosen with a generous contact radius (1.4 x the segment radius), hysteresis (the leader
+keeps the lead out to 1.3 x that contact radius unless a challenger's normalised distance is
+below 0.6 x the leader's and at least 0.15 lower) and an 8-frame plurality vote on the coarse key.
+`frac`, `aspect`, `region` and `structures` are refinement recomputed from the fingertip every
+frame and never change the coarse key. When the same key has led for 900 ms it **locks**: segment
+and side are frozen (fine fields keep refining while the tip is on that segment) until
+`unlock()`, until no pointing candidate has been seen for 1500 ms, or until a different segment
+has led for 1500 ms (the lock then releases and the new segment locks after its own 900 ms);
+during the no-candidate grace period `update` keeps returning the locked result. Contacts are rejected when the pose model's own index
+tip of the pointing hand (pose landmark 19 left / 20 right, visibility >= 0.3, within one shoulder
+width of the hand tip) is nearer the camera than the limb at the contact point by more than 0.6
+shoulder widths (pose `z`; skipped when every `z` is 0 or missing). A hanging arm's finger on its
+own thigh or leg is ranked as a resting hand (+0.5), so the other hand's point wins.
 
 `PointResult`:
 
@@ -66,16 +90,36 @@ pointer.outline(frame, segmentId) -> {x,y}[]      // polygon in image space for 
 {
   hand: "left" | "right",         // the pointing hand
   tip: { x, y },                   // fingertip, image space
-  segment: "forearm",              // id from segments.json
+  segment: "forearm",              // id from segments.json (frozen while locked)
   side: "left" | "right" | null,   // body side of that segment (null for midline: head, neck, trunk)
+  coarse: { segment: "forearm", side: "right", label: "Right forearm" },   // "Trunk", "Head", ...
   frac: 0..1,                      // proximal 0 -> distal 1 (trunk: top 0 -> bottom 1)
   facing: "front" | "back",        // which surface of the body faces the camera
   aspect: "front" | "back" | "inner" | "outer" | null,
   region: { model: "arm", key: "forearm", label: "Right forearm" },
   structures: [ { key: "radius", name: "Radius", layer: "bone" }, ... ],  // headline first, then the region's list
-  stable: true | false             // true after 400 ms in the same segment + band
+  progress: 0..1,                  // time the coarse key has led / 900 ms (1 once locked)
+  locked: true | false,            // segment and side frozen
+  stable: true | false             // alias of locked, for older callers
 }
 ```
+
+Calibration (arms-out stance: both wrists visible, each `|wrist.x - shoulder.x| > 1.1` and
+`|wrist.y - shoulder.y| < 0.5` shoulder widths, hips visible). `measure` returns `sample: null` and
+a short `hint` ("Step back so I can see your hips", "Hold your arms out to the sides") otherwise.
+
+```js
+Sample = { t, lengths: { forearm: { left: 0.74, right: 0.75 }, ... },   // segment length / shoulder width
+              widths:  { forearm: { left: 0.38, right: 0.40 }, ... } }  // mask width at the midpoint / shoulder width
+Calibration = { version: 1, at: "2026-10-23T12:00:00.000Z", samples: 12,
+                radii: { upper_arm, forearm, thigh, leg },   // half-width in shoulder widths, clamped 0.5x..2x default
+                lengths: { upper_arm, forearm, thigh, leg } }
+```
+
+Widths are measured from `frame.pose.mask` by walking perpendicular to the capsule axis at its
+midpoint until the mask ends (when one side runs on more than twice as far, e.g. into the other
+thigh, twice the shorter side is used); without a mask a sample holds lengths only. The view
+persists the calibration (localStorage) and passes it back with `setCalibration`.
 
 `assets/live/segments.json`:
 
@@ -166,6 +210,17 @@ export function createLiveView({ root, onExit, openExplore, config }) -> { open(
 It wires tracker -> pointer -> probe each frame, draws the overlay (landmarks, outline, probe
 glyph) on a canvas over the video, fills the structures panel, and hosts the scan window.
 The camera MediaStream is stopped in `close()` and on `visibilitychange` after 30 s hidden.
+
+Selection is lock-based: every frame the overlay draws all `pointer.outlines(frame)` as faint dashed
+zones, the led segment (`result.coarse`) brighter, the locked one solid `#4fb3ff` with its label, plus a
+progress ring on the fingertip. The pill reads "Hold on: <label>" until `result.locked`, then
+"<label> · locked" with an Unlock button (also Escape, or tapping the stage); tapping the stage while
+a candidate exists calls `pointer.lock()`. The panel and probe follow the locked flag only. A
+Calibrate button (and a first-use card, skippable via `localStorage live.calibration.skipped`) runs
+`pointer.measure` / `calibrate` / `setCalibration` and stores the result in `live.calibration.v1`;
+pointing is paused meanwhile. Key R (or the "Record 10 s" button with `?live-debug=1`) records up to
+600 frames into the `tools/live/record_fixture.mjs` fixture schema and downloads
+`live-recording-<timestamp>.json`.
 
 ## 6. Tests
 

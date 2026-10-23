@@ -45,6 +45,8 @@ try {
       ok("#live visible");
     } catch { fail("#live did not become visible after clicking #go-live"); }
     await page.waitForTimeout(4000); // let the camera, tracker and models start
+    // Dismiss the first-use calibration card if it appeared, without requiring it.
+    if ((await page.textContent(".live-card h1").catch(() => "")) === "Calibrate pointing") await page.click(".live-card button:not(.primary)").catch(() => {});
     const bad = [...hosts].filter(([h]) => !ALLOWED.has(h));
     if (bad.length) fail("cross-origin requests while Live open: " + bad.map(([, u]) => u).join(", "));
     else ok("no requests outside the allow-list (" + [...hosts.keys()].join(", ") + ")");
