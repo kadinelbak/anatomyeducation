@@ -105,7 +105,7 @@ async function openLive(fixture, hand = "left") {
   check(errors.length === 0, `no page errors${errors.length ? ": " + errors.join(" | ") : ""}`);
   await ctx.close();
 }
-// 3. Gesture flow: raise a hand to choose it, lock, count 1 = CT, two fist + blinks walk the structures, open palm releases.
+// 3. Gesture flow: raise a hand to choose it, lock, count 1 = CT, two fist + blinks walk the structures, two fists release.
 {
   const { ctx, page, errors } = await openLive("gesture-flow", null);
   const T = { timeout: 30000 };
@@ -123,7 +123,7 @@ async function openLive(fixture, hand = "left") {
   check(await cur(0), "first blink marks the first structure as current");
   check(await cur(1), "second blink moves to the second structure");
   const released = await page.waitForFunction(() => document.querySelector(".live-structs")?.children.length === 0 && document.querySelector(".live-unlock")?.hidden, null, { timeout: 40000 }).then(() => true, () => false);
-  check(released, "open palm releases the lock");
+  check(released, "two fists release the lock");
   check(errors.length === 0, `no page errors${errors.length ? ": " + errors.join(" | ") : ""}`);
   await ctx.close();
 }

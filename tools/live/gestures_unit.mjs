@@ -176,5 +176,23 @@ function blinkRun(closedMs, step = 10) {
   }
   check("raised with the thumb tucked and through a short flicker", r?.raised === "right", JSON.stringify(r?.raised));
 }
+// 10. twoFists: both hands fists for 600 ms, whichever hand points; one fist, or none chosen, is not enough
+{
+  const g = createGestures();
+  let r = null, first = null;
+  for (let t = 0; t <= 700; t += 33) {
+    r = g.update(frame(t, [hand("left", { fingers: [] }), hand("right", { fingers: [] })]), { pointerHand: "left" });
+    if (r.twoFists && first === null) first = t;
+  }
+  check("two fists held 600 ms -> twoFists", r?.twoFists === true && first !== null && first >= 600 && first < 640, String(first));
+  check("twoFists also fires with no pointer hand chosen", (() => { const h = createGestures(); let x = null; for (let t = 0; t <= 700; t += 33) x = h.update(frame(t, [hand("left", { fingers: [] }), hand("right", { fingers: [] })]), {}); return x?.twoFists === true; })());
+  const one = createGestures();
+  let o = null;
+  for (let t = 0; t <= 1000; t += 33) o = one.update(frame(t, [hand("left", { fingers: ["index"] }), hand("right", { fingers: [] })]), { pointerHand: "left" });
+  check("pointing hand + control fist: fist true, twoFists false", o?.fist === true && o.twoFists === false, JSON.stringify([o?.fist, o?.twoFists]));
+  let m = null;
+  for (let t = 1033; t <= 2000; t += 33) m = one.update(frame(t, [hand("right", { fingers: [] })]), { pointerHand: "left" });
+  check("one hand missing: twoFists false", m?.twoFists === false);
+}
 console.log(failures ? `${failures} FAILED` : "all passed");
 process.exit(failures ? 1 : 0);

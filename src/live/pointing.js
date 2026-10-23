@@ -68,6 +68,7 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
   let leaderKey = null, leadStart = 0, nullSince = null;
   let locked = false, lockedKey = null, lastCandT = 0, lastT = 0;
   let awaySince = null;        // locked, and the finger has led a different segment since this time
+  let hardLock = false;        // when set, a lock only ends with unlock(): no grace-period or retarget release
   let last = null;              // last result
   let calibration = null;
   let pointerHand = null;       // "left" | "right" | null: when set, only that hand may point
@@ -337,8 +338,8 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
     else if (awaySince === null) awaySince = t;
 
     if (locked) {
-      const away = awaySince !== null && t - awaySince > RETARGET_MS;
-      if (!away && (sel || t - lastCandT <= UNLOCK_MS)) {
+      const away = !hardLock && awaySince !== null && t - awaySince > RETARGET_MS;
+      if (!away && (hardLock || sel || t - lastCandT <= UNLOCK_MS)) {
         // Segment and side are frozen; refine frac / band / aspect when the tip is on the locked segment.
         const on = bestOf(all.filter((c) => c.key === lockedKey));
         last = on ? finish(build(ctx, on), 1) : { ...last, tip: sel ? { x: sel.tip.x, y: sel.tip.y } : last.tip };
@@ -494,6 +495,8 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
     unlock() { doUnlock(); },
     get locked() { return locked; },
     setPointerHand(side) { pointerHand = side === "left" || side === "right" ? side : null; },
+    setHardLock(on) { hardLock = !!on; },
+    get hardLock() { return hardLock; },
     get pointerHand() { return pointerHand; },
     reset() { forget(); locked = false; lockedKey = null; last = null; },
   };

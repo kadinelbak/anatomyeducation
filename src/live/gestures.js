@@ -81,7 +81,7 @@ function steady(maxMisses = MAX_MISSES) {
 
 export function createGestures({ holdMs = 600, openMs = 1000, blinkMinMs = 60, blinkMaxMs = 700 } = {}) {
   const raisedT = { left: steady(RAISE_MISSES), right: steady(RAISE_MISSES) };
-  const countT = steady(), fistT = steady(), openT = steady();
+  const countT = steady(), fistT = steady(), openT = steady(), twoFistT = steady();
   let controlSide = null;
   // blink: "unknown" until both eyes are seen open, then "open" <-> "closed"
   let eyes = "unknown", closedSince = 0, faceMisses = 0;
@@ -140,19 +140,24 @@ export function createGestures({ holdMs = 600, openMs = 1000, blinkMinMs = 60, b
     let count = null;
     if (side && countT.held(t, holdMs) && !countT.fired) { countT.fired = true; count = countT.value; }
 
+    // two fists: both hands seen as fists, whatever their roles (the release gesture)
+    const both = hands.left && hands.right;
+    twoFistT.feed(!both ? null : hands.left.shape === "fist" && hands.right.shape === "fist" ? true : false, t);
+
     return {
       hands,
       control,
       raised,
       count,
       fist: !!side && fistT.held(t, FIST_MS),
+      twoFists: twoFistT.held(t, holdMs),
       open: !!side && openT.held(t, openMs),
       blink: blinkStep(frame || {}, t),
     };
   }
 
   function reset() {
-    raisedT.left.reset(); raisedT.right.reset(); resetControl();
+    raisedT.left.reset(); raisedT.right.reset(); twoFistT.reset(); resetControl();
     controlSide = null; eyes = "unknown"; closedSince = 0; faceMisses = 0;
   }
 

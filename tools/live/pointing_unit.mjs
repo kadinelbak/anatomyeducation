@@ -296,6 +296,22 @@ const fresh = () => createPointer({ segmentsUrl: "assets/live/segments.json", lo
   check("retarget: the trunk leads after about 1.5 s away", firstTrunk !== null && firstTrunk >= 1500 && firstTrunk < 2700, String(firstTrunk));
   check("retarget: the trunk locks about 0.9 s later", lockedTrunk !== null && lockedTrunk - firstTrunk >= 880 && lockedTrunk - firstTrunk < 1000, JSON.stringify([firstTrunk, lockedTrunk]));
 }
+// 14b. setHardLock(true): neither the no-candidate grace period nor a retarget ends the lock; unlock() does
+{
+  const p = await fresh();
+  p.setHardLock(true);
+  check("hardLock getter", p.hardLock === true);
+  let t = 0, r = null;
+  for (; t <= 1000; t += 33) r = p.update(frame(t, hand("left", FORE.x, FORE.y)));
+  check("hard lock: locked on the forearm", r?.locked && r.segment === "forearm", JSON.stringify([r?.locked, r?.segment]));
+  for (; t <= 5000; t += 33) r = p.update(frame(t, null));
+  check("hard lock: 4 s without a candidate keeps the lock", r?.locked === true && r.segment === "forearm" && p.locked === true, JSON.stringify([r?.locked, r?.segment]));
+  for (; t <= 10000; t += 33) r = p.update(frame(t, hand("left", 0.5, 0.42)));
+  check("hard lock: 5 s on the trunk never retargets", r?.locked === true && r.segment === "forearm" && p.locked === true, JSON.stringify([r?.locked, r?.segment]));
+  p.unlock();
+  r = p.update(frame(t, hand("left", 0.5, 0.42)));
+  check("hard lock: unlock() releases, trunk can lead", p.locked === false && r?.segment === "trunk" && r.locked === false, JSON.stringify([r?.segment, r?.locked]));
+}
 // 15. setPointerHand("left"): a pointing right hand is the control hand and is ignored
 {
   const p = await fresh();
