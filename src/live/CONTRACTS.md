@@ -94,7 +94,8 @@ frame and never change the coarse key. When the same key has led for 900 ms it *
 and side are frozen (fine fields keep refining while the tip is on that segment) until
 `unlock()`, until no pointing candidate has been seen for 1500 ms, or until a different segment
 has led for 1500 ms (the lock then releases and the new segment locks after its own 900 ms);
-during the no-candidate grace period `update` keeps returning the locked result. Contacts are rejected when the pose model's own index
+during the no-candidate grace period `update` keeps returning the locked result. With
+`setHardLock(true)` (the view's default) neither release applies: a lock lasts until `unlock()`. Contacts are rejected when the pose model's own index
 tip of the pointing hand (pose landmark 19 left / 20 right, visibility >= 0.3, within one shoulder
 width of the hand tip) is nearer the camera than the limb at the contact point by more than 0.6
 shoulder widths (pose `z`; skipped when every `z` is 0 or missing). A hanging arm's finger on its
@@ -279,6 +280,7 @@ GestureResult = {
   count: null | 1 | 2 | 3 | 4,            // edge: control hand's index..pinky count steady holdMs; once, then null until it changes or drops
   fist: boolean,                          // level: control hand steady fist for 300 ms
   open: boolean,                          // level: control hand steady open palm for openMs
+  twoFists: boolean,                      // level: both hands fists for holdMs, whatever their roles (release)
   blink: boolean                          // edge: both eyes >= 0.5 for blinkMinMs..blinkMaxMs after being open (< 0.3), on reopening
 }
 HandRead = { fingers: 0..5, extended: { thumb, index, middle, ring, pinky }, shape: "fist" | "point" | "open" | "count" | "other", raised }

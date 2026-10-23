@@ -22,7 +22,7 @@ const store = {
 };
 const NO_SCANS = "No scans for this region yet";
 const HAND_KEY = "live.pointerHand";
-const LEGEND = "1-4 fingers: scan \u00b7 fist + blink: next structure \u00b7 open palm: release";
+const LEGEND = "1-4 fingers: scan \u00b7 fist + blink: next structure \u00b7 two fists: release";
 const SCAN_TIMEOUT_MS = 20000;
 const ZOOM_PAD = 0.35, ZOOM_MIN = 0.3, ZOOM_MAX = 3, ZOOM_EASE = 0.1;
 // ?live-fixture=<path> replays recorded tracker frames instead of opening a camera (tests, demos).
@@ -230,6 +230,7 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     pointerHand = saved0 === "left" || saved0 === "right" ? saved0 : null;
     flow = pointerHand || !gestures ? "seek" : "hand";
     try { pointer.setPointerHand?.(pointerHand); } catch (e) { console.warn("live: setPointerHand failed", e); }
+    try { pointer.setHardLock?.(true); } catch (e) { console.warn("live: setHardLock failed", e); }   // a lock stays until two fists, Unlock or Escape
     try {
       const saved = store.get(CAL_KEY);
       if (saved) pointer.setCalibration?.(JSON.parse(saved));
@@ -462,7 +463,7 @@ export function createLiveView({ root, onExit, openExplore, config }) {
       markCurrent();
       say(structs[structIdx].name, 1500);
     }
-    if (gs.open) unlockNow();
+    if (gs.twoFists) unlockNow();   // the only gesture that releases a lock
   }
   function markCurrent() {
     [...el.list.children].forEach((li, i) => li.classList.toggle("current", i === structIdx));
@@ -512,7 +513,7 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     if (!(frame.hands || []).length) lines.push("no hands");
     const b = frame.face?.blink;
     lines.push(b ? `blink L ${b.left.toFixed(2)} R ${b.right.toFixed(2)}` : "no face");
-    if (gs) lines.push(`gestures: count ${gs.count ?? "-"} · fist ${gs.fist} · open ${gs.open} · blink ${gs.blink} · raised ${gs.raised || "-"} · control ${gs.control?.side || "-"}`);
+    if (gs) lines.push(`gestures: count ${gs.count ?? "-"} · fist ${gs.fist} · twoFists ${gs.twoFists} · blink ${gs.blink} · raised ${gs.raised || "-"} · control ${gs.control?.side || "-"}`);
     el.debug.textContent = lines.join("\n");
   }
 
