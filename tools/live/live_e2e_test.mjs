@@ -4,6 +4,7 @@
 //   node tools/live/live_e2e_test.mjs http://127.0.0.1:8138/ /opt/pw-browsers/chromium
 // (playwright is resolved from the working directory's node_modules)
 import { chromium } from "playwright";
+import { openLive as openLiveFromHome } from "./_open_live.mjs";
 
 const base = process.argv[2] || "http://127.0.0.1:8138/";
 const executablePath = process.argv[3] || "/opt/pw-browsers/chromium";
@@ -24,7 +25,7 @@ async function openLive(fixture) {
   page.on("request", (r) => { if (/mediapipe|assets\/ml/.test(r.url())) mp.push(r.url()); });
   await page.goto(`${base}?live-fixture=tools/live/fixtures/${fixture}.json`, { waitUntil: "load" });
   await page.waitForFunction(() => !document.getElementById("start").disabled, null, { timeout: 90000 });
-  await page.click("#go-live");
+  await openLiveFromHome(page);
   await page.waitForSelector("#live:not([hidden])");
   await page.click(".live-card button.primary");
   return { ctx, page, errors, mp };

@@ -6,6 +6,7 @@
 //   node tools/live/smoke_test_live.mjs http://127.0.0.1:8137/ [chromium executable]
 //   W=390 H=844 TOUCH=1 node tools/live/smoke_test_live.mjs ...   phone size
 import { chromium } from "playwright";
+import { openLive } from "./_open_live.mjs";
 
 const url = process.argv[2] || "http://127.0.0.1:8137/";
 const executablePath = process.argv[3];
@@ -34,11 +35,11 @@ try {
   });
 
   await page.goto(url, { waitUntil: "load" });
-  if (!(await page.$("#go-live"))) {
+  if (!(await page.$("#go-live")) && !(await page.$("#home-live")) && !(await page.$("#home-explore"))) {
     fail("#go-live is not in the page (Live home button missing); cannot test Live");
   } else {
     recording = true;
-    await page.click("#go-live");
+    await openLive(page);
     try {
       await page.waitForSelector("#live", { state: "visible", timeout: 15000 });
       ok("#live visible");

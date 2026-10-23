@@ -3,6 +3,7 @@
 //   python3 tools/serve.py --port 8131 &
 //   node tools/live/view_test.mjs http://127.0.0.1:8131/ /opt/pw-browsers/chromium
 import { chromium } from "playwright";
+import { openLive } from "./_open_live.mjs";
 
 const url = process.argv[2] || "http://127.0.0.1:8131/";
 const executablePath = process.argv[3] || "/opt/pw-browsers/chromium";
@@ -26,7 +27,7 @@ const check = (ok, msg) => { console.log(ok ? "ok  " : "FAIL", msg); if (!ok) fa
 await page.goto(url, { waitUntil: "load" });
 await page.waitForFunction(() => !document.getElementById("start").disabled, null, { timeout: 90000 });
 live = true;
-await page.click("#go-live");
+await openLive(page);
 await page.waitForSelector("#live:not([hidden])");
 await page.click(".live-card button.primary"); // Turn on camera
 await page.waitForFunction(() => { const v = document.querySelector("#live video"); return v && v.readyState >= 2 && !v.paused && v.videoWidth > 0; }, null, { timeout: 30000 });
@@ -49,7 +50,7 @@ check((await page.evaluate(() => location.hash)) === "", "#live history entry po
 
 // Reopen and leave through browser Back and through the brand button.
 for (const how of ["back", "brand"]) {
-  await page.click("#go-live");
+  await openLive(page);
   await page.click(".live-card button.primary");
   await page.waitForFunction(() => document.querySelector("#live video")?.srcObject);
   if (how === "back") await page.goBack(); else await page.click("#explore-back");
