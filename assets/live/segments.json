@@ -1,0 +1,689 @@
+{
+ "version": 1,
+ "segments": {
+  "head": {
+   "label": "Head",
+   "poly": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "shape": {
+    "kind": "head",
+    "top": 0.9,
+    "chin": 0.35
+   },
+   "midline": true,
+   "model": "head",
+   "bands": [
+    {
+     "frac": [
+      0,
+      0.42
+     ],
+     "region": "skull",
+     "label": "Skull",
+     "headline": {
+      "front": [
+       "frontal_bone",
+       "parietal_bone",
+       "frontalis",
+       "epicranial_aponeurosis",
+       "supraorbital_nerve",
+       "superficial_temporal_artery"
+      ],
+      "back": [
+       "occipital_bone",
+       "parietal_bone",
+       "occipitalis",
+       "epicranial_aponeurosis",
+       "lambdoid_suture",
+       "occipital_artery"
+      ]
+     }
+    },
+    {
+     "frac": [
+      0.42,
+      0.62
+     ],
+     "region": "orbit",
+     "backRegion": "skull",
+     "label": "Orbit",
+     "headline": {
+      "front": [
+       "eyeball",
+       "orbicularis_oculi",
+       "optic_nerve",
+       "levator_palpebrae_superioris",
+       "lacrimal_gland",
+       "supraorbital_nerve"
+      ],
+      "back": [
+       "temporal_bone",
+       "parietal_bone",
+       "occipital_bone",
+       "temporalis",
+       "epicranial_aponeurosis",
+       "occipital_artery"
+      ]
+     }
+    },
+    {
+     "frac": [
+      0.62,
+      0.84
+     ],
+     "region": "face",
+     "backRegion": "skull",
+     "label": "Face",
+     "headline": {
+      "front": [
+       "maxilla",
+       "zygomatic_bone",
+       "nasal_bone",
+       "zygomaticus_major",
+       "facial_nerve",
+       "facial_artery"
+      ],
+      "back": [
+       "occipital_bone",
+       "temporal_bone",
+       "occipitalis",
+       "sternocleidomastoid",
+       "occipital_artery",
+       "lambdoid_suture"
+      ]
+     }
+    },
+    {
+     "frac": [
+      0.84,
+      1
+     ],
+     "region": "jaw",
+     "backRegion": "skull",
+     "label": "Jaw",
+     "headline": {
+      "front": [
+       "mandible",
+       "masseter",
+       "mentalis",
+       "inferior_alveolar_nerve",
+       "mental_nerve",
+       "facial_artery"
+      ],
+      "back": [
+       "occipital_bone",
+       "temporal_bone",
+       "sternocleidomastoid",
+       "parotid_gland",
+       "occipital_artery",
+       "digastric"
+      ]
+     }
+    }
+   ]
+  },
+  "neck": {
+   "label": "Neck",
+   "line": [
+    [
+     11,
+     12
+    ],
+    0
+   ],
+   "radius": 0.3,
+   "midline": true,
+   "model": "neck",
+   "bands": [
+    {
+     "frac": [
+      0,
+      0.5
+     ],
+     "region": {
+      "front": "larynx",
+      "inner": "larynx",
+      "outer": "anterior_triangle",
+      "back": "cervical_spine"
+     },
+     "label": {
+      "front": "Larynx",
+      "inner": "Larynx",
+      "outer": "Anterior triangle",
+      "back": "Cervical spine"
+     },
+     "headline": {
+      "front": [
+       "thyroid_cartilage",
+       "hyoid_bone",
+       "cricoid_cartilage",
+       "sternohyoid",
+       "thyrohyoid",
+       "common_carotid_artery"
+      ],
+      "back": [
+       "c3_vertebra",
+       "c4_vertebra",
+       "nuchal_ligament",
+       "splenius_capitis",
+       "trapezius",
+       "spinal_cord"
+      ],
+      "outer": [
+       "sternocleidomastoid",
+       "internal_jugular_vein",
+       "external_jugular_vein",
+       "common_carotid_artery",
+       "vagus_nerve",
+       "omohyoid"
+      ]
+     }
+    },
+    {
+     "frac": [
+      0.5,
+      1
+     ],
+     "region": {
+      "front": "thyroid",
+      "inner": "thyroid",
+      "outer": "posterior_triangle",
+      "back": "cervical_spine"
+     },
+     "label": {
+      "front": "Thyroid region",
+      "inner": "Thyroid region",
+      "outer": "Posterior triangle",
+      "back": "Cervical spine"
+     },
+     "headline": {
+      "front": [
+       "thyroid_gland",
+       "trachea",
+       "sternothyroid",
+       "recurrent_laryngeal_nerve",
+       "common_carotid_artery",
+       "inferior_thyroid_artery"
+      ],
+      "back": [
+       "c6_vertebra",
+       "c7_vertebra",
+       "nuchal_ligament",
+       "trapezius",
+       "semispinalis_cervicis",
+       "spinal_cord"
+      ],
+      "outer": [
+       "sternocleidomastoid",
+       "trapezius",
+       "levator_scapulae",
+       "scalenus_medius",
+       "brachial_plexus_roots",
+       "spinal_accessory_nerve"
+      ]
+     }
+    }
+   ]
+  },
+  "upper_arm": {
+   "label": "Upper arm",
+   "from": [
+    11,
+    12
+   ],
+   "to": [
+    13,
+    14
+   ],
+   "model": "arm",
+   "bands": [
+    {
+     "frac": [
+      0,
+      0.2
+     ],
+     "region": "shoulder",
+     "label": "Shoulder",
+     "headline": {
+      "front": [
+       "clavicle",
+       "scapula",
+       "deltoid",
+       "pectoralis_major",
+       "axillary_artery",
+       "brachial_plexus_lateral_cord"
+      ],
+      "back": [
+       "scapula",
+       "deltoid",
+       "infraspinatus",
+       "teres_minor",
+       "supraspinatus",
+       "brachial_plexus_posterior_cord"
+      ]
+     }
+    },
+    {
+     "frac": [
+      0.2,
+      1
+     ],
+     "region": "arm",
+     "label": "Upper arm",
+     "headline": {
+      "front": [
+       "humerus",
+       "biceps_brachii",
+       "brachialis",
+       "brachial_artery",
+       "median_nerve",
+       "musculocutaneous_nerve"
+      ],
+      "back": [
+       "humerus",
+       "triceps_brachii",
+       "radial_nerve",
+       "deep_artery_of_arm",
+       "ulnar_nerve",
+       "posterior_circumflex_humeral_artery"
+      ]
+     }
+    }
+   ]
+  },
+  "forearm": {
+   "label": "Forearm",
+   "from": [
+    13,
+    14
+   ],
+   "to": [
+    15,
+    16
+   ],
+   "model": "arm",
+   "bands": [
+    {
+     "frac": [
+      0,
+      1
+     ],
+     "region": "forearm",
+     "label": "Forearm",
+     "headline": {
+      "front": [
+       "radius",
+       "ulna",
+       "flexor_carpi_radialis",
+       "median_nerve",
+       "radial_artery",
+       "ulnar_artery"
+      ],
+      "back": [
+       "radius",
+       "ulna",
+       "extensor_digitorum",
+       "extensor_carpi_ulnaris",
+       "posterior_interosseous_nerve",
+       "posterior_interosseous_artery"
+      ]
+     }
+    }
+   ]
+  },
+  "hand": {
+   "label": "Hand",
+   "from": [
+    15,
+    16
+   ],
+   "to": [
+    [
+     17,
+     19,
+     21
+    ],
+    [
+     18,
+     20,
+     22
+    ]
+   ],
+   "model": "arm",
+   "bands": [
+    {
+     "frac": [
+      0,
+      1
+     ],
+     "region": "hand",
+     "label": "Hand",
+     "headline": {
+      "front": [
+       "metacarpal_2",
+       "phalanges_index",
+       "flexor_retinaculum",
+       "aponeurosis_palmaris",
+       "superficial_palmar_arch",
+       "median_palmar_branch"
+      ],
+      "back": [
+       "metacarpal_3",
+       "phalanges_middle",
+       "extensor_retinaculum",
+       "dorsal_interossei",
+       "extensor_hoods",
+       "dorsal_metacarpal_arteries"
+      ]
+     }
+    }
+   ]
+  },
+  "trunk": {
+   "label": "Trunk",
+   "poly": [
+    11,
+    12,
+    24,
+    23
+   ],
+   "midline": true,
+   "model": "trunk",
+   "bands": [
+    {
+     "frac": [
+      0,
+      0.45
+     ],
+     "region": "thorax",
+     "backRegion": "back",
+     "label": "Thorax",
+     "backLabel": "Upper back",
+     "headline": {
+      "front": [
+       "body_of_sternum",
+       "rib_4",
+       "pectoralis_major",
+       "ventricles",
+       "right_upper_lobe",
+       "left_upper_lobe"
+      ],
+      "back": [
+       "t7_vertebra",
+       "scapula",
+       "trapezius",
+       "latissimus_dorsi",
+       "rhomboid_major",
+       "iliocostalis"
+      ]
+     }
+    },
+    {
+     "frac": [
+      0.45,
+      0.8
+     ],
+     "region": "abdomen",
+     "backRegion": "back",
+     "label": "Abdomen",
+     "backLabel": "Lower back",
+     "headline": {
+      "front": [
+       "rectus_abdominis",
+       "linea_alba",
+       "liver",
+       "stomach",
+       "small_intestine",
+       "external_oblique"
+      ],
+      "back": [
+       "l3_vertebra",
+       "quadratus_lumborum",
+       "iliocostalis",
+       "longissimus",
+       "right_kidney",
+       "left_kidney"
+      ]
+     }
+    },
+    {
+     "frac": [
+      0.8,
+      1
+     ],
+     "region": "pelvis",
+     "backRegion": "back",
+     "label": "Pelvis",
+     "backLabel": "Sacral region",
+     "headline": {
+      "front": [
+       "hip_bone",
+       "inguinal_ligament",
+       "urinary_bladder",
+       "external_iliac_artery",
+       "iliacus",
+       "rectus_abdominis"
+      ],
+      "back": [
+       "sacrum",
+       "hip_bone",
+       "l5_vertebra",
+       "gluteus_maximus",
+       "gluteus_medius",
+       "sciatic_nerve"
+      ]
+     }
+    }
+   ]
+  },
+  "thigh": {
+   "label": "Thigh",
+   "from": [
+    23,
+    24
+   ],
+   "to": [
+    25,
+    26
+   ],
+   "model": "lower-limb",
+   "bands": [
+    {
+     "frac": [
+      0,
+      0.2
+     ],
+     "region": "hip",
+     "label": "Hip",
+     "headline": {
+      "front": [
+       "hip_bone",
+       "iliacus",
+       "psoas_major",
+       "sartorius",
+       "femoral_artery",
+       "femoral_nerve"
+      ],
+      "back": [
+       "hip_bone",
+       "sacrum",
+       "gluteus_maximus",
+       "gluteus_medius",
+       "piriformis",
+       "sciatic_nerve"
+      ]
+     }
+    },
+    {
+     "frac": [
+      0.2,
+      1
+     ],
+     "region": "thigh",
+     "label": "Thigh",
+     "headline": {
+      "front": [
+       "femur",
+       "rectus_femoris",
+       "vastus_lateralis",
+       "sartorius",
+       "femoral_artery",
+       "femoral_nerve"
+      ],
+      "back": [
+       "femur",
+       "biceps_femoris",
+       "semitendinosus",
+       "semimembranosus",
+       "adductor_magnus",
+       "sciatic_nerve"
+      ]
+     }
+    }
+   ]
+  },
+  "leg": {
+   "label": "Leg",
+   "from": [
+    25,
+    26
+   ],
+   "to": [
+    27,
+    28
+   ],
+   "model": "lower-limb",
+   "bands": [
+    {
+     "frac": [
+      0,
+      0.2
+     ],
+     "region": "knee",
+     "label": "Knee",
+     "headline": {
+      "front": [
+       "patella",
+       "quadriceps_tendon_patellar_ligament",
+       "medial_meniscus",
+       "lateral_meniscus",
+       "anterior_cruciate_ligament",
+       "fibular_collateral_ligament"
+      ],
+      "back": [
+       "popliteus",
+       "popliteal_artery",
+       "popliteal_vein",
+       "tibial_nerve",
+       "common_fibular_nerve",
+       "posterior_cruciate_ligament"
+      ]
+     }
+    },
+    {
+     "frac": [
+      0.2,
+      1
+     ],
+     "region": "leg",
+     "label": "Leg",
+     "headline": {
+      "front": [
+       "tibia",
+       "fibula",
+       "tibialis_anterior",
+       "extensor_digitorum_longus",
+       "anterior_tibial_artery",
+       "deep_fibular_nerve"
+      ],
+      "back": [
+       "tibia",
+       "fibula",
+       "gastrocnemius",
+       "soleus",
+       "posterior_tibial_artery",
+       "tibial_nerve"
+      ]
+     }
+    }
+   ]
+  },
+  "foot": {
+   "label": "Foot",
+   "from": [
+    27,
+    28
+   ],
+   "to": [
+    31,
+    32
+   ],
+   "model": "lower-limb",
+   "bands": [
+    {
+     "frac": [
+      0,
+      0.3
+     ],
+     "region": "ankle",
+     "label": "Ankle",
+     "headline": {
+      "front": [
+       "talus",
+       "calcaneus",
+       "extensor_retinacula_ankle",
+       "deltoid_ligament",
+       "anterior_talofibular_ligament",
+       "dorsalis_pedis_artery"
+      ],
+      "back": [
+       "calcaneus",
+       "calcaneal_tendon",
+       "talus",
+       "calcaneofibular_ligament",
+       "posterior_tibial_artery",
+       "tibial_nerve"
+      ]
+     }
+    },
+    {
+     "frac": [
+      0.3,
+      1
+     ],
+     "region": "foot",
+     "label": "Foot",
+     "headline": {
+      "front": [
+       "metatarsal_1",
+       "navicular",
+       "extensor_hallucis_longus",
+       "extensor_digitorum_longus",
+       "dorsalis_pedis_artery",
+       "deep_fibular_nerve"
+      ],
+      "back": [
+       "calcaneus",
+       "plantar_aponeurosis",
+       "flexor_digitorum_brevis",
+       "medial_plantar_nerve",
+       "lateral_plantar_nerve",
+       "plantar_arch"
+      ]
+     }
+    }
+   ]
+  }
+ }
+}

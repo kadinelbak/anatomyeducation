@@ -1,0 +1,5 @@
+.usf-root { position: relative; width: 100%; height: 100%; background: #05080c; overflow: hidden; }
+.usf-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.usf-badge { position: absolute; left: 10px; bottom: 10px; padding: 3px 9px; border-radius: 999px; font: 600 12px/1.4 system-ui, sans-serif;
+  color: #e6edf3; background: rgba(13, 17, 23, 0.78); border: 1px solid rgba(255, 255, 255, 0.18); pointer-events: none; max-width: calc(100% - 20px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.usf-tip { position: absolute; padding: 2px 8px; border-radius: 6px; font: 12px system-ui, sans-serif; color: #fff; background: rgba(13, 17, 23, 0.85); pointer-events: none; transform: translate(-50%, -140%); }

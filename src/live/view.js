@@ -1,0 +1,408 @@
+// Live mode view shell: camera feed, overlay, status pill, structures panel, modality toolbar and scan window.
+// Wires tracker -> pointer -> probe each frame (see src/live/CONTRACTS.md). The sibling modules are imported
+// dynamically; if one is missing or fails to start, a small inline stub keeps the view working.
+import { createRendererSwitch } from "../renderers/switch.js";
+
+const HIDDEN_EXIT_MS = 30000;
+const PEEK = 120;
+const BONES = [[11, 12], [11, 13], [13, 15], [12, 14], [14, 16], [11, 23], [12, 24], [23, 24], [23, 25], [25, 27], [24, 26], [26, 28], [0, 11], [0, 12]];
+const MODALITIES = [{ id: "ct", label: "CT" }, { id: "mri", label: "MRI" }, { id: "xray", label: "X-ray" }, { id: "ultrasound", label: "Ultrasound" }];
+
+// segments.json names the upper limb model "arm"; CONFIG.models (and so openExplore) call it "upper-limb".
+const EXPLORE_MODEL = { arm: "upper-limb" };
+const NO_SCANS = "No scans for this region yet";
+// ?live-fixture=<path> replays recorded tracker frames instead of opening a camera (tests, demos).
+const fixtureUrl = () => { try { return new URLSearchParams(location.search).get("live-fixture") || null; } catch { return null; } };
+
+// ---------- The view ----------
+export function createLiveView({ root, onExit, openExplore, config }) {
+  let active = false;
+  let built = false;
+  let stream = null;
+  let tracker = null, pointer = null, probe = null, usProbe = null, renderers = null;
+  let avail = {};
+  let modality = null;
+  let lastKey = null, lastReqKey = null, applying = false;
+  let hiddenTimer = null;
+  let session = 0; // bumps on every open/close so late async work can tell it is stale
+  let el = {};
+  const h = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+
+  function build() {
+    if (built) return;
+    built = true;
+    el.stage = h("div", "live-stage");
+    el.video = h("video", "live-video");
+    el.video.muted = true; el.video.playsInline = true; el.video.setAttribute("playsinline", ""); el.video.autoplay = true;
+    el.canvas = h("canvas", "live-overlay");
+    el.pill = h("div", "live-pill");
+    el.pill.dataset.state = "loading";
+    el.pill.append(h("span", "dot"));
+    el.pillText = h("span", "text", "Starting");
+    el.pillText.setAttribute("role", "status");
+    el.x = h("button", "live-x", "✕");
+    el.x.type = "button"; el.x.setAttribute("aria-label", "Close Live"); el.x.title = "Close Live";
+    el.x.addEventListener("click", () => exit());
+    el.pill.append(el.pillText, el.x);
+    el.stage.append(el.video, el.canvas);
+
+    el.panel = h("aside", "live-panel");
+    el.panel.hidden = true;
+    el.grab = h("button", "live-grab");
+    el.grab.type = "button"; el.grab.setAttribute("aria-label", "Drag to resize the structures panel");
+    el.title = h("h2", "", "Point at your body");
+    el.hint = h("p", "live-hint", "Point a finger at your arm, hand or trunk and hold still.");
+    el.list = h("ul", "live-structs");
+    el.scan = h("div", "live-scan");
+    el.scan.hidden = true;
+    el.scanView = h("div", "live-scan-view");
+    el.scan.append(el.scanView);
+    el.caption = h("p", "live-caption");
+    el.panel.append(el.grab, el.title, el.hint, el.list, el.scan, el.caption);
+
+    el.toolbar = h("div", "toolbar live-toolbar");
+    el.toolbar.setAttribute("role", "toolbar"); el.toolbar.setAttribute("aria-label", "Scan type");
+    el.toolbar.hidden = true;
+
+    el.card = h("div", "card live-card");
+    root.replaceChildren(el.stage, el.pill, el.panel, el.toolbar, el.card);
+    wireSheet();
+  }
+
+  function showCard(title, body, buttons) {
+    el.card.replaceChildren(h("h1", "", title), h("p", "", body));
+    const row = h("div", "row");
+    for (const b of buttons) {
+      const btn = h("button", b.primary ? "primary" : "", b.label);
+      btn.type = "button";
+      btn.addEventListener("click", b.onClick);
+      row.append(btn);
+    }
+    el.card.append(row);
+    el.card.hidden = false;
+    el.panel.hidden = true; el.toolbar.hidden = true;
+    setPill("loading", "Live needs a camera");
+    row.querySelector("button")?.focus();
+  }
+  const unsupported = (why) => showCard("Live needs a camera", `${why} You can still explore every model with the mouse or touch.`, [{ label: "Open Explore", primary: true, onClick: () => exit() }]);
+
+  function setPill(state, text) {
+    el.pill.dataset.state = state;
+    el.pillText.textContent = text;
+  }
+
+  function hasWebGL2() {
+    try {
+      const c = document.createElement("canvas");
+      const gl = c.getContext("webgl2");
+      gl?.getExtension("WEBGL_lose_context")?.loseContext();
+      return !!gl;
+    } catch { return false; }
+  }
+
+  // ---------- Open / close ----------
+  function open() {
+    if (active) return;
+    build();
+    active = true;
+    session++;
+    root.hidden = false;
+    document.body.classList.add("live");
+    try { history.pushState({ live: 1 }, "", "#live"); } catch {}
+    window.addEventListener("popstate", onPop);
+    document.addEventListener("visibilitychange", onVisibility);
+    window.addEventListener("resize", sizeCanvas);
+    setPill("loading", "Camera permission");
+    if (!navigator.mediaDevices?.getUserMedia) return unsupported("This browser cannot open a camera.");
+    if (!hasWebGL2()) return unsupported("Live also needs WebGL 2, which this browser does not offer.");
+    showCard("Use your camera", "Live watches where you point on your own body and shows what lies beneath. The video stays on this device and is never recorded or sent anywhere.", [
+      { label: "Turn on camera", primary: true, onClick: startCamera },
+      { label: "Not now", onClick: () => exit() },
+    ]);
+  }
+
+  async function startCamera() {
+    const mine = session;
+    el.card.hidden = true;
+    const fixture = fixtureUrl();
+    setPill("loading", fixture ? "Loading tracking" : "Starting camera");
+    if (fixture) { el.panel.hidden = false; sizeCanvas(); } // replay needs no camera
+    else try {
+      const s = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 720 } }, audio: false });
+      if (!active || mine !== session) { s.getTracks().forEach((t) => t.stop()); return; }
+      stream = s;
+    } catch (e) {
+      if (mine === session) unsupported(e?.name === "NotAllowedError" ? "Camera access was not allowed." : "No camera could be opened.");
+      return;
+    }
+    if (stream) {
+      el.video.srcObject = stream;
+      try { await el.video.play(); } catch {}
+      if (mine !== session) return;
+      sizeCanvas();
+      el.panel.hidden = false;
+      setPill("loading", "Loading tracking");
+    }
+    renderers ||= createRendererSwitch({ viewer: el.scanView, models: config.models, onPick() {}, onSelect() {}, onChange() {} });
+    const onStatus = (status, message) => {
+      if (mine !== session) return;
+      const text = message || { loading: "Loading tracking", tracking: "Point at your body", "no-person": "Step back so I can see you", slow: "Running slowly", error: "Tracking problem" }[status] || status;
+      setPill(status, text);
+    };
+    let t, p, pr, us;
+    try {
+      // tracking.js loads the MediaPipe runtime only on the real-camera path, never for a fixture.
+      const [trk, pnt, prb, prbUs] = await Promise.all([import("./tracking.js"), import("./pointing.js"), import("./probe.js"), import("./probe-us.js")]);
+      us = prbUs.createUltrasoundProbe();
+      [t, p, pr] = await Promise.all([
+        trk.createTracker({ video: el.video, onFrame: (f) => onFrame(f, mine), onStatus, fixture: fixture || undefined }),
+        pnt.createPointer({}),
+        prb.createProbe({ renderers }),
+        us.ready,
+      ]);
+    } catch (e) {
+      console.warn("live: tracking could not start", e);
+      if (mine === session) unsupported("Tracking could not start on this device.");
+      return;
+    }
+    if (mine !== session || !active) { t.dispose?.(); return; }
+    tracker = t; pointer = p; probe = pr; usProbe = us;
+    tracker.start();
+  }
+
+  function stopAll() {
+    session++;
+    try { tracker?.stop(); tracker?.dispose?.(); } catch {}
+    tracker = null; pointer = null; probe = null; usProbe = null;
+    if (stream) stream.getTracks().forEach((t) => t.stop());
+    stream = null;
+    if (el.video) { el.video.pause(); el.video.srcObject = null; }
+    clearTimeout(hiddenTimer); hiddenTimer = null;
+    window.removeEventListener("popstate", onPop);
+    document.removeEventListener("visibilitychange", onVisibility);
+    window.removeEventListener("resize", sizeCanvas);
+  }
+
+  function close() {
+    if (!active) return;
+    active = false;
+    stopAll();
+    root.hidden = true;
+    document.body.classList.remove("live");
+    modality = null; lastKey = null; lastReqKey = null; applying = false;
+    if (el.list) { el.list.replaceChildren(); el.toolbar.replaceChildren(); el.toolbar.hidden = true; el.scan.hidden = true; el.caption.textContent = ""; }
+    if (location.hash === "#live") { try { history.back(); } catch {} }
+  }
+  function exit() { close(); onExit?.(); }
+
+  function onPop() {
+    if (active) { active = false; closeNoHistory(); onExit?.(); }
+  }
+  function closeNoHistory() {
+    stopAll();
+    root.hidden = true;
+    document.body.classList.remove("live");
+    modality = null; lastKey = null; lastReqKey = null;
+  }
+  function onVisibility() {
+    if (document.hidden) {
+      tracker?.stop();
+      clearTimeout(hiddenTimer);
+      hiddenTimer = setTimeout(() => { if (active && document.hidden) exit(); }, HIDDEN_EXIT_MS);
+    } else {
+      clearTimeout(hiddenTimer); hiddenTimer = null;
+      if (active) tracker?.start();
+    }
+  }
+
+  // ---------- Bottom sheet (phones) ----------
+  function wireSheet() {
+    let startY = 0, startH = 0, dragging = false, moved = false;
+    const phone = () => window.matchMedia("(max-width: 600px)").matches;
+    const half = () => Math.round(root.clientHeight * 0.5);
+    const setH = (v) => root.style.setProperty("--sheet-h", `${Math.max(PEEK, Math.min(half(), v))}px`);
+    el.grab.addEventListener("pointerdown", (e) => { if (!phone()) return; dragging = true; moved = false; startY = e.clientY; startH = el.panel.offsetHeight; el.grab.setPointerCapture(e.pointerId); });
+    el.grab.addEventListener("pointermove", (e) => { if (dragging) { moved = moved || Math.abs(startY - e.clientY) > 4; setH(startH + (startY - e.clientY)); } });
+    const end = () => {
+      if (!dragging) return;
+      dragging = false;
+      if (!moved) return;
+      setH(el.panel.offsetHeight > (PEEK + half()) / 2 ? half() : PEEK);
+    };
+    el.grab.addEventListener("pointerup", end);
+    el.grab.addEventListener("pointercancel", end);
+    el.grab.addEventListener("click", () => { if (phone() && !moved) setH(el.panel.offsetHeight > PEEK + 10 ? PEEK : half()); });
+  }
+
+  // ---------- Per-frame work ----------
+  let vw = 640, vh = 480, cw = 1, ch = 1, dpr = 1;
+  function sizeCanvas() {
+    if (!el.canvas) return;
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cw = el.stage.clientWidth; ch = el.stage.clientHeight;
+    el.canvas.width = Math.round(cw * dpr); el.canvas.height = Math.round(ch * dpr);
+  }
+  // Image space (un-mirrored, 0..1) -> canvas pixels, matching object-fit: cover and the mirrored video.
+  function toPx(p) {
+    const s = Math.max(cw / vw, ch / vh);
+    const ox = (cw - vw * s) / 2, oy = (ch - vh * s) / 2;
+    return { x: cw - (ox + p.x * vw * s), y: oy + p.y * vh * s };
+  }
+
+  function onFrame(frame, mine) {
+    if (!active || mine !== session) return;
+    vw = frame.width || el.video.videoWidth || vw; vh = frame.height || el.video.videoHeight || vh;
+    if (el.stage.clientWidth !== cw || el.stage.clientHeight !== ch) sizeCanvas();
+    const ctx = el.canvas.getContext("2d");
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, cw, ch);
+    drawPose(ctx, frame);
+    let result = null;
+    try { result = pointer?.update(frame) || null; } catch (e) { console.warn("live: pointing failed", e); }
+    if (result) drawPointing(ctx, frame, result);
+    if (result?.stable) {
+      const key = `${result.region.model}:${result.region.key}`;
+      if (key !== lastKey) { lastKey = key; fillPanel(result); }
+      setPill("tracking", result.region.label);
+      const other = frame.hands.find((hd) => hd.side !== result.hand);
+      if (other) probeStep(ctx, frame, result, other);
+    } else if (lastKey && !result) {
+      lastKey = null; clearPanel();
+    }
+  }
+
+  function drawPose(ctx, frame) {
+    const lm = frame.pose?.landmarks;
+    if (!lm) return;
+    ctx.save();
+    ctx.strokeStyle = "rgba(255,255,255,0.28)"; ctx.lineWidth = 2; ctx.lineCap = "round";
+    for (const [a, b] of BONES) {
+      if (!lm[a] || !lm[b] || lm[a].v < 0.4 || lm[b].v < 0.4) continue;
+      const p = toPx(lm[a]), q = toPx(lm[b]);
+      ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  function drawPointing(ctx, frame, r) {
+    ctx.save();
+    let poly = [];
+    try { poly = pointer.outline(frame, r.segment) || []; } catch {}
+    const label = r.region.label;
+    if (poly.length > 2) {
+      const pts = poly.map(toPx);
+      ctx.beginPath(); pts.forEach((p, i) => (i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y))); ctx.closePath();
+      ctx.fillStyle = r.stable ? "rgba(79,179,255,0.18)" : "rgba(79,179,255,0.08)"; ctx.fill();
+      ctx.strokeStyle = "rgba(79,179,255,0.9)"; ctx.lineWidth = 2; ctx.stroke();
+      const top = pts.reduce((a, p) => (p.y < a.y ? p : a), pts[0]);
+      drawLabel(ctx, label, top.x, top.y - 10);
+    }
+    const t = toPx(r.tip);
+    ctx.beginPath(); ctx.arc(t.x, t.y, 7, 0, Math.PI * 2);
+    ctx.fillStyle = "#4fb3ff"; ctx.fill(); ctx.strokeStyle = "#fff"; ctx.lineWidth = 2; ctx.stroke();
+    if (poly.length <= 2) drawLabel(ctx, label, t.x, t.y - 16);
+    ctx.restore();
+  }
+  function drawLabel(ctx, text, x, y) {
+    ctx.font = "600 14px system-ui, sans-serif";
+    const w = ctx.measureText(text).width + 14;
+    const lx = Math.max(4, Math.min(cw - w - 4, x - w / 2)), ly = Math.max(20, y);
+    ctx.fillStyle = "rgba(15,20,25,0.8)";
+    ctx.beginPath(); ctx.roundRect(lx, ly - 16, w, 22, 11); ctx.fill();
+    ctx.fillStyle = "#e8edf2"; ctx.fillText(text, lx + 7, ly);
+  }
+  function drawProbe(ctx, tip, dir) {
+    const p = toPx(tip);
+    const ang = Math.atan2(dir.y, -dir.x); // mirrored x
+    ctx.save();
+    ctx.translate(p.x, p.y); ctx.rotate(ang + Math.PI / 2);
+    ctx.fillStyle = "rgba(255,200,87,0.9)"; ctx.strokeStyle = "#fff"; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.roundRect(-18, -5, 36, 10, 5); ctx.fill(); ctx.stroke();
+    ctx.restore();
+  }
+
+  // Image x of the trunk edges (shoulders and hips), for the ultrasound angle sweep.
+  function trunkEdges(frame) {
+    const xs = [11, 12, 23, 24].map((i) => frame.pose?.landmarks?.[i]).filter((l) => l && (l.v ?? 1) >= 0.3).map((l) => l.x);
+    return xs.length >= 2 ? { left: Math.min(...xs), right: Math.max(...xs) } : null;
+  }
+
+  function probeStep(ctx, frame, result, hand) {
+    const l5 = hand.landmarks[5], l8 = hand.landmarks[8];
+    if (!l5 || !l8) return;
+    let dx = l8.x - l5.x, dy = l8.y - l5.y;
+    const n = Math.hypot(dx, dy) || 1; dx /= n; dy /= n;
+    const probeTip = { tip: { x: l8.x, y: l8.y }, dir: { x: dx, y: dy } };
+    drawProbe(ctx, probeTip.tip, probeTip.dir);
+    if (!modality || !avail[modality]) return;
+    const trunkX = trunkEdges(frame);
+    const point = trunkX ? { ...result, trunkX } : result;
+    let req = null;
+    try {
+      if (modality === "ultrasound") {
+        const entry = usProbe?.entriesFor(point)[0];
+        req = entry ? usProbe.request(point, probeTip, entry) : null;
+      } else req = probe?.request(point, probeTip, modality) || null;
+    } catch (e) { console.warn("live: probe failed", e); }
+    if (!req) return;
+    el.caption.textContent = req.caption || "";
+    const key = JSON.stringify([req.kind, req.study, req.view]);
+    if (key === lastReqKey || applying) return;
+    lastReqKey = key; applying = true;
+    el.scan.hidden = false;
+    // probe.apply activates the renderer kind for the study (volume, xray, ultrasound) and shows the view.
+    Promise.resolve(probe.apply(req)).then(() => { el.scanView.dataset.kind = req.kind; el.scanView.dataset.study = req.study; }).catch((e) => console.warn("live: scan failed", e)).finally(() => { applying = false; });
+  }
+
+  // ---------- Panel and toolbar ----------
+  function clearPanel() {
+    el.title.textContent = "Point at your body";
+    el.hint.hidden = false;
+    el.list.replaceChildren();
+    el.toolbar.hidden = true;
+    el.scan.hidden = true;
+    el.caption.textContent = "";
+    modality = null; lastReqKey = null;
+  }
+
+  function fillPanel(r) {
+    el.title.textContent = r.region.label;
+    el.hint.hidden = true;
+    el.list.replaceChildren(...r.structures.map((s) => {
+      const li = h("li");
+      const b = h("button");
+      b.type = "button";
+      b.append(h("span", "", s.name), h("span", "layer", s.layer || ""));
+      b.addEventListener("click", () => { close(); openExplore?.(EXPLORE_MODEL[r.region.model] || r.region.model, s.key); });
+      li.append(b);
+      return li;
+    }));
+    avail = {};
+    try { for (const m of probe?.modalitiesFor(r) || []) avail[m.id] = m; } catch (e) { console.warn("live: modalities failed", e); }
+    try { if (usProbe?.entriesFor(r).length) avail.ultrasound = { id: "ultrasound", label: "Ultrasound", simulated: true }; } catch {}
+    if (modality && !avail[modality]) { el.scan.hidden = true; el.caption.textContent = ""; }
+    el.note = h("p", "live-toolnote");
+    el.note.setAttribute("role", "status");
+    const syncNote = () => { el.note.textContent = (!modality && !Object.keys(avail).length) || (modality && !avail[modality]) ? NO_SCANS : ""; };
+    el.toolbar.replaceChildren(...MODALITIES.map((m) => {
+      const b = h("button", "tool", m.label);
+      b.type = "button"; b.dataset.id = m.id;
+      b.setAttribute("aria-pressed", String(m.id === modality));
+      if (!avail[m.id]) b.classList.add("unavailable");
+      else if (avail[m.id].simulated) b.title = "Simulated from a reference scan";
+      b.addEventListener("click", () => {
+        modality = modality === m.id ? null : m.id;
+        lastReqKey = null;
+        el.toolbar.querySelectorAll(".tool").forEach((t) => t.setAttribute("aria-pressed", String(t.dataset.id === modality)));
+        if (!modality || !avail[modality]) { el.scan.hidden = true; el.caption.textContent = ""; }
+        if (modality) el.hint.hidden = true;
+        syncNote();
+      });
+      return b;
+    }), el.note);
+    syncNote();
+    el.toolbar.hidden = false;
+  }
+
+  return { open, close, get active() { return active; } };
+}
