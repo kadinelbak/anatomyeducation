@@ -174,7 +174,7 @@ async function checkHome(page) {
   check(await vis("#home") && !(await vis("#intro")), "root URL shows home, not the landing card");
   check(await page.evaluate(() => document.body.classList.contains("home") && getComputedStyle(document.getElementById("controls")).display === "none"), "body.home hides the 3D toolbar");
   check((await page.textContent("#explore-back")).includes("Open Body 3D") && !(await vis("#mode-quiz")) && !(await vis("#credits-toggle")), "brand reads Open Body 3D; no mode toggle or credits button");
-  check(await page.evaluate(() => [...document.querySelectorAll("#home .home-actions button")].map((b) => b.id + ":" + b.className).join() === "home-explore:primary,home-quiz:secondary,home-credits:ghost"), "Explore, Quiz, Credits in order");
+  check(await page.evaluate(() => [...document.querySelectorAll("#home .home-actions button")].map((b) => b.id + ":" + b.className).join() === "home-explore:primary,home-quiz:secondary,home-live:secondary go-live,home-credits:ghost"), "Explore, Quiz, Live, Credits in order");
   await page.click("#home-credits");
   check(await vis("#credits") && await vis("#home"), "Credits opens over home");
   await page.click("#credits-close");
