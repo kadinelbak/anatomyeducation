@@ -16,7 +16,8 @@ async function fixtureTest() {
   tr.stop();
   const f = frames[frames.length - 1];
   out.fixture = { frames: frames.length, statuses, pose: f.pose.landmarks.length, world: f.pose.world.length,
-    hands: f.hands.map((h) => ({ side: h.side, n: h.landmarks.length, world: h.world.length })), backend: tr.stats.backend };
+    hands: f.hands.map((h) => ({ side: h.side, n: h.landmarks.length, world: h.world.length })), backend: tr.stats.backend,
+    face: frames.every((fr) => fr.face === null) };
 }
 
 async function realTest() {
@@ -32,6 +33,8 @@ async function realTest() {
   await until(() => frames.length >= 15, 60000);
   tr.stop();
   out.real = { frames: frames.length, statuses, stats: { ...tr.stats }, numHands: tr.numHands,
+    face: frames.map((f) => f.face === undefined ? "missing" : f.face === null ? null : (typeof f.face.blink.left === "number" && typeof f.face.blink.right === "number" ? f.face.blink : "bad")),
+    faceModelRequested: performance.getEntriesByType("resource").some((e) => /face_landmarker\.task/.test(e.name)),
     shape: frames.length ? { pose: !!frames[frames.length - 1].pose, hands: frames[frames.length - 1].hands.length, w: frames[0].width, h: frames[0].height } : null };
   tr.dispose();
   await sleep(4000); // let any late telemetry attempt show up

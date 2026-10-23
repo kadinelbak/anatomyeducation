@@ -16,8 +16,12 @@ const CAL_SAMPLES = 30, CAL_MS = 3000, REC_MS = 10000, REC_MAX = 600;
 const store = {
   get(k) { try { return localStorage.getItem(k); } catch { return null; } },
   set(k, v) { try { localStorage.setItem(k, v); } catch {} },
+  del(k) { try { localStorage.removeItem(k); } catch {} },
 };
 const NO_SCANS = "No scans for this region yet";
+const HAND_KEY = "live.pointerHand";
+const LEGEND = "1-4 fingers: scan \u00b7 fist + blink: next structure \u00b7 open palm: release";
+const ZOOM_PAD = 0.35, ZOOM_MIN = 0.3, ZOOM_MAX = 3, ZOOM_EASE = 0.1;
 // ?live-fixture=<path> replays recorded tracker frames instead of opening a camera (tests, demos).
 const debugMode = () => { try { return new URLSearchParams(location.search).get("live-debug") === "1"; } catch { return false; } };
 const fixtureUrl = () => { try { return new URLSearchParams(location.search).get("live-fixture") || null; } catch { return null; } };
@@ -27,7 +31,12 @@ export function createLiveView({ root, onExit, openExplore, config }) {
   let active = false;
   let built = false;
   let stream = null;
-  let tracker = null, pointer = null, probe = null, usProbe = null, renderers = null;
+  let tracker = null, pointer = null, probe = null, usProbe = null, renderers = null, gestures = null;
+  let flow = "seek"; // "hand" (choose the pointing hand) -> "seek" -> "locked"
+  let pointerHand = null;
+  let flash = { text: "", until: 0 };
+  let structs = [], structIdx = -1;
+  let zoom = { k: 1, tx: 0, ty: 0 };
   let avail = {};
   let modality = null;
   let lastKey = null, lastReqKey = null, applying = false;
@@ -69,7 +78,9 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     }
     el.pill.append(el.unlock, el.x);
     el.stage.addEventListener("click", onStageClick);
-    el.stage.append(el.video, el.canvas);
+    el.zoom = h("div", "live-zoom");
+    el.zoom.append(el.video, el.canvas);
+    el.stage.append(el.zoom);
 
     el.panel = h("aside", "live-panel");
     el.panel.hidden = true;
@@ -77,6 +88,8 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     el.grab.type = "button"; el.grab.setAttribute("aria-label", "Drag to resize the structures panel");
     el.title = h("h2", "", "Point at your body");
     el.hint = h("p", "live-hint", "Point a finger at your arm, hand or trunk and hold still.");
+    el.legend = h("p", "live-legend", LEGEND);
+    el.legend.hidden = true;
     el.list = h("ul", "live-structs");
     el.scan = h("div", "live-scan");
     el.scan.hidden = true;
@@ -87,8 +100,11 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     el.calBtn.type = "button"; el.calBtn.title = "Measure your arm proportions for better pointing";
     el.calBtn.addEventListener("click", () => showCalibrateCard());
     el.head = h("div", "live-head");
-    el.head.append(el.title, el.calBtn);
-    el.panel.append(el.grab, el.head, el.hint, el.list, el.scan, el.caption);
+    el.handBtn = h("button", "live-hand", "Change hand");
+    el.handBtn.type = "button"; el.handBtn.title = "Choose which hand points";
+    el.handBtn.addEventListener("click", changeHand);
+    el.head.append(el.title, el.handBtn, el.calBtn);
+    el.panel.append(el.grab, el.head, el.hint, el.legend, el.list, el.scan, el.caption);
 
     el.toolbar = h("div", "toolbar live-toolbar");
     el.toolbar.setAttribute("role", "toolbar"); el.toolbar.setAttribute("aria-label", "Scan type");
@@ -183,10 +199,12 @@ export function createLiveView({ root, onExit, openExplore, config }) {
       statusState = status; statusText = text;
       if (!cal && !rec && !(locked && status === "tracking")) setPill(status, text);
     };
-    let t, p, pr, us;
+    let t, p, pr, us, gs = null;
     try {
       // tracking.js loads the MediaPipe runtime only on the real-camera path, never for a fixture.
-      const [trk, pnt, prb, prbUs] = await Promise.all([import("./tracking.js"), import("./pointing.js"), import("./probe.js"), import("./probe-us.js")]);
+      const [trk, pnt, prb, prbUs, gmod] = await Promise.all([import("./tracking.js"), import("./pointing.js"), import("./probe.js"), import("./probe-us.js"),
+        import("./gestures.js").catch((e) => { console.warn("live: gestures unavailable", e); return null; })]);
+      gs = gmod?.createGestures?.() || null;
       us = prbUs.createUltrasoundProbe();
       [t, p, pr] = await Promise.all([
         trk.createTracker({ video: el.video, onFrame: (f) => onFrame(f, mine), onStatus, fixture: fixture || undefined }),
@@ -200,7 +218,11 @@ export function createLiveView({ root, onExit, openExplore, config }) {
       return;
     }
     if (mine !== session || !active) { t.dispose?.(); return; }
-    tracker = t; pointer = p; probe = pr; usProbe = us;
+    tracker = t; pointer = p; probe = pr; usProbe = us; gestures = gs;
+    const saved0 = store.get(HAND_KEY);
+    pointerHand = saved0 === "left" || saved0 === "right" ? saved0 : null;
+    flow = pointerHand || !gestures ? "seek" : "hand";
+    try { pointer.setPointerHand?.(pointerHand); } catch (e) { console.warn("live: setPointerHand failed", e); }
     try {
       const saved = store.get(CAL_KEY);
       if (saved) pointer.setCalibration?.(JSON.parse(saved));
@@ -212,7 +234,8 @@ export function createLiveView({ root, onExit, openExplore, config }) {
   function stopAll() {
     session++;
     try { tracker?.stop(); tracker?.dispose?.(); } catch {}
-    tracker = null; pointer = null; probe = null; usProbe = null;
+    tracker = null; pointer = null; probe = null; usProbe = null; gestures = null;
+    pointerHand = null; flow = "seek"; flash.until = 0; structs = []; structIdx = -1;
     cal = null; rec = null; locked = false; clearTimeout(calTimer);
     document.removeEventListener("keydown", onKey);
     if (stream) stream.getTracks().forEach((t) => t.stop());
@@ -232,6 +255,8 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     document.body.classList.remove("live");
     modality = null; lastKey = null; lastReqKey = null; applying = false;
     if (el.unlock) el.unlock.hidden = true;
+    setZoom({ k: 1, tx: 0, ty: 0 });
+    if (el.legend) el.legend.hidden = true;
     if (el.list) { el.list.replaceChildren(); el.toolbar.replaceChildren(); el.toolbar.hidden = true; el.scan.hidden = true; el.caption.textContent = ""; }
     if (location.hash === "#live") { try { history.back(); } catch {} }
   }
@@ -301,32 +326,138 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     if (rec) recordFrame(frame);
     if (cal) { drawPose(ctx, frame); calibrateStep(frame); return; }
     drawPose(ctx, frame);
+    const now = performance.now();
+    let gs = null;
+    if (gestures && pointer) try { gs = gestures.update(frame, { pointerHand }) || null; } catch (e) { console.warn("live: gestures failed", e); }
+    if (flow === "hand") {
+      locked = false; lastResultSeen = false; el.unlock.hidden = true;
+      if (lastKey) { lastKey = null; clearPanel(); }
+      setZoom(zoomTarget(null));
+      if (!el.card.hidden) return;
+      if (gs?.raised) choosePointerHand(gs.raised, now);
+      else if (!rec) setPill("tracking", "Raise the hand you want to point with");
+      if (flow === "hand") { if (rec) pillRecording(); return; }
+    }
     let result = null;
     try { result = pointer?.update(frame) || null; } catch (e) { console.warn("live: pointing failed", e); }
     lastResultSeen = !!result;
     locked = !!(result ? (result.locked ?? result.stable) : pointer?.locked);
+    flow = locked ? "locked" : "seek";
     try { drawZones(ctx, frame, result); } catch (e) { console.warn("live: zones failed", e); }
     if (result) drawPointing(ctx, result);
     el.unlock.hidden = !locked;
     if (locked && result) {
       const key = `${result.region.model}:${result.region.key}`;
       if (key !== lastKey) { lastKey = key; fillPanel(result); }
-      if (!rec) setPill("tracking", `${result.region.label} \u00b7 locked`);
-      const other = frame.hands.find((hd) => hd.side !== result.hand);
-      if (other) probeStep(ctx, frame, result, other);
+      if (!rec) flowPill("tracking", `${result.region.label} \u00b7 locked`, now);
+      const ph = frame.hands.find((hd) => hd.side === (pointerHand || result.hand));
+      if (ph) probeStep(ctx, frame, result, ph);
+      try { setZoom(zoomTarget(frame, result)); } catch (e) { console.warn("live: zoom failed", e); }
+      if (gs) { drawGlyph(ctx, frame, gs); lockedGestures(gs, now); }
     } else if (!locked) {
       if (lastKey) { lastKey = null; clearPanel(); }
+      setZoom(zoomTarget(null));
       if (!rec) {
-        if (result) setPill("tracking", `Hold on: ${result.coarse?.label || result.region?.label || "..."}`);
-        else setPill(statusState, statusText);
+        if (result) flowPill("tracking", `Hold on: ${result.coarse?.label || result.region?.label || "..."}`, now);
+        else flowPill(statusState, statusText, now);
       }
     }
     if (rec) pillRecording();
   }
 
+  function flowPill(state, text, now) {
+    if (now < flash.until) setPill("tracking", flash.text); else setPill(state, text);
+  }
+  function say(text, ms) { flash = { text, until: performance.now() + ms }; setPill("tracking", text); }
+
+  function choosePointerHand(side, now) {
+    pointerHand = side;
+    store.set(HAND_KEY, side);
+    try { pointer.setPointerHand?.(side); } catch {}
+    flow = "seek";
+    flash = { text: `Pointing with your ${side} hand`, until: now + 2000 };
+    setPill("tracking", flash.text);
+  }
+  function changeHand() {
+    store.del(HAND_KEY);
+    pointerHand = null;
+    try { pointer?.setPointerHand?.(null); } catch {}
+    try { gestures?.reset?.(); } catch {}
+    flash.until = 0;
+    if (locked) unlockNow();
+    if (gestures) flow = "hand";
+  }
+
+  // ---------- Zoom on lock ----------
+  function setZoom(z) {
+    zoom = z;
+    el.zoom.style.transform = z.k === 1 && !z.tx && !z.ty ? "" : `translate(${z.tx.toFixed(1)}px, ${z.ty.toFixed(1)}px) scale(${z.k.toFixed(4)})`;
+  }
+  // The next zoom step toward the locked segment's box (or toward identity when there is none).
+  function zoomTarget(frame, result) {
+    let goal = { k: 1, tx: 0, ty: 0 };
+    const o = frame && result ? (pointer?.outlines?.(frame) || []).find((q) => q.id === result.segment && (result.side == null || q.side == null || q.side === result.side)) : null;
+    if (o?.poly?.length >= 3) {
+      const pts = o.poly.map(toPx);
+      let x0 = Math.min(...pts.map((p) => p.x)), x1 = Math.max(...pts.map((p) => p.x));
+      let y0 = Math.min(...pts.map((p) => p.y)), y1 = Math.max(...pts.map((p) => p.y));
+      const px = (x1 - x0) * ZOOM_PAD, py = (y1 - y0) * ZOOM_PAD;
+      x0 -= px; x1 += px; y0 -= py; y1 += py;
+      const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+      const bw = Math.min(cw, Math.max(x1 - x0, cw * ZOOM_MIN)), bh = Math.min(ch, Math.max(y1 - y0, ch * ZOOM_MIN));
+      const k = Math.max(1, Math.min(cw / bw, ch / bh, ZOOM_MAX));
+      goal = { k, tx: Math.min(0, Math.max(cw - k * cw, cw / 2 - k * cx)), ty: Math.min(0, Math.max(ch - k * ch, ch / 2 - k * cy)) };
+    } else if (frame && result) return zoom; // locked but no outline this frame: hold
+    const e = (a, b) => (Math.abs(b - a) < 0.002 ? b : a + (b - a) * ZOOM_EASE);
+    if (goal.k === 1 && zoom.k === 1 && !zoom.tx && !zoom.ty) return zoom;
+    return { k: e(zoom.k, goal.k), tx: e(zoom.tx, goal.tx), ty: e(zoom.ty, goal.ty) };
+  }
+
+  // ---------- Control-hand gestures while locked ----------
+  function chooseModality(id, toggle) {
+    modality = toggle && modality === id ? null : id;
+    lastReqKey = null;
+    el.toolbar.querySelectorAll(".tool").forEach((t) => t.setAttribute("aria-pressed", String(t.dataset.id === modality)));
+    if (!modality || !avail[modality]) { el.scan.hidden = true; el.caption.textContent = ""; }
+    if (modality) el.hint.hidden = true;
+    el.syncNote?.();
+  }
+  function lockedGestures(gs, now) {
+    if (gs.count >= 1 && gs.count <= MODALITIES.length) {
+      const m = MODALITIES[gs.count - 1];
+      if (modality !== m.id) chooseModality(m.id, false);
+      if (!avail[m.id]) say(`No ${m.label} here`, 1500);
+    }
+    if (gs.fist && gs.blink && structs.length) {
+      structIdx = (structIdx + 1) % structs.length;
+      markCurrent();
+      say(structs[structIdx].name, 1500);
+    }
+    if (gs.open) unlockNow();
+  }
+  function markCurrent() {
+    [...el.list.children].forEach((li, i) => li.classList.toggle("current", i === structIdx));
+    el.list.children[structIdx]?.scrollIntoView?.({ block: "nearest" });
+  }
+  function drawGlyph(ctx, frame, gs) {
+    const c = gs.control;
+    if (!c) return;
+    const hd = frame.hands.find((q) => q.side === c.side);
+    const w = hd?.landmarks?.[0];
+    if (!w) return;
+    const p = toPx(w), n = ["index", "middle", "ring", "pinky"].filter((k) => c.extended?.[k]).length; // counts ignore the thumb, like gestures.js
+    const text = c.shape === "fist" ? "Fist" : c.shape === "open" ? "Open palm" : c.shape === "point" ? "1" : c.shape === "count" ? String(n) : "?";
+    ctx.save();
+    const lbl = c.shape === "fist" ? "\u270a " + text : text;
+    drawLabel(ctx, lbl, p.x, p.y + 34);
+    ctx.restore();
+  }
+
   function unlockNow() {
     try { pointer?.unlock?.(); } catch {}
     locked = false; lastKey = null;
+    if (flow === "locked") flow = "seek";
+    setZoom({ k: 1, tx: 0, ty: 0 });
     if (el.unlock) el.unlock.hidden = true;
     clearPanel();
   }
@@ -339,6 +470,7 @@ export function createLiveView({ root, onExit, openExplore, config }) {
   function onKey(e) {
     if (!active || e.ctrlKey || e.metaKey || e.altKey) return;
     if (e.key === "Escape" && locked) { e.preventDefault(); unlockNow(); }
+    else if (e.key === "Enter" && locked && structIdx >= 0 && !(e.target instanceof HTMLButtonElement)) { e.preventDefault(); el.list.children[structIdx]?.querySelector("button")?.click(); }
     else if ((e.key === "r" || e.key === "R") && tracker && !cal && !rec && el.card.hidden) startRecording();
   }
 
@@ -536,6 +668,8 @@ export function createLiveView({ root, onExit, openExplore, config }) {
   function clearPanel() {
     el.title.textContent = "Point at your body";
     el.hint.hidden = false;
+    el.legend.hidden = true;
+    structs = []; structIdx = -1;
     el.list.replaceChildren();
     el.toolbar.hidden = true;
     el.scan.hidden = true;
@@ -546,6 +680,8 @@ export function createLiveView({ root, onExit, openExplore, config }) {
   function fillPanel(r) {
     el.title.textContent = r.region.label;
     el.hint.hidden = true;
+    el.legend.hidden = !gestures;
+    structs = r.structures; structIdx = -1;
     el.list.replaceChildren(...r.structures.map((s) => {
       const li = h("li");
       const b = h("button");
@@ -561,21 +697,14 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     if (modality && !avail[modality]) { el.scan.hidden = true; el.caption.textContent = ""; }
     el.note = h("p", "live-toolnote");
     el.note.setAttribute("role", "status");
-    const syncNote = () => { el.note.textContent = (!modality && !Object.keys(avail).length) || (modality && !avail[modality]) ? NO_SCANS : ""; };
+    const syncNote = el.syncNote = () => { el.note.textContent = (!modality && !Object.keys(avail).length) || (modality && !avail[modality]) ? NO_SCANS : ""; };
     el.toolbar.replaceChildren(...MODALITIES.map((m) => {
-      const b = h("button", "tool", m.label);
+      const b = h("button", "tool", `${MODALITIES.indexOf(m) + 1} \u00b7 ${m.label}`);
       b.type = "button"; b.dataset.id = m.id;
       b.setAttribute("aria-pressed", String(m.id === modality));
       if (!avail[m.id]) b.classList.add("unavailable");
       else if (avail[m.id].simulated) b.title = "Simulated from a reference scan";
-      b.addEventListener("click", () => {
-        modality = modality === m.id ? null : m.id;
-        lastReqKey = null;
-        el.toolbar.querySelectorAll(".tool").forEach((t) => t.setAttribute("aria-pressed", String(t.dataset.id === modality)));
-        if (!modality || !avail[modality]) { el.scan.hidden = true; el.caption.textContent = ""; }
-        if (modality) el.hint.hidden = true;
-        syncNote();
-      });
+      b.addEventListener("click", () => chooseModality(m.id, true));
       return b;
     }), el.note);
     syncNote();

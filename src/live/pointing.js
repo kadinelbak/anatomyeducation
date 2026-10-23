@@ -70,6 +70,7 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
   let awaySince = null;        // locked, and the finger has led a different segment since this time
   let last = null;              // last result
   let calibration = null;
+  let pointerHand = null;       // "left" | "right" | null: when set, only that hand may point
 
   const defaultRadius = (id) => segments[id]?.radius ?? LIMB_RADIUS;
   const radiusOf = (id) => calibration?.radii?.[id] ?? defaultRadius(id);
@@ -239,6 +240,7 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
     const all = [];
     let tips = 0;
     for (const hand of frame.hands || []) {
+      if (pointerHand && hand.side !== pointerHand) continue;   // the control hand never points
       const tip = pointingTip(hand, ctx.sc);
       if (!tip || tip.x < 0 || tip.x > 1 || tip.y < 0 || tip.y > 1 || !maskHit(frame, tip)) continue;
       tips++;
@@ -490,6 +492,8 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
     },
     unlock() { doUnlock(); },
     get locked() { return locked; },
+    setPointerHand(side) { pointerHand = side === "left" || side === "right" ? side : null; },
+    get pointerHand() { return pointerHand; },
     reset() { forget(); locked = false; lockedKey = null; last = null; },
   };
 }

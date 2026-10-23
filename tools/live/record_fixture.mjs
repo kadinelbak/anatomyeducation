@@ -6,6 +6,7 @@
 // FIXTURE SCHEMA (what src/live/tracking.js replays with createTracker({ fixture })):
 //   { "name": str, "fps": 30, "width": 640, "height": 480, "frames": [ Frame, ... ] }
 //   Frame = { "pose": null | { "landmarks": L[33], "world": L[33], "mask": null },
+//             "face"?: { "blink": { "left": 0..1, "right": 0..1 } },   (1 = eye closed; absent = null)
 //             "hands": [ { "side": "left"|"right", "score": 0..1, "landmarks": L[21], "world": L[21] } ] }
 //   L = { x, y, z, v }: image space 0..1 over the un-mirrored frame (x to the image right), world in
 //   metres. Sides are the USER's sides (a standing person facing the camera has their left hand on the
@@ -18,6 +19,9 @@
 //     restWrist:{ left:[x,y], right:[x,y] },       // used by a hand that has no target
 //     hands: { left:  { dir:[dx,dy], target?: { arm:"right"|"left", frac: n | [from,to] } },
 //              right: { ... } } }
+//   Optional "blinks": [[startMs, endMs], ...] adds face: { blink: { left, right } } to every frame: 0.9 on
+//   frames whose time (index * 1000 / fps) is inside a range [start, end), 0.05 elsewhere. Without
+//   "blinks" the frames have no face field.
 //   A hand with a target gets its wrist placed so that its index fingertip rests on the named forearm
 //   at frac (0 elbow .. 1 wrist; a pair is swept linearly over the frames). dir is the finger direction.
 import { writeFileSync, readFileSync, mkdirSync } from "node:fs";
@@ -101,8 +105,14 @@ export function buildFixture(desc) {
     const world = landmarks.map((l) => ({ x: (l.x - 0.5) * WORLD, y: (l.y - 0.55) * WORLD, z: 0, v: l.v }));
     const r5 = (v) => Math.round(v * 1e5) / 1e5;
     const round = (a) => a.map((l) => ({ x: r5(l.x), y: r5(l.y), z: r5(l.z), v: l.v }));
-    frames.push({ pose: { landmarks: round(landmarks), world: round(world), mask: null },
-      hands: hands.map((h) => ({ ...h, landmarks: round(h.landmarks), world: round(h.world) })) });
+    const frame = { pose: { landmarks: round(landmarks), world: round(world), mask: null },
+      hands: hands.map((h) => ({ ...h, landmarks: round(h.landmarks), world: round(h.world) })) };
+    if (desc.blinks) {
+      const ms = i * 1000 / (desc.fps ?? 30);
+      const v = desc.blinks.some(([a, b]) => ms >= a && ms < b) ? 0.9 : 0.05;
+      frame.face = { blink: { left: v, right: v } };
+    }
+    frames.push(frame);
   }
   return { name: desc.name, fps: desc.fps ?? 30, width: 640, height: 480, frames };
 }

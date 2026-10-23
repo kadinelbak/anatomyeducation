@@ -65,3 +65,13 @@ body.live #explore-bar { display: none; }
 .live-pill .live-unlock[hidden] { display: none; }
 .live-pill[data-state="recording"] .dot, .live-pill.recording .dot { background: #ff4d4d; animation: live-pulse 1s ease-in-out infinite; }
 .live-stage { cursor: pointer; }
+
+/* Gesture flow: zoom wrapper, hand button, legend, current structure */
+.live-zoom { position: absolute; inset: 0; transform-origin: 0 0; transition: transform 350ms ease; }
+@media (prefers-reduced-motion: reduce) { .live-zoom { transition: none; } }
+.live-hand { flex: none; border-radius: 999px; border: 1px solid var(--border); background: rgba(255, 255, 255, 0.08); color: var(--text); font-size: 0.8rem; font-weight: 600; padding: 4px 10px; cursor: pointer; }
+.live-hand:hover { border-color: var(--accent); }
+.live-head h2 { flex: 1 1 auto; min-width: 0; }
+.live-legend { margin: 0; color: var(--muted); font-size: 0.78rem; line-height: 1.4; }
+.live-legend[hidden] { display: none; }
+.live-structs li.current > button { border-color: var(--accent); background: rgba(79, 179, 255, 0.16); }
