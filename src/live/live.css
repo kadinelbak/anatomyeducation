@@ -6,7 +6,7 @@ body.live #explore-bar { display: none; }
 
 #live { position: fixed; z-index: 6; left: 0; right: 0; top: 44px; bottom: 0; background: #05080b; overflow: hidden; --sheet-h: 120px; }
 #live[hidden] { display: none; }
-.live-stage { position: absolute; inset: 0; }
+.live-stage { position: absolute; inset: 0; overflow: hidden; }
 .live-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); background: #000; }
 .live-overlay { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 
@@ -78,3 +78,23 @@ body.live #explore-bar { display: none; }
 
 .live-debug { position: absolute; left: 10px; bottom: 10px; z-index: 8; margin: 0; padding: 8px 10px; max-width: calc(100% - 20px); font: 12px/1.4 ui-monospace, Menlo, Consolas, monospace; color: #e8edf2; background: rgba(5,8,11,0.78); border: 1px solid var(--border); border-radius: 8px; white-space: pre-wrap; pointer-events: none; }
 .live-debug[hidden] { display: none; }
+
+/* Split layout: while a scan shows, the camera shrinks to the left 38% and the scan takes the right 62%. */
+.live-scanpane { display: none; }
+#live.live-split .live-scanpane { display: flex; flex-direction: column; gap: 6px; position: absolute; z-index: 2; left: 38%; right: 0; top: 0; bottom: 0; padding: 12px; background: #05080b; border-left: 1px solid var(--border); }
+.live-scanpane .live-scan { flex: 1 1 auto; height: auto; min-height: 0; }
+#live.live-split .live-stage { right: auto; width: 38%; }
+#live.live-split .live-pill { left: 19%; max-width: calc(38% - 16px); }
+#live.live-split .live-debug { top: 52px; bottom: auto; max-width: calc(38% - 20px); }
+#live.live-split .live-panel { left: 0; right: auto; top: auto; bottom: 0; width: 38%; max-height: 40%; border-left: 0; border-top: 1px solid var(--border); }
+#live.live-split .live-toolbar { left: 19%; bottom: calc(40% + 8px); max-width: calc(38% - 16px); overflow-x: auto; }
+@media (max-width: 800px) {
+  #live.live-split .live-scanpane { left: 0; top: 40%; bottom: calc(var(--sheet-h) + 60px); border-left: 0; border-top: 1px solid var(--border); }
+  #live.live-split .live-stage { width: auto; right: 0; bottom: auto; height: 40%; }
+  #live.live-split .live-pill { left: 50%; max-width: calc(100% - 32px); }
+  #live.live-split .live-debug { max-width: calc(100% - 20px); }
+  #live.live-split .live-panel { top: auto; left: 0; right: 0; width: auto; max-height: none; height: var(--sheet-h); border-top: 1px solid var(--border); border-radius: 16px 16px 0 0; padding-top: 6px; }
+  #live.live-split .live-grab { display: block; flex: none; align-self: center; width: 100%; height: 22px; background: none; border: 0; cursor: grab; touch-action: none; position: relative; }
+  #live.live-split .live-grab::after { content: ""; position: absolute; left: 50%; top: 8px; width: 40px; height: 4px; margin-left: -20px; border-radius: 2px; background: var(--muted); }
+  #live.live-split .live-toolbar { left: 50%; bottom: calc(var(--sheet-h) + 8px); max-width: calc(100% - 16px); }
+}

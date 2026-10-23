@@ -246,6 +246,15 @@ bounding box (max 3x, eased per frame, back to identity on unlock). The pointer 
 probe; the control hand counts 1-4 = CT/MRI/X-ray/Ultrasound, fist + blink advances the `.current` structure
 (Enter or a tap opens it in Explore), open palm for 1 s unlocks. Fixture: `tools/live/make_gesture_fixture.mjs`.
 
+Split layout: while a scan shows (`.live-scan` visible and a modality active) `#live` gets class `live-split`. Above 800 px
+the stage (camera + overlay) takes the left 38% and `.live-scanpane` (holding `.live-scan` and `.live-caption`, created once
+in `build()`) the right 62%; the structures panel becomes a bottom overlay on the stage (max 40% height). At 800 px or
+narrower the camera takes the top 40%, the scan pane sits below it and the panel stays the bottom sheet. On every class
+change `sizeCanvas()` runs, the zoom translation is rescaled to the new stage size, and a `resize` event fires on the next
+frame so the scan renderers re-fit (switch.js has no resize API). `applyReq` gives `probe.apply` 20 s before it reports
+"Scan is slow to load" and frees `applying`. Every tracked hand is drawn orange (`#ff9f1c`): the pointer hand opaque
+labelled "point", the other at 0.75 alpha labelled "menu".
+
 ## 6. Tests
 
 Each workstream adds a Playwright script under `tools/live/` runnable as

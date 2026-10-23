@@ -156,6 +156,7 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
     const out = [];
     for (const [id, seg] of Object.entries(segments)) {
       for (const side of seg.midline ? [null] : ["left", "right"]) {
+        if (pointerHand && side === pointerHand && OWN_ARM.includes(id)) continue;   // the pointing arm is never a zone
         const inst = instance(id, seg, side, lms, sc);
         if (inst) { inst.radius = radiusOf(id) * sw; inst.key = keyOf(inst.id, inst.side); out.push(inst); }
       }

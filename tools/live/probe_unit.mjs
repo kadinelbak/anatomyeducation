@@ -86,5 +86,14 @@ check(calls.length === n0, "0.2 slice change is skipped");
 const p3 = probe.apply({ ...ct, view: { ...ct.view, frac: ct.view.frac + 3 / (ct.sliceCount - 1) } }); tick(); await p3;
 check(calls.length === n0 + 1 && calls[n0][0] === "show", "3 slice change is one show, no re-activate");
 
+// A study already on screen stays while it covers the point (a moving probe steps slices, not volumes).
+{
+  const a = probe.request({ ...trunk, frac: 0.2 }, transverse, "mri");
+  const b = probe.request({ ...trunk, frac: 0.6 }, transverse, "mri");
+  const sticky = probe.request({ ...trunk, frac: 0.6 }, transverse, { id: "mri", study: a.study });
+  check(a && b && sticky && sticky.study === a.study, `sticky MRI study ${a?.study} kept at frac 0.6 (first choice there was ${b?.study})`);
+  const far = probe.request({ ...trunk, frac: 0.98 }, transverse, { id: "mri", study: "msd-heart-03" });
+  check(far && far.study !== "msd-heart-03", "a study that no longer covers the point is dropped");
+}
 console.log(fails ? `${fails} FAILED` : "all passed");
 process.exit(fails ? 1 : 0);

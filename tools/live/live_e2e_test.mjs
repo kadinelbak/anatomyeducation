@@ -55,6 +55,14 @@ async function openLive(fixture, hand = "left") {
   const fstudy = await page.waitForFunction(() => { const c = document.querySelector("#live .viewer-volume:not([hidden]) canvas"); const v = document.querySelector(".live-scan-view"); return c && v?.dataset.kind === "volume" ? v.dataset.study : null; }, null, { timeout: 90000 })
     .then((h) => h.jsonValue()).catch(() => null);
   check(fstudy === "vh-forearm", `CT on the right forearm opens a canvas in .viewer-volume with study ${fstudy}`);
+  {
+    await page.waitForTimeout(500);
+    const g = await page.evaluate(() => { const v = document.querySelector(".live-scan-view"), st = document.querySelector(".live-stage"); return { split: document.getElementById("live").classList.contains("live-split"), vw: v.clientWidth, vh: v.clientHeight, sw: st.clientWidth, ww: window.innerWidth, wh: window.innerHeight }; });
+    check(g.split, "#live has class live-split while the CT shows");
+    check(g.vw >= 0.55 * g.ww && g.vh >= 0.6 * g.wh, `scan view is ${g.vw}x${g.vh} (>= 55% x 60% of ${g.ww}x${g.wh})`);
+    check(g.sw < 0.45 * g.ww, `stage is ${g.sw}px wide (< 45% of ${g.ww})`);
+    if (process.env.SHOT) await page.screenshot({ path: process.env.SHOT });
+  }
   await page.click('.live-toolbar .tool[data-id="ultrasound"]');
   const fus = await page.waitForFunction(() => { const b = document.querySelector("#live .viewer-ultrasound:not([hidden])"); return b && b.querySelector("canvas") && /simulated/i.test(document.querySelector(".live-caption")?.textContent || ""); }, null, { timeout: 90000 })
     .then(() => true, () => false);
@@ -69,6 +77,10 @@ async function openLive(fixture, hand = "left") {
   await page.click(".live-unlock");
   const cleared = await page.waitForFunction(() => document.querySelector(".live-structs")?.children.length === 0, null, { timeout: 5000 }).then(() => true, () => false);
   check(cleared, "clicking Unlock clears the panel");
+  {
+    const g = await page.evaluate(() => ({ split: document.getElementById("live").classList.contains("live-split"), sw: document.querySelector(".live-stage").clientWidth, rw: document.getElementById("live").clientWidth }));
+    check(!g.split && g.sw === g.rw, `after Unlock live-split is gone and the stage is full width (${g.sw}/${g.rw})`);
+  }
   check(mp.length === 0, `fixture path loads no MediaPipe files${mp.length ? ": " + mp[0] : ""}`);
   check(errors.length === 0, `no page errors${errors.length ? ": " + errors.join(" | ") : ""}`);
   await ctx.close();

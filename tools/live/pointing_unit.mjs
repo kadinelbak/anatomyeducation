@@ -319,5 +319,15 @@ const fresh = () => createPointer({ segmentsUrl: "assets/live/segments.json", lo
   p.setPointerHand(null);
   check("pointerHand null: right hand points again", (await fresh()).update(frame(0, hand("right", 0.5, 0.38)))?.segment === "trunk" && p.pointerHand === null);
 }
+// 16. with a pointer hand set, that side's arm segments are not zones at all (no outline, no selection)
+{
+  const p = await fresh();
+  p.setPointerHand("left");
+  const f = frame(0, hand("right", 0.35 + 0.4 * (0.18 - 0.35), 0.45 + 0.4 * 0.15));   // right hand on the LEFT forearm
+  const ids = p.outlines(f).map((o) => `${o.id}:${o.side}`);
+  check("pointer arm not in outlines", !ids.includes("forearm:left") && !ids.includes("upper_arm:left") && !ids.includes("hand:left") && ids.includes("forearm:right"), ids.join(","));
+  check("control hand cannot select at all", p.update(f) === null);
+  p.setPointerHand(null);
+}
 console.log(failures ? `${failures} FAILED` : "all passed");
 process.exit(failures ? 1 : 0);

@@ -109,10 +109,16 @@ export async function createProbe({ studiesUrl = "assets/live/studies.json", ren
     if (!point) return null;
     const mid = typeof modality === "string" ? modality : modality?.id;
     const options = modalitiesFor(point);
-    const pick = options.find((o) => o.id === mid && (typeof modality === "string" || !modality.study || o.study === modality.study)) || options.find((o) => o.id === mid);
+    let pick = options.find((o) => o.id === mid && (typeof modality === "string" || !modality.study || o.study === modality.study)) || options.find((o) => o.id === mid);
     if (!pick) return null;
-    // The entry for the chosen study (the same study id can appear once per segment).
-    const entry = covering(point).find((e) => e.studyId === pick.study && (pick.id === "xray" ? e.modality === "CT" : true));
+    // A study the caller is already showing stays while it still covers the point, so a moving probe
+    // steps through slices of one volume instead of reloading a different overlapping study each time.
+    const want = typeof modality === "object" ? modality.study : null;
+    let entry = want && want !== pick.study
+      ? covering(point).find((e) => e.studyId === want && e.modality === (mid === "xray" ? "CT" : MODALITY_LABEL[mid]) && coverMargin(e, clamp(Number(point.frac) || 0, 0, 1)) >= 0) : null;
+    if (entry) pick = { ...pick, study: entry.studyId };
+    // Otherwise the entry for the chosen study (the same study id can appear once per segment).
+    entry ||= covering(point).find((e) => e.studyId === pick.study && (pick.id === "xray" ? e.modality === "CT" : true));
     if (!entry) return null;
     const frac = clamp(Number(point.frac) || 0, 0, 1);
     const front = point.aspect === "front" || point.aspect === "back";
