@@ -266,7 +266,7 @@ gestures.reset()                                             // forget every tim
 GestureResult = {
   hands: { left: HandRead | null, right: HandRead | null },  // highest-score hand per side
   control: (HandRead & { side }) | null,  // the hand that is not pointerHand; null when pointerHand is null or it is absent
-  raised: "left" | "right" | null,        // level: open hand, wrist above its own shoulder (pose 11 / 12), steady holdMs
+  raised: "left" | "right" | null,        // level: four fingers up (thumb free), wrist at or above its own shoulder (pose 11 / 12), steady holdMs, forgiving of flicker
   count: null | 1 | 2 | 3 | 4,            // edge: control hand's index..pinky count steady holdMs; once, then null until it changes or drops
   fist: boolean,                          // level: control hand steady fist for 300 ms
   open: boolean,                          // level: control hand steady open palm for openMs

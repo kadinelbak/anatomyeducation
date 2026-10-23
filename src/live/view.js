@@ -335,7 +335,7 @@ export function createLiveView({ root, onExit, openExplore, config }) {
       setZoom(zoomTarget(null));
       if (!el.card.hidden) return;
       if (gs?.raised) choosePointerHand(gs.raised, now);
-      else if (!rec) setPill("tracking", "Raise the hand you want to point with");
+      else if (!rec) setPill("tracking", `Raise the hand you want to point with${seenHands(gs, frame)}`);
       if (flow === "hand") { if (rec) pillRecording(); return; }
     }
     let result = null;
@@ -451,6 +451,22 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     const lbl = c.shape === "fist" ? "\u270a " + text : text;
     drawLabel(ctx, lbl, p.x, p.y + 34);
     ctx.restore();
+  }
+
+  // What the camera makes of each hand while choosing the pointer hand, so a user can adjust.
+  function seenHands(gs, frame) {
+    if (!gs) return "";
+    const parts = [];
+    for (const side of ["left", "right"]) {
+      const r = gs.hands?.[side];
+      if (!r) continue;
+      const n = ["index", "middle", "ring", "pinky"].filter((k) => r.extended?.[k]).length;
+      const s = frame.pose?.landmarks?.[side === "left" ? 11 : 12];
+      const w = frame.hands?.find((q) => q.side === side)?.landmarks?.[0];
+      const where = s && w ? (w.y < s.y ? "above" : "below") + " the shoulder" : "shoulder not seen";
+      parts.push(`${side}: ${n} finger${n === 1 ? "" : "s"}, ${where}`);
+    }
+    return parts.length ? ` \u00b7 ${parts.join(" \u00b7 ")}` : " \u00b7 no hand seen";
   }
 
   function unlockNow() {

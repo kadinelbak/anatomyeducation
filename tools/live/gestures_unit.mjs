@@ -166,5 +166,15 @@ function blinkRun(closedMs, step = 10) {
   g.reset();
   check("reset clears level signals", g.update(frame(433, [hand("left", { fingers: [] })]), { pointerHand: "right" }).fist === false);
 }
+// 9. raising is forgiving: thumb tucked still counts, and a 5-frame flicker of a curled finger does not reset
+{
+  const g = createGestures();
+  let r = null;
+  for (let t = 0; t <= 700; t += 33) {
+    const flicker = t >= 300 && t < 300 + 5 * 33;
+    r = g.update(frame(t, [hand("right", { fingers: flicker ? ALL.slice(0, 3) : ALL, thumb: false, wy: 0.2 })]), {});
+  }
+  check("raised with the thumb tucked and through a short flicker", r?.raised === "right", JSON.stringify(r?.raised));
+}
 console.log(failures ? `${failures} FAILED` : "all passed");
 process.exit(failures ? 1 : 0);
