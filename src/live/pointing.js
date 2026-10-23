@@ -21,6 +21,8 @@ const EXTENDED = 1.1;           // fingertip-to-palm distance / hand size for an
 const VOTE_FRAMES = 8;
 const LOCK_MS = 900;            // the same coarse key leading this long locks it
 const UNLOCK_MS = 1500;         // this long without any pointing candidate releases a lock
+const FOLLOW = 3.0;              // hard lock: the finger still scrubs the locked segment out to this many radii,
+                                 // whatever its shape, the person mask or the depth hint say
 const RETARGET_MS = 1500;       // locked, but a different segment leads this long: release so it can lock
 const NULL_RESET_MS = 200;      // (unlocked) this long without a hit forgets the history
 const DEPTH_TOL = 0.6;          // pose index tip this far (shoulder widths) nearer than the limb = in front
@@ -256,6 +258,24 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
   }
   const bestOf = (list) => list.reduce((b, c) => (!b || c.rank < b.rank ? c : b), null);
 
+  // Hard lock: the pointing hand's index tip against the locked segment only, with none of the
+  // seek-time filters, so moving the finger keeps stepping through the scan.
+  function follow(frame, ctx) {
+    const out = [];
+    for (const hand of frame.hands || []) {
+      if (pointerHand && hand.side !== pointerHand) continue;
+      const l8 = hand.landmarks?.[8];
+      if (!l8 || l8.x < 0 || l8.x > 1 || l8.y < 0 || l8.y > 1) continue;
+      const tip = { x: l8.x, y: l8.y, px: pxPoint(l8, ctx.sc) };
+      for (const inst of ctx.list) {
+        if (inst.key !== lockedKey) continue;
+        const c = contactWith(ctx, inst, tip, hand.side);
+        if (c.norm <= FOLLOW) out.push(c);
+      }
+    }
+    return bestOf(out);
+  }
+
   // Coarse selection with hysteresis against the current leader: the leader keeps the lead while
   // it is within HOLD * SEEK radii, unless a challenger is clearly better.
   function select(all, leader) {
@@ -341,7 +361,7 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
       const away = !hardLock && awaySince !== null && t - awaySince > RETARGET_MS;
       if (!away && (hardLock || sel || t - lastCandT <= UNLOCK_MS)) {
         // Segment and side are frozen; refine frac / band / aspect when the tip is on the locked segment.
-        const on = bestOf(all.filter((c) => c.key === lockedKey));
+        const on = bestOf(all.filter((c) => c.key === lockedKey)) || (hardLock && ctx ? follow(frame, ctx) : null);
         last = on ? finish(build(ctx, on), 1) : { ...last, tip: sel ? { x: sel.tip.x, y: sel.tip.y } : last.tip };
         return last;
       }

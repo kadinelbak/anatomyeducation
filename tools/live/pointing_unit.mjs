@@ -308,6 +308,12 @@ const fresh = () => createPointer({ segmentsUrl: "assets/live/segments.json", lo
   check("hard lock: 4 s without a candidate keeps the lock", r?.locked === true && r.segment === "forearm" && p.locked === true, JSON.stringify([r?.locked, r?.segment]));
   for (; t <= 10000; t += 33) r = p.update(frame(t, hand("left", 0.5, 0.42)));
   check("hard lock: 5 s on the trunk never retargets", r?.locked === true && r.segment === "forearm" && p.locked === true, JSON.stringify([r?.locked, r?.segment]));
+  // the finger still scrubs the locked forearm on frames the seek filters reject (here: off the person mask)
+  const off = { width: 4, height: 4, data: new Uint8Array(16) };
+  r = p.update(frame(t += 33, hand("left", 0.35 + 0.8 * (0.32 - 0.35), 0.45 + 0.8 * 0.15), { mask: off }));
+  check("hard lock: frac follows the finger past the seek filters", r?.locked && r.segment === "forearm" && r.frac > 0.75 && r.frac < 0.85, JSON.stringify([r?.segment, r?.frac]));
+  r = p.update(frame(t += 33, hand("left", 0.35 + 0.2 * (0.32 - 0.35), 0.45 + 0.2 * 0.15), { mask: off }));
+  check("hard lock: and back up the forearm", r?.locked && r.frac > 0.15 && r.frac < 0.25, JSON.stringify(r?.frac));
   p.unlock();
   r = p.update(frame(t, hand("left", 0.5, 0.42)));
   check("hard lock: unlock() releases, trunk can lead", p.locked === false && r?.segment === "trunk" && r.locked === false, JSON.stringify([r?.segment, r?.locked]));
