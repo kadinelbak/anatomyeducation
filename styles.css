@@ -164,7 +164,7 @@ body.mode-volume #controls, body.mode-xray #controls, body.mode-ultrasound #cont
 /* Slide and cell modes: the bar sits at the bottom left with its zoom chips, so the licence line keeps to the bottom right. */
 
 /* ---------- Education shell (PRD: clean main screen) ---------- */
-/* Top bar: home, breadcrumb, mode switch, credits. Stays within 44 px: the scan viewers' own toolbars start there. */
+/* Top bar: home, breadcrumb, quiz stats. Stays within 44 px: the scan viewers' own toolbars start there. */
 .topbar { z-index: 10; height: 44px; padding: 0 12px; gap: 10px; justify-content: flex-start;
   background: linear-gradient(rgba(15, 20, 25, 0.92), rgba(15, 20, 25, 0.6)); border-bottom: 1px solid var(--border); }
 .topbar > * { pointer-events: auto; }
@@ -179,10 +179,6 @@ body.mode-volume #controls, body.mode-xray #controls, body.mode-ultrasound #cont
 .crumb:disabled { cursor: default; opacity: 1; }
 .crumb.current { color: var(--muted); }
 .crumb-sep { color: var(--muted); }
-.mode-toggle { display: flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; }
-.mode-toggle button { background: transparent; color: var(--muted); border: 0; padding: 4px 12px; font-size: 0.85rem; font-weight: 600; }
-.mode-toggle button[aria-pressed="true"] { background: rgba(79, 179, 255, 0.18); color: var(--accent); }
-.credits-toggle { background: none; border: 0; color: var(--muted); font-size: 0.82rem; padding: 4px; }
 
 /* Menus and popovers (region menu, views, layers). */
 .menu-wrap { position: relative; }
@@ -208,7 +204,7 @@ body.mode-volume #controls, body.mode-xray #controls, body.mode-ultrasound #cont
 .layers label { display: flex; gap: 8px; align-items: center; font-size: 0.92rem; }
 .layers label[hidden] { display: none; }
 .views-menu { min-width: 240px; }
-body.landing #controls, body.landing #slice-bar { display: none; }
+body.landing #controls, body.landing #slice-bar, body.home #controls, body.home #slice-bar, body.home .quiz-fab { display: none; }
 body.quizzing .toolbar { left: auto; right: 16px; transform: none; }
 .slice-bar { position: fixed; z-index: 8; left: 50%; bottom: 68px; transform: translateX(-50%); width: min(360px, calc(100vw - 32px));
   display: grid; gap: 4px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted);
@@ -265,12 +261,10 @@ body.mode-volume .study-note, body.quizzing .study-note { display: none; }
 @media (max-width: 720px) {
   .topbar { padding: 0 8px; gap: 6px; }
   .topbar .brand { font-size: 0.9rem; }
-  body:not(.landing) .brand-full { display: none; } /* a home mark leaves room for the breadcrumb */
-  body:not(.landing) .brand-short { display: inline; font-size: 1.15rem; }
+  body:not(.landing):not(.home) .brand-full { display: none; } /* a home mark leaves room for the breadcrumb */
+  body:not(.landing):not(.home) .brand-short { display: inline; font-size: 1.15rem; }
   body.details-open .quiz-fab, body:not(.landing) .study-note { display: none; }
   .crumb { max-width: 30vw; font-size: 0.85rem; padding: 4px 3px; }
-  .mode-toggle button { padding: 4px 8px; font-size: 0.78rem; }
-  .credits-toggle { font-size: 0.75rem; }
   .card.intro { left: 8px; right: 8px; width: auto; top: 52px; max-height: calc(100vh - 60px); }
   .figure { height: min(38vh, 300px); max-width: 120px; }
   .toolbar { bottom: 8px; }
@@ -284,7 +278,7 @@ body.mode-volume .study-note, body.quizzing .study-note { display: none; }
   .deep-links { left: 8px; bottom: 8px; max-width: calc(100vw - 110px); }
 }
 /* Over a scan, film or slide the bar stays see-through, so the viewer's own edge letters show beneath it. */
-body:not(.mode-mesh):not(.landing) .topbar { background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0)); border-bottom-color: transparent; }
+body:not(.mode-mesh):not(.landing):not(.home) .topbar { background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0)); border-bottom-color: transparent; }
 
 /* Phones: the Explore landing is a shelf along the bottom that the student can fold down to a handle.
    app.js sets body.shelf while the Explore landing is up, body.shelf-closed when it is folded, and
@@ -314,3 +308,20 @@ body:not(.mode-mesh):not(.landing) .topbar { background: linear-gradient(rgba(0,
 .privacy-note { display: block; margin-top: 6px; font-size: 0.72rem; color: var(--muted); }
 .privacy-note summary { cursor: pointer; display: inline; text-decoration: underline; }
 #more[hidden] { display: none; }
+
+/* Home: the turning figure fills the screen behind the three buttons. */
+.home { position: fixed; inset: 0; z-index: 5; display: flex; flex-direction: column; align-items: center; padding: 44px 16px 0;
+  background: radial-gradient(ellipse at 50% 38%, #1b2430 0%, var(--bg) 70%); }
+.hero { position: relative; flex: 1 1 auto; min-height: 0; width: 100%; max-width: 900px; }
+.hero > svg.figure, .hero > canvas { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; }
+.hero > svg.figure { padding: 3% 0; opacity: 0.55; pointer-events: none; }
+.hero .figure .zone, .hero .figure .inert { fill: rgba(79, 179, 255, 0.1); stroke: rgba(79, 179, 255, 0.45); cursor: default; pointer-events: none; }
+.hero.hero-ready > svg.figure { display: none; }
+.hero > canvas { cursor: grab; touch-action: none; }
+.hero > canvas:active { cursor: grabbing; }
+.home-actions { flex: 0 0 auto; display: flex; gap: 12px; justify-content: center; padding: 14px 0 max(34px, env(safe-area-inset-bottom)); }
+.home-actions button { min-width: 120px; padding: 12px 22px; font-size: 1.05rem; }
+.home-actions button:disabled { opacity: 0.5; cursor: wait; }
+@media (max-width: 600px) {
+  .home-actions { flex-direction: column; align-items: stretch; width: min(320px, 100%); gap: 10px; }
+}
