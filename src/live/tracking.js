@@ -29,7 +29,8 @@ const POSE_MODEL = new URL("assets/ml/pose_landmarker_lite.task", ROOT).href;
 const HAND_MODEL = new URL("assets/ml/hand_landmarker.task", ROOT).href;
 const FACE_MODEL = new URL("assets/ml/face_landmarker.task", ROOT).href;
 
-const POSE_EVERY = 2;
+const POSE_EVERY = 2;           // normal cadence; a slow device goes to POSE_EVERY_SLOW (hands run every frame)
+const POSE_EVERY_SLOW = 4;
 // Face runs on the frames where pose does not: frameNo % POSE_EVERY === FACE_PHASE.
 const FACE_PHASE = 1;
 const SLOW_FPS = 12, SLOW_MS = 5000;
@@ -180,10 +181,10 @@ export async function createTracker({ video, onFrame, onStatus, budgetMs = 33, f
     throw e;
   }
   let { pose: poseLm, hand: handLm, face: faceLm, backend } = models;
-  let numHands = 2, running = false, handle = 0, usingRvfc = false, disposed = false;
+  let numHands = 2, running = false, handle = 0, usingRvfc = false, disposed = false, poseEvery = POSE_EVERY;
   let frameNo = 0, lastVideoTime = -1, lastTs = 0, lastDraw = 0, slowSince = 0, slowDone = false;
   let lastPose = null, prevPose = null, lastMask = null, poseWarm = false, lastFace = null, faceErrors = 0;
-  const stats = { fps: 0, poseMs: 0, handMs: 0, faceMs: 0, backend };
+  const stats = { fps: 0, poseMs: 0, handMs: 0, faceMs: 0, backend, poseEvery: POSE_EVERY };
   const poseF = new LandmarkFilter(33, ["x", "y", "z"]);
   const poseWF = new LandmarkFilter(33, ["x", "y", "z"]);
   const handF = { left: new LandmarkFilter(21, ["x", "y", "z"]), right: new LandmarkFilter(21, ["x", "y", "z"]) };
@@ -275,10 +276,10 @@ export async function createTracker({ video, onFrame, onStatus, budgetMs = 33, f
       lastTs = ts;
       const tSec = ts / 1000;
       try {
-        if (frameNo % POSE_EVERY === 0) runPose(ts);
-        if (frameNo % POSE_EVERY === FACE_PHASE) runFace(ts);
+        if (frameNo % poseEvery === 0) runPose(ts);
+        if (frameNo % poseEvery === FACE_PHASE) runFace(ts);
         const hands = runHands(ts);
-        const p = frameNo % POSE_EVERY === 0 ? lastPose : interpolated();
+        const p = frameNo % poseEvery === 0 ? lastPose : interpolated();
         frameNo++;
         const frame = { t: now, width: video.videoWidth, height: video.videoHeight, pose: null, hands: [], face: lastFace };
         if (p) frame.pose = { landmarks: poseF.apply(p.lm, tSec), world: poseWF.apply(p.world, tSec), mask: lastMask };
@@ -294,8 +295,10 @@ export async function createTracker({ video, onFrame, onStatus, budgetMs = 33, f
         if (stats.fps && stats.fps < SLOW_FPS) {
           slowSince = slowSince || now;
           if (!slowDone && now - slowSince > SLOW_MS) {
-            slowDone = true; api.setNumHands(1);
-            status("slow", `Tracking is slow (${stats.fps.toFixed(0)} fps); following one hand.`);
+            // Both hands are needed for the gestures, so slow devices keep two hands and run the body
+            // and face models less often instead.
+            slowDone = true; poseEvery = POSE_EVERY_SLOW; stats.poseEvery = poseEvery;
+            status("slow", `Tracking is slow (${stats.fps.toFixed(0)} fps); updating the body less often.`);
           }
         } else slowSince = 0;
         if (lastStatus !== "slow" || frame.pose || frame.hands.length) {

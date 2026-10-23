@@ -110,8 +110,10 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     el.toolbar.setAttribute("role", "toolbar"); el.toolbar.setAttribute("aria-label", "Scan type");
     el.toolbar.hidden = true;
 
+    el.debug = h("pre", "live-debug");
+    el.debug.hidden = !debugMode();
     el.card = h("div", "card live-card");
-    root.replaceChildren(el.stage, el.pill, el.panel, el.toolbar, el.card);
+    root.replaceChildren(el.stage, el.pill, el.panel, el.toolbar, el.card, el.debug);
     wireSheet();
   }
 
@@ -329,6 +331,7 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     const now = performance.now();
     let gs = null;
     if (gestures && pointer) try { gs = gestures.update(frame, { pointerHand }) || null; } catch (e) { console.warn("live: gestures failed", e); }
+    if (!el.debug.hidden) debugReadout(frame, gs);
     if (flow === "hand") {
       locked = false; lastResultSeen = false; el.unlock.hidden = true;
       if (lastKey) { lastKey = null; clearPanel(); }
@@ -469,6 +472,24 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     return parts.length ? ` \u00b7 ${parts.join(" \u00b7 ")}` : " \u00b7 no hand seen";
   }
 
+  // Press D (or open with ?live-debug=1): what the tracker and the gesture reader see right now.
+  function debugReadout(frame, gs) {
+    const st = tracker?.stats || {};
+    const f = (v) => (typeof v === "number" ? v.toFixed(v < 10 ? 1 : 0) : String(v));
+    const lines = [`${f(st.fps)} fps · pose ${f(st.poseMs)} ms /${st.poseEvery ?? "?"} · hands ${f(st.handMs)} ms · face ${f(st.faceMs)} ms · ${st.backend || ""}`,
+      `flow ${flow} · pointer hand ${pointerHand || "none"} · locked ${locked}`];
+    for (const hd of frame.hands || []) {
+      const r = gs?.hands?.[hd.side];
+      const n = r ? ["index", "middle", "ring", "pinky"].filter((k) => r.extended?.[k]).length : "?";
+      lines.push(`hand ${hd.side}: ${r?.shape || "?"} · ${n} fingers · thumb ${r?.extended?.thumb ? "out" : "in"} · raised ${!!r?.raised} · score ${f(hd.score)}`);
+    }
+    if (!(frame.hands || []).length) lines.push("no hands");
+    const b = frame.face?.blink;
+    lines.push(b ? `blink L ${b.left.toFixed(2)} R ${b.right.toFixed(2)}` : "no face");
+    if (gs) lines.push(`gestures: count ${gs.count ?? "-"} · fist ${gs.fist} · open ${gs.open} · blink ${gs.blink} · raised ${gs.raised || "-"} · control ${gs.control?.side || "-"}`);
+    el.debug.textContent = lines.join("\n");
+  }
+
   function unlockNow() {
     try { pointer?.unlock?.(); } catch {}
     locked = false; lastKey = null;
@@ -488,6 +509,7 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     if (e.key === "Escape" && locked) { e.preventDefault(); unlockNow(); }
     else if (e.key === "Enter" && locked && structIdx >= 0 && !(e.target instanceof HTMLButtonElement)) { e.preventDefault(); el.list.children[structIdx]?.querySelector("button")?.click(); }
     else if ((e.key === "r" || e.key === "R") && tracker && !cal && !rec && el.card.hidden) startRecording();
+    else if (e.key === "d" || e.key === "D") el.debug.hidden = !el.debug.hidden;
   }
 
   function drawPose(ctx, frame) {

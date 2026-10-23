@@ -13,8 +13,8 @@ const FIST_MS = 300;            // control-hand fist held this long
 const MAX_MISSES = 2;           // consecutive missing / "other" frames tolerated before a timer resets
 const RAISE_SLACK = 0.04;       // image-height fraction the wrist may sit below the shoulder and still be "raised"
 const RAISE_MISSES = 8;         // raising is a deliberate pose; tolerate more detector flicker than a gesture
-const BLINK_CLOSED = 0.5;       // both eyes' blink score at or above this = closed
-const BLINK_OPEN = 0.3;         // both below this = open
+const BLINK_CLOSED = 0.45;      // both eyes' blink score at or above this = closed (a 15 Hz sample can catch a blink mid-way)
+const BLINK_OPEN = 0.25;        // both below this = open
 const FINGERS = [               // [name, tip, pip, mcp]
   ["index", 8, 6, 5],
   ["middle", 12, 10, 9],
