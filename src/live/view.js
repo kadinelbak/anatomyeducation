@@ -5,6 +5,8 @@ import { createRendererSwitch } from "../renderers/switch.js";
 
 const HIDDEN_EXIT_MS = 30000;
 const PEEK = 120;
+const HAND_BONES = [[0, 1], [1, 2], [2, 3], [3, 4], [0, 5], [5, 6], [6, 7], [7, 8], [5, 9], [9, 10], [10, 11], [11, 12], [9, 13], [13, 14], [14, 15], [15, 16], [13, 17], [17, 18], [18, 19], [19, 20], [0, 17]];
+const HAND_COLOR = "#ff9f1c";
 const BONES = [[11, 12], [11, 13], [13, 15], [12, 14], [14, 16], [11, 23], [12, 24], [23, 24], [23, 25], [25, 27], [24, 26], [26, 28], [0, 11], [0, 12]];
 const MODALITIES = [{ id: "ct", label: "CT" }, { id: "mri", label: "MRI" }, { id: "xray", label: "X-ray" }, { id: "ultrasound", label: "Ultrasound" }];
 
@@ -21,6 +23,7 @@ const store = {
 const NO_SCANS = "No scans for this region yet";
 const HAND_KEY = "live.pointerHand";
 const LEGEND = "1-4 fingers: scan \u00b7 fist + blink: next structure \u00b7 open palm: release";
+const SCAN_TIMEOUT_MS = 20000;
 const ZOOM_PAD = 0.35, ZOOM_MIN = 0.3, ZOOM_MAX = 3, ZOOM_EASE = 0.1;
 // ?live-fixture=<path> replays recorded tracker frames instead of opening a camera (tests, demos).
 const debugMode = () => { try { return new URLSearchParams(location.search).get("live-debug") === "1"; } catch { return false; } };
@@ -96,6 +99,8 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     el.scanView = h("div", "live-scan-view");
     el.scan.append(el.scanView);
     el.caption = h("p", "live-caption");
+    el.scanpane = h("div", "live-scanpane"); // right-hand pane in split layout (hidden otherwise)
+    el.scanpane.append(el.scan, el.caption);
     el.calBtn = h("button", "live-calibrate", "Calibrate");
     el.calBtn.type = "button"; el.calBtn.title = "Measure your arm proportions for better pointing";
     el.calBtn.addEventListener("click", () => showCalibrateCard());
@@ -104,7 +109,7 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     el.handBtn.type = "button"; el.handBtn.title = "Choose which hand points";
     el.handBtn.addEventListener("click", changeHand);
     el.head.append(el.title, el.handBtn, el.calBtn);
-    el.panel.append(el.grab, el.head, el.hint, el.legend, el.list, el.scan, el.caption);
+    el.panel.append(el.grab, el.head, el.hint, el.legend, el.list);
 
     el.toolbar = h("div", "toolbar live-toolbar");
     el.toolbar.setAttribute("role", "toolbar"); el.toolbar.setAttribute("aria-label", "Scan type");
@@ -113,7 +118,7 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     el.debug = h("pre", "live-debug");
     el.debug.hidden = !debugMode();
     el.card = h("div", "card live-card");
-    root.replaceChildren(el.stage, el.pill, el.panel, el.toolbar, el.card, el.debug);
+    root.replaceChildren(el.stage, el.scanpane, el.pill, el.panel, el.toolbar, el.card, el.debug);
     wireSheet();
   }
 
@@ -255,11 +260,11 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     stopAll();
     root.hidden = true;
     document.body.classList.remove("live");
-    modality = null; lastKey = null; lastReqKey = null; applying = false;
+    modality = null; lastKey = null; lastReqKey = null; applying = false; pendingReq = null;
     if (el.unlock) el.unlock.hidden = true;
     setZoom({ k: 1, tx: 0, ty: 0 });
     if (el.legend) el.legend.hidden = true;
-    if (el.list) { el.list.replaceChildren(); el.toolbar.replaceChildren(); el.toolbar.hidden = true; el.scan.hidden = true; el.caption.textContent = ""; }
+    if (el.list) { el.list.replaceChildren(); el.toolbar.replaceChildren(); el.toolbar.hidden = true; setScan(false); el.caption.textContent = ""; }
     if (location.hash === "#live") { try { history.back(); } catch {} }
   }
   function exit() { close(); onExit?.(); }
@@ -272,6 +277,7 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     root.hidden = true;
     document.body.classList.remove("live");
     modality = null; lastKey = null; lastReqKey = null;
+    if (el.scan) setScan(false);
   }
   function onVisibility() {
     if (document.hidden) {
@@ -287,7 +293,7 @@ export function createLiveView({ root, onExit, openExplore, config }) {
   // ---------- Bottom sheet (phones) ----------
   function wireSheet() {
     let startY = 0, startH = 0, dragging = false, moved = false;
-    const phone = () => window.matchMedia("(max-width: 600px)").matches;
+    const phone = () => window.matchMedia("(max-width: 600px)").matches || (root.classList.contains("live-split") && window.matchMedia("(max-width: 800px)").matches);
     const half = () => Math.round(root.clientHeight * 0.5);
     const setH = (v) => root.style.setProperty("--sheet-h", `${Math.max(PEEK, Math.min(half(), v))}px`);
     el.grab.addEventListener("pointerdown", (e) => { if (!phone()) return; dragging = true; moved = false; startY = e.clientY; startH = el.panel.offsetHeight; el.grab.setPointerCapture(e.pointerId); });
@@ -301,6 +307,23 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     el.grab.addEventListener("pointerup", end);
     el.grab.addEventListener("pointercancel", end);
     el.grab.addEventListener("click", () => { if (phone() && !moved) setH(el.panel.offsetHeight > PEEK + 10 ? PEEK : half()); });
+  }
+
+  // ---------- Split layout (camera left / scan right; stacked on narrow screens) ----------
+  function setScan(show) { el.scan.hidden = !show; syncSplit(); }
+  function syncSplit() {
+    const on = !el.scan.hidden && !!modality;
+    if (root.classList.contains("live-split") === on) return;
+    root.classList.toggle("live-split", on);
+    relayout();
+  }
+  // The stage changed size: resize the overlay, keep the zoom framing proportional, then let the scan renderers re-fit.
+  // (src/renderers/switch.js has no resize API; each renderer listens to window "resize" / a ResizeObserver.)
+  function relayout() {
+    const ow = cw, oh = ch;
+    sizeCanvas();
+    if (ow > 1 && oh > 1 && (zoom.tx || zoom.ty)) setZoom({ k: zoom.k, tx: zoom.tx * cw / ow, ty: zoom.ty * ch / oh });
+    requestAnimationFrame(() => window.dispatchEvent(new Event("resize")));
   }
 
   // ---------- Per-frame work ----------
@@ -326,8 +349,9 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, cw, ch);
     if (rec) recordFrame(frame);
-    if (cal) { drawPose(ctx, frame); calibrateStep(frame); return; }
+    if (cal) { drawPose(ctx, frame); drawHands(ctx, frame); calibrateStep(frame); return; }
     drawPose(ctx, frame);
+    drawHands(ctx, frame);
     const now = performance.now();
     let gs = null;
     if (gestures && pointer) try { gs = gestures.update(frame, { pointerHand }) || null; } catch (e) { console.warn("live: gestures failed", e); }
@@ -418,10 +442,12 @@ export function createLiveView({ root, onExit, openExplore, config }) {
 
   // ---------- Control-hand gestures while locked ----------
   function chooseModality(id, toggle) {
+    const prev = modality;
     modality = toggle && modality === id ? null : id;
     lastReqKey = null;
+    if (modality !== prev) { applying = false; pendingReq = null; }
     el.toolbar.querySelectorAll(".tool").forEach((t) => t.setAttribute("aria-pressed", String(t.dataset.id === modality)));
-    if (!modality || !avail[modality]) { el.scan.hidden = true; el.caption.textContent = ""; }
+    if (!modality || !avail[modality]) { setScan(false); el.caption.textContent = ""; }
     if (modality) el.hint.hidden = true;
     el.syncNote?.();
   }
@@ -525,6 +551,23 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     ctx.restore();
   }
 
+  // Every tracked hand in orange so the user sees what the computer reads: the pointer hand opaque ("point"), the other 0.75 ("menu").
+  function drawHands(ctx, frame) {
+    for (const hd of frame.hands || []) {
+      const lm = hd.landmarks;
+      if (!lm || lm.length < 21) continue;
+      const isPointer = pointerHand ? hd.side === pointerHand : false;
+      const pts = lm.map(toPx);
+      ctx.save();
+      ctx.globalAlpha = isPointer ? 1 : 0.75;
+      ctx.strokeStyle = HAND_COLOR; ctx.fillStyle = HAND_COLOR; ctx.lineWidth = 2; ctx.lineCap = "round";
+      for (const [a, b] of HAND_BONES) { ctx.beginPath(); ctx.moveTo(pts[a].x, pts[a].y); ctx.lineTo(pts[b].x, pts[b].y); ctx.stroke(); }
+      for (const p of pts) { ctx.beginPath(); ctx.arc(p.x, p.y, 3, 0, Math.PI * 2); ctx.fill(); }
+      if (pointerHand) drawLabel(ctx, isPointer ? "point" : "menu", pts[0].x, pts[0].y + 22);
+      ctx.restore();
+    }
+  }
+
   function polyPath(ctx, poly) {
     const pts = poly.map(toPx);
     ctx.beginPath(); pts.forEach((p, i) => (i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y))); ctx.closePath();
@@ -609,16 +652,31 @@ export function createLiveView({ root, onExit, openExplore, config }) {
       if (modality === "ultrasound") {
         const entry = usProbe?.entriesFor(point)[0];
         req = entry ? usProbe.request(point, probeTip, entry) : null;
-      } else req = probe?.request(point, probeTip, modality) || null;
+      } else req = probe?.request(point, probeTip, { id: modality, study: el.scanView.dataset.study || null }) || null;
     } catch (e) { console.warn("live: probe failed", e); }
     if (!req) return;
     el.caption.textContent = req.caption || "";
     const key = JSON.stringify([req.kind, req.study, req.view]);
-    if (key === lastReqKey || applying) return;
+    if (key === lastReqKey) return;
+    if (applying) { pendingReq = { req, key }; return; }   // the newest request waits for the current load
+    applyReq(req, key);
+  }
+  let pendingReq = null;
+  function applyReq(req, key) {
     lastReqKey = key; applying = true;
-    el.scan.hidden = false;
+    setScan(true);
     // probe.apply activates the renderer kind for the study (volume, xray, ultrasound) and shows the view.
-    Promise.resolve(probe.apply(req)).then(() => { el.scanView.dataset.kind = req.kind; el.scanView.dataset.study = req.study; }).catch((e) => console.warn("live: scan failed", e)).finally(() => { applying = false; });
+    let timer = 0;
+    const timeout = new Promise((_, rej) => { timer = setTimeout(() => rej(new Error("scan-timeout")), SCAN_TIMEOUT_MS); });
+    Promise.race([Promise.resolve(probe.apply(req)), timeout]).then(() => { el.scanView.dataset.kind = req.kind; el.scanView.dataset.study = req.study; }).catch((e) => {
+      if (e?.message === "scan-timeout") { console.warn("live: scan load timed out", req.study); say("Scan is slow to load", 2000); }
+      else console.warn("live: scan failed", e);
+    }).finally(() => {
+      clearTimeout(timer);
+      applying = false;
+      const next = pendingReq; pendingReq = null;
+      if (next && next.key !== lastReqKey && modality && !el.scan.hidden) applyReq(next.req, next.key);
+    });
   }
 
   // ---------- Calibration ----------
@@ -710,9 +768,9 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     structs = []; structIdx = -1;
     el.list.replaceChildren();
     el.toolbar.hidden = true;
-    el.scan.hidden = true;
-    el.caption.textContent = "";
     modality = null; lastReqKey = null;
+    setScan(false);
+    el.caption.textContent = "";
   }
 
   function fillPanel(r) {
@@ -732,7 +790,7 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     avail = {};
     try { for (const m of probe?.modalitiesFor(r) || []) avail[m.id] = m; } catch (e) { console.warn("live: modalities failed", e); }
     try { if (usProbe?.entriesFor(r).length) avail.ultrasound = { id: "ultrasound", label: "Ultrasound", simulated: true }; } catch {}
-    if (modality && !avail[modality]) { el.scan.hidden = true; el.caption.textContent = ""; }
+    if (modality && !avail[modality]) { setScan(false); el.caption.textContent = ""; }
     el.note = h("p", "live-toolnote");
     el.note.setAttribute("role", "status");
     const syncNote = el.syncNote = () => { el.note.textContent = (!modality && !Object.keys(avail).length) || (modality && !avail[modality]) ? NO_SCANS : ""; };
