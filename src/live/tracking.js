@@ -277,7 +277,7 @@ export async function createTracker({ video, onFrame, onStatus, budgetMs = 33, f
       const tSec = ts / 1000;
       try {
         if (frameNo % poseEvery === 0) runPose(ts);
-        if (frameNo % poseEvery === FACE_PHASE) runFace(ts);
+        if (frameNo % 2 === FACE_PHASE) runFace(ts);   // face keeps its 2-frame cadence even when pose is thinned: blinks are short
         const hands = runHands(ts);
         const p = frameNo % poseEvery === 0 ? lastPose : interpolated();
         frameNo++;
