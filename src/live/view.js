@@ -184,7 +184,7 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     setPill("loading", fixture ? "Loading tracking" : "Starting camera");
     if (fixture) { el.panel.hidden = false; sizeCanvas(); } // replay needs no camera
     else try {
-      const s = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 720 } }, audio: false });
+      const s = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user", width: { ideal: 640 }, height: { ideal: 480 } }, audio: false });
       if (!active || mine !== session) { s.getTracks().forEach((t) => t.stop()); return; }
       stream = s;
     } catch (e) {
@@ -350,13 +350,17 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, cw, ch);
     if (rec) recordFrame(frame);
-    if (cal) { drawPose(ctx, frame); drawHands(ctx, frame); calibrateStep(frame); return; }
+    if (cal) { tracker?.setNeeds?.({ mask: true, face: false }); drawPose(ctx, frame); drawHands(ctx, frame); calibrateStep(frame); return; }
     drawPose(ctx, frame);
     drawHands(ctx, frame);
     const now = performance.now();
     let gs = null;
     if (gestures && pointer) try { gs = gestures.update(frame, { pointerHand }) || null; } catch (e) { console.warn("live: gestures failed", e); }
     if (!el.debug.hidden) debugReadout(frame, gs);
+    // Only pay for the person mask while seeking, and for the face model while a blink can matter
+    // (locked with the control hand in a fist), while recording, or with the debug readout open.
+    // Uses last frame's lock state; one frame late is fine.
+    try { tracker?.setNeeds?.({ mask: !locked, face: (locked && gs?.control?.shape === "fist") || !!rec || !el.debug.hidden }); } catch {}
     if (flow === "hand") {
       locked = false; lastResultSeen = false; el.unlock.hidden = true;
       if (lastKey) { lastKey = null; clearPanel(); }

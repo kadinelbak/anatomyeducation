@@ -96,6 +96,7 @@ async function createFixtureTracker({ fixture, onFrame, onStatus }) {
     stop() { clearInterval(timer); timer = null; },
     dispose() { this.stop(); },
     setNumHands() {},
+    setNeeds() {},
     get stats() { return stats; },
     get frameCount() { return frames.length; },
   };
@@ -184,6 +185,9 @@ export async function createTracker({ video, onFrame, onStatus, budgetMs = 33, f
   let numHands = 2, running = false, handle = 0, usingRvfc = false, disposed = false, poseEvery = POSE_EVERY;
   let frameNo = 0, lastVideoTime = -1, lastTs = 0, lastDraw = 0, slowSince = 0, slowDone = false;
   let lastPose = null, prevPose = null, lastMask = null, poseWarm = false, lastFace = null, faceErrors = 0;
+  // What the caller needs this frame (setNeeds): the person mask costs a GPU->CPU readback per body
+  // frame and the face model a full detection, so both are skipped while nothing reads them.
+  const needs = { mask: true, face: true };
   const stats = { fps: 0, poseMs: 0, handMs: 0, faceMs: 0, backend, poseEvery: POSE_EVERY };
   const poseF = new LandmarkFilter(33, ["x", "y", "z"]);
   const poseWF = new LandmarkFilter(33, ["x", "y", "z"]);
@@ -208,7 +212,7 @@ export async function createTracker({ video, onFrame, onStatus, budgetMs = 33, f
     prevPose = lastPose;
     lastPose = cur;
     lastMask = null;
-    const m = r.segmentationMasks && r.segmentationMasks[0];
+    const m = needs.mask && r.segmentationMasks && r.segmentationMasks[0];
     if (m) {
       try {
         const f = m.getAsFloat32Array();
@@ -232,6 +236,7 @@ export async function createTracker({ video, onFrame, onStatus, budgetMs = 33, f
   // Blink scores from the face blendshapes; never throws (a failing face model must not stop pose/hands).
   function runFace(ts) {
     if (!faceLm) return;
+    if (!needs.face) { lastFace = null; return; }
     try {
       const t0 = performance.now();
       const r = faceLm.detectForVideo(video, ts);
@@ -339,6 +344,10 @@ export async function createTracker({ video, onFrame, onStatus, budgetMs = 33, f
       try { handLm.setOptions({ numHands }); } catch (e) { console.warn(e); }
     },
     get numHands() { return numHands; },
+    setNeeds({ mask, face } = {}) {
+      if (typeof mask === "boolean") { needs.mask = mask; if (!mask) lastMask = null; }
+      if (typeof face === "boolean") { needs.face = face; if (!face) lastFace = null; }
+    },
     get stats() { return stats; },
   };
   return api;
