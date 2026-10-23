@@ -1,0 +1,10 @@
+<!doctype html>
+<meta charset="utf-8">
+<base href="../../">
+<title>pointing test page</title>
+<script type="module">
+  // <base> makes the app's relative asset URLs (assets/...) resolve from the repo root, as on the real page.
+  import { createPointer } from "./src/live/pointing.js";
+  window.createPointer = createPointer;
+  window.ready = true;
+</script>

@@ -65,6 +65,9 @@ const renderer = createRendererSwitch({
     $("attr-xray").hidden = kind !== "xray";
     $("attr-us").hidden = kind !== "ultrasound";
     $("attr-ct").hidden = $("attr-ct").hidden || kind === "slide" || kind === "cell";
+    const vh = scan && typeof id === "string" && id.startsWith("vh-");
+    $("attr-vh").hidden = !vh;
+    if (vh) $("attr-ct").hidden = true;
     $("attr-hist").hidden = kind !== "slide";
     $("attr-cell").hidden = kind !== "cell";
     if (kind === "slide") { // one line per study: the manifest names its source and licence
@@ -1054,3 +1057,12 @@ for (const k of ["viewTween", "controls", "camera", "meshesByStructure", "pick",
 }
 Object.assign(app, { quiz: engine.state, answer: engine.answer, engine, renderer, switch: renderer, openExplore, openDetails, openDeep, backToStructure, setMode, imagingFor, slidesFor: (k) => slidesFor(k, layerOfAny(k)) });
 app.QUESTIONS ||= engine.current;
+
+// ---------- Live mode (workstream A): src/live/view.js is imported on the first click, so the home screen loads nothing extra ----------
+let liveView = null;
+$("go-live").addEventListener("click", async () => {
+  liveView ||= (await import("./live/view.js")).createLiveView({ root: $("live"), config: CONFIG, onExit: () => showLanding(),
+    openExplore: (model, key) => openExplore("mesh", model, key) });
+  liveView.open();
+});
+$("explore-back").addEventListener("click", () => { if (liveView?.active) liveView.close(); });

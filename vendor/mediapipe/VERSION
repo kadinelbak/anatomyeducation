@@ -1,0 +1,3 @@
+1.1.1
+npm @mediapipe/tasks-vision. Kept: vision_bundle.mjs, wasm/vision_wasm_internal.{js,wasm} (the simd build, the only one the browser path loads; tracking.js passes these paths explicitly).
+Removed: wasm/vision_wasm_nosimd_internal.* (old browsers without wasm SIMD) and wasm/vision_wasm_module_internal.* (module-worker build, unused).
