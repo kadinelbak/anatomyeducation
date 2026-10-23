@@ -116,7 +116,7 @@ landmark 5 to 8 in image space). `ProbeRequest`:
   kind: "volume" | "xray" | "ultrasound",     // renderer kind in src/renderers/switch.js
   study: "ts-s1042",
   view: { plane: "axial", frac: 0.42, window: "soft" }          // volume (CT, MRI)
-     |  { axis: "ap" | "lat", frac: 0.42 }                       // xray (see xray.js parseView)
+     |  { axis: "ap" | "lateral", zoom: 1, cx: 0.5, cy: 0.42 }     // xray (xray.js parseView; cy = frac along the long axis)
      |  { frac: 0.42, angle: 15, tilt: 0, rot: 0 | 90, depth: 16 } // ultrasound (views.json fields)
   caption: "Right forearm, transverse, 40% from the elbow",
   simulated: true | false
