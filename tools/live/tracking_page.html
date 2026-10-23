@@ -1,0 +1,43 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>tracking test page</title>
+<video id="v" autoplay muted playsinline width="320" height="240"></video>
+<script type="module">
+import { createTracker } from "../../src/live/tracking.js";
+const out = window.__tracking = { fixture: null, real: null, done: false };
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+async function until(fn, ms) { const t0 = performance.now(); while (performance.now() - t0 < ms) { if (fn()) return true; await sleep(50); } return false; }
+
+async function fixtureTest() {
+  const frames = [], statuses = [];
+  const tr = await createTracker({ fixture: "tools/live/fixtures/two-hands-probe.json", onFrame: (f) => frames.push(f), onStatus: (s) => statuses.push(s) });
+  tr.start();
+  await until(() => frames.length >= 10, 3000);
+  tr.stop();
+  const f = frames[frames.length - 1];
+  out.fixture = { frames: frames.length, statuses, pose: f.pose.landmarks.length, world: f.pose.world.length,
+    hands: f.hands.map((h) => ({ side: h.side, n: h.landmarks.length, world: h.world.length })), backend: tr.stats.backend };
+}
+
+async function realTest() {
+  const video = document.getElementById("v");
+  video.srcObject = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480 } });
+  await video.play();
+  const frames = [], statuses = [];
+  let tr;
+  try {
+    tr = await createTracker({ video, onFrame: (f) => frames.push(f), onStatus: (s, m) => statuses.push(m ? s + ": " + m : s) });
+  } catch (e) { out.real = { error: String(e && e.message || e), statuses }; return; }
+  tr.start();
+  await until(() => frames.length >= 15, 60000);
+  tr.stop();
+  out.real = { frames: frames.length, statuses, stats: { ...tr.stats }, numHands: tr.numHands,
+    shape: frames.length ? { pose: !!frames[frames.length - 1].pose, hands: frames[frames.length - 1].hands.length, w: frames[0].width, h: frames[0].height } : null };
+  tr.dispose();
+  await sleep(4000); // let any late telemetry attempt show up
+}
+
+try { await fixtureTest(); } catch (e) { out.fixture = { error: String(e && e.message || e) }; }
+try { await realTest(); } catch (e) { out.real = { error: String(e && e.message || e) }; }
+out.done = true;
+</script>
