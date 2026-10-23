@@ -11,6 +11,8 @@ const EXT_TIP = 1.6;            // finger extended: dist(tip, wrist) > EXT_TIP *
 const EXT_THUMB = 0.8;          // thumb extended: dist(tip 4, mcp 5) > EXT_THUMB * dist(wrist, mcp 5)
 const FIST_MS = 300;            // control-hand fist held this long
 const MAX_MISSES = 2;           // consecutive missing / "other" frames tolerated before a timer resets
+const RAISE_SLACK = 0.04;       // image-height fraction the wrist may sit below the shoulder and still be "raised"
+const RAISE_MISSES = 8;         // raising is a deliberate pose; tolerate more detector flicker than a gesture
 const BLINK_CLOSED = 0.5;       // both eyes' blink score at or above this = closed
 const BLINK_OPEN = 0.3;         // both below this = open
 const FINGERS = [               // [name, tip, pip, mcp]
@@ -50,18 +52,20 @@ export function readHand(hand, frame) {
   else shape = "count";
   // Raised: open and the wrist above the user's own shoulder (image y grows downward).
   const s = frame.pose?.landmarks?.[SHOULDER[hand.side]];
-  const raised = shape === "open" && !!s && (s.v ?? 1) >= MIN_VIS && l[0].y < s.y;
+  // Raised: four fingers up (thumb free) and the wrist above the user's own shoulder, with a little slack
+  // below the shoulder line so a hand held level with it still counts.
+  const raised = four === 4 && !!s && (s.v ?? 1) >= MIN_VIS && l[0].y < s.y + RAISE_SLACK;
   return { fingers, extended, shape, raised };
 }
 
 // The same reading on every update, tolerating up to MAX_MISSES consecutive missing frames.
 // feed(r, t): r === null is a missing / "other" frame; r === false means "definitely not" (resets).
-function steady() {
+function steady(maxMisses = MAX_MISSES) {
   let value = null, since = 0, misses = 0;
   return {
     feed(r, t) {
       if (r === null) {
-        if (value !== null && misses < MAX_MISSES) misses++;
+        if (value !== null && misses < maxMisses) misses++;
         else { value = null; misses = 0; }
       } else if (r === false) { value = null; misses = 0; }
       else if (r === value) misses = 0;
@@ -76,7 +80,7 @@ function steady() {
 }
 
 export function createGestures({ holdMs = 600, openMs = 1000, blinkMinMs = 60, blinkMaxMs = 700 } = {}) {
-  const raisedT = { left: steady(), right: steady() };
+  const raisedT = { left: steady(RAISE_MISSES), right: steady(RAISE_MISSES) };
   const countT = steady(), fistT = steady(), openT = steady();
   let controlSide = null;
   // blink: "unknown" until both eyes are seen open, then "open" <-> "closed"
@@ -119,7 +123,7 @@ export function createGestures({ holdMs = 600, openMs = 1000, blinkMinMs = 60, b
     let raised = null;
     for (const side of ["left", "right"]) {
       const r = hands[side];
-      raisedT[side].feed(!r || r.shape === "other" ? null : r.raised ? true : false, t);
+      raisedT[side].feed(r?.raised ? true : null, t);   // a flickering finger is a miss, not a reset
       if (raisedT[side].held(t, holdMs) && (!raised || raisedT[side].since < raisedT[raised].since)) raised = side;
     }
 
