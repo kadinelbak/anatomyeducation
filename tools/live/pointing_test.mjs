@@ -33,8 +33,17 @@ const out = await page.evaluate(async () => {
   const frame = { t: 0, width: 1000, height: 1000, pose: { landmarks: lm, world: [], mask: null }, hands: [{ side: "left", landmarks: h, world: h, score: 1 }] };
   const p = await window.createPointer({ segmentsUrl: "assets/live/segments.json" });
   const result = p.update(frame);
+  const forced = p.lock();
+  const locked = p.update({ ...frame, t: 33 });
+  p.unlock();
   const arm = await (await fetch("assets/model/structures.json")).json();
-  return { result, armKeys: Object.keys(arm.structures), outline: p.outline(frame, "forearm", "right").length };
+  return {
+    result, forced, locked, unlocked: p.locked,
+    armKeys: Object.keys(arm.structures),
+    outline: p.outline(frame, "forearm", "right").length,
+    outlines: p.outlines(frame).map((o) => o.label),
+    hint: p.measure(frame).hint,
+  };
 });
 
 let failures = 0;
@@ -46,6 +55,10 @@ const known = new Set(out.armKeys);
 const bad = (r?.structures || []).filter((s) => !known.has(s.key)).map((s) => s.key);
 check("all keys exist in assets/model/structures.json", r && bad.length === 0, bad.join(", "));
 check("outline polygon", out.outline === 12);
+check("coarse label and progress", r?.coarse?.label === "Right forearm" && r.progress === 0 && r.locked === false && r.stable === false, JSON.stringify([r?.coarse, r?.progress]));
+check("lock() locks, unlock() releases", out.forced === true && out.locked?.locked === true && out.locked.stable === true && out.unlocked === false, JSON.stringify([out.forced, out.locked?.locked, out.unlocked]));
+check("outlines() labels every visible segment", out.outlines.includes("Right forearm") && out.outlines.includes("Trunk"), out.outlines.join(","));
+check("measure() asks for the calibration stance", typeof out.hint === "string" && out.hint.length > 0, out.hint);
 check("no page errors", errors.length === 0, errors.join(" | "));
 await browser.close();
 console.log(failures ? `${failures} FAILED` : "all passed");

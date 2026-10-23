@@ -6,6 +6,7 @@
 //   node tools/live/smoke_test_live.mjs http://127.0.0.1:8137/ [chromium executable]
 //   W=390 H=844 TOUCH=1 node tools/live/smoke_test_live.mjs ...   phone size
 import { chromium } from "playwright";
+import { openLive } from "./_open_live.mjs";
 
 const url = process.argv[2] || "http://127.0.0.1:8137/";
 const executablePath = process.argv[3];
@@ -34,16 +35,18 @@ try {
   });
 
   await page.goto(url, { waitUntil: "load" });
-  if (!(await page.$("#go-live"))) {
+  if (!(await page.$("#go-live")) && !(await page.$("#home-live")) && !(await page.$("#home-explore"))) {
     fail("#go-live is not in the page (Live home button missing); cannot test Live");
   } else {
     recording = true;
-    await page.click("#go-live");
+    await openLive(page);
     try {
       await page.waitForSelector("#live", { state: "visible", timeout: 15000 });
       ok("#live visible");
     } catch { fail("#live did not become visible after clicking #go-live"); }
     await page.waitForTimeout(4000); // let the camera, tracker and models start
+    // Dismiss the first-use calibration card if it appeared, without requiring it.
+    if ((await page.textContent(".live-card h1").catch(() => "")) === "Calibrate pointing") await page.click(".live-card button:not(.primary)").catch(() => {});
     const bad = [...hosts].filter(([h]) => !ALLOWED.has(h));
     if (bad.length) fail("cross-origin requests while Live open: " + bad.map(([, u]) => u).join(", "));
     else ok("no requests outside the allow-list (" + [...hosts.keys()].join(", ") + ")");

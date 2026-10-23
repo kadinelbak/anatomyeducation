@@ -3,6 +3,7 @@
 //   python3 tools/serve.py --port 8131 &
 //   node tools/live/view_test.mjs http://127.0.0.1:8131/ /opt/pw-browsers/chromium
 import { chromium } from "playwright";
+import { openLive } from "./_open_live.mjs";
 
 const url = process.argv[2] || "http://127.0.0.1:8131/";
 const executablePath = process.argv[3] || "/opt/pw-browsers/chromium";
@@ -26,7 +27,7 @@ const check = (ok, msg) => { console.log(ok ? "ok  " : "FAIL", msg); if (!ok) fa
 await page.goto(url, { waitUntil: "load" });
 await page.waitForFunction(() => !document.getElementById("start").disabled, null, { timeout: 90000 });
 live = true;
-await page.click("#go-live");
+await openLive(page);
 await page.waitForSelector("#live:not([hidden])");
 await page.click(".live-card button.primary"); // Turn on camera
 await page.waitForFunction(() => { const v = document.querySelector("#live video"); return v && v.readyState >= 2 && !v.paused && v.videoWidth > 0; }, null, { timeout: 30000 });
@@ -35,6 +36,14 @@ const pill = await page.waitForFunction(() => document.querySelector(".live-pill
 check(pill.length > 0, `status pill text: "${pill}"`);
 check(await page.evaluate(() => getComputedStyle(document.querySelector("#live video")).transform !== "none"), "video is mirrored");
 await page.waitForTimeout(1500);
+// Calibration: the card is offered once tracking starts; Skip is remembered.
+const skipSel = ".live-card:not([hidden]) button:not(.primary)";
+await page.waitForSelector(skipSel, { timeout: 60000 });
+check((await page.textContent(skipSel)) === "Skip" && (await page.textContent(".live-card button.primary")).startsWith("Calibrate"), "calibration card offers Calibrate and Skip");
+await page.click(skipSel);
+check(await page.evaluate(() => localStorage.getItem("live.calibration.skipped")) === "1", "Skip stores live.calibration.skipped");
+check(await page.isVisible(".live-calibrate"), "Calibrate button in the panel");
+check((await page.$(".live-record")) === null, "no Record button without ?live-debug=1");
 check((await page.evaluate(() => location.hash)) === "#live", "history entry #live pushed");
 const topbar = await page.evaluate(() => document.querySelector(".topbar").getBoundingClientRect().height);
 check(topbar <= 44, `top bar height ${topbar}`);
@@ -49,9 +58,13 @@ check((await page.evaluate(() => location.hash)) === "", "#live history entry po
 
 // Reopen and leave through browser Back and through the brand button.
 for (const how of ["back", "brand"]) {
-  await page.click("#go-live");
+  await openLive(page);
   await page.click(".live-card button.primary");
   await page.waitForFunction(() => document.querySelector("#live video")?.srcObject);
+  if (how === "back") {
+    await page.waitForTimeout(6000);
+    check(await page.evaluate(() => document.querySelector(".live-card")?.hidden !== false || !/Calibrate/.test(document.querySelector(".live-card h1")?.textContent || "")), "skip is remembered (no calibration card again)");
+  }
   if (how === "back") await page.goBack(); else await page.click("#explore-back");
   await page.waitForSelector("#live", { state: "hidden" });
   check(await page.evaluate(() => document.querySelector("#live video").srcObject === null), `exit via ${how} stops the stream`);
