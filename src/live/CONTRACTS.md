@@ -24,7 +24,7 @@ tracker.start()            // starts requestVideoFrameCallback / rAF loop
 tracker.stop()             // stops loop; models stay warm
 tracker.dispose()          // frees models
 tracker.setNumHands(n)     // 1 or 2 (budget fallback)
-tracker.stats              // { fps, poseMs, handMs, backend: "mediapipe-gpu" | "mediapipe-wasm" | "tfjs" }
+tracker.stats              // { fps, poseMs, handMs, faceMs, backend: "mediapipe-gpu" | "mediapipe-wasm" | "tfjs" }
 ```
 
 `onFrame(frame)` is called at most once per video frame with:
@@ -40,9 +40,16 @@ tracker.stats              // { fps, poseMs, handMs, backend: "mediapipe-gpu" | 
   },
   hands: [                          // 0..2 entries, order stable by handedness
     { side: "left" | "right", landmarks: Landmark[21], world: Landmark[21], score: 0..1 }
-  ]
+  ],
+  face: null | { blink: { left: 0..1, right: 0..1 } }  // 1 = eye closed; null when no face
 }
 ```
+
+`face` comes from the MediaPipe FaceLandmarker (`assets/ml/face_landmarker.task`, blendshapes
+`eyeBlinkLeft`/`eyeBlinkRight`; no face landmarks are exposed). It runs on the frames where pose does
+not (pose on even frames, face on odd ones); between runs the last reading is repeated. `left`/`right`
+are the user's sides (the model's labels are swapped once, like handedness). If the face model fails to
+load, `face` stays `null` and pose/hands are unaffected.
 
 `onStatus(status)` with `status` in `"loading" | "tracking" | "no-person" | "slow" | "error"`
 plus an optional `message` string for the status pill.
@@ -50,7 +57,10 @@ plus an optional `message` string for the status pill.
 Fixture mode: `createTracker({ fixture: "tools/live/fixtures/<name>.json" })` replays recorded
 frames from JSON (`{ fps, frames: [frame, ...] }`) instead of running models, so Playwright tests
 never need a camera. Workstream B records at least one fixture, `forearm-point.json`, with a
-person pointing at their own right forearm, and one `two-hands-probe.json`.
+person pointing at their own right forearm, and one `two-hands-probe.json`. A fixture frame may carry
+`face` (passed through unchanged; `null` when absent). `record_fixture.mjs` accepts an optional
+`"blinks": [[startMs, endMs], ...]` in a landmark description: frames inside a range get
+`face.blink` 0.9/0.9, all others 0.05/0.05; without `blinks` no face field is written.
 
 ## 3. pointing.js (workstream C)
 
@@ -67,7 +77,13 @@ pointer.measure(frame) -> { sample: Sample | null, hint: string | null }  // one
 pointer.calibrate(samples) -> Calibration | null  // median of >= 10 samples; null when too few
 pointer.setCalibration(cal | null)                // override segment radii (null = defaults)
 pointer.getCalibration() -> Calibration | null
+pointer.setPointerHand(side | null)               // "left" | "right": only that hand may point; null = either
+pointer.pointerHand                               // getter, "left" | "right" | null
 ```
+
+Hand roles: with `setPointerHand(side)` only that hand's fingertip is a pointing candidate; the other
+hand is the control hand (see section 7) and never selects, leads, locks or retargets a segment. With
+`null` (the default) either hand may point, as before.
 
 Selection is **coarse then fine**. The coarse key is the segment instance (`segment` + `side`).
 It is chosen with a generous contact radius (1.4 x the segment radius), hysteresis (the leader
@@ -222,9 +238,49 @@ pointing is paused meanwhile. Key R (or the "Record 10 s" button with `?live-deb
 600 frames into the `tools/live/record_fixture.mjs` fixture schema and downloads
 `live-recording-<timestamp>.json`.
 
+Gesture flow (state "hand" -> "seek" -> "locked"): after tracking starts, unless `localStorage live.pointerHand`
+is set, the pill asks the user to raise the hand to point with (`gestures.update(...).raised`), then
+`pointer.setPointerHand(side)` and the choice is stored; "Change hand" (`.live-hand`) clears it. No pointing is
+evaluated in "hand". On lock the stage wrapper `.live-zoom` (video + overlay) scales to the segment's padded
+bounding box (max 3x, eased per frame, back to identity on unlock). The pointer hand's index finger drives the
+probe; the control hand counts 1-4 = CT/MRI/X-ray/Ultrasound, fist + blink advances the `.current` structure
+(Enter or a tap opens it in Explore), open palm for 1 s unlocks. Fixture: `tools/live/make_gesture_fixture.mjs`.
+
 ## 6. Tests
 
 Each workstream adds a Playwright script under `tools/live/` runnable as
 `node tools/live/<name>.mjs http://127.0.0.1:<port>/ /opt/pw-browsers/chromium` against
 `python3 tools/serve.py --port <port>`. Pure logic (pointing, probe maths) also gets a Node
 unit script that needs no browser. Use the port your brief assigns so parallel runs do not collide.
+
+## 7. gestures.js
+
+```js
+export function createGestures({ holdMs = 600, openMs = 1000, blinkMinMs = 60, blinkMaxMs = 400 } = {}) -> Gestures
+export function readHand(hand, frame) -> HandRead | null     // pure, one hand of a tracker frame
+gestures.update(frame, { pointerHand }) -> GestureResult    // pointerHand: "left" | "right" | null
+gestures.reset()                                             // forget every timer
+```
+
+```js
+GestureResult = {
+  hands: { left: HandRead | null, right: HandRead | null },  // highest-score hand per side
+  control: (HandRead & { side }) | null,  // the hand that is not pointerHand; null when pointerHand is null or it is absent
+  raised: "left" | "right" | null,        // level: open hand, wrist above its own shoulder (pose 11 / 12), steady holdMs
+  count: null | 1 | 2 | 3 | 4,            // edge: control hand's index..pinky count steady holdMs; once, then null until it changes or drops
+  fist: boolean,                          // level: control hand steady fist for 300 ms
+  open: boolean,                          // level: control hand steady open palm for openMs
+  blink: boolean                          // edge: both eyes >= 0.5 for blinkMinMs..blinkMaxMs after being open (< 0.3), on reopening
+}
+HandRead = { fingers: 0..5, extended: { thumb, index, middle, ring, pinky }, shape: "fist" | "point" | "open" | "count" | "other", raised }
+```
+
+Finger rule (pixel space; the view's fixture generator uses the same rule): index..pinky (tips
+8/12/16/20, PIPs 6/10/14/18, MCPs 5/9/13/17) is extended when `dist(tip, wrist) > 1.6 * dist(mcp, wrist)`
+and `dist(tip, wrist) > dist(pip, wrist)`; the thumb when `dist(4, 5) > 0.8 * dist(0, 5)`. Shapes ignore
+the thumb: fist = none of index..pinky, point = index only, open = all four plus the thumb, count = any
+other subset (four fingers with the thumb tucked is a count of 4); "other" = degenerate landmarks. An
+open palm never emits a count, so "release" (open) and "4 = ultrasound" (count) cannot collide. "Steady" = the same reading every update for the hold time; up to 2
+consecutive missing / "other" frames keep the timer, a third (or a different reading) restarts it.
+A blink needs `frame.face.blink` (null face for more than 2 frames re-arms it: eyes must be seen open
+again). The view decides what each signal does; gestures.js holds no app state.

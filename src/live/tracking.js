@@ -1,4 +1,4 @@
-// Live mode body tracking: MediaPipe Tasks Vision PoseLandmarker + HandLandmarker, run in the
+// Live mode body tracking: MediaPipe Tasks Vision PoseLandmarker + HandLandmarker + FaceLandmarker, run in the
 // browser from files in this repo (vendor/mediapipe, assets/ml). Contract: CONTRACTS.md section 2.
 //
 // Design notes
@@ -10,6 +10,11 @@
 //   (selfie-flipped) input image. We feed the un-mirrored frame, so the label is the opposite of the
 //   user's real hand: label "Left" = the user's RIGHT hand. We therefore swap once, here.
 //   (Pose needs no swap: BlazePose index 11 is the subject's own left shoulder.)
+// - Face (blink only): FaceLandmarker runs on the frames where pose does not (odd frames), so the per-frame
+//   cost stays close to pose-every-2nd-frame. frame.face = { blink: { left, right } } (1 = closed) from the
+//   eyeBlinkLeft/eyeBlinkRight blendshapes, held between runs, null with no face. Like handedness, the model's
+//   Left/Right assume a mirrored image, so the two scores are swapped once (left = the user's left eye).
+//   A face model that fails to load only logs a warning; pose and hands never wait on it.
 // - GPU delegate first, automatic fallback to the wasm (CPU) delegate; stats.backend says which.
 // - TODO(fallback): a tfjs MoveNet path would plug in at `loadModels()` (backend "tfjs"); not built yet.
 
@@ -22,8 +27,11 @@ const FILESET = {
 const BUNDLE = new URL("vendor/mediapipe/vision_bundle.mjs", ROOT).href;
 const POSE_MODEL = new URL("assets/ml/pose_landmarker_lite.task", ROOT).href;
 const HAND_MODEL = new URL("assets/ml/hand_landmarker.task", ROOT).href;
+const FACE_MODEL = new URL("assets/ml/face_landmarker.task", ROOT).href;
 
 const POSE_EVERY = 2;
+// Face runs on the frames where pose does not: frameNo % POSE_EVERY === FACE_PHASE.
+const FACE_PHASE = 1;
 const SLOW_FPS = 12, SLOW_MS = 5000;
 
 // ---- one-euro filter -------------------------------------------------------------------------
@@ -70,11 +78,11 @@ async function createFixtureTracker({ fixture, onFrame, onStatus }) {
   const frames = data.frames || [];
   const fps = data.fps || 30;
   let timer = null, i = 0, last = null;
-  const stats = { fps, poseMs: 0, handMs: 0, backend: "fixture" };
+  const stats = { fps, poseMs: 0, handMs: 0, faceMs: 0, backend: "fixture" };
   function tick() {
     const f = frames[i % frames.length]; i++;
     const frame = { t: performance.now(), width: f.width || data.width || 640, height: f.height || data.height || 480,
-      pose: f.pose || null, hands: f.hands || [] };
+      pose: f.pose || null, hands: f.hands || [], face: f.face || null };
     const st = frame.pose || frame.hands.length ? "tracking" : "no-person";
     if (st !== last) { last = st; status(st); }
     try { onFrame && onFrame(frame); } catch (e) { console.error(e); }
@@ -125,6 +133,7 @@ async function loadModels(numHands, status) {
       baseOptions: { modelAssetPath: HAND_MODEL, delegate },
       runningMode: "VIDEO", numHands,
     }),
+    face: await makeFace(vision, delegate),
   });
   try {
     const m = await make("GPU");
@@ -133,6 +142,19 @@ async function loadModels(numHands, status) {
     console.warn("MediaPipe GPU delegate failed, using wasm CPU:", e && e.message);
     const m = await make("CPU");
     return { ...m, backend: "mediapipe-wasm", make };
+  }
+}
+
+// The face model is optional: any failure here only costs the blink signal (returns null).
+async function makeFace(vision, delegate) {
+  try {
+    return await vision.FaceLandmarker.createFromOptions(FILESET, {
+      baseOptions: { modelAssetPath: FACE_MODEL, delegate },
+      runningMode: "VIDEO", numFaces: 1, outputFaceBlendshapes: true, outputFacialTransformationMatrixes: false,
+    });
+  } catch (e) {
+    console.warn("Face model unavailable, blink detection off:", e && e.message);
+    return null;
   }
 }
 
@@ -154,11 +176,11 @@ export async function createTracker({ video, onFrame, onStatus, budgetMs = 33, f
     status("error", "Could not start body tracking: " + (e && e.message || e));
     throw e;
   }
-  let { pose: poseLm, hand: handLm, backend } = models;
+  let { pose: poseLm, hand: handLm, face: faceLm, backend } = models;
   let numHands = 2, running = false, handle = 0, usingRvfc = false, disposed = false;
   let frameNo = 0, lastVideoTime = -1, lastTs = 0, lastDraw = 0, slowSince = 0, slowDone = false;
-  let lastPose = null, prevPose = null, lastMask = null, poseWarm = false;
-  const stats = { fps: 0, poseMs: 0, handMs: 0, backend };
+  let lastPose = null, prevPose = null, lastMask = null, poseWarm = false, lastFace = null, faceErrors = 0;
+  const stats = { fps: 0, poseMs: 0, handMs: 0, faceMs: 0, backend };
   const poseF = new LandmarkFilter(33, ["x", "y", "z"]);
   const poseWF = new LandmarkFilter(33, ["x", "y", "z"]);
   const handF = { left: new LandmarkFilter(21, ["x", "y", "z"]), right: new LandmarkFilter(21, ["x", "y", "z"]) };
@@ -166,9 +188,9 @@ export async function createTracker({ video, onFrame, onStatus, budgetMs = 33, f
 
   async function fallbackToCpu() {
     if (stats.backend === "mediapipe-wasm") return false;
-    try { poseLm.close(); handLm.close(); } catch (e) { /* ignore */ }
+    try { poseLm.close(); handLm.close(); if (faceLm) faceLm.close(); } catch (e) { /* ignore */ }
     const m = await models.make("CPU");
-    poseLm = m.pose; handLm = m.hand; stats.backend = "mediapipe-wasm"; lastTs = 0;
+    poseLm = m.pose; handLm = m.hand; faceLm = m.face; faceErrors = 0; stats.backend = "mediapipe-wasm"; lastTs = 0;
     return true;
   }
 
@@ -203,6 +225,25 @@ export async function createTracker({ video, onFrame, onStatus, budgetMs = 33, f
     return { lm: ex(lastPose.lm, prevPose.lm), world: ex(lastPose.world, prevPose.world) };
   }
 
+  // Blink scores from the face blendshapes; never throws (a failing face model must not stop pose/hands).
+  function runFace(ts) {
+    if (!faceLm) return;
+    try {
+      const t0 = performance.now();
+      const r = faceLm.detectForVideo(video, ts);
+      stats.faceMs = performance.now() - t0;
+      const cats = r.faceBlendshapes && r.faceBlendshapes[0] && r.faceBlendshapes[0].categories;
+      if (!cats) { lastFace = null; return; }
+      const get = (n) => { const c = cats.find((k) => k.categoryName === n); return c ? c.score : 0; };
+      // Like handedness, the model's Left/Right assume a mirrored image; swap for our un-mirrored input.
+      lastFace = { blink: { left: get("eyeBlinkRight"), right: get("eyeBlinkLeft") } };
+      faceErrors = 0;
+    } catch (e) {
+      lastFace = null;
+      if (++faceErrors >= 5) { console.warn("Face model failing, blink detection off:", e && e.message); try { faceLm.close(); } catch (e2) { /* ignore */ } faceLm = null; }
+    }
+  }
+
   function runHands(ts) {
     const t0 = performance.now();
     const r = handLm.detectForVideo(video, ts);
@@ -232,10 +273,11 @@ export async function createTracker({ video, onFrame, onStatus, budgetMs = 33, f
       const tSec = ts / 1000;
       try {
         if (frameNo % POSE_EVERY === 0) runPose(ts);
+        if (frameNo % POSE_EVERY === FACE_PHASE) runFace(ts);
         const hands = runHands(ts);
         const p = frameNo % POSE_EVERY === 0 ? lastPose : interpolated();
         frameNo++;
-        const frame = { t: now, width: video.videoWidth, height: video.videoHeight, pose: null, hands: [] };
+        const frame = { t: now, width: video.videoWidth, height: video.videoHeight, pose: null, hands: [], face: lastFace };
         if (p) frame.pose = { landmarks: poseF.apply(p.lm, tSec), world: poseWF.apply(p.world, tSec), mask: lastMask };
         hands.sort((a, b) => (a.side === "left" ? -1 : 1) - (b.side === "left" ? -1 : 1));
         frame.hands = hands.map((h) => ({ side: h.side, score: h.score,
@@ -282,7 +324,7 @@ export async function createTracker({ video, onFrame, onStatus, budgetMs = 33, f
     },
     dispose() {
       this.stop(); disposed = true;
-      try { poseLm.close(); handLm.close(); } catch (e) { /* ignore */ }
+      try { poseLm.close(); handLm.close(); if (faceLm) faceLm.close(); } catch (e) { /* ignore */ }
       // close() and the runtime's timers may still try to flush a log; keep the guard up a little longer.
       setTimeout(unguard, 10000);
     },

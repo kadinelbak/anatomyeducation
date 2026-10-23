@@ -46,21 +46,27 @@ try {
     check(fx.pose === 33 && fx.world === 33, "fixture pose has 33 landmarks and 33 world landmarks");
     check(fx.hands.length === 2 && fx.hands.every((h) => h.n === 21 && h.world === 21), "fixture has two hands with 21 landmarks each");
     check(fx.hands[0].side === "left" && fx.hands[1].side === "right", "hands ordered left, right");
+    check(fx.face, "fixture frames without a face field pass face through as null");
     check(fx.statuses.includes("loading") && fx.statuses.includes("tracking"), "fixture statuses: " + fx.statuses.join(","));
   }
 
   const re = r.real;
   check(re && !re.error, "real tracker initialised" + (re && re.error ? ": " + re.error : ""));
   if (re && !re.error) {
-    console.log("     backend:", re.stats.backend, "| fps", re.stats.fps.toFixed(1), "| poseMs", re.stats.poseMs.toFixed(0), "| handMs", re.stats.handMs.toFixed(0), "| statuses:", re.statuses.join(" > "));
+    console.log("     backend:", re.stats.backend, "| fps", re.stats.fps.toFixed(1), "| poseMs", re.stats.poseMs.toFixed(0), "| handMs", re.stats.handMs.toFixed(0), "| faceMs", re.stats.faceMs.toFixed(0), "| statuses:", re.statuses.join(" > "));
     check(re.frames >= 15, `real frames processed (${re.frames})`);
     check(re.statuses.some((s) => s === "tracking" || s === "no-person"), "status reached tracking or no-person");
     check(!re.statuses.some((s) => s.startsWith("error")), "no error status");
+    check(typeof re.stats.faceMs === "number", "stats.faceMs is a number (" + re.stats.faceMs + ")");
+    check(re.face.every((f) => f === null || (f && typeof f === "object" && typeof f.left === "number" && typeof f.right === "number")),
+      "every real frame has face null or { blink: { left, right } } numbers");
+    check(re.faceModelRequested, "face model file was requested");
   }
   const wantHost = new URL(url).host;
   const foreign = [...hosts].filter((h) => h !== wantHost);
   check(foreign.length === 0, "only " + wantHost + " contacted" + (foreign.length ? ": " + foreign.join(", ") : ""));
-  const bad = errors.filter((e) => !/favicon/.test(e));
+  // MediaPipe prints this INFO line through console.error when a graph (the face model) first builds on CPU.
+  const bad = errors.filter((e) => !/favicon|^INFO: Created TensorFlow Lite XNNPACK delegate/.test(e));
   check(bad.length === 0, "no page errors" + (bad.length ? ": " + bad.slice(0, 3).join(" | ") : ""));
 } finally {
   await browser.close();

@@ -296,5 +296,28 @@ const fresh = () => createPointer({ segmentsUrl: "assets/live/segments.json", lo
   check("retarget: the trunk leads after about 1.5 s away", firstTrunk !== null && firstTrunk >= 1500 && firstTrunk < 2700, String(firstTrunk));
   check("retarget: the trunk locks about 0.9 s later", lockedTrunk !== null && lockedTrunk - firstTrunk >= 880 && lockedTrunk - firstTrunk < 1000, JSON.stringify([firstTrunk, lockedTrunk]));
 }
+// 15. setPointerHand("left"): a pointing right hand is the control hand and is ignored
+{
+  const p = await fresh();
+  p.setPointerHand("left");
+  check("pointerHand getter", p.pointerHand === "left", String(p.pointerHand));
+  const rightOnly = p.update(frame(0, hand("right", 0.5, 0.38)));
+  check("pointerHand left: right hand alone ignored", rightOnly === null, JSON.stringify(rightOnly?.segment));
+  const two = frame(33, hand("right", 0.5, 0.38));
+  two.hands.push(hand("left", FORE.x, FORE.y));
+  const r = p.update(two);
+  check("pointerHand left: the left hand selects", r?.hand === "left" && r.segment === "forearm" && r.side === "right", JSON.stringify([r?.hand, r?.segment, r?.side]));
+  let t = 66, last = r;
+  for (; t <= 1200; t += 33) {
+    const f = frame(t, hand("right", 0.5, 0.38));
+    f.hands.push(hand("left", FORE.x, FORE.y));
+    last = p.update(f);
+  }
+  check("pointerHand left: locks on the left hand's target", last?.locked && last.segment === "forearm", JSON.stringify([last?.locked, last?.segment]));
+  for (; t <= 4500; t += 33) last = p.update(frame(t, hand("right", 0.5, 0.38)));
+  check("pointerHand left: right hand never retargets", last === null || last.segment === "forearm", JSON.stringify(last?.segment));
+  p.setPointerHand(null);
+  check("pointerHand null: right hand points again", (await fresh()).update(frame(0, hand("right", 0.5, 0.38)))?.segment === "trunk" && p.pointerHand === null);
+}
 console.log(failures ? `${failures} FAILED` : "all passed");
 process.exit(failures ? 1 : 0);
