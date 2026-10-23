@@ -1,6 +1,6 @@
 // Writes tools/live/fixtures/gesture-flow.json from two-hands-probe.json (left hand points at the right forearm, right hand free).
 // Loops every 8.5 s: 0-1.2 left hand raised open (choose the pointing hand), 1.2-3.5 original frames (right hand a fist),
-// 3.5-4.6 right hand one finger (CT), 4.6-7.0 right fist with blinks at 5.0 s and 6.0 s (next structure), 7.0-8.5 right open palm (release).
+// 3.5-4.6 right hand one finger (CT), 4.6-7.0 right fist with 5-frame (167 ms) blinks at 5.0 s and 6.0 s (next structure), 7.0-8.5 right open palm (release).
 // Finger geometry follows src/live/gestures.js (distances in pixel space).
 //   node tools/live/make_gesture_fixture.mjs
 import { readFileSync, writeFileSync } from "node:fs";
@@ -64,7 +64,7 @@ for (let n = 0; n < total; n++) {
   else rightShape = OPEN;
   shape(right, ...rightShape);
   let blink = 0.05;
-  for (const bt of [5.0, 6.0]) { const b = Math.round(bt * fps); if (n >= b && n < b + 2) blink = 0.9; }
+  for (const bt of [5.0, 6.0]) { const b = Math.round(bt * fps); if (n >= b && n < b + 5) blink = 0.9; }
   f.face = { blink: { left: blink, right: blink } };
   frames.push(f);
 }

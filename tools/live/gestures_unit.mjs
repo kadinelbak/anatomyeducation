@@ -125,7 +125,7 @@ function blinkRun(closedMs, step = 10) {
   const h150 = blinkRun(150);
   check("blink 150 ms fires once on reopening", h150.length === 1 && h150[0] === 650, JSON.stringify(h150));
   check("blink 30 ms flicker ignored", blinkRun(30).length === 0, JSON.stringify(blinkRun(30)));
-  check("blink 600 ms closure ignored", blinkRun(600).length === 0, JSON.stringify(blinkRun(600)));
+  check("blink 900 ms closure ignored", blinkRun(900).length === 0, JSON.stringify(blinkRun(900)));
   const g = createGestures();
   let b = false;
   for (let t = 0; t <= 300; t += 10) b ||= g.update(frame(t, [], { blink: t < 150 ? [0.9, 0.9] : [0.0, 0.0] }), {}).blink;

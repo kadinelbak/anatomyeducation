@@ -75,7 +75,7 @@ function steady() {
   };
 }
 
-export function createGestures({ holdMs = 600, openMs = 1000, blinkMinMs = 60, blinkMaxMs = 400 } = {}) {
+export function createGestures({ holdMs = 600, openMs = 1000, blinkMinMs = 60, blinkMaxMs = 700 } = {}) {
   const raisedT = { left: steady(), right: steady() };
   const countT = steady(), fistT = steady(), openT = steady();
   let controlSide = null;

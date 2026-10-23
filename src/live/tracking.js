@@ -79,16 +79,19 @@ async function createFixtureTracker({ fixture, onFrame, onStatus }) {
   const fps = data.fps || 30;
   let timer = null, i = 0, last = null;
   const stats = { fps, poseMs: 0, handMs: 0, faceMs: 0, backend: "fixture" };
+  let t0 = 0;
   function tick() {
-    const f = frames[i % frames.length]; i++;
-    const frame = { t: performance.now(), width: f.width || data.width || 640, height: f.height || data.height || 480,
+    const f = frames[i % frames.length];
+    // Frame time, not wall time: a slow page then plays the fixture slower instead of stretching every
+    // gesture (a 200 ms blink must stay 200 ms for the hold and blink timers).
+    const frame = { t: t0 + (i++ * 1000) / fps, width: f.width || data.width || 640, height: f.height || data.height || 480,
       pose: f.pose || null, hands: f.hands || [], face: f.face || null };
     const st = frame.pose || frame.hands.length ? "tracking" : "no-person";
     if (st !== last) { last = st; status(st); }
     try { onFrame && onFrame(frame); } catch (e) { console.error(e); }
   }
   return {
-    start() { if (!timer) timer = setInterval(tick, 1000 / fps); },
+    start() { if (!timer) { t0 = performance.now() - (i * 1000) / fps; timer = setInterval(tick, 1000 / fps); } },
     stop() { clearInterval(timer); timer = null; },
     dispose() { this.stop(); },
     setNumHands() {},

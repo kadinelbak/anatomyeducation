@@ -256,7 +256,7 @@ unit script that needs no browser. Use the port your brief assigns so parallel r
 ## 7. gestures.js
 
 ```js
-export function createGestures({ holdMs = 600, openMs = 1000, blinkMinMs = 60, blinkMaxMs = 400 } = {}) -> Gestures
+export function createGestures({ holdMs = 600, openMs = 1000, blinkMinMs = 60, blinkMaxMs = 700 } = {}) -> Gestures
 export function readHand(hand, frame) -> HandRead | null     // pure, one hand of a tracker frame
 gestures.update(frame, { pointerHand }) -> GestureResult    // pointerHand: "left" | "right" | null
 gestures.reset()                                             // forget every timer
