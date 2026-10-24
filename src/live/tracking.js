@@ -69,7 +69,7 @@ class LandmarkFilter {
   }
 }
 
-const mapLms = (arr, withV) => arr.map((l) => ({ x: l.x, y: l.y, z: l.z || 0, v: withV ? (l.visibility ?? l.presence ?? 1) : 1 }));
+const mapLms = (arr, withV) => (Array.isArray(arr) ? arr : Array.from(arr || [])).map((l) => ({ x: l.x, y: l.y, z: l.z || 0, v: withV ? (l.visibility ?? l.presence ?? 1) : 1 }));
 
 // ---- fixture mode ----------------------------------------------------------------------------
 function resolveUrl(p) { return /^(https?:|\/|blob:|data:)/.test(p) ? p : new URL(p, ROOT).href; }

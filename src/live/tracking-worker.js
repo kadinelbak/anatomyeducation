@@ -109,7 +109,8 @@ function detect({ ts, bitmap, runPose, runFace, wantMask }) {
     const r = pose.detectForVideo(bitmap, ts);
     out.poseMs = performance.now() - t0;
     const found = r.landmarks && r.landmarks.length;
-    out.pose = { landmarks: found ? plain(r.landmarks[0]) : [], worldLandmarks: found ? plain(r.worldLandmarks[0]) : [], mask: null };
+    // Keep MediaPipe's shape (a list of poses, each a list of landmarks): takePose reads [0] of each.
+    out.pose = { landmarks: found ? [plain(r.landmarks[0])] : [], worldLandmarks: found ? [plain(r.worldLandmarks[0])] : [], mask: null };
     const m = found && wantMask && r.segmentationMasks && r.segmentationMasks[0];
     if (m) {
       try {

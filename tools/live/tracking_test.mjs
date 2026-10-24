@@ -24,7 +24,9 @@ const check = (ok, msg) => { console.log((ok ? "ok   " : "FAIL ") + msg); if (!o
 const browser = await chromium.launch({
   executablePath,
   args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist",
-    "--use-fake-ui-for-media-stream", "--use-fake-device-for-media-stream"],
+    "--use-fake-ui-for-media-stream", "--use-fake-device-for-media-stream",
+    // FAKE_VIDEO=<file.y4m|.mjpeg>: a recording of a person plays as the camera, so pose/hand results are exercised.
+    ...(process.env.FAKE_VIDEO ? [`--use-file-for-fake-video-capture=${process.env.FAKE_VIDEO}`] : [])],
 });
 try {
   const ctx = await browser.newContext({ permissions: ["camera"] });
@@ -58,6 +60,11 @@ try {
     console.log("     backend:", re.stats.backend, "| fps", re.stats.fps.toFixed(1), "| poseMs", re.stats.poseMs.toFixed(0), "| handMs", re.stats.handMs.toFixed(0), "| faceMs", re.stats.faceMs.toFixed(0), "| worker", re.stats.worker, "| statuses:", re.statuses.join(" > "));
     check(re.frames >= 15, `real frames processed (${re.frames})`);
     check(re.statuses.some((s) => s === "tracking" || s === "no-person"), "status reached tracking or no-person");
+    if (process.env.FAKE_VIDEO) {
+      check(re.statuses.includes("tracking") && re.shape?.pose === true, `person video: status tracking with a pose (${JSON.stringify(re.shape)})`);
+      check(re.poseN === 33 && re.worldN === 33, `person video: pose has 33 landmarks and 33 world landmarks (${re.poseN}/${re.worldN})`);
+      check(re.maskSeen, "person video: a person mask arrived");
+    }
     check(!re.statuses.some((s) => s.startsWith("error")), "no error status");
     check(typeof re.stats.faceMs === "number", "stats.faceMs is a number (" + re.stats.faceMs + ")");
     check(re.face.every((f) => f === null || (f && typeof f === "object" && typeof f.left === "number" && typeof f.right === "number")),
