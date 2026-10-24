@@ -657,7 +657,12 @@ export function createLiveView({ root, onExit, openExplore, config }) {
       if (modality === "ultrasound") {
         const entry = usProbe?.entriesFor(point)[0];
         req = entry ? usProbe.request(point, probeTip, entry) : null;
-      } else req = probe?.request(point, probeTip, { id: modality, study: el.scanView.dataset.study || null }) || null;
+      } else {
+        // CT, MRI and X-ray always step through the region with the finger's height. The finger's angle
+        // used to pick a lengthwise (coronal/sagittal) plane, but that plane does not move with height, so a
+        // finger tilting while it slid down the belly froze the scan on one of two images.
+        req = probe?.request(point, { tip: probeTip.tip, dir: null }, { id: modality, study: el.scanView.dataset.study || null }) || null;
+      }
     } catch (e) { console.warn("live: probe failed", e); }
     if (!req) return;
     el.caption.textContent = req.caption || "";
@@ -673,7 +678,7 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     // probe.apply activates the renderer kind for the study (volume, xray, ultrasound) and shows the view.
     let timer = 0;
     const timeout = new Promise((_, rej) => { timer = setTimeout(() => rej(new Error("scan-timeout")), SCAN_TIMEOUT_MS); });
-    Promise.race([Promise.resolve(probe.apply(req)), timeout]).then(() => { el.scanView.dataset.kind = req.kind; el.scanView.dataset.study = req.study; }).catch((e) => {
+    Promise.race([Promise.resolve(probe.apply(req)), timeout]).then(() => { el.scanView.dataset.kind = req.kind; el.scanView.dataset.study = req.study; el.scanView.dataset.slice = String(req.slice ?? ""); el.scanView.dataset.plane = req.view?.plane || req.view?.axis || ""; }).catch((e) => {
       if (e?.message === "scan-timeout") { console.warn("live: scan load timed out", req.study); say("Scan is slow to load", 2000); }
       else console.warn("live: scan failed", e);
     }).finally(() => {
