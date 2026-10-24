@@ -504,11 +504,22 @@ export function createLiveView({ root, onExit, openExplore, config }) {
   }
 
   // Press D (or open with ?live-debug=1): what the tracker and the gesture reader see right now.
+  let glNameCache = null;
+  function glName() {   // the GPU the browser renders WebGL with (software renderers explain a black or slow scan)
+    if (glNameCache !== null) return glNameCache;
+    try {
+      const gl = document.createElement("canvas").getContext("webgl2");
+      const dbg = gl?.getExtension("WEBGL_debug_renderer_info");
+      glNameCache = gl ? String(dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER)).slice(0, 50) : "no webgl2";
+    } catch { glNameCache = "?"; }
+    return glNameCache;
+  }
   function debugReadout(frame, gs) {
     const st = tracker?.stats || {};
     const f = (v) => (typeof v === "number" ? v.toFixed(v < 10 ? 1 : 0) : String(v));
     const lines = [`${f(st.fps)} fps · pose ${f(st.poseMs)} ms /${st.poseEvery ?? "?"} · hands ${f(st.handMs)} ms · face ${f(st.faceMs)} ms · ${st.backend || ""}`,
-      `flow ${flow} · pointer hand ${pointerHand || "none"} · locked ${locked}`];
+      `flow ${flow} · pointer hand ${pointerHand || "none"} · locked ${locked} · worker ${st.worker ?? "?"} · gl ${glName()}`,
+      `scan ${modality || "none"} · last apply ${f(scanStat.ms)} ms · ${scanStat.n} applied · ${scanStat.fails} failed${scanStat.last ? " · " + scanStat.last.slice(0, 60) : ""}`];
     for (const hd of frame.hands || []) {
       const r = gs?.hands?.[hd.side];
       const n = r ? ["index", "middle", "ring", "pinky"].filter((k) => r.extended?.[k]).length : "?";
@@ -671,18 +682,21 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     if (applying) { pendingReq = { req, key }; return; }   // the newest request waits for the current load
     applyReq(req, key);
   }
-  let pendingReq = null;
+  let pendingReq = null, scanStat = { ms: 0, n: 0, fails: 0, last: "" };
   function applyReq(req, key) {
     lastReqKey = key; applying = true;
     setScan(true);
+    const tApply = performance.now();
     // probe.apply activates the renderer kind for the study (volume, xray, ultrasound) and shows the view.
     let timer = 0;
     const timeout = new Promise((_, rej) => { timer = setTimeout(() => rej(new Error("scan-timeout")), SCAN_TIMEOUT_MS); });
     Promise.race([Promise.resolve(probe.apply(req)), timeout]).then(() => { el.scanView.dataset.kind = req.kind; el.scanView.dataset.study = req.study; el.scanView.dataset.slice = String(req.slice ?? req.view?.frac ?? ""); el.scanView.dataset.plane = req.view?.plane || req.view?.axis || ""; }).catch((e) => {
+      scanStat.fails++; scanStat.last = String(e?.message || e);
       if (e?.message === "scan-timeout") { console.warn("live: scan load timed out", req.study); say("Scan is slow to load", 2000); }
-      else console.warn("live: scan failed", e);
+      else { console.warn("live: scan failed", e); say(`Scan failed: ${scanStat.last}`.slice(0, 80), 4000); }
     }).finally(() => {
       clearTimeout(timer);
+      scanStat.ms = performance.now() - tApply; scanStat.n++;
       applying = false;
       const next = pendingReq; pendingReq = null;
       if (next && next.key !== lastReqKey && modality && !el.scan.hidden) applyReq(next.req, next.key);
