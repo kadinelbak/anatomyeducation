@@ -32,7 +32,12 @@ async function realTest() {
   tr.start();
   await until(() => frames.length >= 15, 60000);
   tr.stop();
+  const withPose = frames.filter((f) => f.pose);
   out.real = { frames: frames.length, statuses, stats: { ...tr.stats }, numHands: tr.numHands,
+    poseN: withPose.length ? withPose[withPose.length - 1].pose.landmarks.length : 0,
+    worldN: withPose.length ? withPose[withPose.length - 1].pose.world.length : 0,
+    maskSeen: withPose.some((f) => f.pose.mask && f.pose.mask.data && f.pose.mask.data.length === f.pose.mask.width * f.pose.mask.height),
+    handsMax: Math.max(0, ...frames.map((f) => f.hands.length)),
     face: frames.map((f) => f.face === undefined ? "missing" : f.face === null ? null : (typeof f.face.blink.left === "number" && typeof f.face.blink.right === "number" ? f.face.blink : "bad")),
     faceModelRequested: performance.getEntriesByType("resource").some((e) => /face_landmarker\.task/.test(e.name)),
     shape: frames.length ? { pose: !!frames[frames.length - 1].pose, hands: frames[frames.length - 1].hands.length, w: frames[0].width, h: frames[0].height } : null };
