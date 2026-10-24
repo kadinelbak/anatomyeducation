@@ -262,8 +262,15 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
   // seek-time filters, so moving the finger keeps stepping through the scan.
   function follow(frame, ctx) {
     const out = [];
-    for (const hand of frame.hands || []) {
-      if (pointerHand && hand.side !== pointerHand) continue;
+    let hands = (frame.hands || []).filter((h) => !pointerHand || h.side === pointerHand);
+    // The hand detector can mislabel a hand that crosses the body. With the pointing hand's label missing,
+    // take the hand whose index tip is nearest the last pointed spot.
+    if (!hands.length && last?.tip && frame.hands?.length) {
+      const d = (h) => { const p = h.landmarks?.[8]; return p ? Math.hypot(p.x - last.tip.x, p.y - last.tip.y) : Infinity; };
+      const near = frame.hands.reduce((b, h) => (d(h) < d(b) ? h : b));
+      if (d(near) < 0.15) hands = [near];
+    }
+    for (const hand of hands) {
       const l8 = hand.landmarks?.[8];
       if (!l8 || l8.x < 0 || l8.x > 1 || l8.y < 0 || l8.y > 1) continue;
       const tip = { x: l8.x, y: l8.y, px: pxPoint(l8, ctx.sc) };
