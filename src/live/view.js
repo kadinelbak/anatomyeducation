@@ -678,7 +678,7 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     // probe.apply activates the renderer kind for the study (volume, xray, ultrasound) and shows the view.
     let timer = 0;
     const timeout = new Promise((_, rej) => { timer = setTimeout(() => rej(new Error("scan-timeout")), SCAN_TIMEOUT_MS); });
-    Promise.race([Promise.resolve(probe.apply(req)), timeout]).then(() => { el.scanView.dataset.kind = req.kind; el.scanView.dataset.study = req.study; el.scanView.dataset.slice = String(req.slice ?? ""); el.scanView.dataset.plane = req.view?.plane || req.view?.axis || ""; }).catch((e) => {
+    Promise.race([Promise.resolve(probe.apply(req)), timeout]).then(() => { el.scanView.dataset.kind = req.kind; el.scanView.dataset.study = req.study; el.scanView.dataset.slice = String(req.slice ?? req.view?.frac ?? ""); el.scanView.dataset.plane = req.view?.plane || req.view?.axis || ""; }).catch((e) => {
       if (e?.message === "scan-timeout") { console.warn("live: scan load timed out", req.study); say("Scan is slow to load", 2000); }
       else console.warn("live: scan failed", e);
     }).finally(() => {

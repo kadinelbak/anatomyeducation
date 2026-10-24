@@ -16,6 +16,10 @@
 //   Left/Right assume a mirrored image, so the two scores are swapped once (left = the user's left eye).
 //   A face model that fails to load only logs a warning; pose and hands never wait on it.
 // - GPU delegate first, automatic fallback to the wasm (CPU) delegate; stats.backend says which.
+// - Inference runs in a module worker (tracking-worker.js) fed one ImageBitmap per video frame, at most one
+//   frame in flight; filters, interpolation, handedness swap, stats and statuses stay here, so frames are the
+//   same either way. Without module workers / OffscreenCanvas, or if the worker's models fail to start
+//   within 30 s, the models run on the main thread as before. stats.worker says which.
 // - TODO(fallback): a tfjs MoveNet path would plug in at `loadModels()` (backend "tfjs"); not built yet.
 
 const ROOT = new URL("../../", import.meta.url);
@@ -163,6 +167,33 @@ async function makeFace(vision, delegate) {
   }
 }
 
+// ---- worker -----------------------------------------------------------------------------------
+// The model inference runs in tracking-worker.js when the browser allows it (module workers,
+// OffscreenCanvas, createImageBitmap); every frame is an ImageBitmap transferred there, at most one in
+// flight (frames that arrive while it is busy are dropped, so latency stays at one frame). Anything
+// that fails here falls back to the main-thread path below, unchanged.
+const WORKER_URL = new URL("./tracking-worker.js", import.meta.url).href;
+const WORKER_INIT_MS = 30000;
+
+function startWorker(numHands) {
+  if (typeof Worker === "undefined" || typeof OffscreenCanvas === "undefined" || typeof createImageBitmap === "undefined") {
+    return Promise.reject(new Error("Worker / OffscreenCanvas / createImageBitmap unavailable"));
+  }
+  return new Promise((resolve, reject) => {
+    let w;
+    try { w = new Worker(WORKER_URL, { type: "module" }); } catch (e) { reject(e); return; }
+    const done = () => { clearTimeout(timer); w.onmessage = null; w.onerror = null; };
+    const fail = (e) => { done(); try { w.terminate(); } catch (e2) { /* ignore */ } reject(e); };
+    const timer = setTimeout(() => fail(new Error(`worker init timed out (${WORKER_INIT_MS / 1000} s)`)), WORKER_INIT_MS);
+    w.onerror = (ev) => { if (ev.preventDefault) ev.preventDefault(); fail(new Error(ev.message || "worker failed to load")); };
+    w.onmessage = ({ data }) => {
+      if (data.type === "ready") { done(); resolve({ worker: w, backend: data.backend, face: data.face }); }
+      else if (data.type === "init-error") fail(new Error(data.message));
+    };
+    w.postMessage({ type: "init", numHands });
+  });
+}
+
 export async function createTracker({ video, onFrame, onStatus, budgetMs = 33, fixture } = {}) {
   if (fixture) return createFixtureTracker({ fixture, onFrame, onStatus });
   let lastStatus = null;
@@ -175,20 +206,30 @@ export async function createTracker({ video, onFrame, onStatus, budgetMs = 33, f
   installGuard();
   let guarded = true;
   const unguard = () => { if (guarded) { guarded = false; removeGuard(); } };
-  let models;
-  try { models = await loadModels(2, status); } catch (e) {
-    unguard();
-    status("error", "Could not start body tracking: " + (e && e.message || e));
-    throw e;
+  let models = null, worker = null, workerFace = false, backend;
+  try {
+    const w = await startWorker(2);
+    worker = w.worker; workerFace = w.face; backend = w.backend;
+  } catch (e) {
+    console.warn("Tracking worker unavailable, running the models on the main thread:", e && e.message || e);
   }
-  let { pose: poseLm, hand: handLm, face: faceLm, backend } = models;
+  if (!worker) {
+    try { models = await loadModels(2, status); } catch (e) {
+      unguard();
+      status("error", "Could not start body tracking: " + (e && e.message || e));
+      throw e;
+    }
+    backend = models.backend;
+  }
+  let { pose: poseLm, hand: handLm, face: faceLm } = models || {};
   let numHands = 2, running = false, handle = 0, usingRvfc = false, disposed = false, poseEvery = POSE_EVERY;
   let frameNo = 0, lastVideoTime = -1, lastTs = 0, lastDraw = 0, slowSince = 0, slowDone = false;
   let lastPose = null, prevPose = null, lastMask = null, poseWarm = false, lastFace = null, faceErrors = 0;
+  let busy = false, pending = null, cpuWait = null;   // worker path: the one frame in flight
   // What the caller needs this frame (setNeeds): the person mask costs a GPU->CPU readback per body
   // frame and the face model a full detection, so both are skipped while nothing reads them.
   const needs = { mask: true, face: true };
-  const stats = { fps: 0, poseMs: 0, handMs: 0, faceMs: 0, backend, poseEvery: POSE_EVERY };
+  const stats = { fps: 0, poseMs: 0, handMs: 0, faceMs: 0, backend, poseEvery: POSE_EVERY, worker: !!worker };
   const poseF = new LandmarkFilter(33, ["x", "y", "z"]);
   const poseWF = new LandmarkFilter(33, ["x", "y", "z"]);
   const handF = { left: new LandmarkFilter(21, ["x", "y", "z"]), right: new LandmarkFilter(21, ["x", "y", "z"]) };
@@ -196,32 +237,64 @@ export async function createTracker({ video, onFrame, onStatus, budgetMs = 33, f
 
   async function fallbackToCpu() {
     if (stats.backend === "mediapipe-wasm") return false;
+    if (worker) {
+      const ready = await new Promise((resolve, reject) => { cpuWait = { resolve, reject }; worker.postMessage({ type: "cpu" }); });
+      workerFace = ready.face; stats.backend = ready.backend; lastTs = 0;
+      return true;
+    }
     try { poseLm.close(); handLm.close(); if (faceLm) faceLm.close(); } catch (e) { /* ignore */ }
     const m = await models.make("CPU");
     poseLm = m.pose; handLm = m.hand; faceLm = m.face; faceErrors = 0; stats.backend = "mediapipe-wasm"; lastTs = 0;
     return true;
   }
 
+  // ---- results -> state (shared by both paths; r has MediaPipe's result shape) -------------------
+  function takePose(r, mask) {
+    poseWarm = true;
+    if (!r.landmarks || !r.landmarks.length) { lastPose = prevPose = null; lastMask = null; return; }
+    const cur = { lm: mapLms(r.landmarks[0], true), world: mapLms(r.worldLandmarks[0], true) };
+    prevPose = lastPose;
+    lastPose = cur;
+    lastMask = mask || null;
+  }
+  // blink = null | { eyeBlinkLeft, eyeBlinkRight } (model labels)
+  function takeFace(blink) {
+    // Like handedness, the model's Left/Right assume a mirrored image; swap for our un-mirrored input.
+    lastFace = blink ? { blink: { left: blink.eyeBlinkRight, right: blink.eyeBlinkLeft } } : null;
+  }
+  function takeHands(r) {
+    const found = [];
+    (r.landmarks || []).forEach((lms, i) => {
+      const cat = r.handedness[i][0];
+      // Swap: MediaPipe labels assume a mirrored image; ours is not mirrored (see header).
+      found.push({ side: cat.categoryName === "Left" ? "right" : "left", score: cat.score,
+        lm: mapLms(lms, false), world: mapLms(r.worldLandmarks[i], false) });
+    });
+    // Two hands given the same side: keep the better one on that side, the other takes the opposite.
+    if (found.length === 2 && found[0].side === found[1].side) {
+      const w = found[0].score >= found[1].score ? 1 : 0;
+      found[w].side = found[w].side === "left" ? "right" : "left";
+    }
+    return found;
+  }
+
+  // ---- main-thread inference ---------------------------------------------------------------------
   function runPose(ts) {
     const t0 = performance.now();
     const r = poseLm.detectForVideo(video, ts);
     stats.poseMs = performance.now() - t0;
-    poseWarm = true;
-    if (!r.landmarks || !r.landmarks.length) { lastPose = prevPose = null; lastMask = null; closeMasks(r); return; }
-    const cur = { lm: mapLms(r.landmarks[0], true), world: mapLms(r.worldLandmarks[0], true) };
-    prevPose = lastPose;
-    lastPose = cur;
-    lastMask = null;
-    const m = needs.mask && r.segmentationMasks && r.segmentationMasks[0];
+    let mask = null;
+    const m = needs.mask && r.landmarks && r.landmarks.length && r.segmentationMasks && r.segmentationMasks[0];
     if (m) {
       try {
         const f = m.getAsFloat32Array();
         const data = new Uint8Array(f.length);
         for (let i = 0; i < f.length; i++) data[i] = f[i] > 0.5 ? 255 : 0;
-        lastMask = { width: m.width, height: m.height, data };
-      } catch (e) { lastMask = null; }
+        mask = { width: m.width, height: m.height, data };
+      } catch (e) { mask = null; }
     }
     closeMasks(r);
+    takePose(r, mask);
   }
   function closeMasks(r) { (r.segmentationMasks || []).forEach((m) => { try { m.close(); } catch (e) { /* ignore */ } }); }
 
@@ -244,8 +317,7 @@ export async function createTracker({ video, onFrame, onStatus, budgetMs = 33, f
       const cats = r.faceBlendshapes && r.faceBlendshapes[0] && r.faceBlendshapes[0].categories;
       if (!cats) { lastFace = null; return; }
       const get = (n) => { const c = cats.find((k) => k.categoryName === n); return c ? c.score : 0; };
-      // Like handedness, the model's Left/Right assume a mirrored image; swap for our un-mirrored input.
-      lastFace = { blink: { left: get("eyeBlinkRight"), right: get("eyeBlinkLeft") } };
+      takeFace({ eyeBlinkLeft: get("eyeBlinkLeft"), eyeBlinkRight: get("eyeBlinkRight") });
       faceErrors = 0;
     } catch (e) {
       lastFace = null;
@@ -257,23 +329,53 @@ export async function createTracker({ video, onFrame, onStatus, budgetMs = 33, f
     const t0 = performance.now();
     const r = handLm.detectForVideo(video, ts);
     stats.handMs = performance.now() - t0;
-    const found = [];
-    (r.landmarks || []).forEach((lms, i) => {
-      const cat = r.handedness[i][0];
-      // Swap: MediaPipe labels assume a mirrored image; ours is not mirrored (see header).
-      found.push({ side: cat.categoryName === "Left" ? "right" : "left", score: cat.score,
-        lm: mapLms(lms, false), world: mapLms(r.worldLandmarks[i], false) });
-    });
-    // Two hands given the same side: keep the better one on that side, the other takes the opposite.
-    if (found.length === 2 && found[0].side === found[1].side) {
-      const w = found[0].score >= found[1].score ? 1 : 0;
-      found[w].side = found[w].side === "left" ? "right" : "left";
+    return takeHands(r);
+  }
+
+  // ---- frame assembly, stats, statuses (shared) --------------------------------------------------
+  function emit(now, tSec, width, height, hands, poseRan) {
+    const p = poseRan ? lastPose : interpolated();
+    frameNo++;
+    const frame = { t: now, width, height, pose: null, hands: [], face: lastFace };
+    if (p) frame.pose = { landmarks: poseF.apply(p.lm, tSec), world: poseWF.apply(p.world, tSec), mask: lastMask };
+    hands.sort((a, b) => (a.side === "left" ? -1 : 1) - (b.side === "left" ? -1 : 1));
+    frame.hands = hands.map((h) => ({ side: h.side, score: h.score,
+      landmarks: handF[h.side].apply(h.lm, tSec), world: handWF[h.side].apply(h.world, tSec) }));
+    // fps (smoothed over processed frames) and the slow rule
+    if (lastDraw) {
+      const inst = 1000 / Math.max(1, now - lastDraw);
+      stats.fps = stats.fps ? stats.fps * 0.9 + inst * 0.1 : inst;
     }
-    return found;
+    lastDraw = now;
+    if (stats.fps && stats.fps < SLOW_FPS) {
+      slowSince = slowSince || now;
+      if (!slowDone && now - slowSince > SLOW_MS) {
+        // Both hands are needed for the gestures, so slow devices keep two hands and run the body
+        // and face models less often instead.
+        slowDone = true; poseEvery = POSE_EVERY_SLOW; stats.poseEvery = poseEvery;
+        status("slow", `Tracking is slow (${stats.fps.toFixed(0)} fps); updating the body less often.`);
+      }
+    } else slowSince = 0;
+    if (lastStatus !== "slow" || frame.pose || frame.hands.length) {
+      if (!(lastStatus === "slow" && slowSince)) status(frame.pose || frame.hands.length ? "tracking" : "no-person");
+    }
+    onFrame && onFrame(frame);
+  }
+
+  // Returns true when the loop was handed to the GPU->CPU fallback (which restarts it).
+  function detectFailed(e) {
+    if (!poseWarm && stats.backend === "mediapipe-gpu") {
+      cancelLoop(); running = false;
+      fallbackToCpu().then(() => { running = true; schedule(); }).catch((e2) => status("error", String(e2 && e2.message || e2)));
+      return true;
+    }
+    console.error(e); status("error", String(e && e.message || e));
+    return false;
   }
 
   function process() {
     if (disposed || !running) return;
+    if (worker) { processWorker(); return; }
     const now = performance.now();
     if (video.readyState >= 2 && video.videoWidth && video.currentTime !== lastVideoTime) {
       lastVideoTime = video.currentTime;
@@ -281,66 +383,100 @@ export async function createTracker({ video, onFrame, onStatus, budgetMs = 33, f
       lastTs = ts;
       const tSec = ts / 1000;
       try {
-        if (frameNo % poseEvery === 0) runPose(ts);
+        const poseRan = frameNo % poseEvery === 0;
+        if (poseRan) runPose(ts);
         if (frameNo % 2 === FACE_PHASE) runFace(ts);   // face keeps its 2-frame cadence even when pose is thinned: blinks are short
         const hands = runHands(ts);
-        const p = frameNo % poseEvery === 0 ? lastPose : interpolated();
-        frameNo++;
-        const frame = { t: now, width: video.videoWidth, height: video.videoHeight, pose: null, hands: [], face: lastFace };
-        if (p) frame.pose = { landmarks: poseF.apply(p.lm, tSec), world: poseWF.apply(p.world, tSec), mask: lastMask };
-        hands.sort((a, b) => (a.side === "left" ? -1 : 1) - (b.side === "left" ? -1 : 1));
-        frame.hands = hands.map((h) => ({ side: h.side, score: h.score,
-          landmarks: handF[h.side].apply(h.lm, tSec), world: handWF[h.side].apply(h.world, tSec) }));
-        // fps (smoothed over processed frames) and the slow rule
-        if (lastDraw) {
-          const inst = 1000 / Math.max(1, now - lastDraw);
-          stats.fps = stats.fps ? stats.fps * 0.9 + inst * 0.1 : inst;
-        }
-        lastDraw = now;
-        if (stats.fps && stats.fps < SLOW_FPS) {
-          slowSince = slowSince || now;
-          if (!slowDone && now - slowSince > SLOW_MS) {
-            // Both hands are needed for the gestures, so slow devices keep two hands and run the body
-            // and face models less often instead.
-            slowDone = true; poseEvery = POSE_EVERY_SLOW; stats.poseEvery = poseEvery;
-            status("slow", `Tracking is slow (${stats.fps.toFixed(0)} fps); updating the body less often.`);
-          }
-        } else slowSince = 0;
-        if (lastStatus !== "slow" || frame.pose || frame.hands.length) {
-          if (!(lastStatus === "slow" && slowSince)) status(frame.pose || frame.hands.length ? "tracking" : "no-person");
-        }
-        onFrame && onFrame(frame);
+        emit(now, tSec, video.videoWidth, video.videoHeight, hands, poseRan);
       } catch (e) {
-        if (!poseWarm && stats.backend === "mediapipe-gpu") {
-          running = false;
-          fallbackToCpu().then(() => { running = true; schedule(); }).catch((e2) => status("error", String(e2 && e2.message || e2)));
-          return;
-        }
-        console.error(e); status("error", String(e && e.message || e));
+        if (detectFailed(e)) return;
       }
     }
     schedule();
   }
+
+  // ---- worker inference --------------------------------------------------------------------------
+  function processWorker() {
+    if (!busy && video.readyState >= 2 && video.videoWidth && video.currentTime !== lastVideoTime) {
+      lastVideoTime = video.currentTime;
+      const now = performance.now();
+      const ts = Math.max(lastTs + 1, now);
+      lastTs = ts;
+      const poseRan = frameNo % poseEvery === 0;
+      const facePhase = frameNo % 2 === FACE_PHASE;   // same cadence as the main-thread path
+      if (facePhase && workerFace && !needs.face) lastFace = null;
+      const runFaceNow = facePhase && workerFace && needs.face;
+      const wantMask = needs.mask;
+      busy = true;
+      pending = { now, tSec: ts / 1000, width: video.videoWidth, height: video.videoHeight, poseRan, runFace: runFaceNow };
+      createImageBitmap(video).then((bitmap) => {
+        if (disposed || !worker) { bitmap.close(); return; }
+        worker.postMessage({ type: "frame", ts, bitmap, runPose: poseRan, runFace: runFaceNow, wantMask }, [bitmap]);
+      }, (e) => {
+        busy = false; pending = null;
+        console.warn("createImageBitmap failed, frame skipped:", e && e.message);
+      });
+    }
+    schedule();
+  }
+
+  function onWorkerMessage({ data }) {
+    if (data.type === "ready" || data.type === "init-error") {
+      const w = cpuWait; cpuWait = null;
+      if (w) { if (data.type === "ready") w.resolve(data); else w.reject(new Error(data.message)); }
+      return;
+    }
+    if (data.type !== "result") return;
+    const p = pending;
+    busy = false; pending = null;
+    if (disposed || !p) return;
+    if (data.error) { detectFailed(new Error(data.error)); return; }
+    if (!running) return;
+    try {
+      if (p.poseRan && data.pose) { stats.poseMs = data.poseMs; takePose(data.pose, needs.mask ? data.pose.mask : null); }
+      if (p.runFace) {
+        if (data.faceMs !== undefined) stats.faceMs = data.faceMs;
+        takeFace(data.face);
+        if (data.faceOff) { workerFace = false; lastFace = null; }
+      }
+      stats.handMs = data.handMs;
+      emit(p.now, p.tSec, p.width, p.height, takeHands(data.hands), p.poseRan);
+    } catch (e) { console.error(e); status("error", String(e && e.message || e)); }
+  }
+  if (worker) {
+    worker.onmessage = onWorkerMessage;
+    worker.onerror = (ev) => { if (ev.preventDefault) ev.preventDefault(); console.error("Tracking worker error:", ev.message); status("error", "Body tracking stopped: " + (ev.message || "worker error")); };
+  }
+
   function schedule() {
     if (!running || disposed) return;
     if (video.requestVideoFrameCallback) { usingRvfc = true; handle = video.requestVideoFrameCallback(process); }
     else { usingRvfc = false; handle = requestAnimationFrame(process); }
+  }
+  function cancelLoop() {
+    if (usingRvfc && video.cancelVideoFrameCallback) video.cancelVideoFrameCallback(handle); else cancelAnimationFrame(handle);
   }
 
   const api = {
     start() { if (running || disposed) return; running = true; lastDraw = 0; slowSince = 0; schedule(); },
     stop() {
       running = false;
-      if (usingRvfc && video.cancelVideoFrameCallback) video.cancelVideoFrameCallback(handle); else cancelAnimationFrame(handle);
+      cancelLoop();
     },
     dispose() {
       this.stop(); disposed = true;
-      try { poseLm.close(); handLm.close(); if (faceLm) faceLm.close(); } catch (e) { /* ignore */ }
+      if (worker) {
+        try { worker.terminate(); } catch (e) { /* ignore */ }
+        worker = null;
+        if (cpuWait) { cpuWait.reject(new Error("tracker disposed")); cpuWait = null; }
+      }
+      try { if (poseLm) poseLm.close(); if (handLm) handLm.close(); if (faceLm) faceLm.close(); } catch (e) { /* ignore */ }
       // close() and the runtime's timers may still try to flush a log; keep the guard up a little longer.
       setTimeout(unguard, 10000);
     },
     setNumHands(n) {
       numHands = n === 1 ? 1 : 2;
+      if (worker) { worker.postMessage({ type: "numHands", n: numHands }); return; }
       try { handLm.setOptions({ numHands }); } catch (e) { console.warn(e); }
     },
     get numHands() { return numHands; },

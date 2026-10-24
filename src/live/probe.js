@@ -80,16 +80,18 @@ export async function createProbe({ studiesUrl = "assets/live/studies.json", ren
   const byKey = new Map(entries.map((e) => [e.key, e]));
   const schedule = raf || (typeof requestAnimationFrame === "function" ? (fn) => requestAnimationFrame(fn) : (fn) => setTimeout(fn, 16));
 
-  // Scan studies that cover this point's segment (limbs also match the side), best first for this frac.
+  // Scan studies that cover this point's segment, best first for this frac. Limbs prefer a study of the
+  // same side; a study of the other side is used (as a mirror image) when that side has none, since the
+  // datasets cover only one forearm, one thigh and so on.
   function covering(point, kind = "volume") {
     if (!point) return [];
     const seg = canon(point.segment);
     const limb = !["trunk", "head", "neck"].includes(seg);
     const frac = clamp(Number(point.frac) || 0, 0, 1);
     return entries
-      .filter((e) => e.kind === kind && canon(e.segment) === seg && (!limb || !e.side || !point.side || e.side === point.side))
-      .map((e) => ({ e, m: coverMargin(e, frac), len: e.frac[1] - e.frac[0] }))
-      .sort((a, b) => b.m - a.m || b.len - a.len)
+      .filter((e) => e.kind === kind && canon(e.segment) === seg)
+      .map((e) => ({ e, other: limb && !!e.side && !!point.side && e.side !== point.side ? 1 : 0, m: coverMargin(e, frac), len: e.frac[1] - e.frac[0] }))
+      .sort((a, b) => a.other - b.other || b.m - a.m || b.len - a.len)
       .map((x) => x.e);
   }
 
@@ -98,10 +100,11 @@ export async function createProbe({ studiesUrl = "assets/live/studies.json", ren
     const out = [];
     const ct = vols.find((e) => e.modality === "CT");
     const mri = vols.find((e) => e.modality === "MRI");
-    if (ct) out.push({ id: "ct", label: MODALITY_LABEL.ct, study: ct.studyId, simulated: false });
-    if (mri) out.push({ id: "mri", label: MODALITY_LABEL.mri, study: mri.studyId, simulated: false });
+    const mirrored = (e) => !!(e.side && point.side && e.side !== point.side);
+    if (ct) out.push({ id: "ct", label: MODALITY_LABEL.ct, study: ct.studyId, simulated: false, mirrored: mirrored(ct) });
+    if (mri) out.push({ id: "mri", label: MODALITY_LABEL.mri, study: mri.studyId, simulated: false, mirrored: mirrored(mri) });
     // Radiographs are computed in the browser from the CT, so they exist wherever a CT does.
-    if (ct) out.push({ id: "xray", label: MODALITY_LABEL.xray, study: ct.studyId, simulated: true });
+    if (ct) out.push({ id: "xray", label: MODALITY_LABEL.xray, study: ct.studyId, simulated: true, mirrored: mirrored(ct) });
     return out;
   }
 
@@ -140,12 +143,15 @@ export async function createProbe({ studiesUrl = "assets/live/studies.json", ren
       const f = plane === "axial" ? along : plane === "coronal" ? (point.aspect === "back" ? 0.38 : 0.62) : 0.5;
       view = { plane, frac: round(f), window: windowFor(entry, frac) };
     }
+    const mirror = !!(entry.side && point.side && entry.side !== point.side);
+    const edge = coverMargin(entry, frac) < 0 ? " · end of this scan" : "";
     const kindWord = pick.id === "xray" ? (view.axis === "ap" ? "AP view" : "lateral view") : longitudinal ? "longitudinal" : "transverse";
     return {
       kind,
       study: entry.studyId,
       view,
-      caption: `${region}, ${kindWord}, ${pct}% from the ${from}`,
+      caption: `${region}, ${kindWord}, ${pct}% from the ${from}${mirror ? ` · from the ${entry.side} side scan` : ""}${edge}`,
+      mirrored: mirror,
       simulated: pick.simulated,
       modality: pick.id,
       slice: round(slice, 2),

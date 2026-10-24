@@ -31,6 +31,8 @@ try {
   const page = await ctx.newPage();
   const errors = [];
   const hosts = new Set();
+  let faceReq = false;   // the model files are fetched by the tracking worker, outside the page's performance entries
+  page.on("request", (r) => { if (/face_landmarker\.task/.test(r.url())) faceReq = true; });
   page.on("request", (r) => { try { const u = new URL(r.url()); if (u.protocol.startsWith("http")) hosts.add(u.host); } catch (e) { /* ignore */ } });
   page.on("pageerror", (e) => errors.push(e.message));
   page.on("console", (m) => { if (m.type() === "error" && !/favicon/.test(m.location().url || "")) errors.push(m.text()); if (process.env.VERBOSE) console.log("page:", m.text()); });
@@ -53,14 +55,15 @@ try {
   const re = r.real;
   check(re && !re.error, "real tracker initialised" + (re && re.error ? ": " + re.error : ""));
   if (re && !re.error) {
-    console.log("     backend:", re.stats.backend, "| fps", re.stats.fps.toFixed(1), "| poseMs", re.stats.poseMs.toFixed(0), "| handMs", re.stats.handMs.toFixed(0), "| faceMs", re.stats.faceMs.toFixed(0), "| statuses:", re.statuses.join(" > "));
+    console.log("     backend:", re.stats.backend, "| fps", re.stats.fps.toFixed(1), "| poseMs", re.stats.poseMs.toFixed(0), "| handMs", re.stats.handMs.toFixed(0), "| faceMs", re.stats.faceMs.toFixed(0), "| worker", re.stats.worker, "| statuses:", re.statuses.join(" > "));
     check(re.frames >= 15, `real frames processed (${re.frames})`);
     check(re.statuses.some((s) => s === "tracking" || s === "no-person"), "status reached tracking or no-person");
     check(!re.statuses.some((s) => s.startsWith("error")), "no error status");
     check(typeof re.stats.faceMs === "number", "stats.faceMs is a number (" + re.stats.faceMs + ")");
     check(re.face.every((f) => f === null || (f && typeof f === "object" && typeof f.left === "number" && typeof f.right === "number")),
       "every real frame has face null or { blink: { left, right } } numbers");
-    check(re.faceModelRequested, "face model file was requested");
+    check(re.faceModelRequested || faceReq, "face model file was requested");
+    check(typeof re.stats.worker === "boolean", "stats.worker is a boolean (" + re.stats.worker + ")");
   }
   const wantHost = new URL(url).host;
   const foreign = [...hosts].filter((h) => h !== wantHost);

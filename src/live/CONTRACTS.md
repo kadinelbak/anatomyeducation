@@ -24,8 +24,14 @@ tracker.start()            // starts requestVideoFrameCallback / rAF loop
 tracker.stop()             // stops loop; models stay warm
 tracker.dispose()          // frees models
 tracker.setNumHands(n)     // 1 or 2 (budget fallback)
-tracker.stats              // { fps, poseMs, handMs, faceMs, backend: "mediapipe-gpu" | "mediapipe-wasm" | "tfjs" }
+tracker.stats              // { fps, poseMs, handMs, faceMs, backend: "mediapipe-gpu" | "mediapipe-wasm" | "tfjs", worker: bool }
 ```
+
+The models run in a module worker (`tracking-worker.js`, one transferred ImageBitmap per video frame,
+at most one in flight; frames that arrive while it is busy are dropped). Filtering, interpolation and
+statuses stay on the main thread, so frames are the same either way. If module workers, OffscreenCanvas
+or the worker's model start fail (or take over 30 s), the models run on the main thread instead;
+`stats.worker` says which.
 
 `onFrame(frame)` is called at most once per video frame with:
 

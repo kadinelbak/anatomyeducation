@@ -11,7 +11,7 @@ const browser = await chromium.launch({ executablePath, args: ["--use-gl=angle",
 let failures = 0;
 const check = (ok, msg) => { console.log(ok ? "ok  " : "FAIL", msg); if (!ok) failures++; };
 
-for (const tool of ["mri", "ct"]) {
+for (const tool of (process.env.TOOLS || "mri,ct,ultrasound").split(",")) {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 }, permissions: ["camera"] });
   const page = await ctx.newPage();
   await page.addInitScript(() => { try { localStorage.clear(); localStorage.setItem("live.pointerHand", "left"); localStorage.setItem("live.calibration.skipped", "1"); } catch {} });
@@ -39,9 +39,9 @@ for (const tool of ["mri", "ct"]) {
   const studies = new Set(samples.map((s) => s.study).filter(Boolean));
   check(caps.size >= 10, `${tool}: caption percent takes ${caps.size} values (>= 10): ${[...caps].slice(0, 12).join(",")}`);
   check(slices.size >= 10, `${tool}: shown slice takes ${slices.size} values (>= 10)`);
-  check(planes.size === 1 && planes.has("axial"), `${tool}: plane stays axial (${[...planes].join(",")})`);
+  if (tool !== "ultrasound") check(planes.size === 1 && planes.has("axial"), `${tool}: plane stays axial (${[...planes].join(",")})`);
   // MRI has one study covering the whole trunk; CT hands over from a chest study to an abdomen one once.
-  check(studies.size <= (tool === "ct" ? 2 : 1), `${tool}: ${studies.size} studies over the sweep (${[...studies].join(",")})`);
+  check(studies.size <= (tool === "mri" ? 1 : 2), `${tool}: ${studies.size} studies over the sweep (${[...studies].join(",")})`);
   check(errors.length === 0, `${tool}: no page errors${errors.length ? ": " + errors.join(" | ") : ""}`);
   await ctx.close();
 }

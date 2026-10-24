@@ -71,7 +71,11 @@ check(probe.modalitiesFor(null).length === 0, "null point yields none");
 // the knee study is data-driven: left thigh matches, right does not
 check(probe.modalitiesFor({ segment: "thigh", side: "left", frac: 0.9 }).some((m) => m.id === "mri"), "left thigh offers the knee MRI");
 check(probe.modalitiesFor({ segment: "thigh", side: "right", frac: 0.3 }).some((m) => m.id === "ct" && m.study === "vh-thigh"), "right thigh offers the Visible Human CT");
-check(!probe.modalitiesFor({ segment: "thigh", side: "right", frac: 0.3 }).some((m) => m.id === "mri"), "right thigh has no MRI");
+check(probe.modalitiesFor({ segment: "thigh", side: "right", frac: 0.3 }).some((m) => m.id === "mri" && m.mirrored), "right thigh borrows the left knee MRI, mirrored");
+check(probe.modalitiesFor({ segment: "forearm", side: "left", frac: 0.4 }).some((m) => m.id === "ct" && m.study === "vh-forearm" && m.mirrored), "left forearm borrows the right forearm CT, mirrored");
+{ const r = probe.request({ segment: "forearm", side: "left", frac: 0.4, aspect: "front" }, null, "ct");
+  check(r && r.study === "vh-forearm" && r.mirrored && /from the right side scan/.test(r.caption), `left forearm CT request is mirrored: ${r?.caption}`); }
+check(probe.modalitiesFor({ segment: "thigh", side: "right", frac: 0.3 }).find((m) => m.id === "ct")?.mirrored === false, "same-side CT is preferred and not mirrored");
 
 // apply: throttle to one show per frame, skip sub-half-slice changes
 const tick = () => { const f = frames.splice(0); f.forEach((fn) => fn()); };
