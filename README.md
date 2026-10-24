@@ -40,25 +40,28 @@ them (ad blockers, offline), it just counts and collects nothing.
 ## Layout
 
 ```
-index.html, styles.css      the page
-src/app.js                  wiring: boot, DOM callbacks, set chooser, share, signup
+index.html, styles.css      the page: body map home (Explore, Quiz, Histology, Imaging, Live), quiz and explore UI
+src/app.js                  wiring: boot, DOM callbacks, modes, set chooser, share, signup
 src/engine.js               quiz engine: state, score, timer, feedback, share URL (no DOM, no three)
-src/renderers/mesh.js       the Three.js renderer: model, layers, cross-section, picking, highlight
-src/sets.js                 question sets: daily (seeded by UTC date), random, per topic, clinical
-src/bank.js                 loads the question bank JSON
-src/analytics.js            anonymous events (random visitor id in localStorage)
-src/config.js               endpoints and the draft-question gate
-assets/questions/upper-limb.json   the question bank (50 records, see below)
-assets/model/arm.glb        the model (6 MB, 415 meshes incl. marrow cores, ~400k triangles)
-assets/model/structures.json   mesh -> structure/layer map, display names, regions, limb axis
-vendor/three/               Three.js 0.169 (MIT): core, TrackballControls, GLTFLoader
-tools/build_o3d.mjs         rebuilds arm.glb from the Open3DModel GLB (see below)
-tools/o3d_parts.json        source node -> structure key, layer, display name
-tools/build_model.py, parts.py, nerves.py   the old BodyParts3D pipeline (milestone 1)
-tools/serve.py, report.py   local server and metrics (per set, per question accuracy)
-tools/smoke_test.mjs        end-to-end browser test (Playwright); ALL=1 plays every question
-tools/questions_md.py       regenerates docs/question-review.md from the bank
-docs/question-review.md     all 50 questions laid out for clinician review
+src/sets.js, bank.js        question sets (daily, random, per topic, clinical) and the bank loader
+src/bodymap.js              the home body map and Explore entry
+src/volume.js               shared volume/study loading for CT, MRI and X-ray
+src/webgl-probe.js          WebGL2 capability check (also used by Live)
+src/analytics.js, config.js anonymous events; endpoints, model list, draft-question gate
+src/renderers/              mesh (Three.js 3D models), volume (Cornerstone3D CT/MRI), xray + drr, ultrasound + bmode,
+                            slide (histology), cell, switch (renderer switcher)
+src/live/                   Live mode: CONTRACTS.md, view.js, live.css, tracking, pointing, probe modules
+assets/model/               GLB meshes and structures.json per model (upper limb, lower limb, ...)
+assets/questions/           question banks (JSON, one per model/topic)
+assets/volumes/, usframes/, ultrasound/   CT/MRI studies, simulated ultrasound frames and view definitions
+assets/slides/, cells/      histology tile pyramids; cell models and diagrams
+assets/bodymap/, ontology/  body map figure; structure ontology and imaging crosswalk
+assets/live/, assets/ml/    Live data (segments, studies) and the MediaPipe model files
+assets/source/              untouched upstream downloads used by the build scripts
+vendor/                     three, cornerstone, mediapipe (all served locally, no CDN)
+tools/                      serve.py, report.py, build/import scripts, Playwright tests (*_test.mjs, smoke_test*.mjs)
+tools/live/                 Live import scripts and tests
+docs/                       reviewer sheets, format notes, docs/live/ for Live mode
 ```
 
 ## Questions and sets
@@ -140,6 +143,35 @@ The build fails and lists any source node missing from `tools/o3d_parts.json`;
 The previous model (milestone 1) came from BodyParts3D 3.0 (DBCLS, CC BY 4.0)
 via `tools/build_model.py`, `tools/parts.py` and `tools/nerves.py`, which are
 kept for reference; its nerves and arteries were hand-placed tubes.
+
+## Live mode
+
+Live is the fourth entry on the home screen (after Explore, Quiz and Imaging). Click **Live** (`#go-live`)
+and allow the camera. The browser runs MediaPipe pose and hand landmarkers on your video. Point at your own
+body with one index finger and the app lists the structures of that region; the other hand's index finger is a
+virtual probe that scrubs through CT, MRI, X-ray and simulated ultrasound slices of the region. The brand
+button returns to the body map and stops the camera.
+
+Requirements: a camera, a secure context (HTTPS, or `127.0.0.1`/`localhost`) and WebGL2. Without them Live shows
+a fallback card instead of the camera view; the rest of the app is unaffected.
+
+Privacy: nothing is uploaded and no frames are stored. Landmark detection runs in the page, the model files are
+served from this repo (`vendor/mediapipe`, `assets/ml`), and the camera is stopped on every exit (back button,
+mode switch, tab hidden, page close). The usage counter may count that Live was opened, never what was pointed at.
+
+Tests (each `tools/live/*_test.mjs` takes a base URL and an optional Chromium path, like `tools/smoke_test.mjs`;
+`W=390 H=844` runs at phone size):
+
+```
+python3 tools/serve.py --port 8137 &
+node tools/live/smoke_test_live.mjs http://127.0.0.1:8137/ /opt/pw-browsers/chromium
+node tools/live/view_test.mjs http://127.0.0.1:8137/ /opt/pw-browsers/chromium
+```
+
+The smoke test uses Chromium's fake camera, opens Live, fails on any request to a host other than the local
+server (plus the page's existing GoatCounter and Kit scripts), then leaves via the brand button and checks the
+camera tracks ended. Module contracts and the file map are in [`docs/live/README.md`](docs/live/README.md); the
+pre-release list is `docs/live/release-checklist.md`.
 
 ## Testing
 

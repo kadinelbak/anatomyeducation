@@ -1,0 +1,11 @@
+<!doctype html>
+<meta charset="utf-8"><title>usframes test</title>
+<style>html,body{margin:0;background:#000}#box{width:640px;height:480px}</style>
+<div id="box"></div>
+<script type="module">
+import { createUsFramesRenderer } from "../../src/renderers/usframes.js";
+const r = await createUsFramesRenderer({ container: document.getElementById("box"), stacksBase: "../../assets/usframes/", initialStack: "sample-synthetic" });
+window.r = r;
+await r.show({ study: "sample-synthetic", view: { frac: 0.5 }, layers: ["labels"] });
+window.ready = true;
+</script>
