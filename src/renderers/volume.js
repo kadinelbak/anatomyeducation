@@ -101,7 +101,13 @@ export async function createVolumeRenderer({ container, studyUrl, studiesBase = 
   container.append(root);
 
   // ---------- Cornerstone ----------
-  csReady = csReady || Promise.resolve(init());
+  // preferSizeOverAccuracy: upload int16 voxels as half floats. Without it, data outside -2048..2048 (MR
+  // 0..4095, CT up to 3000) goes into an R32F texture that needs OES_texture_float_linear for linear
+  // filtering; where that extension is missing (seen in Firefox on Linux) the texture is incomplete and the
+  // slice renders black. Half floats keep 11 bits of mantissa, plenty for windowed display.
+  // webGlContextCount: the default pool of 7 WebGL contexts, plus MediaPipe's three and the mesh renderer,
+  // approaches Firefox's per-site context limit, past which it silently drops the oldest context.
+  csReady = csReady || Promise.resolve(init({ rendering: { preferSizeOverAccuracy: true, webGlContextCount: 2 } }));
   await csReady;
   const mkMeta = (bits, signed, modality) => ({
     BitsAllocated: bits, BitsStored: bits, SamplesPerPixel: 1, HighBit: bits - 1, PixelRepresentation: signed,
