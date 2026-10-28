@@ -116,9 +116,11 @@ export async function createProbe({ studiesUrl = "assets/live/studies.json", ren
     if (!pick) return null;
     // A study the caller is already showing stays while it still covers the point, so a moving probe
     // steps through slices of one volume instead of reloading a different overlapping study each time.
-    const want = typeof modality === "object" ? modality.study : null;
+    // With pin, the study is fixed for the lock (the one Explore opens for this region): the point's
+    // frac is clamped to the study's span, and the caption says when it has run past the end.
+    const want = typeof modality === "object" ? modality.study : null, pin = typeof modality === "object" && !!modality.pin;
     let entry = want && want !== pick.study
-      ? covering(point).find((e) => e.studyId === want && e.modality === (mid === "xray" ? "CT" : MODALITY_LABEL[mid]) && coverMargin(e, clamp(Number(point.frac) || 0, 0, 1)) >= 0) : null;
+      ? covering(point).find((e) => e.studyId === want && e.modality === (mid === "xray" ? "CT" : MODALITY_LABEL[mid]) && (pin || coverMargin(e, clamp(Number(point.frac) || 0, 0, 1)) >= 0)) : null;
     if (entry) pick = { ...pick, study: entry.studyId };
     // Otherwise the entry for the chosen study (the same study id can appear once per segment).
     entry ||= covering(point).find((e) => e.studyId === pick.study && (pick.id === "xray" ? e.modality === "CT" : true));
@@ -198,9 +200,13 @@ export async function createProbe({ studiesUrl = "assets/live/studies.json", ren
     return done;
   }
 
+  // True when `study` can show this point in modality `id` (a Live entry exists for the point's segment).
+  const canServe = (point, id, study) => !!request(point, null, { id, study, pin: true });
+
   return {
     modalitiesFor,
     request,
+    canServe,
     apply,
     studyEntry: (key) => byKey.get(key) || null,
     get studies() { return data; },

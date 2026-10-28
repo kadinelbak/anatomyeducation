@@ -40,8 +40,10 @@ for (const tool of (process.env.TOOLS || "mri,ct,ultrasound").split(",")) {
   check(caps.size >= 10, `${tool}: caption percent takes ${caps.size} values (>= 10): ${[...caps].slice(0, 12).join(",")}`);
   check(slices.size >= 10, `${tool}: shown slice takes ${slices.size} values (>= 10)`);
   if (tool !== "ultrasound") check(planes.size === 1 && planes.has("axial"), `${tool}: plane stays axial (${[...planes].join(",")})`);
-  // MRI has one study covering the whole trunk; CT hands over from a chest study to an abdomen one once.
-  check(studies.size <= (tool === "mri" ? 1 : 2), `${tool}: ${studies.size} studies over the sweep (${[...studies].join(",")})`);
+  // CT/MRI/X-ray stay on the study Explore opens first for the locked region (thorax -> chest): one study per lock.
+  const EXPLORE_FIRST = { mri: "ts-mr-s0153", ct: "ts-s1042" };
+  if (EXPLORE_FIRST[tool]) check(studies.size === 1 && studies.has(EXPLORE_FIRST[tool]), `${tool}: the whole sweep stays on Explore's chest study ${EXPLORE_FIRST[tool]} (${[...studies].join(",")})`);
+  else check(studies.size <= 2, `${tool}: ${studies.size} studies over the sweep (${[...studies].join(",")})`);
   check(errors.length === 0, `${tool}: no page errors${errors.length ? ": " + errors.join(" | ") : ""}`);
   await ctx.close();
 }

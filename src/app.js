@@ -1071,7 +1071,8 @@ async function openLive(from) {
   liveFrom = from;
   liveView ||= (await import("./live/view.js")).createLiveView({ root: $("live"), config: CONFIG,
     onExit: () => (liveFrom === "home" ? showHome() : showLanding()),
-    openExplore: (model, key) => { liveFrom = "landing"; liveHandoff = location.hash === "#live"; openExplore("mesh", model, key); } });
+    openExplore: (model, key) => { liveFrom = "landing"; liveHandoff = location.hash === "#live"; openExplore("mesh", model, key); },
+    exploreRegions: regions });
   liveView.open();
 }
 $("go-live").addEventListener("click", () => openLive("landing"));

@@ -303,3 +303,13 @@ open palm never emits a count, so "release" (open) and "4 = ultrasound" (count) 
 consecutive missing / "other" frames keep the timer, a third (or a different reading) restarts it.
 A blink needs `frame.face.blink` (null face for more than 2 frames re-arms it: eyes must be seen open
 again). The view decides what each signal does; gestures.js holds no app state.
+
+### Same scan as Explore (view + probe, 2026-10-28)
+
+When a region locks, the view asks `exploreRegions` (the Explore body map passed in by app.js) for the
+study Explore opens first for that body region and modality (thorax -> chest, head/neck -> head,
+arm -> upper-limb, lower-limb; CT, MRI and X-ray only) and, if `probe.canServe(point, id, study)`,
+pins it for the whole lock: `probe.request(point, tip, { id, study, pin: true })` keeps that study
+whatever band the finger refines into, clamping frac to the study's span ("end of this scan" in the
+caption). Ultrasound keeps its own region-based simulated views. Without `exploreRegions` (tests that
+mount the view alone) Live falls back to the best-covering study as before.
