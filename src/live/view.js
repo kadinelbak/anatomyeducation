@@ -30,7 +30,12 @@ const debugMode = () => { try { return new URLSearchParams(location.search).get(
 const fixtureUrl = () => { try { return new URLSearchParams(location.search).get("live-fixture") || null; } catch { return null; } };
 
 // ---------- The view ----------
-export function createLiveView({ root, onExit, openExplore, config }) {
+// Which Explore body-map region a Live region belongs to, by the model the region's structures come from.
+const EXPLORE_REGION = { head: () => "head", neck: () => "head", arm: () => "upper-limb", "lower-limb": () => "lower-limb",
+  trunk: (key) => (key === "thorax" ? "chest" : key) };
+const EXPLORE_MODALITY = { ct: "CT", mri: "MRI", xray: "X-ray" };
+
+export function createLiveView({ root, onExit, openExplore, config, exploreRegions = [] }) {
   let active = false;
   let built = false;
   let stream = null;
@@ -672,7 +677,8 @@ export function createLiveView({ root, onExit, openExplore, config }) {
         // CT, MRI and X-ray always step through the region with the finger's height. The finger's angle
         // used to pick a lengthwise (coronal/sagittal) plane, but that plane does not move with height, so a
         // finger tilting while it slid down the belly froze the scan on one of two images.
-        req = probe?.request(point, { tip: probeTip.tip, dir: null }, { id: modality, study: el.scanView.dataset.study || null }) || null;
+        const a = avail[modality];
+        req = probe?.request(point, { tip: probeTip.tip, dir: null }, a?.pin ? { id: modality, study: a.study, pin: true } : { id: modality, study: el.scanView.dataset.study || null }) || null;
       }
     } catch (e) { console.warn("live: probe failed", e); }
     if (!req) return;
@@ -785,7 +791,9 @@ export function createLiveView({ root, onExit, openExplore, config }) {
   }
 
   // ---------- Panel and toolbar ----------
+  let pins = null;   // modality id -> study pinned for the current lock
   function clearPanel() {
+    pins = null;
     el.title.textContent = "Point at your body";
     el.hint.hidden = false;
     el.legend.hidden = true;
@@ -797,6 +805,13 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     el.caption.textContent = "";
   }
 
+  function exploreStudyFor(r, modalityId) {
+    const label = EXPLORE_MODALITY[modalityId];
+    const rid = EXPLORE_REGION[r.region?.model]?.(r.region?.key);
+    if (!label || !rid) return null;
+    const region = exploreRegions.find((x) => x.id === rid);
+    return region?.options.find((o) => o.modality === label)?.studies?.[0] || null;
+  }
   function fillPanel(r) {
     el.title.textContent = r.region.label;
     el.hint.hidden = true;
@@ -813,6 +828,17 @@ export function createLiveView({ root, onExit, openExplore, config }) {
     }));
     avail = {};
     try { for (const m of probe?.modalitiesFor(r) || []) avail[m.id] = m; } catch (e) { console.warn("live: modalities failed", e); }
+    // Same scan as Explore: a lock opens the study the Explore page opens first for the body region
+    // the finger was on when it locked, and keeps it until the lock ends, whatever band the finger
+    // refines into; the finger only moves the slice. (pins is cleared in clearPanel.)
+    if (!pins) {
+      pins = {};
+      for (const m of Object.values(avail)) {
+        const s = exploreStudyFor(r, m.id);
+        if (s && probe?.canServe?.(r, m.id, s)) pins[m.id] = s;
+      }
+    }
+    for (const m of Object.values(avail)) if (pins[m.id]) { m.study = pins[m.id]; m.pin = true; m.mirrored = false; }
     try { if (usProbe?.entriesFor(r).length) avail.ultrasound = { id: "ultrasound", label: "Ultrasound", simulated: true }; } catch {}
     if (modality && !avail[modality]) { setScan(false); el.caption.textContent = ""; }
     el.note = h("p", "live-toolnote");

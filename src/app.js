@@ -1008,7 +1008,7 @@ app.QUESTIONS ||= engine.current;
 let liveView = null;
 $("go-live").addEventListener("click", async () => {
   liveView ||= (await import("./live/view.js")).createLiveView({ root: $("live"), config: CONFIG, onExit: () => showLanding(),
-    openExplore: (model, key) => openExplore("mesh", model, key) });
+    openExplore: (model, key) => openExplore("mesh", model, key), exploreRegions: regions });
   liveView.open();
 });
 $("explore-back").addEventListener("click", () => { if (liveView?.active) liveView.close(); });

@@ -100,4 +100,9 @@ check(calls.length === n0 + 1 && calls[n0][0] === "show", "3 slice change is one
   check(far && far.study !== "msd-heart-03", "a study that no longer covers the point is dropped");
 }
 console.log(fails ? `${fails} FAILED` : "all passed");
+// pin: a fixed study serves points past its span (frac clamped, caption says so); canServe says whether an entry exists
+{ const r = probe.request({ segment: "trunk", side: null, frac: 0.95, aspect: "front" }, null, { id: "ct", study: "ts-s1042", pin: true });
+  check(r && r.study === "ts-s1042" && /end of this scan/.test(r.caption), `pinned chest CT at frac 0.95 clamps: ${r?.caption}`);
+  check(probe.canServe({ segment: "trunk", frac: 0.2 }, "mri", "ts-mr-s0153") === true, "canServe: trunk MRI s0153");
+  check(probe.canServe({ segment: "forearm", side: "right", frac: 0.2 }, "mri", "ts-mr-s0153") === false, "canServe: no s0153 entry on the forearm"); }
 process.exit(fails ? 1 : 0);
