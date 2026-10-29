@@ -50,7 +50,8 @@ check(topbar <= 44, `top bar height ${topbar}`);
 
 await page.click(".live-x");
 await page.waitForSelector("#live", { state: "hidden" });
-check(await page.isVisible("#intro"), "#intro visible after X");
+const backHome = async () => (await page.isVisible("#home")) || (await page.isVisible("#intro")); // home screen when Live was opened from it, landing card otherwise
+check(await backHome(), "home or landing visible after X");
 const live1 = await page.evaluate(() => document.querySelector("#live video").srcObject);
 check(live1 === null, "stream released");
 await page.waitForTimeout(500);
@@ -68,7 +69,7 @@ for (const how of ["back", "brand"]) {
   if (how === "back") await page.goBack(); else await page.click("#explore-back");
   await page.waitForSelector("#live", { state: "hidden" });
   check(await page.evaluate(() => document.querySelector("#live video").srcObject === null), `exit via ${how} stops the stream`);
-  check(await page.isVisible("#intro"), `#intro visible after ${how}`);
+  check(await backHome(), `home or landing visible after ${how}`);
 }
 check(external.length === 0, `no off-origin requests while Live was open${external.length ? ": " + external.join(", ") : ""}`);
 check(errors.length === 0, `no page errors${errors.length ? ": " + errors.join(" | ") : ""}`);

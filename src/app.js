@@ -567,6 +567,11 @@ $("home-credits").addEventListener("click", () => {
   $("home-credits").setAttribute("aria-expanded", String(open));
 });
 window.addEventListener("popstate", (e) => {
+  if (liveHandoff) { // Live closed itself (one history entry back) to open a structure: stay on the model
+    liveHandoff = false;
+    if (e.state?.view !== "explore") history.pushState({ view: "explore" }, "", window.location.href);
+    return;
+  }
   const view = e.state?.view;
   if (view === "explore" || view === "quiz") leaveHome(view);
   else goHome();
@@ -1060,9 +1065,22 @@ app.QUESTIONS ||= engine.current;
 
 // ---------- Live mode (workstream A): src/live/view.js is imported on the first click, so the home screen loads nothing extra ----------
 let liveView = null;
-$("go-live").addEventListener("click", async () => {
-  liveView ||= (await import("./live/view.js")).createLiveView({ root: $("live"), config: CONFIG, onExit: () => showLanding(),
-    openExplore: (model, key) => openExplore("mesh", model, key), exploreRegions: regions });
+let liveFrom = "landing"; // "home" when opened from the home screen, so leaving Live returns there
+let liveHandoff = false; // set while Live hands a structure to Explore, so the history pop it causes is not a navigation
+async function openLive(from) {
+  liveFrom = from;
+  liveView ||= (await import("./live/view.js")).createLiveView({ root: $("live"), config: CONFIG,
+    onExit: () => (liveFrom === "home" ? showHome() : showLanding()),
+    openExplore: (model, key) => { liveFrom = "landing"; liveHandoff = location.hash === "#live"; openExplore("mesh", model, key); },
+    exploreRegions: regions });
   liveView.open();
+}
+$("go-live").addEventListener("click", () => openLive("landing"));
+$("home-live").addEventListener("click", () => {
+  hero.stop(); // frees the home canvas; Live needs the GPU for tracking
+  $("home").hidden = true;
+  $("credits").hidden = true;
+  $("home-credits").setAttribute("aria-expanded", "false");
+  openLive("home");
 });
 $("explore-back").addEventListener("click", () => { if (liveView?.active) liveView.close(); });
