@@ -7,6 +7,7 @@ import { buildBodyMap, buildFigure, upgradeFigure, studyLabel } from "./bodymap.
 import { createEngine, fmtTime } from "./engine.js";
 import { createRendererSwitch } from "./renderers/switch.js";
 import { WebGLUnavailableError, webglHelp } from "./webgl-probe.js";
+import { createHero } from "./hero.js";
 
 const $ = (id) => document.getElementById(id);
 const SCAN_KINDS = ["volume", "xray", "ultrasound", "slide", "cell"];
@@ -36,6 +37,15 @@ function readSharedScore(n) {
 // ---------- Boot ----------
 
 const app = (window.__app = {});
+
+// ---------- Home ----------
+// The root URL opens on the home screen: a turning figure and Explore / Quiz / Credits. A ?set= or ?q= link skips it.
+// It shows before the banks and the default model load, so the figure is already turning while they do.
+const hero = createHero({ container: $("hero"), url: "assets/model/hero.glb" });
+const startParams = new URLSearchParams(window.location.search);
+const skipHome = startParams.has("set") || startParams.has("q");
+if (!skipHome) { $("home").hidden = false; document.body.classList.add("home"); hero.start(); }
+
 let engine = null;
 let selectedSet = "daily";
 
@@ -122,6 +132,7 @@ try {
   ]);
 } catch (err) {
   console.error(err);
+  hero.stop(); $("home").hidden = true; document.body.classList.remove("home");
   $("loading").textContent = "Couldn't load the questions. Please reload the page.";
   throw err;
 }
@@ -134,6 +145,7 @@ selectedSet = initial.explicit ? builtin.find((s) => s.id === initial.builtinId)
 // The model behind the chooser: the one a shared link or ?set= asks for, else the default.
 await renderer.activate("mesh", initial.renderer === "mesh" ? initial.model : undefined).catch((err) => {
   console.error(err);
+  hero.stop(); $("home").hidden = true; document.body.classList.remove("home");
   if (err instanceof WebGLUnavailableError) showNoWebGL(err);
   else $("loading").textContent = `Couldn't load the 3D model. Please reload the page. (${err?.message || err})`;
   throw err;
@@ -366,13 +378,11 @@ function renderExploreBar() {
   }));
 }
 $("explore-study").addEventListener("change", (e) => exploreOption(exploring.region, exploring.option, e.target.value));
+// The brand button returns to the home screen from anywhere: stops a quiz, closes menus and details.
 $("explore-back").addEventListener("click", () => {
-  exploring = null;
-  deep = null;
-  closeDetails();
-  if (engine.state.state !== "intro") track("quit", { set: engine.set?.id, at: engine.state.index });
-  setMode("explore", { stay: true });
-  engine.intro();
+  if (!$("home").hidden) { $("credits").hidden = true; $("home-credits").setAttribute("aria-expanded", "false"); return; }
+  goHome();
+  history.pushState({ view: "home" }, "", window.location.href);
 });
 
 // ---------- Confirming an answer ----------
@@ -506,8 +516,6 @@ let deep = null; // { kind, id, from: { model, key, camera } } while a slide, ce
 let selected = null; // structure key open in the details panel
 function setMode(m, { stay = false } = {}) {
   mode = m;
-  $("mode-explore").setAttribute("aria-pressed", String(m === "explore"));
-  $("mode-quiz").setAttribute("aria-pressed", String(m === "quiz"));
   $("explore-home").hidden = m !== "explore";
   $("quiz-home").hidden = m !== "quiz";
   if (stay) return;
@@ -517,8 +525,49 @@ function setMode(m, { stay = false } = {}) {
   engine.intro(); // stops any quiz and shows the landing card in this mode
   if (m === "quiz") setTimeout(() => $("quiz-search").focus(), 0);
 }
-$("mode-explore").addEventListener("click", () => setMode("explore"));
-$("mode-quiz").addEventListener("click", () => setMode("quiz"));
+
+// Home <-> the landing card. Leaving home for the body map or the quiz chooser pushes a history entry, so Back returns home.
+function showHome() {
+  $("intro").hidden = true;
+  $("home").hidden = false;
+  closeMenus();
+  setChrome();
+  hero.start();
+}
+function goHome() {
+  exploring = null;
+  deep = null;
+  closeDetails();
+  if (engine.state.state !== "intro") track("quit", { set: engine.set?.id, at: engine.state.index });
+  setMode("explore", { stay: true });
+  engine.intro(); // stops any quiz, hides question and results, shows the landing card
+  showHome();
+}
+function leaveHome(m) {
+  hero.stop(); // frees the home canvas so the model viewer has the GPU
+  $("home").hidden = true;
+  $("credits").hidden = true;
+  $("home-credits").setAttribute("aria-expanded", "false");
+  setMode(m, { stay: true });
+  showLanding();
+  if (m === "quiz") setTimeout(() => $("quiz-search").focus(), 0);
+}
+function openFromHome(m) {
+  leaveHome(m);
+  history.pushState({ view: m }, "", window.location.href);
+}
+$("home-explore").addEventListener("click", () => openFromHome("explore"));
+$("home-quiz").addEventListener("click", () => openFromHome("quiz"));
+$("home-credits").addEventListener("click", () => {
+  const open = $("credits").hidden;
+  $("credits").hidden = !open;
+  $("home-credits").setAttribute("aria-expanded", String(open));
+});
+window.addEventListener("popstate", (e) => {
+  const view = e.state?.view;
+  if (view === "explore" || view === "quiz") leaveHome(view);
+  else goHome();
+});
 
 function showLanding() {
   $("intro").hidden = false;
@@ -533,12 +582,14 @@ function showLanding() {
 // Body classes the stylesheet keys on: landing (the card is up), quizzing (a question or the results).
 function setChrome() {
   const landing = !$("intro").hidden;
+  const home = !$("home").hidden;
+  document.body.classList.toggle("home", home);
   const quizzing = !$("question").hidden || !$("results").hidden;
   document.body.classList.toggle("landing", landing);
   document.body.classList.toggle("quizzing", quizzing);
   setShelf(landing && mode === "explore");
-  $("quiz-fab").hidden = landing || quizzing || !quizSetForView();
-  if (landing || quizzing) $("slice-bar").hidden = true;
+  $("quiz-fab").hidden = home || landing || quizzing || !quizSetForView();
+  if (home || landing || quizzing) $("slice-bar").hidden = true;
 }
 
 // Phones: the Explore landing is a shelf along the bottom (styles.css, body.shelf). The student can fold it
@@ -583,12 +634,7 @@ document.addEventListener("click", (e) => { if (!e.target.closest?.(".menu-wrap"
 $("views-menu").addEventListener("click", (e) => { if (e.target.closest("[data-view]")) setTimeout(() => closeMenus(), 0); });
 $("zoom-row").addEventListener("click", (e) => { if (e.target.closest("[data-focus]")) setTimeout(() => closeMenus(), 0); });
 
-$("credits-toggle").addEventListener("click", () => {
-  const open = $("credits").hidden;
-  $("credits").hidden = !open;
-  $("credits-toggle").setAttribute("aria-expanded", String(open));
-});
-$("credits-close").addEventListener("click", () => { $("credits").hidden = true; $("credits-toggle").setAttribute("aria-expanded", "false"); });
+$("credits-close").addEventListener("click", () => { $("credits").hidden = true; $("home-credits").setAttribute("aria-expanded", "false"); });
 
 // ---------- 3D toolbar ----------
 $("zoom-in").addEventListener("click", () => renderer.mesh?.zoomBy?.(0.8));
@@ -605,10 +651,10 @@ const updateShowAll = () => { $("show-all").hidden = !renderer.mesh?.hiddenCount
 
 document.addEventListener("keydown", (e) => {
   if (e.target.closest?.("input, select, textarea") || e.metaKey || e.ctrlKey || e.altKey) return;
-  const mesh = renderer.active === "mesh" && $("intro").hidden;
+  const mesh = renderer.active === "mesh" && $("intro").hidden && $("home").hidden;
   if (e.key === "Escape") {
     if (MENUS.some(([, m]) => !$(m).hidden)) closeMenus();
-    else if (!$("credits").hidden) $("credits").hidden = true;
+    else if (!$("credits").hidden) { $("credits").hidden = true; $("home-credits").setAttribute("aria-expanded", "false"); }
     else if (deep) backToStructure();
     else if (selected) closeDetails();
     return;
@@ -639,7 +685,7 @@ const LAYER_LABELS = { skin: "Skin", muscle: "Muscle", tendon: "Tendon", ligamen
 const modelTitle = (id) => CONFIG.models[id]?.title || id;
 
 function onStructureClick(key) {
-  if (!$("intro").hidden || engine.state.state !== "intro") return; // the landing card is up, or a quiz is running
+  if (!$("intro").hidden || !$("home").hidden || engine.state.state !== "intro") return; // the landing card is up, or a quiz is running
   if (!key) { closeDetails(); return; }
   openDetails(key);
 }
@@ -991,8 +1037,16 @@ checkReturnVisit();
 $("loading").hidden = true;
 $("start").disabled = false;
 // A shared score or a ?set= link opens on the quiz; everything else on the body map.
-setMode(initial.explicit || new URLSearchParams(window.location.search).has("set") ? "quiz" : "explore", { stay: true });
-setChrome();
+setMode(initial.explicit || startParams.has("set") ? "quiz" : "explore", { stay: true });
+$("home-explore").disabled = $("home-quiz").disabled = false;
+if (initial.explicit || startParams.has("set")) {
+  // A shared score or a ?set= link opens straight on the quiz chooser.
+  history.replaceState({ view: "quiz" }, "", window.location.href);
+  showLanding();
+} else {
+  history.replaceState({ view: "home" }, "", window.location.href);
+  showHome();
+}
 
 // Exposed for automated checks (tools/smoke_test.mjs). The mesh debug handles follow the active model.
 for (const k of ["viewTween", "controls", "camera", "meshesByStructure", "pick", "setView", "setLayers"]) {

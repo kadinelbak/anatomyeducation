@@ -1,0 +1,10 @@
+{
+ "source": "BodyParts3D 3.0 (DBCLS), CC BY 4.0",
+ "parts": {
+  "bone": 207,
+  "muscle": 206,
+  "organ": 39
+ },
+ "triangles": 163464,
+ "heightM": 1.644
+}

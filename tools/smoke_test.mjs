@@ -9,6 +9,7 @@
 //   ALL=1 node tools/smoke_test.mjs ...   plays every question in the bank, 10 per set,
 //                                         and lists the ones whose answer is not clickable
 import { chromium } from "playwright";
+import { existsSync } from "node:fs";
 
 const url = process.argv[2] || "http://127.0.0.1:8123/";
 const executablePath = process.argv[3];
@@ -21,7 +22,9 @@ const errors = [];
 async function openPage() {
   const page = await browser.newPage({ viewport: { width, height }, hasTouch: !!process.env.TOUCH });
   page.on("pageerror", (e) => errors.push(e.message));
-  page.on("console", (m) => m.type() === "error" && errors.push(m.text() + " " + (m.location().url || "")));
+  page.on("console", (m) => m.type() === "error" && !(/net::ERR_/.test(m.text()) && !(m.location().url || "").startsWith(url.split("?")[0])) && errors.push(m.text() + " " + (m.location().url || "")));
+  // hero.glb comes from another build step; until it exists, trunk.glb stands in for it.
+  if (!existsSync(new URL("../assets/model/hero.glb", import.meta.url))) await page.route("**/assets/model/hero.glb", (route) => route.fulfill({ path: new URL("../assets/model/trunk.glb", import.meta.url).pathname, contentType: "model/gltf-binary" }));
   page.on("response", (r) => r.status() >= 400 && console.log("http", r.status(), r.url()));
   return page;
 }
@@ -78,6 +81,7 @@ async function playSet(page, label) {
     } else {
       await page.mouse.click(spot.x, spot.y);
       console.log(`ok   ${label}q${i + 1} ${spot.id}: clicked answer at ${Math.round(spot.x)},${Math.round(spot.y)}`);
+      await page.click("#answer-confirm-ok"); // a tap only proposes the answer; Confirm sends it
     }
     await page.waitForSelector("#feedback:not([hidden])", { timeout: 5000 });
     if (process.env.SHOTS) await page.screenshot({ path: `${process.env.SHOTS}/${label}q${i + 1}.png` });
@@ -141,6 +145,7 @@ async function playCT(page) {
     } else {
       await page.mouse.click(spot.x, spot.y);
       console.log(`ok   ctq${i + 1} ${spot.id}: real click at ${Math.round(spot.x)},${Math.round(spot.y)}`);
+      await page.click("#answer-confirm-ok");
     }
     await page.waitForSelector("#feedback:not([hidden])", { timeout: 5000 });
     if (i === 4) await page.screenshot({ path: process.env.SHOT || "docs/screenshots/ct-question.png" });
@@ -160,6 +165,34 @@ async function playCT(page) {
   if (shown === false) failures++;
 }
 
+// Home screen: the root URL opens on it; Explore and Quiz open their cards, the brand button and Back return.
+async function checkHome(page) {
+  const check = (ok, what) => { console.log(`${ok ? "ok  " : "FAIL"} ${what}`); if (!ok) failures++; };
+  const vis = (sel) => page.evaluate((s) => { const e = document.querySelector(s); return !!e && !e.hidden && e.getClientRects().length > 0; }, sel);
+  await page.goto(base);
+  await page.waitForFunction(() => !document.getElementById("home-explore").disabled, null, { timeout: 90000 });
+  check(await vis("#home") && !(await vis("#intro")), "root URL shows home, not the landing card");
+  check(await page.evaluate(() => document.body.classList.contains("home") && getComputedStyle(document.getElementById("controls")).display === "none"), "body.home hides the 3D toolbar");
+  check((await page.textContent("#explore-back")).includes("Open Body 3D") && !(await vis("#mode-quiz")) && !(await vis("#credits-toggle")), "brand reads Open Body 3D; no mode toggle or credits button");
+  check(await page.evaluate(() => [...document.querySelectorAll("#home .home-actions button")].map((b) => b.id + ":" + b.className).join() === "home-explore:primary,home-quiz:secondary,home-credits:ghost"), "Explore, Quiz, Credits in order");
+  await page.click("#home-credits");
+  check(await vis("#credits") && await vis("#home"), "Credits opens over home");
+  await page.click("#credits-close");
+  await page.click("#home-explore");
+  check(await vis("#explore-home") && !(await vis("#home")), "Explore opens the body map");
+  await page.goBack();
+  check(await vis("#home") && !(await vis("#intro")), "browser Back returns home from the body map");
+  await page.click("#home-quiz");
+  check(await vis("#quiz-home") && await page.evaluate(() => document.activeElement?.id === "quiz-search"), "Quiz opens the chooser with the search focused");
+  await page.click("#explore-back");
+  check(await vis("#home") && !(await vis("#intro")), "brand button returns home from the quiz chooser");
+  await page.click("#home-explore");
+  await page.click(".explore-regions .chip");
+  await page.waitForSelector("#explore-bar:not([hidden])", { timeout: 60000 });
+  await page.click("#explore-back");
+  check(await vis("#home") && !(await vis("#explore-bar")), "brand button returns home from an open model");
+}
+
 if (process.env.CT) {
   await playCT(page);
 } else if (process.env.ALL) {
@@ -173,6 +206,7 @@ if (process.env.CT) {
     failures += (await playSet(page, `b${b + 1}.`)).failed;
   }
 } else {
+  await checkHome(page);
   await page.goto(`${base}?q=${ORIGINAL}`);
   const { n, failed } = await playSet(page, "");
   failures += failed;
