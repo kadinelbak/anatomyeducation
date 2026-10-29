@@ -1,13 +1,16 @@
 import { chromium } from "playwright";
+import { existsSync } from "node:fs";
 const base = process.argv[2], exe = process.argv[3];
 const browser = await chromium.launch({ executablePath: exe, args: ["--use-gl=angle", "--use-angle=swiftshader", "--ignore-gpu-blocklist", "--enable-unsafe-swiftshader"] });
 const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
 page.on("pageerror", (e) => console.log("PAGEERROR", e.message));
+// hero.glb comes from another build step; until it exists, trunk.glb stands in for it.
+if (!existsSync(new URL("../assets/model/hero.glb", import.meta.url))) await page.route("**/assets/model/hero.glb", (route) => route.fulfill({ path: new URL("../assets/model/trunk.glb", import.meta.url).pathname, contentType: "model/gltf-binary" }));
 let fails = 0;
 const check = (ok, msg) => { console.log(`${ok ? "ok  " : "FAIL"} ${msg}`); if (!ok) fails++; };
 await page.goto(base);
-await page.waitForFunction(() => !document.getElementById("start").disabled, null, { timeout: 90000 });
-await page.click("#mode-quiz");
+await page.waitForFunction(() => !document.getElementById("home-quiz").disabled && !document.getElementById("start").disabled, null, { timeout: 90000 });
+await page.click("#home-quiz");
 const groups = await page.$$eval(".chooser-group", (els) => els.map((e) => e.textContent));
 check(groups.join("|") === "Upper limb|Lower limb|Trunk|Neck|Head|Scans|X-ray|Ultrasound|Histology|Cells", `chooser groups: ${groups.join(" | ")}`);
 const dom = () => page.evaluate(() => ({

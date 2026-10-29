@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Anatomy in 3D</title>
+  <title>Open Body 3D</title>
   <meta name="description" content="Can you score 10/10? Free anatomy practice: click the structure on 3D upper and lower limb models, or on a CT or MRI scan.">
-  <meta property="og:title" content="Hand Nerves 3D Challenge">
-  <meta property="og:description" content="10 click-the-structure questions on a 3D hand and forearm. Free, no account.">
+  <meta property="og:title" content="Open Body 3D">
+  <meta property="og:description" content="Explore the human body in 3D and test yourself with click-the-structure quizzes. Free, no account.">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="src/renderers/volume.css">
@@ -22,7 +22,7 @@
   <div id="viewer" aria-label="3D anatomy model"></div>
 
   <header class="topbar">
-    <button id="explore-back" class="brand" type="button" title="Back to the body map"><span class="brand-full">Anatomy in 3D</span><span class="brand-short" aria-hidden="true">⌂</span></button>
+    <button id="explore-back" class="brand" type="button" title="Home"><span class="brand-full">Open Body 3D</span><span class="brand-short" aria-hidden="true">⌂</span></button>
     <nav id="explore-bar" class="crumbs" aria-label="Where you are" hidden>
       <span class="crumb-sep" aria-hidden="true">›</span>
       <div class="menu-wrap">
@@ -48,13 +48,19 @@
         <span id="timer">0:00</span>
         <span id="score">0 pts</span>
       </div>
-      <div class="mode-toggle" role="group" aria-label="Mode">
-        <button id="mode-explore" type="button" aria-pressed="true">Explore</button>
-        <button id="mode-quiz" type="button" aria-pressed="false">Quiz</button>
-      </div>
-      <button id="credits-toggle" class="credits-toggle" type="button" aria-expanded="false" aria-controls="credits">Credits</button>
     </div>
   </header>
+
+  <!-- Home: a slowly turning whole-body figure (src/hero.js) and the three ways in -->
+  <section id="home" class="home" hidden aria-labelledby="home-title">
+    <h1 id="home-title" class="sr-only">Open Body 3D</h1>
+    <div id="hero" class="hero"></div>
+    <div class="home-actions">
+      <button id="home-explore" class="primary" type="button" disabled>Explore</button>
+      <button id="home-quiz" class="secondary" type="button" disabled>Quiz</button>
+      <button id="home-credits" class="ghost" type="button" aria-expanded="false" aria-controls="credits">Credits</button>
+    </div>
+  </section>
 
   <div id="loading" class="loading">Loading the model…</div>
 
@@ -62,7 +68,7 @@
   <section id="live" hidden aria-label="Live camera mode"></section>
 
   <!-- Landing: the body map (Explore) or the quiz chooser (Quiz) -->
-  <section id="intro" class="card intro">
+  <section id="intro" class="card intro" hidden>
     <button id="shelf-toggle" class="shelf-handle" type="button" aria-expanded="true" aria-controls="explore-home" hidden>
       <span class="shelf-grip" aria-hidden="true"></span>
       <span class="shelf-title">Explore the body</span>
@@ -232,6 +238,7 @@
     <span id="attr-hist" hidden>Histology: <a id="attr-hist-src" target="_blank" rel="noopener"></a>. The <a href="https://obofoundry.org/ontology/cl.html" target="_blank" rel="noopener">Cell Ontology</a> (CC BY 4.0) names the cell types.</span>
     <span id="attr-cell" hidden>Cell: <a id="attr-cell-src" target="_blank" rel="noopener"></a>. <span id="attr-cell-note">Stylised 3D model built from primitives, not a reconstruction</span>; organelle names from the <a href="http://geneontology.org/" target="_blank" rel="noopener">Gene Ontology</a> (CC BY 4.0).</span>
     <span id="attr-us" hidden>Ultrasound views are simulated in the browser from the same CT studies (CC BY 4.0); they are teaching simulations, not real scans.</span>
+    <span id="attr-hero">Home figure: skeleton, muscles and organs from <a href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/" target="_blank" rel="noopener">BodyParts3D 3.0</a> (DBCLS), <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>, simplified for this app.</span>
     <span id="attr-bodymap">Body map: outline traced from the whole-body skin and bones of <a href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/" target="_blank" rel="noopener">BodyParts3D</a> (DBCLS), <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.</span>
     <span id="attr-more">Also used: scans from the <a href="https://medicalsegmentationdecathlon.com/" target="_blank" rel="noopener">Medical Segmentation Decathlon</a> (Antonelli et al., CC BY-SA 4.0), the ICBM 152 2009c brain template (Fonov et al., Montreal Neurological Institute, used with attribution), Allen Institute for Cell Science hiPSC cell images (CC BY 4.0; Viana et al., Nature 2023), and histology from the GTEx Consortium via the NCI Imaging Data Commons (CC BY 4.0) and the Berkshire Community College Bioscience Image Library (CC0). Libraries: <a href="https://threejs.org/" target="_blank" rel="noopener">three.js</a> and Cornerstone3D, both MIT (licence texts in <code>vendor/</code>). We changed the models and scans for this app (simplified, recoloured, cropped, downsampled, labelled). The adapted files keep their source licences; the MRI scans are for non-commercial use only. The app is free and non-commercial; the code is under the <a href="https://polyformproject.org/licenses/noncommercial/1.0.0/" target="_blank" rel="noopener">PolyForm Noncommercial License 1.0.0</a> and our own content (question text, labels, maps, diagrams) under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>. See <code>NOTICE.md</code> in the project for details.</span>
     <details id="privacy" class="privacy-note"><summary>Usage data</summary>Anonymous usage counts go to <a href="https://www.goatcounter.com/help/privacy" target="_blank" rel="noopener">GoatCounter</a>: page views and how many times the quiz was started, each answer was right or wrong, a quiz was finished, a score was shared and the signup form was used. GoatCounter stores no cookies and nothing in your browser, and does not keep your IP address. If you leave your email in the "more questions" form, <a href="https://kit.com/privacy" target="_blank" rel="noopener">Kit</a> stores it on our behalf to send that one email; the form keeps an anonymous id in your browser's localStorage, not a cookie. The app itself keeps a random visitor id in localStorage and sessionStorage, sets no cookies and collects no names or accounts. To ask about this data, email elbakkouri.kadin@gmail.com.</details>
