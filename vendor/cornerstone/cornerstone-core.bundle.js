@@ -1275,7 +1275,8 @@ vec2 rayIntersectVolumeDistances(vec3 rayOriginVC, vec3 rayDirVC) {
   vec3 rayDirIS = vecVCToIS(rayDirVC);
   // Don't check for infinity as the min/max combination afterward will always
   // find an intersection before infinity
-  vec3 invDir = 1.0 / rayDirIS;
+  vec3 isParallel = vec3(equal(rayDirIS, vec3(0.0)));
+  vec3 invDir = mix(1.0 / (rayDirIS + isParallel), vec3(3.402823466e+38), isParallel);
 
   // We have: bound = origin + t * dir
   // So: t = (1/dir) * (bound - origin)
