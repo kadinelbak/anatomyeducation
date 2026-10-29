@@ -31,9 +31,8 @@ const FLIP_V = { axial: false, coronal: false, sagittal: false };
 
 let uid = 0;
 let csReady = null;
-const NORM16_OPT_IN = (() => { try { return new URLSearchParams(location.search).get("norm16") === "1" || localStorage.getItem("vol.norm16") === "1"; } catch { return false; } })();
-let texInfo = null;   // what the GPU offered and which int16 texture path the renderer takes; see hideNorm16()
-function hideNorm16() {
+let texInfo = null;   // what the GPU offered and which int16 texture path vtk.js will take; logged once, shown by the black check
+function probeTexturePath() {
   if (texInfo) return;
   texInfo = { norm16: "?", floatLinear: "?", renderer: "?", path: "?" };
   try {
@@ -43,13 +42,7 @@ function hideNorm16() {
     texInfo.norm16 = !!gl?.getExtension("EXT_texture_norm16");
     texInfo.floatLinear = !!gl?.getExtension("OES_texture_float_linear");
     gl?.getExtension("WEBGL_lose_context")?.loseContext();
-    const hide = texInfo.norm16 && !NORM16_OPT_IN && typeof WebGL2RenderingContext === "function";
-    if (hide) {
-      const orig = WebGL2RenderingContext.prototype.getExtension;
-      WebGL2RenderingContext.prototype.getExtension = function (name) { return name === "EXT_texture_norm16" ? null : orig.call(this, name); };
-    }
-    texInfo.path = texInfo.norm16 && !hide ? "R16_SNORM (norm16)" : "R32F (float)";
-    texInfo.norm16Hidden = hide;
+    texInfo.path = texInfo.norm16 ? "R16_SNORM (norm16)" : "R32F (float)";
   } catch (e) { texInfo.error = String(e); }
   console.info("volume: texture path", texInfo);
 }
@@ -123,14 +116,14 @@ export async function createVolumeRenderer({ container, studyUrl, studiesBase = 
   container.append(root);
 
   // ---------- Cornerstone ----------
-  // Texture path. vtk.js uploads int16 voxels as R16_SNORM when the browser offers EXT_texture_norm16
-  // (desktop GPUs in Chromium and Firefox) and as R32F otherwise (SwiftShader, which every automated test
-  // here runs on). On kadin-main-sys (NVIDIA, Linux) the SNORM path drew Live's MRI black while the chip,
-  // labels and caption rendered, in both browsers; the R32F path has rendered every study here. Hide the
-  // extension so every GPU takes the tested path. ?norm16=1 (or localStorage vol.norm16=1) restores it.
+  // Texture path: vtk.js uploads int16 voxels as R16_SNORM where the browser offers EXT_texture_norm16
+  // (desktop GPUs) and as R32F otherwise (SwiftShader, which the automated tests run on). Both draw. The
+  // black scan seen on kadin-main-sys (NVIDIA 580 driver, OpenGL backend, Chromium and Firefox) was not the
+  // texture format: vtk.js's volume shader divided by a zero ray-direction component for axis-aligned MPR
+  // rays, which GLSL ES leaves unspecified. That is patched in vendor/cornerstone (see tools/build_cornerstone.sh).
   // webGlContextCount: the default pool of 7 WebGL contexts, plus MediaPipe's three and the mesh renderer,
   // approaches Firefox's per-site context limit, past which it silently drops the oldest context.
-  hideNorm16();
+  probeTexturePath();
   csReady = csReady || Promise.resolve(init({ rendering: { webGlContextCount: 2, renderingEngineMode: Enums.RenderingEngineModeEnum?.Tiled ?? "tiled" } }));
   await csReady;
   const mkMeta = (bits, signed, modality) => ({
