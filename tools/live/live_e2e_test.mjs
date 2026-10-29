@@ -1,0 +1,131 @@
+// Live mode end to end with recorded tracker frames (no camera): forearm pointing with CT (vh-forearm) and simulated Ultrasound,
+// then a trunk point with CT (chest study in .viewer-volume) and simulated Ultrasound.
+//   python3 tools/serve.py --port 8138 &
+//   node tools/live/live_e2e_test.mjs http://127.0.0.1:8138/ /opt/pw-browsers/chromium
+// (playwright is resolved from the working directory's node_modules)
+import { chromium } from "playwright";
+import { openLive as openLiveFromHome } from "./_open_live.mjs";
+
+const base = process.argv[2] || "http://127.0.0.1:8138/";
+const executablePath = process.argv[3] || "/opt/pw-browsers/chromium";
+const CHEST = ["ts-s1042", "ts-s1164", "ts-s1337"];
+const browser = await chromium.launch({
+  executablePath,
+  args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist",
+    "--use-fake-ui-for-media-stream", "--use-fake-device-for-media-stream"],
+});
+let failures = 0;
+const check = (ok, msg) => { console.log(ok ? "ok  " : "FAIL", msg); if (!ok) failures++; };
+
+async function openLive(fixture, hand = "left") {
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 }, permissions: ["camera"] });
+  const page = await ctx.newPage();
+  // The pointing hand is chosen by raising it; the first two scenarios start with it stored, the gesture scenario with none.
+  await page.addInitScript((v) => { try { localStorage.clear(); if (v) localStorage.setItem("live.pointerHand", v); } catch {} }, hand);
+  const errors = [], mp = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  page.on("request", (r) => { if (/mediapipe|assets\/ml/.test(r.url())) mp.push(r.url()); });
+  await page.goto(`${base}?live-fixture=tools/live/fixtures/${fixture}.json`, { waitUntil: "load" });
+  await page.waitForFunction(() => !document.getElementById("start").disabled, null, { timeout: 90000 });
+  await openLiveFromHome(page);
+  await page.waitForSelector("#live:not([hidden])");
+  await page.click(".live-card button.primary");
+  // First use asks to calibrate once tracking starts; skip it.
+  await page.waitForFunction(() => [...document.querySelectorAll(".live-card button")].some((b) => b.textContent === "Skip" && !b.closest("[hidden]")), null, { timeout: 60000 });
+  await page.click(".live-card button:not(.primary)");
+  return { ctx, page, errors, mp };
+}
+
+// 1. Two hands, forearm.
+{
+  const { ctx, page, errors, mp } = await openLive("two-hands-probe");
+  const label = await page.waitForFunction(() => { const t = document.querySelector(".live-pill .text")?.textContent || ""; return /forearm/i.test(t) ? t : null; }, null, { timeout: 20000 })
+    .then((h) => h.jsonValue()).catch(() => null);
+  check(!!label, `region label names a forearm: "${label}"`);
+  await page.waitForSelector(".live-structs li", { timeout: 10000 });
+  check(await page.locator(".live-unlock").isVisible(), "Unlock button appears once locked");
+  check(/locked/.test(await page.textContent(".live-pill .text")), `pill says locked: "${await page.textContent(".live-pill .text")}"`);
+  const names = await page.$$eval(".live-structs li", (l) => l.length);
+  check(names >= 4, `structures panel lists ${names} structures (>= 4)`);
+  // Each listed structure's key exists in structures.json: click-through uses the key, so compare names to the file.
+  const known = await page.evaluate(async () => { const j = await (await fetch("assets/model/structures.json")).json(); return Object.values(j.structures); });
+  const listed = await page.$$eval(".live-structs li button span:first-child", (s) => s.map((x) => x.textContent));
+  check(listed.length >= 4 && listed.every((n) => known.includes(n)), `listed structures exist in structures.json (${listed.slice(0, 5).join(", ")})`);
+  await page.click('.live-toolbar .tool[data-id="ct"]');
+  const fstudy = await page.waitForFunction(() => { const c = document.querySelector("#live .viewer-volume:not([hidden]) canvas"); const v = document.querySelector(".live-scan-view"); return c && v?.dataset.kind === "volume" ? v.dataset.study : null; }, null, { timeout: 90000 })
+    .then((h) => h.jsonValue()).catch(() => null);
+  check(fstudy === "vh-forearm", `CT on the right forearm opens a canvas in .viewer-volume with study ${fstudy}`);
+  {
+    await page.waitForTimeout(500);
+    const g = await page.evaluate(() => { const v = document.querySelector(".live-scan-view"), st = document.querySelector(".live-stage"); return { split: document.getElementById("live").classList.contains("live-split"), vw: v.clientWidth, vh: v.clientHeight, sw: st.clientWidth, ww: window.innerWidth, wh: window.innerHeight }; });
+    check(g.split, "#live has class live-split while the CT shows");
+    check(g.vw >= 0.55 * g.ww && g.vh >= 0.6 * g.wh, `scan view is ${g.vw}x${g.vh} (>= 55% x 60% of ${g.ww}x${g.wh})`);
+    check(g.sw < 0.45 * g.ww, `stage is ${g.sw}px wide (< 45% of ${g.ww})`);
+    if (process.env.SHOT) await page.screenshot({ path: process.env.SHOT });
+  }
+  await page.click('.live-toolbar .tool[data-id="ultrasound"]');
+  const fus = await page.waitForFunction(() => { const b = document.querySelector("#live .viewer-ultrasound:not([hidden])"); return b && b.querySelector("canvas") && /simulated/i.test(document.querySelector(".live-caption")?.textContent || ""); }, null, { timeout: 90000 })
+    .then(() => true, () => false);
+  check(fus, `Ultrasound on the forearm shows a simulated caption: "${await page.textContent(".live-caption").catch(() => "")}"`);
+  // Record 10 s with R, then Unlock.
+  {
+    const [dl] = await Promise.all([page.waitForEvent("download", { timeout: 30000 }), page.keyboard.press("r")]);
+    check(/^live-recording-.*\.json$/.test(dl.suggestedFilename()), `R downloads ${dl.suggestedFilename()}`);
+    const rec = JSON.parse(await (await import("node:fs/promises")).readFile(await dl.path(), "utf8"));
+    check(rec.frames?.length > 0 && rec.frames[0].pose?.landmarks?.length === 33 && rec.frames[0].pose.mask === null && rec.frames.length <= 600, `recording has ${rec.frames?.length} frames, first pose has ${rec.frames?.[0]?.pose?.landmarks?.length} landmarks`);
+  }
+  await page.click(".live-unlock");
+  const cleared = await page.waitForFunction(() => document.querySelector(".live-structs")?.children.length === 0, null, { timeout: 5000 }).then(() => true, () => false);
+  check(cleared, "clicking Unlock clears the panel");
+  {
+    const g = await page.evaluate(() => ({ split: document.getElementById("live").classList.contains("live-split"), sw: document.querySelector(".live-stage").clientWidth, rw: document.getElementById("live").clientWidth }));
+    check(!g.split && g.sw === g.rw, `after Unlock live-split is gone and the stage is full width (${g.sw}/${g.rw})`);
+  }
+  check(mp.length === 0, `fixture path loads no MediaPipe files${mp.length ? ": " + mp[0] : ""}`);
+  check(errors.length === 0, `no page errors${errors.length ? ": " + errors.join(" | ") : ""}`);
+  await ctx.close();
+}
+
+// 2. Trunk: CT then Ultrasound.
+{
+  const { ctx, page, errors } = await openLive("trunk-probe");
+  const label = await page.waitForFunction(() => { const t = document.querySelector(".live-pill .text")?.textContent || ""; return /thora|chest|trunk/i.test(t) ? t : null; }, null, { timeout: 20000 })
+    .then((h) => h.jsonValue()).catch(() => null);
+  check(!!label, `trunk region label: "${label}"`);
+  await page.waitForSelector(".live-toolbar .tool:not(.unavailable)", { timeout: 10000 });
+  await page.click('.live-toolbar .tool[data-id="ct"]');
+  const study = await page.waitForFunction(() => { const c = document.querySelector("#live .viewer-volume:not([hidden]) canvas"); const v = document.querySelector(".live-scan-view"); return c && v.dataset.kind === "volume" ? v.dataset.study : null; }, null, { timeout: 90000 })
+    .then((h) => h.jsonValue()).catch(() => null);
+  check(CHEST.includes(study), `CT opens a canvas in .viewer-volume with chest study ${study}`);
+  await page.click('.live-toolbar .tool[data-id="ultrasound"]');
+  const ok = await page.waitForFunction(() => { const b = document.querySelector("#live .viewer-ultrasound:not([hidden])"); return b && b.querySelector("canvas") && /simulated/i.test(document.querySelector(".live-caption")?.textContent || ""); }, null, { timeout: 90000 })
+    .then(() => true, () => false);
+  const cap = await page.textContent(".live-caption");
+  check(ok, `Ultrasound viewer visible, caption: "${cap}"`);
+  check(errors.length === 0, `no page errors${errors.length ? ": " + errors.join(" | ") : ""}`);
+  await ctx.close();
+}
+// 3. Gesture flow: raise a hand to choose it, lock, count 1 = CT, two fist + blinks walk the structures, two fists release.
+{
+  const { ctx, page, errors } = await openLive("gesture-flow", null);
+  const T = { timeout: 30000 };
+  const pillIs = (re) => page.waitForFunction((src) => new RegExp(src, "i").test(document.querySelector(".live-pill .text")?.textContent || ""), re.source, T).then(() => true, () => false);
+  check(await page.isVisible(".live-hand"), "Change hand button exists");
+  check(await pillIs(/Pointing with your left hand/), `pill says "Pointing with your left hand": "${await page.textContent(".live-pill .text")}"`);
+  check(await page.evaluate(() => localStorage.getItem("live.pointerHand")) === "left", "chosen hand is stored");
+  check(await pillIs(/forearm.*locked/), `locks on the right forearm: "${await page.textContent(".live-pill .text")}"`);
+  const zoomed = await page.waitForFunction(() => /scale\(([\d.]+)\)/.test(document.querySelector(".live-zoom")?.style.transform || "") && parseFloat(RegExp.$1) > 1.2, null, T).then(() => true, () => false);
+  check(zoomed, "stage zooms in on lock");
+  const study = await page.waitForFunction(() => { const c = document.querySelector("#live .viewer-volume:not([hidden]) canvas"); const v = document.querySelector(".live-scan-view"); return c && v?.dataset.kind === "volume" ? v.dataset.study : null; }, null, { timeout: 90000 })
+    .then((h) => h.jsonValue()).catch(() => null);
+  check(study === "vh-forearm", `one finger opens the CT canvas (study ${study})`);
+  const cur = (n) => page.waitForFunction((i) => document.querySelectorAll(".live-structs li")[i]?.classList.contains("current"), n, { timeout: 40000 }).then(() => true, () => false);
+  check(await cur(0), "first blink marks the first structure as current");
+  check(await cur(1), "second blink moves to the second structure");
+  const released = await page.waitForFunction(() => document.querySelector(".live-structs")?.children.length === 0 && document.querySelector(".live-unlock")?.hidden, null, { timeout: 40000 }).then(() => true, () => false);
+  check(released, "two fists release the lock");
+  check(errors.length === 0, `no page errors${errors.length ? ": " + errors.join(" | ") : ""}`);
+  await ctx.close();
+}
+await browser.close();
+process.exit(failures ? 1 : 0);

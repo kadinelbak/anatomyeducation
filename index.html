@@ -10,6 +10,7 @@
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="src/renderers/volume.css">
+  <link rel="stylesheet" href="src/live/live.css">
   <!-- Email signup form (Kit) and anonymous usage counts (GoatCounter); see "Usage data" in Credits. -->
   <script async data-uid="0580fa41c5" src="https://kadin-el-bakkouri.kit.com/0580fa41c5/index.js"></script>
   <script data-goatcounter="https://kadin.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
@@ -50,18 +51,22 @@
     </div>
   </header>
 
-  <!-- Home: a slowly turning whole-body figure (src/hero.js) and the three ways in -->
+  <!-- Home: a slowly turning whole-body figure (src/hero.js) and the ways in -->
   <section id="home" class="home" hidden aria-labelledby="home-title">
     <h1 id="home-title" class="sr-only">Open Body 3D</h1>
     <div id="hero" class="hero"></div>
     <div class="home-actions">
       <button id="home-explore" class="primary" type="button" disabled>Explore</button>
       <button id="home-quiz" class="secondary" type="button" disabled>Quiz</button>
+      <button id="home-live" class="secondary go-live" type="button" title="Point at your own body with the camera">Live</button>
       <button id="home-credits" class="ghost" type="button" aria-expanded="false" aria-controls="credits">Credits</button>
     </div>
   </section>
 
   <div id="loading" class="loading">Loading the model…</div>
+
+  <!-- Live mode: camera view, built by src/live/view.js on first use -->
+  <section id="live" hidden aria-label="Live camera mode"></section>
 
   <!-- Landing: the body map (Explore) or the quiz chooser (Quiz) -->
   <section id="intro" class="card intro" hidden>
@@ -73,6 +78,7 @@
     <div id="explore-home">
       <h1>Explore the body</h1>
       <p class="lead">Pick a part of the body. Click any structure to name it, then open its histology or its scans.</p>
+      <button id="go-live" class="chip go-live" type="button" title="Point at your own body with the camera">Live</button>
       <div class="bodymap">
         <div id="figure-slot" class="figure-slot"></div>
         <div class="bodymap-side">
@@ -227,6 +233,8 @@
     <span id="attr-za" hidden>Model: <a href="https://www.z-anatomy.com/" target="_blank" rel="noopener">Z-Anatomy</a>, licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>, derived from BodyParts3D (DBCLS); simplified and recoloured. Nerves, sutures and foramina partly schematic. For study, not clinical use.</span>
     <span id="attr-ct" hidden>CT: <a href="https://zenodo.org/records/10047292" target="_blank" rel="noopener">TotalSegmentator dataset</a> (Wasserthal et al.), CC BY 4.0. Viewer: <a href="https://github.com/cornerstonejs/cornerstone3D" target="_blank" rel="noopener">Cornerstone3D</a>, MIT.</span>
     <span id="attr-mr" hidden>MRI: <a id="attr-mr-src" href="https://zenodo.org/records/11367005" target="_blank" rel="noopener">TotalSegmentator MRI dataset (Akinci D'Antonoli et al.), CC BY-NC-SA 4.0</a>. Viewer: <a href="https://github.com/cornerstonejs/cornerstone3D" target="_blank" rel="noopener">Cornerstone3D</a>, MIT.</span>
+    <span id="attr-vh" hidden>Visible Human Project CT: Courtesy of the U.S. National Library of Medicine. This copy may not reflect NLM's current data; NLM does not endorse this app. Labels: TotalSegmentator (Apache 2.0).</span>
+    <span id="attr-mp">Body and hand tracking: <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker" target="_blank" rel="noopener">MediaPipe Tasks Vision</a> (Google, Apache 2.0), running on this device.</span>
     <span id="attr-xray" hidden>X-ray views are digitally reconstructed radiographs computed in the browser from the TotalSegmentator CT studies above (CC BY 4.0); they are teaching simulations, not patient films.</span>
     <span id="attr-hist" hidden>Histology: <a id="attr-hist-src" target="_blank" rel="noopener"></a>. The <a href="https://obofoundry.org/ontology/cl.html" target="_blank" rel="noopener">Cell Ontology</a> (CC BY 4.0) names the cell types.</span>
     <span id="attr-cell" hidden>Cell: <a id="attr-cell-src" target="_blank" rel="noopener"></a>. <span id="attr-cell-note">Stylised 3D model built from primitives, not a reconstruction</span>; organelle names from the <a href="http://geneontology.org/" target="_blank" rel="noopener">Gene Ontology</a> (CC BY 4.0).</span>

@@ -101,7 +101,13 @@ export async function createVolumeRenderer({ container, studyUrl, studiesBase = 
   container.append(root);
 
   // ---------- Cornerstone ----------
-  csReady = csReady || Promise.resolve(init());
+  // preferSizeOverAccuracy: upload int16 voxels as half floats. Without it, data outside -2048..2048 (MR
+  // 0..4095, CT up to 3000) goes into an R32F texture that needs OES_texture_float_linear for linear
+  // filtering; where that extension is missing (seen in Firefox on Linux) the texture is incomplete and the
+  // slice renders black. Half floats keep 11 bits of mantissa, plenty for windowed display.
+  // webGlContextCount: the default pool of 7 WebGL contexts, plus MediaPipe's three and the mesh renderer,
+  // approaches Firefox's per-site context limit, past which it silently drops the oldest context.
+  csReady = csReady || Promise.resolve(init({ rendering: { preferSizeOverAccuracy: true, webGlContextCount: 2, renderingEngineMode: Enums.RenderingEngineModeEnum?.Tiled ?? "tiled" } }));
   await csReady;
   const mkMeta = (bits, signed, modality) => ({
     BitsAllocated: bits, BitsStored: bits, SamplesPerPixel: 1, HighBit: bits - 1, PixelRepresentation: signed,
@@ -331,6 +337,45 @@ export async function createVolumeRenderer({ container, studyUrl, studiesBase = 
   window.addEventListener("resize", onResize);
   if (typeof ResizeObserver === "function") new ResizeObserver(onResize).observe(root);
 
+  // ---------- Black-draw check ----------
+  // A scan that the browser draws black (seen in Firefox on Linux, while the chip, labels and caption
+  // render) used to fail silently. A second after each swap, sample the viewport's canvas; if every
+  // pixel is black while a volume is loaded, say so on the viewer and log what the GPU offered.
+  let blackTimer = 0;
+  function scheduleBlackCheck(n) {
+    clearTimeout(blackTimer);
+    blackTimer = setTimeout(() => { if (swapCounter === n && volume) checkBlack(n); }, 1200);
+  }
+  function checkBlack(n) {
+    try {
+      const cv = vpEl.querySelector("canvas");
+      if (!cv || !cv.width || !cv.height) return;
+      const probe = document.createElement("canvas");
+      const w = probe.width = Math.min(96, cv.width), h = probe.height = Math.min(96, cv.height);
+      const c2 = probe.getContext("2d");
+      c2.drawImage(cv, (cv.width - w) / 2, (cv.height - h) / 2, w, h, 0, 0, w, h);
+      const px = c2.getImageData(0, 0, w, h).data;
+      let lit = 0;
+      for (let i = 0; i < px.length; i += 4) if (px[i] > 8 || px[i + 1] > 8 || px[i + 2] > 8) lit++;
+      if (lit > px.length / 400) { if (blackNote.parentNode) blackNote.remove(); return; }
+      if (n === swapCounter && blackTimer !== -1) {
+        // one retry: the first draw may not have landed yet
+        blackTimer = -1; setTimeout(() => checkBlack(n), 1500); return;
+      }
+      const gl = document.createElement("canvas").getContext("webgl2");
+      const dbg = gl?.getExtension("WEBGL_debug_renderer_info");
+      console.warn("volume: the scan drew black", {
+        study: studyId, dims, renderer: gl ? String(dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER)) : "no webgl2",
+        norm16: !!gl?.getExtension("EXT_texture_norm16"), floatLinear: !!gl?.getExtension("OES_texture_float_linear"),
+        colorBufferFloat: !!gl?.getExtension("EXT_color_buffer_float"), canvas: [cv.width, cv.height], ua: navigator.userAgent,
+      });
+      gl?.getExtension("WEBGL_lose_context")?.loseContext();
+      blackNote.textContent = "This browser drew the scan black. Please try it in Chrome or Chromium.";
+      if (!blackNote.parentNode) root.append(blackNote);
+    } catch (e) { console.warn("volume: black check failed", e); }
+  }
+  const blackNote = el("div", "vol-blacknote");
+
   // ---------- Study swap ----------
   // Replaces both Cornerstone volumes. setVolumesForViewports drops the old actors from the viewport; the old
   // volumes are then evicted from the cache so their typed arrays can be collected.
@@ -367,6 +412,7 @@ export async function createVolumeRenderer({ container, studyUrl, studiesBase = 
     setSlab();
     resetView();
     setDepth(Math.round((dims[depthAxis()] - 1) / 2));
+    scheduleBlackCheck(n);
     syncUI();
     studyId = vol.meta.id || pendingId;
   }

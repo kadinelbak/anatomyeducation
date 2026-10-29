@@ -21,7 +21,7 @@ button { font: inherit; cursor: pointer; }
 /* On phones the Explore landing is a bottom shelf (see below); the viewer ends where the shelf begins. */
 body.shelf #viewer { bottom: var(--shelf-h, 0px); }
 #viewer canvas { display: block; }
-.viewer-mesh, .viewer-volume, .viewer-xray, .viewer-ultrasound, .viewer-slide, .viewer-cell { position: absolute; inset: 0; }
+.viewer-mesh, .viewer-volume, .viewer-xray, .viewer-ultrasound, .viewer-usframes, .viewer-slide, .viewer-cell { position: absolute; inset: 0; }
 body.mode-volume #controls, body.mode-xray #controls, body.mode-ultrasound #controls, body.mode-slide #controls, body.mode-cell #controls { display: none; }
 
 .topbar {
@@ -255,6 +255,8 @@ body.mode-volume .quiz-fab { bottom: 80px; }
 .attribution { position: fixed; z-index: 15; right: 16px; top: 52px; width: min(440px, calc(100vw - 32px)); max-height: calc(100vh - 70px); overflow: auto;
   background: #161c24; border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; font-size: 0.76rem; color: var(--muted); display: grid; gap: 6px; }
 .credits-head { display: flex; justify-content: space-between; align-items: center; color: var(--text); font-size: 0.85rem; }
+#attr-mp { display: none; }
+body.live #attr-mp { display: block; }
 .study-note { position: fixed; right: 16px; bottom: 2px; margin: 0; font-size: 0.66rem; pointer-events: none; }
 body.mode-volume .study-note, body.quizzing .study-note { display: none; }
 
@@ -322,6 +324,7 @@ body:not(.mode-mesh):not(.landing):not(.home) .topbar { background: linear-gradi
 .home-actions { flex: 0 0 auto; display: flex; gap: 12px; justify-content: center; padding: 14px 0 max(34px, env(safe-area-inset-bottom)); }
 .home-actions button { min-width: 120px; padding: 12px 22px; font-size: 1.05rem; }
 .home-actions button:disabled { opacity: 0.5; cursor: wait; }
+.home-actions .go-live { margin: 0; }
 @media (max-width: 600px) {
   .home-actions { flex-direction: column; align-items: stretch; width: min(320px, 100%); gap: 10px; }
 }

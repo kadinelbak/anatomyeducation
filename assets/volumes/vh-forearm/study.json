@@ -1,0 +1,88 @@
+{
+ "id": "vh-forearm",
+ "source": "NLM Visible Human Project, male CT (NCI Imaging Data Commons, nlm_visible_human_project)",
+ "license": "Public domain (NLM Terms and Conditions, 2019)",
+ "attribution": "Courtesy of the U.S. National Library of Medicine",
+ "dims": [
+  145,
+  150,
+  105
+ ],
+ "spacing": [
+  1.875,
+  1.875,
+  2.0
+ ],
+ "orientation": "RAS",
+ "modality": "CT",
+ "sourceUrl": "https://www.nlm.nih.gov/research/visible/visible_human.html",
+ "ct": {
+  "file": "ct.i16.gz",
+  "dtype": "int16"
+ },
+ "labels": {
+  "file": "labels.u8.gz",
+  "dtype": "uint8"
+ },
+ "defaultWindow": "soft",
+ "windows": {
+  "soft": {
+   "width": 400,
+   "level": 40
+  },
+  "lung": {
+   "width": 1500,
+   "level": -600
+  },
+  "bone": {
+   "width": 1800,
+   "level": 400
+  }
+ },
+ "structures": {
+  "201": {
+   "key": "bone",
+   "name": "Bone (HU above 250)",
+   "group": "bone"
+  },
+  "202": {
+   "key": "soft_tissue",
+   "name": "Soft tissue (muscle, skin, organs)",
+   "group": "organ"
+  },
+  "203": {
+   "key": "fat",
+   "name": "Fat",
+   "group": "organ"
+  },
+  "204": {
+   "key": "internal_gas",
+   "name": "Gas inside the body",
+   "group": "organ"
+  }
+ },
+ "views": {
+  "bone": {
+   "plane": "axial",
+   "frac": 0.5,
+   "window": "soft"
+  },
+  "soft_tissue": {
+   "plane": "axial",
+   "frac": 0.635,
+   "window": "soft"
+  },
+  "fat": {
+   "plane": "axial",
+   "frac": 0.423,
+   "window": "soft"
+  },
+  "internal_gas": {
+   "plane": "axial",
+   "frac": 0.51,
+   "window": "soft"
+  }
+ },
+ "note": "Cadaver CT, 1 mm source resampled to about 2 mm. Labels: TotalSegmentator v2 total task (--fast, 3 mm model, Apache-2.0 weights) where it finds a structure, coarse HU thresholds (bone above 250 HU, soft tissue, fat, gas) everywhere else. Copy may not reflect NLM's current data.",
+ "labelsMethod": "Labels: TotalSegmentator v2 total task (--fast, 3 mm model, Apache-2.0 weights) where it finds a structure, coarse HU thresholds (bone above 250 HU, soft tissue, fat, gas) everywhere else."
+}

@@ -1,0 +1,128 @@
+{
+ "version": 1,
+ "notes": "Simulated B-mode from CT for Live mode. fracSpan = trunk fraction (shoulders 0 -> hips 1) the study covers. Study frac runs inferior 0 -> superior 1, so study frac = 1 - (frac - a)/(b - a). Probe angle: 0 = anterior, 90 = patient's left, 270 = patient's right (bmode.js). sweepDeg = angle swing across the trunk width; longitudinalWithinDeg = finger-to-axis angle that counts as longitudinal. Limb and neck studies (vh-*) span the whole volume: fracSpan is the segment fraction mapped onto the volume, proximal at the top slice, so it can lie outside 0..1.",
+ "sweepDeg": 60,
+ "longitudinalWithinDeg": 35,
+ "studies": {
+  "ts-s1042": {
+   "segment": "trunk",
+   "region": "Chest",
+   "fracSpan": [
+    0.0,
+    0.45
+   ],
+   "anchor": "shoulders",
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 16
+  },
+  "ts-s1164": {
+   "segment": "trunk",
+   "region": "Chest",
+   "fracSpan": [
+    0.0,
+    0.45
+   ],
+   "anchor": "shoulders",
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 16
+  },
+  "ts-s1337": {
+   "segment": "trunk",
+   "region": "Chest",
+   "fracSpan": [
+    0.0,
+    0.45
+   ],
+   "anchor": "shoulders",
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 16
+  },
+  "ts-s0513": {
+   "segment": "trunk",
+   "region": "Abdomen",
+   "fracSpan": [
+    0.45,
+    0.8
+   ],
+   "anchor": "shoulders",
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 16
+  },
+  "ts-s1383": {
+   "segment": "trunk",
+   "region": "Abdomen",
+   "fracSpan": [
+    0.45,
+    0.8
+   ],
+   "anchor": "shoulders",
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 16
+  },
+  "ts-s1390": {
+   "segment": "trunk",
+   "region": "Abdomen",
+   "fracSpan": [
+    0.45,
+    0.8
+   ],
+   "anchor": "shoulders",
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 16
+  },
+  "vh-forearm": {
+   "segment": "forearm",
+   "region": "Forearm",
+   "fracSpan": [
+    0,
+    1.678
+   ],
+   "anchor": "elbow",
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 6
+  },
+  "vh-thigh": {
+   "segment": "thigh",
+   "region": "Thigh",
+   "fracSpan": [
+    0.12,
+    0.56
+   ],
+   "anchor": "hip",
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 10
+  },
+  "vh-leg": {
+   "segment": "leg",
+   "region": "Leg",
+   "fracSpan": [
+    -0.152,
+    0.84
+   ],
+   "anchor": "knee",
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 10
+  },
+  "vh-head-neck": {
+   "segment": "neck",
+   "region": "Neck",
+   "fracSpan": [
+    -1.469,
+    1
+   ],
+   "anchor": "skull base",
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 8
+  }
+ }
+}

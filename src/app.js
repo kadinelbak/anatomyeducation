@@ -65,6 +65,9 @@ const renderer = createRendererSwitch({
     $("attr-xray").hidden = kind !== "xray";
     $("attr-us").hidden = kind !== "ultrasound";
     $("attr-ct").hidden = $("attr-ct").hidden || kind === "slide" || kind === "cell";
+    const vh = scan && typeof id === "string" && id.startsWith("vh-");
+    $("attr-vh").hidden = !vh;
+    if (vh) $("attr-ct").hidden = true;
     $("attr-hist").hidden = kind !== "slide";
     $("attr-cell").hidden = kind !== "cell";
     if (kind === "slide") { // one line per study: the manifest names its source and licence
@@ -564,6 +567,11 @@ $("home-credits").addEventListener("click", () => {
   $("home-credits").setAttribute("aria-expanded", String(open));
 });
 window.addEventListener("popstate", (e) => {
+  if (liveHandoff) { // Live closed itself (one history entry back) to open a structure: stay on the model
+    liveHandoff = false;
+    if (e.state?.view !== "explore") history.pushState({ view: "explore" }, "", window.location.href);
+    return;
+  }
   const view = e.state?.view;
   if (view === "explore" || view === "quiz") leaveHome(view);
   else goHome();
@@ -1054,3 +1062,25 @@ for (const k of ["viewTween", "controls", "camera", "meshesByStructure", "pick",
 }
 Object.assign(app, { quiz: engine.state, answer: engine.answer, engine, renderer, switch: renderer, openExplore, openDetails, openDeep, backToStructure, setMode, imagingFor, slidesFor: (k) => slidesFor(k, layerOfAny(k)) });
 app.QUESTIONS ||= engine.current;
+
+// ---------- Live mode (workstream A): src/live/view.js is imported on the first click, so the home screen loads nothing extra ----------
+let liveView = null;
+let liveFrom = "landing"; // "home" when opened from the home screen, so leaving Live returns there
+let liveHandoff = false; // set while Live hands a structure to Explore, so the history pop it causes is not a navigation
+async function openLive(from) {
+  liveFrom = from;
+  liveView ||= (await import("./live/view.js")).createLiveView({ root: $("live"), config: CONFIG,
+    onExit: () => (liveFrom === "home" ? showHome() : showLanding()),
+    openExplore: (model, key) => { liveFrom = "landing"; liveHandoff = location.hash === "#live"; openExplore("mesh", model, key); },
+    exploreRegions: regions });
+  liveView.open();
+}
+$("go-live").addEventListener("click", () => openLive("landing"));
+$("home-live").addEventListener("click", () => {
+  hero.stop(); // frees the home canvas; Live needs the GPU for tracking
+  $("home").hidden = true;
+  $("credits").hidden = true;
+  $("home-credits").setAttribute("aria-expanded", "false");
+  openLive("home");
+});
+$("explore-back").addEventListener("click", () => { if (liveView?.active) liveView.close(); });

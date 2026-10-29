@@ -1,0 +1,1010 @@
+{
+ "version": 1,
+ "_notes": "Method: for each study the labels.u8.gz volume was read with Node zlib and, per organ group (lung, liver, spleen, kidney, stomach, pancreas, adrenal, gallbladder, heart, bladder, prostate, hip, sacrum, gluteus maximus), the 1st/99th percentile slice of the voxel-count histogram along z (axis 2, RAS: higher index is more superior in every study) was taken as its bottom/top, skipping extents cut off by the volume edge. Trunk frac: 0 = lung apex, 0.45 = liver dome (diaphragm), 0.8 = iliac crest (top of hip bone), 1.0 = ischial tuberosity (bottom of hip bone). The six TotalSegmentator CTs with an apex or pelvis in view were anchored directly (piecewise linear 'anchors', [frac, slice] pairs); a reference frac per organ extent was the median over those CTs; every other trunk study was fitted by least squares of slice against that reference (rms residual in 'fit'). Head frac: 0 = vertex, 1 = foramen magnum. 'frac' and 'slices' are the span the study covers after clipping to 0..1 and to the volume; 'anchors' (when present) maps frac to slice piecewise and extrapolates nowhere. windowAt switches a CT to the lung window where the slice is between lung apex and diaphragm (frac 0.03-0.38); 'dims' is the voxel count along the axis. Entries marked approx are small crops placed by their organ position. Keys with @suffix reuse the study in 'studyId'. Limb entries (ts-mr-s0056) are the left knee: femur = thigh, tibia = leg; 'side' is the anatomical side of the segment. Regenerate by re-running the same measurement; do not hand-edit slices. Visible Human CTs (vh-*): proximal is the high slice in all four (RAS). Forearm: elbow end = volume top z104, wrist z42 (class 201 bone extent). Thigh and leg fractions assume femur 450 mm and tibia 380 mm; thigh position set from the femoral isthmus. Head: vertex z123 to foramen magnum z51; neck: z51 to z0. Ultrasound fracSpan for these studies maps the WHOLE volume (study frac = 1 - (frac - a)/(b - a)), so a and b can lie outside 0..1.",
+ "studies": {
+  "ts-example-sm": {
+   "kind": "volume",
+   "modality": "CT",
+   "segment": "trunk",
+   "side": null,
+   "dims": 30,
+   "frac": [
+    0.511,
+    0.666
+   ],
+   "axis": 2,
+   "slices": [
+    0,
+    29
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "windowAt": [
+    {
+     "frac": [
+      0.03,
+      0.38
+     ],
+     "window": "lung"
+    }
+   ],
+   "anchors": [
+    [
+     0.511,
+     29
+    ],
+    [
+     0.666,
+     0
+    ]
+   ],
+   "fit": "least-squares fit to 9 organ-extent landmarks, rms 0.02"
+  },
+  "ts-s1042": {
+   "kind": "volume",
+   "modality": "CT",
+   "segment": "trunk",
+   "side": null,
+   "dims": 152,
+   "frac": [
+    0,
+    0.629
+   ],
+   "axis": 2,
+   "slices": [
+    0,
+    130
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "windowAt": [
+    {
+     "frac": [
+      0.03,
+      0.38
+     ],
+     "window": "lung"
+    }
+   ],
+   "anchors": [
+    [
+     0,
+     130
+    ],
+    [
+     0.629,
+     0
+    ]
+   ],
+   "fit": "anchored: lung apex=0, liver dome=0.45"
+  },
+  "ts-s1164": {
+   "kind": "volume",
+   "modality": "CT",
+   "segment": "trunk",
+   "side": null,
+   "dims": 151,
+   "frac": [
+    0,
+    0.726
+   ],
+   "axis": 2,
+   "slices": [
+    0,
+    129
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "windowAt": [
+    {
+     "frac": [
+      0.03,
+      0.38
+     ],
+     "window": "lung"
+    }
+   ],
+   "anchors": [
+    [
+     0,
+     129
+    ],
+    [
+     0.726,
+     0
+    ]
+   ],
+   "fit": "anchored: lung apex=0, liver dome=0.45"
+  },
+  "ts-s1337": {
+   "kind": "volume",
+   "modality": "CT",
+   "segment": "trunk",
+   "side": null,
+   "dims": 153,
+   "frac": [
+    0,
+    0.648
+   ],
+   "axis": 2,
+   "slices": [
+    0,
+    134
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "windowAt": [
+    {
+     "frac": [
+      0.03,
+      0.38
+     ],
+     "window": "lung"
+    }
+   ],
+   "anchors": [
+    [
+     0,
+     134
+    ],
+    [
+     0.648,
+     0
+    ]
+   ],
+   "fit": "anchored: lung apex=0, liver dome=0.45"
+  },
+  "ts-s0513": {
+   "kind": "volume",
+   "modality": "CT",
+   "segment": "trunk",
+   "side": null,
+   "dims": 160,
+   "frac": [
+    0.374,
+    1
+   ],
+   "axis": 2,
+   "slices": [
+    8,
+    159
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "windowAt": [
+    {
+     "frac": [
+      0.03,
+      0.38
+     ],
+     "window": "lung"
+    }
+   ],
+   "anchors": [
+    [
+     0.374,
+     159
+    ],
+    [
+     0.45,
+     143
+    ],
+    [
+     0.8,
+     69
+    ],
+    [
+     1,
+     8
+    ]
+   ],
+   "fit": "anchored: liver dome=0.45, iliac crest=0.8, ischium=1.0"
+  },
+  "ts-s1383": {
+   "kind": "volume",
+   "modality": "CT",
+   "segment": "trunk",
+   "side": null,
+   "dims": 160,
+   "frac": [
+    0.42,
+    1
+   ],
+   "axis": 2,
+   "slices": [
+    11,
+    159
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "windowAt": [
+    {
+     "frac": [
+      0.03,
+      0.38
+     ],
+     "window": "lung"
+    }
+   ],
+   "anchors": [
+    [
+     0.42,
+     159
+    ],
+    [
+     0.45,
+     153
+    ],
+    [
+     0.8,
+     82
+    ],
+    [
+     1,
+     11
+    ]
+   ],
+   "fit": "anchored: liver dome=0.45, iliac crest=0.8, ischium=1.0"
+  },
+  "ts-s1390": {
+   "kind": "volume",
+   "modality": "CT",
+   "segment": "trunk",
+   "side": null,
+   "dims": 160,
+   "frac": [
+    0.371,
+    1
+   ],
+   "axis": 2,
+   "slices": [
+    12,
+    159
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "windowAt": [
+    {
+     "frac": [
+      0.03,
+      0.38
+     ],
+     "window": "lung"
+    }
+   ],
+   "anchors": [
+    [
+     0.371,
+     159
+    ],
+    [
+     0.45,
+     145
+    ],
+    [
+     0.8,
+     83
+    ],
+    [
+     1,
+     12
+    ]
+   ],
+   "fit": "anchored: liver dome=0.45, iliac crest=0.8, ischium=1.0"
+  },
+  "ts-mr-example-sm": {
+   "kind": "volume",
+   "modality": "MRI",
+   "segment": "trunk",
+   "side": null,
+   "sequence": "T1",
+   "dims": 20,
+   "frac": [
+    0.541,
+    0.668
+   ],
+   "axis": 2,
+   "slices": [
+    0,
+    19
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "anchors": [
+    [
+     0.541,
+     19
+    ],
+    [
+     0.668,
+     0
+    ]
+   ],
+   "fit": "least-squares fit to 5 organ-extent landmarks, rms 0.011"
+  },
+  "ts-mr-s0153": {
+   "kind": "volume",
+   "modality": "MRI",
+   "segment": "trunk",
+   "side": null,
+   "sequence": "T1",
+   "dims": 160,
+   "frac": [
+    0.001,
+    0.906
+   ],
+   "axis": 2,
+   "slices": [
+    0,
+    143
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "anchors": [
+    [
+     0.001,
+     143
+    ],
+    [
+     0.906,
+     0
+    ]
+   ],
+   "fit": "least-squares fit to 18 organ-extent landmarks, rms 0.041"
+  },
+  "ts-mr-s0167": {
+   "kind": "volume",
+   "modality": "MRI",
+   "segment": "trunk",
+   "side": null,
+   "sequence": "T1",
+   "dims": 160,
+   "frac": [
+    0.142,
+    0.996
+   ],
+   "axis": 2,
+   "slices": [
+    5,
+    159
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "anchors": [
+    [
+     0.142,
+     159
+    ],
+    [
+     0.996,
+     5
+    ]
+   ],
+   "fit": "least-squares fit to 24 organ-extent landmarks, rms 0.049"
+  },
+  "ts-mr-s0175": {
+   "kind": "volume",
+   "modality": "MRI",
+   "segment": "trunk",
+   "side": null,
+   "sequence": "T1",
+   "dims": 160,
+   "frac": [
+    0.007,
+    0.99
+   ],
+   "axis": 2,
+   "slices": [
+    34,
+    121
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "anchors": [
+    [
+     0.007,
+     121
+    ],
+    [
+     0.99,
+     34
+    ]
+   ],
+   "fit": "least-squares fit to 21 organ-extent landmarks, rms 0.036"
+  },
+  "ts-mr-s0191": {
+   "kind": "volume",
+   "modality": "MRI",
+   "segment": "trunk",
+   "side": null,
+   "sequence": "T2",
+   "dims": 68,
+   "frac": [
+    0.762,
+    0.997
+   ],
+   "axis": 2,
+   "slices": [
+    20,
+    67
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "anchors": [
+    [
+     0.762,
+     67
+    ],
+    [
+     0.997,
+     20
+    ]
+   ],
+   "fit": "least-squares fit to 9 organ-extent landmarks, rms 0.007"
+  },
+  "ts-mr-s0219": {
+   "kind": "volume",
+   "modality": "MRI",
+   "segment": "trunk",
+   "side": null,
+   "sequence": "T2",
+   "dims": 86,
+   "frac": [
+    0.413,
+    0.999
+   ],
+   "axis": 2,
+   "slices": [
+    3,
+    85
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "anchors": [
+    [
+     0.413,
+     85
+    ],
+    [
+     0.999,
+     3
+    ]
+   ],
+   "fit": "least-squares fit to 24 organ-extent landmarks, rms 0.04"
+  },
+  "ts-mr-s0237": {
+   "kind": "volume",
+   "modality": "MRI",
+   "segment": "trunk",
+   "side": null,
+   "sequence": "T1",
+   "dims": 160,
+   "frac": [
+    0.321,
+    0.997
+   ],
+   "axis": 2,
+   "slices": [
+    19,
+    159
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "anchors": [
+    [
+     0.321,
+     159
+    ],
+    [
+     0.997,
+     19
+    ]
+   ],
+   "fit": "least-squares fit to 19 organ-extent landmarks, rms 0.096"
+  },
+  "ts-mr-s0256": {
+   "kind": "volume",
+   "modality": "MRI",
+   "segment": "trunk",
+   "side": null,
+   "sequence": "T2",
+   "dims": 80,
+   "frac": [
+    0.461,
+    0.916
+   ],
+   "axis": 2,
+   "slices": [
+    0,
+    79
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "anchors": [
+    [
+     0.461,
+     79
+    ],
+    [
+     0.916,
+     0
+    ]
+   ],
+   "fit": "least-squares fit to 19 organ-extent landmarks, rms 0.029"
+  },
+  "mni-brain-t1": {
+   "kind": "volume",
+   "modality": "MRI",
+   "segment": "head",
+   "side": null,
+   "sequence": "T1",
+   "dims": 138,
+   "frac": [
+    0,
+    1
+   ],
+   "axis": 2,
+   "slices": [
+    5,
+    132
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "anchors": [
+    [
+     0,
+     132
+    ],
+    [
+     1,
+     5
+    ]
+   ],
+   "fit": "anchored: cortex top z132 = 0 (vertex), brainstem bottom z5 = 1 (foramen magnum)"
+  },
+  "mni-brain-t2": {
+   "kind": "volume",
+   "modality": "MRI",
+   "segment": "head",
+   "side": null,
+   "sequence": "T2",
+   "dims": 138,
+   "frac": [
+    0,
+    1
+   ],
+   "axis": 2,
+   "slices": [
+    5,
+    132
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "anchors": [
+    [
+     0,
+     132
+    ],
+    [
+     1,
+     5
+    ]
+   ],
+   "fit": "anchored: cortex top z132 = 0 (vertex), brainstem bottom z5 = 1 (foramen magnum)"
+  },
+  "mni-brain-pd": {
+   "kind": "volume",
+   "modality": "MRI",
+   "segment": "head",
+   "side": null,
+   "sequence": "PD",
+   "dims": 138,
+   "frac": [
+    0,
+    1
+   ],
+   "axis": 2,
+   "slices": [
+    5,
+    132
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "anchors": [
+    [
+     0,
+     132
+    ],
+    [
+     1,
+     5
+    ]
+   ],
+   "fit": "anchored: cortex top z132 = 0 (vertex), brainstem bottom z5 = 1 (foramen magnum)"
+  },
+  "ts-mr-s0283": {
+   "kind": "volume",
+   "modality": "MRI",
+   "segment": "head",
+   "side": null,
+   "sequence": "T1",
+   "dims": 160,
+   "frac": [
+    0,
+    1
+   ],
+   "axis": 2,
+   "slices": [
+    76,
+    158
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "anchors": [
+    [
+     0,
+     158
+    ],
+    [
+     1,
+     76
+    ]
+   ],
+   "fit": "anchored: brain top z158 = 0, top of spinal cord label z76 (foramen magnum) = 1"
+  },
+  "msd-hippocampus-01": {
+   "kind": "volume",
+   "modality": "MRI",
+   "segment": "head",
+   "side": null,
+   "dims": 35,
+   "frac": [
+    0.499,
+    0.721
+   ],
+   "axis": 2,
+   "slices": [
+    0,
+    34
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "anchors": [
+    [
+     0.499,
+     34
+    ],
+    [
+     0.721,
+     0
+    ]
+   ],
+   "approx": true,
+   "fit": "hippocampus centre (slice 17) aligned to MNI hippocampus centre, frac 0.61, 1 mm/slice"
+  },
+  "msd-heart-03": {
+   "kind": "volume",
+   "modality": "MRI",
+   "segment": "trunk",
+   "side": null,
+   "dims": 155,
+   "frac": [
+    0.11,
+    0.49
+   ],
+   "axis": 2,
+   "slices": [
+    0,
+    154
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "anchors": [
+    [
+     0.11,
+     154
+    ],
+    [
+     0.49,
+     0
+    ]
+   ],
+   "approx": true,
+   "fit": "left atrium centre (slice 77) at frac 0.30 (CT heart spans 0.20-0.47), 1.25 mm/slice at 0.00197 frac/mm"
+  },
+  "msd-prostate-04": {
+   "kind": "volume",
+   "modality": "MRI",
+   "segment": "trunk",
+   "side": null,
+   "dims": 15,
+   "frac": [
+    0.939,
+    0.984
+   ],
+   "axis": 2,
+   "slices": [
+    0,
+    14
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "anchors": [
+    [
+     0.939,
+     14
+    ],
+    [
+     0.984,
+     0
+    ]
+   ],
+   "approx": true,
+   "fit": "prostate centre (slice 7.5) at frac 0.96 (CT prostate spans 0.94-0.98), 4 mm/slice at 0.00081 frac/mm"
+  },
+  "ts-mr-s0056": {
+   "dims": 160,
+   "sequence": "PD",
+   "kind": "volume",
+   "modality": "MRI",
+   "segment": "thigh",
+   "side": "left",
+   "frac": [
+    0.79,
+    1
+   ],
+   "axis": 2,
+   "slices": [
+    68,
+    159
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "anchors": [
+    [
+     0.79,
+     159
+    ],
+    [
+     1,
+     68
+    ]
+   ],
+   "approx": true,
+   "fit": "femur label z68-159 (1 mm slices), distal 92 mm of a ~430 mm femur"
+  },
+  "ts-mr-s0056@leg": {
+   "studyId": "ts-mr-s0056",
+   "dims": 160,
+   "sequence": "PD",
+   "kind": "volume",
+   "modality": "MRI",
+   "segment": "leg",
+   "side": "left",
+   "frac": [
+    0,
+    0.19
+   ],
+   "axis": 2,
+   "slices": [
+    0,
+    69
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "anchors": [
+    [
+     0,
+     69
+    ],
+    [
+     0.19,
+     0
+    ]
+   ],
+   "approx": true,
+   "fit": "tibia label z0-69, proximal 70 mm of a ~360 mm tibia; knee joint at slice 69"
+  },
+  "vh-forearm": {
+   "dims": 105,
+   "kind": "volume",
+   "modality": "CT",
+   "segment": "forearm",
+   "side": "right",
+   "frac": [
+    0,
+    1
+   ],
+   "axis": 2,
+   "slices": [
+    42,
+    104
+   ],
+   "proximalIsHigh": true,
+   "window": "bone",
+   "approx": true,
+   "fit": "bone class 201 extent z0-104; z104 (volume edge, shaft of radius/ulna) = elbow end, z42 = distal radius end where carpals begin = wrist; slices 57-61 are a gap in the source data; z0-41 is hand"
+  },
+  "vh-thigh": {
+   "dims": 100,
+   "kind": "volume",
+   "modality": "CT",
+   "segment": "thigh",
+   "side": "right",
+   "frac": [
+    0.12,
+    0.56
+   ],
+   "axis": 2,
+   "slices": [
+    0,
+    99
+   ],
+   "proximalIsHigh": true,
+   "window": "bone",
+   "approx": true,
+   "fit": "femur label z2-99 (200 mm of shaft); body width and femur area grow toward z99 (hip end); femoral isthmus (min femur area, z25) put at frac 0.45 of an assumed 450 mm femur"
+  },
+  "vh-leg": {
+   "dims": 190,
+   "kind": "volume",
+   "modality": "CT",
+   "segment": "leg",
+   "side": "right",
+   "frac": [
+    0,
+    0.84
+   ],
+   "axis": 2,
+   "slices": [
+    0,
+    160
+   ],
+   "proximalIsHigh": true,
+   "window": "bone",
+   "approx": true,
+   "fit": "femur label z159-189, tibial plateau z~160 = knee (frac 0); tibia runs to the volume bottom z0, 320 mm of an assumed 380 mm tibia; z161-189 is distal femur and not covered"
+  },
+  "vh-head-neck": {
+   "dims": 127,
+   "kind": "volume",
+   "modality": "CT",
+   "segment": "head",
+   "side": null,
+   "frac": [
+    0,
+    1
+   ],
+   "axis": 2,
+   "slices": [
+    51,
+    123
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "fit": "skull label tops out at z123 = vertex (frac 0); C1 top / foramen magnum z51 = frac 1"
+  },
+  "vh-head-neck@neck": {
+   "studyId": "vh-head-neck",
+   "dims": 127,
+   "kind": "volume",
+   "modality": "CT",
+   "segment": "neck",
+   "side": null,
+   "frac": [
+    0,
+    1
+   ],
+   "axis": 2,
+   "slices": [
+    0,
+    51
+   ],
+   "proximalIsHigh": true,
+   "window": "soft",
+   "fit": "skull base z51 (top of C1, frac 0) down to z0 (C6 bottom, clavicle labels z0-2, frac 1)"
+  }
+ },
+ "ultrasound": {
+  "ts-s1042": {
+   "segment": "trunk",
+   "frac": [
+    0.0,
+    0.45
+   ],
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 16
+  },
+  "ts-s1164": {
+   "segment": "trunk",
+   "frac": [
+    0.0,
+    0.45
+   ],
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 16
+  },
+  "ts-s1337": {
+   "segment": "trunk",
+   "frac": [
+    0.0,
+    0.45
+   ],
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 16
+  },
+  "ts-s0513": {
+   "segment": "trunk",
+   "frac": [
+    0.45,
+    0.8
+   ],
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 16
+  },
+  "ts-s1383": {
+   "segment": "trunk",
+   "frac": [
+    0.45,
+    0.8
+   ],
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 16
+  },
+  "ts-s1390": {
+   "segment": "trunk",
+   "frac": [
+    0.45,
+    0.8
+   ],
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 16
+  },
+  "vh-forearm": {
+   "segment": "forearm",
+   "frac": [
+    0,
+    1.678
+   ],
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 6
+  },
+  "vh-thigh": {
+   "segment": "thigh",
+   "frac": [
+    0.12,
+    0.56
+   ],
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 10
+  },
+  "vh-leg": {
+   "segment": "leg",
+   "frac": [
+    -0.152,
+    0.84
+   ],
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 10
+  },
+  "vh-head-neck": {
+   "segment": "neck",
+   "frac": [
+    -1.469,
+    1
+   ],
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 8
+  }
+ }
+}
