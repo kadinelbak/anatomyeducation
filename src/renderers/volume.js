@@ -31,6 +31,28 @@ const FLIP_V = { axial: false, coronal: false, sagittal: false };
 
 let uid = 0;
 let csReady = null;
+const NORM16_OPT_IN = (() => { try { return new URLSearchParams(location.search).get("norm16") === "1" || localStorage.getItem("vol.norm16") === "1"; } catch { return false; } })();
+let texInfo = null;   // what the GPU offered and which int16 texture path the renderer takes; see hideNorm16()
+function hideNorm16() {
+  if (texInfo) return;
+  texInfo = { norm16: "?", floatLinear: "?", renderer: "?", path: "?" };
+  try {
+    const gl = document.createElement("canvas").getContext("webgl2");
+    const dbg = gl?.getExtension("WEBGL_debug_renderer_info");
+    texInfo.renderer = gl ? String(dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER)) : "no webgl2";
+    texInfo.norm16 = !!gl?.getExtension("EXT_texture_norm16");
+    texInfo.floatLinear = !!gl?.getExtension("OES_texture_float_linear");
+    gl?.getExtension("WEBGL_lose_context")?.loseContext();
+    const hide = texInfo.norm16 && !NORM16_OPT_IN && typeof WebGL2RenderingContext === "function";
+    if (hide) {
+      const orig = WebGL2RenderingContext.prototype.getExtension;
+      WebGL2RenderingContext.prototype.getExtension = function (name) { return name === "EXT_texture_norm16" ? null : orig.call(this, name); };
+    }
+    texInfo.path = texInfo.norm16 && !hide ? "R16_SNORM (norm16)" : "R32F (float)";
+    texInfo.norm16Hidden = hide;
+  } catch (e) { texInfo.error = String(e); }
+  console.info("volume: texture path", texInfo);
+}
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const nextFrame = () => new Promise((r) => requestAnimationFrame(r));
 
@@ -101,13 +123,15 @@ export async function createVolumeRenderer({ container, studyUrl, studiesBase = 
   container.append(root);
 
   // ---------- Cornerstone ----------
-  // preferSizeOverAccuracy: upload int16 voxels as half floats. Without it, data outside -2048..2048 (MR
-  // 0..4095, CT up to 3000) goes into an R32F texture that needs OES_texture_float_linear for linear
-  // filtering; where that extension is missing (seen in Firefox on Linux) the texture is incomplete and the
-  // slice renders black. Half floats keep 11 bits of mantissa, plenty for windowed display.
+  // Texture path. vtk.js uploads int16 voxels as R16_SNORM when the browser offers EXT_texture_norm16
+  // (desktop GPUs in Chromium and Firefox) and as R32F otherwise (SwiftShader, which every automated test
+  // here runs on). On kadin-main-sys (NVIDIA, Linux) the SNORM path drew Live's MRI black while the chip,
+  // labels and caption rendered, in both browsers; the R32F path has rendered every study here. Hide the
+  // extension so every GPU takes the tested path. ?norm16=1 (or localStorage vol.norm16=1) restores it.
   // webGlContextCount: the default pool of 7 WebGL contexts, plus MediaPipe's three and the mesh renderer,
   // approaches Firefox's per-site context limit, past which it silently drops the oldest context.
-  csReady = csReady || Promise.resolve(init({ rendering: { preferSizeOverAccuracy: true, webGlContextCount: 2, renderingEngineMode: Enums.RenderingEngineModeEnum?.Tiled ?? "tiled" } }));
+  hideNorm16();
+  csReady = csReady || Promise.resolve(init({ rendering: { webGlContextCount: 2, renderingEngineMode: Enums.RenderingEngineModeEnum?.Tiled ?? "tiled" } }));
   await csReady;
   const mkMeta = (bits, signed, modality) => ({
     BitsAllocated: bits, BitsStored: bits, SamplesPerPixel: 1, HighBit: bits - 1, PixelRepresentation: signed,
@@ -349,7 +373,11 @@ export async function createVolumeRenderer({ container, studyUrl, studiesBase = 
   function checkBlack(n) {
     try {
       const cv = vpEl.querySelector("canvas");
-      if (!cv || !cv.width || !cv.height) return;
+      if (!cv || !cv.width || !cv.height) {
+        console.warn("volume: the scan has no canvas to draw on", { study: studyId, canvas: cv ? [cv.width, cv.height] : null, root: [root.clientWidth, root.clientHeight] });
+        root.dataset.lit = "no canvas";
+        return;
+      }
       const probe = document.createElement("canvas");
       const w = probe.width = Math.min(96, cv.width), h = probe.height = Math.min(96, cv.height);
       const c2 = probe.getContext("2d");
@@ -357,24 +385,21 @@ export async function createVolumeRenderer({ container, studyUrl, studiesBase = 
       const px = c2.getImageData(0, 0, w, h).data;
       let lit = 0;
       for (let i = 0; i < px.length; i += 4) if (px[i] > 8 || px[i + 1] > 8 || px[i + 2] > 8) lit++;
+      const pct = Math.round((lit * 400) / px.length);   // percent of sampled pixels that are not black
+      root.dataset.lit = `${pct}%`;
+      console.info("volume: scan check", { study: studyId, lit: `${pct}%`, canvas: [cv.width, cv.height], path: texInfo?.path });
       if (lit > px.length / 400) { if (blackNote.parentNode) blackNote.remove(); return; }
       if (n === swapCounter && blackTimer !== -1) {
         // one retry: the first draw may not have landed yet
         blackTimer = -1; setTimeout(() => checkBlack(n), 1500); return;
       }
-      const gl = document.createElement("canvas").getContext("webgl2");
-      const dbg = gl?.getExtension("WEBGL_debug_renderer_info");
-      console.warn("volume: the scan drew black", {
-        study: studyId, dims, renderer: gl ? String(dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER)) : "no webgl2",
-        norm16: !!gl?.getExtension("EXT_texture_norm16"), floatLinear: !!gl?.getExtension("OES_texture_float_linear"),
-        colorBufferFloat: !!gl?.getExtension("EXT_color_buffer_float"), canvas: [cv.width, cv.height], ua: navigator.userAgent,
-      });
-      gl?.getExtension("WEBGL_lose_context")?.loseContext();
-      blackNote.textContent = "This browser drew the scan black. Please try it in Chrome or Chromium.";
+      console.warn("volume: the scan drew black", { study: studyId, dims, ...texInfo, canvas: [cv.width, cv.height], ua: navigator.userAgent });
+      blackNote.textContent = `This browser drew the scan black (${texInfo?.path || "?"}). Press D for details.`;
       if (!blackNote.parentNode) root.append(blackNote);
     } catch (e) { console.warn("volume: black check failed", e); }
   }
   const blackNote = el("div", "vol-blacknote");
+  root.dataset.lit = "";
 
   // ---------- Study swap ----------
   // Replaces both Cornerstone volumes. setVolumesForViewports drops the old actors from the viewport; the old

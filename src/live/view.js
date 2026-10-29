@@ -509,6 +509,19 @@ export function createLiveView({ root, onExit, openExplore, config, exploreRegio
   }
 
   // Press D (or open with ?live-debug=1): what the tracker and the gesture reader see right now.
+  let buildCache = null;   // short commit hash of the served checkout (local server only; "?" on Pages)
+  function buildId() {
+    if (buildCache !== null) return buildCache;
+    buildCache = "?";
+    (async () => {
+      try {
+        const head = (await (await fetch(".git/HEAD", { cache: "no-store" })).text()).trim();
+        const ref = head.startsWith("ref: ") ? (await (await fetch(".git/" + head.slice(5), { cache: "no-store" })).text()).trim() : head;
+        if (/^[0-9a-f]{40}$/.test(ref)) buildCache = ref.slice(0, 7);
+      } catch {}
+    })();
+    return buildCache;
+  }
   let glNameCache = null;
   function glName() {   // the GPU the browser renders WebGL with (software renderers explain a black or slow scan)
     if (glNameCache !== null) return glNameCache;
@@ -524,7 +537,8 @@ export function createLiveView({ root, onExit, openExplore, config, exploreRegio
     const f = (v) => (typeof v === "number" ? v.toFixed(v < 10 ? 1 : 0) : String(v));
     const lines = [`${f(st.fps)} fps · pose ${f(st.poseMs)} ms /${st.poseEvery ?? "?"} · hands ${f(st.handMs)} ms · face ${f(st.faceMs)} ms · ${st.backend || ""}`,
       `flow ${flow} · pointer hand ${pointerHand || "none"} · locked ${locked} · worker ${st.worker ?? "?"} · gl ${glName()}`,
-      `scan ${modality || "none"} · last apply ${f(scanStat.ms)} ms · ${scanStat.n} applied · ${scanStat.fails} failed${scanStat.last ? " · " + scanStat.last.slice(0, 60) : ""}`];
+      `scan ${modality || "none"} · last apply ${f(scanStat.ms)} ms · ${scanStat.n} applied · ${scanStat.fails} failed${scanStat.last ? " · " + scanStat.last.slice(0, 60) : ""}`,
+      `build ${buildId()} · scan pixels lit ${el.scanView.querySelector("[data-lit]")?.dataset.lit || "not checked"} · study ${el.scanView.dataset.study || "-"} slice ${el.scanView.dataset.slice || "-"}`];
     for (const hd of frame.hands || []) {
       const r = gs?.hands?.[hd.side];
       const n = r ? ["index", "middle", "ring", "pinky"].filter((k) => r.extended?.[k]).length : "?";
