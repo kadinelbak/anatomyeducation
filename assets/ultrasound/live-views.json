@@ -1,6 +1,6 @@
 {
  "version": 1,
- "notes": "Simulated B-mode from CT for Live mode. fracSpan = trunk fraction (shoulders 0 -> hips 1) the study covers. Study frac runs inferior 0 -> superior 1, so study frac = 1 - (frac - a)/(b - a). Probe angle: 0 = anterior, 90 = patient's left, 270 = patient's right (bmode.js). sweepDeg = angle swing across the trunk width; longitudinalWithinDeg = finger-to-axis angle that counts as longitudinal. Limb and neck studies (vh-*) span the whole volume: fracSpan is the segment fraction mapped onto the volume, proximal at the top slice, so it can lie outside 0..1.",
+ "notes": "Simulated B-mode from CT for Live mode. fracSpan = trunk fraction (shoulders 0 -> hips 1) the study covers. Study frac runs inferior 0 -> superior 1, so study frac = 1 - (frac - a)/(b - a). Probe angle: 0 = anterior, 90 = patient's left, 270 = patient's right (bmode.js). sweepDeg = angle swing across the trunk width; longitudinalWithinDeg = finger-to-axis angle that counts as longitudinal. Limb and neck studies (vh-*) span the whole volume: fracSpan is the segment fraction mapped onto the volume, proximal at the top slice, so it can lie outside 0..1. studyFrac = [volume frac at fracSpan start, at fracSpan end] from the study's anchors in assets/live/studies.json; without it the whole volume is spread over fracSpan. A key with @ (ts-s0513@pelvis) is a second band of the same study; studyId names the study.",
  "sweepDeg": 60,
  "longitudinalWithinDeg": 35,
  "studies": {
@@ -14,7 +14,11 @@
    "anchor": "shoulders",
    "angleFront": 0,
    "angleBack": 180,
-   "depth": 16
+   "depth": 16,
+   "studyFrac": [
+    0.861,
+    0.245
+   ]
   },
   "ts-s1164": {
    "segment": "trunk",
@@ -26,7 +30,11 @@
    "anchor": "shoulders",
    "angleFront": 0,
    "angleBack": 180,
-   "depth": 16
+   "depth": 16,
+   "studyFrac": [
+    0.86,
+    0.327
+   ]
   },
   "ts-s1337": {
    "segment": "trunk",
@@ -38,7 +46,11 @@
    "anchor": "shoulders",
    "angleFront": 0,
    "angleBack": 180,
-   "depth": 16
+   "depth": 16,
+   "studyFrac": [
+    0.882,
+    0.269
+   ]
   },
   "ts-s0513": {
    "segment": "trunk",
@@ -50,7 +62,11 @@
    "anchor": "shoulders",
    "angleFront": 0,
    "angleBack": 180,
-   "depth": 16
+   "depth": 16,
+   "studyFrac": [
+    0.899,
+    0.434
+   ]
   },
   "ts-s1383": {
    "segment": "trunk",
@@ -62,7 +78,11 @@
    "anchor": "shoulders",
    "angleFront": 0,
    "angleBack": 180,
-   "depth": 16
+   "depth": 16,
+   "studyFrac": [
+    0.962,
+    0.516
+   ]
   },
   "ts-s1390": {
    "segment": "trunk",
@@ -74,7 +94,11 @@
    "anchor": "shoulders",
    "angleFront": 0,
    "angleBack": 180,
-   "depth": 16
+   "depth": 16,
+   "studyFrac": [
+    0.912,
+    0.522
+   ]
   },
   "vh-forearm": {
    "segment": "forearm",
@@ -123,6 +147,57 @@
    "angleFront": 0,
    "angleBack": 180,
    "depth": 8
+  },
+  "ts-s0513@pelvis": {
+   "studyId": "ts-s0513",
+   "segment": "trunk",
+   "region": "Pelvis",
+   "fracSpan": [
+    0.8,
+    1.0
+   ],
+   "studyFrac": [
+    0.434,
+    0.05
+   ],
+   "anchor": "shoulders",
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 16
+  },
+  "ts-s1383@pelvis": {
+   "studyId": "ts-s1383",
+   "segment": "trunk",
+   "region": "Pelvis",
+   "fracSpan": [
+    0.8,
+    1.0
+   ],
+   "studyFrac": [
+    0.516,
+    0.069
+   ],
+   "anchor": "shoulders",
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 16
+  },
+  "ts-s1390@pelvis": {
+   "studyId": "ts-s1390",
+   "segment": "trunk",
+   "region": "Pelvis",
+   "fracSpan": [
+    0.8,
+    1.0
+   ],
+   "studyFrac": [
+    0.522,
+    0.075
+   ],
+   "anchor": "shoulders",
+   "angleFront": 0,
+   "angleBack": 180,
+   "depth": 16
   }
  }
 }
