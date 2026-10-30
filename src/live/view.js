@@ -386,9 +386,12 @@ export function createLiveView({ root, onExit, openExplore, config, exploreRegio
     if (locked && result) {
       const key = `${result.region.model}:${result.region.key}`;
       if (key !== lastKey) { lastKey = key; fillPanel(result); }
-      if (!rec) flowPill("tracking", `${result.region.label} \u00b7 locked`, now);
+      // Locked, but nothing refined the slice this frame (the pointing hand is not in view): say so instead of sitting still.
+      const hint = result.onSegment === false ? " \u00b7 show your pointing hand to scan" : "";
+      if (!rec) flowPill("tracking", `${result.region.label} \u00b7 locked${hint}`, now);
+      lastResult = result;
       const ph = frame.hands.find((hd) => hd.side === (pointerHand || result.hand));
-      if (ph) probeStep(ctx, frame, result, ph);
+      if (ph && result.onSegment !== false) probeStep(ctx, frame, result, ph);
       try { setZoom(zoomTarget(frame, result)); } catch (e) { console.warn("live: zoom failed", e); }
       if (gs) { drawGlyph(ctx, frame, gs); lockedGestures(gs, now); }
     } else if (!locked) {
@@ -545,6 +548,8 @@ export function createLiveView({ root, onExit, openExplore, config, exploreRegio
       lines.push(`hand ${hd.side}: ${r?.shape || "?"} · ${n} fingers · thumb ${r?.extended?.thumb ? "out" : "in"} · raised ${!!r?.raised} · score ${f(hd.score)}`);
     }
     if (!(frame.hands || []).length) lines.push("no hands");
+    const lr = locked && lastResult;
+    lines.push(lr ? `point ${lr.region?.label || lr.segment} \u00b7 frac ${lr.frac.toFixed(2)} \u00b7 on segment ${lr.onSegment ?? "?"} \u00b7 body ${lr.bodySeen ?? "?"} \u00b7 hips ${lr.hipsEstimated ? "estimated" : "seen"}` : "point none");
     const b = frame.face?.blink;
     lines.push(b ? `blink L ${b.left.toFixed(2)} R ${b.right.toFixed(2)}` : "no face");
     if (gs) lines.push(`gestures: count ${gs.count ?? "-"} · fist ${gs.fist} · twoFists ${gs.twoFists} · blink ${gs.blink} · raised ${gs.raised || "-"} · control ${gs.control?.side || "-"}`);
@@ -559,7 +564,7 @@ export function createLiveView({ root, onExit, openExplore, config, exploreRegio
     if (el.unlock) el.unlock.hidden = true;
     clearPanel();
   }
-  let lastResultSeen = false;
+  let lastResultSeen = false, lastResult = null;
   function onStageClick() {
     if (!active || cal) return;
     if (locked) return unlockNow();
