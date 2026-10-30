@@ -10,7 +10,9 @@ const tr = { tip: { x: 0.5, y: 0.4 }, dir: { x: 1, y: 0 } }, lo = { tip: { x: 0.
 let r = p.request(pt({}), tr);
 assert(chest.includes(r.study) && r.kind === "ultrasound" && r.simulated);
 assert.equal(r.view.rot, 0); assert(r.view.frac >= 0 && r.view.frac <= 1); assert.equal(r.view.angle, 0);
-assert(Math.abs(r.view.frac - (1 - 0.2 / 0.45)) < 1e-3);
+{ const e = data.studies[r.study], [a, b] = e.studyFrac; assert(Math.abs(r.view.frac - (a + (b - a) * (0.2 / 0.45))) < 1e-3, "chest frac follows the study's anchored span"); }
+// Pelvis band: a second entry of an abdomen study, loaded under the study's own id and mapped onto its lower part.
+r = p.request(pt({ frac: 0.9 }), tr); assert(abd.includes(r.study), "pelvis uses a trunk CT study id, not the @pelvis key"); assert(/^Pelvis/.test(r.caption)); assert(r.view.frac > 0.1 && r.view.frac < 0.4, `pelvis frac in the lower volume (${r.view.frac})`);
 r = p.request(pt({}), lo); assert.equal(r.view.rot, 90);
 r = p.request(pt({ facing: "back" }), tr); assert.equal(r.view.angle, 180);
 r = p.request(pt({}), { tip: { x: 0.7, y: 0.4 }, dir: { x: 1, y: 0 } }); assert.equal(r.view.angle, 60);

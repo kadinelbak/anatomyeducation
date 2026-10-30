@@ -123,6 +123,9 @@ export async function createUltrasoundRenderer({ container, studiesBase = "asset
     return o;
   }
   function resolveView(v) {
+    // An object { frac, angle, tilt, rot, depth } is what Live's probe sends while the finger moves (see
+    // src/live/CONTRACTS.md); it used to be read as an empty string and fall back to the study's first view.
+    if (v && typeof v === "object") return normalise({ frac: 0.5, angle: 0, tilt: 0, rot: 0, depth: 16, ...v });
     let s = typeof v === "string" ? v.trim() : "";
     if (s.startsWith("us:")) s = s.slice(3);
     if (s.includes("=")) {

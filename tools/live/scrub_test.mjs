@@ -30,7 +30,7 @@ for (const tool of (process.env.TOOLS || "mri,ct,ultrasound").split(",")) {
   // Sample one full sweep (frames loop every 7.5 s).
   const samples = [];
   for (let i = 0; i < 80; i++) {
-    samples.push(await page.evaluate(() => { const v = document.querySelector(".live-scan-view"); return { slice: v?.dataset.slice, plane: v?.dataset.plane, study: v?.dataset.study, cap: document.querySelector(".live-caption")?.textContent, slider: document.querySelector(".live-scan-view .vol-slider")?.value }; }));
+    samples.push(await page.evaluate(() => { const v = document.querySelector(".live-scan-view"); return { slice: v?.dataset.slice, plane: v?.dataset.plane, study: v?.dataset.study, cap: document.querySelector(".live-caption")?.textContent, slider: document.querySelector(".live-scan-view .vol-slider")?.value, level: document.querySelector(".live-scan-view .us-level")?.value }; }));
     await page.waitForTimeout(100);
   }
   const slices = new Set(samples.map((s) => s.slice).filter(Boolean));
@@ -42,6 +42,8 @@ for (const tool of (process.env.TOOLS || "mri,ct,ultrasound").split(",")) {
   // The request is not enough: the viewer's own slice slider (its camera depth) must move too. It sat at the
   // middle for every request while resolveView() did not understand the probe's { plane, frac, window } object.
   if (tool !== "ultrasound") { const sliders = new Set(samples.map((s) => s.slider).filter(Boolean)); check(sliders.size >= 10, `${tool}: the viewer's slice slider takes ${sliders.size} values (>= 10): ${[...sliders].slice(0, 12).join(",")}`); }
+  // Likewise the ultrasound renderer's own level slider (its pose frac) must follow the finger, not sit on the study's first view.
+  if (tool === "ultrasound") { const levels = new Set(samples.map((s) => s.level).filter(Boolean)); check(levels.size >= 10, `${tool}: the viewer's level slider takes ${levels.size} values (>= 10): ${[...levels].slice(0, 12).join(",")}`); }
   if (tool !== "ultrasound") check(planes.size === 1 && planes.has("axial"), `${tool}: plane stays axial (${[...planes].join(",")})`);
   // CT/MRI/X-ray stay on the study Explore opens first for the locked region (thorax -> chest): one study per lock.
   const EXPLORE_FIRST = { mri: "ts-mr-s0153", ct: "ts-s1042" };
