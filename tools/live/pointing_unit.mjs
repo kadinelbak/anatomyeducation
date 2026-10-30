@@ -314,6 +314,13 @@ const fresh = () => createPointer({ segmentsUrl: "assets/live/segments.json", lo
   check("hard lock: frac follows the finger past the seek filters", r?.locked && r.segment === "forearm" && r.frac > 0.75 && r.frac < 0.85, JSON.stringify([r?.segment, r?.frac]));
   r = p.update(frame(t += 33, hand("left", 0.35 + 0.2 * (0.32 - 0.35), 0.45 + 0.2 * 0.15), { mask: off }));
   check("hard lock: and back up the forearm", r?.locked && r.frac > 0.15 && r.frac < 0.25, JSON.stringify(r?.frac));
+  // the finger far from the forearm still scrubs it (its projection onto the axis), and a frame without a
+  // pose at all uses the segment's last seen geometry
+  r = p.update(frame(t += 33, hand("left", 0.5, 0.45 + 0.7 * 0.15), { mask: off }));
+  check("hard lock: a finger far off the forearm still scrubs it", r?.locked && r.segment === "forearm" && r.frac > 0.4 && r.frac < 0.6, JSON.stringify([r?.segment, r?.frac]));
+  const noPose = { ...frame(t += 33, hand("left", 0.35 + 0.9 * (0.32 - 0.35), 0.45 + 0.9 * 0.15)), pose: null };
+  r = p.update(noPose);
+  check("hard lock: no pose this frame, frac still follows the finger", r?.locked && r.segment === "forearm" && r.frac > 0.85 && r.frac < 0.95, JSON.stringify([r?.segment, r?.frac]));
   p.unlock();
   r = p.update(frame(t, hand("left", 0.5, 0.42)));
   check("hard lock: unlock() releases, trunk can lead", p.locked === false && r?.segment === "trunk" && r.locked === false, JSON.stringify([r?.segment, r?.locked]));
