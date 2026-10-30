@@ -105,7 +105,9 @@ during the no-candidate grace period `update` keeps returning the locked result.
 frac keeps following the pointing hand's index tip (landmark 8) along the locked segment from wherever
 the tip is, whatever its hand shape, the person mask or the depth hint say; on frames where the pose
 model loses the body (too close to the camera, shoulders off frame) the segment's last seen geometry
-is used, so the finger's height always moves the slice. Contacts are rejected when the pose model's own index
+is used, so the finger's height always moves the slice. Under a hard lock `region`, `structures` and
+`aspect` are frozen at lock time too (a finger sliding from the chest band into the belly band keeps the
+locked region and its pinned scan; the caption then says "end of this scan" past its coverage). Contacts are rejected when the pose model's own index
 tip of the pointing hand (pose landmark 19 left / 20 right, visibility >= 0.3, within one shoulder
 width of the hand tip) is nearer the camera than the limb at the contact point by more than 0.6
 shoulder widths (pose `z`; skipped when every `z` is 0 or missing). A hanging arm's finger on its

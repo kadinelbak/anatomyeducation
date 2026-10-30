@@ -69,6 +69,8 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
   let history = [];             // last VOTE_FRAMES entries: { key, res } or null
   let leaderKey = null, leadStart = 0, nullSince = null;
   let locked = false, lockedKey = null, lastCandT = 0, lastT = 0;
+  let lockRegion = null; // hard lock: { region, structures, aspect } frozen at lock time: the finger sliding from the
+                         // chest band into the belly band keeps the locked region (and its pinned scan); only frac moves
   let lockGeom = null;   // hard lock: { ctx, inst } from the last frame the locked segment was seen, so the finger
                          // still scrubs it on frames where the pose model loses the body (very close, or off frame)
   let awaySince = null;        // locked, and the finger has led a different segment since this time
@@ -366,7 +368,7 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
 
   function forget() { history = []; leaderKey = null; nullSince = null; }
   function doUnlock() {
-    locked = false; lockedKey = null; awaySince = null; lockGeom = null;
+    locked = false; lockedKey = null; awaySince = null; lockGeom = null; lockRegion = null;
     forget();
     if (last) last = { ...last, progress: 0, locked: false, stable: false };
   }
@@ -392,7 +394,8 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
         let on = ctx ? bestOf(all.filter((c) => c.key === lockedKey)) : null, onCtx = ctx;
         if (on) lockGeom = { ctx, inst: on.inst };
         else if (hardLock) { const f = follow(frame, ctx); if (f) { on = f.c; onCtx = f.ctx; if (ctx && ctx.list.includes(on.inst)) lockGeom = { ctx, inst: on.inst }; } }
-        last = on ? { ...finish(build(onCtx, on), 1), bodySeen: !!ctx } : { ...last, tip: sel ? { x: sel.tip.x, y: sel.tip.y } : last.tip, onSegment: false, bodySeen: !!ctx };
+        if (on && hardLock && !lockRegion && last?.region) lockRegion = { region: last.region, structures: last.structures, aspect: last.aspect };
+        last = on ? { ...finish(build(onCtx, on), 1), ...(hardLock ? lockRegion : null), bodySeen: !!ctx } : { ...last, tip: sel ? { x: sel.tip.x, y: sel.tip.y } : last.tip, onSegment: false, bodySeen: !!ctx };
         return last;
       }
       doUnlock();
@@ -548,6 +551,6 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
     setHardLock(on) { hardLock = !!on; },
     get hardLock() { return hardLock; },
     get pointerHand() { return pointerHand; },
-    reset() { forget(); locked = false; lockedKey = null; lockGeom = null; last = null; },
+    reset() { forget(); locked = false; lockedKey = null; lockGeom = null; lockRegion = null; last = null; },
   };
 }
