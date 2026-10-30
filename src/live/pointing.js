@@ -21,8 +21,6 @@ const EXTENDED = 1.1;           // fingertip-to-palm distance / hand size for an
 const VOTE_FRAMES = 8;
 const LOCK_MS = 900;            // the same coarse key leading this long locks it
 const UNLOCK_MS = 1500;         // this long without any pointing candidate releases a lock
-const FOLLOW = 3.0;              // hard lock: the finger still scrubs the locked segment out to this many radii,
-                                 // whatever its shape, the person mask or the depth hint say
 const RETARGET_MS = 1500;       // locked, but a different segment leads this long: release so it can lock
 const NULL_RESET_MS = 200;      // (unlocked) this long without a hit forgets the history
 const DEPTH_TOL = 0.6;          // pose index tip this far (shoulder widths) nearer than the limb = in front
@@ -69,6 +67,8 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
   let history = [];             // last VOTE_FRAMES entries: { key, res } or null
   let leaderKey = null, leadStart = 0, nullSince = null;
   let locked = false, lockedKey = null, lastCandT = 0, lastT = 0;
+  let lockGeom = null;   // hard lock: { ctx, inst } from the last frame the locked segment was seen, so the finger
+                         // still scrubs it on frames where the pose model loses the body (very close, or off frame)
   let awaySince = null;        // locked, and the finger has led a different segment since this time
   let hardLock = false;        // when set, a lock only ends with unlock(): no grace-period or retarget release
   let last = null;              // last result
@@ -260,6 +260,9 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
 
   // Hard lock: the pointing hand's index tip against the locked segment only, with none of the
   // seek-time filters, so moving the finger keeps stepping through the scan.
+  // Hard lock: the pointing hand's index tip scrubs the locked segment from wherever it is, whatever
+  // its shape, the person mask or the depth hint say, and however far from the segment it has wandered.
+  // `ctx` may be null (no pose this frame): the segment's last seen geometry is used instead.
   function follow(frame, ctx) {
     const out = [];
     let hands = (frame.hands || []).filter((h) => !pointerHand || h.side === pointerHand);
@@ -270,17 +273,18 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
       const near = frame.hands.reduce((b, h) => (d(h) < d(b) ? h : b));
       if (d(near) < 0.15) hands = [near];
     }
+    let insts = ctx ? ctx.list.filter((inst) => inst.key === lockedKey) : [];
+    let useCtx = ctx;
+    if (!insts.length && lockGeom) { insts = [lockGeom.inst]; useCtx = lockGeom.ctx; }
+    if (!useCtx) return null;
     for (const hand of hands) {
       const l8 = hand.landmarks?.[8];
       if (!l8 || l8.x < 0 || l8.x > 1 || l8.y < 0 || l8.y > 1) continue;
-      const tip = { x: l8.x, y: l8.y, px: pxPoint(l8, ctx.sc) };
-      for (const inst of ctx.list) {
-        if (inst.key !== lockedKey) continue;
-        const c = contactWith(ctx, inst, tip, hand.side);
-        if (c.norm <= FOLLOW) out.push(c);
-      }
+      const tip = { x: l8.x, y: l8.y, px: pxPoint(l8, useCtx.sc) };
+      for (const inst of insts) out.push(contactWith(useCtx, inst, tip, hand.side));
     }
-    return bestOf(out);
+    const best = bestOf(out);
+    return best ? { c: best, ctx: useCtx } : null;
   }
 
   // Coarse selection with hysteresis against the current leader: the leader keeps the lead while
@@ -345,7 +349,7 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
 
   function forget() { history = []; leaderKey = null; nullSince = null; }
   function doUnlock() {
-    locked = false; lockedKey = null; awaySince = null;
+    locked = false; lockedKey = null; awaySince = null; lockGeom = null;
     forget();
     if (last) last = { ...last, progress: 0, locked: false, stable: false };
   }
@@ -368,8 +372,10 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
       const away = !hardLock && awaySince !== null && t - awaySince > RETARGET_MS;
       if (!away && (hardLock || sel || t - lastCandT <= UNLOCK_MS)) {
         // Segment and side are frozen; refine frac / band / aspect when the tip is on the locked segment.
-        const on = bestOf(all.filter((c) => c.key === lockedKey)) || (hardLock && ctx ? follow(frame, ctx) : null);
-        last = on ? finish(build(ctx, on), 1) : { ...last, tip: sel ? { x: sel.tip.x, y: sel.tip.y } : last.tip };
+        let on = ctx ? bestOf(all.filter((c) => c.key === lockedKey)) : null, onCtx = ctx;
+        if (on) lockGeom = { ctx, inst: on.inst };
+        else if (hardLock) { const f = follow(frame, ctx); if (f) { on = f.c; onCtx = f.ctx; if (ctx && ctx.list.includes(on.inst)) lockGeom = { ctx, inst: on.inst }; } }
+        last = on ? finish(build(onCtx, on), 1) : { ...last, tip: sel ? { x: sel.tip.x, y: sel.tip.y } : last.tip };
         return last;
       }
       doUnlock();
@@ -525,6 +531,6 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
     setHardLock(on) { hardLock = !!on; },
     get hardLock() { return hardLock; },
     get pointerHand() { return pointerHand; },
-    reset() { forget(); locked = false; lockedKey = null; last = null; },
+    reset() { forget(); locked = false; lockedKey = null; lockGeom = null; last = null; },
   };
 }

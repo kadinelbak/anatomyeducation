@@ -102,8 +102,10 @@ and side are frozen (fine fields keep refining while the tip is on that segment)
 has led for 1500 ms (the lock then releases and the new segment locks after its own 900 ms);
 during the no-candidate grace period `update` keeps returning the locked result. With
 `setHardLock(true)` (the view's default) neither release applies: a lock lasts until `unlock()`, and
-frac keeps following the pointing hand's index tip (landmark 8) along the locked segment out to 3 radii,
-whatever its hand shape, the person mask or the depth hint say. Contacts are rejected when the pose model's own index
+frac keeps following the pointing hand's index tip (landmark 8) along the locked segment from wherever
+the tip is, whatever its hand shape, the person mask or the depth hint say; on frames where the pose
+model loses the body (too close to the camera, shoulders off frame) the segment's last seen geometry
+is used, so the finger's height always moves the slice. Contacts are rejected when the pose model's own index
 tip of the pointing hand (pose landmark 19 left / 20 right, visibility >= 0.3, within one shoulder
 width of the hand tip) is nearer the camera than the limb at the contact point by more than 0.6
 shoulder widths (pose `z`; skipped when every `z` is 0 or missing). A hanging arm's finger on its
