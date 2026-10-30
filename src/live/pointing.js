@@ -21,6 +21,8 @@ const EXTENDED = 1.1;           // fingertip-to-palm distance / hand size for an
 const VOTE_FRAMES = 8;
 const LOCK_MS = 900;            // the same coarse key leading this long locks it
 const UNLOCK_MS = 1500;         // this long without any pointing candidate releases a lock
+const HIP_DROP = 1.25;          // hips out of view (seated at a desk): hip joints sit this many shoulder widths below the shoulders
+const HIP_HALF = 0.3;           // ...and this many shoulder widths either side of the trunk's midline
 const RETARGET_MS = 1500;       // locked, but a different segment leads this long: release so it can lock
 const NULL_RESET_MS = 200;      // (unlocked) this long without a hit forgets the history
 const DEPTH_TOL = 0.6;          // pose index tip this far (shoulder widths) nearer than the limb = in front
@@ -156,11 +158,23 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
     if (!ls || !rs) return null;
     const sw = dist(ls, rs);
     if (sw < 1e-6) return null;
+    // Seated at a desk, the camera sees the shoulders but not the hips, and the trunk zone would vanish with
+    // them. Estimate the hip joints from the shoulder line instead (pixel space, so the frame's aspect ratio
+    // does not skew the drop), and use them for the trunk only; the legs still need real hips.
+    let lmsTrunk = lms, hipsEstimated = false;
+    if (!point(23, lms, sc) || !point(24, lms, sc)) {
+      const ux = (ls.x - rs.x) / sw, uy = (ls.y - rs.y) / sw;          // unit vector along the shoulders, 12 -> 11
+      let px = -uy, py = ux; if (py < 0) { px = -px; py = -py; }       // its perpendicular, pointing down the image
+      const mx = (ls.x + rs.x) / 2 + px * HIP_DROP * sw, my = (ls.y + rs.y) / 2 + py * HIP_DROP * sw;
+      const hip = (k) => ({ x: (mx + k * ux * HIP_HALF * sw) / sc.W, y: (my + k * uy * HIP_HALF * sw) / sc.H, z: ls.z, v: 1 });
+      lmsTrunk = lms.slice(); lmsTrunk[23] = hip(1); lmsTrunk[24] = hip(-1);
+      hipsEstimated = true;
+    }
     const out = [];
     for (const [id, seg] of Object.entries(segments)) {
       for (const side of seg.midline ? [null] : ["left", "right"]) {
         if (pointerHand && side === pointerHand && OWN_ARM.includes(id)) continue;   // the pointing arm is never a zone
-        const inst = instance(id, seg, side, lms, sc);
+        const inst = instance(id, seg, side, id === "trunk" ? lmsTrunk : lms, sc);
         if (inst) { inst.radius = radiusOf(id) * sw; inst.key = keyOf(inst.id, inst.side); out.push(inst); }
       }
     }
@@ -178,7 +192,7 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
       const S = point(s, lms, sc), E = point(e, lms, sc), Wr = point(w, lms, sc);
       hanging[side] = !!(down(S, E) && down(E, Wr));
     }
-    return { list: out, sc, sw, swN, hasZ, lms, facing, hanging, midX: (ls.x + rs.x) / 2 };
+    return { list: out, sc, sw, swN, hasZ, lms, facing, hanging, hipsEstimated, midX: (ls.x + rs.x) / 2 };
   }
 
   // ---- finger test ----
@@ -343,6 +357,9 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
       progress: 0,
       locked: false,
       stable: false,
+      onSegment: true,                      // this frame's tip refined frac (false on locked frames that reuse the last result)
+      bodySeen: true,                       // the pose gave a body to measure against (false on locked frames without one)
+      hipsEstimated: !!ctx.hipsEstimated,   // the trunk zone used hips estimated from the shoulders
     };
   }
   const finish = (res, progress) => ({ ...res, progress, locked, stable: locked });
@@ -375,7 +392,7 @@ export async function createPointer({ segmentsUrl = "assets/live/segments.json",
         let on = ctx ? bestOf(all.filter((c) => c.key === lockedKey)) : null, onCtx = ctx;
         if (on) lockGeom = { ctx, inst: on.inst };
         else if (hardLock) { const f = follow(frame, ctx); if (f) { on = f.c; onCtx = f.ctx; if (ctx && ctx.list.includes(on.inst)) lockGeom = { ctx, inst: on.inst }; } }
-        last = on ? finish(build(onCtx, on), 1) : { ...last, tip: sel ? { x: sel.tip.x, y: sel.tip.y } : last.tip };
+        last = on ? { ...finish(build(onCtx, on), 1), bodySeen: !!ctx } : { ...last, tip: sel ? { x: sel.tip.x, y: sel.tip.y } : last.tip, onSegment: false, bodySeen: !!ctx };
         return last;
       }
       doUnlock();

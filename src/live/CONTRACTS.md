@@ -111,6 +111,14 @@ width of the hand tip) is nearer the camera than the limb at the contact point b
 shoulder widths (pose `z`; skipped when every `z` is 0 or missing). A hanging arm's finger on its
 own thigh or leg is ranked as a resting hand (+0.5), so the other hand's point wins.
 
+Trunk with the hips out of view (2026-10-30): when hip landmarks 23/24 fall under the visibility
+threshold (a person seated at a desk), the trunk polygon uses hip joints estimated from the shoulder
+line, 1.25 shoulder widths down its perpendicular and 0.3 shoulder widths either side of the midline;
+the legs still need real hips. Results carry `hipsEstimated`. A locked result also carries `onSegment`
+(false when this frame's tip did not refine frac, so the fields are the previous frame's) and
+`bodySeen` (false when the frame had no usable pose, so the last seen geometry was used); the view
+says why the scan is not following the finger when `onSegment` is false instead of showing a frozen slice.
+
 `PointResult`:
 
 ```js
