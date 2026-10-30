@@ -387,7 +387,7 @@ export function createLiveView({ root, onExit, openExplore, config, exploreRegio
       const key = `${result.region.model}:${result.region.key}`;
       if (key !== lastKey) { lastKey = key; fillPanel(result); }
       // Locked, but nothing refined the slice this frame (the pointing hand is not in view): say so instead of sitting still.
-      const hint = result.onSegment === false ? " \u00b7 show your pointing hand to scan" : "";
+      const hint = result.onSegment === false ? " \u00b7 move back so your pointing hand and chest are in view" : "";
       if (!rec) flowPill("tracking", `${result.region.label} \u00b7 locked${hint}`, now);
       lastResult = result;
       // The probe is the pointing hand. The hand detector can mislabel a lone hand's side, so when no hand
