@@ -390,7 +390,10 @@ export function createLiveView({ root, onExit, openExplore, config, exploreRegio
       const hint = result.onSegment === false ? " \u00b7 show your pointing hand to scan" : "";
       if (!rec) flowPill("tracking", `${result.region.label} \u00b7 locked${hint}`, now);
       lastResult = result;
-      const ph = frame.hands.find((hd) => hd.side === (pointerHand || result.hand));
+      // The probe is the pointing hand. The hand detector can mislabel a lone hand's side, so when no hand
+      // carries that label take the one whose index tip is at the tip the pointer just refined from.
+      const near = (hd) => { const l = hd.landmarks?.[8]; return l && result.tip ? Math.hypot(l.x - result.tip.x, l.y - result.tip.y) : Infinity; };
+      const ph = frame.hands.find((hd) => hd.side === (pointerHand || result.hand)) || frame.hands.filter((hd) => near(hd) < 0.15).sort((a, b) => near(a) - near(b))[0];
       if (ph && result.onSegment !== false) probeStep(ctx, frame, result, ph);
       try { setZoom(zoomTarget(frame, result)); } catch (e) { console.warn("live: zoom failed", e); }
       if (gs) { drawGlyph(ctx, frame, gs); lockedGestures(gs, now); }
