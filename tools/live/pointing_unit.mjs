@@ -322,6 +322,13 @@ const fresh = () => createPointer({ segmentsUrl: "assets/live/segments.json", lo
   r = p.update(noPose);
   check("hard lock: no pose this frame, frac still follows the finger", r?.locked && r.segment === "forearm" && r.frac > 0.85 && r.frac < 0.95, JSON.stringify([r?.segment, r?.frac]));
   p.unlock();
+  // a trunk lock made on the chest keeps the chest region (and its structures) while the finger slides to the pelvis
+  for (t += 33; t <= 12000; t += 33) r = p.update(frame(t, hand("left", 0.5, 0.30 + 0.2 * 0.25)));
+  const chest = r?.region?.key;
+  check("hard lock: trunk locks on the chest band", r?.locked && r.segment === "trunk" && chest === "thorax", JSON.stringify([r?.locked, r?.segment, chest]));
+  r = p.update(frame(t += 33, hand("left", 0.5, 0.30 + 0.92 * 0.25)));
+  check("hard lock: region stays the chest while frac reaches the pelvis", r?.region?.key === "thorax" && r.frac > 0.85, JSON.stringify([r?.region?.key, r?.frac]));
+  p.unlock();
   r = p.update(frame(t, hand("left", 0.5, 0.42)));
   check("hard lock: unlock() releases, trunk can lead", p.locked === false && r?.segment === "trunk" && r.locked === false, JSON.stringify([r?.segment, r?.locked]));
 }
