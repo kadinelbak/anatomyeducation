@@ -9,7 +9,8 @@ export function createUltrasoundProbe({ liveViewsUrl = "assets/ultrasound/live-v
   const ready = views ? Promise.resolve(views)
     : fetch(liveViewsUrl).then((r) => r.json()).then((j) => (views = j));
 
-  const studies = () => Object.entries(views?.studies || {}).map(([study, e]) => ({ study, ...e }));
+  // A key may be a second band of one study (ts-s0513@pelvis): studyId names the study to load.
+  const studies = () => Object.entries(views?.studies || {}).map(([key, e]) => ({ key, ...e, study: e.studyId || key }));
   // Entries whose segment and fracSpan cover the pointed trunk fraction (all of them, in file order).
   function entriesFor(point) {
     if (!point) return [];
@@ -31,7 +32,10 @@ export function createUltrasoundProbe({ liveViewsUrl = "assets/ultrasound/live-v
     if (!e) return null;
     const [a, b] = e.fracSpan;
     const t = clamp((point.frac - a) / (b - a), 0, 1);
-    const frac = +(1 - t).toFixed(4); // study frac 0 is inferior, pointer frac 0 is the shoulders
+    // Study frac 0 is inferior, pointer frac 0 is the shoulders. studyFrac maps the band onto the part of
+    // the volume it covers (from the study's anchors); without it the whole volume spans the band.
+    const sf = Array.isArray(e.studyFrac) && e.studyFrac.length === 2 ? e.studyFrac : [1, 0];
+    const frac = +(sf[0] + (sf[1] - sf[0]) * t).toFixed(4);
     const back = point.facing === "back";
     const tip = probeTip?.tip || point.tip || { x: 0.5, y: 0.5 };
     // Horizontal position between the trunk edges (point.trunkX = { left, right } image x, optional).

@@ -102,12 +102,24 @@ and side are frozen (fine fields keep refining while the tip is on that segment)
 has led for 1500 ms (the lock then releases and the new segment locks after its own 900 ms);
 during the no-candidate grace period `update` keeps returning the locked result. With
 `setHardLock(true)` (the view's default) neither release applies: a lock lasts until `unlock()`, and
-frac keeps following the pointing hand's index tip (landmark 8) along the locked segment out to 3 radii,
-whatever its hand shape, the person mask or the depth hint say. Contacts are rejected when the pose model's own index
+frac keeps following the pointing hand's index tip (landmark 8) along the locked segment from wherever
+the tip is, whatever its hand shape, the person mask or the depth hint say; on frames where the pose
+model loses the body (too close to the camera, shoulders off frame) the segment's last seen geometry
+is used, so the finger's height always moves the slice. Under a hard lock `region`, `structures` and
+`aspect` are frozen at lock time too (a finger sliding from the chest band into the belly band keeps the
+locked region and its pinned scan; the caption then says "end of this scan" past its coverage). Contacts are rejected when the pose model's own index
 tip of the pointing hand (pose landmark 19 left / 20 right, visibility >= 0.3, within one shoulder
 width of the hand tip) is nearer the camera than the limb at the contact point by more than 0.6
 shoulder widths (pose `z`; skipped when every `z` is 0 or missing). A hanging arm's finger on its
 own thigh or leg is ranked as a resting hand (+0.5), so the other hand's point wins.
+
+Trunk with the hips out of view (2026-10-30): when hip landmarks 23/24 fall under the visibility
+threshold (a person seated at a desk), the trunk polygon uses hip joints estimated from the shoulder
+line, 1.25 shoulder widths down its perpendicular and 0.3 shoulder widths either side of the midline;
+the legs still need real hips. Results carry `hipsEstimated`. A locked result also carries `onSegment`
+(false when this frame's tip did not refine frac, so the fields are the previous frame's) and
+`bodySeen` (false when the frame had no usable pose, so the last seen geometry was used); the view
+says why the scan is not following the finger when `onSegment` is false instead of showing a frozen slice.
 
 `PointResult`:
 

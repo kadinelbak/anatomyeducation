@@ -314,9 +314,49 @@ const fresh = () => createPointer({ segmentsUrl: "assets/live/segments.json", lo
   check("hard lock: frac follows the finger past the seek filters", r?.locked && r.segment === "forearm" && r.frac > 0.75 && r.frac < 0.85, JSON.stringify([r?.segment, r?.frac]));
   r = p.update(frame(t += 33, hand("left", 0.35 + 0.2 * (0.32 - 0.35), 0.45 + 0.2 * 0.15), { mask: off }));
   check("hard lock: and back up the forearm", r?.locked && r.frac > 0.15 && r.frac < 0.25, JSON.stringify(r?.frac));
+  // the finger far from the forearm still scrubs it (its projection onto the axis), and a frame without a
+  // pose at all uses the segment's last seen geometry
+  r = p.update(frame(t += 33, hand("left", 0.5, 0.45 + 0.7 * 0.15), { mask: off }));
+  check("hard lock: a finger far off the forearm still scrubs it", r?.locked && r.segment === "forearm" && r.frac > 0.4 && r.frac < 0.6, JSON.stringify([r?.segment, r?.frac]));
+  const noPose = { ...frame(t += 33, hand("left", 0.35 + 0.9 * (0.32 - 0.35), 0.45 + 0.9 * 0.15)), pose: null };
+  r = p.update(noPose);
+  check("hard lock: no pose this frame, frac still follows the finger", r?.locked && r.segment === "forearm" && r.frac > 0.85 && r.frac < 0.95, JSON.stringify([r?.segment, r?.frac]));
+  p.unlock();
+  // a trunk lock made on the chest keeps the chest region (and its structures) while the finger slides to the pelvis
+  for (t += 33; t <= 12000; t += 33) r = p.update(frame(t, hand("left", 0.5, 0.30 + 0.2 * 0.25)));
+  const chest = r?.region?.key;
+  check("hard lock: trunk locks on the chest band", r?.locked && r.segment === "trunk" && chest === "thorax", JSON.stringify([r?.locked, r?.segment, chest]));
+  r = p.update(frame(t += 33, hand("left", 0.5, 0.30 + 0.92 * 0.25)));
+  check("hard lock: region stays the chest while frac reaches the pelvis", r?.region?.key === "thorax" && r.frac > 0.85, JSON.stringify([r?.region?.key, r?.frac]));
   p.unlock();
   r = p.update(frame(t, hand("left", 0.5, 0.42)));
   check("hard lock: unlock() releases, trunk can lead", p.locked === false && r?.segment === "trunk" && r.locked === false, JSON.stringify([r?.segment, r?.locked]));
+}
+// 14c. Hips out of view (seated at a desk): the trunk zone is estimated from the shoulders and still scrubs.
+{
+  const p = await fresh();
+  p.setHardLock(true);
+  const noHips = { lm: { 23: { v: 0.05 }, 24: { v: 0.05 } } };
+  // Shoulders at y 0.3, half-width 0.1 (shoulder width 0.2): estimated hips land at y 0.55, like the real pose's.
+  let t = 0, r = null;
+  for (; t <= 1000; t += 33) r = p.update(frame(t, hand("left", 0.5, 0.4), noHips));
+  check("no hips: trunk locks from the shoulders alone", r?.locked && r.segment === "trunk" && r.hipsEstimated === true, JSON.stringify([r?.locked, r?.segment, r?.hipsEstimated]));
+  check("no hips: frac 0.4 at y 0.40", r && r.frac > 0.37 && r.frac < 0.43 && r.onSegment === true && r.bodySeen === true, JSON.stringify([r?.frac, r?.onSegment]));
+  r = p.update(frame(t += 33, hand("left", 0.5, 0.5), noHips));
+  check("no hips: frac follows the finger down to 0.8", r && r.frac > 0.77 && r.frac < 0.83, JSON.stringify(r?.frac));
+  const withHips = (await fresh()).update(frame(0, hand("left", 0.5, 0.5)));
+  check("no hips: matches the real hips' frac", withHips && Math.abs(withHips.frac - r.frac) < 0.03, JSON.stringify([withHips?.frac, r?.frac]));
+  // A finger above the shoulders projects onto the top of the trunk (hard lock scrubs from anywhere).
+  r = p.update(frame(t += 33, hand("left", 0.95, 0.05), noHips));
+  check("above the shoulders: frac 0, still on segment", r?.locked && r.onSegment === true && r.bodySeen === true && r.frac === 0, JSON.stringify([r?.onSegment, r?.bodySeen, r?.frac]));
+  // No pose at all (only a hand in front of the camera): the last seen trunk geometry still scrubs, bodySeen says the body was lost.
+  const f = frame(t += 33, hand("left", 0.5, 0.5)); f.pose = null;
+  r = p.update(f);
+  check("no pose: frac follows the finger on the last trunk, bodySeen false", r?.locked && r.onSegment === true && r.bodySeen === false && r.frac > 0.77 && r.frac < 0.83, JSON.stringify([r?.locked, r?.onSegment, r?.bodySeen, r?.frac]));
+  // No hand at all: nothing to refine from; the result is reused and says so.
+  r = p.update(frame(t += 33, null, noHips));
+  check("no hand: onSegment false, frac kept", r?.locked && r.onSegment === false && r.bodySeen === true && r.frac > 0.77 && r.frac < 0.83, JSON.stringify([r?.onSegment, r?.bodySeen, r?.frac]));
+  p.unlock();
 }
 // 15. setPointerHand("left"): a pointing right hand is the control hand and is ignored
 {

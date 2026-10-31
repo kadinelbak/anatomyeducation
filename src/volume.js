@@ -159,6 +159,12 @@ export function createVolume(meta, ct, labels) {
 // Parse a question's `view`: a named view from the study, or "plane:frac[:window]".
 export function resolveView(meta, view, fallback = { plane: "axial", frac: 0.5, window: defaultWindow(meta) }) {
   if (!view) return { ...fallback };
+  // An object { plane, frac, window } (what Live's probe sends; see src/live/CONTRACTS.md): missing or bad
+  // fields fall back one by one, so a bad plane never throws the whole view away.
+  if (typeof view === "object") {
+    const f = Number(view.frac);
+    return { plane: PLANES.includes(view.plane) ? view.plane : fallback.plane, frac: Number.isFinite(f) ? Math.max(0, Math.min(1, f)) : fallback.frac, window: view.window || fallback.window };
+  }
   if (meta.views && meta.views[view]) return { ...fallback, ...meta.views[view] };
   const [plane, frac, window] = String(view).split(":");
   if (!PLANES.includes(plane)) return { ...fallback };
